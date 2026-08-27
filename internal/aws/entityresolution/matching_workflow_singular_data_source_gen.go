@@ -15,6 +15,341 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute10c616580096249f545d0606() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnableTransitiveMatching
+			"enable_transitive_matching": schemaAttributedd4641df305641fa059a780f(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for matching behavior within rule condition properties",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d0404c260426cb5eb182f9f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MatchingKeys
+				"matching_keys": schemaAttribute89399b79b90efb7380032a31(),
+				// Property: RuleName
+				"rule_name": schemaAttribute6f2ceeb6e6c7d3451b7f316a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3141cd25a1ae403192231c64() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MatchingConfig
+			"matching_config": schemaAttribute10c616580096249f545d0606(),
+			// Property: Rules
+			"rules": schemaAttribute3645ea90507d17cd30d58133(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3645ea90507d17cd30d58133() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Condition
+				"condition": schemaAttribute6f2ceeb6e6c7d3451b7f316a(),
+				// Property: RuleName
+				"rule_name": schemaAttribute6f2ceeb6e6c7d3451b7f316a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute398ca96d24d333c4736e08e2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApplyNormalization
+				"apply_normalization": schemaAttribute856a4e7452197a638376b47c(),
+				// Property: CustomerProfilesIntegrationConfig
+				"customer_profiles_integration_config": schemaAttributed63235480515cfa54ac46c8a(),
+				// Property: KMSArn
+				"kms_arn": schemaAttribute6f2ceeb6e6c7d3451b7f316a(),
+				// Property: Output
+				"output": schemaAttribute741709869fe3f2592458030d(),
+				// Property: OutputS3Path
+				"output_s3_path": schemaAttributed46d8f02630979b342d2dca7(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3db2ebf7705468b08511346b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AttributeMatchingModel
+			"attribute_matching_model": schemaAttribute6f2ceeb6e6c7d3451b7f316a(),
+			// Property: MatchPurpose
+			"match_purpose": schemaAttribute6f2ceeb6e6c7d3451b7f316a(),
+			// Property: Rules
+			"rules": schemaAttribute2d0404c260426cb5eb182f9f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute417259a7a136c4d4babd6bce() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Additional Provider configuration that would be required for the provider service. The Configuration must be in JSON string format",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a278c6569d2d0828c96fcea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The default MatchingWorkflow arn",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute50dee463e60d0736074b3596() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An Glue table ARN for the input source table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e74c90c52659f8dd9805752() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the MatchingWorkflow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f2ceeb6e6c7d3451b7f316a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7386321ce07b0e2404d85d9d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IntermediateS3Path
+			"intermediate_s3_path": schemaAttributeda1b152a8bf057715d405c26(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute741709869fe3f2592458030d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Hashed
+				"hashed": schemaAttribute856a4e7452197a638376b47c(),
+				// Property: Name
+				"name": schemaAttribute6f2ceeb6e6c7d3451b7f316a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78539301e11c32e64ce6cecb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time of this MatchingWorkflow got created",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute826c4c141e40aada2202af86() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnableRealTimeMatching
+			"enable_real_time_matching": schemaAttributeafb2bfae39e66a0004b95e04(),
+			// Property: ProviderProperties
+			"provider_properties": schemaAttribute834c1b41a4cae8075e379c9e(),
+			// Property: ResolutionType
+			"resolution_type": schemaAttribute6f2ceeb6e6c7d3451b7f316a(),
+			// Property: RuleBasedProperties
+			"rule_based_properties": schemaAttribute3db2ebf7705468b08511346b(),
+			// Property: RuleConditionProperties
+			"rule_condition_properties": schemaAttribute3141cd25a1ae403192231c64(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute834c1b41a4cae8075e379c9e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IntermediateSourceConfiguration
+			"intermediate_source_configuration": schemaAttribute7386321ce07b0e2404d85d9d(),
+			// Property: ProviderConfiguration
+			"provider_configuration": schemaAttribute417259a7a136c4d4babd6bce(),
+			// Property: ProviderServiceArn
+			"provider_service_arn": schemaAttribute836a5ea068c0772a591fca15(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute836a5ea068c0772a591fca15() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Arn of the Provider service being used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute856a4e7452197a638376b47c() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89399b79b90efb7380032a31() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ab1f4713d570bf4a372a876() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time of this MatchingWorkflow got last updated at",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e9185d735d17386e9550cb6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeadb9b011603fa00dbb39549f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeafb2bfae39e66a0004b95e04() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables the workflow to use real-time matching. Can only be set on creation for RULE_MATCHING workflows that define RuleConditionProperties.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb7c823546097f2732c2fac33() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute8e9185d735d17386e9550cb6(),
+				// Property: Value
+				"value": schemaAttributeadb9b011603fa00dbb39549f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8e0d595b886588b9397bd79() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Customer Profiles domain",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9d36f08ad1c673e9f63a3f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Customer Profiles object type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc8dd55dcd4686c2002240b8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApplyNormalization
+				"apply_normalization": schemaAttribute856a4e7452197a638376b47c(),
+				// Property: InputSourceARN
+				"input_source_arn": schemaAttribute50dee463e60d0736074b3596(),
+				// Property: SchemaArn
+				"schema_arn": schemaAttributec8fc5540da0fd375fbddd7a5(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2b01ce9a1bc2a70e4617b46() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the MatchingWorkflow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8fc5540da0fd375fbddd7a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SchemaMapping arn associated with the Schema",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed46d8f02630979b342d2dca7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The S3 path to which Entity Resolution will write the output table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed63235480515cfa54ac46c8a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DomainArn
+			"domain_arn": schemaAttributeb8e0d595b886588b9397bd79(),
+			// Property: ObjectTypeArn
+			"object_type_arn": schemaAttributeb9d36f08ad1c673e9f63a3f3(),
+		}, /*END SCHEMA*/
+		Description: "The Customer Profiles integration configuration for the output source",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda1b152a8bf057715d405c26() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The s3 path that would be used to stage the intermediate data being generated during workflow execution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb84f88e5e77ac43c4b7e0f5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IncrementalRunType
+			"incremental_run_type": schemaAttribute6f2ceeb6e6c7d3451b7f316a(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd4641df305641fa059a780f() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables transitive matching to process records across all rule levels and connect unmatched records to existing match groups",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_entityresolution_matching_workflow", matchingWorkflowDataSource)
 }
@@ -30,10 +365,7 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The time of this MatchingWorkflow got created",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time of this MatchingWorkflow got created",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute78539301e11c32e64ce6cecb(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +375,7 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the MatchingWorkflow",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributec2b01ce9a1bc2a70e4617b46(),
 		// Property: IncrementalRunConfig
 		// CloudFormation resource type schema:
 		//
@@ -65,15 +394,7 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"incremental_run_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IncrementalRunType
-				"incremental_run_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"incremental_run_config": schemaAttributedb84f88e5e77ac43c4b7e0f5(),
 		// Property: InputSourceConfig
 		// CloudFormation resource type schema:
 		//
@@ -106,27 +427,7 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"input_source_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ApplyNormalization
-					"apply_normalization": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: InputSourceARN
-					"input_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "An Glue table ARN for the input source table",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SchemaArn
-					"schema_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The SchemaMapping arn associated with the Schema",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"input_source_config": schemaAttributebc8dd55dcd4686c2002240b8(),
 		// Property: OutputSourceConfig
 		// CloudFormation resource type schema:
 		//
@@ -202,59 +503,7 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"output_source_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ApplyNormalization
-					"apply_normalization": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: CustomerProfilesIntegrationConfig
-					"customer_profiles_integration_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DomainArn
-							"domain_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Amazon Resource Name (ARN) of the Customer Profiles domain",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ObjectTypeArn
-							"object_type_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Amazon Resource Name (ARN) of the Customer Profiles object type",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The Customer Profiles integration configuration for the output source",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: KMSArn
-					"kms_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Output
-					"output": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Hashed
-								"hashed": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Name
-								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: OutputS3Path
-					"output_s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The S3 path to which Entity Resolution will write the output table",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"output_source_config": schemaAttribute398ca96d24d333c4736e08e2(),
 		// Property: ResolutionTechniques
 		// CloudFormation resource type schema:
 		//
@@ -411,114 +660,7 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"resolution_techniques": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EnableRealTimeMatching
-				"enable_real_time_matching": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Enables the workflow to use real-time matching. Can only be set on creation for RULE_MATCHING workflows that define RuleConditionProperties.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProviderProperties
-				"provider_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: IntermediateSourceConfiguration
-						"intermediate_source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: IntermediateS3Path
-								"intermediate_s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The s3 path that would be used to stage the intermediate data being generated during workflow execution.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ProviderConfiguration
-						"provider_configuration": // Pattern: ""
-						schema.MapAttribute{      /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "Additional Provider configuration that would be required for the provider service. The Configuration must be in JSON string format",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ProviderServiceArn
-						"provider_service_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Arn of the Provider service being used.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResolutionType
-				"resolution_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: RuleBasedProperties
-				"rule_based_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AttributeMatchingModel
-						"attribute_matching_model": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: MatchPurpose
-						"match_purpose": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Rules
-						"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: MatchingKeys
-									"matching_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: RuleName
-									"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: RuleConditionProperties
-				"rule_condition_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: MatchingConfig
-						"matching_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: EnableTransitiveMatching
-								"enable_transitive_matching": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "Enables transitive matching to process records across all rule levels and connect unmatched records to existing match groups",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Configuration for matching behavior within rule condition properties",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Rules
-						"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Condition
-									"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: RuleName
-									"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"resolution_techniques": schemaAttribute826c4c141e40aada2202af86(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -526,9 +668,7 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute6f2ceeb6e6c7d3451b7f316a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -562,23 +702,7 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeb7c823546097f2732c2fac33(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -586,10 +710,7 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The time of this MatchingWorkflow got last updated at",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time of this MatchingWorkflow got last updated at",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute8ab1f4713d570bf4a372a876(),
 		// Property: WorkflowArn
 		// CloudFormation resource type schema:
 		//
@@ -598,10 +719,7 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):entityresolution:.*:[0-9]+:(matchingworkflow/.*)$",
 		//	  "type": "string"
 		//	}
-		"workflow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The default MatchingWorkflow arn",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"workflow_arn": schemaAttribute4a278c6569d2d0828c96fcea(),
 		// Property: WorkflowName
 		// CloudFormation resource type schema:
 		//
@@ -612,10 +730,7 @@ func matchingWorkflowDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z_0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"workflow_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the MatchingWorkflow",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"workflow_name": schemaAttribute5e74c90c52659f8dd9805752(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,133 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0608e7cb29d3ffb709d9400b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Gid
+			"gid": schemaAttribute787942588f0f4fb18a0bfa5f(),
+			// Property: SecondaryGids
+			"secondary_gids": schemaAttribute683d03f1125d848c4092d81d(),
+			// Property: Uid
+			"uid": schemaAttribute6bdd11b43f122d5fbde82f10(),
+		}, /*END SCHEMA*/
+		Description: "The operating system user and group applied to all compute drive requests made using the access point.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute133c4451ed5677ba8ec25064() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3350337fdb3d4e38275f391b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c6a88edf25d35f5e4cf1571() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute133c4451ed5677ba8ec25064(),
+				// Property: Value
+				"value": schemaAttribute133c4451ed5677ba8ec25064(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute432df04319931d5e5bfebeba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide the CreationPermissions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute683d03f1125d848c4092d81d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Secondary POSIX group IDs used for all file system operations using this access point.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6bdd11b43f122d5fbde82f10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The POSIX user ID used for all file system operations using this access point.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76b172b0d97f4008cc581aef() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the S3 Files file system that the access point provides access to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute787942588f0f4fb18a0bfa5f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The POSIX group ID used for all file system operations using this access point.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c584e02df51185bb33fc118() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CreationPermissions
+			"creation_permissions": schemaAttributebc5b1937edaf9d593f14dbbe(),
+			// Property: Path
+			"path": schemaAttribute432df04319931d5e5bfebeba(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the directory on the Amazon EFS file system that the access point exposes as the root directory of your file system to NFS clients using the access point. The clients using the access point can only access the root directory and below. If the RootDirectory>Path specified does not exist, EFS creates it and applies the CreationPermissions settings when a client connects to an access point. When specifying a RootDirectory, you need to provide the Path, and the CreationPermissions is optional.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute97a42fb51da4af415d377d36() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the POSIX user ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc5b1937edaf9d593f14dbbe() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: OwnerGid
+			"owner_gid": schemaAttributef252c75de53b57253704bd38(),
+			// Property: OwnerUid
+			"owner_uid": schemaAttribute97a42fb51da4af415d377d36(),
+			// Property: Permissions
+			"permissions": schemaAttribute3350337fdb3d4e38275f391b(),
+		}, /*END SCHEMA*/
+		Description: "(Optional) Specifies the POSIX IDs and permissions to apply to the access point's RootDirectory. If the RootDirectory>Path specified does not exist, EFS creates the root directory using the CreationPermissions settings when a client connects to an access point. When specifying the CreationPermissions, you must provide values for all properties.   If you do not provide CreationPermissions and the specified RootDirectory>Path does not exist, attempts to mount the file system using the access point will fail. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec434514f384b34c0750b7c00() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "(optional) A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef252c75de53b57253704bd38() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the POSIX group ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_s3files_access_point", accessPointDataSource)
 }
@@ -31,9 +158,7 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z]*:s3files:[0-9a-z-:]+:file-system/fs-[0-9a-f]{17,40}/access-point/fsap-[0-9a-f]{17,40}$",
 		//	  "type": "string"
 		//	}
-		"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"access_point_arn": schemaAttribute133c4451ed5677ba8ec25064(),
 		// Property: AccessPointId
 		// CloudFormation resource type schema:
 		//
@@ -42,9 +167,7 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(arn:aws[-a-z]*:s3files:[0-9a-z-:]+:file-system/fs-[0-9a-f]{17,40}/access-point/fsap-[0-9a-f]{17,40}|fsap-[0-9a-f]{17,40})$",
 		//	  "type": "string"
 		//	}
-		"access_point_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"access_point_id": schemaAttribute133c4451ed5677ba8ec25064(),
 		// Property: ClientToken
 		// CloudFormation resource type schema:
 		//
@@ -55,10 +178,7 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(.+)$",
 		//	  "type": "string"
 		//	}
-		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "(optional) A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent creation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"client_token": schemaAttributec434514f384b34c0750b7c00(),
 		// Property: FileSystemId
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +188,7 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(arn:aws[-a-z]*:s3files:[0-9a-z-:]+:file-system/fs-[0-9a-f]{17,40}|fs-[0-9a-f]{17,40})$",
 		//	  "type": "string"
 		//	}
-		"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the S3 Files file system that the access point provides access to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"file_system_id": schemaAttribute76b172b0d97f4008cc581aef(),
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -80,9 +197,7 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^((\\d{12})|(\\d{4}-\\d{4}-\\d{4}))$",
 		//	  "type": "string"
 		//	}
-		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"owner_id": schemaAttribute133c4451ed5677ba8ec25064(),
 		// Property: PosixUser
 		// CloudFormation resource type schema:
 		//
@@ -115,28 +230,7 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"posix_user": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Gid
-				"gid": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The POSIX group ID used for all file system operations using this access point.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecondaryGids
-				"secondary_gids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Secondary POSIX group IDs used for all file system operations using this access point.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Uid
-				"uid": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The POSIX user ID used for all file system operations using this access point.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The operating system user and group applied to all compute drive requests made using the access point.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"posix_user": schemaAttribute0608e7cb29d3ffb709d9400b(),
 		// Property: RootDirectory
 		// CloudFormation resource type schema:
 		//
@@ -181,39 +275,7 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"root_directory": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CreationPermissions
-				"creation_permissions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: OwnerGid
-						"owner_gid": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies the POSIX group ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: OwnerUid
-						"owner_uid": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies the POSIX user ID to apply to the RootDirectory. Accepts values from 0 to 2^32 (4294967295).",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Permissions
-						"permissions": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies the POSIX permissions to apply to the RootDirectory, in the format of an octal number representing the file's mode bits.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "(Optional) Specifies the POSIX IDs and permissions to apply to the access point's RootDirectory. If the RootDirectory>Path specified does not exist, EFS creates the root directory using the CreationPermissions settings when a client connects to an access point. When specifying the CreationPermissions, you must provide values for all properties.   If you do not provide CreationPermissions and the specified RootDirectory>Path does not exist, attempts to mount the file system using the access point will fail. ",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Path
-				"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the path on the EFS file system to expose as the root directory to NFS clients using the access point to access the EFS file system. A path can have up to four subdirectories. If the specified path does not exist, you are required to provide the CreationPermissions.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies the directory on the Amazon EFS file system that the access point exposes as the root directory of your file system to NFS clients using the access point. The clients using the access point can only access the root directory and below. If the RootDirectory>Path specified does not exist, EFS creates it and applies the CreationPermissions settings when a client connects to an access point. When specifying a RootDirectory, you need to provide the Path, and the CreationPermissions is optional.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"root_directory": schemaAttribute8c584e02df51185bb33fc118(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -228,9 +290,7 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute133c4451ed5677ba8ec25064(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -255,21 +315,7 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute3c6a88edf25d35f5e4cf1571(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

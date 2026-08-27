@@ -15,6 +15,196 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0c54cd694981e0c5544b6bf9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name (ARN) of the license asset ruleset.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2cce4416cf1ccd4814b51398() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Constraint
+			"constraint": schemaAttribute92b6749c1e10a165e15a4993(),
+			// Property: KeyToMatch
+			"key_to_match": schemaAttributec332f7179ecc5f220c2afe9d(),
+			// Property: ValueToMatch
+			"value_to_match": schemaAttribute5c5e76110854588d97556725(),
+		}, /*END SCHEMA*/
+		Description: "Matching rule statement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30833064322d9e54c34589f0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AndRuleStatement
+			"and_rule_statement": schemaAttributeb302276805080283a0d2c9bf(),
+			// Property: MatchingRuleStatement
+			"matching_rule_statement": schemaAttribute2cce4416cf1ccd4814b51398(),
+			// Property: OrRuleStatement
+			"or_rule_statement": schemaAttribute9f8b610ee9c6656aa8164763(),
+		}, /*END SCHEMA*/
+		Description: "License configuration rule statement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c5e76110854588d97556725() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Values to match.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61bbd44c66597e522fb1c857() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "License asset ruleset description.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e9289aa4e23b256da8eb823() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Constraint
+				"constraint": schemaAttribute92b6749c1e10a165e15a4993(),
+				// Property: KeyToMatch
+				"key_to_match": schemaAttributec332f7179ecc5f220c2afe9d(),
+				// Property: ValueToMatch
+				"value_to_match": schemaAttribute5c5e76110854588d97556725(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute810f2481f0d7127458dcb4bd() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RuleStatement
+				"rule_statement": schemaAttributeaff034de573c3dad5aabc316(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "License asset rules.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92b6749c1e10a165e15a4993() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Constraint (e.g. Equals, Not_Equals).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9edecb936de55ba9b233cedd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f8b610ee9c6656aa8164763() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MatchingRuleStatements
+			"matching_rule_statements": schemaAttribute7e9289aa4e23b256da8eb823(),
+		}, /*END SCHEMA*/
+		Description: "OR rule statement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae5fe7e82d357069d8788014() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AndRuleStatement
+			"and_rule_statement": schemaAttributeb302276805080283a0d2c9bf(),
+			// Property: MatchingRuleStatement
+			"matching_rule_statement": schemaAttribute2cce4416cf1ccd4814b51398(),
+			// Property: OrRuleStatement
+			"or_rule_statement": schemaAttribute9f8b610ee9c6656aa8164763(),
+		}, /*END SCHEMA*/
+		Description: "Instance rule statement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaff034de573c3dad5aabc316() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceRuleStatement
+			"instance_rule_statement": schemaAttributeae5fe7e82d357069d8788014(),
+			// Property: LicenseConfigurationRuleStatement
+			"license_configuration_rule_statement": schemaAttribute30833064322d9e54c34589f0(),
+			// Property: LicenseRuleStatement
+			"license_rule_statement": schemaAttributef60405108852c2d5346537e3(),
+		}, /*END SCHEMA*/
+		Description: "Rule statement. Specify exactly one of InstanceRuleStatement, LicenseRuleStatement, or LicenseConfigurationRuleStatement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb302276805080283a0d2c9bf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MatchingRuleStatements
+			"matching_rule_statements": schemaAttribute7e9289aa4e23b256da8eb823(),
+		}, /*END SCHEMA*/
+		Description: "AND rule statement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec332f7179ecc5f220c2afe9d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Key to match.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6a9688c992bbba20a7e5b1c() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute9edecb936de55ba9b233cedd(),
+				// Property: Value
+				"value": schemaAttribute9edecb936de55ba9b233cedd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to add to the license asset ruleset.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1cb6eca38dd2ebd05aafdbf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "License asset ruleset name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef60405108852c2d5346537e3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AndRuleStatement
+			"and_rule_statement": schemaAttributeb302276805080283a0d2c9bf(),
+			// Property: MatchingRuleStatement
+			"matching_rule_statement": schemaAttribute2cce4416cf1ccd4814b51398(),
+			// Property: OrRuleStatement
+			"or_rule_statement": schemaAttribute9f8b610ee9c6656aa8164763(),
+		}, /*END SCHEMA*/
+		Description: "License rule statement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_licensemanager_license_asset_rule_set", licenseAssetRuleSetDataSource)
 }
@@ -31,10 +221,7 @@ func licenseAssetRuleSetDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "License asset ruleset description.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute61bbd44c66597e522fb1c857(),
 		// Property: LicenseAssetRulesetArn
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +231,7 @@ func licenseAssetRuleSetDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"license_asset_ruleset_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name (ARN) of the license asset ruleset.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"license_asset_ruleset_arn": schemaAttribute0c54cd694981e0c5544b6bf9(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +240,7 @@ func licenseAssetRuleSetDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "License asset ruleset name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributee1cb6eca38dd2ebd05aafdbf(),
 		// Property: Rules
 		// CloudFormation resource type schema:
 		//
@@ -424,297 +605,7 @@ func licenseAssetRuleSetDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: RuleStatement
-					"rule_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: InstanceRuleStatement
-							"instance_rule_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AndRuleStatement
-									"and_rule_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: MatchingRuleStatements
-											"matching_rule_statements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Constraint
-														"constraint": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Constraint (e.g. Equals, Not_Equals).",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: KeyToMatch
-														"key_to_match": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Key to match.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: ValueToMatch
-														"value_to_match": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Description: "Values to match.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-												}, /*END NESTED OBJECT*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "AND rule statement.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: MatchingRuleStatement
-									"matching_rule_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Constraint
-											"constraint": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Constraint (e.g. Equals, Not_Equals).",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: KeyToMatch
-											"key_to_match": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Key to match.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: ValueToMatch
-											"value_to_match": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Description: "Values to match.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Matching rule statement.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: OrRuleStatement
-									"or_rule_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: MatchingRuleStatements
-											"matching_rule_statements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Constraint
-														"constraint": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Constraint (e.g. Equals, Not_Equals).",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: KeyToMatch
-														"key_to_match": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Key to match.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: ValueToMatch
-														"value_to_match": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Description: "Values to match.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-												}, /*END NESTED OBJECT*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "OR rule statement.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Instance rule statement.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: LicenseConfigurationRuleStatement
-							"license_configuration_rule_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AndRuleStatement
-									"and_rule_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: MatchingRuleStatements
-											"matching_rule_statements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Constraint
-														"constraint": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Constraint (e.g. Equals, Not_Equals).",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: KeyToMatch
-														"key_to_match": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Key to match.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: ValueToMatch
-														"value_to_match": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Description: "Values to match.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-												}, /*END NESTED OBJECT*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "AND rule statement.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: MatchingRuleStatement
-									"matching_rule_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Constraint
-											"constraint": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Constraint (e.g. Equals, Not_Equals).",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: KeyToMatch
-											"key_to_match": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Key to match.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: ValueToMatch
-											"value_to_match": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Description: "Values to match.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Matching rule statement.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: OrRuleStatement
-									"or_rule_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: MatchingRuleStatements
-											"matching_rule_statements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Constraint
-														"constraint": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Constraint (e.g. Equals, Not_Equals).",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: KeyToMatch
-														"key_to_match": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Key to match.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: ValueToMatch
-														"value_to_match": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Description: "Values to match.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-												}, /*END NESTED OBJECT*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "OR rule statement.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "License configuration rule statement.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: LicenseRuleStatement
-							"license_rule_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AndRuleStatement
-									"and_rule_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: MatchingRuleStatements
-											"matching_rule_statements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Constraint
-														"constraint": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Constraint (e.g. Equals, Not_Equals).",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: KeyToMatch
-														"key_to_match": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Key to match.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: ValueToMatch
-														"value_to_match": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Description: "Values to match.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-												}, /*END NESTED OBJECT*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "AND rule statement.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: MatchingRuleStatement
-									"matching_rule_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Constraint
-											"constraint": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Constraint (e.g. Equals, Not_Equals).",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: KeyToMatch
-											"key_to_match": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Key to match.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: ValueToMatch
-											"value_to_match": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Description: "Values to match.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Matching rule statement.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: OrRuleStatement
-									"or_rule_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: MatchingRuleStatements
-											"matching_rule_statements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Constraint
-														"constraint": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Constraint (e.g. Equals, Not_Equals).",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: KeyToMatch
-														"key_to_match": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Key to match.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: ValueToMatch
-														"value_to_match": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Description: "Values to match.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-												}, /*END NESTED OBJECT*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "OR rule statement.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "License rule statement.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Rule statement. Specify exactly one of InstanceRuleStatement, LicenseRuleStatement, or LicenseConfigurationRuleStatement.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "License asset rules.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rules": schemaAttribute810f2481f0d7127458dcb4bd(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -744,22 +635,7 @@ func licenseAssetRuleSetDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to add to the license asset ruleset.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributec6a9688c992bbba20a7e5b1c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

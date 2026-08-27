@@ -15,6 +15,174 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute18857e870356aa4985a3faa0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the StorageConfiguration resource to use for individual participant recording.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a3c70123d957f5fda0e649b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RecordingMode
+			"recording_mode": schemaAttribute639404c870e34ed4946771ff(),
+			// Property: Storage
+			"storage": schemaAttribute6c3e5a383ccdb00e9d5523a1(),
+			// Property: TargetIntervalSeconds
+			"target_interval_seconds": schemaAttributec79a6acc7cc4139eb08b61fb(),
+		}, /*END SCHEMA*/
+		Description: "An object representing a configuration of thumbnails for recorded video from an individual participant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d9fe30542ee72a316740473() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ID of the active session within the stage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ee7dec86e15d296f6bfe387() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute67ded9d7bf24f089adbc01ce(),
+				// Property: Value
+				"value": schemaAttribute8e340ea5159ed8d7dee267cd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute639404c870e34ed4946771ff() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Thumbnail recording mode. Default: DISABLED.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67ded9d7bf24f089adbc01ce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c3e5a383ccdb00e9d5523a1() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Indicates the format in which thumbnails are recorded. SEQUENTIAL records all generated thumbnails in a serial manner, to the media/thumbnails/high directory. LATEST saves the latest thumbnail in media/latest_thumbnail/high/thumb.jpg and overwrites it at the interval specified by targetIntervalSeconds. You can enable both SEQUENTIAL and LATEST. Default: SEQUENTIAL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82ef270bbfc3adb9386b6e76() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HlsConfiguration
+			"hls_configuration": schemaAttributec6aed1696578cd63511a9a6f(),
+			// Property: MediaTypes
+			"media_types": schemaAttribute93fc0044976fc2c303ce5bd4(),
+			// Property: RecordingReconnectWindowSeconds
+			"recording_reconnect_window_seconds": schemaAttributef9b7ac1401861c8229b4bb2a(),
+			// Property: StorageConfigurationArn
+			"storage_configuration_arn": schemaAttribute18857e870356aa4985a3faa0(),
+			// Property: ThumbnailConfiguration
+			"thumbnail_configuration": schemaAttribute9e057b5a21828d0997313532(),
+		}, /*END SCHEMA*/
+		Description: "Configuration object for individual participant recording, to attach to the new stage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e340ea5159ed8d7dee267cd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9023d114f2571e53ab00d0fe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Stage name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93fc0044976fc2c303ce5bd4() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Types of media to be recorded. Default: AUDIO_VIDEO.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute97f3e1bb0eb9d40e93442ea6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TargetSegmentDurationSeconds
+			"target_segment_duration_seconds": schemaAttributed2b168818f497fe17c52226d(),
+		}, /*END SCHEMA*/
+		Description: "An object representing a configuration of participant HLS recordings for individual participant recording.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e057b5a21828d0997313532() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ParticipantThumbnailConfiguration
+			"participant_thumbnail_configuration": schemaAttribute1a3c70123d957f5fda0e649b(),
+		}, /*END SCHEMA*/
+		Description: "A complex type that allows you to enable/disable the recording of thumbnails for individual participant recording and modify the interval at which thumbnails are generated for the live session.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6aed1696578cd63511a9a6f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ParticipantRecordingHlsConfiguration
+			"participant_recording_hls_configuration": schemaAttribute97f3e1bb0eb9d40e93442ea6(),
+		}, /*END SCHEMA*/
+		Description: "HLS configuration object for individual participant recording.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec79a6acc7cc4139eb08b61fb() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The targeted thumbnail-generation interval in seconds. This is configurable only if recordingMode is INTERVAL. Default: 60.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed2b168818f497fe17c52226d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Defines the target duration for recorded segments generated when recording a stage participant. Segments may have durations longer than the specified value when needed to ensure each segment begins with a keyframe. Default: 6.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9b7ac1401861c8229b4bb2a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "If a stage publisher disconnects and then reconnects within the specified interval, the multiple recordings will be considered a single recording and merged together. The default value is 0, which disables merging.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb258cc1280adfa4acaa02f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Stage ARN is automatically generated on creation and assigned as the unique identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ivs_stage", stageDataSource)
 }
@@ -32,10 +200,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"active_session_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ID of the active session within the stage.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"active_session_id": schemaAttribute2d9fe30542ee72a316740473(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +211,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z]*:ivs:[a-z0-9-]+:[0-9]+:stage/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Stage ARN is automatically generated on creation and assigned as the unique identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributefb258cc1280adfa4acaa02f3(),
 		// Property: AutoParticipantRecordingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -164,77 +326,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"auto_participant_recording_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: HlsConfiguration
-				"hls_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ParticipantRecordingHlsConfiguration
-						"participant_recording_hls_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: TargetSegmentDurationSeconds
-								"target_segment_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Defines the target duration for recorded segments generated when recording a stage participant. Segments may have durations longer than the specified value when needed to ensure each segment begins with a keyframe. Default: 6.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "An object representing a configuration of participant HLS recordings for individual participant recording.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "HLS configuration object for individual participant recording.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MediaTypes
-				"media_types": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Types of media to be recorded. Default: AUDIO_VIDEO.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RecordingReconnectWindowSeconds
-				"recording_reconnect_window_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "If a stage publisher disconnects and then reconnects within the specified interval, the multiple recordings will be considered a single recording and merged together. The default value is 0, which disables merging.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StorageConfigurationArn
-				"storage_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "ARN of the StorageConfiguration resource to use for individual participant recording.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ThumbnailConfiguration
-				"thumbnail_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ParticipantThumbnailConfiguration
-						"participant_thumbnail_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: RecordingMode
-								"recording_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Thumbnail recording mode. Default: DISABLED.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Storage
-								"storage": schema.SetAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "Indicates the format in which thumbnails are recorded. SEQUENTIAL records all generated thumbnails in a serial manner, to the media/thumbnails/high directory. LATEST saves the latest thumbnail in media/latest_thumbnail/high/thumb.jpg and overwrites it at the interval specified by targetIntervalSeconds. You can enable both SEQUENTIAL and LATEST. Default: SEQUENTIAL.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TargetIntervalSeconds
-								"target_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The targeted thumbnail-generation interval in seconds. This is configurable only if recordingMode is INTERVAL. Default: 60.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "An object representing a configuration of thumbnails for recorded video from an individual participant.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A complex type that allows you to enable/disable the recording of thumbnails for individual participant recording and modify the interval at which thumbnails are generated for the live session.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration object for individual participant recording, to attach to the new stage.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"auto_participant_recording_configuration": schemaAttribute82ef270bbfc3adb9386b6e76(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -245,10 +337,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Stage name",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute9023d114f2571e53ab00d0fe(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -281,24 +370,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute3ee7dec86e15d296f6bfe387(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,438 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0229cb929f972bd03efb6d73() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A map containing the list of resources with their properties and environment variables.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10fc7866479d3cb882d7a167() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizerResultTtlInSeconds
+			"authorizer_result_ttl_in_seconds": schemaAttribute416e3f5aee54941f0aa69e25(),
+			// Property: AuthorizerUri
+			"authorizer_uri": schemaAttribute99237679bd5556b72c222696(),
+			// Property: IdentityValidationExpression
+			"identity_validation_expression": schemaAttributeb59227f6ea954308ddff8315(),
+		}, /*END SCHEMA*/
+		Description: "A LambdaAuthorizerConfig holds configuration on how to authorize AWS AppSync API access when using the AWS_LAMBDA authorizer mode. Be aware that an AWS AppSync API may have only one Lambda authorizer configured at a time.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute174bdbb1ed51bacd5218b1a6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The action that you want your GraphQL API to take when a request that uses Amazon Cognito user pool authentication doesn't match the Amazon Cognito user pool configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute190d4321d1af946b471be30d() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A flag indicating whether to use AWS X-Ray tracing for this GraphqlApi.\n\n",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute199819df7ca74d42ecd29c41() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The API name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1b044470aa3258b25a064f4f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Region in which the user pool was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2533ac13bcf3cd6c4c69e001() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthTTL
+			"auth_ttl": schemaAttributee2949a21c936f5696e082eae(),
+			// Property: ClientId
+			"client_id": schemaAttributec7c96beb5b3260285c62b8a8(),
+			// Property: IatTTL
+			"iat_ttl": schemaAttribute91739f7b5bdc591772fb0ec9(),
+			// Property: Issuer
+			"issuer": schemaAttribute5c17020a699d8550460ed4c9(),
+		}, /*END SCHEMA*/
+		Description: "The OpenID Connect configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c7e0b07d8125b14ecf221e4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique AWS AppSync GraphQL API identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f942509a9d47e9b8734460f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user pool ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute416e3f5aee54941f0aa69e25() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of seconds a response should be cached for.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute502ab22d4ed89e17b026f783() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The fully qualified domain name (FQDN) of the endpoint URL of your GraphQL API.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52ae62e7a8d87d63af3a915d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Identity and Access Management service role ARN for a merged API. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute566f08aa07a6526d8981ee4d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizerResultTtlInSeconds
+			"authorizer_result_ttl_in_seconds": schemaAttribute416e3f5aee54941f0aa69e25(),
+			// Property: AuthorizerUri
+			"authorizer_uri": schemaAttribute99237679bd5556b72c222696(),
+			// Property: IdentityValidationExpression
+			"identity_validation_expression": schemaAttributeb59227f6ea954308ddff8315(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute59288548831e8a06a501be8d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Security configuration for your GraphQL API",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c17020a699d8550460ed4c9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The issuer for the OIDC configuration. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62226aa25db0a1357fe8b9bf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value that indicates whether the GraphQL API is a standard API (GRAPHQL) or merged API (MERGED).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute725735f66f77b5875e7400c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The owner contact information for an API resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute786494c189ebcb5c57e4bd83() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A regular expression for validating the incoming Amazon Cognito user pool app client ID. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7aa6aced07d8c2cf54811d17() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Endpoint URL of your GraphQL API.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute802c8316b4ed69d7c9f01ec7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AppIdClientRegex
+			"app_id_client_regex": schemaAttribute89136e571eda98bde9f0c560(),
+			// Property: AwsRegion
+			"aws_region": schemaAttribute1b044470aa3258b25a064f4f(),
+			// Property: DefaultAction
+			"default_action": schemaAttribute174bdbb1ed51bacd5218b1a6(),
+			// Property: UserPoolId
+			"user_pool_id": schemaAttribute2f942509a9d47e9b8734460f(),
+		}, /*END SCHEMA*/
+		Description: "Optional authorization configuration for using Amazon Cognito user pools with your GraphQL endpoint.\n\n",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89136e571eda98bde9f0c560() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A regular expression for validating the incoming Amazon Cognito user pool app client ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91739f7b5bdc591772fb0ec9() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of milliseconds that a token is valid after it's issued to a user.\n\n",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute918002546f09479f858845fd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the API key",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91a5ba3f43a85e40296fc3ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The GraphQL endpoint ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute99237679bd5556b72c222696() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Lambda function to be called for authorization.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a25ad5e540739465d141259() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging level.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a8838d94cb873b966cd3116() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of resolvers that can be invoked in a single request.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0654a5a18135b77994aa696() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AppIdClientRegex
+			"app_id_client_regex": schemaAttribute786494c189ebcb5c57e4bd83(),
+			// Property: AwsRegion
+			"aws_region": schemaAttribute1b044470aa3258b25a064f4f(),
+			// Property: UserPoolId
+			"user_pool_id": schemaAttributefeaf23919372d52753efac3d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb203d18302e37335da9ac76d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The fully qualified domain name (FQDN) of the real-time endpoint URL of your GraphQL API.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb59227f6ea954308ddff8315() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A regular expression for validation of tokens before the Lambda function is called.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6ab77cd1e4decbe89bcdade() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Controls how data source metrics will be emitted to CloudWatch. Data source metrics include:\n\n",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe3442f87c1d0ec89e406803() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The GraphQL API real-time endpoint URL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebeabaab701abe7302fd5cb69() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Sets the scope of the GraphQL API to public (GLOBAL) or private (PRIVATE). By default, the scope is set to Global if no value is provided.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec200b48fdc0902f8ff558c2f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeda2a541bfc191b10eb3828a2(),
+				// Property: Value
+				"value": schemaAttributeda2a541bfc191b10eb3828a2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An arbitrary set of tags (key-value pairs) for this GraphQL API.\n\n",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3e2457df2226388892c2d66() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Controls how operation metrics will be emitted to CloudWatch. Operation metrics include:\n\n",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7c96beb5b3260285c62b8a8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The client identifier of the Relying party at the OpenID identity provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8c71d91946f17e5d2b68bb1() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum depth a query can have in a single request. Depth refers to the amount of nested levels allowed in the body of query.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed15ce56e722c6a601ef09cf0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataSourceLevelMetricsBehavior
+			"data_source_level_metrics_behavior": schemaAttributeb6ab77cd1e4decbe89bcdade(),
+			// Property: OperationLevelMetricsConfig
+			"operation_level_metrics_config": schemaAttributec3e2457df2226388892c2d66(),
+			// Property: ResolverLevelMetricsBehavior
+			"resolver_level_metrics_behavior": schemaAttributef8daa53c66a07cd4b6f3745a(),
+		}, /*END SCHEMA*/
+		Description: "Enables and controls the enhanced metrics feature. Enhanced metrics emit granular data on API usage and performance such as AppSync request and error counts, latency, and cache hits/misses. All enhanced metric data is sent to your CloudWatch account, and you can configure the types of data that will be sent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda2a541bfc191b10eb3828a2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedabc1abda28552110182f937() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The authentication type for API key, AWS Identity and Access Management, OIDC, Amazon Cognito user pools, or AWS Lambda.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1f2c983bc78956342406047() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The field logging level. Values can be NONE, ERROR, INFO, DEBUG, or ALL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2949a21c936f5696e082eae() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of milliseconds that a token is valid after being authenticated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3b89d532936daf888596cd1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthTTL
+			"auth_ttl": schemaAttributee2949a21c936f5696e082eae(),
+			// Property: ClientId
+			"client_id": schemaAttributec7c96beb5b3260285c62b8a8(),
+			// Property: IatTTL
+			"iat_ttl": schemaAttribute91739f7b5bdc591772fb0ec9(),
+			// Property: Issuer
+			"issuer": schemaAttribute5c17020a699d8550460ed4c9(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee69ff14d0c1e0e3a3ff3bf88() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The service role that AWS AppSync will assume to publish to Amazon CloudWatch Logs in your account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7f389885d2943fc9cfcc6bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Sets the value of the GraphQL API to enable (ENABLED) or disable (DISABLED) introspection. If no value is provided, the introspection configuration will be set to ENABLED by default. This field will produce an error if the operation attempts to use the introspection feature while this field is disabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8daa53c66a07cd4b6f3745a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Controls how resolver metrics will be emitted to CloudWatch. Resolver metrics include:\n\n",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd089b218b4eb54014c8636c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatchLogsRoleArn
+			"cloudwatch_logs_role_arn": schemaAttributee69ff14d0c1e0e3a3ff3bf88(),
+			// Property: ExcludeVerboseContent
+			"exclude_verbose_content": schemaAttribute9a25ad5e540739465d141259(),
+			// Property: FieldLogLevel
+			"field_log_level": schemaAttributee1f2c983bc78956342406047(),
+		}, /*END SCHEMA*/
+		Description: "The Amazon CloudWatch Logs configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefeaf23919372d52753efac3d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user pool ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefef2a486778de6b3696a52f4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthenticationType
+				"authentication_type": schemaAttributedabc1abda28552110182f937(),
+				// Property: LambdaAuthorizerConfig
+				"lambda_authorizer_config": schemaAttribute566f08aa07a6526d8981ee4d(),
+				// Property: OpenIDConnectConfig
+				"open_id_connect_config": schemaAttributee3b89d532936daf888596cd1(),
+				// Property: UserPoolConfig
+				"user_pool_config": schemaAttributeb0654a5a18135b77994aa696(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of additional authentication providers for the GraphqlApi API.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_appsync_graph_ql_api", graphQLApiDataSource)
 }
@@ -102,87 +534,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"additional_authentication_providers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AuthenticationType
-					"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The authentication type for API key, AWS Identity and Access Management, OIDC, Amazon Cognito user pools, or AWS Lambda.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: LambdaAuthorizerConfig
-					"lambda_authorizer_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AuthorizerResultTtlInSeconds
-							"authorizer_result_ttl_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The number of seconds a response should be cached for.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: AuthorizerUri
-							"authorizer_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The ARN of the Lambda function to be called for authorization.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: IdentityValidationExpression
-							"identity_validation_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A regular expression for validation of tokens before the Lambda function is called.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: OpenIDConnectConfig
-					"open_id_connect_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AuthTTL
-							"auth_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The number of milliseconds that a token is valid after being authenticated.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ClientId
-							"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The client identifier of the Relying party at the OpenID identity provider.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: IatTTL
-							"iat_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The number of milliseconds that a token is valid after it's issued to a user.\n\n",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Issuer
-							"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The issuer for the OIDC configuration. ",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: UserPoolConfig
-					"user_pool_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AppIdClientRegex
-							"app_id_client_regex": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A regular expression for validating the incoming Amazon Cognito user pool app client ID. ",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: AwsRegion
-							"aws_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The AWS Region in which the user pool was created.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: UserPoolId
-							"user_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The user pool ID",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of additional authentication providers for the GraphqlApi API.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"additional_authentication_providers": schemaAttributefef2a486778de6b3696a52f4(),
 		// Property: ApiId
 		// CloudFormation resource type schema:
 		//
@@ -190,10 +542,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Unique AWS AppSync GraphQL API identifier.",
 		//	  "type": "string"
 		//	}
-		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique AWS AppSync GraphQL API identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"api_id": schemaAttribute2c7e0b07d8125b14ecf221e4(),
 		// Property: ApiType
 		// CloudFormation resource type schema:
 		//
@@ -201,10 +550,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The value that indicates whether the GraphQL API is a standard API (GRAPHQL) or merged API (MERGED).",
 		//	  "type": "string"
 		//	}
-		"api_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The value that indicates whether the GraphQL API is a standard API (GRAPHQL) or merged API (MERGED).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"api_type": schemaAttribute62226aa25db0a1357fe8b9bf(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -213,10 +559,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.*",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the API key",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute918002546f09479f858845fd(),
 		// Property: AuthenticationType
 		// CloudFormation resource type schema:
 		//
@@ -224,10 +567,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Security configuration for your GraphQL API",
 		//	  "type": "string"
 		//	}
-		"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Security configuration for your GraphQL API",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"authentication_type": schemaAttribute59288548831e8a06a501be8d(),
 		// Property: EnhancedMetricsConfig
 		// CloudFormation resource type schema:
 		//
@@ -255,27 +595,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"enhanced_metrics_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DataSourceLevelMetricsBehavior
-				"data_source_level_metrics_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Controls how data source metrics will be emitted to CloudWatch. Data source metrics include:\n\n",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: OperationLevelMetricsConfig
-				"operation_level_metrics_config": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Controls how operation metrics will be emitted to CloudWatch. Operation metrics include:\n\n",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResolverLevelMetricsBehavior
-				"resolver_level_metrics_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Controls how resolver metrics will be emitted to CloudWatch. Resolver metrics include:\n\n",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Enables and controls the enhanced metrics feature. Enhanced metrics emit granular data on API usage and performance such as AppSync request and error counts, latency, and cache hits/misses. All enhanced metric data is sent to your CloudWatch account, and you can configure the types of data that will be sent.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enhanced_metrics_config": schemaAttributed15ce56e722c6a601ef09cf0(),
 		// Property: EnvironmentVariables
 		// CloudFormation resource type schema:
 		//
@@ -289,12 +609,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"environment_variables": // Pattern: ""
-		schema.MapAttribute{     /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A map containing the list of resources with their properties and environment variables.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"environment_variables": schemaAttribute0229cb929f972bd03efb6d73(),
 		// Property: GraphQLDns
 		// CloudFormation resource type schema:
 		//
@@ -302,10 +617,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The fully qualified domain name (FQDN) of the endpoint URL of your GraphQL API.",
 		//	  "type": "string"
 		//	}
-		"graph_ql_dns": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The fully qualified domain name (FQDN) of the endpoint URL of your GraphQL API.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"graph_ql_dns": schemaAttribute502ab22d4ed89e17b026f783(),
 		// Property: GraphQLEndpointArn
 		// CloudFormation resource type schema:
 		//
@@ -313,10 +625,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The GraphQL endpoint ARN.",
 		//	  "type": "string"
 		//	}
-		"graph_ql_endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The GraphQL endpoint ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"graph_ql_endpoint_arn": schemaAttribute91a5ba3f43a85e40296fc3ae(),
 		// Property: GraphQLUrl
 		// CloudFormation resource type schema:
 		//
@@ -324,10 +633,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Endpoint URL of your GraphQL API.",
 		//	  "type": "string"
 		//	}
-		"graph_ql_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Endpoint URL of your GraphQL API.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"graph_ql_url": schemaAttribute7aa6aced07d8c2cf54811d17(),
 		// Property: IntrospectionConfig
 		// CloudFormation resource type schema:
 		//
@@ -335,10 +641,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Sets the value of the GraphQL API to enable (ENABLED) or disable (DISABLED) introspection. If no value is provided, the introspection configuration will be set to ENABLED by default. This field will produce an error if the operation attempts to use the introspection feature while this field is disabled.",
 		//	  "type": "string"
 		//	}
-		"introspection_config": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Sets the value of the GraphQL API to enable (ENABLED) or disable (DISABLED) introspection. If no value is provided, the introspection configuration will be set to ENABLED by default. This field will produce an error if the operation attempts to use the introspection feature while this field is disabled.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"introspection_config": schemaAttributef7f389885d2943fc9cfcc6bc(),
 		// Property: LambdaAuthorizerConfig
 		// CloudFormation resource type schema:
 		//
@@ -361,27 +664,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"lambda_authorizer_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AuthorizerResultTtlInSeconds
-				"authorizer_result_ttl_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The number of seconds a response should be cached for.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: AuthorizerUri
-				"authorizer_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the Lambda function to be called for authorization.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IdentityValidationExpression
-				"identity_validation_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A regular expression for validation of tokens before the Lambda function is called.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A LambdaAuthorizerConfig holds configuration on how to authorize AWS AppSync API access when using the AWS_LAMBDA authorizer mode. Be aware that an AWS AppSync API may have only one Lambda authorizer configured at a time.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"lambda_authorizer_config": schemaAttribute10fc7866479d3cb882d7a167(),
 		// Property: LogConfig
 		// CloudFormation resource type schema:
 		//
@@ -408,27 +691,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"log_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CloudWatchLogsRoleArn
-				"cloudwatch_logs_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The service role that AWS AppSync will assume to publish to Amazon CloudWatch Logs in your account.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ExcludeVerboseContent
-				"exclude_verbose_content": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Set to TRUE to exclude sections that contain information such as headers, context, and evaluated mapping templates, regardless of logging level.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FieldLogLevel
-				"field_log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The field logging level. Values can be NONE, ERROR, INFO, DEBUG, or ALL.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The Amazon CloudWatch Logs configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"log_config": schemaAttributefd089b218b4eb54014c8636c(),
 		// Property: MergedApiExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -436,10 +699,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AWS Identity and Access Management service role ARN for a merged API. ",
 		//	  "type": "string"
 		//	}
-		"merged_api_execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS Identity and Access Management service role ARN for a merged API. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"merged_api_execution_role_arn": schemaAttribute52ae62e7a8d87d63af3a915d(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -447,10 +707,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The API name",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API name",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute199819df7ca74d42ecd29c41(),
 		// Property: OpenIDConnectConfig
 		// CloudFormation resource type schema:
 		//
@@ -477,32 +734,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"open_id_connect_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AuthTTL
-				"auth_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The number of milliseconds that a token is valid after being authenticated.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ClientId
-				"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The client identifier of the Relying party at the OpenID identity provider.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IatTTL
-				"iat_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The number of milliseconds that a token is valid after it's issued to a user.\n\n",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Issuer
-				"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The issuer for the OIDC configuration. ",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The OpenID Connect configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"open_id_connect_config": schemaAttribute2533ac13bcf3cd6c4c69e001(),
 		// Property: OwnerContact
 		// CloudFormation resource type schema:
 		//
@@ -510,10 +742,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The owner contact information for an API resource.",
 		//	  "type": "string"
 		//	}
-		"owner_contact": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The owner contact information for an API resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"owner_contact": schemaAttribute725735f66f77b5875e7400c4(),
 		// Property: QueryDepthLimit
 		// CloudFormation resource type schema:
 		//
@@ -521,10 +750,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The maximum depth a query can have in a single request. Depth refers to the amount of nested levels allowed in the body of query.",
 		//	  "type": "integer"
 		//	}
-		"query_depth_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum depth a query can have in a single request. Depth refers to the amount of nested levels allowed in the body of query.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"query_depth_limit": schemaAttributec8c71d91946f17e5d2b68bb1(),
 		// Property: RealtimeDns
 		// CloudFormation resource type schema:
 		//
@@ -532,10 +758,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The fully qualified domain name (FQDN) of the real-time endpoint URL of your GraphQL API.",
 		//	  "type": "string"
 		//	}
-		"realtime_dns": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The fully qualified domain name (FQDN) of the real-time endpoint URL of your GraphQL API.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"realtime_dns": schemaAttributeb203d18302e37335da9ac76d(),
 		// Property: RealtimeUrl
 		// CloudFormation resource type schema:
 		//
@@ -543,10 +766,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The GraphQL API real-time endpoint URL.",
 		//	  "type": "string"
 		//	}
-		"realtime_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The GraphQL API real-time endpoint URL.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"realtime_url": schemaAttributebe3442f87c1d0ec89e406803(),
 		// Property: ResolverCountLimit
 		// CloudFormation resource type schema:
 		//
@@ -554,10 +774,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The maximum number of resolvers that can be invoked in a single request.",
 		//	  "type": "integer"
 		//	}
-		"resolver_count_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum number of resolvers that can be invoked in a single request.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resolver_count_limit": schemaAttribute9a8838d94cb873b966cd3116(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -582,22 +799,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An arbitrary set of tags (key-value pairs) for this GraphQL API.\n\n",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributec200b48fdc0902f8ff558c2f(),
 		// Property: UserPoolConfig
 		// CloudFormation resource type schema:
 		//
@@ -624,32 +826,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"user_pool_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AppIdClientRegex
-				"app_id_client_regex": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A regular expression for validating the incoming Amazon Cognito user pool app client ID.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: AwsRegion
-				"aws_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The AWS Region in which the user pool was created.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DefaultAction
-				"default_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The action that you want your GraphQL API to take when a request that uses Amazon Cognito user pool authentication doesn't match the Amazon Cognito user pool configuration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: UserPoolId
-				"user_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The user pool ID.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Optional authorization configuration for using Amazon Cognito user pools with your GraphQL endpoint.\n\n",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"user_pool_config": schemaAttribute802c8316b4ed69d7c9f01ec7(),
 		// Property: Visibility
 		// CloudFormation resource type schema:
 		//
@@ -657,10 +834,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Sets the scope of the GraphQL API to public (GLOBAL) or private (PRIVATE). By default, the scope is set to Global if no value is provided.",
 		//	  "type": "string"
 		//	}
-		"visibility": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Sets the scope of the GraphQL API to public (GLOBAL) or private (PRIVATE). By default, the scope is set to Global if no value is provided.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"visibility": schemaAttributebeabaab701abe7302fd5cb69(),
 		// Property: XrayEnabled
 		// CloudFormation resource type schema:
 		//
@@ -668,10 +842,7 @@ func graphQLApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A flag indicating whether to use AWS X-Ray tracing for this GraphqlApi.\n\n",
 		//	  "type": "boolean"
 		//	}
-		"xray_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A flag indicating whether to use AWS X-Ray tracing for this GraphqlApi.\n\n",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"xray_enabled": schemaAttribute190d4321d1af946b471be30d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

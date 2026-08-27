@@ -15,6 +15,55 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute14f918257e7ecd57ce500030() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1b7e4fbebef92ad6b5c01d17() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LinkedAccounts
+			"linked_accounts": schemaAttribute9b54fff5a70616b1356f1c5d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute46063ddbd3528815c0f01942() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute87737cf8c12eae2526972175(),
+				// Property: Value
+				"value": schemaAttribute87737cf8c12eae2526972175(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87737cf8c12eae2526972175() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b54fff5a70616b1356f1c5d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3d78b5b8b1b3ae73cb853ee() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_invoicing_invoice_unit", invoiceUnitDataSource)
 }
@@ -32,9 +81,7 @@ func invoiceUnitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\S\\s]*$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute87737cf8c12eae2526972175(),
 		// Property: InvoiceReceiver
 		// CloudFormation resource type schema:
 		//
@@ -44,9 +91,7 @@ func invoiceUnitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"invoice_receiver": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"invoice_receiver": schemaAttribute87737cf8c12eae2526972175(),
 		// Property: InvoiceUnitArn
 		// CloudFormation resource type schema:
 		//
@@ -56,18 +101,14 @@ func invoiceUnitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
 		//	  "type": "string"
 		//	}
-		"invoice_unit_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"invoice_unit_arn": schemaAttribute87737cf8c12eae2526972175(),
 		// Property: LastModified
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "number"
 		//	}
-		"last_modified": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"last_modified": schemaAttribute14f918257e7ecd57ce500030(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -77,9 +118,7 @@ func invoiceUnitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute87737cf8c12eae2526972175(),
 		// Property: ResourceTags
 		// CloudFormation resource type schema:
 		//
@@ -106,21 +145,7 @@ func invoiceUnitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"resource_tags": schemaAttribute46063ddbd3528815c0f01942(),
 		// Property: Rule
 		// CloudFormation resource type schema:
 		//
@@ -142,25 +167,14 @@ func invoiceUnitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LinkedAccounts
-				"linked_accounts": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"rule": schemaAttribute1b7e4fbebef92ad6b5c01d17(),
 		// Property: TaxInheritanceDisabled
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"tax_inheritance_disabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tax_inheritance_disabled": schemaAttributef3d78b5b8b1b3ae73cb853ee(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

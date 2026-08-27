@@ -14,6 +14,78 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0dc19896bc966f67ecba59b0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "AWS Internet of Things (IoT) object name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute102f8995cec7fa84a15c7e3b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute179a0f87a9d93a45f5c6e600() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a0e1e57b4d73d65143f14f0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute179a0f87a9d93a45f5c6e600(),
+				// Property: Value
+				"value": schemaAttribute102f8995cec7fa84a15c7e3b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Associate tags with the resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4361fc605a6cc716f42e3f6b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the device",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute50f8bd69338b70f244e18f45() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Description of the device",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b0ce5d4f0aeb895762f4004() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the edge device fleet",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea014592db23cdc4d1b59152f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Description
+			"description": schemaAttribute50f8bd69338b70f244e18f45(),
+			// Property: DeviceName
+			"device_name": schemaAttribute4361fc605a6cc716f42e3f6b(),
+			// Property: IotThingName
+			"iot_thing_name": schemaAttribute0dc19896bc966f67ecba59b0(),
+		}, /*END SCHEMA*/
+		Description: "The Edge Device you want to register against a device fleet",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_device", deviceDataSource)
 }
@@ -55,27 +127,7 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"device": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Description
-				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Description of the device",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DeviceName
-				"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the device",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IotThingName
-				"iot_thing_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "AWS Internet of Things (IoT) object name.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The Edge Device you want to register against a device fleet",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"device": schemaAttributea014592db23cdc4d1b59152f(),
 		// Property: DeviceFleetName
 		// CloudFormation resource type schema:
 		//
@@ -86,10 +138,7 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
-		"device_fleet_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the edge device fleet",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"device_fleet_name": schemaAttribute7b0ce5d4f0aeb895762f4004(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -121,24 +170,7 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Associate tags with the resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute2a0e1e57b4d73d65143f14f0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

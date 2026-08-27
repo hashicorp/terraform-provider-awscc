@@ -14,6 +14,41 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute73c4799d9a6b7b75d093ac7e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec89b89e1c4b5157e992f6109() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca9bf9780ecb03553a6b451b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd880d43fcccc89751cab6d3() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec89b89e1c4b5157e992f6109(),
+				// Property: Value
+				"value": schemaAttributeca9bf9780ecb03553a6b451b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_managedblockchain_accessor", accessorDataSource)
 }
@@ -31,9 +66,7 @@ func accessorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"accessor_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"accessor_type": schemaAttribute73c4799d9a6b7b75d093ac7e(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -43,9 +76,7 @@ func accessorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.+:.+:.+:.+:.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute73c4799d9a6b7b75d093ac7e(),
 		// Property: BillingToken
 		// CloudFormation resource type schema:
 		//
@@ -54,18 +85,14 @@ func accessorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 42,
 		//	  "type": "string"
 		//	}
-		"billing_token": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"billing_token": schemaAttribute73c4799d9a6b7b75d093ac7e(),
 		// Property: CreationDate
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"creation_date": schemaAttribute73c4799d9a6b7b75d093ac7e(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -74,9 +101,7 @@ func accessorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"accessor_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"accessor_id": schemaAttribute73c4799d9a6b7b75d093ac7e(),
 		// Property: NetworkType
 		// CloudFormation resource type schema:
 		//
@@ -90,9 +115,7 @@ func accessorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"network_type": schemaAttribute73c4799d9a6b7b75d093ac7e(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -104,9 +127,7 @@ func accessorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute73c4799d9a6b7b75d093ac7e(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -140,24 +161,7 @@ func accessorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributefd880d43fcccc89751cab6d3(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

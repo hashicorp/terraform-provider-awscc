@@ -16,6 +16,125 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute02c27a3290258d258dd21fdd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the context.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute148c90fd8487e1f30bd5b497() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ffb235879d0b7cdd796e9e6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The context type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute32aa56a037f1917b83b61aa9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "When the context was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute546e8b2b6d34f913230ec79b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SourceId
+			"source_id": schemaAttributef163470b5ea8c7e3015f3d54(),
+			// Property: SourceType
+			"source_type": schemaAttribute90f8cc16bb0323c9feaefa3e(),
+			// Property: SourceUri
+			"source_uri": schemaAttributeeb6f4e1c62ac32e3c74d349b(),
+		}, /*END SCHEMA*/
+		Description: "The source type, ID, and URI.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63e0f0a26321531b278c29e4() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of properties to add to the context.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90f8cc16bb0323c9feaefa3e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea5765cb936cdae0ccb63fa8d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the context.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4b026f8cdb5014127c435a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7144c7855ae9c357a9f31e8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the context. Must be unique to your account in an AWS Region.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed57b0e92c977e19fc221e150() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeb4b026f8cdb5014127c435a0(),
+				// Property: Value
+				"value": schemaAttribute148c90fd8487e1f30bd5b497(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags to apply to the context.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb6f4e1c62ac32e3c74d349b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URI of the source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef163470b5ea8c7e3015f3d54() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef669a31c3ded8cfe81a5d6f7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "When the context was last modified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_context", contextDataSource)
 }
@@ -33,10 +152,7 @@ func contextDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:context/",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the context.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributea5765cb936cdae0ccb63fa8d(),
 		// Property: ContextName
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +163,7 @@ func contextDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,119}$",
 		//	  "type": "string"
 		//	}
-		"context_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the context. Must be unique to your account in an AWS Region.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"context_name": schemaAttributec7144c7855ae9c357a9f31e8(),
 		// Property: ContextType
 		// CloudFormation resource type schema:
 		//
@@ -60,10 +173,7 @@ func contextDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"context_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The context type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"context_type": schemaAttribute1ffb235879d0b7cdd796e9e6(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -72,11 +182,7 @@ func contextDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "When the context was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute32aa56a037f1917b83b61aa9(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -86,10 +192,7 @@ func contextDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the context.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute02c27a3290258d258dd21fdd(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -98,11 +201,7 @@ func contextDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "When the context was last modified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttributef669a31c3ded8cfe81a5d6f7(),
 		// Property: Properties
 		// CloudFormation resource type schema:
 		//
@@ -117,12 +216,7 @@ func contextDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"properties":        // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of properties to add to the context.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"properties": schemaAttribute63e0f0a26321531b278c29e4(),
 		// Property: Source
 		// CloudFormation resource type schema:
 		//
@@ -154,27 +248,7 @@ func contextDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SourceId
-				"source_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID of the source.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourceType
-				"source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of the source.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourceUri
-				"source_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The URI of the source.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The source type, ID, and URI.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source": schemaAttribute546e8b2b6d34f913230ec79b(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -207,24 +281,7 @@ func contextDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags to apply to the context.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributed57b0e92c977e19fc221e150(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

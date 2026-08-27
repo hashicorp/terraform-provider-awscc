@@ -15,6 +15,45 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute016ef9194a4fbe90341908fc() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of included Regions",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute109bb314f13c82584aef7d95() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the AggregatorV2 being created and assigned as the unique identifier",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute433006ca5c304e9c001b7f34() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The aggregation Region of the AggregatorV2",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea320a5eb3cebedccba6f1594() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A key-value pair to associate with the Security Hub V2 resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef51d3d22d3d600c5e4507825() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates to link a list of included Regions",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_securityhub_aggregator_v2", aggregatorV2DataSource)
 }
@@ -31,10 +70,7 @@ func aggregatorV2DataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z0-9-]{1,32}$",
 		//	  "type": "string"
 		//	}
-		"aggregation_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The aggregation Region of the AggregatorV2",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"aggregation_region": schemaAttribute433006ca5c304e9c001b7f34(),
 		// Property: AggregatorV2Arn
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +79,7 @@ func aggregatorV2DataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "arn:aws\\S*:securityhub:\\S*",
 		//	  "type": "string"
 		//	}
-		"aggregator_v2_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the AggregatorV2 being created and assigned as the unique identifier",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"aggregator_v2_arn": schemaAttribute109bb314f13c82584aef7d95(),
 		// Property: LinkedRegions
 		// CloudFormation resource type schema:
 		//
@@ -62,11 +95,7 @@ func aggregatorV2DataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"linked_regions": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of included Regions",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"linked_regions": schemaAttribute016ef9194a4fbe90341908fc(),
 		// Property: RegionLinkingMode
 		// CloudFormation resource type schema:
 		//
@@ -77,10 +106,7 @@ func aggregatorV2DataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"region_linking_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates to link a list of included Regions",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"region_linking_mode": schemaAttributef51d3d22d3d600c5e4507825(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -97,12 +123,7 @@ func aggregatorV2DataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A key-value pair to associate with the Security Hub V2 resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributea320a5eb3cebedccba6f1594(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

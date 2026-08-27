@@ -15,6 +15,307 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute113e59d876e990df79642888() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatchLogsConfiguration
+			"cloudwatch_logs_configuration": schemaAttribute8a5f8ed62836ad850b69f916(),
+			// Property: LogSchemaVersion
+			"log_schema_version": schemaAttribute8c3608096c733041848d682a(),
+			// Property: S3Configuration
+			"s3_configuration": schemaAttributea25b0d012ba1bcc6fcd9edcb(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute166c1aee6a7bd6e42fb4fea5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatchDashboards
+			"cloudwatch_dashboards": schemaAttributeba19326496041ea80bf8902f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d5b082606fe7db1234ebe51() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The names of the actions that must be completed before the current action starts.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a66dfb658f9578cc5acec9a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31f00b2c6f29d57718a875cf() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Path
+				"path": schemaAttributec83bee36af15d00f6f4f4be5(),
+				// Property: Values
+				"values": schemaAttribute9f8325889bbc1f0bf82bbbbe(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38e4cc28f8baea0f66837f2f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccountTargeting
+			"account_targeting": schemaAttribute6addaa8ee4da62b56dfabf22(),
+			// Property: EmptyTargetResolutionMode
+			"empty_target_resolution_mode": schemaAttributee78ab6436791fd4032d5e25f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48f08dd0f9028a401a5d690a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ed8909b117ed71208bd6f9e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Scopes the identified resources to a specific number of the resources at random, or a percentage of the resources.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65919c90b5e8f83aaf8c03b0() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ActionId
+				"action_id": schemaAttribute2a66dfb658f9578cc5acec9a(),
+				// Property: Description
+				"description": schemaAttribute8566b3fbe10c3683f2f4dbf5(),
+				// Property: Parameters
+				"parameters": schemaAttribute660787165dbacd907d5d85dd(),
+				// Property: StartAfter
+				"start_after": schemaAttribute1d5b082606fe7db1234ebe51(),
+				// Property: Targets
+				"targets": schemaAttributedbd830e328186c4dac30c0cd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The actions for the experiment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute660787165dbacd907d5d85dd() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The parameters for the action, if applicable.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6addaa8ee4da62b56dfabf22() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The account targeting setting for the experiment template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72b31a400c58ea5e1057792a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS resource type. The resource type must be supported for the specified action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8566b3fbe10c3683f2f4dbf5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a5f8ed62836ad850b69f916() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogGroupArn
+			"log_group_arn": schemaAttribute9b1a00f0f9114518342354b4(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c3608096c733041848d682a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b1a00f0f9114518342354b4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f8325889bbc1f0bf82bbbbe() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The attribute values for the filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea25b0d012ba1bcc6fcd9edcb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketName
+			"bucket_name": schemaAttribute9b1a00f0f9114518342354b4(),
+			// Property: Prefix
+			"prefix": schemaAttribute9b1a00f0f9114518342354b4(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea320ca83f313f0648ef58d6d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The Amazon Resource Names (ARNs) of the target resources.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea914e17749ed8245d7718ef7() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba19326496041ea80bf8902f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DashboardIdentifier
+				"dashboard_identifier": schemaAttribute9b1a00f0f9114518342354b4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec205d41a6572c1b37360459c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataSources
+			"data_sources": schemaAttribute166c1aee6a7bd6e42fb4fea5(),
+			// Property: Outputs
+			"outputs": schemaAttributed6a0fb8d1811f16d83017a01(),
+			// Property: PostExperimentDuration
+			"post_experiment_duration": schemaAttribute9b1a00f0f9114518342354b4(),
+			// Property: PreExperimentDuration
+			"pre_experiment_duration": schemaAttribute9b1a00f0f9114518342354b4(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec83bee36af15d00f6f4f4be5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The attribute path for the filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6a0fb8d1811f16d83017a01() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ExperimentReportS3Configuration
+			"experiment_report_s3_configuration": schemaAttributea25b0d012ba1bcc6fcd9edcb(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedbd830e328186c4dac30c0cd() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "One or more targets for the action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedefa1c869a2346071ccb5cf6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Source
+				"source": schemaAttribute9b1a00f0f9114518342354b4(),
+				// Property: Value
+				"value": schemaAttribute9b1a00f0f9114518342354b4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more stop conditions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee618529ec76a327cb4c8a9e2() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Filters
+				"filters": schemaAttribute31f00b2c6f29d57718a875cf(),
+				// Property: Parameters
+				"parameters": schemaAttributea914e17749ed8245d7718ef7(),
+				// Property: ResourceArns
+				"resource_arns": schemaAttributea320ca83f313f0648ef58d6d(),
+				// Property: ResourceTags
+				"resource_tags": schemaAttributea914e17749ed8245d7718ef7(),
+				// Property: ResourceType
+				"resource_type": schemaAttribute72b31a400c58ea5e1057792a(),
+				// Property: SelectionMode
+				"selection_mode": schemaAttribute5ed8909b117ed71208bd6f9e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The targets for the experiment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee78ab6436791fd4032d5e25f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The target resolution failure mode for the experiment template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef179b58e9ac2ee09ff5c221c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the experiment template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_fis_experiment_template", experimentTemplateDataSource)
 }
@@ -83,45 +384,7 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"actions":                 // Pattern: ""
-		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ActionId
-					"action_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of the action.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Description
-					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A description for the action.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Parameters
-					"parameters":        // Pattern: ""
-					schema.MapAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The parameters for the action, if applicable.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: StartAfter
-					"start_after": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The names of the actions that must be completed before the current action starts.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Targets
-					"targets":           // Pattern: ""
-					schema.MapAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "One or more targets for the action.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The actions for the experiment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"actions": schemaAttribute65919c90b5e8f83aaf8c03b0(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -130,10 +393,7 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "maxLength": 512,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description for the experiment template.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributef179b58e9ac2ee09ff5c221c(),
 		// Property: ExperimentOptions
 		// CloudFormation resource type schema:
 		//
@@ -159,21 +419,7 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"experiment_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AccountTargeting
-				"account_targeting": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The account targeting setting for the experiment template.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EmptyTargetResolutionMode
-				"empty_target_resolution_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The target resolution failure mode for the experiment template.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"experiment_options": schemaAttribute38e4cc28f8baea0f66837f2f(),
 		// Property: ExperimentReportConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -243,66 +489,14 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"experiment_report_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DataSources
-				"data_sources": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CloudWatchDashboards
-						"cloudwatch_dashboards": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DashboardIdentifier
-									"dashboard_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Outputs
-				"outputs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ExperimentReportS3Configuration
-						"experiment_report_s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BucketName
-								"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Prefix
-								"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PostExperimentDuration
-				"post_experiment_duration": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PreExperimentDuration
-				"pre_experiment_duration": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"experiment_report_configuration": schemaAttributec205d41a6572c1b37360459c(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"experiment_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"experiment_template_id": schemaAttribute9b1a00f0f9114518342354b4(),
 		// Property: LogConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -352,39 +546,7 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"log_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CloudWatchLogsConfiguration
-				"cloudwatch_logs_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: LogGroupArn
-						"log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: LogSchemaVersion
-				"log_schema_version": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: S3Configuration
-				"s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BucketName
-						"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Prefix
-						"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"log_configuration": schemaAttribute113e59d876e990df79642888(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -393,10 +555,7 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "maxLength": 1224,
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS service permission to perform service actions on your behalf.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute48f08dd0f9028a401a5d690a(),
 		// Property: StopConditions
 		// CloudFormation resource type schema:
 		//
@@ -422,22 +581,7 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "array"
 		//	}
-		"stop_conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Source
-					"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "One or more stop conditions.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"stop_conditions": schemaAttributedefa1c869a2346071ccb5cf6(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -451,11 +595,7 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributea914e17749ed8245d7718ef7(),
 		// Property: Targets
 		// CloudFormation resource type schema:
 		//
@@ -543,62 +683,7 @@ func experimentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"targets":                 // Pattern: ""
-		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Filters
-					"filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Path
-								"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The attribute path for the filter.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Values
-								"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "The attribute values for the filter.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Parameters
-					"parameters":        // Pattern: ""
-					schema.MapAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ResourceArns
-					"resource_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The Amazon Resource Names (ARNs) of the target resources.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ResourceTags
-					"resource_tags":     // Pattern: ""
-					schema.MapAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ResourceType
-					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The AWS resource type. The resource type must be supported for the specified action.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SelectionMode
-					"selection_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Scopes the identified resources to a specific number of the resources at random, or a percentage of the resources.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The targets for the experiment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"targets": schemaAttributee618529ec76a327cb4c8a9e2(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

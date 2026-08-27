@@ -14,6 +14,48 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute04c967943d6794eb184a9d1a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute07d2d3955790d3d5b124d4b6() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute04c967943d6794eb184a9d1a(),
+				// Property: Value
+				"value": schemaAttribute43435778199e602acc649772(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute260b7793f60398c155aa47c6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43435778199e602acc649772() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7c248ffc4a39349cdcabad9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the collection",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_rekognition_collection", collectionDataSource)
 }
@@ -31,9 +73,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute260b7793f60398c155aa47c6(),
 		// Property: CollectionId
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +83,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "\\A[a-zA-Z0-9_\\.\\-]+$",
 		//	  "type": "string"
 		//	}
-		"collection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the collection",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"collection_id": schemaAttributea7c248ffc4a39349cdcabad9(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -81,24 +118,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute07d2d3955790d3d5b124d4b6(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

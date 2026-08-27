@@ -15,6 +15,46 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute4d7bd7357d9261b562fc4a41() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of security group IDs for the VPC link.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54827f7ff234d3ba6c6e3a62() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The collection of tags. Each tag element is associated with a given resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5dd19bdbff3f101e5893e2fe() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of subnet IDs to include in the VPC link.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3e9273f6f8d3290dd1a5a2c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb4400cba482242f6e9c8a98() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the VPC link.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_apigatewayv2_vpc_link", vpcLinkDataSource)
 }
@@ -30,10 +70,7 @@ func vpcLinkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the VPC link.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the VPC link.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributefb4400cba482242f6e9c8a98(),
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -46,11 +83,7 @@ func vpcLinkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of security group IDs for the VPC link.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_ids": schemaAttribute4d7bd7357d9261b562fc4a41(),
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -63,11 +96,7 @@ func vpcLinkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of subnet IDs to include in the VPC link.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_ids": schemaAttribute5dd19bdbff3f101e5893e2fe(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -81,12 +110,7 @@ func vpcLinkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The collection of tags. Each tag element is associated with a given resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute54827f7ff234d3ba6c6e3a62(),
 		// Property: VpcLinkId
 		// CloudFormation resource type schema:
 		//
@@ -94,10 +118,7 @@ func vpcLinkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"vpc_link_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_link_id": schemaAttributed3e9273f6f8d3290dd1a5a2c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

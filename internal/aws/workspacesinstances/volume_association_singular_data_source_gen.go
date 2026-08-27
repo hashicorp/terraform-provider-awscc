@@ -14,6 +14,34 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute058ffbb6197b49b3e7335e7f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ID of the workspace instance to associate with the volume",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c1eb705baafa10b7986bff4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ID of the volume to attach to the workspace instance",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f9c7e65aa46b09742747912() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The device name for the volume attachment",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec658bf1476e3370396788f8d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Mode to use when disassociating the volume",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_workspacesinstances_volume_association", volumeAssociationDataSource)
 }
@@ -30,10 +58,7 @@ func volumeAssociationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "maxLength": 32,
 		//	  "type": "string"
 		//	}
-		"device": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The device name for the volume attachment",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"device": schemaAttribute8f9c7e65aa46b09742747912(),
 		// Property: DisassociateMode
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +70,7 @@ func volumeAssociationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"disassociate_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Mode to use when disassociating the volume",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"disassociate_mode": schemaAttributec658bf1476e3370396788f8d(),
 		// Property: VolumeId
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +79,7 @@ func volumeAssociationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^vol-[0-9a-zA-Z]{1,63}$",
 		//	  "type": "string"
 		//	}
-		"volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ID of the volume to attach to the workspace instance",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"volume_id": schemaAttribute2c1eb705baafa10b7986bff4(),
 		// Property: WorkspaceInstanceId
 		// CloudFormation resource type schema:
 		//
@@ -69,10 +88,7 @@ func volumeAssociationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^wsinst-[0-9a-zA-Z]{8,63}$",
 		//	  "type": "string"
 		//	}
-		"workspace_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ID of the workspace instance to associate with the volume",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"workspace_instance_id": schemaAttribute058ffbb6197b49b3e7335e7f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

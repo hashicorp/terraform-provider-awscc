@@ -14,6 +14,26 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributeab784478f18353c7d49f0986() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttributed81b23f04220783153ab1bcb(),
+				// Property: Value
+				"value": schemaAttributed81b23f04220783153ab1bcb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed81b23f04220783153ab1bcb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_appstream_entitlement", entitlementDataSource)
 }
@@ -28,9 +48,7 @@ func entitlementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"app_visibility": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"app_visibility": schemaAttributed81b23f04220783153ab1bcb(),
 		// Property: Attributes
 		// CloudFormation resource type schema:
 		//
@@ -55,66 +73,42 @@ func entitlementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"attributes": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"attributes": schemaAttributeab784478f18353c7d49f0986(),
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttributed81b23f04220783153ab1bcb(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributed81b23f04220783153ab1bcb(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttributed81b23f04220783153ab1bcb(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributed81b23f04220783153ab1bcb(),
 		// Property: StackName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"stack_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"stack_name": schemaAttributed81b23f04220783153ab1bcb(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

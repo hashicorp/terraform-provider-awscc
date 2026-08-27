@@ -15,6 +15,136 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute06c26f30f17dc9c8630160bc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DirectoryListingOptimization
+			"directory_listing_optimization": schemaAttribute9d6a71d07c99a95e4af0120e(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute495a0567a0c51e7400dcc64d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of egress IP addresses of this server. These IP addresses are only relevant for servers that use the AS2 protocol. They are used for sending asynchronous MDNs. These IP addresses are assigned automatically when you create an AS2 server. Additionally, if you update an existing server and add the AS2 protocol, static IP addresses are assigned as well.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute515b0f10e5b5ba73bfcabfa1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: OnPartialUpload
+			"on_partial_upload": schemaAttributec074fb11a1e228ee0e2a25fc(),
+			// Property: OnUpload
+			"on_upload": schemaAttributec074fb11a1e228ee0e2a25fc(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute829cd5bac3ee74d24e2a5953() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DirectoryId
+			"directory_id": schemaAttributebebdd570b21c2cb31c63b839(),
+			// Property: Function
+			"function": schemaAttributebebdd570b21c2cb31c63b839(),
+			// Property: InvocationRole
+			"invocation_role": schemaAttributebebdd570b21c2cb31c63b839(),
+			// Property: SftpAuthenticationMethods
+			"sftp_authentication_methods": schemaAttributebebdd570b21c2cb31c63b839(),
+			// Property: Url
+			"url": schemaAttributebebdd570b21c2cb31c63b839(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c95ce4f5bc58d7febea4a48() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d6a71d07c99a95e4af0120e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether optimization to directory listing on S3 servers is used. Disabled by default for compatibility.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea61d434e7885e35a88917df2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: As2Transports
+			"as_2_transports": schemaAttribute9c95ce4f5bc58d7febea4a48(),
+			// Property: PassiveIp
+			"passive_ip": schemaAttributebebdd570b21c2cb31c63b839(),
+			// Property: SetStatOption
+			"set_stat_option": schemaAttributebebdd570b21c2cb31c63b839(),
+			// Property: TlsSessionResumptionMode
+			"tls_session_resumption_mode": schemaAttributebebdd570b21c2cb31c63b839(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3d4cd1a3e6827fb40acbfca() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AddressAllocationIds
+			"address_allocation_ids": schemaAttribute9c95ce4f5bc58d7febea4a48(),
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttribute9c95ce4f5bc58d7febea4a48(),
+			// Property: SubnetIds
+			"subnet_ids": schemaAttribute9c95ce4f5bc58d7febea4a48(),
+			// Property: VpcEndpointId
+			"vpc_endpoint_id": schemaAttributebebdd570b21c2cb31c63b839(),
+			// Property: VpcId
+			"vpc_id": schemaAttributebebdd570b21c2cb31c63b839(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebebdd570b21c2cb31c63b839() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec074fb11a1e228ee0e2a25fc() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExecutionRole
+				"execution_role": schemaAttributebebdd570b21c2cb31c63b839(),
+				// Property: WorkflowId
+				"workflow_id": schemaAttributebebdd570b21c2cb31c63b839(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef786056e928b440f02e1e36c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributebebdd570b21c2cb31c63b839(),
+				// Property: Value
+				"value": schemaAttributebebdd570b21c2cb31c63b839(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_transfer_server", serverDataSource)
 }
@@ -32,9 +162,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:\\S+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributebebdd570b21c2cb31c63b839(),
 		// Property: As2ServiceManagedEgressIpAddresses
 		// CloudFormation resource type schema:
 		//
@@ -47,11 +175,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"as_2_service_managed_egress_ip_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of egress IP addresses of this server. These IP addresses are only relevant for servers that use the AS2 protocol. They are used for sending asynchronous MDNs. These IP addresses are assigned automatically when you create an AS2 server. Additionally, if you update an existing server and add the AS2 protocol, static IP addresses are assigned as well.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"as_2_service_managed_egress_ip_addresses": schemaAttribute495a0567a0c51e7400dcc64d(),
 		// Property: Certificate
 		// CloudFormation resource type schema:
 		//
@@ -60,9 +184,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"certificate": schemaAttributebebdd570b21c2cb31c63b839(),
 		// Property: Domain
 		// CloudFormation resource type schema:
 		//
@@ -73,9 +195,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"domain": schemaAttributebebdd570b21c2cb31c63b839(),
 		// Property: EndpointDetails
 		// CloudFormation resource type schema:
 		//
@@ -118,34 +238,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"endpoint_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AddressAllocationIds
-				"address_allocation_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecurityGroupIds
-				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SubnetIds
-				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VpcEndpointId
-				"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: VpcId
-				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_details": schemaAttributeb3d4cd1a3e6827fb40acbfca(),
 		// Property: EndpointType
 		// CloudFormation resource type schema:
 		//
@@ -157,9 +250,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_type": schemaAttributebebdd570b21c2cb31c63b839(),
 		// Property: IdentityProviderDetails
 		// CloudFormation resource type schema:
 		//
@@ -201,31 +292,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"identity_provider_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DirectoryId
-				"directory_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Function
-				"function": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: InvocationRole
-				"invocation_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SftpAuthenticationMethods
-				"sftp_authentication_methods": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Url
-				"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"identity_provider_details": schemaAttribute829cd5bac3ee74d24e2a5953(),
 		// Property: IdentityProviderType
 		// CloudFormation resource type schema:
 		//
@@ -238,9 +305,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"identity_provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"identity_provider_type": schemaAttributebebdd570b21c2cb31c63b839(),
 		// Property: IpAddressType
 		// CloudFormation resource type schema:
 		//
@@ -251,9 +316,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"ip_address_type": schemaAttributebebdd570b21c2cb31c63b839(),
 		// Property: LoggingRole
 		// CloudFormation resource type schema:
 		//
@@ -263,9 +326,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(|arn:.*role/\\S+)$",
 		//	  "type": "string"
 		//	}
-		"logging_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"logging_role": schemaAttributebebdd570b21c2cb31c63b839(),
 		// Property: PostAuthenticationLoginBanner
 		// CloudFormation resource type schema:
 		//
@@ -275,9 +336,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\x09-\\x0D\\x20-\\x7E]*$",
 		//	  "type": "string"
 		//	}
-		"post_authentication_login_banner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"post_authentication_login_banner": schemaAttributebebdd570b21c2cb31c63b839(),
 		// Property: PreAuthenticationLoginBanner
 		// CloudFormation resource type schema:
 		//
@@ -287,9 +346,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\x09-\\x0D\\x20-\\x7E]*$",
 		//	  "type": "string"
 		//	}
-		"pre_authentication_login_banner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"pre_authentication_login_banner": schemaAttributebebdd570b21c2cb31c63b839(),
 		// Property: ProtocolDetails
 		// CloudFormation resource type schema:
 		//
@@ -331,28 +388,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"protocol_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: As2Transports
-				"as_2_transports": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PassiveIp
-				"passive_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SetStatOption
-				"set_stat_option": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: TlsSessionResumptionMode
-				"tls_session_resumption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"protocol_details": schemaAttributea61d434e7885e35a88917df2(),
 		// Property: Protocols
 		// CloudFormation resource type schema:
 		//
@@ -371,10 +407,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"protocols": schemaAttribute9c95ce4f5bc58d7febea4a48(),
 		// Property: S3StorageOptions
 		// CloudFormation resource type schema:
 		//
@@ -392,16 +425,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"s3_storage_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DirectoryListingOptimization
-				"directory_listing_optimization": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether optimization to directory listing on S3 servers is used. Disabled by default for compatibility.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"s3_storage_options": schemaAttribute06c26f30f17dc9c8630160bc(),
 		// Property: SecurityPolicyName
 		// CloudFormation resource type schema:
 		//
@@ -411,9 +435,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^TransferSecurityPolicy-.+$",
 		//	  "type": "string"
 		//	}
-		"security_policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"security_policy_name": schemaAttributebebdd570b21c2cb31c63b839(),
 		// Property: ServerId
 		// CloudFormation resource type schema:
 		//
@@ -423,9 +445,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^s-([0-9a-f]{17})$",
 		//	  "type": "string"
 		//	}
-		"server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"server_id": schemaAttributebebdd570b21c2cb31c63b839(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -440,9 +460,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributebebdd570b21c2cb31c63b839(),
 		// Property: StructuredLogDestinations
 		// CloudFormation resource type schema:
 		//
@@ -458,10 +476,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"structured_log_destinations": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"structured_log_destinations": schemaAttribute9c95ce4f5bc58d7febea4a48(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -491,21 +506,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributef786056e928b440f02e1e36c(),
 		// Property: WorkflowDetails
 		// CloudFormation resource type schema:
 		//
@@ -571,43 +572,7 @@ func serverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"workflow_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: OnPartialUpload
-				"on_partial_upload": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ExecutionRole
-							"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: WorkflowId
-							"workflow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: OnUpload
-				"on_upload": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ExecutionRole
-							"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: WorkflowId
-							"workflow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"workflow_details": schemaAttribute515b0f10e5b5ba73bfcabfa1(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,624 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0064ff5ad4707a4160ddc810() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates the degree of outage when the alarm goes off.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute046dae42d31415f427393305() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d577f75efed2f8694cc6139() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "When set to true, creates opsItems for any problems detected on an application.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute102bc56cb204d4473e1897a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Prometheus exporter port.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute135f6be97ab7502d4f55b71c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The log pattern.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute160c1a5f5b547d56ec6e0f04() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tier of the application component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute160c5105788b7534581d38ba() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceNumbers
+			"instance_numbers": schemaAttributef85592802538121574e1b79b(),
+			// Property: PrometheusPort
+			"prometheus_port": schemaAttribute102bc56cb204d4473e1897a0(),
+			// Property: SAPSID
+			"sapsid": schemaAttribute820b6ae9422ef300afaff439(),
+		}, /*END SCHEMA*/
+		Description: "The NetWeaver Prometheus Exporter settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1cf7c220c4dbb4d75d684744() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AlarmName
+				"alarm_name": schemaAttribute5f0b09fb26c60f7bb75f6a37(),
+				// Property: Severity
+				"severity": schemaAttribute0064ff5ad4707a4160ddc810(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of alarms to monitor for the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d7f8bfb692eabc88a289bad() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConfigurationDetails
+			"configuration_details": schemaAttribute67525642bbfe63963a2ee438(),
+			// Property: SubComponentTypeConfigurations
+			"sub_component_type_configurations": schemaAttributea61d77a9c2009b32c923f7a6(),
+		}, /*END SCHEMA*/
+		Description: "The overwritten settings on default component monitoring configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e73d48150d682706efc5617() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConfigurationDetails
+			"configuration_details": schemaAttribute67525642bbfe63963a2ee438(),
+			// Property: SubComponentTypeConfigurations
+			"sub_component_type_configurations": schemaAttributea61d77a9c2009b32c923f7a6(),
+		}, /*END SCHEMA*/
+		Description: "The monitoring configuration of the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2085420d0edc54c91dca00a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of encoding of the logs to be monitored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20a6d1eff856c8d63feadcb2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The grouping type of the application",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2474de2d9755e7b584a420f4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The path of the logs to be monitored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25aa6b958ce7fe71172b5029() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Application Insights sends notifications to this SNS topic whenever there is a problem update in the associated application.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2997f4083e8133b7cb1e41d2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LogPatterns
+				"log_patterns": schemaAttributecee75e147d7d6f242d50c559(),
+				// Property: PatternSetName
+				"pattern_set_name": schemaAttributef2345b4c80c955f1f4bc1ea8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The log pattern sets.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute32e87ed70487b57fde78ef6b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AlarmMetrics
+				"alarm_metrics": schemaAttribute3a3118d372804819bdecd59a(),
+				// Property: ProcessName
+				"process_name": schemaAttributeefdb363f4d72370323d5aace(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute372ec569b81750de2c2c114b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a3118d372804819bdecd59a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AlarmMetricName
+				"alarm_metric_name": schemaAttributef693fd9a5042d5a04f9a961f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of metrics to monitor for the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3adc0f87d4a84404bc585b13() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AgreeToInstallHANADBClient
+			"agree_to_install_hanadb_client": schemaAttribute7952c4d6ec708553a2e2a630(),
+			// Property: HANAPort
+			"hana_port": schemaAttributef5dc6b6440d5a0e11ef0b677(),
+			// Property: HANASID
+			"hanasid": schemaAttribute52990a793a8385571f6a50e7(),
+			// Property: HANASecretName
+			"hana_secret_name": schemaAttributecf676f377d339aee9ec31e4d(),
+			// Property: PrometheusPort
+			"prometheus_port": schemaAttribute102bc56cb204d4473e1897a0(),
+		}, /*END SCHEMA*/
+		Description: "The HANA DB Prometheus Exporter settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c93e1995f3e69a4d6a48c13() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the resource group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52990a793a8385571f6a50e7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "HANA DB SID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute55fbb378585e3034d3d71800() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Java agent host port",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d05e4a4e40b5eaed66ccd5e() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "If set to true, application will be configured with recommended monitoring configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f0b09fb26c60f7bb75f6a37() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the CloudWatch alarm to be monitored for the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f27cca7222be08a20dafee5() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether Application Insights can listen to CloudWatch events for the application resources.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67525642bbfe63963a2ee438() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AlarmMetrics
+			"alarm_metrics": schemaAttribute3a3118d372804819bdecd59a(),
+			// Property: Alarms
+			"alarms": schemaAttribute1cf7c220c4dbb4d75d684744(),
+			// Property: HAClusterPrometheusExporter
+			"ha_cluster_prometheus_exporter": schemaAttributedf2496c3fc70dc00789c8b3e(),
+			// Property: HANAPrometheusExporter
+			"hana_prometheus_exporter": schemaAttribute3adc0f87d4a84404bc585b13(),
+			// Property: JMXPrometheusExporter
+			"jmx_prometheus_exporter": schemaAttributebdaa0326e60378392517a381(),
+			// Property: Logs
+			"logs": schemaAttributef9c2e14911e15310f5d59f63(),
+			// Property: NetWeaverPrometheusExporter
+			"net_weaver_prometheus_exporter": schemaAttribute160c5105788b7534581d38ba(),
+			// Property: Processes
+			"processes": schemaAttribute32e87ed70487b57fde78ef6b(),
+			// Property: SQLServerPrometheusExporter
+			"sql_server_prometheus_exporter": schemaAttribute7b15c0009516cd2fd966b9c9(),
+			// Property: WindowsEvents
+			"windows_events": schemaAttributea21758240d52b61ac7d75407(),
+		}, /*END SCHEMA*/
+		Description: "The configuration settings",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b17d76d935398a3eee4eaad() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AlarmMetrics
+			"alarm_metrics": schemaAttribute3a3118d372804819bdecd59a(),
+			// Property: Logs
+			"logs": schemaAttributef9c2e14911e15310f5d59f63(),
+			// Property: Processes
+			"processes": schemaAttribute32e87ed70487b57fde78ef6b(),
+			// Property: WindowsEvents
+			"windows_events": schemaAttributea21758240d52b61ac7d75407(),
+		}, /*END SCHEMA*/
+		Description: "The configuration settings of sub components.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ea1f4ce9c46dd150453e49f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the log pattern.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f6d5bc2ca9bc71920a689c3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ComponentARN
+				"component_arn": schemaAttributeee0ef2be0ddea2f1246f7a13(),
+				// Property: ComponentConfigurationMode
+				"component_configuration_mode": schemaAttributebc2a5f28e63c06fa9503bed4(),
+				// Property: ComponentName
+				"component_name": schemaAttributee28c38635bcbaf3efa52bb6c(),
+				// Property: CustomComponentConfiguration
+				"custom_component_configuration": schemaAttribute1e73d48150d682706efc5617(),
+				// Property: DefaultOverwriteComponentConfiguration
+				"default_overwrite_component_configuration": schemaAttribute1d7f8bfb692eabc88a289bad(),
+				// Property: Tier
+				"tier": schemaAttribute160c1a5f5b547d56ec6e0f04(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The monitoring settings of the components.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute722fee0f16b99c5420cc7c22() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the ApplicationInsights application.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7952c4d6ec708553a2e2a630() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A flag which indicates agreeing to install SAP HANA DB client.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b15c0009516cd2fd966b9c9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PrometheusPort
+			"prometheus_port": schemaAttribute102bc56cb204d4473e1897a0(),
+			// Property: SQLSecretName
+			"sql_secret_name": schemaAttribute993b13a5bd436ecad9822a5e(),
+		}, /*END SCHEMA*/
+		Description: "The SQL Prometheus Exporter settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute820b6ae9422ef300afaff439() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "SAP NetWeaver SID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83008cec557185325fca7d2b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ComponentName
+				"component_name": schemaAttributee28c38635bcbaf3efa52bb6c(),
+				// Property: ResourceList
+				"resource_list": schemaAttribute99fe867322f26acd974c1fcf(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The custom grouped components.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute86a5abb3fbc3ca21bdb1ce05() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The levels of event to log. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87ce4e16bbe6020ebd4dc0d7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SNS topic provided to Application Insights that is associated to the created opsItem.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute993b13a5bd436ecad9822a5e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Secret name which managers SQL exporter connection. e.g. {\"data_source_name\": \"sqlserver://<USERNAME>:<PASSWORD>@localhost:1433\"}",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute99fe867322f26acd974c1fcf() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of resource ARNs that belong to the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea1c9a1461aed34a0bcecb125() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "If set to true, the managed policies for SSM and CW will be attached to the instance roles if they are missing",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea21758240d52b61ac7d75407() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EventLevels
+				"event_levels": schemaAttribute86a5abb3fbc3ca21bdb1ce05(),
+				// Property: EventName
+				"event_name": schemaAttributecefade75ea502443598fb7c0(),
+				// Property: LogGroupName
+				"log_group_name": schemaAttributebbc86843f8fc475806c1af1c(),
+				// Property: PatternSet
+				"pattern_set": schemaAttributef2345b4c80c955f1f4bc1ea8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of Windows Events to log.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea61d77a9c2009b32c923f7a6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SubComponentConfigurationDetails
+				"sub_component_configuration_details": schemaAttribute6b17d76d935398a3eee4eaad(),
+				// Property: SubComponentType
+				"sub_component_type": schemaAttributeed3f0f8a92324f367b58dee8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Sub component configurations of the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb21241190ee91913791f4992() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "JMX service URL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebbc86843f8fc475806c1af1c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The CloudWatch log group name to be associated to the monitored log.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc2a5f28e63c06fa9503bed4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The component monitoring configuration mode.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebdaa0326e60378392517a381() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HostPort
+			"host_port": schemaAttribute55fbb378585e3034d3d71800(),
+			// Property: JMXURL
+			"jmxurl": schemaAttributeb21241190ee91913791f4992(),
+			// Property: PrometheusPort
+			"prometheus_port": schemaAttribute102bc56cb204d4473e1897a0(),
+		}, /*END SCHEMA*/
+		Description: "The JMX Prometheus Exporter settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebfa8aa173d963a05adae3c32() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The log type decides the log patterns against which Application Insights analyzes the log.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec28c98409db6b80ebfe81ebf() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute046dae42d31415f427393305(),
+				// Property: Value
+				"value": schemaAttribute372ec569b81750de2c2c114b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags of Application Insights application.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecee75e147d7d6f242d50c559() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Pattern
+				"pattern": schemaAttribute135f6be97ab7502d4f55b71c(),
+				// Property: PatternName
+				"pattern_name": schemaAttribute6ea1f4ce9c46dd150453e49f(),
+				// Property: Rank
+				"rank": schemaAttributed3e3af5042c39cce056ea7cd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The log patterns of a set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecefade75ea502443598fb7c0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of Windows Events to log.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf676f377d339aee9ec31e4d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The secret name which manages the HANA DB credentials e.g. {\n  \"username\": \"<>\",\n  \"password\": \"<>\"\n}.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3e3af5042c39cce056ea7cd() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Rank of the log pattern.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf2496c3fc70dc00789c8b3e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PrometheusPort
+			"prometheus_port": schemaAttribute102bc56cb204d4473e1897a0(),
+		}, /*END SCHEMA*/
+		Description: "The HA cluster Prometheus Exporter settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee28c38635bcbaf3efa52bb6c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed3f0f8a92324f367b58dee8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The sub component type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee0ef2be0ddea2f1246f7a13() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the compnonent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeefdb363f4d72370323d5aace() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the process to be monitored for the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2345b4c80c955f1f4bc1ea8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the log pattern set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef5dc6b6440d5a0e11ef0b677() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The HANA DB port.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef693fd9a5042d5a04f9a961f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the metric to be monitored for the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef85592802538121574e1b79b() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "SAP instance numbers for ASCS, ERS, and App Servers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9c2e14911e15310f5d59f63() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Encoding
+				"encoding": schemaAttribute2085420d0edc54c91dca00a5(),
+				// Property: LogGroupName
+				"log_group_name": schemaAttributebbc86843f8fc475806c1af1c(),
+				// Property: LogPath
+				"log_path": schemaAttribute2474de2d9755e7b584a420f4(),
+				// Property: LogType
+				"log_type": schemaAttributebfa8aa173d963a05adae3c32(),
+				// Property: PatternSet
+				"pattern_set": schemaAttributef2345b4c80c955f1f4bc1ea8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of logs to monitor for the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_applicationinsights_application", applicationDataSource)
 }
@@ -30,10 +648,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the ApplicationInsights application.",
 		//	  "type": "string"
 		//	}
-		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the ApplicationInsights application.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"application_arn": schemaAttribute722fee0f16b99c5420cc7c22(),
 		// Property: AttachMissingPermission
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +656,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "If set to true, the managed policies for SSM and CW will be attached to the instance roles if they are missing",
 		//	  "type": "boolean"
 		//	}
-		"attach_missing_permission": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "If set to true, the managed policies for SSM and CW will be attached to the instance roles if they are missing",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"attach_missing_permission": schemaAttributea1c9a1461aed34a0bcecb125(),
 		// Property: AutoConfigurationEnabled
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +664,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "If set to true, application will be configured with recommended monitoring configuration.",
 		//	  "type": "boolean"
 		//	}
-		"auto_configuration_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "If set to true, application will be configured with recommended monitoring configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"auto_configuration_enabled": schemaAttribute5d05e4a4e40b5eaed66ccd5e(),
 		// Property: CWEMonitorEnabled
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +672,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether Application Insights can listen to CloudWatch events for the application resources.",
 		//	  "type": "boolean"
 		//	}
-		"cwe_monitor_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether Application Insights can listen to CloudWatch events for the application resources.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cwe_monitor_enabled": schemaAttribute5f27cca7222be08a20dafee5(),
 		// Property: ComponentMonitoringSettings
 		// CloudFormation resource type schema:
 		//
@@ -1165,778 +1771,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"component_monitoring_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ComponentARN
-					"component_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ARN of the compnonent.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ComponentConfigurationMode
-					"component_configuration_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The component monitoring configuration mode.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ComponentName
-					"component_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the component.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: CustomComponentConfiguration
-					"custom_component_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ConfigurationDetails
-							"configuration_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AlarmMetrics
-									"alarm_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: AlarmMetricName
-												"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the metric to be monitored for the component.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "A list of metrics to monitor for the component.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Alarms
-									"alarms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: AlarmName
-												"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the CloudWatch alarm to be monitored for the component.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Severity
-												"severity": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Indicates the degree of outage when the alarm goes off.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "A list of alarms to monitor for the component.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: HAClusterPrometheusExporter
-									"ha_cluster_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: PrometheusPort
-											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Prometheus exporter port.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "The HA cluster Prometheus Exporter settings.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: HANAPrometheusExporter
-									"hana_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: AgreeToInstallHANADBClient
-											"agree_to_install_hanadb_client": schema.BoolAttribute{ /*START ATTRIBUTE*/
-												Description: "A flag which indicates agreeing to install SAP HANA DB client.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: HANAPort
-											"hana_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The HANA DB port.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: HANASID
-											"hanasid": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "HANA DB SID.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: HANASecretName
-											"hana_secret_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The secret name which manages the HANA DB credentials e.g. {\n  \"username\": \"<>\",\n  \"password\": \"<>\"\n}.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: PrometheusPort
-											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Prometheus exporter port.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "The HANA DB Prometheus Exporter settings.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: JMXPrometheusExporter
-									"jmx_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: HostPort
-											"host_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Java agent host port",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: JMXURL
-											"jmxurl": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "JMX service URL.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: PrometheusPort
-											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Prometheus exporter port.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "The JMX Prometheus Exporter settings.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Logs
-									"logs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Encoding
-												"encoding": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The type of encoding of the logs to be monitored.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: LogGroupName
-												"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The CloudWatch log group name to be associated to the monitored log.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: LogPath
-												"log_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The path of the logs to be monitored.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: LogType
-												"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The log type decides the log patterns against which Application Insights analyzes the log.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: PatternSet
-												"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the log pattern set.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "A list of logs to monitor for the component.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: NetWeaverPrometheusExporter
-									"net_weaver_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: InstanceNumbers
-											"instance_numbers": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Description: "SAP instance numbers for ASCS, ERS, and App Servers.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: PrometheusPort
-											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Prometheus exporter port.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: SAPSID
-											"sapsid": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "SAP NetWeaver SID.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "The NetWeaver Prometheus Exporter settings.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Processes
-									"processes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: AlarmMetrics
-												"alarm_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: AlarmMetricName
-															"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The name of the metric to be monitored for the component.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "A list of metrics to monitor for the component.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: ProcessName
-												"process_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the process to be monitored for the component.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: SQLServerPrometheusExporter
-									"sql_server_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: PrometheusPort
-											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Prometheus exporter port.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: SQLSecretName
-											"sql_secret_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Secret name which managers SQL exporter connection. e.g. {\"data_source_name\": \"sqlserver://<USERNAME>:<PASSWORD>@localhost:1433\"}",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "The SQL Prometheus Exporter settings.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: WindowsEvents
-									"windows_events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: EventLevels
-												"event_levels": schema.ListAttribute{ /*START ATTRIBUTE*/
-													ElementType: types.StringType,
-													Description: "The levels of event to log. ",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: EventName
-												"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The type of Windows Events to log.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: LogGroupName
-												"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The CloudWatch log group name to be associated to the monitored log.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: PatternSet
-												"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the log pattern set.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "A list of Windows Events to log.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The configuration settings",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SubComponentTypeConfigurations
-							"sub_component_type_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: SubComponentConfigurationDetails
-										"sub_component_configuration_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: AlarmMetrics
-												"alarm_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: AlarmMetricName
-															"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The name of the metric to be monitored for the component.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "A list of metrics to monitor for the component.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Logs
-												"logs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Encoding
-															"encoding": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The type of encoding of the logs to be monitored.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: LogGroupName
-															"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The CloudWatch log group name to be associated to the monitored log.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: LogPath
-															"log_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The path of the logs to be monitored.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: LogType
-															"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The log type decides the log patterns against which Application Insights analyzes the log.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: PatternSet
-															"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The name of the log pattern set.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "A list of logs to monitor for the component.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Processes
-												"processes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: AlarmMetrics
-															"alarm_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																		// Property: AlarmMetricName
-																		"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			Description: "The name of the metric to be monitored for the component.",
-																			Computed:    true,
-																		}, /*END ATTRIBUTE*/
-																	}, /*END SCHEMA*/
-																}, /*END NESTED OBJECT*/
-																Description: "A list of metrics to monitor for the component.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: ProcessName
-															"process_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The name of the process to be monitored for the component.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: WindowsEvents
-												"windows_events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: EventLevels
-															"event_levels": schema.ListAttribute{ /*START ATTRIBUTE*/
-																ElementType: types.StringType,
-																Description: "The levels of event to log. ",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: EventName
-															"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The type of Windows Events to log.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: LogGroupName
-															"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The CloudWatch log group name to be associated to the monitored log.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: PatternSet
-															"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The name of the log pattern set.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "A list of Windows Events to log.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "The configuration settings of sub components.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: SubComponentType
-										"sub_component_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The sub component type.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "Sub component configurations of the component.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The monitoring configuration of the component.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: DefaultOverwriteComponentConfiguration
-					"default_overwrite_component_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ConfigurationDetails
-							"configuration_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AlarmMetrics
-									"alarm_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: AlarmMetricName
-												"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the metric to be monitored for the component.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "A list of metrics to monitor for the component.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Alarms
-									"alarms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: AlarmName
-												"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the CloudWatch alarm to be monitored for the component.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Severity
-												"severity": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Indicates the degree of outage when the alarm goes off.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "A list of alarms to monitor for the component.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: HAClusterPrometheusExporter
-									"ha_cluster_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: PrometheusPort
-											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Prometheus exporter port.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "The HA cluster Prometheus Exporter settings.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: HANAPrometheusExporter
-									"hana_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: AgreeToInstallHANADBClient
-											"agree_to_install_hanadb_client": schema.BoolAttribute{ /*START ATTRIBUTE*/
-												Description: "A flag which indicates agreeing to install SAP HANA DB client.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: HANAPort
-											"hana_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The HANA DB port.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: HANASID
-											"hanasid": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "HANA DB SID.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: HANASecretName
-											"hana_secret_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The secret name which manages the HANA DB credentials e.g. {\n  \"username\": \"<>\",\n  \"password\": \"<>\"\n}.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: PrometheusPort
-											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Prometheus exporter port.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "The HANA DB Prometheus Exporter settings.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: JMXPrometheusExporter
-									"jmx_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: HostPort
-											"host_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Java agent host port",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: JMXURL
-											"jmxurl": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "JMX service URL.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: PrometheusPort
-											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Prometheus exporter port.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "The JMX Prometheus Exporter settings.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Logs
-									"logs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Encoding
-												"encoding": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The type of encoding of the logs to be monitored.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: LogGroupName
-												"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The CloudWatch log group name to be associated to the monitored log.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: LogPath
-												"log_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The path of the logs to be monitored.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: LogType
-												"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The log type decides the log patterns against which Application Insights analyzes the log.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: PatternSet
-												"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the log pattern set.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "A list of logs to monitor for the component.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: NetWeaverPrometheusExporter
-									"net_weaver_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: InstanceNumbers
-											"instance_numbers": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Description: "SAP instance numbers for ASCS, ERS, and App Servers.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: PrometheusPort
-											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Prometheus exporter port.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: SAPSID
-											"sapsid": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "SAP NetWeaver SID.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "The NetWeaver Prometheus Exporter settings.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Processes
-									"processes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: AlarmMetrics
-												"alarm_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: AlarmMetricName
-															"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The name of the metric to be monitored for the component.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "A list of metrics to monitor for the component.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: ProcessName
-												"process_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the process to be monitored for the component.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: SQLServerPrometheusExporter
-									"sql_server_prometheus_exporter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: PrometheusPort
-											"prometheus_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Prometheus exporter port.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: SQLSecretName
-											"sql_secret_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Secret name which managers SQL exporter connection. e.g. {\"data_source_name\": \"sqlserver://<USERNAME>:<PASSWORD>@localhost:1433\"}",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "The SQL Prometheus Exporter settings.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: WindowsEvents
-									"windows_events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: EventLevels
-												"event_levels": schema.ListAttribute{ /*START ATTRIBUTE*/
-													ElementType: types.StringType,
-													Description: "The levels of event to log. ",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: EventName
-												"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The type of Windows Events to log.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: LogGroupName
-												"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The CloudWatch log group name to be associated to the monitored log.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: PatternSet
-												"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the log pattern set.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "A list of Windows Events to log.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The configuration settings",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SubComponentTypeConfigurations
-							"sub_component_type_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: SubComponentConfigurationDetails
-										"sub_component_configuration_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: AlarmMetrics
-												"alarm_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: AlarmMetricName
-															"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The name of the metric to be monitored for the component.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "A list of metrics to monitor for the component.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Logs
-												"logs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Encoding
-															"encoding": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The type of encoding of the logs to be monitored.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: LogGroupName
-															"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The CloudWatch log group name to be associated to the monitored log.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: LogPath
-															"log_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The path of the logs to be monitored.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: LogType
-															"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The log type decides the log patterns against which Application Insights analyzes the log.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: PatternSet
-															"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The name of the log pattern set.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "A list of logs to monitor for the component.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Processes
-												"processes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: AlarmMetrics
-															"alarm_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																		// Property: AlarmMetricName
-																		"alarm_metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			Description: "The name of the metric to be monitored for the component.",
-																			Computed:    true,
-																		}, /*END ATTRIBUTE*/
-																	}, /*END SCHEMA*/
-																}, /*END NESTED OBJECT*/
-																Description: "A list of metrics to monitor for the component.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: ProcessName
-															"process_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The name of the process to be monitored for the component.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "A list of processes to monitor for the component. Only Windows EC2 instances can have a processes section.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: WindowsEvents
-												"windows_events": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: EventLevels
-															"event_levels": schema.ListAttribute{ /*START ATTRIBUTE*/
-																ElementType: types.StringType,
-																Description: "The levels of event to log. ",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: EventName
-															"event_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The type of Windows Events to log.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: LogGroupName
-															"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The CloudWatch log group name to be associated to the monitored log.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: PatternSet
-															"pattern_set": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The name of the log pattern set.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "A list of Windows Events to log.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "The configuration settings of sub components.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: SubComponentType
-										"sub_component_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The sub component type.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "Sub component configurations of the component.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The overwritten settings on default component monitoring configuration.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Tier
-					"tier": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tier of the application component.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The monitoring settings of the components.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"component_monitoring_settings": schemaAttribute6f6d5bc2ca9bc71920a689c3(),
 		// Property: CustomComponents
 		// CloudFormation resource type schema:
 		//
@@ -1976,25 +1811,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"custom_components": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ComponentName
-					"component_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the component.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ResourceList
-					"resource_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The list of resource ARNs that belong to the component.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The custom grouped components.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"custom_components": schemaAttribute83008cec557185325fca7d2b(),
 		// Property: GroupingType
 		// CloudFormation resource type schema:
 		//
@@ -2005,10 +1822,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"grouping_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The grouping type of the application",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"grouping_type": schemaAttribute20a6d1eff856c8d63feadcb2(),
 		// Property: LogPatternSets
 		// CloudFormation resource type schema:
 		//
@@ -2071,43 +1885,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"log_pattern_sets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: LogPatterns
-					"log_patterns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Pattern
-								"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The log pattern.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: PatternName
-								"pattern_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the log pattern.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Rank
-								"rank": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Rank of the log pattern.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "The log patterns of a set.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PatternSetName
-					"pattern_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the log pattern set.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The log pattern sets.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"log_pattern_sets": schemaAttribute2997f4083e8133b7cb1e41d2(),
 		// Property: OpsCenterEnabled
 		// CloudFormation resource type schema:
 		//
@@ -2115,10 +1893,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "When set to true, creates opsItems for any problems detected on an application.",
 		//	  "type": "boolean"
 		//	}
-		"ops_center_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "When set to true, creates opsItems for any problems detected on an application.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ops_center_enabled": schemaAttribute0d577f75efed2f8694cc6139(),
 		// Property: OpsItemSNSTopicArn
 		// CloudFormation resource type schema:
 		//
@@ -2129,10 +1904,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$",
 		//	  "type": "string"
 		//	}
-		"ops_item_sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The SNS topic provided to Application Insights that is associated to the created opsItem.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ops_item_sns_topic_arn": schemaAttribute87ce4e16bbe6020ebd4dc0d7(),
 		// Property: ResourceGroupName
 		// CloudFormation resource type schema:
 		//
@@ -2143,10 +1915,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9.-_]*",
 		//	  "type": "string"
 		//	}
-		"resource_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the resource group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_group_name": schemaAttribute4c93e1995f3e69a4d6a48c13(),
 		// Property: SNSNotificationArn
 		// CloudFormation resource type schema:
 		//
@@ -2157,10 +1926,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[\\w]+)*:[\\w\\d-]+:([\\w\\d-]*)?:[\\w\\d_-]*([:/].+)*$",
 		//	  "type": "string"
 		//	}
-		"sns_notification_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Application Insights sends notifications to this SNS topic whenever there is a problem update in the associated application.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sns_notification_arn": schemaAttribute25aa6b958ce7fe71172b5029(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -2193,24 +1959,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags of Application Insights application.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributec28c98409db6b80ebfe81ebf(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

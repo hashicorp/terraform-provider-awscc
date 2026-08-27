@@ -14,6 +14,71 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1aeede63932d990e1793bda4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The registry id.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute223a349f616fa3e3c61030ca() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RepositoryFilters
+				"repository_filters": schemaAttribute6ebe767761a22e1dd89bb001(),
+				// Property: ScanFrequency
+				"scan_frequency": schemaAttribute556dd1d5786cf94ff84cf66e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The scanning rules associated with the registry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute556dd1d5786cf94ff84cf66e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The frequency that scans are performed at for a private registry. When the ``ENHANCED`` scan type is specified, the supported scan frequencies are ``CONTINUOUS_SCAN`` and ``SCAN_ON_PUSH``. When the ``BASIC`` scan type is specified, the ``SCAN_ON_PUSH`` scan frequency is supported. If scan on push is not specified, then the ``MANUAL`` scan frequency is set by default.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ebe767761a22e1dd89bb001() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Filter
+				"filter": schemaAttributec6070c806238c8d43cb637d8(),
+				// Property: FilterType
+				"filter_type": schemaAttribute8401ac7d8794647c5f171608(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The details of a scanning repository filter. For more information on how to use filters, see [Using filters](https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html#image-scanning-filters) in the *Amazon Elastic Container Registry User Guide*.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a5f92ada793b56c7f678f35() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of scanning configured for the registry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8401ac7d8794647c5f171608() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type associated with the filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6070c806238c8d43cb637d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The filter to use when scanning.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ecr_registry_scanning_configuration", registryScanningConfigurationDataSource)
 }
@@ -30,10 +95,7 @@ func registryScanningConfigurationDataSource(ctx context.Context) (datasource.Da
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"registry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The registry id.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"registry_id": schemaAttribute1aeede63932d990e1793bda4(),
 		// Property: Rules
 		// CloudFormation resource type schema:
 		//
@@ -93,38 +155,7 @@ func registryScanningConfigurationDataSource(ctx context.Context) (datasource.Da
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: RepositoryFilters
-					"repository_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Filter
-								"filter": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The filter to use when scanning.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: FilterType
-								"filter_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type associated with the filter.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "The details of a scanning repository filter. For more information on how to use filters, see [Using filters](https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html#image-scanning-filters) in the *Amazon Elastic Container Registry User Guide*.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ScanFrequency
-					"scan_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The frequency that scans are performed at for a private registry. When the ``ENHANCED`` scan type is specified, the supported scan frequencies are ``CONTINUOUS_SCAN`` and ``SCAN_ON_PUSH``. When the ``BASIC`` scan type is specified, the ``SCAN_ON_PUSH`` scan frequency is supported. If scan on push is not specified, then the ``MANUAL`` scan frequency is set by default.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The scanning rules associated with the registry.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rules": schemaAttribute223a349f616fa3e3c61030ca(),
 		// Property: ScanType
 		// CloudFormation resource type schema:
 		//
@@ -136,10 +167,7 @@ func registryScanningConfigurationDataSource(ctx context.Context) (datasource.Da
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"scan_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of scanning configured for the registry.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scan_type": schemaAttribute7a5f92ada793b56c7f678f35(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

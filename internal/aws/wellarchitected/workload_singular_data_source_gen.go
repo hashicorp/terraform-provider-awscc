@@ -15,6 +15,164 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0b03cd77b049ea274d4e7c15() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The environment for the workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0bd147bfe347ba27ee289183() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description for the workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d4d0e15f45642d4206b21a4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The industry type for the workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23ee3d521252db716e34d2e3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The industry for the workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24b16645707915f2e0bef1d6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30cb129b3dd046534f2cbc97() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The notes associated with the workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38436cbb96c1ec03600b4772() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN for the workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f6f25b1cff62958bbb17692() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of lenses associated with the workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute584520ac6d0bb278a2d280c8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID assigned to the workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute744146637af869b254944fcd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The review owner of the workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7701a6e60f407cc8b5122045() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The improvement status for a workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7792d63cbd463d5d9ff93772() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The mode to use for identifying resources associated with the workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute816e8c387ee38e6e6184dcf5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea5be4e1f2327ce01acf7d632() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL of the architectural design for the workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea79400bf4e0487418ad6b9fb() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of non-Amazon Web Services Regions associated with the workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb84bea604cd318d56216c8a0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of Amazon Web Services Regions associated with the workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedecf643c5c261a5950116602() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute816e8c387ee38e6e6184dcf5(),
+				// Property: Value
+				"value": schemaAttribute816e8c387ee38e6e6184dcf5(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags associated with the workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee548294ac4ab750a9e152585() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TrustedAdvisorIntegrationStatus
+			"trusted_advisor_integration_status": schemaAttributef676e9f3aee64c67dd0fff4c(),
+			// Property: WorkloadResourceDefinition
+			"workload_resource_definition": schemaAttribute7792d63cbd463d5d9ff93772(),
+		}, /*END SCHEMA*/
+		Description: "Discovery configuration associated to the workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb79756b247e9c98c972e094() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of Amazon Web Services account IDs associated with the workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef676e9f3aee64c67dd0fff4c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Discovery integration status in respect to Trusted Advisor for the workload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_wellarchitected_workload", workloadDataSource)
 }
@@ -38,11 +196,7 @@ func workloadDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"account_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of Amazon Web Services account IDs associated with the workload.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"account_ids": schemaAttributeeb79756b247e9c98c972e094(),
 		// Property: ArchitecturalDesign
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +206,7 @@ func workloadDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(|(https?|ftp):\\/\\/[^\\s/$.?#].[^\\s]*)$",
 		//	  "type": "string"
 		//	}
-		"architectural_design": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The URL of the architectural design for the workload.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"architectural_design": schemaAttributea5be4e1f2327ce01acf7d632(),
 		// Property: AwsRegions
 		// CloudFormation resource type schema:
 		//
@@ -69,11 +220,7 @@ func workloadDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"aws_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of Amazon Web Services Regions associated with the workload.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"aws_regions": schemaAttributeb84bea604cd318d56216c8a0(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -83,10 +230,7 @@ func workloadDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description for the workload.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute0bd147bfe347ba27ee289183(),
 		// Property: DiscoveryConfig
 		// CloudFormation resource type schema:
 		//
@@ -116,23 +260,7 @@ func workloadDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"discovery_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: TrustedAdvisorIntegrationStatus
-				"trusted_advisor_integration_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Discovery integration status in respect to Trusted Advisor for the workload.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: WorkloadResourceDefinition
-				"workload_resource_definition": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The mode to use for identifying resources associated with the workload.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Discovery configuration associated to the workload.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"discovery_config": schemaAttributee548294ac4ab750a9e152585(),
 		// Property: Environment
 		// CloudFormation resource type schema:
 		//
@@ -144,10 +272,7 @@ func workloadDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"environment": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The environment for the workload.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"environment": schemaAttribute0b03cd77b049ea274d4e7c15(),
 		// Property: ImprovementStatus
 		// CloudFormation resource type schema:
 		//
@@ -162,10 +287,7 @@ func workloadDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"improvement_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The improvement status for a workload.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"improvement_status": schemaAttribute7701a6e60f407cc8b5122045(),
 		// Property: Industry
 		// CloudFormation resource type schema:
 		//
@@ -174,10 +296,7 @@ func workloadDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 100,
 		//	  "type": "string"
 		//	}
-		"industry": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The industry for the workload.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"industry": schemaAttribute23ee3d521252db716e34d2e3(),
 		// Property: IndustryType
 		// CloudFormation resource type schema:
 		//
@@ -186,10 +305,7 @@ func workloadDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 100,
 		//	  "type": "string"
 		//	}
-		"industry_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The industry type for the workload.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"industry_type": schemaAttribute0d4d0e15f45642d4206b21a4(),
 		// Property: Lenses
 		// CloudFormation resource type schema:
 		//
@@ -202,11 +318,7 @@ func workloadDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"lenses": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of lenses associated with the workload.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"lenses": schemaAttribute4f6f25b1cff62958bbb17692(),
 		// Property: NonAwsRegions
 		// CloudFormation resource type schema:
 		//
@@ -221,11 +333,7 @@ func workloadDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"non_aws_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of non-Amazon Web Services Regions associated with the workload.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"non_aws_regions": schemaAttributea79400bf4e0487418ad6b9fb(),
 		// Property: Notes
 		// CloudFormation resource type schema:
 		//
@@ -234,10 +342,7 @@ func workloadDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 2084,
 		//	  "type": "string"
 		//	}
-		"notes": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The notes associated with the workload.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"notes": schemaAttribute30cb129b3dd046534f2cbc97(),
 		// Property: ReviewOwner
 		// CloudFormation resource type schema:
 		//
@@ -247,10 +352,7 @@ func workloadDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"review_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The review owner of the workload.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"review_owner": schemaAttribute744146637af869b254944fcd(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -279,22 +381,7 @@ func workloadDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags associated with the workload.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributedecf643c5c261a5950116602(),
 		// Property: WorkloadArn
 		// CloudFormation resource type schema:
 		//
@@ -302,10 +389,7 @@ func workloadDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN for the workload.",
 		//	  "type": "string"
 		//	}
-		"workload_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN for the workload.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"workload_arn": schemaAttribute38436cbb96c1ec03600b4772(),
 		// Property: WorkloadId
 		// CloudFormation resource type schema:
 		//
@@ -316,10 +400,7 @@ func workloadDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"workload_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID assigned to the workload.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"workload_id": schemaAttribute584520ac6d0bb278a2d280c8(),
 		// Property: WorkloadName
 		// CloudFormation resource type schema:
 		//
@@ -329,10 +410,7 @@ func workloadDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"workload_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the workload.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"workload_name": schemaAttribute24b16645707915f2e0bef1d6(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

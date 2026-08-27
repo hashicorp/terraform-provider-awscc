@@ -14,6 +14,63 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute06b5c3027dd42aa6b6b38784() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute259701a3e4d0d798cd2fb4ec() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributecf58305500ec403d7e05127a(),
+				// Property: Value
+				"value": schemaAttribute8d8dfe28ddac9feceec8a333(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e2b881f7a635512d6b0d2db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A collection of matchmaking rules, formatted as a JSON string.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d8dfe28ddac9feceec8a333() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf58305500ec403d7e05127a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecfedf0bbe88a388878578047() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift matchmaking rule set resource and uniquely identifies it.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedffe9a29961379166d74fc4f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the matchmaking rule set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_gamelift_matchmaking_rule_set", matchmakingRuleSetDataSource)
 }
@@ -30,10 +87,7 @@ func matchmakingRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:.*:matchmakingruleset\\/[a-zA-Z0-9-\\.]*",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift matchmaking rule set resource and uniquely identifies it.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributecfedf0bbe88a388878578047(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +95,7 @@ func matchmakingRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute06b5c3027dd42aa6b6b38784(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +105,7 @@ func matchmakingRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "[a-zA-Z0-9-\\.]*",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for the matchmaking rule set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributedffe9a29961379166d74fc4f(),
 		// Property: RuleSetBody
 		// CloudFormation resource type schema:
 		//
@@ -67,10 +115,7 @@ func matchmakingRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"rule_set_body": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A collection of matchmaking rules, formatted as a JSON string.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rule_set_body": schemaAttribute3e2b881f7a635512d6b0d2db(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -105,24 +150,7 @@ func matchmakingRuleSetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute259701a3e4d0d798cd2fb4ec(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

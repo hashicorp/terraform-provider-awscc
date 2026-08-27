@@ -14,6 +14,308 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0382637da7f4474e09d166d4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the bot alias. Use the description to help identify the bot alias in lists.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute174419ce48e44e2078cbb2e8() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BotAliasLocaleSetting
+				"bot_alias_locale_setting": schemaAttributeb20984a1b9e4e54fecf6ece0(),
+				// Property: LocaleId
+				"locale_id": schemaAttribute67a8977621581b1c3974c239(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of bot alias locale settings to add to the bot alias.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d2db89c60c4627b0a041efa() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether the Lambda code hook is enabled",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33e424d20bfcb008ebafaf4d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Lambda function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute35a098bc579b5d21b1cea35d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of a bot.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38f97cd12f9aeed59a0e9159() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttribute8bd43fd94619a2cb5dc271f1(),
+			// Property: LogPrefix
+			"log_prefix": schemaAttributec79a6a188f292fd7a69dbe6a(),
+			// Property: S3BucketArn
+			"s3_bucket_arn": schemaAttribute6560f6903168564486975498(),
+		}, /*END SCHEMA*/
+		Description: "Specifies an Amazon S3 bucket for logging audio conversations",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute453ec42f13403d34fd14cbed() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Bucket
+			"s3_bucket": schemaAttribute38f97cd12f9aeed59a0e9159(),
+		}, /*END SCHEMA*/
+		Description: "The location of audio log files collected when conversation logging is enabled for a bot.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute503b43c3a2acc6a2c576a573() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enable to call Amazon Comprehend for Sentiment natively within Lex",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53dd71414f07b2f20ab26041() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeb25468c69dac9ef929e8044f(),
+				// Property: Value
+				"value": schemaAttribute676f0351c5b4846af3612a92(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags to add to the bot alias.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d60ed4b2a50bc57220364b4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the request-response that you want Amazon Lex to use to invoke your Lambda function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6023f62fa076f4590ec53468() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LambdaCodeHook
+			"lambda_code_hook": schemaAttributea63ad37740568bb877343241(),
+		}, /*END SCHEMA*/
+		Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63a7ba1139b2a15d0126667e() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Destination
+				"destination": schemaAttribute92f4b3cb6a9ffaa76f9ca053(),
+				// Property: Enabled
+				"enabled": schemaAttributedcea5e7fe0f835adf00af102(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of text log settings",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6560f6903168564486975498() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute676f0351c5b4846af3612a92() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string containing the value for the tag",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67a8977621581b1c3974c239() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string used to identify the locale",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c87d0d75e70eecc427213c6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique ID of resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8bd43fd94619a2cb5dc271f1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c94b3e6e25798dd601952b4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DetectSentiment
+			"detect_sentiment": schemaAttribute503b43c3a2acc6a2c576a573(),
+		}, /*END SCHEMA*/
+		Description: "Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of user utterances.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92f4b3cb6a9ffaa76f9ca053() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatch
+			"cloudwatch": schemaAttributefe119d1fa4e5c9bbedf467c1(),
+		}, /*END SCHEMA*/
+		Description: "Defines the Amazon CloudWatch Logs destination log group for conversation text logs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea63ad37740568bb877343241() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CodeHookInterfaceVersion
+			"code_hook_interface_version": schemaAttribute5d60ed4b2a50bc57220364b4(),
+			// Property: LambdaArn
+			"lambda_arn": schemaAttribute33e424d20bfcb008ebafaf4d(),
+		}, /*END SCHEMA*/
+		Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab635c36742142bd96b8b954() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for a resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb20984a1b9e4e54fecf6ece0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CodeHookSpecification
+			"code_hook_specification": schemaAttribute6023f62fa076f4590ec53468(),
+			// Property: Enabled
+			"enabled": schemaAttribute2d2db89c60c4627b0a041efa(),
+		}, /*END SCHEMA*/
+		Description: "You can use this parameter to specify a specific Lambda function to run different functions in different locales.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb25468c69dac9ef929e8044f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string used to identify this tag",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec1b4d4039c04debca6caf660() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec24fb8968ea82d2e3b64549c() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Destination
+				"destination": schemaAttribute453ec42f13403d34fd14cbed(),
+				// Property: Enabled
+				"enabled": schemaAttributedcea5e7fe0f835adf00af102(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of audio log settings",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec79a6a188f292fd7a69dbe6a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon S3 key of the deployment package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1309650b9be079784d71388() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string containing the value for the Log Prefix",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8efe207df8b3b4815eba134() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AudioLogSettings
+			"audio_log_settings": schemaAttributec24fb8968ea82d2e3b64549c(),
+			// Property: TextLogSettings
+			"text_log_settings": schemaAttribute63a7ba1139b2a15d0126667e(),
+		}, /*END SCHEMA*/
+		Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedcea5e7fe0f835adf00af102() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed71146edb6f0cf94a516c83() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the bot alias.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9b8d48ba873a60807aeee1d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string used to identify the groupArn for the Cloudwatch Log Group",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefe119d1fa4e5c9bbedf467c1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatchLogGroupArn
+			"cloudwatch_log_group_arn": schemaAttributef9b8d48ba873a60807aeee1d(),
+			// Property: LogPrefix
+			"log_prefix": schemaAttributed1309650b9be079784d71388(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_lex_bot_alias", botAliasDataSource)
 }
@@ -30,10 +332,7 @@ func botAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the bot alias.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeed71146edb6f0cf94a516c83(),
 		// Property: BotAliasId
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +343,7 @@ func botAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-zA-Z]+$",
 		//	  "type": "string"
 		//	}
-		"bot_alias_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique ID of resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bot_alias_id": schemaAttribute7c87d0d75e70eecc427213c6(),
 		// Property: BotAliasLocaleSettings
 		// CloudFormation resource type schema:
 		//
@@ -122,55 +418,7 @@ func botAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"bot_alias_locale_settings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: BotAliasLocaleSetting
-					"bot_alias_locale_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: CodeHookSpecification
-							"code_hook_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: LambdaCodeHook
-									"lambda_code_hook": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: CodeHookInterfaceVersion
-											"code_hook_interface_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The version of the request-response that you want Amazon Lex to use to invoke your Lambda function.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: LambdaArn
-											"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The Amazon Resource Name (ARN) of the Lambda function.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Enabled
-							"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "Whether the Lambda code hook is enabled",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "You can use this parameter to specify a specific Lambda function to run different functions in different locales.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: LocaleId
-					"locale_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string used to identify the locale",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of bot alias locale settings to add to the bot alias.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bot_alias_locale_settings": schemaAttribute174419ce48e44e2078cbb2e8(),
 		// Property: BotAliasName
 		// CloudFormation resource type schema:
 		//
@@ -181,10 +429,7 @@ func botAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([0-9a-zA-Z][_-]?)+$",
 		//	  "type": "string"
 		//	}
-		"bot_alias_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for a resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bot_alias_name": schemaAttributeab635c36742142bd96b8b954(),
 		// Property: BotAliasStatus
 		// CloudFormation resource type schema:
 		//
@@ -197,9 +442,7 @@ func botAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"bot_alias_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"bot_alias_status": schemaAttributec1b4d4039c04debca6caf660(),
 		// Property: BotAliasTags
 		// CloudFormation resource type schema:
 		//
@@ -233,24 +476,7 @@ func botAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"bot_alias_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string used to identify this tag",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string containing the value for the tag",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags to add to the bot alias.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bot_alias_tags": schemaAttribute53dd71414f07b2f20ab26041(),
 		// Property: BotId
 		// CloudFormation resource type schema:
 		//
@@ -261,10 +487,7 @@ func botAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-zA-Z]+$",
 		//	  "type": "string"
 		//	}
-		"bot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique ID of resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bot_id": schemaAttribute7c87d0d75e70eecc427213c6(),
 		// Property: BotVersion
 		// CloudFormation resource type schema:
 		//
@@ -275,10 +498,7 @@ func botAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(DRAFT|[0-9]+)$",
 		//	  "type": "string"
 		//	}
-		"bot_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of a bot.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bot_version": schemaAttribute35a098bc579b5d21b1cea35d(),
 		// Property: ConversationLogSettings
 		// CloudFormation resource type schema:
 		//
@@ -406,92 +626,7 @@ func botAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"conversation_log_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AudioLogSettings
-				"audio_log_settings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Destination
-							"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: S3Bucket
-									"s3_bucket": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: KmsKeyArn
-											"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: LogPrefix
-											"log_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The Amazon S3 key of the deployment package.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: S3BucketArn
-											"s3_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Specifies an Amazon S3 bucket for logging audio conversations",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The location of audio log files collected when conversation logging is enabled for a bot.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Enabled
-							"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "List of audio log settings",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TextLogSettings
-				"text_log_settings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Destination
-							"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: CloudWatch
-									"cloudwatch": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: CloudWatchLogGroupArn
-											"cloudwatch_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "A string used to identify the groupArn for the Cloudwatch Log Group",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: LogPrefix
-											"log_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "A string containing the value for the Log Prefix",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Defines the Amazon CloudWatch Logs destination log group for conversation text logs.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Enabled
-							"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "List of text log settings",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"conversation_log_settings": schemaAttributed8efe207df8b3b4815eba134(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -500,10 +635,7 @@ func botAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 200,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the bot alias. Use the description to help identify the bot alias in lists.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute0382637da7f4474e09d166d4(),
 		// Property: SentimentAnalysisSettings
 		// CloudFormation resource type schema:
 		//
@@ -521,17 +653,7 @@ func botAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"sentiment_analysis_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DetectSentiment
-				"detect_sentiment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Enable to call Amazon Comprehend for Sentiment natively within Lex",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of user utterances.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sentiment_analysis_settings": schemaAttribute8c94b3e6e25798dd601952b4(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,41 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0edc72a760664766fc4a7222() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Arn representation for the guardrail",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25bd306ed07f23ab8be42a2b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique id for the guardrail",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63fa69a2765c7ce2f1d4bfec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Identifier (GuardrailId or GuardrailArn) for the guardrail",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ecb485bea611e8173434f44() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Description of the Guardrail version",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0c27d0e915254028554853e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Guardrail version",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrock_guardrail_version", guardrailVersionDataSource)
 }
@@ -31,10 +66,7 @@ func guardrailVersionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description of the Guardrail version",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute7ecb485bea611e8173434f44(),
 		// Property: GuardrailArn
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +76,7 @@ func guardrailVersionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"guardrail_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Arn representation for the guardrail",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"guardrail_arn": schemaAttribute0edc72a760664766fc4a7222(),
 		// Property: GuardrailId
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +86,7 @@ func guardrailVersionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"guardrail_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique id for the guardrail",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"guardrail_id": schemaAttribute25bd306ed07f23ab8be42a2b(),
 		// Property: GuardrailIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +96,7 @@ func guardrailVersionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^(([a-z0-9]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+))$",
 		//	  "type": "string"
 		//	}
-		"guardrail_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Identifier (GuardrailId or GuardrailArn) for the guardrail",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"guardrail_identifier": schemaAttribute63fa69a2765c7ce2f1d4bfec(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +105,7 @@ func guardrailVersionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[1-9][0-9]{0,7}$",
 		//	  "type": "string"
 		//	}
-		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Guardrail version",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttributef0c27d0e915254028554853e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -17,6 +17,96 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute3d979f1fa27e102d4e987a75() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute9211d09b5a586f790fb98780(),
+				// Property: Value
+				"value": schemaAttribute9211d09b5a586f790fb98780(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4fc27169c63629098adb51bd() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute765404150bf32d1f5d8defc4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3
+			"s3": schemaAttributecaf2af784dc2d9c67e15d14f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9211d09b5a586f790fb98780() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c267a67063c6d7d412bac8c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e9accce9488807f7eb9ffbd() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecaf2af784dc2d9c67e15d14f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Bucket
+			"bucket": schemaAttribute9211d09b5a586f790fb98780(),
+			// Property: BucketOwner
+			"bucket_owner": schemaAttribute9211d09b5a586f790fb98780(),
+			// Property: FolderStructure
+			"folder_structure": schemaAttribute9211d09b5a586f790fb98780(),
+			// Property: KeyPrefix
+			"key_prefix": schemaAttribute9211d09b5a586f790fb98780(),
+			// Property: LogFileFormat
+			"log_file_format": schemaAttribute9211d09b5a586f790fb98780(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed048de9c9871d249e37748d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: jsontypes.NormalizedType{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed84eead6befb57a348a0729b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: All
+			"all": schemaAttributed048de9c9871d249e37748d8(),
+			// Property: Include
+			"include": schemaAttribute9e9accce9488807f7eb9ffbd(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_workspacesweb_session_logger", sessionLoggerDataSource)
 }
@@ -40,11 +130,7 @@ func sessionLoggerDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"additional_encryption_context": // Pattern: ""
-		schema.MapAttribute{             /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"additional_encryption_context": schemaAttribute4fc27169c63629098adb51bd(),
 		// Property: AssociatedPortalArns
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +143,7 @@ func sessionLoggerDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"associated_portal_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"associated_portal_arns": schemaAttribute9e9accce9488807f7eb9ffbd(),
 		// Property: CreationDate
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +151,7 @@ func sessionLoggerDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"creation_date": schemaAttribute9c267a67063c6d7d412bac8c(),
 		// Property: CustomerManagedKey
 		// CloudFormation resource type schema:
 		//
@@ -81,9 +161,7 @@ func sessionLoggerDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:kms:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:key\\/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"customer_managed_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"customer_managed_key": schemaAttribute9211d09b5a586f790fb98780(),
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -93,9 +171,7 @@ func sessionLoggerDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[ _\\-\\d\\w]+$",
 		//	  "type": "string"
 		//	}
-		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"display_name": schemaAttribute9211d09b5a586f790fb98780(),
 		// Property: EventFilter
 		// CloudFormation resource type schema:
 		//
@@ -136,21 +212,7 @@ func sessionLoggerDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"event_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: All
-				"all": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType: jsontypes.NormalizedType{},
-					Computed:   true,
-				}, /*END ATTRIBUTE*/
-				// Property: Include
-				"include": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"event_filter": schemaAttributed84eead6befb57a348a0729b(),
 		// Property: LogConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -201,37 +263,7 @@ func sessionLoggerDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"log_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: S3
-				"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Bucket
-						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: BucketOwner
-						"bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: FolderStructure
-						"folder_structure": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: KeyPrefix
-						"key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: LogFileFormat
-						"log_file_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"log_configuration": schemaAttribute765404150bf32d1f5d8defc4(),
 		// Property: SessionLoggerArn
 		// CloudFormation resource type schema:
 		//
@@ -241,9 +273,7 @@ func sessionLoggerDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36})+$",
 		//	  "type": "string"
 		//	}
-		"session_logger_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"session_logger_arn": schemaAttribute9211d09b5a586f790fb98780(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -275,21 +305,7 @@ func sessionLoggerDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute3d979f1fa27e102d4e987a75(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

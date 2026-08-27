@@ -15,6 +15,357 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute100eef0ac78fee1f6b0f24f3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Cidr
+			"cidr": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: Direction
+			"direction": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: PortRange
+			"port_range": schemaAttribute97784e65b0440ee218702d0b(),
+			// Property: PrefixListId
+			"prefix_list_id": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: Protocol
+			"protocol": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: SecurityGroupId
+			"security_group_id": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute46cef9a50422e220292e2963() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+				// Property: Value
+				"value": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute519e9481ff87888090e29d8f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ddddc6a3560eadaa583437c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstancePort
+			"instance_port": schemaAttribute519e9481ff87888090e29d8f(),
+			// Property: LoadBalancerPort
+			"load_balancer_port": schemaAttribute519e9481ff87888090e29d8f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ed6fdaae4059c8576d0dd0b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AclRule
+				"acl_rule": schemaAttributef9971d755e54d05d567ec7be(),
+				// Property: Component
+				"component": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: DestinationVpc
+				"destination_vpc": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: InboundHeader
+				"inbound_header": schemaAttribute6f3eff1cbcddf310717144ad(),
+				// Property: OutboundHeader
+				"outbound_header": schemaAttribute6f3eff1cbcddf310717144ad(),
+				// Property: RouteTableRoute
+				"route_table_route": schemaAttribute92b3b5086f69f9e8db80a5d2(),
+				// Property: SecurityGroupRule
+				"security_group_rule": schemaAttribute100eef0ac78fee1f6b0f24f3(),
+				// Property: SequenceNumber
+				"sequence_number": schemaAttribute519e9481ff87888090e29d8f(),
+				// Property: SourceVpc
+				"source_vpc": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: Subnet
+				"subnet": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: Vpc
+				"vpc": schemaAttributefc6f4f6957d5208112a63fe9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f3eff1cbcddf310717144ad() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DestinationAddresses
+			"destination_addresses": schemaAttributeca3abf84a7801e198a1fae6c(),
+			// Property: DestinationPortRanges
+			"destination_port_ranges": schemaAttributeaefe48878c072be64075ccd8(),
+			// Property: Protocol
+			"protocol": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: SourceAddresses
+			"source_addresses": schemaAttributeca3abf84a7801e198a1fae6c(),
+			// Property: SourcePortRanges
+			"source_port_ranges": schemaAttributeaefe48878c072be64075ccd8(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90440f7fdc0bbe2cd555902f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ComponentArn
+				"component_arn": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+				// Property: ComponentId
+				"component_id": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92b3b5086f69f9e8db80a5d2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: NatGatewayId
+			"nat_gateway_id": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: NetworkInterfaceId
+			"network_interface_id": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: Origin
+			"origin": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: TransitGatewayId
+			"transit_gateway_id": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: VpcPeeringConnectionId
+			"vpc_peering_connection_id": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: destinationCidr
+			"destination_cidr": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: destinationPrefixListId
+			"destination_prefix_list_id": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: egressOnlyInternetGatewayId
+			"egress_only_internet_gateway_id": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: gatewayId
+			"gateway_id": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: instanceId
+			"instance_id": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute97784e65b0440ee218702d0b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: From
+			"from": schemaAttribute519e9481ff87888090e29d8f(),
+			// Property: To
+			"to": schemaAttribute519e9481ff87888090e29d8f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea711fbedb7bf3c6ec38f9ed4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaefe48878c072be64075ccd8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: From
+				"from": schemaAttribute519e9481ff87888090e29d8f(),
+				// Property: To
+				"to": schemaAttribute519e9481ff87888090e29d8f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca3abf84a7801e198a1fae6c() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeceedaa70d39b4e259aa9b631() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Acl
+				"acl": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: AclRule
+				"acl_rule": schemaAttributef9971d755e54d05d567ec7be(),
+				// Property: Address
+				"address": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+				// Property: Addresses
+				"addresses": schemaAttributeca3abf84a7801e198a1fae6c(),
+				// Property: AttachedTo
+				"attached_to": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: AvailabilityZones
+				"availability_zones": schemaAttributeca3abf84a7801e198a1fae6c(),
+				// Property: Cidrs
+				"cidrs": schemaAttributeca3abf84a7801e198a1fae6c(),
+				// Property: ClassicLoadBalancerListener
+				"classic_load_balancer_listener": schemaAttribute5ddddc6a3560eadaa583437c(),
+				// Property: Component
+				"component": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: CustomerGateway
+				"customer_gateway": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: Destination
+				"destination": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: DestinationVpc
+				"destination_vpc": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: Direction
+				"direction": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+				// Property: ElasticLoadBalancerListener
+				"elastic_load_balancer_listener": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: ExplanationCode
+				"explanation_code": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+				// Property: IngressRouteTable
+				"ingress_route_table": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: InternetGateway
+				"internet_gateway": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: LoadBalancerArn
+				"load_balancer_arn": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+				// Property: LoadBalancerListenerPort
+				"load_balancer_listener_port": schemaAttribute519e9481ff87888090e29d8f(),
+				// Property: LoadBalancerTarget
+				"load_balancer_target": schemaAttributed5e20f34a6d49d40e89196a9(),
+				// Property: LoadBalancerTargetGroup
+				"load_balancer_target_group": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: LoadBalancerTargetGroups
+				"load_balancer_target_groups": schemaAttributeecf77176f4cc13e9a4d48fe3(),
+				// Property: LoadBalancerTargetPort
+				"load_balancer_target_port": schemaAttribute519e9481ff87888090e29d8f(),
+				// Property: MissingComponent
+				"missing_component": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+				// Property: NatGateway
+				"nat_gateway": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: NetworkInterface
+				"network_interface": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: PacketField
+				"packet_field": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+				// Property: Port
+				"port": schemaAttribute519e9481ff87888090e29d8f(),
+				// Property: PortRanges
+				"port_ranges": schemaAttributeaefe48878c072be64075ccd8(),
+				// Property: PrefixList
+				"prefix_list": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: Protocols
+				"protocols": schemaAttributeca3abf84a7801e198a1fae6c(),
+				// Property: RouteTable
+				"route_table": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: RouteTableRoute
+				"route_table_route": schemaAttribute92b3b5086f69f9e8db80a5d2(),
+				// Property: SecurityGroup
+				"security_group": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: SecurityGroupRule
+				"security_group_rule": schemaAttribute100eef0ac78fee1f6b0f24f3(),
+				// Property: SecurityGroups
+				"security_groups": schemaAttributeecf77176f4cc13e9a4d48fe3(),
+				// Property: SourceVpc
+				"source_vpc": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: State
+				"state": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+				// Property: Subnet
+				"subnet": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: SubnetRouteTable
+				"subnet_route_table": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: Vpc
+				"vpc": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: VpcPeeringConnection
+				"vpc_peering_connection": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: VpnConnection
+				"vpn_connection": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: VpnGateway
+				"vpn_gateway": schemaAttributefc6f4f6957d5208112a63fe9(),
+				// Property: vpcEndpoint
+				"vpc_endpoint": schemaAttributefc6f4f6957d5208112a63fe9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5e20f34a6d49d40e89196a9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Address
+			"address": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: AvailabilityZone
+			"availability_zone": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: Instance
+			"instance": schemaAttributefc6f4f6957d5208112a63fe9(),
+			// Property: Port
+			"port": schemaAttribute519e9481ff87888090e29d8f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeecf77176f4cc13e9a4d48fe3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Arn
+				"arn": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+				// Property: Id
+				"id": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef79e84e7add55d0dcefe20cb() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9971d755e54d05d567ec7be() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Cidr
+			"cidr": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: Egress
+			"egress": schemaAttributef79e84e7add55d0dcefe20cb(),
+			// Property: PortRange
+			"port_range": schemaAttribute97784e65b0440ee218702d0b(),
+			// Property: Protocol
+			"protocol": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: RuleAction
+			"rule_action": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: RuleNumber
+			"rule_number": schemaAttribute519e9481ff87888090e29d8f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc6f4f6957d5208112a63fe9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+			// Property: Id
+			"id": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_network_insights_analysis", networkInsightsAnalysisDataSource)
 }
@@ -41,21 +392,7 @@ func networkInsightsAnalysisDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "array"
 		//	}
-		"alternate_path_hints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ComponentArn
-					"component_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ComponentId
-					"component_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"alternate_path_hints": schemaAttribute90440f7fdc0bbe2cd555902f(),
 		// Property: Explanations
 		// CloudFormation resource type schema:
 		//
@@ -584,615 +921,7 @@ func networkInsightsAnalysisDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "array"
 		//	}
-		"explanations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Acl
-					"acl": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: AclRule
-					"acl_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Cidr
-							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Egress
-							"egress": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: PortRange
-							"port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: From
-									"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: To
-									"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Protocol
-							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: RuleAction
-							"rule_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: RuleNumber
-							"rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Address
-					"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Addresses
-					"addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: AttachedTo
-					"attached_to": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: AvailabilityZones
-					"availability_zones": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Cidrs
-					"cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ClassicLoadBalancerListener
-					"classic_load_balancer_listener": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: InstancePort
-							"instance_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: LoadBalancerPort
-							"load_balancer_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Component
-					"component": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: CustomerGateway
-					"customer_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Destination
-					"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: DestinationVpc
-					"destination_vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Direction
-					"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ElasticLoadBalancerListener
-					"elastic_load_balancer_listener": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ExplanationCode
-					"explanation_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: IngressRouteTable
-					"ingress_route_table": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: InternetGateway
-					"internet_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: LoadBalancerArn
-					"load_balancer_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: LoadBalancerListenerPort
-					"load_balancer_listener_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: LoadBalancerTarget
-					"load_balancer_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Address
-							"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: AvailabilityZone
-							"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Instance
-							"instance": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Arn
-									"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Id
-									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Port
-							"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: LoadBalancerTargetGroup
-					"load_balancer_target_group": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: LoadBalancerTargetGroups
-					"load_balancer_target_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Arn
-								"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Id
-								"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: LoadBalancerTargetPort
-					"load_balancer_target_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: MissingComponent
-					"missing_component": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: NatGateway
-					"nat_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: NetworkInterface
-					"network_interface": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: PacketField
-					"packet_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Port
-					"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: PortRanges
-					"port_ranges": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: From
-								"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: To
-								"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: PrefixList
-					"prefix_list": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Protocols
-					"protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: RouteTable
-					"route_table": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: RouteTableRoute
-					"route_table_route": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: NatGatewayId
-							"nat_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: NetworkInterfaceId
-							"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Origin
-							"origin": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: TransitGatewayId
-							"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: VpcPeeringConnectionId
-							"vpc_peering_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: destinationCidr
-							"destination_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: destinationPrefixListId
-							"destination_prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: egressOnlyInternetGatewayId
-							"egress_only_internet_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: gatewayId
-							"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: instanceId
-							"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SecurityGroup
-					"security_group": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SecurityGroupRule
-					"security_group_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Cidr
-							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Direction
-							"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: PortRange
-							"port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: From
-									"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: To
-									"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: PrefixListId
-							"prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Protocol
-							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: SecurityGroupId
-							"security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SecurityGroups
-					"security_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Arn
-								"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Id
-								"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SourceVpc
-					"source_vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: State
-					"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Subnet
-					"subnet": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SubnetRouteTable
-					"subnet_route_table": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Vpc
-					"vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: VpcPeeringConnection
-					"vpc_peering_connection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: VpnConnection
-					"vpn_connection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: VpnGateway
-					"vpn_gateway": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: vpcEndpoint
-					"vpc_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"explanations": schemaAttributeceedaa70d39b4e259aa9b631(),
 		// Property: FilterInArns
 		// CloudFormation resource type schema:
 		//
@@ -1202,10 +931,7 @@ func networkInsightsAnalysisDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "array"
 		//	}
-		"filter_in_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"filter_in_arns": schemaAttributeca3abf84a7801e198a1fae6c(),
 		// Property: ForwardPathComponents
 		// CloudFormation resource type schema:
 		//
@@ -1485,353 +1211,35 @@ func networkInsightsAnalysisDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "array"
 		//	}
-		"forward_path_components": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AclRule
-					"acl_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Cidr
-							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Egress
-							"egress": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: PortRange
-							"port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: From
-									"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: To
-									"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Protocol
-							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: RuleAction
-							"rule_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: RuleNumber
-							"rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Component
-					"component": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: DestinationVpc
-					"destination_vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: InboundHeader
-					"inbound_header": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DestinationAddresses
-							"destination_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: DestinationPortRanges
-							"destination_port_ranges": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: From
-										"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: To
-										"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Protocol
-							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: SourceAddresses
-							"source_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SourcePortRanges
-							"source_port_ranges": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: From
-										"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: To
-										"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: OutboundHeader
-					"outbound_header": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DestinationAddresses
-							"destination_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: DestinationPortRanges
-							"destination_port_ranges": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: From
-										"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: To
-										"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Protocol
-							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: SourceAddresses
-							"source_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SourcePortRanges
-							"source_port_ranges": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: From
-										"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: To
-										"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: RouteTableRoute
-					"route_table_route": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: NatGatewayId
-							"nat_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: NetworkInterfaceId
-							"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Origin
-							"origin": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: TransitGatewayId
-							"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: VpcPeeringConnectionId
-							"vpc_peering_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: destinationCidr
-							"destination_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: destinationPrefixListId
-							"destination_prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: egressOnlyInternetGatewayId
-							"egress_only_internet_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: gatewayId
-							"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: instanceId
-							"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SecurityGroupRule
-					"security_group_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Cidr
-							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Direction
-							"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: PortRange
-							"port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: From
-									"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: To
-									"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: PrefixListId
-							"prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Protocol
-							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: SecurityGroupId
-							"security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SequenceNumber
-					"sequence_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SourceVpc
-					"source_vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Subnet
-					"subnet": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Vpc
-					"vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"forward_path_components": schemaAttribute6ed6fdaae4059c8576d0dd0b(),
 		// Property: NetworkInsightsAnalysisArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"network_insights_analysis_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"network_insights_analysis_arn": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
 		// Property: NetworkInsightsAnalysisId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"network_insights_analysis_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"network_insights_analysis_id": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
 		// Property: NetworkInsightsPathId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"network_insights_path_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"network_insights_path_id": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
 		// Property: NetworkPathFound
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"network_path_found": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"network_path_found": schemaAttributef79e84e7add55d0dcefe20cb(),
 		// Property: ReturnPathComponents
 		// CloudFormation resource type schema:
 		//
@@ -2111,326 +1519,14 @@ func networkInsightsAnalysisDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "array"
 		//	}
-		"return_path_components": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AclRule
-					"acl_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Cidr
-							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Egress
-							"egress": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: PortRange
-							"port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: From
-									"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: To
-									"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Protocol
-							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: RuleAction
-							"rule_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: RuleNumber
-							"rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Component
-					"component": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: DestinationVpc
-					"destination_vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: InboundHeader
-					"inbound_header": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DestinationAddresses
-							"destination_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: DestinationPortRanges
-							"destination_port_ranges": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: From
-										"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: To
-										"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Protocol
-							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: SourceAddresses
-							"source_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SourcePortRanges
-							"source_port_ranges": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: From
-										"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: To
-										"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: OutboundHeader
-					"outbound_header": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DestinationAddresses
-							"destination_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: DestinationPortRanges
-							"destination_port_ranges": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: From
-										"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: To
-										"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Protocol
-							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: SourceAddresses
-							"source_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SourcePortRanges
-							"source_port_ranges": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: From
-										"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: To
-										"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: RouteTableRoute
-					"route_table_route": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: NatGatewayId
-							"nat_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: NetworkInterfaceId
-							"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Origin
-							"origin": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: TransitGatewayId
-							"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: VpcPeeringConnectionId
-							"vpc_peering_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: destinationCidr
-							"destination_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: destinationPrefixListId
-							"destination_prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: egressOnlyInternetGatewayId
-							"egress_only_internet_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: gatewayId
-							"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: instanceId
-							"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SecurityGroupRule
-					"security_group_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Cidr
-							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Direction
-							"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: PortRange
-							"port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: From
-									"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: To
-									"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: PrefixListId
-							"prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Protocol
-							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: SecurityGroupId
-							"security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SequenceNumber
-					"sequence_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SourceVpc
-					"source_vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Subnet
-					"subnet": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Vpc
-					"vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Arn
-							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"return_path_components": schemaAttribute6ed6fdaae4059c8576d0dd0b(),
 		// Property: StartDate
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"start_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"start_date": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -2442,18 +1538,14 @@ func networkInsightsAnalysisDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
 		// Property: StatusMessage
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status_message": schemaAttributea711fbedb7bf3c6ec38f9ed4(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -2475,21 +1567,7 @@ func networkInsightsAnalysisDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute46cef9a50422e220292e2963(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

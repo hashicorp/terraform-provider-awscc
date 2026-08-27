@@ -14,6 +14,20 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute50560026eff56d80f49c79fe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The managed notification configuration ARN, against which the account contact association will be created",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7281cc7c89187a638d7439e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "This unique identifier for Contact",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_notifications_managed_notification_account_contact_association", managedNotificationAccountContactAssociationDataSource)
 }
@@ -35,10 +49,7 @@ func managedNotificationAccountContactAssociationDataSource(ctx context.Context)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"contact_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "This unique identifier for Contact",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"contact_identifier": schemaAttributea7281cc7c89187a638d7439e(),
 		// Property: ManagedNotificationConfigurationArn
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +58,7 @@ func managedNotificationAccountContactAssociationDataSource(ctx context.Context)
 		//	  "pattern": "^arn:[a-z-]{3,10}:notifications::([0-9]{12}|):managed-notification-configuration/category/[a-zA-Z0-9\\-]{3,64}/sub-category/[a-zA-Z0-9\\-]{3,64}$",
 		//	  "type": "string"
 		//	}
-		"managed_notification_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The managed notification configuration ARN, against which the account contact association will be created",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"managed_notification_configuration_arn": schemaAttribute50560026eff56d80f49c79fe(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

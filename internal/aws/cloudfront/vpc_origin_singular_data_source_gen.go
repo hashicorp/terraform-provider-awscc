@@ -15,6 +15,108 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute18597c40e9715ba9ac3e36df() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeb0298356f05fc432146deaff(),
+				// Property: Value
+				"value": schemaAttributee63bf58a18ae5a6fb7aa2872(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A complex type that contains zero or more ``Tag`` elements.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute206b496eb4d36b77fdde834f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the CloudFront VPC origin endpoint configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ff295b5c55e9b9a0262b685() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Specifies the minimum SSL/TLS protocol that CloudFront uses when connecting to your origin over HTTPS. Valid values include ``SSLv3``, ``TLSv1``, ``TLSv1.1``, and ``TLSv1.2``.\n For more information, see [Minimum Origin SSL Protocol](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginSSLProtocols) in the *Amazon CloudFront Developer Guide*.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d4554efd68d3f3af6c02996() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The HTTPS port of the CloudFront VPC origin endpoint configuration. The default value is ``443``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96725a431f9ec159f2a77c31() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttribute9f147512d6004838976f7744(),
+			// Property: HTTPPort
+			"http_port": schemaAttributee0c22bac72514d905031411c(),
+			// Property: HTTPSPort
+			"https_port": schemaAttribute6d4554efd68d3f3af6c02996(),
+			// Property: IpAddressType
+			"ip_address_type": schemaAttributeb8afd7e49add7615f7e10a20(),
+			// Property: Name
+			"name": schemaAttribute206b496eb4d36b77fdde834f(),
+			// Property: OriginProtocolPolicy
+			"origin_protocol_policy": schemaAttributeb216b739e0d3eac966a0d32c(),
+			// Property: OriginSSLProtocols
+			"origin_ssl_protocols": schemaAttribute2ff295b5c55e9b9a0262b685(),
+		}, /*END SCHEMA*/
+		Description: "The VPC origin endpoint configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f147512d6004838976f7744() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the CloudFront VPC origin endpoint configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0298356f05fc432146deaff() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb216b739e0d3eac966a0d32c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The origin protocol policy for the CloudFront VPC origin endpoint configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8afd7e49add7615f7e10a20() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0c22bac72514d905031411c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The HTTP port for the CloudFront VPC origin endpoint configuration. The default value is ``80``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee63bf58a18ae5a6fb7aa2872() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudfront_vpc_origin", vpcOriginDataSource)
 }
@@ -30,10 +132,7 @@ func vpcOriginDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"account_id": schemaAttributeb8afd7e49add7615f7e10a20(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +140,7 @@ func vpcOriginDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeb8afd7e49add7615f7e10a20(),
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +148,7 @@ func vpcOriginDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttributeb8afd7e49add7615f7e10a20(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +156,7 @@ func vpcOriginDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"vpc_origin_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_origin_id": schemaAttributeb8afd7e49add7615f7e10a20(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +164,7 @@ func vpcOriginDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttributeb8afd7e49add7615f7e10a20(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +172,7 @@ func vpcOriginDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributeb8afd7e49add7615f7e10a20(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -116,24 +200,7 @@ func vpcOriginDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A complex type that contains zero or more ``Tag`` elements.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute18597c40e9715ba9ac3e36df(),
 		// Property: VpcOriginEndpointConfig
 		// CloudFormation resource type schema:
 		//
@@ -192,48 +259,7 @@ func vpcOriginDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"vpc_origin_endpoint_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the CloudFront VPC origin endpoint configuration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: HTTPPort
-				"http_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The HTTP port for the CloudFront VPC origin endpoint configuration. The default value is ``80``.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: HTTPSPort
-				"https_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The HTTPS port of the CloudFront VPC origin endpoint configuration. The default value is ``443``.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IpAddressType
-				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the CloudFront VPC origin endpoint configuration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: OriginProtocolPolicy
-				"origin_protocol_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The origin protocol policy for the CloudFront VPC origin endpoint configuration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: OriginSSLProtocols
-				"origin_ssl_protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Specifies the minimum SSL/TLS protocol that CloudFront uses when connecting to your origin over HTTPS. Valid values include ``SSLv3``, ``TLSv1``, ``TLSv1.1``, and ``TLSv1.2``.\n For more information, see [Minimum Origin SSL Protocol](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesOrigin.html#DownloadDistValuesOriginSSLProtocols) in the *Amazon CloudFront Developer Guide*.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The VPC origin endpoint configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_origin_endpoint_config": schemaAttribute96725a431f9ec159f2a77c31(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,26 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute31133bb75cbcb54718516b83() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConfigurationStatus
+			"configuration_status": schemaAttribute393981476e6b73e88f36f566(),
+			// Property: ErrorCode
+			"error_code": schemaAttribute393981476e6b73e88f36f566(),
+			// Property: ErrorMessage
+			"error_message": schemaAttribute393981476e6b73e88f36f566(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute393981476e6b73e88f36f566() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iot_encryption_configuration", encryptionConfigurationDataSource)
 }
@@ -28,9 +48,7 @@ func encryptionConfigurationDataSource(ctx context.Context) (datasource.DataSour
 		//	{
 		//	  "type": "string"
 		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"account_id": schemaAttribute393981476e6b73e88f36f566(),
 		// Property: ConfigurationDetails
 		// CloudFormation resource type schema:
 		//
@@ -53,23 +71,7 @@ func encryptionConfigurationDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "object"
 		//	}
-		"configuration_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConfigurationStatus
-				"configuration_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ErrorCode
-				"error_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ErrorMessage
-				"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"configuration_details": schemaAttribute31133bb75cbcb54718516b83(),
 		// Property: EncryptionType
 		// CloudFormation resource type schema:
 		//
@@ -80,9 +82,7 @@ func encryptionConfigurationDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"encryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"encryption_type": schemaAttribute393981476e6b73e88f36f566(),
 		// Property: KmsAccessRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -91,9 +91,7 @@ func encryptionConfigurationDataSource(ctx context.Context) (datasource.DataSour
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"kms_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"kms_access_role_arn": schemaAttribute393981476e6b73e88f36f566(),
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -102,18 +100,14 @@ func encryptionConfigurationDataSource(ctx context.Context) (datasource.DataSour
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttribute393981476e6b73e88f36f566(),
 		// Property: LastModifiedDate
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"last_modified_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_date": schemaAttribute393981476e6b73e88f36f566(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

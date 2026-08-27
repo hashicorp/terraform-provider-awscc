@@ -14,6 +14,32 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0345bc2d3d622a66590252a6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute7ebfafedcae5c42abf1c46b6(),
+				// Property: Value
+				"value": schemaAttribute7ebfafedcae5c42abf1c46b6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ebfafedcae5c42abf1c46b6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83f3ad53bcb9fe84efcd86f7() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_rolesanywhere_crl", cRLDataSource)
 }
@@ -28,9 +54,7 @@ func cRLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"crl_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"crl_data": schemaAttribute7ebfafedcae5c42abf1c46b6(),
 		// Property: CrlId
 		// CloudFormation resource type schema:
 		//
@@ -38,27 +62,21 @@ func cRLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"crl_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"crl_id": schemaAttribute7ebfafedcae5c42abf1c46b6(),
 		// Property: Enabled
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"enabled": schemaAttribute83f3ad53bcb9fe84efcd86f7(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute7ebfafedcae5c42abf1c46b6(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -87,21 +105,7 @@ func cRLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute0345bc2d3d622a66590252a6(),
 		// Property: TrustAnchorArn
 		// CloudFormation resource type schema:
 		//
@@ -109,9 +113,7 @@ func cRLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[^:]+)?:rolesanywhere(:.*){2}(:trust-anchor.*)$",
 		//	  "type": "string"
 		//	}
-		"trust_anchor_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"trust_anchor_arn": schemaAttribute7ebfafedcae5c42abf1c46b6(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,257 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute06a9ab646843c2d830cbc078() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute08423e608a1a3385c0d6fbaa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name (ARN) of the analyzer",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0e346b90efdf98bcc1c12986() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Filter
+				"filter": schemaAttributec1a323d9be7ffad0fdb1c32a(),
+				// Property: RuleName
+				"rule_name": schemaAttributecf0f8248ec99dfd25d9da1da(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute291196cbd853c9fd5b47dc8c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InternalAccessAnalysisRule
+			"internal_access_analysis_rule": schemaAttribute746f86b0f22bdd455f341647(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the configuration of an internal access analyzer for an AWS organization or account. This configuration determines how the analyzer evaluates internal access within your AWS environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b672113f059663c84ac167a() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute433c921d932e4029d5751c40(),
+				// Property: Value
+				"value": schemaAttribute3a6d7a94ee45f0c9b683c1d3(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d351903b1b890366a752085() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of resource types to apply to the internal access analysis rule criteria. The analyzer will only generate findings for resources of these types.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a6d7a94ee45f0c9b683c1d3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3daf408a072d5ff7c26dd884() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			},                                       /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to match for your resources. You can use the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.\n\nFor the tag key, you can specify a value that is 1 to 128 characters in length and cannot be prefixed with aws:.\n\nFor the tag value, you can specify a value that is 0 to 256 characters in length. If the specified tag value is 0 characters, the rule is applied to all principals with the specified tag key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute433c921d932e4029d5751c40() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute579d49886e59e58124c72204() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Analyzer name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a7ea04e6afd7b155af79fb0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccountIds
+				"account_ids": schemaAttributedef605c8488fd29cd7b03dea(),
+				// Property: ResourceTags
+				"resource_tags": schemaAttribute3daf408a072d5ff7c26dd884(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of rules for the analyzer containing criteria to exclude from analysis. Entities that meet the rule criteria will not generate findings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute746f86b0f22bdd455f341647() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Inclusions
+			"inclusions": schemaAttributeb2e026055ee055856b8f7ee8(),
+		}, /*END SCHEMA*/
+		Description: "Contains information about analysis rules for the internal access analyzer. Analysis rules determine which entities will generate findings based on the criteria you define when you create the rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80005f0e672e5645b680aa68() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the analyzer, must be one of ACCOUNT, ORGANIZATION, ACCOUNT_INTERNAL_ACCESS, ORGANIZATION_INTERNAL_ACCESS, ACCOUNT_UNUSED_ACCESS and ORGANIZATION_UNUSED_ACCESS",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7ab18bde0e7e2287535fead() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of resource ARNs to apply to the internal access analysis rule criteria. The analyzer will only generate findings for resources that match these ARNs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaaef76dca3cb2f6a678e3bc9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AnalysisRule
+			"analysis_rule": schemaAttributeb8063287846ae71564875a80(),
+			// Property: UnusedAccessAge
+			"unused_access_age": schemaAttributee02c3ee7bbb3f681499335df(),
+		}, /*END SCHEMA*/
+		Description: "The Configuration for Unused Access Analyzer",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2e026055ee055856b8f7ee8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccountIds
+				"account_ids": schemaAttributed1ecbc33cbebde112624f7e3(),
+				// Property: ResourceArns
+				"resource_arns": schemaAttributea7ab18bde0e7e2287535fead(),
+				// Property: ResourceTypes
+				"resource_types": schemaAttribute2d351903b1b890366a752085(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of rules for the internal access analyzer containing criteria to include in analysis. Only resources that meet the rule criteria will generate findings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8063287846ae71564875a80() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Exclusions
+			"exclusions": schemaAttribute5a7ea04e6afd7b155af79fb0(),
+		}, /*END SCHEMA*/
+		Description: "Contains information about rules for the analyzer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec1a323d9be7ffad0fdb1c32a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Contains
+				"contains": schemaAttributedc566cb0e5de43c9293d4a5c(),
+				// Property: Eq
+				"eq": schemaAttributedc566cb0e5de43c9293d4a5c(),
+				// Property: Exists
+				"exists": schemaAttribute06a9ab646843c2d830cbc078(),
+				// Property: Neq
+				"neq": schemaAttributedc566cb0e5de43c9293d4a5c(),
+				// Property: Property
+				"property": schemaAttributecdd39f1958c28baab3a2de3b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecdd39f1958c28baab3a2de3b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf0f8248ec99dfd25d9da1da() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The archive rule name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1ecbc33cbebde112624f7e3() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of AWS account IDs to apply to the internal access analysis rule criteria. Account IDs can only be applied to the analysis rule criteria for organization-level analyzers and cannot include the organization owner account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc566cb0e5de43c9293d4a5c() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedef605c8488fd29cd7b03dea() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of AWS account IDs to apply to the analysis rule criteria. The accounts cannot include the organization analyzer owner account. Account IDs can only be applied to the analysis rule criteria for organization-level analyzers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee02c3ee7bbb3f681499335df() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that hasn't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 365 days.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee183bb814f1dcf661fe2c279() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InternalAccessConfiguration
+			"internal_access_configuration": schemaAttribute291196cbd853c9fd5b47dc8c(),
+			// Property: UnusedAccessConfiguration
+			"unused_access_configuration": schemaAttributeaaef76dca3cb2f6a678e3bc9(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for the analyzer",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_accessanalyzer_analyzer", analyzerDataSource)
 }
@@ -156,96 +407,7 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"analyzer_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: InternalAccessConfiguration
-				"internal_access_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: InternalAccessAnalysisRule
-						"internal_access_analysis_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Inclusions
-								"inclusions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: AccountIds
-											"account_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Description: "A list of AWS account IDs to apply to the internal access analysis rule criteria. Account IDs can only be applied to the analysis rule criteria for organization-level analyzers and cannot include the organization owner account.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: ResourceArns
-											"resource_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Description: "A list of resource ARNs to apply to the internal access analysis rule criteria. The analyzer will only generate findings for resources that match these ARNs.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: ResourceTypes
-											"resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Description: "A list of resource types to apply to the internal access analysis rule criteria. The analyzer will only generate findings for resources of these types.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "A list of rules for the internal access analyzer containing criteria to include in analysis. Only resources that meet the rule criteria will generate findings.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Contains information about analysis rules for the internal access analyzer. Analysis rules determine which entities will generate findings based on the criteria you define when you create the rule.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Specifies the configuration of an internal access analyzer for an AWS organization or account. This configuration determines how the analyzer evaluates internal access within your AWS environment.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: UnusedAccessConfiguration
-				"unused_access_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AnalysisRule
-						"analysis_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Exclusions
-								"exclusions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: AccountIds
-											"account_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Description: "A list of AWS account IDs to apply to the analysis rule criteria. The accounts cannot include the organization analyzer owner account. Account IDs can only be applied to the analysis rule criteria for organization-level analyzers.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: ResourceTags
-											"resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													},                                       /*END SCHEMA*/
-												}, /*END NESTED OBJECT*/
-												Description: "An array of key-value pairs to match for your resources. You can use the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.\n\nFor the tag key, you can specify a value that is 1 to 128 characters in length and cannot be prefixed with aws:.\n\nFor the tag value, you can specify a value that is 0 to 256 characters in length. If the specified tag value is 0 characters, the rule is applied to all principals with the specified tag key.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "A list of rules for the analyzer containing criteria to exclude from analysis. Entities that meet the rule criteria will not generate findings.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Contains information about rules for the analyzer.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: UnusedAccessAge
-						"unused_access_age": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The specified access age in days for which to generate findings for unused access. For example, if you specify 90 days, the analyzer will generate findings for IAM entities within the accounts of the selected organization for any access that hasn't been used in 90 or more days since the analyzer's last scan. You can choose a value between 1 and 365 days.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The Configuration for Unused Access Analyzer",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration for the analyzer",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"analyzer_configuration": schemaAttributee183bb814f1dcf661fe2c279(),
 		// Property: AnalyzerName
 		// CloudFormation resource type schema:
 		//
@@ -255,10 +417,7 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"analyzer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Analyzer name",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"analyzer_name": schemaAttribute579d49886e59e58124c72204(),
 		// Property: ArchiveRules
 		// CloudFormation resource type schema:
 		//
@@ -322,49 +481,7 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"archive_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Filter
-					"filter": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Contains
-								"contains": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Eq
-								"eq": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Exists
-								"exists": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Neq
-								"neq": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Property
-								"property": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: RuleName
-					"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The archive rule name",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"archive_rules": schemaAttribute0e346b90efdf98bcc1c12986(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -375,10 +492,7 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[^:]+:access-analyzer(-beta|-gamma)?:[^:]*:[^:]*:analyzer/.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name (ARN) of the analyzer",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute08423e608a1a3385c0d6fbaa(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -411,24 +525,7 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute2b672113f059663c84ac167a(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -438,10 +535,7 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the analyzer, must be one of ACCOUNT, ORGANIZATION, ACCOUNT_INTERNAL_ACCESS, ORGANIZATION_INTERNAL_ACCESS, ACCOUNT_UNUSED_ACCESS and ORGANIZATION_UNUSED_ACCESS",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute80005f0e672e5645b680aa68(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

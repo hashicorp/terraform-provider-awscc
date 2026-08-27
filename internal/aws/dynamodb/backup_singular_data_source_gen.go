@@ -15,6 +15,63 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute115b2dc45d8a32b8a297fb9b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current state of the backup.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3629355f8913a35f787943fb() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The size of the backup in bytes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute74ab4e1b2b545650f41b9651() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of backup (USER, SYSTEM, or AWS_BACKUP).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8231c7ac10da2e0e6b25a3c9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier portion of the backup ARN (server-generated).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c77f7974b57c87d6114f8b9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The time at which the backup was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb30ba1f302ab30466c647df5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the table to back up.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede026b30023cd283ce625991() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN associated with the backup.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee43306bfe466d7289fc8a71() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the backup.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_dynamodb_backup", backupDataSource)
 }
@@ -32,10 +89,7 @@ func backupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 37,
 		//	  "type": "string"
 		//	}
-		"backup_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN associated with the backup.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"backup_arn": schemaAttributede026b30023cd283ce625991(),
 		// Property: BackupCreationDateTime
 		// CloudFormation resource type schema:
 		//
@@ -44,11 +98,7 @@ func backupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"backup_creation_date_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time at which the backup was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"backup_creation_date_time": schemaAttribute8c77f7974b57c87d6114f8b9(),
 		// Property: BackupId
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +106,7 @@ func backupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The identifier portion of the backup ARN (server-generated).",
 		//	  "type": "string"
 		//	}
-		"backup_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier portion of the backup ARN (server-generated).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"backup_id": schemaAttribute8231c7ac10da2e0e6b25a3c9(),
 		// Property: BackupName
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +117,7 @@ func backupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_.-]+$",
 		//	  "type": "string"
 		//	}
-		"backup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the backup.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"backup_name": schemaAttributeee43306bfe466d7289fc8a71(),
 		// Property: BackupSizeBytes
 		// CloudFormation resource type schema:
 		//
@@ -81,10 +125,7 @@ func backupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The size of the backup in bytes.",
 		//	  "type": "integer"
 		//	}
-		"backup_size_bytes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The size of the backup in bytes.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"backup_size_bytes": schemaAttribute3629355f8913a35f787943fb(),
 		// Property: BackupStatus
 		// CloudFormation resource type schema:
 		//
@@ -97,10 +138,7 @@ func backupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"backup_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current state of the backup.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"backup_status": schemaAttribute115b2dc45d8a32b8a297fb9b(),
 		// Property: BackupType
 		// CloudFormation resource type schema:
 		//
@@ -113,10 +151,7 @@ func backupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"backup_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of backup (USER, SYSTEM, or AWS_BACKUP).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"backup_type": schemaAttribute74ab4e1b2b545650f41b9651(),
 		// Property: TableName
 		// CloudFormation resource type schema:
 		//
@@ -127,10 +162,7 @@ func backupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_.-]+$",
 		//	  "type": "string"
 		//	}
-		"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the table to back up.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"table_name": schemaAttributeb30ba1f302ab30466c647df5(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

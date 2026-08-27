@@ -14,6 +14,12 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute8291b75d1e60f811bd12f11e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cognito_user_pool_user_to_group_attachment", userPoolUserToGroupAttachmentDataSource)
 }
@@ -28,27 +34,21 @@ func userPoolUserToGroupAttachmentDataSource(ctx context.Context) (datasource.Da
 		//	{
 		//	  "type": "string"
 		//	}
-		"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"group_name": schemaAttribute8291b75d1e60f811bd12f11e(),
 		// Property: UserPoolId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"user_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"user_pool_id": schemaAttribute8291b75d1e60f811bd12f11e(),
 		// Property: Username
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"username": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"username": schemaAttribute8291b75d1e60f811bd12f11e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

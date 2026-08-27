@@ -14,6 +14,26 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute01ca378042cae9b3653a26e1() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute293d7e49e7fc046c41a3c062(),
+				// Property: Value
+				"value": schemaAttribute293d7e49e7fc046c41a3c062(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute293d7e49e7fc046c41a3c062() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ses_mail_manager_address_list", mailManagerAddressListDataSource)
 }
@@ -28,9 +48,7 @@ func mailManagerAddressListDataSource(ctx context.Context) (datasource.DataSourc
 		//	{
 		//	  "type": "string"
 		//	}
-		"address_list_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"address_list_arn": schemaAttribute293d7e49e7fc046c41a3c062(),
 		// Property: AddressListId
 		// CloudFormation resource type schema:
 		//
@@ -40,9 +58,7 @@ func mailManagerAddressListDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"address_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"address_list_id": schemaAttribute293d7e49e7fc046c41a3c062(),
 		// Property: AddressListName
 		// CloudFormation resource type schema:
 		//
@@ -52,9 +68,7 @@ func mailManagerAddressListDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^[a-zA-Z0-9_.-]+$",
 		//	  "type": "string"
 		//	}
-		"address_list_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"address_list_name": schemaAttribute293d7e49e7fc046c41a3c062(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -85,21 +99,7 @@ func mailManagerAddressListDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute01ca378042cae9b3653a26e1(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

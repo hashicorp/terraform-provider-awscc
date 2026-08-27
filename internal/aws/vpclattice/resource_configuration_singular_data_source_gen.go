@@ -15,6 +15,65 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute13e1e67ab410448f15831b08() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c6434519a57aae153de3a8d() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributea7a29276bcbb18a8ddbc185d(),
+				// Property: Value
+				"value": schemaAttributea7a29276bcbb18a8ddbc185d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7a29276bcbb18a8ddbc185d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb002f8e8b2bde0af3811bfe0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DomainName
+			"domain_name": schemaAttributea7a29276bcbb18a8ddbc185d(),
+			// Property: IpAddressType
+			"ip_address_type": schemaAttributea7a29276bcbb18a8ddbc185d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3fb6ab8955f45b25e5ba056() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ArnResource
+			"arn_resource": schemaAttributea7a29276bcbb18a8ddbc185d(),
+			// Property: DnsResource
+			"dns_resource": schemaAttributeb002f8e8b2bde0af3811bfe0(),
+			// Property: IpResource
+			"ip_resource": schemaAttributea7a29276bcbb18a8ddbc185d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed40b351aec7a066a8d4bea24() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_vpclattice_resource_configuration", resourceConfigurationDataSource)
 }
@@ -29,9 +88,7 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"allow_association_to_sharable_service_network": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"allow_association_to_sharable_service_network": schemaAttribute13e1e67ab410448f15831b08(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -41,9 +98,7 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^arn:[a-z0-9f\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourceconfiguration/rcfg-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributea7a29276bcbb18a8ddbc185d(),
 		// Property: CustomDomainName
 		// CloudFormation resource type schema:
 		//
@@ -52,9 +107,7 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"custom_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"custom_domain_name": schemaAttributea7a29276bcbb18a8ddbc185d(),
 		// Property: DomainVerificationId
 		// CloudFormation resource type schema:
 		//
@@ -64,9 +117,7 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^dv-[a-fA-F0-9]{17}$",
 		//	  "type": "string"
 		//	}
-		"domain_verification_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"domain_verification_id": schemaAttributea7a29276bcbb18a8ddbc185d(),
 		// Property: GroupDomain
 		// CloudFormation resource type schema:
 		//
@@ -75,9 +126,7 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"group_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"group_domain": schemaAttributea7a29276bcbb18a8ddbc185d(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -87,9 +136,7 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^rcfg-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"resource_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"resource_configuration_id": schemaAttributea7a29276bcbb18a8ddbc185d(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -99,9 +146,7 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributea7a29276bcbb18a8ddbc185d(),
 		// Property: PortRanges
 		// CloudFormation resource type schema:
 		//
@@ -115,10 +160,7 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"port_ranges": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"port_ranges": schemaAttributed40b351aec7a066a8d4bea24(),
 		// Property: ProtocolType
 		// CloudFormation resource type schema:
 		//
@@ -128,9 +170,7 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"protocol_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"protocol_type": schemaAttributea7a29276bcbb18a8ddbc185d(),
 		// Property: ResourceConfigurationAuthType
 		// CloudFormation resource type schema:
 		//
@@ -141,9 +181,7 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"resource_configuration_auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"resource_configuration_auth_type": schemaAttributea7a29276bcbb18a8ddbc185d(),
 		// Property: ResourceConfigurationDefinition
 		// CloudFormation resource type schema:
 		//
@@ -185,33 +223,7 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"resource_configuration_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ArnResource
-				"arn_resource": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: DnsResource
-				"dns_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DomainName
-						"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: IpAddressType
-						"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: IpResource
-				"ip_resource": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"resource_configuration_definition": schemaAttributed3fb6ab8955f45b25e5ba056(),
 		// Property: ResourceConfigurationGroupId
 		// CloudFormation resource type schema:
 		//
@@ -221,9 +233,7 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^rcfg-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"resource_configuration_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"resource_configuration_group_id": schemaAttributea7a29276bcbb18a8ddbc185d(),
 		// Property: ResourceConfigurationType
 		// CloudFormation resource type schema:
 		//
@@ -236,18 +246,14 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"resource_configuration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"resource_configuration_type": schemaAttributea7a29276bcbb18a8ddbc185d(),
 		// Property: ResourceGatewayId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"resource_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"resource_gateway_id": schemaAttributea7a29276bcbb18a8ddbc185d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -277,21 +283,7 @@ func resourceConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute8c6434519a57aae153de3a8d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

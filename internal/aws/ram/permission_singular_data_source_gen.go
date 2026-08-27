@@ -15,6 +15,76 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0219debd2c53878e8cfd5fd8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Policy template for the permission.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f24e3ecfae9e912cdc33076() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3257761fd3fe699095280b0f() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Set to true to use this as the default permission.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d16b96a8d75aaca5479beeb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The resource type this permission can be used with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c4001fa07854c1f958e225b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the permission.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72a2a7b55d13435042fb9a20() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute765c9b83419323e22f958231() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e462ab8216a7d40c5ad6d10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Version of the permission.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefad7ad6400a8866cfeb98662() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute0f24e3ecfae9e912cdc33076(),
+				// Property: Value
+				"value": schemaAttribute765c9b83419323e22f958231(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ram_permission", permissionDataSource)
 }
@@ -29,9 +99,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute72a2a7b55d13435042fb9a20(),
 		// Property: IsResourceTypeDefault
 		// CloudFormation resource type schema:
 		//
@@ -39,10 +107,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Set to true to use this as the default permission.",
 		//	  "type": "boolean"
 		//	}
-		"is_resource_type_default": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Set to true to use this as the default permission.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"is_resource_type_default": schemaAttribute3257761fd3fe699095280b0f(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -50,19 +115,14 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the permission.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the permission.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute6c4001fa07854c1f958e225b(),
 		// Property: PermissionType
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"permission_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"permission_type": schemaAttribute72a2a7b55d13435042fb9a20(),
 		// Property: PolicyTemplate
 		// CloudFormation resource type schema:
 		//
@@ -70,11 +130,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Policy template for the permission.",
 		//	  "type": "object"
 		//	}
-		"policy_template": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "Policy template for the permission.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_template": schemaAttribute0219debd2c53878e8cfd5fd8(),
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +138,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The resource type this permission can be used with.",
 		//	  "type": "string"
 		//	}
-		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The resource type this permission can be used with.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_type": schemaAttribute5d16b96a8d75aaca5479beeb(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -116,23 +169,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributefad7ad6400a8866cfeb98662(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -140,10 +177,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Version of the permission.",
 		//	  "type": "string"
 		//	}
-		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Version of the permission.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttribute9e462ab8216a7d40c5ad6d10(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

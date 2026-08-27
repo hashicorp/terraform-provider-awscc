@@ -14,6 +14,200 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute149d07569d58e84bb536490b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The duration for which data must be stored in the magnetic store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27e4a8437548ead4715e0862() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The level of enforcement for the specification of a dimension key in ingested records. Options are REQUIRED (dimension key must be specified) and OPTIONAL (dimension key does not have to be specified).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e48814a704cda53a86f45c5() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Boolean flag indicating whether magnetic store writes are enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4911b8bddf923e4e8f8275f5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the attribute used for a dimension key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b8ac2b7b04dcdb729f6d9c9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Configuration
+			"s3_configuration": schemaAttribute871b1e5918cf15d6bb8c2387(),
+		}, /*END SCHEMA*/
+		Description: "Location to store information about records that were asynchronously rejected during magnetic store writes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53e54150aa99dbd1f7688546() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The bucket name used to store the data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute871b1e5918cf15d6bb8c2387() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketName
+			"bucket_name": schemaAttribute53e54150aa99dbd1f7688546(),
+			// Property: EncryptionOption
+			"encryption_option": schemaAttributef253fd80d640670d792102a7(),
+			// Property: KmsKeyId
+			"kms_key_id": schemaAttributef6dcf6069b77c6cc0cdc32bf(),
+			// Property: ObjectKeyPrefix
+			"object_key_prefix": schemaAttributeeef5d1ba50e034c2ff1eb28f(),
+		}, /*END SCHEMA*/
+		Description: "S3 configuration for location to store rejections from magnetic store writes",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute988c385b942eada3e64d940e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The table name exposed as a read-only attribute.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c9b5abbef06f637256f7b0a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnableMagneticStoreWrites
+			"enable_magnetic_store_writes": schemaAttribute2e48814a704cda53a86f45c5(),
+			// Property: MagneticStoreRejectedDataLocation
+			"magnetic_store_rejected_data_location": schemaAttribute4b8ac2b7b04dcdb729f6d9c9(),
+		}, /*END SCHEMA*/
+		Description: "The properties that determine whether magnetic store writes are enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e276b15259cd23eae078127() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnforcementInRecord
+				"enforcement_in_record": schemaAttribute27e4a8437548ead4715e0862(),
+				// Property: Name
+				"name": schemaAttribute4911b8bddf923e4e8f8275f5(),
+				// Property: Type
+				"type": schemaAttributeca1f9e0e85dff9a3443da5d4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of partition keys defining the attributes used to partition the table data. The order of the list determines the partition hierarchy. The name and type of each partition key as well as the partition key order cannot be changed after the table is created. However, the enforcement level of each partition key can be changed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4470ef73021cfa5f148f5ff() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CompositePartitionKey
+			"composite_partition_key": schemaAttribute9e276b15259cd23eae078127(),
+		}, /*END SCHEMA*/
+		Description: "A Schema specifies the expected data model of the table.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead8d9a89172a100563ad820d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9e10db0279537956f996955() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributead8d9a89172a100563ad820d(),
+				// Property: Value
+				"value": schemaAttributead8d9a89172a100563ad820d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe120821fe1dc1ee378748df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The duration for which data must be stored in the memory store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec837081193b7296b265e9bdb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the table. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the table name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca1f9e0e85dff9a3443da5d4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the partition key. Options are DIMENSION (dimension key) and MEASURE (measure key).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb169587120f126113e85809() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the database which the table to be created belongs to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee27eea32e6549fe8203e9236() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MagneticStoreRetentionPeriodInDays
+			"magnetic_store_retention_period_in_days": schemaAttribute149d07569d58e84bb536490b(),
+			// Property: MemoryStoreRetentionPeriodInHours
+			"memory_store_retention_period_in_hours": schemaAttributebe120821fe1dc1ee378748df(),
+		}, /*END SCHEMA*/
+		Description: "The retention duration of the memory store and the magnetic store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeef5d1ba50e034c2ff1eb28f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "String used to prefix all data in the bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef253fd80d640670d792102a7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Either SSE_KMS or SSE_S3.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6dcf6069b77c6cc0cdc32bf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Must be provided if SSE_KMS is specified as the encryption option",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_timestream_table", tableDataSource)
 }
@@ -28,9 +222,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributead8d9a89172a100563ad820d(),
 		// Property: DatabaseName
 		// CloudFormation resource type schema:
 		//
@@ -39,10 +231,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_.-]{3,256}$",
 		//	  "type": "string"
 		//	}
-		"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the database which the table to be created belongs to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"database_name": schemaAttributedb169587120f126113e85809(),
 		// Property: MagneticStoreWriteProperties
 		// CloudFormation resource type schema:
 		//
@@ -94,51 +283,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"magnetic_store_write_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EnableMagneticStoreWrites
-				"enable_magnetic_store_writes": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Boolean flag indicating whether magnetic store writes are enabled.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MagneticStoreRejectedDataLocation
-				"magnetic_store_rejected_data_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: S3Configuration
-						"s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BucketName
-								"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The bucket name used to store the data.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: EncryptionOption
-								"encryption_option": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Either SSE_KMS or SSE_S3.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: KmsKeyId
-								"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Must be provided if SSE_KMS is specified as the encryption option",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ObjectKeyPrefix
-								"object_key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "String used to prefix all data in the bucket.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "S3 configuration for location to store rejections from magnetic store writes",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Location to store information about records that were asynchronously rejected during magnetic store writes.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The properties that determine whether magnetic store writes are enabled.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"magnetic_store_write_properties": schemaAttribute9c9b5abbef06f637256f7b0a(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -146,10 +291,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The table name exposed as a read-only attribute.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The table name exposed as a read-only attribute.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute988c385b942eada3e64d940e(),
 		// Property: RetentionProperties
 		// CloudFormation resource type schema:
 		//
@@ -168,22 +310,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"retention_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MagneticStoreRetentionPeriodInDays
-				"magnetic_store_retention_period_in_days": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The duration for which data must be stored in the magnetic store.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MemoryStoreRetentionPeriodInHours
-				"memory_store_retention_period_in_hours": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The duration for which data must be stored in the memory store.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The retention duration of the memory store and the magnetic store.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"retention_properties": schemaAttributee27eea32e6549fe8203e9236(),
 		// Property: Schema
 		// CloudFormation resource type schema:
 		//
@@ -232,36 +359,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CompositePartitionKey
-				"composite_partition_key": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: EnforcementInRecord
-							"enforcement_in_record": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The level of enforcement for the specification of a dimension key in ingested records. Options are REQUIRED (dimension key must be specified) and OPTIONAL (dimension key does not have to be specified).",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the attribute used for a dimension key.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The type of the partition key. Options are DIMENSION (dimension key) and MEASURE (measure key).",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A list of partition keys defining the attributes used to partition the table data. The order of the list determines the partition hierarchy. The name and type of each partition key as well as the partition key order cannot be changed after the table is created. However, the enforcement level of each partition key can be changed.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A Schema specifies the expected data model of the table.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schema": schemaAttributea4470ef73021cfa5f148f5ff(),
 		// Property: TableName
 		// CloudFormation resource type schema:
 		//
@@ -270,10 +368,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_.-]{3,256}$",
 		//	  "type": "string"
 		//	}
-		"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the table. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the table name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"table_name": schemaAttributec837081193b7296b265e9bdb(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -300,22 +395,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 200,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeb9e10db0279537956f996955(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

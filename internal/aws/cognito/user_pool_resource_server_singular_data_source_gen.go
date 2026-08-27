@@ -14,6 +14,26 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute70e89be977330b6d82b80581() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ScopeDescription
+				"scope_description": schemaAttributeb8df88965aa525744d5c0400(),
+				// Property: ScopeName
+				"scope_name": schemaAttributeb8df88965aa525744d5c0400(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8df88965aa525744d5c0400() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cognito_user_pool_resource_server", userPoolResourceServerDataSource)
 }
@@ -28,18 +48,14 @@ func userPoolResourceServerDataSource(ctx context.Context) (datasource.DataSourc
 		//	{
 		//	  "type": "string"
 		//	}
-		"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"identifier": schemaAttributeb8df88965aa525744d5c0400(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributeb8df88965aa525744d5c0400(),
 		// Property: Scopes
 		// CloudFormation resource type schema:
 		//
@@ -62,30 +78,14 @@ func userPoolResourceServerDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "array"
 		//	}
-		"scopes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ScopeDescription
-					"scope_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ScopeName
-					"scope_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"scopes": schemaAttribute70e89be977330b6d82b80581(),
 		// Property: UserPoolId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"user_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"user_pool_id": schemaAttributeb8df88965aa525744d5c0400(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

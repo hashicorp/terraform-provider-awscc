@@ -14,6 +14,77 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0068fece19306754307565aa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Id of the IPAM Prefix List Resolver Target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute02d76a1234099cb3435f697c() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute5812abdfc8c6b0e045e5b5c9(),
+				// Property: Value
+				"value": schemaAttribute0ca14817fa2a18a360ac5c15(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0ca14817fa2a18a360ac5c15() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute47c5ae734d18c3c1f5a7f8cf() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether this Target automatically tracks the latest version of the Prefix List Resolver.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5812abdfc8c6b0e045e5b5c9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7156af35dc5871152175d99d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The desired version of the Prefix List Resolver that this Target should synchronize with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4011689d043714ec4fa8b2c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The region that the Managed Prefix List is located in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed35e6c308bb4e1a11e74e72a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Id of the IPAM Prefix List Resolver associated with this Target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee17f63d74f0d365e34df32a2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Id of the Managed Prefix List.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_ipam_prefix_list_resolver_target", iPAMPrefixListResolverTargetDataSource)
 }
@@ -30,10 +101,7 @@ func iPAMPrefixListResolverTargetDataSource(ctx context.Context) (datasource.Dat
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
-		"desired_version": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The desired version of the Prefix List Resolver that this Target should synchronize with.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"desired_version": schemaAttribute7156af35dc5871152175d99d(),
 		// Property: IpamPrefixListResolverId
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +109,7 @@ func iPAMPrefixListResolverTargetDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The Id of the IPAM Prefix List Resolver associated with this Target.",
 		//	  "type": "string"
 		//	}
-		"ipam_prefix_list_resolver_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Id of the IPAM Prefix List Resolver associated with this Target.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipam_prefix_list_resolver_id": schemaAttributed35e6c308bb4e1a11e74e72a(),
 		// Property: IpamPrefixListResolverTargetArn
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +117,7 @@ func iPAMPrefixListResolverTargetDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "Id of the IPAM Prefix List Resolver Target.",
 		//	  "type": "string"
 		//	}
-		"ipam_prefix_list_resolver_target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Id of the IPAM Prefix List Resolver Target.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipam_prefix_list_resolver_target_arn": schemaAttribute0068fece19306754307565aa(),
 		// Property: IpamPrefixListResolverTargetId
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +125,7 @@ func iPAMPrefixListResolverTargetDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "Id of the IPAM Prefix List Resolver Target.",
 		//	  "type": "string"
 		//	}
-		"ipam_prefix_list_resolver_target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Id of the IPAM Prefix List Resolver Target.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipam_prefix_list_resolver_target_id": schemaAttribute0068fece19306754307565aa(),
 		// Property: PrefixListId
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +133,7 @@ func iPAMPrefixListResolverTargetDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The Id of the Managed Prefix List.",
 		//	  "type": "string"
 		//	}
-		"prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Id of the Managed Prefix List.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"prefix_list_id": schemaAttributee17f63d74f0d365e34df32a2(),
 		// Property: PrefixListRegion
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +141,7 @@ func iPAMPrefixListResolverTargetDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The region that the Managed Prefix List is located in.",
 		//	  "type": "string"
 		//	}
-		"prefix_list_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The region that the Managed Prefix List is located in.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"prefix_list_region": schemaAttributea4011689d043714ec4fa8b2c(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -121,24 +174,7 @@ func iPAMPrefixListResolverTargetDataSource(ctx context.Context) (datasource.Dat
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute02d76a1234099cb3435f697c(),
 		// Property: TrackLatestVersion
 		// CloudFormation resource type schema:
 		//
@@ -146,10 +182,7 @@ func iPAMPrefixListResolverTargetDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "Indicates whether this Target automatically tracks the latest version of the Prefix List Resolver.",
 		//	  "type": "boolean"
 		//	}
-		"track_latest_version": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether this Target automatically tracks the latest version of the Prefix List Resolver.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"track_latest_version": schemaAttribute47c5ae734d18c3c1f5a7f8cf(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

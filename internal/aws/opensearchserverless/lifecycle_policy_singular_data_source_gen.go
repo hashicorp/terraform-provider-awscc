@@ -14,6 +14,34 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute12fd9a8af5b4dc971f7fa8cc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The JSON policy document that is the content for the policy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute39846ae9d23cdc14d190212e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of lifecycle policy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7751a2a32fa35b821db179f9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the policy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeddb8483531560e0babfeb760() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the policy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_opensearchserverless_lifecycle_policy", lifecyclePolicyDataSource)
 }
@@ -31,10 +59,7 @@ func lifecyclePolicyDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the policy",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeddb8483531560e0babfeb760(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +70,7 @@ func lifecyclePolicyDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-z][a-z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the policy",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute7751a2a32fa35b821db179f9(),
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +81,7 @@ func lifecyclePolicyDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The JSON policy document that is the content for the policy",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy": schemaAttribute12fd9a8af5b4dc971f7fa8cc(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +92,7 @@ func lifecyclePolicyDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of lifecycle policy",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute39846ae9d23cdc14d190212e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

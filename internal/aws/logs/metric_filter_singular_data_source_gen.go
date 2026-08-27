@@ -15,6 +15,136 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute04f7d3d5d52e960f61800369() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unit to assign to the metric. If you omit this, the unit is set as ``None``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17a08a599c2fdd65ac2c97ea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the metric filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17da990e3f31157a74c88d8b() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "(Optional) The value to emit when a filter pattern does not match a log event. This value can be null.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2bb87406fa067f8f9abec9e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value that is published to the CloudWatch metric. For example, if you're counting the occurrences of a particular term like ``Error``, specify 1 for the metric value. If you're counting the number of bytes transferred, reference the value that is in the log event by using $. followed by the name of the field that you specified in the filter pattern, such as ``$.size``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31170d1d6b75cbf10c9ee2ec() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DefaultValue
+				"default_value": schemaAttribute17da990e3f31157a74c88d8b(),
+				// Property: Dimensions
+				"dimensions": schemaAttributea235e75b1a500fddb28da8fd(),
+				// Property: MetricName
+				"metric_name": schemaAttributec733065d97d03833747e0593(),
+				// Property: MetricNamespace
+				"metric_namespace": schemaAttributed371f889fc0271b29dcec4a8(),
+				// Property: MetricValue
+				"metric_value": schemaAttribute2bb87406fa067f8f9abec9e1(),
+				// Property: Unit
+				"unit": schemaAttribute04f7d3d5d52e960f61800369(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The metric transformations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute900f3ea8d2bfc2c3cab26316() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A filter pattern for extracting metric data out of ingested log events. For more information, see [Filter and Pattern Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute925ad0985d5f856aea63c7fe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of an existing log group that you want to associate with this metric filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute97e4af909acca9b5340bcf72() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "This parameter is valid only for log groups that have an active log transformer. For more information about log transformers, see [PutTransformer](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html).\n If this value is ``true``, the metric filter is applied on the transformed version of the log events instead of the original ingested log events.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea235e75b1a500fddb28da8fd() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributebac8ca9cc4b699076df9f97b(),
+				// Property: Value
+				"value": schemaAttributea25353953d48ac17843eedf9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The fields to use as dimensions for the metric. One metric filter can include as many as three dimensions.\n  Metrics extracted from log events are charged as custom metrics. To prevent unexpected high charges, do not specify high-cardinality fields such as ``IPAddress`` or ``requestID`` as dimensions. Each different value found for a dimension is treated as a separate metric and accrues charges as a separate custom metric. \n CloudWatch Logs disables a metric filter if it generates 1000 different name/value pairs for your specified dimensions within a certain amount of time. This helps to prevent accidental high charges.\n You can also set up a billing alarm to alert you if your charges are higher than expected. For more information, see [Creating a Billing Alarm to Monitor Your Estimated Charges](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea25353953d48ac17843eedf9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The log event field that will contain the value for this dimension. This dimension will only be published for a metric if the value is found in the log event. For example, ``$.eventType`` for JSON log events, or ``$server`` for space-delimited log events.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab900fec48f82d6a3ef6b5d5() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of system fields that are emitted as additional dimensions in the generated metrics. Returns the ``emitSystemFieldDimensions`` value if it was specified when the metric filter was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebac8ca9cc4b699076df9f97b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the CW metric dimension that the metric filter creates.\n Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec733065d97d03833747e0593() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the CloudWatch metric.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed371f889fc0271b29dcec4a8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A custom namespace to contain your metric in CloudWatch. Use namespaces to group together metrics that are similar. For more information, see [Namespaces](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdac6f7e82333a8373865a25() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The filter expression that specifies which log events are processed by this metric filter based on system fields. Returns the ``fieldSelectionCriteria`` value if it was specified when the metric filter was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_logs_metric_filter", metricFilterDataSource)
 }
@@ -30,10 +160,7 @@ func metricFilterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "This parameter is valid only for log groups that have an active log transformer. For more information about log transformers, see [PutTransformer](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html).\n If this value is ``true``, the metric filter is applied on the transformed version of the log events instead of the original ingested log events.",
 		//	  "type": "boolean"
 		//	}
-		"apply_on_transformed_logs": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "This parameter is valid only for log groups that have an active log transformer. For more information about log transformers, see [PutTransformer](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutTransformer.html).\n If this value is ``true``, the metric filter is applied on the transformed version of the log events instead of the original ingested log events.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"apply_on_transformed_logs": schemaAttribute97e4af909acca9b5340bcf72(),
 		// Property: EmitSystemFieldDimensions
 		// CloudFormation resource type schema:
 		//
@@ -45,11 +172,7 @@ func metricFilterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"emit_system_field_dimensions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of system fields that are emitted as additional dimensions in the generated metrics. Returns the ``emitSystemFieldDimensions`` value if it was specified when the metric filter was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"emit_system_field_dimensions": schemaAttributeab900fec48f82d6a3ef6b5d5(),
 		// Property: FieldSelectionCriteria
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +182,7 @@ func metricFilterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"field_selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The filter expression that specifies which log events are processed by this metric filter based on system fields. Returns the ``fieldSelectionCriteria`` value if it was specified when the metric filter was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"field_selection_criteria": schemaAttributefdac6f7e82333a8373865a25(),
 		// Property: FilterName
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +193,7 @@ func metricFilterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[^:*]{1,512}",
 		//	  "type": "string"
 		//	}
-		"filter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the metric filter.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"filter_name": schemaAttribute17a08a599c2fdd65ac2c97ea(),
 		// Property: FilterPattern
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +202,7 @@ func metricFilterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"filter_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A filter pattern for extracting metric data out of ingested log events. For more information, see [Filter and Pattern Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"filter_pattern": schemaAttribute900f3ea8d2bfc2c3cab26316(),
 		// Property: LogGroupName
 		// CloudFormation resource type schema:
 		//
@@ -99,10 +213,7 @@ func metricFilterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[.\\-_/#A-Za-z0-9]{1,512}",
 		//	  "type": "string"
 		//	}
-		"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of an existing log group that you want to associate with this metric filter.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"log_group_name": schemaAttribute925ad0985d5f856aea63c7fe(),
 		// Property: MetricTransformations
 		// CloudFormation resource type schema:
 		//
@@ -215,58 +326,7 @@ func metricFilterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"metric_transformations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DefaultValue
-					"default_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "(Optional) The value to emit when a filter pattern does not match a log event. This value can be null.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Dimensions
-					"dimensions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Key
-								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name for the CW metric dimension that the metric filter creates.\n Dimension names must contain only ASCII characters, must include at least one non-whitespace character, and cannot start with a colon (:).",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Value
-								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The log event field that will contain the value for this dimension. This dimension will only be published for a metric if the value is found in the log event. For example, ``$.eventType`` for JSON log events, or ``$server`` for space-delimited log events.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "The fields to use as dimensions for the metric. One metric filter can include as many as three dimensions.\n  Metrics extracted from log events are charged as custom metrics. To prevent unexpected high charges, do not specify high-cardinality fields such as ``IPAddress`` or ``requestID`` as dimensions. Each different value found for a dimension is treated as a separate metric and accrues charges as a separate custom metric. \n CloudWatch Logs disables a metric filter if it generates 1000 different name/value pairs for your specified dimensions within a certain amount of time. This helps to prevent accidental high charges.\n You can also set up a billing alarm to alert you if your charges are higher than expected. For more information, see [Creating a Billing Alarm to Monitor Your Estimated Charges](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html).",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: MetricName
-					"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the CloudWatch metric.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: MetricNamespace
-					"metric_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A custom namespace to contain your metric in CloudWatch. Use namespaces to group together metrics that are similar. For more information, see [Namespaces](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Namespace).",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: MetricValue
-					"metric_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value that is published to the CloudWatch metric. For example, if you're counting the occurrences of a particular term like ``Error``, specify 1 for the metric value. If you're counting the number of bytes transferred, reference the value that is in the log event by using $. followed by the name of the field that you specified in the filter pattern, such as ``$.size``.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Unit
-					"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The unit to assign to the metric. If you omit this, the unit is set as ``None``.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The metric transformations.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"metric_transformations": schemaAttribute31170d1d6b75cbf10c9ee2ec(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

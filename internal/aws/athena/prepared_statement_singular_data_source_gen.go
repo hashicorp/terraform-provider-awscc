@@ -14,6 +14,34 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute650d1e4840a69abe65f4916c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the prepared statement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute88b2c8561aaf07dea11a6d4a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the workgroup to which the prepared statement belongs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea13dd6d16ba523d066ffda65() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The query string for the prepared statement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb76a4f6f64e5b66fcf513760() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the prepared statement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_athena_prepared_statement", preparedStatementDataSource)
 }
@@ -31,10 +59,7 @@ func preparedStatementDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the prepared statement.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeb76a4f6f64e5b66fcf513760(),
 		// Property: QueryStatement
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +69,7 @@ func preparedStatementDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"query_statement": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The query string for the prepared statement.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"query_statement": schemaAttributea13dd6d16ba523d066ffda65(),
 		// Property: StatementName
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +79,7 @@ func preparedStatementDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"statement_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the prepared statement.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"statement_name": schemaAttribute650d1e4840a69abe65f4916c(),
 		// Property: WorkGroup
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +89,7 @@ func preparedStatementDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"work_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the workgroup to which the prepared statement belongs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"work_group": schemaAttribute88b2c8561aaf07dea11a6d4a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

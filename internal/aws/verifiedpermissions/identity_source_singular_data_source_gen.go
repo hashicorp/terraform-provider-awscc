@@ -15,6 +15,135 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1d0e79777831f5adbd65e1d2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClientIds
+			"client_ids": schemaAttribute38a8747ac3b97337cc478fa7(),
+			// Property: PrincipalIdClaim
+			"principal_id_claim": schemaAttributed3f88f35d68981428a479d2f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38a8747ac3b97337cc478fa7() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4397f5680dcb0be2d6471b77() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EntityIdPrefix
+			"entity_id_prefix": schemaAttributed3f88f35d68981428a479d2f(),
+			// Property: GroupConfiguration
+			"group_configuration": schemaAttribute62239673111e12d8349754fe(),
+			// Property: Issuer
+			"issuer": schemaAttributed3f88f35d68981428a479d2f(),
+			// Property: TokenSelection
+			"token_selection": schemaAttributeaa3ccd7dc945afdffdc799fd(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57ae64c2d482a04a704b442c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GroupEntityType
+			"group_entity_type": schemaAttributed3f88f35d68981428a479d2f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5882489bf3cf53058e788bc1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClientIds
+			"client_ids": schemaAttribute38a8747ac3b97337cc478fa7(),
+			// Property: GroupConfiguration
+			"group_configuration": schemaAttribute57ae64c2d482a04a704b442c(),
+			// Property: UserPoolArn
+			"user_pool_arn": schemaAttributed3f88f35d68981428a479d2f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c9f703f47df5994da845023() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClientIds
+			"client_ids": schemaAttribute38a8747ac3b97337cc478fa7(),
+			// Property: DiscoveryUrl
+			"discovery_url": schemaAttributed3f88f35d68981428a479d2f(),
+			// Property: OpenIdIssuer
+			"open_id_issuer": schemaAttributed3f88f35d68981428a479d2f(),
+			// Property: UserPoolArn
+			"user_pool_arn": schemaAttributed3f88f35d68981428a479d2f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62239673111e12d8349754fe() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GroupClaim
+			"group_claim": schemaAttributed3f88f35d68981428a479d2f(),
+			// Property: GroupEntityType
+			"group_entity_type": schemaAttributed3f88f35d68981428a479d2f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8404b264c747ff135c313acc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CognitoUserPoolConfiguration
+			"cognito_user_pool_configuration": schemaAttribute5882489bf3cf53058e788bc1(),
+			// Property: OpenIdConnectConfiguration
+			"open_id_connect_configuration": schemaAttribute4397f5680dcb0be2d6471b77(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa3ccd7dc945afdffdc799fd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccessTokenOnly
+			"access_token_only": schemaAttributec13093cedc6b2edd851f8e11(),
+			// Property: IdentityTokenOnly
+			"identity_token_only": schemaAttribute1d0e79777831f5adbd65e1d2(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec13093cedc6b2edd851f8e11() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Audiences
+			"audiences": schemaAttribute38a8747ac3b97337cc478fa7(),
+			// Property: PrincipalIdClaim
+			"principal_id_claim": schemaAttributed3f88f35d68981428a479d2f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3f88f35d68981428a479d2f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_verifiedpermissions_identity_source", identitySourceDataSource)
 }
@@ -164,100 +293,7 @@ func identitySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CognitoUserPoolConfiguration
-				"cognito_user_pool_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ClientIds
-						"client_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: GroupConfiguration
-						"group_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: GroupEntityType
-								"group_entity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: UserPoolArn
-						"user_pool_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: OpenIdConnectConfiguration
-				"open_id_connect_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: EntityIdPrefix
-						"entity_id_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: GroupConfiguration
-						"group_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: GroupClaim
-								"group_claim": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: GroupEntityType
-								"group_entity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Issuer
-						"issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: TokenSelection
-						"token_selection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AccessTokenOnly
-								"access_token_only": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Audiences
-										"audiences": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: PrincipalIdClaim
-										"principal_id_claim": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: IdentityTokenOnly
-								"identity_token_only": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ClientIds
-										"client_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: PrincipalIdClaim
-										"principal_id_claim": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"configuration": schemaAttribute8404b264c747ff135c313acc(),
 		// Property: Details
 		// CloudFormation resource type schema:
 		//
@@ -297,28 +333,7 @@ func identitySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ClientIds
-				"client_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DiscoveryUrl
-				"discovery_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: OpenIdIssuer
-				"open_id_issuer": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UserPoolArn
-				"user_pool_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"details": schemaAttribute5c9f703f47df5994da845023(),
 		// Property: IdentitySourceId
 		// CloudFormation resource type schema:
 		//
@@ -328,9 +343,7 @@ func identitySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"identity_source_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"identity_source_id": schemaAttributed3f88f35d68981428a479d2f(),
 		// Property: PolicyStoreId
 		// CloudFormation resource type schema:
 		//
@@ -340,9 +353,7 @@ func identitySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"policy_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"policy_store_id": schemaAttributed3f88f35d68981428a479d2f(),
 		// Property: PrincipalEntityType
 		// CloudFormation resource type schema:
 		//
@@ -352,9 +363,7 @@ func identitySourceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^.*$",
 		//	  "type": "string"
 		//	}
-		"principal_entity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"principal_entity_type": schemaAttributed3f88f35d68981428a479d2f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

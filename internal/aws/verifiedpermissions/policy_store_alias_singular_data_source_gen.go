@@ -14,6 +14,12 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute600aa035fc52571836d24491() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_verifiedpermissions_policy_store_alias", policyStoreAliasDataSource)
 }
@@ -31,9 +37,7 @@ func policyStoreAliasDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z0-9-_/]*$",
 		//	  "type": "string"
 		//	}
-		"alias_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"alias_name": schemaAttribute600aa035fc52571836d24491(),
 		// Property: PolicyStoreId
 		// CloudFormation resource type schema:
 		//
@@ -43,9 +47,7 @@ func policyStoreAliasDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"policy_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"policy_store_id": schemaAttribute600aa035fc52571836d24491(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

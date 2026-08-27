@@ -14,6 +14,69 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute442bc94e6219f860f99d34ab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key of the key-value tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65305999dcee96875589e73a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name (ARN) of the tenant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8c59b6df5737893a01901f2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the resource to associate with the tenant",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae64ffa61cfd6820a2c3fa6b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute442bc94e6219f860f99d34ab(),
+				// Property: Value
+				"value": schemaAttributeb5a4f865c9c431c40eff9385(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags (keys and values) associated with the tenant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5a4f865c9c431c40eff9385() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the key-value tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec90bf78dfb2cb15147774e78() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the tenant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee08b4d9befcc2aa95e020c88() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ResourceArn
+				"resource_arn": schemaAttributea8c59b6df5737893a01901f2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of resources to associate with the tenant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ses_tenant", tenantDataSource)
 }
@@ -30,10 +93,7 @@ func tenantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name (ARN) of the tenant.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute65305999dcee96875589e73a(),
 		// Property: ResourceAssociations
 		// CloudFormation resource type schema:
 		//
@@ -58,19 +118,7 @@ func tenantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"resource_associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ResourceArn
-					"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ARN of the resource to associate with the tenant",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of resources to associate with the tenant.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_associations": schemaAttributee08b4d9befcc2aa95e020c88(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -104,24 +152,7 @@ func tenantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key of the key-value tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value of the key-value tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags (keys and values) associated with the tenant.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeae64ffa61cfd6820a2c3fa6b(),
 		// Property: TenantName
 		// CloudFormation resource type schema:
 		//
@@ -132,10 +163,7 @@ func tenantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\w\\-_]+$",
 		//	  "type": "string"
 		//	}
-		"tenant_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the tenant.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tenant_name": schemaAttributec90bf78dfb2cb15147774e78(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,20 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1cec28e74ae81341e0c6b0ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Detective graph ARN",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute671b0b8997a15da8cd48bba9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The account ID of the account that should be registered as your Organization's delegated administrator for Detective",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_detective_organization_admin", organizationAdminDataSource)
 }
@@ -30,10 +44,7 @@ func organizationAdminDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "[0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The account ID of the account that should be registered as your Organization's delegated administrator for Detective",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"account_id": schemaAttribute671b0b8997a15da8cd48bba9(),
 		// Property: GraphArn
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +52,7 @@ func organizationAdminDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The Detective graph ARN",
 		//	  "type": "string"
 		//	}
-		"graph_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Detective graph ARN",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"graph_arn": schemaAttribute1cec28e74ae81341e0c6b0ae(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

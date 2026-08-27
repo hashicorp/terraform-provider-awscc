@@ -14,6 +14,34 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1a9b36e4d920a36cb6c92ec6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the identity to map to the Studio is a user or a group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ed0d460c02e65aba12f2a3d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb53086b143999d8c8dacca0f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedfee91bb07bbe26d67cd2e05() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_emr_studio_session_mapping", studioSessionMappingDataSource)
 }
@@ -29,10 +57,7 @@ func studioSessionMappingDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.",
 		//	  "type": "string"
 		//	}
-		"identity_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"identity_name": schemaAttributeb53086b143999d8c8dacca0f(),
 		// Property: IdentityType
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +69,7 @@ func studioSessionMappingDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"identity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether the identity to map to the Studio is a user or a group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"identity_type": schemaAttribute1a9b36e4d920a36cb6c92ec6(),
 		// Property: SessionPolicyArn
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +78,7 @@ func studioSessionMappingDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^arn:aws(-(cn|us-gov|iso-f|iso-e))?:iam::([0-9]{12})?:policy\\/[^.]+$",
 		//	  "type": "string"
 		//	}
-		"session_policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"session_policy_arn": schemaAttributedfee91bb07bbe26d67cd2e05(),
 		// Property: StudioId
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +89,7 @@ func studioSessionMappingDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^es-[0-9A-Z]+",
 		//	  "type": "string"
 		//	}
-		"studio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"studio_id": schemaAttribute5ed0d460c02e65aba12f2a3d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

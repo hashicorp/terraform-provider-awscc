@@ -15,6 +15,169 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute20064814688fa1511a36ccb0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IpAddressType
+			"ip_address_type": schemaAttribute568efbcaab8a49cdbe996d12(),
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttributec42bd66a1fd367c0106323c3(),
+			// Property: SubnetIds
+			"subnet_ids": schemaAttributec42bd66a1fd367c0106323c3(),
+			// Property: VpcId
+			"vpc_id": schemaAttribute67804bb7a176f918500885e3(),
+		}, /*END SCHEMA*/
+		Description: "You can provide a structure that contains the details for the VPC endpoint to use with your web app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31419848b4055ef31511f71e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the web app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3eb9c462f8b9d962a072f2dd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AccessEndpoint is the URL that you provide to your users for them to interact with the Transfer Family web app. You can specify a custom URL or use the default value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c69e379a978d6b2700c1417() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute67804bb7a176f918500885e3(),
+				// Property: Value
+				"value": schemaAttribute67804bb7a176f918500885e3(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Key-value pairs that can be used to group and search for web apps.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5089db8d86070978376e3cb3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Vpc
+			"vpc": schemaAttribute20064814688fa1511a36ccb0(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute568efbcaab8a49cdbe996d12() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IP address type for the VPC endpoint used by the web app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67804bb7a176f918500885e3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a334d96256973541856ed81() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the IAM Identity Center used for the web app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute99670b2c724580f7c54767cc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IAM role in IAM Identity Center used for the web app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea5b211ed3ed02bee05e2ea36() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies a favicon to display in the browser tab.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3a883d6cbdccedd7c4d2fdd() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec42bd66a1fd367c0106323c3() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed2e2c5cebd777f8d14e106a3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the unique Amazon Resource Name (ARN) for the web app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee25fe946a0a9cc232d724ba1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Provisioned
+			"provisioned": schemaAttributec3a883d6cbdccedd7c4d2fdd(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5d8180dcd3381d23d82aa79() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies a logo to display on the web app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee7ada743fc82755a51754d43() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FaviconFile
+			"favicon_file": schemaAttributea5b211ed3ed02bee05e2ea36(),
+			// Property: LogoFile
+			"logo_file": schemaAttributee5d8180dcd3381d23d82aa79(),
+			// Property: Title
+			"title": schemaAttributeff466811f84d84e627b491bd(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc228d2d1e0dbf131897b6ed() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApplicationArn
+			"application_arn": schemaAttribute67804bb7a176f918500885e3(),
+			// Property: InstanceArn
+			"instance_arn": schemaAttribute8a334d96256973541856ed81(),
+			// Property: Role
+			"role": schemaAttribute99670b2c724580f7c54767cc(),
+		}, /*END SCHEMA*/
+		Description: "You can provide a structure that contains the details for the identity provider to use with your web app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff466811f84d84e627b491bd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies a title to display on the web app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_transfer_web_app", webAppDataSource)
 }
@@ -32,10 +195,7 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"access_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AccessEndpoint is the URL that you provide to your users for them to interact with the Transfer Family web app. You can specify a custom URL or use the default value.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"access_endpoint": schemaAttribute3eb9c462f8b9d962a072f2dd(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +206,7 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:.*",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the unique Amazon Resource Name (ARN) for the web app.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributed2e2c5cebd777f8d14e106a3(),
 		// Property: EndpointDetails
 		// CloudFormation resource type schema:
 		//
@@ -102,37 +259,7 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"endpoint_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Vpc
-				"vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: IpAddressType
-						"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The IP address type for the VPC endpoint used by the web app.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SecurityGroupIds
-						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SubnetIds
-						"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: VpcId
-						"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "You can provide a structure that contains the details for the VPC endpoint to use with your web app.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_details": schemaAttribute5089db8d86070978376e3cb3(),
 		// Property: IdentityProviderDetails
 		// CloudFormation resource type schema:
 		//
@@ -163,26 +290,7 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"identity_provider_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ApplicationArn
-				"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: InstanceArn
-				"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) for the IAM Identity Center used for the web app.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Role
-				"role": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The IAM role in IAM Identity Center used for the web app.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "You can provide a structure that contains the details for the identity provider to use with your web app.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"identity_provider_details": schemaAttributefc228d2d1e0dbf131897b6ed(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -213,22 +321,7 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Key-value pairs that can be used to group and search for web apps.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute4c69e379a978d6b2700c1417(),
 		// Property: VpcEndpointId
 		// CloudFormation resource type schema:
 		//
@@ -238,9 +331,7 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^vpce-[0-9a-f]{8,17}$",
 		//	  "type": "string"
 		//	}
-		"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"vpc_endpoint_id": schemaAttribute67804bb7a176f918500885e3(),
 		// Property: WebAppCustomization
 		// CloudFormation resource type schema:
 		//
@@ -268,26 +359,7 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"web_app_customization": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FaviconFile
-				"favicon_file": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies a favicon to display in the browser tab.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LogoFile
-				"logo_file": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies a logo to display on the web app.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Title
-				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies a title to display on the web app.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"web_app_customization": schemaAttributee7ada743fc82755a51754d43(),
 		// Property: WebAppEndpointPolicy
 		// CloudFormation resource type schema:
 		//
@@ -298,9 +370,7 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"web_app_endpoint_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"web_app_endpoint_policy": schemaAttribute67804bb7a176f918500885e3(),
 		// Property: WebAppId
 		// CloudFormation resource type schema:
 		//
@@ -311,10 +381,7 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^webapp-([0-9a-f]{17})$",
 		//	  "type": "string"
 		//	}
-		"web_app_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for the web app.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"web_app_id": schemaAttribute31419848b4055ef31511f71e(),
 		// Property: WebAppUnits
 		// CloudFormation resource type schema:
 		//
@@ -327,15 +394,7 @@ func webAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"web_app_units": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Provisioned
-				"provisioned": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"web_app_units": schemaAttributee25fe946a0a9cc232d724ba1(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

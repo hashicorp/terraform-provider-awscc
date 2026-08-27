@@ -15,6 +15,94 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute10f885c75c316d39dd024784() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "An optional set of non-secret key?value pairs that contains additional contextual information about the data. For more information, see [Encryption context](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context) in the *Key Management Service Developer Guide*.\n You can only include this parameter if you specify the ``KMSKeyId`` parameter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30ffe871ca1e3bf4d28e184b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3346c2e79ca8df34f2b5cb41() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute337a8cdae138ea45b3865822(),
+				// Property: Value
+				"value": schemaAttribute30ffe871ca1e3bf4d28e184b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags. For more information, see [Tagging Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the *Amazon RDS User Guide.*.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute337a8cdae138ea45b3865822() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53ff1e899c77d14c3ad51b51() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the integration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute71ca64296456a15bcebe4edd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the integration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bb7ba38938e2e4454c7a68c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the database to use as the source for replication.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ae753866eef0e33cde2969e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Redshift data warehouse to use as the target for replication.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf243b5b953a3798104a088d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd66410ee3b839cd2e3833ba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Data filters for the integration. These filters determine which tables from the source database are sent to the target Amazon Redshift data warehouse.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed18b27597fd0a6545795e280() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Key Management System (AWS KMS) key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, RDS uses a default AWS owned key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_rds_integration", integrationDataSource)
 }
@@ -38,12 +126,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"additional_encryption_context": // Pattern: ""
-		schema.MapAttribute{             /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "An optional set of non-secret key?value pairs that contains additional contextual information about the data. For more information, see [Encryption context](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context) in the *Key Management Service Developer Guide*.\n You can only include this parameter if you specify the ``KMSKeyId`` parameter.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"additional_encryption_context": schemaAttribute10f885c75c316d39dd024784(),
 		// Property: CreateTime
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +134,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"create_time": schemaAttributeaf243b5b953a3798104a088d(),
 		// Property: DataFilter
 		// CloudFormation resource type schema:
 		//
@@ -65,10 +145,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9_ \"\\\\\\-$,*.:?+\\/]*",
 		//	  "type": "string"
 		//	}
-		"data_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Data filters for the integration. These filters determine which tables from the source database are sent to the target Amazon Redshift data warehouse.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_filter": schemaAttributecd66410ee3b839cd2e3833ba(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -78,10 +155,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the integration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute71ca64296456a15bcebe4edd(),
 		// Property: IntegrationArn
 		// CloudFormation resource type schema:
 		//
@@ -89,10 +163,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"integration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"integration_arn": schemaAttributeaf243b5b953a3798104a088d(),
 		// Property: IntegrationName
 		// CloudFormation resource type schema:
 		//
@@ -102,10 +173,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"integration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the integration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"integration_name": schemaAttribute53ff1e899c77d14c3ad51b51(),
 		// Property: KMSKeyId
 		// CloudFormation resource type schema:
 		//
@@ -113,10 +181,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AWS Key Management System (AWS KMS) key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, RDS uses a default AWS owned key.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS Key Management System (AWS KMS) key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, RDS uses a default AWS owned key.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttributed18b27597fd0a6545795e280(),
 		// Property: SourceArn
 		// CloudFormation resource type schema:
 		//
@@ -124,10 +189,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the database to use as the source for replication.",
 		//	  "type": "string"
 		//	}
-		"source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the database to use as the source for replication.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_arn": schemaAttribute7bb7ba38938e2e4454c7a68c(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -160,24 +222,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags. For more information, see [Tagging Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in the *Amazon RDS User Guide.*.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute3346c2e79ca8df34f2b5cb41(),
 		// Property: TargetArn
 		// CloudFormation resource type schema:
 		//
@@ -185,10 +230,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the Redshift data warehouse to use as the target for replication.",
 		//	  "type": "string"
 		//	}
-		"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Redshift data warehouse to use as the target for replication.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_arn": schemaAttribute8ae753866eef0e33cde2969e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

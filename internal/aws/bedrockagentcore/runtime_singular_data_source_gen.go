@@ -15,6 +15,746 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute05ee1bb55e6fec0928ac63f9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Current status of the agent",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute096d649adb61556b318033c2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CodeConfiguration
+			"code_configuration": schemaAttributebf665a847194723e32b871d8(),
+			// Property: ContainerConfiguration
+			"container_configuration": schemaAttribute5961a2ce0f01077b378e3ce9(),
+		}, /*END SCHEMA*/
+		Description: "The artifact of the agent",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0b2d6dfc9bf2189e31d6ea6b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RequestHeaderAllowlist
+			"request_header_allowlist": schemaAttribute2e691705cb8dc002fbb54e2a(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for HTTP request headers",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10da9cc7c43416be9619acbe() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Timeout in seconds for idle runtime sessions",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1149a4bb127124dcbe128b5a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name(ARN) that uniquely identifies the Agent",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute139e8fa1cd59981bbadfd6b4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The domain to override",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute179ce4a1bce90020d6374710() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the custom claim to validate",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e87063a771ba864ef674221() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3
+			"s3": schemaAttribute6473c66b48e364414327ea1e(),
+		}, /*END SCHEMA*/
+		Description: "Object represents source code from zip file",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2518e87e26b7df26473c8755() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Security groups for VPC",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2bce79c87574f658248350f0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MountPath
+			"mount_path": schemaAttributed1f4ea961bacf351906281b1(),
+			// Property: VolumeName
+			"volume_name": schemaAttributeb5840ac6de279a35c2ebbe45(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for a CapacityProvider-managed volume to mount into the agent runtime",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e691705cb8dc002fbb54e2a() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of allowed HTTP headers for agent runtime requests",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30afc29af7f232f927fd04af() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Description of the resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30be9bc3ee87278a26483b3e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthorizingClaimMatchValue
+				"authorizing_claim_match_value": schemaAttribute5cec2c0c23ce0978a3f516eb(),
+				// Property: InboundTokenClaimName
+				"inbound_token_claim_name": schemaAttribute179ce4a1bce90020d6374710(),
+				// Property: InboundTokenClaimValueType
+				"inbound_token_claim_value_type": schemaAttributebd64cdf4964afbdf1dad871e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of required custom claims",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31ee33020646f64ab0a8423e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "OpenID Connect discovery URL",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40d90894b757261c8f51c2f0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the bedrock-agentcore hosting environment",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41f682360505b08a57b5fdd4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The reason for failure if the agent is in a failed state.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45c5b7d2696a646d7d83e42c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "When resource was last updated",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a3f0f1b5ce9c65781a326bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Protocol configuration for the agent runtime",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4aa7d7ef4a1a46ed9c298a2f() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Arn
+				"arn": schemaAttribute40d90894b757261c8f51c2f0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of allow-listed hosting environments",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ef846651c7552120bd6ebe7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Version of the Agent",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute590a3bf08584c7f78e2b8b81() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Tags to apply to the managed VPC Lattice resource gateway",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5961a2ce0f01077b378e3ce9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContainerUri
+			"container_uri": schemaAttribute94fb94549fddb63bbe336d55(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute599973bd15f835a9b399765b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the VPC Lattice resource configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5cec2c0c23ce0978a3f516eb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClaimMatchOperator
+			"claim_match_operator": schemaAttributef79374f48defa7be000450b3(),
+			// Property: ClaimMatchValue
+			"claim_match_value": schemaAttribute94cc801228793503a0af98e4(),
+		}, /*END SCHEMA*/
+		Description: "The value or values in the custom claim to match and relationship of match",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6473c66b48e364414327ea1e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Bucket
+			"bucket": schemaAttribute8725d52d23d3362480f9c677(),
+			// Property: Prefix
+			"prefix": schemaAttributec8512f4b8d249a747dd00146(),
+			// Property: VersionId
+			"version_id": schemaAttributeac6c95bc95af15d0c2a8797f(),
+		}, /*END SCHEMA*/
+		Description: "S3 Location Configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c45d1ed3a1555c0fa8d3ad4() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The subnet IDs",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c555ad7171ed86a14237703() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EndpointIpAddressType
+			"endpoint_ip_address_type": schemaAttributec366ec40f5689ba8e3ca4be0(),
+			// Property: RoutingDomain
+			"routing_domain": schemaAttribute70a558378e9b6ebcf7c8955d(),
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttribute6c997582ed4b49079fa7475d(),
+			// Property: SubnetIds
+			"subnet_ids": schemaAttribute6c45d1ed3a1555c0fa8d3ad4(),
+			// Property: Tags
+			"tags": schemaAttribute590a3bf08584c7f78e2b8b81(),
+			// Property: VpcIdentifier
+			"vpc_identifier": schemaAttributef1757baa134389478717bbcd(),
+		}, /*END SCHEMA*/
+		Description: "Managed VPC resource configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c997582ed4b49079fa7475d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The security group IDs",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70a558378e9b6ebcf7c8955d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An intermediate domain to use as the resource configuration endpoint instead of the actual target domain",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7111f09ea56c674a3b45ab7a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Subnets for VPC",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7285bd01f8fafc79e1ab6f0d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomJWTAuthorizer
+			"custom_jwt_authorizer": schemaAttribute9bf6fc437c47914bd01dff84(),
+		}, /*END SCHEMA*/
+		Description: "Authorizer configuration for the agent runtime",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7909a89d535395c34fc06f6b() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Maximum lifetime in seconds for runtime sessions",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7fe8cab0a3bffe24b5555526() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Domain
+				"domain": schemaAttribute139e8fa1cd59981bbadfd6b4(),
+				// Property: PrivateEndpoint
+				"private_endpoint": schemaAttributec476e6dd8e7f06a8f1992e99(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of private endpoint overrides",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80d0e8747bbecf5ea483504c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: NetworkMode
+			"network_mode": schemaAttribute97c17646edbc3c38d9379aff(),
+			// Property: NetworkModeConfig
+			"network_mode_config": schemaAttributed3339e14af42c6d30d0f20cf(),
+		}, /*END SCHEMA*/
+		Description: "Network access configuration for the Agent",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8725d52d23d3362480f9c677() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "S3 bucket name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute874cc2fd72422c5d596dab2f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Timestamp when the Agent was created",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute88da196c55e7cda046e27ee7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the S3 Files access point",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a21ce678bf9e3b86769e715() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the capacity provider",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a230c282b79927ec1e6f74b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The string value to match for",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e0f25a2490696f097a02c4a() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A map of tag keys and values",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f04dad8409da9aad4262a51() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name (ARN) of an IAM role",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute928a79da39cff352d8a91f50() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Managed runtime types",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92de32eaf59cba23a7f40a00() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the EFS access point",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92df712e458945adc802f819() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IdleRuntimeSessionTimeout
+			"idle_runtime_session_timeout": schemaAttribute10da9cc7c43416be9619acbe(),
+			// Property: MaxLifetime
+			"max_lifetime": schemaAttribute7909a89d535395c34fc06f6b(),
+		}, /*END SCHEMA*/
+		Description: "Lifecycle configuration for managing runtime sessions",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94cc801228793503a0af98e4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MatchValueString
+			"match_value_string": schemaAttribute8a230c282b79927ec1e6f74b(),
+			// Property: MatchValueStringList
+			"match_value_string_list": schemaAttributea706d4a1d4a6f56b3a15baef(),
+		}, /*END SCHEMA*/
+		Description: "The value or values in the custom claim to match for",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94fb94549fddb63bbe336d55() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ECR URI of the container",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9672c20832d8a6960020e393() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccessPointArn
+			"access_point_arn": schemaAttribute88da196c55e7cda046e27ee7(),
+			// Property: MountPath
+			"mount_path": schemaAttributed1f4ea961bacf351906281b1(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for S3 Files access point filesystem",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute97c17646edbc3c38d9379aff() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Network mode configuration type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9bf6fc437c47914bd01dff84() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AllowedAudience
+			"allowed_audience": schemaAttributeaa3d4a2ef03c17e612db20b8(),
+			// Property: AllowedClients
+			"allowed_clients": schemaAttributeca93b7d8bca06d6cd808b08f(),
+			// Property: AllowedScopes
+			"allowed_scopes": schemaAttributed37d00ae6845d6f3d4d9a69e(),
+			// Property: AllowedWorkloadConfiguration
+			"allowed_workload_configuration": schemaAttributeedf8b6d3c8203d17628fb6e8(),
+			// Property: CustomClaims
+			"custom_claims": schemaAttribute30be9bc3ee87278a26483b3e(),
+			// Property: DiscoveryUrl
+			"discovery_url": schemaAttribute31ee33020646f64ab0a8423e(),
+			// Property: PrivateEndpoint
+			"private_endpoint": schemaAttributec476e6dd8e7f06a8f1992e99(),
+			// Property: PrivateEndpointOverrides
+			"private_endpoint_overrides": schemaAttribute7fe8cab0a3bffe24b5555526(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for custom JWT authorizer",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea706d4a1d4a6f56b3a15baef() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of strings to check for a match",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9c32442dad1e45fa705f3cc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MountPath
+			"mount_path": schemaAttributed1f4ea961bacf351906281b1(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for session storage",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa3d4a2ef03c17e612db20b8() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of allowed audiences",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeabc2a3a5b1253376a2d1a5a0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: WorkloadIdentityArn
+			"workload_identity_arn": schemaAttributecedc4eb81f7d2b668d32ee66(),
+		}, /*END SCHEMA*/
+		Description: "Workload identity details for the agent",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac6c95bc95af15d0c2a8797f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "S3 object version ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5840ac6de279a35c2ebbe45() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the capacity provider volume",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb63698e1c0a1a705e529009c() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Environment variables for the agent runtime",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6377ea8d06cf673070779f4() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of allow-listed workload identity names",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9449183a8ee24554a988bd4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccessPointArn
+			"access_point_arn": schemaAttribute92de32eaf59cba23a7f40a00(),
+			// Property: MountPath
+			"mount_path": schemaAttributed1f4ea961bacf351906281b1(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for EFS access point filesystem",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc89a6765aa00523592e2910() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name for a resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd64cdf4964afbdf1dad871e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Token claim data type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf665a847194723e32b871d8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Code
+			"code": schemaAttribute1e87063a771ba864ef674221(),
+			// Property: EntryPoint
+			"entry_point": schemaAttributede376e0822cd6f7d4f128063(),
+			// Property: Runtime
+			"runtime": schemaAttribute928a79da39cff352d8a91f50(),
+		}, /*END SCHEMA*/
+		Description: "Representation of a code configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec366ec40f5689ba8e3ca4be0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IP address type for the endpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec476e6dd8e7f06a8f1992e99() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ManagedVpcResource
+			"managed_vpc_resource": schemaAttribute6c555ad7171ed86a14237703(),
+			// Property: SelfManagedLatticeResource
+			"self_managed_lattice_resource": schemaAttributed2395520e18b4becb1bad3bd(),
+		}, /*END SCHEMA*/
+		Description: "Private endpoint configuration. Exactly one of SelfManagedLatticeResource or ManagedVpcResource must be specified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6339ea6dffcfa75b40add45() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CapacityProviderArn
+			"capacity_provider_arn": schemaAttribute8a21ce678bf9e3b86769e715(),
+		}, /*END SCHEMA*/
+		Description: "Capacity provider configuration for the agent runtime",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8512f4b8d249a747dd00146() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "S3 object key prefix",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca93b7d8bca06d6cd808b08f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of allowed clients",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecedc4eb81f7d2b668d32ee66() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the workload identity",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1f4ea961bacf351906281b1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Mount path for filesystem configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed2395520e18b4becb1bad3bd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ResourceConfigurationIdentifier
+			"resource_configuration_identifier": schemaAttribute599973bd15f835a9b399765b(),
+		}, /*END SCHEMA*/
+		Description: "Self-managed VPC Lattice resource configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3339e14af42c6d30d0f20cf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecurityGroups
+			"security_groups": schemaAttribute2518e87e26b7df26473c8755(),
+			// Property: Subnets
+			"subnets": schemaAttribute7111f09ea56c674a3b45ab7a(),
+		}, /*END SCHEMA*/
+		Description: "Network mode configuration for VPC",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed37d00ae6845d6f3d4d9a69e() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of allowed scopes",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede376e0822cd6f7d4f128063() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of entry points",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee01d6630842fbca50b957805() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Identifier for a resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeede1175547fa72c5ffdd3d4f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CapacityProviderVolume
+				"capacity_provider_volume": schemaAttribute2bce79c87574f658248350f0(),
+				// Property: EfsAccessPoint
+				"efs_access_point": schemaAttributeb9449183a8ee24554a988bd4(),
+				// Property: S3FilesAccessPoint
+				"s3_files_access_point": schemaAttribute9672c20832d8a6960020e393(),
+				// Property: SessionStorage
+				"session_storage": schemaAttributea9c32442dad1e45fa705f3cc(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Filesystem configurations for the agent runtime",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeedf8b6d3c8203d17628fb6e8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HostingEnvironments
+			"hosting_environments": schemaAttribute4aa7d7ef4a1a46ed9c298a2f(),
+			// Property: WorkloadIdentities
+			"workload_identities": schemaAttributeb6377ea8d06cf673070779f4(),
+		}, /*END SCHEMA*/
+		Description: "Allow-list of upstream workloads permitted to reach this resource via the workload identity chain. When set, the data plane enforces that the introspected workload chain's caller matches one of the configured hosting environments or workload identities; absent means no chain enforcement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1757baa134389478717bbcd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The VPC identifier",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef79374f48defa7be000450b3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The relationship between the claim field value and the value or values being matched",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_runtime", runtimeDataSource)
 }
@@ -32,10 +772,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:runtime/[a-zA-Z][a-zA-Z0-9_]{0,99}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"agent_runtime_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name(ARN) that uniquely identifies the Agent",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_runtime_arn": schemaAttribute1149a4bb127124dcbe128b5a(),
 		// Property: AgentRuntimeArtifact
 		// CloudFormation resource type schema:
 		//
@@ -120,7 +857,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "description": "The ECR URI of the container",
 		//	          "maxLength": 1024,
 		//	          "minLength": 1,
-		//	          "pattern": "^\\d{12}\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)([:@]\\S+)$",
+		//	          "pattern": "^(([0-9]{12})\\.dkr\\.ecr\\.([a-z0-9-]+)\\.amazonaws\\.com(\\.cn)?|public\\.ecr\\.aws)/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?::([^:@]{1,300}))?(?:@(.+))?$",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -132,70 +869,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"agent_runtime_artifact": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CodeConfiguration
-				"code_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Code
-						"code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: S3
-								"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Bucket
-										"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "S3 bucket name",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Prefix
-										"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "S3 object key prefix",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: VersionId
-										"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "S3 object version ID",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "S3 Location Configuration",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Object represents source code from zip file",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: EntryPoint
-						"entry_point": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "List of entry points",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Runtime
-						"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Managed runtime types",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Representation of a code configuration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ContainerConfiguration
-				"container_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ContainerUri
-						"container_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ECR URI of the container",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The artifact of the agent",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_runtime_artifact": schemaAttribute096d649adb61556b318033c2(),
 		// Property: AgentRuntimeId
 		// CloudFormation resource type schema:
 		//
@@ -204,10 +878,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z][a-zA-Z0-9_]{0,99}-[a-zA-Z0-9]{10}",
 		//	  "type": "string"
 		//	}
-		"agent_runtime_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Identifier for a resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_runtime_id": schemaAttributee01d6630842fbca50b957805(),
 		// Property: AgentRuntimeName
 		// CloudFormation resource type schema:
 		//
@@ -216,10 +887,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z][a-zA-Z0-9_]{0,47}",
 		//	  "type": "string"
 		//	}
-		"agent_runtime_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name for a resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_runtime_name": schemaAttributebc89a6765aa00523592e2910(),
 		// Property: AgentRuntimeVersion
 		// CloudFormation resource type schema:
 		//
@@ -230,10 +898,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "([1-9][0-9]{0,4})",
 		//	  "type": "string"
 		//	}
-		"agent_runtime_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Version of the Agent",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_runtime_version": schemaAttribute4ef846651c7552120bd6ebe7(),
 		// Property: AuthorizerConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -585,252 +1250,27 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"authorizer_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomJWTAuthorizer
-				"custom_jwt_authorizer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AllowedAudience
-						"allowed_audience": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "List of allowed audiences",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AllowedClients
-						"allowed_clients": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "List of allowed clients",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AllowedScopes
-						"allowed_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "List of allowed scopes",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AllowedWorkloadConfiguration
-						"allowed_workload_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: HostingEnvironments
-								"hosting_environments": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Arn
-											"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The ARN of the bedrock-agentcore hosting environment",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "List of allow-listed hosting environments",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: WorkloadIdentities
-								"workload_identities": schema.SetAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "List of allow-listed workload identity names",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Allow-list of upstream workloads permitted to reach this resource via the workload identity chain. When set, the data plane enforces that the introspected workload chain's caller matches one of the configured hosting environments or workload identities; absent means no chain enforcement.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: CustomClaims
-						"custom_claims": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AuthorizingClaimMatchValue
-									"authorizing_claim_match_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: ClaimMatchOperator
-											"claim_match_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The relationship between the claim field value and the value or values being matched",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: ClaimMatchValue
-											"claim_match_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: MatchValueString
-													"match_value_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The string value to match for",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: MatchValueStringList
-													"match_value_string_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-														ElementType: types.StringType,
-														Description: "The list of strings to check for a match",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "The value or values in the custom claim to match for",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "The value or values in the custom claim to match and relationship of match",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: InboundTokenClaimName
-									"inbound_token_claim_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the custom claim to validate",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: InboundTokenClaimValueType
-									"inbound_token_claim_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Token claim data type",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "List of required custom claims",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DiscoveryUrl
-						"discovery_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "OpenID Connect discovery URL",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: PrivateEndpoint
-						"private_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ManagedVpcResource
-								"managed_vpc_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: EndpointIpAddressType
-										"endpoint_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The IP address type for the endpoint",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: RoutingDomain
-										"routing_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "An intermediate domain to use as the resource configuration endpoint instead of the actual target domain",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: SecurityGroupIds
-										"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Description: "The security group IDs",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: SubnetIds
-										"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Description: "The subnet IDs",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Tags
-										"tags":              // Pattern: ""
-										schema.MapAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Description: "Tags to apply to the managed VPC Lattice resource gateway",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: VpcIdentifier
-										"vpc_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The VPC identifier",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Managed VPC resource configuration",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SelfManagedLatticeResource
-								"self_managed_lattice_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ResourceConfigurationIdentifier
-										"resource_configuration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The identifier of the VPC Lattice resource configuration",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Self-managed VPC Lattice resource configuration",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Private endpoint configuration. Exactly one of SelfManagedLatticeResource or ManagedVpcResource must be specified.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: PrivateEndpointOverrides
-						"private_endpoint_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Domain
-									"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The domain to override",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: PrivateEndpoint
-									"private_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: ManagedVpcResource
-											"managed_vpc_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: EndpointIpAddressType
-													"endpoint_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The IP address type for the endpoint",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: RoutingDomain
-													"routing_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "An intermediate domain to use as the resource configuration endpoint instead of the actual target domain",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: SecurityGroupIds
-													"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-														ElementType: types.StringType,
-														Description: "The security group IDs",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: SubnetIds
-													"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-														ElementType: types.StringType,
-														Description: "The subnet IDs",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: Tags
-													"tags":              // Pattern: ""
-													schema.MapAttribute{ /*START ATTRIBUTE*/
-														ElementType: types.StringType,
-														Description: "Tags to apply to the managed VPC Lattice resource gateway",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: VpcIdentifier
-													"vpc_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The VPC identifier",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Managed VPC resource configuration",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: SelfManagedLatticeResource
-											"self_managed_lattice_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: ResourceConfigurationIdentifier
-													"resource_configuration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The identifier of the VPC Lattice resource configuration",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Self-managed VPC Lattice resource configuration",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Private endpoint configuration. Exactly one of SelfManagedLatticeResource or ManagedVpcResource must be specified.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "List of private endpoint overrides",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration for custom JWT authorizer",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Authorizer configuration for the agent runtime",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"authorizer_configuration": schemaAttribute7285bd01f8fafc79e1ab6f0d(),
+		// Property: CapacityProviderConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Capacity provider configuration for the agent runtime",
+		//	  "properties": {
+		//	    "CapacityProviderArn": {
+		//	      "description": "ARN of the capacity provider",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:capacity-provider/[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10}$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "CapacityProviderArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"capacity_provider_configuration": schemaAttributec6339ea6dffcfa75b40add45(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -838,10 +1278,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Timestamp when the Agent was created",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Timestamp when the Agent was created",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute874cc2fd72422c5d596dab2f(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -851,10 +1288,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description of the resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute30afc29af7f232f927fd04af(),
 		// Property: EnvironmentVariables
 		// CloudFormation resource type schema:
 		//
@@ -870,12 +1304,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"environment_variables": // Pattern: ""
-		schema.MapAttribute{     /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Environment variables for the agent runtime",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"environment_variables": schemaAttributeb63698e1c0a1a705e529009c(),
 		// Property: FailureReason
 		// CloudFormation resource type schema:
 		//
@@ -883,10 +1312,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The reason for failure if the agent is in a failed state.",
 		//	  "type": "string"
 		//	}
-		"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The reason for failure if the agent is in a failed state.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"failure_reason": schemaAttribute41f682360505b08a57b5fdd4(),
 		// Property: FilesystemConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -897,6 +1323,31 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "Filesystem configuration for the runtime",
 		//	    "properties": {
+		//	      "CapacityProviderVolume": {
+		//	        "additionalProperties": false,
+		//	        "description": "Configuration for a CapacityProvider-managed volume to mount into the agent runtime",
+		//	        "properties": {
+		//	          "MountPath": {
+		//	            "description": "Mount path for filesystem configuration",
+		//	            "maxLength": 200,
+		//	            "minLength": 6,
+		//	            "pattern": "^/mnt/[a-zA-Z0-9._-]+/?$",
+		//	            "type": "string"
+		//	          },
+		//	          "VolumeName": {
+		//	            "description": "Name of the capacity provider volume",
+		//	            "maxLength": 48,
+		//	            "minLength": 1,
+		//	            "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,47}$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "VolumeName",
+		//	          "MountPath"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "EfsAccessPoint": {
 		//	        "additionalProperties": false,
 		//	        "description": "Configuration for EFS access point filesystem",
@@ -969,60 +1420,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"filesystem_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: EfsAccessPoint
-					"efs_access_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AccessPointArn
-							"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "ARN of the EFS access point",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: MountPath
-							"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Mount path for filesystem configuration",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Configuration for EFS access point filesystem",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: S3FilesAccessPoint
-					"s3_files_access_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AccessPointArn
-							"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "ARN of the S3 Files access point",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: MountPath
-							"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Mount path for filesystem configuration",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Configuration for S3 Files access point filesystem",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SessionStorage
-					"session_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: MountPath
-							"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Mount path for filesystem configuration",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Configuration for session storage",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Filesystem configurations for the agent runtime",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"filesystem_configurations": schemaAttributeede1175547fa72c5ffdd3d4f(),
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -1030,10 +1428,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "When resource was last updated",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "When resource was last updated",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_at": schemaAttribute45c5b7d2696a646d7d83e42c(),
 		// Property: LifecycleConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1043,35 +1438,20 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "properties": {
 		//	    "IdleRuntimeSessionTimeout": {
 		//	      "description": "Timeout in seconds for idle runtime sessions",
-		//	      "maximum": 28800,
+		//	      "maximum": 1209600,
 		//	      "minimum": 60,
 		//	      "type": "integer"
 		//	    },
 		//	    "MaxLifetime": {
 		//	      "description": "Maximum lifetime in seconds for runtime sessions",
-		//	      "maximum": 28800,
+		//	      "maximum": 1209600,
 		//	      "minimum": 60,
 		//	      "type": "integer"
 		//	    }
 		//	  },
 		//	  "type": "object"
 		//	}
-		"lifecycle_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IdleRuntimeSessionTimeout
-				"idle_runtime_session_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Timeout in seconds for idle runtime sessions",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaxLifetime
-				"max_lifetime": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Maximum lifetime in seconds for runtime sessions",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Lifecycle configuration for managing runtime sessions",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"lifecycle_configuration": schemaAttribute92df712e458945adc802f819(),
 		// Property: NetworkConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1128,36 +1508,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: NetworkMode
-				"network_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Network mode configuration type",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NetworkModeConfig
-				"network_mode_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: SecurityGroups
-						"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "Security groups for VPC",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Subnets
-						"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "Subnets for VPC",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Network mode configuration for VPC",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Network access configuration for the Agent",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_configuration": schemaAttribute80d0e8747bbecf5ea483504c(),
 		// Property: ProtocolConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1171,10 +1522,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"protocol_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Protocol configuration for the agent runtime",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"protocol_configuration": schemaAttribute4a3f0f1b5ce9c65781a326bb(),
 		// Property: RequestHeaderConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1200,18 +1548,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"request_header_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RequestHeaderAllowlist
-				"request_header_allowlist": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "List of allowed HTTP headers for agent runtime requests",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration for HTTP request headers",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"request_header_configuration": schemaAttribute0b2d6dfc9bf2189e31d6ea6b(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -1220,10 +1557,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name (ARN) of an IAM role",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute8f04dad8409da9aad4262a51(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -1239,10 +1573,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Current status of the agent",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute05ee1bb55e6fec0928ac63f9(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1260,12 +1591,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A map of tag keys and values",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute8e0f25a2490696f097a02c4a(),
 		// Property: WorkloadIdentityDetails
 		// CloudFormation resource type schema:
 		//
@@ -1285,17 +1611,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"workload_identity_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: WorkloadIdentityArn
-				"workload_identity_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "ARN of the workload identity",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Workload identity details for the agent",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"workload_identity_details": schemaAttributeabc2a3a5b1253376a2d1a5a0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -1327,6 +1643,9 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"authorizer_configuration":          "AuthorizerConfiguration",
 		"authorizing_claim_match_value":     "AuthorizingClaimMatchValue",
 		"bucket":                            "Bucket",
+		"capacity_provider_arn":             "CapacityProviderArn",
+		"capacity_provider_configuration":   "CapacityProviderConfiguration",
+		"capacity_provider_volume":          "CapacityProviderVolume",
 		"claim_match_operator":              "ClaimMatchOperator",
 		"claim_match_value":                 "ClaimMatchValue",
 		"code":                              "Code",
@@ -1380,6 +1699,7 @@ func runtimeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"subnets":                           "Subnets",
 		"tags":                              "Tags",
 		"version_id":                        "VersionId",
+		"volume_name":                       "VolumeName",
 		"vpc_identifier":                    "VpcIdentifier",
 		"workload_identities":               "WorkloadIdentities",
 		"workload_identity_arn":             "WorkloadIdentityArn",

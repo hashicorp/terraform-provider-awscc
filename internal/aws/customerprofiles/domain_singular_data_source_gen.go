@@ -14,6 +14,69 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute235875f4b96c5297d04b61d6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The default encryption key",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute282a2e42b82c2a8f1b8728ff() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique name of the domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ad9353b26ca66783f68326f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72ada883974148c8ec9b7a72() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute4ad9353b26ca66783f68326f(),
+				// Property: Value
+				"value": schemaAttribute4ad9353b26ca66783f68326f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags (keys and values) associated with the domain",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6407b3b6d6ddb6142e03064() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time of this integration got last updated at",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed587fe0e6e91493bd1600fa9() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The default number of days until the data within the domain expires.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5c2273494662bf70faa1098() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time of this integration got created",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea27827e00c10b4b4908efcc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL of the SQS dead letter queue",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_customerprofiles_domain", domainDataSource)
 }
@@ -29,10 +92,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time of this integration got created",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time of this integration got created",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributee5c2273494662bf70faa1098(),
 		// Property: DeadLetterQueueUrl
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +102,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"dead_letter_queue_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The URL of the SQS dead letter queue",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dead_letter_queue_url": schemaAttributeea27827e00c10b4b4908efcc(),
 		// Property: DefaultEncryptionKey
 		// CloudFormation resource type schema:
 		//
@@ -55,10 +112,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"default_encryption_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The default encryption key",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_encryption_key": schemaAttribute235875f4b96c5297d04b61d6(),
 		// Property: DefaultExpirationDays
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +122,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"default_expiration_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The default number of days until the data within the domain expires.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_expiration_days": schemaAttributed587fe0e6e91493bd1600fa9(),
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +133,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique name of the domain.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_name": schemaAttribute282a2e42b82c2a8f1b8728ff(),
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -93,10 +141,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time of this integration got last updated at",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time of this integration got last updated at",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_at": schemaAttributeb6407b3b6d6ddb6142e03064(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -127,22 +172,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags (keys and values) associated with the domain",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute72ada883974148c8ec9b7a72(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -16,6 +16,167 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0fa0909e22eebd472aba369c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b9002f382d56ac9842ed110() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Allowlist
+			"allowlist": schemaAttributee1793eb645303162ef4e81af(),
+			// Property: Blocklist
+			"blocklist": schemaAttributee1793eb645303162ef4e81af(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6efb8534dba22b7cab1d6996() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76cfc66e99c92939b09d1f16() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ColorTheme
+			"color_theme": schemaAttribute0fa0909e22eebd472aba369c(),
+			// Property: Favicon
+			"favicon": schemaAttribute0fa0909e22eebd472aba369c(),
+			// Property: FaviconMetadata
+			"favicon_metadata": schemaAttributeea5e71c54da57c903446d18e(),
+			// Property: LocalizedStrings
+			"localized_strings": schemaAttributee2e3fc528ad5a9e902c5ed9d(),
+			// Property: Logo
+			"logo": schemaAttribute0fa0909e22eebd472aba369c(),
+			// Property: LogoMetadata
+			"logo_metadata": schemaAttributeea5e71c54da57c903446d18e(),
+			// Property: TermsOfService
+			"terms_of_service": schemaAttribute0fa0909e22eebd472aba369c(),
+			// Property: Wallpaper
+			"wallpaper": schemaAttribute0fa0909e22eebd472aba369c(),
+			// Property: WallpaperMetadata
+			"wallpaper_metadata": schemaAttributeea5e71c54da57c903446d18e(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93763de27a744cb438b86172() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HiddenToolbarItems
+			"hidden_toolbar_items": schemaAttributecf0a7002652c855868f1311a(),
+			// Property: MaxDisplayResolution
+			"max_display_resolution": schemaAttribute0fa0909e22eebd472aba369c(),
+			// Property: ToolbarType
+			"toolbar_type": schemaAttribute0fa0909e22eebd472aba369c(),
+			// Property: VisualMode
+			"visual_mode": schemaAttribute0fa0909e22eebd472aba369c(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ab684fe105a4520d0ae0887() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute0fa0909e22eebd472aba369c(),
+				// Property: Value
+				"value": schemaAttribute0fa0909e22eebd472aba369c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea1d3f171288fe6e8c8e8cfd8() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf0a7002652c855868f1311a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1793eb645303162ef4e81af() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Domain
+				"domain": schemaAttribute0fa0909e22eebd472aba369c(),
+				// Property: Name
+				"name": schemaAttribute0fa0909e22eebd472aba369c(),
+				// Property: Path
+				"path": schemaAttribute0fa0909e22eebd472aba369c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2e3fc528ad5a9e902c5ed9d() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BrowserTabTitle
+				"browser_tab_title": schemaAttribute0fa0909e22eebd472aba369c(),
+				// Property: ContactButtonText
+				"contact_button_text": schemaAttribute0fa0909e22eebd472aba369c(),
+				// Property: ContactLink
+				"contact_link": schemaAttribute0fa0909e22eebd472aba369c(),
+				// Property: LoadingText
+				"loading_text": schemaAttribute0fa0909e22eebd472aba369c(),
+				// Property: LoginButtonText
+				"login_button_text": schemaAttribute0fa0909e22eebd472aba369c(),
+				// Property: LoginDescription
+				"login_description": schemaAttribute0fa0909e22eebd472aba369c(),
+				// Property: LoginTitle
+				"login_title": schemaAttribute0fa0909e22eebd472aba369c(),
+				// Property: WelcomeText
+				"welcome_text": schemaAttribute0fa0909e22eebd472aba369c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea5e71c54da57c903446d18e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FileExtension
+			"file_extension": schemaAttribute0fa0909e22eebd472aba369c(),
+			// Property: LastUploadTimestamp
+			"last_upload_timestamp": schemaAttribute6efb8534dba22b7cab1d6996(),
+			// Property: MimeType
+			"mime_type": schemaAttribute0fa0909e22eebd472aba369c(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff8e5e008bbce00f81b1b684() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_workspacesweb_user_settings", userSettingsDataSource)
 }
@@ -39,11 +200,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"additional_encryption_context": // Pattern: ""
-		schema.MapAttribute{             /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"additional_encryption_context": schemaAttributeff8e5e008bbce00f81b1b684(),
 		// Property: AssociatedPortalArns
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +214,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"associated_portal_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"associated_portal_arns": schemaAttributecf0a7002652c855868f1311a(),
 		// Property: BrandingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -228,129 +382,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"branding_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ColorTheme
-				"color_theme": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Favicon
-				"favicon": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: FaviconMetadata
-				"favicon_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: FileExtension
-						"file_extension": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: LastUploadTimestamp
-						"last_upload_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType: timetypes.RFC3339Type{},
-							Computed:   true,
-						}, /*END ATTRIBUTE*/
-						// Property: MimeType
-						"mime_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: LocalizedStrings
-				"localized_strings":       // Pattern: ""
-				schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: BrowserTabTitle
-							"browser_tab_title": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ContactButtonText
-							"contact_button_text": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ContactLink
-							"contact_link": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: LoadingText
-							"loading_text": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: LoginButtonText
-							"login_button_text": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: LoginDescription
-							"login_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: LoginTitle
-							"login_title": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: WelcomeText
-							"welcome_text": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Logo
-				"logo": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: LogoMetadata
-				"logo_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: FileExtension
-						"file_extension": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: LastUploadTimestamp
-						"last_upload_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType: timetypes.RFC3339Type{},
-							Computed:   true,
-						}, /*END ATTRIBUTE*/
-						// Property: MimeType
-						"mime_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: TermsOfService
-				"terms_of_service": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Wallpaper
-				"wallpaper": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: WallpaperMetadata
-				"wallpaper_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: FileExtension
-						"file_extension": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: LastUploadTimestamp
-						"last_upload_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType: timetypes.RFC3339Type{},
-							Computed:   true,
-						}, /*END ATTRIBUTE*/
-						// Property: MimeType
-						"mime_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"branding_configuration": schemaAttribute76cfc66e99c92939b09d1f16(),
 		// Property: CookieSynchronizationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -427,51 +459,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"cookie_synchronization_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Allowlist
-				"allowlist": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Domain
-							"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Path
-							"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Blocklist
-				"blocklist": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Domain
-							"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Path
-							"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"cookie_synchronization_configuration": schemaAttribute2b9002f382d56ac9842ed110(),
 		// Property: CopyAllowed
 		// CloudFormation resource type schema:
 		//
@@ -482,9 +470,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"copy_allowed": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"copy_allowed": schemaAttribute0fa0909e22eebd472aba369c(),
 		// Property: CustomerManagedKey
 		// CloudFormation resource type schema:
 		//
@@ -494,9 +480,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:kms:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:key\\/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"customer_managed_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"customer_managed_key": schemaAttribute0fa0909e22eebd472aba369c(),
 		// Property: DeepLinkAllowed
 		// CloudFormation resource type schema:
 		//
@@ -507,9 +491,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"deep_link_allowed": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"deep_link_allowed": schemaAttribute0fa0909e22eebd472aba369c(),
 		// Property: DisconnectTimeoutInMinutes
 		// CloudFormation resource type schema:
 		//
@@ -518,9 +500,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minimum": 1,
 		//	  "type": "number"
 		//	}
-		"disconnect_timeout_in_minutes": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"disconnect_timeout_in_minutes": schemaAttributea1d3f171288fe6e8c8e8cfd8(),
 		// Property: DownloadAllowed
 		// CloudFormation resource type schema:
 		//
@@ -531,9 +511,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"download_allowed": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"download_allowed": schemaAttribute0fa0909e22eebd472aba369c(),
 		// Property: IdleDisconnectTimeoutInMinutes
 		// CloudFormation resource type schema:
 		//
@@ -542,9 +520,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minimum": 0,
 		//	  "type": "number"
 		//	}
-		"idle_disconnect_timeout_in_minutes": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"idle_disconnect_timeout_in_minutes": schemaAttributea1d3f171288fe6e8c8e8cfd8(),
 		// Property: PasteAllowed
 		// CloudFormation resource type schema:
 		//
@@ -555,9 +531,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"paste_allowed": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"paste_allowed": schemaAttribute0fa0909e22eebd472aba369c(),
 		// Property: PrintAllowed
 		// CloudFormation resource type schema:
 		//
@@ -568,9 +542,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"print_allowed": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"print_allowed": schemaAttribute0fa0909e22eebd472aba369c(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -602,21 +574,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute9ab684fe105a4520d0ae0887(),
 		// Property: ToolbarConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -666,28 +624,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"toolbar_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: HiddenToolbarItems
-				"hidden_toolbar_items": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaxDisplayResolution
-				"max_display_resolution": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ToolbarType
-				"toolbar_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: VisualMode
-				"visual_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"toolbar_configuration": schemaAttribute93763de27a744cb438b86172(),
 		// Property: UploadAllowed
 		// CloudFormation resource type schema:
 		//
@@ -698,9 +635,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"upload_allowed": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"upload_allowed": schemaAttribute0fa0909e22eebd472aba369c(),
 		// Property: UserSettingsArn
 		// CloudFormation resource type schema:
 		//
@@ -710,9 +645,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36})+$",
 		//	  "type": "string"
 		//	}
-		"user_settings_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"user_settings_arn": schemaAttribute0fa0909e22eebd472aba369c(),
 		// Property: WebAuthnAllowed
 		// CloudFormation resource type schema:
 		//
@@ -723,9 +656,7 @@ func userSettingsDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"web_authn_allowed": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"web_authn_allowed": schemaAttribute0fa0909e22eebd472aba369c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

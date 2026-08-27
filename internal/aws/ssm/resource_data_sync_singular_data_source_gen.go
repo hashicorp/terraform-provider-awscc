@@ -15,6 +15,71 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0d33e5b657e02114dc363ff2() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1c1a8fcd27e0723e159a8fcc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AwsOrganizationsSource
+			"aws_organizations_source": schemaAttribute6f3db31d890a5791c6b89468(),
+			// Property: IncludeFutureRegions
+			"include_future_regions": schemaAttributed6294a70aef3ceb43fd3f5b9(),
+			// Property: SourceRegions
+			"source_regions": schemaAttribute0d33e5b657e02114dc363ff2(),
+			// Property: SourceType
+			"source_type": schemaAttributeb2de3a857fbdc1548ac68114(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f3db31d890a5791c6b89468() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: OrganizationSourceType
+			"organization_source_type": schemaAttributeb2de3a857fbdc1548ac68114(),
+			// Property: OrganizationalUnits
+			"organizational_units": schemaAttribute0d33e5b657e02114dc363ff2(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2de3a857fbdc1548ac68114() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6294a70aef3ceb43fd3f5b9() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef2e99377b909797613d04cd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketName
+			"bucket_name": schemaAttributeb2de3a857fbdc1548ac68114(),
+			// Property: BucketPrefix
+			"bucket_prefix": schemaAttributeb2de3a857fbdc1548ac68114(),
+			// Property: BucketRegion
+			"bucket_region": schemaAttributeb2de3a857fbdc1548ac68114(),
+			// Property: KMSKeyArn
+			"kms_key_arn": schemaAttributeb2de3a857fbdc1548ac68114(),
+			// Property: SyncFormat
+			"sync_format": schemaAttributeb2de3a857fbdc1548ac68114(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ssm_resource_data_sync", resourceDataSyncDataSource)
 }
@@ -31,9 +96,7 @@ func resourceDataSyncDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"bucket_name": schemaAttributeb2de3a857fbdc1548ac68114(),
 		// Property: BucketPrefix
 		// CloudFormation resource type schema:
 		//
@@ -42,9 +105,7 @@ func resourceDataSyncDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"bucket_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"bucket_prefix": schemaAttributeb2de3a857fbdc1548ac68114(),
 		// Property: BucketRegion
 		// CloudFormation resource type schema:
 		//
@@ -53,9 +114,7 @@ func resourceDataSyncDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"bucket_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"bucket_region": schemaAttributeb2de3a857fbdc1548ac68114(),
 		// Property: KMSKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -64,9 +123,7 @@ func resourceDataSyncDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttributeb2de3a857fbdc1548ac68114(),
 		// Property: S3Destination
 		// CloudFormation resource type schema:
 		//
@@ -106,31 +163,7 @@ func resourceDataSyncDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"s3_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BucketName
-				"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: BucketPrefix
-				"bucket_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: BucketRegion
-				"bucket_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: KMSKeyArn
-				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SyncFormat
-				"sync_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"s3_destination": schemaAttributeef2e99377b909797613d04cd(),
 		// Property: SyncFormat
 		// CloudFormation resource type schema:
 		//
@@ -139,9 +172,7 @@ func resourceDataSyncDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"sync_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"sync_format": schemaAttributeb2de3a857fbdc1548ac68114(),
 		// Property: SyncName
 		// CloudFormation resource type schema:
 		//
@@ -150,9 +181,7 @@ func resourceDataSyncDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"sync_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"sync_name": schemaAttributeb2de3a857fbdc1548ac68114(),
 		// Property: SyncSource
 		// CloudFormation resource type schema:
 		//
@@ -202,39 +231,7 @@ func resourceDataSyncDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"sync_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AwsOrganizationsSource
-				"aws_organizations_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: OrganizationSourceType
-						"organization_source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: OrganizationalUnits
-						"organizational_units": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: IncludeFutureRegions
-				"include_future_regions": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourceRegions
-				"source_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourceType
-				"source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"sync_source": schemaAttribute1c1a8fcd27e0723e159a8fcc(),
 		// Property: SyncType
 		// CloudFormation resource type schema:
 		//
@@ -243,9 +240,7 @@ func resourceDataSyncDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"sync_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"sync_type": schemaAttributeb2de3a857fbdc1548ac68114(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

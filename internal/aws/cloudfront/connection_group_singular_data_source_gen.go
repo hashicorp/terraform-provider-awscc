@@ -15,6 +15,85 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1562c90919ba9afbd098f75f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34f0c423eefa89e0fcc8169e() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "IPv6 is enabled for the connection group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e0fff842ea14c329cdc28dc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f3b49d4351aaab49e38857b() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute71fadc06b5f68a765f51aff0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85ba818ab36642f3f3e1b2a1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the connection group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea06ecb13fd394b5b40d333db() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether the connection group is enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec06eb743e922a81015ee8256() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeefa8fbe99fc27d4fa7cd9d1a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Anycast static IP list.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef47cde418310a986c33f0243() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute1562c90919ba9afbd098f75f(),
+				// Property: Value
+				"value": schemaAttributec06eb743e922a81015ee8256(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A complex type that contains zero or more ``Tag`` elements.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudfront_connection_group", connectionGroupDataSource)
 }
@@ -30,10 +109,7 @@ func connectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The ID of the Anycast static IP list.",
 		//	  "type": "string"
 		//	}
-		"anycast_ip_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Anycast static IP list.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"anycast_ip_list_id": schemaAttributeefa8fbe99fc27d4fa7cd9d1a(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +117,7 @@ func connectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute71fadc06b5f68a765f51aff0(),
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -53,11 +126,7 @@ func connectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttribute3e0fff842ea14c329cdc28dc(),
 		// Property: ETag
 		// CloudFormation resource type schema:
 		//
@@ -65,10 +134,7 @@ func connectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"e_tag": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"e_tag": schemaAttribute71fadc06b5f68a765f51aff0(),
 		// Property: Enabled
 		// CloudFormation resource type schema:
 		//
@@ -76,10 +142,7 @@ func connectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Whether the connection group is enabled.",
 		//	  "type": "boolean"
 		//	}
-		"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether the connection group is enabled.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enabled": schemaAttributea06ecb13fd394b5b40d333db(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -87,10 +150,7 @@ func connectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"connection_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_group_id": schemaAttribute71fadc06b5f68a765f51aff0(),
 		// Property: Ipv6Enabled
 		// CloudFormation resource type schema:
 		//
@@ -98,10 +158,7 @@ func connectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "IPv6 is enabled for the connection group.",
 		//	  "type": "boolean"
 		//	}
-		"ipv_6_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "IPv6 is enabled for the connection group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_6_enabled": schemaAttribute34f0c423eefa89e0fcc8169e(),
 		// Property: IsDefault
 		// CloudFormation resource type schema:
 		//
@@ -109,10 +166,7 @@ func connectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "",
 		//	  "type": "boolean"
 		//	}
-		"is_default": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"is_default": schemaAttribute5f3b49d4351aaab49e38857b(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -121,11 +175,7 @@ func connectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttribute3e0fff842ea14c329cdc28dc(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -133,10 +183,7 @@ func connectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The name of the connection group.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the connection group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute85ba818ab36642f3f3e1b2a1(),
 		// Property: RoutingEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -144,10 +191,7 @@ func connectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"routing_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"routing_endpoint": schemaAttribute71fadc06b5f68a765f51aff0(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -155,10 +199,7 @@ func connectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute71fadc06b5f68a765f51aff0(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -186,24 +227,7 @@ func connectionGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A complex type that contains zero or more ``Tag`` elements.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributef47cde418310a986c33f0243(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

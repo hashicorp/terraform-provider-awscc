@@ -14,6 +14,125 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0e556efb3021c18442ae964a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Elastic Network Interface ID owned by the Route Server Endpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f7f7d0e2e3920b00b5cf81e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "BGP ASN of the Route Server Peer",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34cf9b79d416c19a4e4c00e9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "IP address of the Route Server Peer",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute537dbd6617abadadee3af80c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee2bcbf958a2791b0698a5342(),
+				// Property: Value
+				"value": schemaAttributeb4e6646a7b76fbaf2c8854ea(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d3190d79a11d77cd9d56f7b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Elastic Network Interface IP address owned by the Route Server Endpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute758d892701a12cf1bee51844() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "BGP Liveness Detection",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f6cac1d8a78ae7f96c0909f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Route Server Endpoint ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c9d96310a43dc00c5e41cc2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Subnet ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb20f1750992863d826d24a92() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Route Server Peer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb28dc02cc50f96dc9c14ec12() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "VPC ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4e6646a7b76fbaf2c8854ea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe2ca4cffda203b1c99e2e19() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PeerAsn
+			"peer_asn": schemaAttribute0f7f7d0e2e3920b00b5cf81e(),
+			// Property: PeerLivenessDetection
+			"peer_liveness_detection": schemaAttribute758d892701a12cf1bee51844(),
+		}, /*END SCHEMA*/
+		Description: "BGP Options",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9d814c9afb4dcd36748149e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Route Server ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2bcbf958a2791b0698a5342() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefe635002be992a7d53083834() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Route Server Peer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_route_server_peer", routeServerPeerDataSource)
 }
@@ -29,10 +148,7 @@ func routeServerPeerDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The Amazon Resource Name (ARN) of the Route Server Peer.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Route Server Peer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributefe635002be992a7d53083834(),
 		// Property: BgpOptions
 		// CloudFormation resource type schema:
 		//
@@ -58,22 +174,7 @@ func routeServerPeerDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"bgp_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PeerAsn
-				"peer_asn": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "BGP ASN of the Route Server Peer",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PeerLivenessDetection
-				"peer_liveness_detection": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "BGP Liveness Detection",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "BGP Options",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bgp_options": schemaAttributebe2ca4cffda203b1c99e2e19(),
 		// Property: EndpointEniAddress
 		// CloudFormation resource type schema:
 		//
@@ -81,10 +182,7 @@ func routeServerPeerDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Elastic Network Interface IP address owned by the Route Server Endpoint",
 		//	  "type": "string"
 		//	}
-		"endpoint_eni_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Elastic Network Interface IP address owned by the Route Server Endpoint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_eni_address": schemaAttribute5d3190d79a11d77cd9d56f7b(),
 		// Property: EndpointEniId
 		// CloudFormation resource type schema:
 		//
@@ -92,10 +190,7 @@ func routeServerPeerDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Elastic Network Interface ID owned by the Route Server Endpoint",
 		//	  "type": "string"
 		//	}
-		"endpoint_eni_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Elastic Network Interface ID owned by the Route Server Endpoint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_eni_id": schemaAttribute0e556efb3021c18442ae964a(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -103,10 +198,7 @@ func routeServerPeerDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The ID of the Route Server Peer.",
 		//	  "type": "string"
 		//	}
-		"route_server_peer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Route Server Peer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"route_server_peer_id": schemaAttributeb20f1750992863d826d24a92(),
 		// Property: PeerAddress
 		// CloudFormation resource type schema:
 		//
@@ -114,10 +206,7 @@ func routeServerPeerDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "IP address of the Route Server Peer",
 		//	  "type": "string"
 		//	}
-		"peer_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IP address of the Route Server Peer",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"peer_address": schemaAttribute34cf9b79d416c19a4e4c00e9(),
 		// Property: RouteServerEndpointId
 		// CloudFormation resource type schema:
 		//
@@ -125,10 +214,7 @@ func routeServerPeerDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Route Server Endpoint ID",
 		//	  "type": "string"
 		//	}
-		"route_server_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Route Server Endpoint ID",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"route_server_endpoint_id": schemaAttribute7f6cac1d8a78ae7f96c0909f(),
 		// Property: RouteServerId
 		// CloudFormation resource type schema:
 		//
@@ -136,10 +222,7 @@ func routeServerPeerDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Route Server ID",
 		//	  "type": "string"
 		//	}
-		"route_server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Route Server ID",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"route_server_id": schemaAttributec9d814c9afb4dcd36748149e(),
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -147,10 +230,7 @@ func routeServerPeerDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Subnet ID",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Subnet ID",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_id": schemaAttribute9c9d96310a43dc00c5e41cc2(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -183,24 +263,7 @@ func routeServerPeerDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute537dbd6617abadadee3af80c(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -208,10 +271,7 @@ func routeServerPeerDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "VPC ID",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC ID",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttributeb28dc02cc50f96dc9c14ec12(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

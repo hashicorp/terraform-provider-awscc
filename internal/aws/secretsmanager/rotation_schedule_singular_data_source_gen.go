@@ -14,6 +14,200 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute060ed6d6773d1c2495b4eae8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the KMS key that Secrets Manager used to encrypt the superuser secret, if you use the alternating users strategy and the superuser secret is encrypted with a customer managed key. You don't need to specify this property if the superuser secret is encrypted using the key aws/secretsmanager. CloudFormation grants the execution role for the Lambda rotation function Decrypt, DescribeKey, and GenerateDataKey permission to the key in this property.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute08cce8f136b7229f7adfdf21() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN or name of the secret to rotate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c75655dd959fa4d77b8cb46() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether to rotate the secret immediately or wait until the next scheduled rotation window.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1010e580fc6c1af5d49a526c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the metadata item. You can specify a value that's 1 to 256 characters in length.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute12fa33078bfee7dc60b6d572() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of an existing Lambda rotation function. To specify a rotation function that is also defined in this template, use the Ref function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1c76d114ded673329a399fbd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A comma-separated list of security group IDs applied to the target database.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute225dba825543e56ba513bb58() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the KMS key that Secrets Manager uses to encrypt the secret. If you don't specify this value, then Secrets Manager uses the key aws/secretsmanager. If aws/secretsmanager doesn't yet exist, then Secrets Manager creates it for you automatically the first time it encrypts the secret value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25dc7a8b4244b200add7f484() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM role that is used by Secrets Manager to rotate a managed external secret.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4d4a266391371cd04df17869() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Lambda rotation function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b1f6df30ee6f5ea02e217ff() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A cron() or rate() expression that defines the schedule for rotating your secret. Secrets Manager rotation schedules use UTC time zone.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90e21ee7b6b4679e60f1d648() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of days between automatic scheduled rotations of the secret. You can use this value to check that your secret meets your compliance guidelines for how often secrets must be rotated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ac31e91b0b1b4b1d168792f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AutomaticallyAfterDays
+			"automatically_after_days": schemaAttribute90e21ee7b6b4679e60f1d648(),
+			// Property: Duration
+			"duration": schemaAttributea76475a1ce3ed9ca06f2b969(),
+			// Property: ScheduleExpression
+			"schedule_expression": schemaAttribute6b1f6df30ee6f5ea02e217ff(),
+		}, /*END SCHEMA*/
+		Description: "A structure that defines the rotation configuration for this secret.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea08bfa13b90249a9261d4c54() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the secret.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea76475a1ce3ed9ca06f2b969() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The length of the rotation window in hours, for example 3h for a three hour window. Secrets Manager rotates your secret at any time during this window. The window must not extend into the next rotation window or the next UTC day. The window starts according to the ScheduleExpression. If you don't specify a Duration, for a ScheduleExpression in hours, the window automatically closes after one hour. For a ScheduleExpression in days, the window automatically closes at the end of the UTC day.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb486f6b991f98bf6ec62a278() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute1010e580fc6c1af5d49a526c(),
+				// Property: Value
+				"value": schemaAttributee3004350331ad6a1cda683fb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of metadata needed to successfully rotate a managed external secret.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8fed444604ed5b030329818() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of rotation template to use",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc116e64ef3ed32e66bac95e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ExcludeCharacters
+			"exclude_characters": schemaAttributee54796d1ae4fd5fb329b3ab0(),
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttribute225dba825543e56ba513bb58(),
+			// Property: MasterSecretArn
+			"master_secret_arn": schemaAttributed1a6fc71a9b2cce191be9030(),
+			// Property: MasterSecretKmsKeyArn
+			"master_secret_kms_key_arn": schemaAttribute060ed6d6773d1c2495b4eae8(),
+			// Property: RotationLambdaName
+			"rotation_lambda_name": schemaAttribute4d4a266391371cd04df17869(),
+			// Property: RotationType
+			"rotation_type": schemaAttributeb8fed444604ed5b030329818(),
+			// Property: Runtime
+			"runtime": schemaAttributedcdca4e98d4e37ce575d86bf(),
+			// Property: SuperuserSecretArn
+			"superuser_secret_arn": schemaAttributed1a6fc71a9b2cce191be9030(),
+			// Property: SuperuserSecretKmsKeyArn
+			"superuser_secret_kms_key_arn": schemaAttribute060ed6d6773d1c2495b4eae8(),
+			// Property: VpcSecurityGroupIds
+			"vpc_security_group_ids": schemaAttribute1c76d114ded673329a399fbd(),
+			// Property: VpcSubnetIds
+			"vpc_subnet_ids": schemaAttributed3c4c41d9e64787a8f7476f4(),
+		}, /*END SCHEMA*/
+		Description: "Creates a new Lambda rotation function based on one of the Secrets Manager rotation function templates. To use a rotation function that already exists, specify RotationLambdaARN instead.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1a6fc71a9b2cce191be9030() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the secret that contains superuser credentials, if you use the alternating users rotation strategy. CloudFormation grants the execution role for the Lambda rotation function GetSecretValue permission to the secret in this property.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3c4c41d9e64787a8f7476f4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A comma separated list of VPC subnet IDs of the target database network. The Lambda rotation function is in the same subnet group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedcdca4e98d4e37ce575d86bf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The python runtime associated with the Lambda function",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3004350331ad6a1cda683fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the metadata item. You can specify a value that's 1 to 2048 characters in length.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee54796d1ae4fd5fb329b3ab0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string of the characters that you don't want in the password.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_secretsmanager_rotation_schedule", rotationScheduleDataSource)
 }
@@ -50,24 +244,7 @@ func rotationScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"external_secret_rotation_metadata": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the metadata item. You can specify a value that's 1 to 256 characters in length.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the metadata item. You can specify a value that's 1 to 2048 characters in length.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of metadata needed to successfully rotate a managed external secret.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"external_secret_rotation_metadata": schemaAttributeb486f6b991f98bf6ec62a278(),
 		// Property: ExternalSecretRotationRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -75,10 +252,7 @@ func rotationScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The ARN of the IAM role that is used by Secrets Manager to rotate a managed external secret.",
 		//	  "type": "string"
 		//	}
-		"external_secret_rotation_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the IAM role that is used by Secrets Manager to rotate a managed external secret.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"external_secret_rotation_role_arn": schemaAttribute25dc7a8b4244b200add7f484(),
 		// Property: HostedRotationLambda
 		// CloudFormation resource type schema:
 		//
@@ -136,67 +310,7 @@ func rotationScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"hosted_rotation_lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ExcludeCharacters
-				"exclude_characters": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A string of the characters that you don't want in the password.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: KmsKeyArn
-				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the KMS key that Secrets Manager uses to encrypt the secret. If you don't specify this value, then Secrets Manager uses the key aws/secretsmanager. If aws/secretsmanager doesn't yet exist, then Secrets Manager creates it for you automatically the first time it encrypts the secret value.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MasterSecretArn
-				"master_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the secret that contains superuser credentials, if you use the alternating users rotation strategy. CloudFormation grants the execution role for the Lambda rotation function GetSecretValue permission to the secret in this property.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MasterSecretKmsKeyArn
-				"master_secret_kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the KMS key that Secrets Manager used to encrypt the superuser secret, if you use the alternating users strategy and the superuser secret is encrypted with a customer managed key. You don't need to specify this property if the superuser secret is encrypted using the key aws/secretsmanager. CloudFormation grants the execution role for the Lambda rotation function Decrypt, DescribeKey, and GenerateDataKey permission to the key in this property.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RotationLambdaName
-				"rotation_lambda_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the Lambda rotation function.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RotationType
-				"rotation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of rotation template to use",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Runtime
-				"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The python runtime associated with the Lambda function",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SuperuserSecretArn
-				"superuser_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the secret that contains superuser credentials, if you use the alternating users rotation strategy. CloudFormation grants the execution role for the Lambda rotation function GetSecretValue permission to the secret in this property.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SuperuserSecretKmsKeyArn
-				"superuser_secret_kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the KMS key that Secrets Manager used to encrypt the superuser secret, if you use the alternating users strategy and the superuser secret is encrypted with a customer managed key. You don't need to specify this property if the superuser secret is encrypted using the key aws/secretsmanager. CloudFormation grants the execution role for the Lambda rotation function Decrypt, DescribeKey, and GenerateDataKey permission to the key in this property.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VpcSecurityGroupIds
-				"vpc_security_group_ids": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A comma-separated list of security group IDs applied to the target database.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VpcSubnetIds
-				"vpc_subnet_ids": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A comma separated list of VPC subnet IDs of the target database network. The Lambda rotation function is in the same subnet group.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Creates a new Lambda rotation function based on one of the Secrets Manager rotation function templates. To use a rotation function that already exists, specify RotationLambdaARN instead.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"hosted_rotation_lambda": schemaAttributecc116e64ef3ed32e66bac95e(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -204,10 +318,7 @@ func rotationScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The ARN of the secret.",
 		//	  "type": "string"
 		//	}
-		"rotation_schedule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the secret.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rotation_schedule_id": schemaAttributea08bfa13b90249a9261d4c54(),
 		// Property: RotateImmediatelyOnUpdate
 		// CloudFormation resource type schema:
 		//
@@ -215,10 +326,7 @@ func rotationScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Specifies whether to rotate the secret immediately or wait until the next scheduled rotation window.",
 		//	  "type": "boolean"
 		//	}
-		"rotate_immediately_on_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether to rotate the secret immediately or wait until the next scheduled rotation window.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rotate_immediately_on_update": schemaAttribute0c75655dd959fa4d77b8cb46(),
 		// Property: RotationLambdaARN
 		// CloudFormation resource type schema:
 		//
@@ -226,10 +334,7 @@ func rotationScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The ARN of an existing Lambda rotation function. To specify a rotation function that is also defined in this template, use the Ref function.",
 		//	  "type": "string"
 		//	}
-		"rotation_lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of an existing Lambda rotation function. To specify a rotation function that is also defined in this template, use the Ref function.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rotation_lambda_arn": schemaAttribute12fa33078bfee7dc60b6d572(),
 		// Property: RotationRules
 		// CloudFormation resource type schema:
 		//
@@ -252,27 +357,7 @@ func rotationScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"rotation_rules": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AutomaticallyAfterDays
-				"automatically_after_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The number of days between automatic scheduled rotations of the secret. You can use this value to check that your secret meets your compliance guidelines for how often secrets must be rotated.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Duration
-				"duration": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The length of the rotation window in hours, for example 3h for a three hour window. Secrets Manager rotates your secret at any time during this window. The window must not extend into the next rotation window or the next UTC day. The window starts according to the ScheduleExpression. If you don't specify a Duration, for a ScheduleExpression in hours, the window automatically closes after one hour. For a ScheduleExpression in days, the window automatically closes at the end of the UTC day.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ScheduleExpression
-				"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A cron() or rate() expression that defines the schedule for rotating your secret. Secrets Manager rotation schedules use UTC time zone.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A structure that defines the rotation configuration for this secret.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rotation_rules": schemaAttribute9ac31e91b0b1b4b1d168792f(),
 		// Property: SecretId
 		// CloudFormation resource type schema:
 		//
@@ -280,10 +365,7 @@ func rotationScheduleDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The ARN or name of the secret to rotate.",
 		//	  "type": "string"
 		//	}
-		"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN or name of the secret to rotate.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"secret_id": schemaAttribute08cce8f136b7229f7adfdf21(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

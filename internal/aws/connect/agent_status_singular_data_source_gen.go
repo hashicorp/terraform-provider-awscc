@@ -14,6 +14,105 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0f3c18143560937bc4ef83e4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of the status.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f5fa5d02f5ff86bd3613fe2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the agent status.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d6e0b0b180280f6c17a809f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the Amazon Connect instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f4d5487cb01c5190e6fa770() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Last modified region.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70c5e58aa6a8a8c313af2054() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The display order of the status.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70fe36e2d6902f7afd7a0131() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8095978b43f020f5c6f0d74d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the status.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8487da3068bb9300f4c76b0f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of agent status.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96e20075ff545baa1aedc530() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributef885e0505f47a7e37ba7c097(),
+				// Property: Value
+				"value": schemaAttribute70fe36e2d6902f7afd7a0131(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa1eda3290fa6315b6e14058() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "Last modified time.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5fa0630fd46a4a33112c43e() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A number indicating the reset order of the agent status.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed203571080413bbe68ec7ee5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the status.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef885e0505f47a7e37ba7c097() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_agent_status", agentStatusDataSource)
 }
@@ -30,10 +129,7 @@ func agentStatusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent-state/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"agent_status_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the agent status.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_status_arn": schemaAttribute5f5fa5d02f5ff86bd3613fe2(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +139,7 @@ func agentStatusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the status.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributed203571080413bbe68ec7ee5(),
 		// Property: DisplayOrder
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +149,7 @@ func agentStatusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"display_order": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The display order of the status.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"display_order": schemaAttribute70c5e58aa6a8a8c313af2054(),
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +158,7 @@ func agentStatusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the Amazon Connect instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_arn": schemaAttribute6d6e0b0b180280f6c17a809f(),
 		// Property: LastModifiedRegion
 		// CloudFormation resource type schema:
 		//
@@ -80,10 +167,7 @@ func agentStatusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-z]{2}(-[a-z]+){1,2}(-[0-9])?",
 		//	  "type": "string"
 		//	}
-		"last_modified_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Last modified region.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_region": schemaAttribute6f4d5487cb01c5190e6fa770(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -91,10 +175,7 @@ func agentStatusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Last modified time.",
 		//	  "type": "number"
 		//	}
-		"last_modified_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "Last modified time.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttributeaa1eda3290fa6315b6e14058(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -104,10 +185,7 @@ func agentStatusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the status.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute8095978b43f020f5c6f0d74d(),
 		// Property: ResetOrderNumber
 		// CloudFormation resource type schema:
 		//
@@ -115,10 +193,7 @@ func agentStatusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A number indicating the reset order of the agent status.",
 		//	  "type": "boolean"
 		//	}
-		"reset_order_number": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A number indicating the reset order of the agent status.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"reset_order_number": schemaAttributeb5fa0630fd46a4a33112c43e(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -130,10 +205,7 @@ func agentStatusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The state of the status.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttribute0f3c18143560937bc4ef83e4(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -167,24 +239,7 @@ func agentStatusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute96e20075ff545baa1aedc530(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -197,10 +252,7 @@ func agentStatusDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of agent status.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute8487da3068bb9300f4c76b0f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

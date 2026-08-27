@@ -14,6 +14,72 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0aa229bf50801b26530227f8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributea05b378b1557d84817f731e3(),
+				// Property: Value
+				"value": schemaAttributea05b378b1557d84817f731e3(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags (keys and values) associated with the email template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ba4ed1c8d270fc8e21e9be3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The subject line of the email.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3307a8deba6451a40f52cb30() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The email body that is visible to recipients whose email clients do not display HTML content.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43effdddf30dcc062ddb5dba() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HtmlPart
+			"html_part": schemaAttribute4d3e6cb9caab9d4809220bee(),
+			// Property: SubjectPart
+			"subject_part": schemaAttribute2ba4ed1c8d270fc8e21e9be3(),
+			// Property: TemplateName
+			"template_name": schemaAttribute960f280c5f81c80dda7155e4(),
+			// Property: TextPart
+			"text_part": schemaAttribute3307a8deba6451a40f52cb30(),
+		}, /*END SCHEMA*/
+		Description: "The content of the email, composed of a subject line, an HTML part, and a text-only part",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4d3e6cb9caab9d4809220bee() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The HTML body of the email.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute960f280c5f81c80dda7155e4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea05b378b1557d84817f731e3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ses_template", templateDataSource)
 }
@@ -28,9 +94,7 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"template_id": schemaAttributea05b378b1557d84817f731e3(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -61,22 +125,7 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags (keys and values) associated with the email template.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute0aa229bf50801b26530227f8(),
 		// Property: Template
 		// CloudFormation resource type schema:
 		//
@@ -109,32 +158,7 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: HtmlPart
-				"html_part": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The HTML body of the email.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SubjectPart
-				"subject_part": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The subject line of the email.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TemplateName
-				"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the template.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TextPart
-				"text_part": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The email body that is visible to recipients whose email clients do not display HTML content.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The content of the email, composed of a subject line, an HTML part, and a text-only part",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"template": schemaAttribute43effdddf30dcc062ddb5dba(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

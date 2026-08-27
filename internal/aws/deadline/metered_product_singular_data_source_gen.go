@@ -14,6 +14,18 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0afb5ac4d42d5a0d8e736d28() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3de99d3aeeabfb3817fe55f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_deadline_metered_product", meteredProductDataSource)
 }
@@ -29,9 +41,7 @@ func meteredProductDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*):deadline:[a-z0-9-]+:[0-9]{12}:license-endpoint/le-[0-9a-z]{32}/metered-product/[0-9a-z]{1,32}-[.0-9a-z]{1,32}",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute0afb5ac4d42d5a0d8e736d28(),
 		// Property: Family
 		// CloudFormation resource type schema:
 		//
@@ -40,9 +50,7 @@ func meteredProductDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"family": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"family": schemaAttribute0afb5ac4d42d5a0d8e736d28(),
 		// Property: LicenseEndpointId
 		// CloudFormation resource type schema:
 		//
@@ -50,9 +58,7 @@ func meteredProductDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^le-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"license_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"license_endpoint_id": schemaAttribute0afb5ac4d42d5a0d8e736d28(),
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -61,9 +67,7 @@ func meteredProductDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minimum": 1024,
 		//	  "type": "integer"
 		//	}
-		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"port": schemaAttributee3de99d3aeeabfb3817fe55f(),
 		// Property: ProductId
 		// CloudFormation resource type schema:
 		//
@@ -71,9 +75,7 @@ func meteredProductDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[0-9a-z]{1,32}-[.0-9a-z]{1,32}$",
 		//	  "type": "string"
 		//	}
-		"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"product_id": schemaAttribute0afb5ac4d42d5a0d8e736d28(),
 		// Property: Vendor
 		// CloudFormation resource type schema:
 		//
@@ -82,9 +84,7 @@ func meteredProductDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"vendor": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"vendor": schemaAttribute0afb5ac4d42d5a0d8e736d28(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,41 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2a4b6bfc635dbf777a29192d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The API mapping key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute329eb2b7abaf5c9973823a5c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The API stage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34f59bb027ddee074c2491f8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70973117793f72085e6ff775() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The domain name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d442cb8fb74c46e6c2eaddd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The API identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_apigatewayv2_api_mapping", apiMappingDataSource)
 }
@@ -29,10 +64,7 @@ func apiMappingDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The API identifier.",
 		//	  "type": "string"
 		//	}
-		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"api_id": schemaAttribute8d442cb8fb74c46e6c2eaddd(),
 		// Property: ApiMappingId
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +72,7 @@ func apiMappingDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"api_mapping_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"api_mapping_id": schemaAttribute34f59bb027ddee074c2491f8(),
 		// Property: ApiMappingKey
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +80,7 @@ func apiMappingDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The API mapping key.",
 		//	  "type": "string"
 		//	}
-		"api_mapping_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API mapping key.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"api_mapping_key": schemaAttribute2a4b6bfc635dbf777a29192d(),
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +88,7 @@ func apiMappingDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The domain name.",
 		//	  "type": "string"
 		//	}
-		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The domain name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_name": schemaAttribute70973117793f72085e6ff775(),
 		// Property: Stage
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +96,7 @@ func apiMappingDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The API stage.",
 		//	  "type": "string"
 		//	}
-		"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API stage.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"stage": schemaAttribute329eb2b7abaf5c9973823a5c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

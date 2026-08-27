@@ -14,6 +14,20 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1d703f4c42a17abfd4517cdf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e22cd6b511e2d4544540447() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name for the model. If you don't specify a name, CFN generates a unique physical ID and uses that ID for the model name. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).\n  If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_apigateway_model", modelDataSource)
 }
@@ -29,10 +43,7 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"content_type": schemaAttribute1d703f4c42a17abfd4517cdf(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +51,7 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute1d703f4c42a17abfd4517cdf(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +59,7 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A name for the model. If you don't specify a name, CFN generates a unique physical ID and uses that ID for the model name. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).\n  If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the model. If you don't specify a name, CFN generates a unique physical ID and uses that ID for the model name. For more information, see [Name Type](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-name.html).\n  If you specify a name, you cannot perform updates that require replacement of this resource. You can perform updates that require no or some interruption. If you must replace the resource, specify a new name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute9e22cd6b511e2d4544540447(),
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +67,7 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rest_api_id": schemaAttribute1d703f4c42a17abfd4517cdf(),
 		// Property: Schema
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +75,7 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"schema": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schema": schemaAttribute1d703f4c42a17abfd4517cdf(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

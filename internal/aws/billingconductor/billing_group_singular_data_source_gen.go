@@ -15,6 +15,105 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1be667f9ba6b0128728e0139() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute346fbba5742800a7603fd834() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AutoAssociate
+			"auto_associate": schemaAttribute84d6bcf03db6b3a969439bb6(),
+			// Property: LinkedAccountIds
+			"linked_account_ids": schemaAttribute3b330b912e77b52613e48b04(),
+			// Property: ResponsibilityTransferArn
+			"responsibility_transfer_arn": schemaAttribute1be667f9ba6b0128728e0139(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b330b912e77b52613e48b04() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d04ceed2e4e0043148df26c() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute1be667f9ba6b0128728e0139(),
+				// Property: Value
+				"value": schemaAttribute1be667f9ba6b0128728e0139(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4880271c55bd275f9caeb069() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Creation timestamp in UNIX epoch time format",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b398fe5de6408238383fa75() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Latest modified timestamp in UNIX epoch time format",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82a50c0be80f55a4517ab4b1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "This account will act as a virtual payer account of the billing group",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84d6bcf03db6b3a969439bb6() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0ca18ed48e676711a03c636() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Billing Group ARN",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb356a59df4b2c6f2325865e5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the attached pricing plan",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee180fe23b41caec264ba9a09() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Number of accounts in the billing group",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8a1f919b4085d1af70de1fa() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PricingPlanArn
+			"pricing_plan_arn": schemaAttributeb356a59df4b2c6f2325865e5(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_billingconductor_billing_group", billingGroupDataSource)
 }
@@ -49,24 +148,7 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"account_grouping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AutoAssociate
-				"auto_associate": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: LinkedAccountIds
-				"linked_account_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResponsibilityTransferArn
-				"responsibility_transfer_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"account_grouping": schemaAttribute346fbba5742800a7603fd834(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -75,10 +157,7 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[a-zA-Z0-9]{10,12}",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Billing Group ARN",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeb0ca18ed48e676711a03c636(),
 		// Property: ComputationPreference
 		// CloudFormation resource type schema:
 		//
@@ -96,16 +175,7 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"computation_preference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PricingPlanArn
-				"pricing_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "ARN of the attached pricing plan",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"computation_preference": schemaAttributee8a1f919b4085d1af70de1fa(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -113,10 +183,7 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Creation timestamp in UNIX epoch time format",
 		//	  "type": "integer"
 		//	}
-		"creation_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Creation timestamp in UNIX epoch time format",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute4880271c55bd275f9caeb069(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -124,9 +191,7 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute1be667f9ba6b0128728e0139(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -134,10 +199,7 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Latest modified timestamp in UNIX epoch time format",
 		//	  "type": "integer"
 		//	}
-		"last_modified_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Latest modified timestamp in UNIX epoch time format",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttribute6b398fe5de6408238383fa75(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -147,9 +209,7 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "[a-zA-Z0-9_\\+=\\.\\-@]+",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute1be667f9ba6b0128728e0139(),
 		// Property: PrimaryAccountId
 		// CloudFormation resource type schema:
 		//
@@ -158,10 +218,7 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "[0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"primary_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "This account will act as a virtual payer account of the billing group",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"primary_account_id": schemaAttribute82a50c0be80f55a4517ab4b1(),
 		// Property: Size
 		// CloudFormation resource type schema:
 		//
@@ -169,10 +226,7 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Number of accounts in the billing group",
 		//	  "type": "integer"
 		//	}
-		"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Number of accounts in the billing group",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"size": schemaAttributee180fe23b41caec264ba9a09(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -183,18 +237,14 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute1be667f9ba6b0128728e0139(),
 		// Property: StatusReason
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status_reason": schemaAttribute1be667f9ba6b0128728e0139(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -223,21 +273,7 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute3d04ceed2e4e0043148df26c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

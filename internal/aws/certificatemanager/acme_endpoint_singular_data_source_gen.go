@@ -15,6 +15,108 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1a6350613c285bd27924de76() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute82061983b5dc2f7ae4c51c7b(),
+				// Property: Value
+				"value": schemaAttributea7c500f69c870452cfc617ef(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags associated with the ACME endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2422fd23b29ce15b56db354d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether contact information is required for the ACME endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a765cb3ee4a93c563202845() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The allowed key algorithms for certificates issued via this endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute319928d7553b158397b9e679() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the ACME endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82061983b5dc2f7ae4c51c7b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8364d3ce42002931df042b4b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute82061983b5dc2f7ae4c51c7b(),
+				// Property: Value
+				"value": schemaAttributea7c500f69c870452cfc617ef(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags applied to certificates issued via this endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7c500f69c870452cfc617ef() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeadf6eb786f5c71016aeacc49() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AllowedKeyAlgorithms
+			"allowed_key_algorithms": schemaAttribute2a765cb3ee4a93c563202845(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for the public certificate authority.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4e3ae86f222e020d0d3858b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ACME directory URL for the endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed895ce335de522b7dc826304() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PublicCertificateAuthority
+			"public_certificate_authority": schemaAttributeadf6eb786f5c71016aeacc49(),
+		}, /*END SCHEMA*/
+		Description: "The certificate authority configuration for the ACME endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee24f3a1b21813495eadb8fbb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The authorization behavior for the ACME endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_certificatemanager_acme_endpoint", acmeEndpointDataSource)
 }
@@ -30,10 +132,7 @@ func acmeEndpointDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The Amazon Resource Name (ARN) of the ACME endpoint.",
 		//	  "type": "string"
 		//	}
-		"acme_endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the ACME endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"acme_endpoint_arn": schemaAttribute319928d7553b158397b9e679(),
 		// Property: AuthorizationBehavior
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +140,7 @@ func acmeEndpointDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The authorization behavior for the ACME endpoint.",
 		//	  "type": "string"
 		//	}
-		"authorization_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The authorization behavior for the ACME endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"authorization_behavior": schemaAttributee24f3a1b21813495eadb8fbb(),
 		// Property: CertificateAuthority
 		// CloudFormation resource type schema:
 		//
@@ -73,25 +169,7 @@ func acmeEndpointDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"certificate_authority": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PublicCertificateAuthority
-				"public_certificate_authority": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AllowedKeyAlgorithms
-						"allowed_key_algorithms": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The allowed key algorithms for certificates issued via this endpoint.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration for the public certificate authority.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The certificate authority configuration for the ACME endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate_authority": schemaAttributed895ce335de522b7dc826304(),
 		// Property: CertificateTags
 		// CloudFormation resource type schema:
 		//
@@ -124,24 +202,7 @@ func acmeEndpointDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"certificate_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags applied to certificates issued via this endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate_tags": schemaAttribute8364d3ce42002931df042b4b(),
 		// Property: Contact
 		// CloudFormation resource type schema:
 		//
@@ -149,10 +210,7 @@ func acmeEndpointDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Whether contact information is required for the ACME endpoint.",
 		//	  "type": "string"
 		//	}
-		"contact": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether contact information is required for the ACME endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"contact": schemaAttribute2422fd23b29ce15b56db354d(),
 		// Property: EndpointUrl
 		// CloudFormation resource type schema:
 		//
@@ -160,10 +218,7 @@ func acmeEndpointDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The ACME directory URL for the endpoint.",
 		//	  "type": "string"
 		//	}
-		"endpoint_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ACME directory URL for the endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_url": schemaAttributec4e3ae86f222e020d0d3858b(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -195,24 +250,7 @@ func acmeEndpointDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags associated with the ACME endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute1a6350613c285bd27924de76(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

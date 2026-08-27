@@ -15,6 +15,85 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1e6a07822adf95b15085fa62() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6617715af07af9ddbc7c5e3a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute1e6a07822adf95b15085fa62(),
+				// Property: Value
+				"value": schemaAttribute1e6a07822adf95b15085fa62(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute668cd4c8c014688978b33c11() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Criterion
+			"criterion": schemaAttribute762ff81daed6b99aad4d31f6(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute762ff81daed6b99aad4d31f6() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Eq
+				"eq": schemaAttributed75712083ee44c14d4214249(),
+				// Property: Equals
+				"equals": schemaAttributed75712083ee44c14d4214249(),
+				// Property: GreaterThan
+				"greater_than": schemaAttributedad9211ec4e6a546f96a834a(),
+				// Property: GreaterThanOrEqual
+				"greater_than_or_equal": schemaAttributedad9211ec4e6a546f96a834a(),
+				// Property: Gt
+				"gt": schemaAttributedad9211ec4e6a546f96a834a(),
+				// Property: Gte
+				"gte": schemaAttributedad9211ec4e6a546f96a834a(),
+				// Property: LessThan
+				"less_than": schemaAttributedad9211ec4e6a546f96a834a(),
+				// Property: LessThanOrEqual
+				"less_than_or_equal": schemaAttributedad9211ec4e6a546f96a834a(),
+				// Property: Lt
+				"lt": schemaAttributedad9211ec4e6a546f96a834a(),
+				// Property: Lte
+				"lte": schemaAttributedad9211ec4e6a546f96a834a(),
+				// Property: Neq
+				"neq": schemaAttributed75712083ee44c14d4214249(),
+				// Property: NotEquals
+				"not_equals": schemaAttributed75712083ee44c14d4214249(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed75712083ee44c14d4214249() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedad9211ec4e6a546f96a834a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_guardduty_filter", filterDataSource)
 }
@@ -29,18 +108,14 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"action": schemaAttribute1e6a07822adf95b15085fa62(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute1e6a07822adf95b15085fa62(),
 		// Property: DetectorId
 		// CloudFormation resource type schema:
 		//
@@ -49,9 +124,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"detector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"detector_id": schemaAttribute1e6a07822adf95b15085fa62(),
 		// Property: FindingCriteria
 		// CloudFormation resource type schema:
 		//
@@ -129,72 +202,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"finding_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Criterion
-				"criterion":               // Pattern: ""
-				schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Eq
-							"eq": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Equals
-							"equals": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: GreaterThan
-							"greater_than": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: GreaterThanOrEqual
-							"greater_than_or_equal": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Gt
-							"gt": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Gte
-							"gte": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: LessThan
-							"less_than": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: LessThanOrEqual
-							"less_than_or_equal": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Lt
-							"lt": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Lte
-							"lte": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Neq
-							"neq": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: NotEquals
-							"not_equals": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"finding_criteria": schemaAttribute668cd4c8c014688978b33c11(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -203,9 +211,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute1e6a07822adf95b15085fa62(),
 		// Property: Rank
 		// CloudFormation resource type schema:
 		//
@@ -214,9 +220,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"rank": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"rank": schemaAttributedad9211ec4e6a546f96a834a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -244,21 +248,7 @@ func filterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6617715af07af9ddbc7c5e3a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

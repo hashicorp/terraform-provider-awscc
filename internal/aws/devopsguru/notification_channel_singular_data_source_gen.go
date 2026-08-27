@@ -15,6 +15,72 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0d763f4dbd6f3e337fb80e68() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TopicArn
+			"topic_arn": schemaAttributed39c2de3339a60771cfb40a4(),
+		}, /*END SCHEMA*/
+		Description: "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26fa741341154fedb60af673() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "DevOps Guru insight severities to filter for",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute533ea8112d1d8a4bfa6351dd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Filters
+			"filters": schemaAttributeda2c590b9dfaf0f623565498(),
+			// Property: Sns
+			"sns": schemaAttribute0d763f4dbd6f3e337fb80e68(),
+		}, /*END SCHEMA*/
+		Description: "Information about notification channels you have configured with DevOps Guru.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute560c712426e51fba633b3359() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "DevOps Guru message types to filter for",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed39c2de3339a60771cfb40a4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda2c590b9dfaf0f623565498() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MessageTypes
+			"message_types": schemaAttribute560c712426e51fba633b3359(),
+			// Property: Severities
+			"severities": schemaAttribute26fa741341154fedb60af673(),
+		}, /*END SCHEMA*/
+		Description: "Information about filters of a notification channel configured in DevOpsGuru to filter for insights.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee49f9ca0534099735d364bf4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of a notification channel.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_devopsguru_notification_channel", notificationChannelDataSource)
 }
@@ -87,42 +153,7 @@ func notificationChannelDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Filters
-				"filters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: MessageTypes
-						"message_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "DevOps Guru message types to filter for",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Severities
-						"severities": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "DevOps Guru insight severities to filter for",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Information about filters of a notification channel configured in DevOpsGuru to filter for insights.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Sns
-				"sns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: TopicArn
-						"topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Information about notification channels you have configured with DevOps Guru.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"config": schemaAttribute533ea8112d1d8a4bfa6351dd(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -133,10 +164,7 @@ func notificationChannelDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"notification_channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of a notification channel.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"notification_channel_id": schemaAttributee49f9ca0534099735d364bf4(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

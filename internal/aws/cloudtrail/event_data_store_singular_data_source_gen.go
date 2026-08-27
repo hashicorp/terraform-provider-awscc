@@ -15,6 +15,298 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute02b4de4427c634a64798c88a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the maximum size allowed for the event. Valid values are Standard and Large. If you add ContextKeySelectors, this value must be set to Large.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute054773dd1b051563791a2ee4() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FieldSelectors
+				"field_selectors": schemaAttributed80569184ebcb56224553a20(),
+				// Property: Name
+				"name": schemaAttributebe7a0ef7bf168fdb2f349cea(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The advanced event selectors that were used to select events for the data store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute062e598e2c880b3ee01cd4e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the type of the event record field in ContextKeySelector. Valid values include RequestContext, TagContext.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0ae867b51216d40fd6ea112e() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates that an event data store is collecting logged events for an organization.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute12232ea5d3ac1c0eff40f137() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "An operator that excludes events that match the first few characters of the event record field specified as the value of Field.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a89ee90bd22ef84361e2ee0() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the event data store is ingesting events.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2bc88771d86a127a4f9985d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the ARN of the event data store that will collect Insights events. Both InsightSelectors and InsightsDestination need to have a value in order to enable Insights events on an event data store",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2dc610776ae55dcb40b6704c() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "An operator that includes events that match the first few characters of the event record field specified as the value of Field.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute302c048d4474fbacc0f21267() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the event data store is protected from termination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute303a37ba751602ed91a28030() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "An operator that excludes events that match the exact value of the event record field specified as the value of Field.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d84e71fd1124a70b67d2531() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute526c379b35ff3e991bb9c634() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "An operator that includes events that match the last few characters of the event record field specified as the value of Field.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute527beaf3c0774c3b9902df4c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of an event data store. Values are STARTING_INGESTION, ENABLED, STOPPING_INGESTION, STOPPED_INGESTION and PENDING_DELETION.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60e43ccc723edc1cac661ea2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeafd6568bc352596c36bb7281(),
+				// Property: Value
+				"value": schemaAttributebb55be0c1f58a654ebaeae80(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute660b50570c171f5b9c57b564() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the event data store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6739b0d67023b4aec07020e9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of Insights to log on an event data store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b9e040fa7cf0d1b900aa355() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "An operator that excludes events that match the last few characters of the event record field specified as the value of Field.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83079fbb5a1d8c6c76c45780() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "An operator that includes events that match the exact value of the event record field specified in Type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84fd7f2190a8f5a4fc94291e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The retention period, in days.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute925d83ec0f79fb1448b47ddf() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether federation is enabled on an event data store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92c3bfcd9b6a45095a690bd3() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Equals
+				"equals": schemaAttribute83079fbb5a1d8c6c76c45780(),
+				// Property: Type
+				"type": schemaAttribute062e598e2c880b3ee01cd4e1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array that enriches event records in an existing event data store by including additional information specified in individual ContexKeySelector entries. If you add ContextKeySelectors, you must set MaxEventSize to Large.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f438be4ba7968cc336308e0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The mode that the event data store will use to charge for event storage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0bd29f27f410fd8c4583bdc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the role used for event data store federation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea79a4e86439e31b149eb208c() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InsightType
+				"insight_type": schemaAttribute6739b0d67023b4aec07020e9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing event data store. Both InsightSelectors and InsightsDestination need to have a value in order to enable Insights events on an event data store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeafd6568bc352596c36bb7281() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb55be0c1f58a654ebaeae80() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe7a0ef7bf168fdb2f349cea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An optional, descriptive name for an advanced event selector, such as \"Log data events for only two S3 buckets\".",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8afa3a3c23feb0feba49ba0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp showing when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecbb585cfe56b7082df1a10d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1e989102bb3bf380e918af0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the event data store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed80569184ebcb56224553a20() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EndsWith
+				"ends_with": schemaAttribute526c379b35ff3e991bb9c634(),
+				// Property: Equals
+				"equals": schemaAttributef175738ca5bfd92a6170693f(),
+				// Property: Field
+				"field": schemaAttribute3d84e71fd1124a70b67d2531(),
+				// Property: NotEndsWith
+				"not_ends_with": schemaAttribute6b9e040fa7cf0d1b900aa355(),
+				// Property: NotEquals
+				"not_equals": schemaAttribute303a37ba751602ed91a28030(),
+				// Property: NotStartsWith
+				"not_starts_with": schemaAttribute12232ea5d3ac1c0eff40f137(),
+				// Property: StartsWith
+				"starts_with": schemaAttribute2dc610776ae55dcb40b6704c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Contains all selector statements in an advanced event selector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede704006146d3fea5da0257f() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the event data store includes events from all regions, or only from the region in which it was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee062c72f46f9b1899ca61492() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp of the event data store's creation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef175738ca5bfd92a6170693f() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudtrail_event_data_store", eventDataStoreDataSource)
 }
@@ -150,69 +442,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"advanced_event_selectors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: FieldSelectors
-					"field_selectors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: EndsWith
-								"ends_with": schema.SetAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "An operator that includes events that match the last few characters of the event record field specified as the value of Field.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Equals
-								"equals": schema.SetAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Field
-								"field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: NotEndsWith
-								"not_ends_with": schema.SetAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "An operator that excludes events that match the last few characters of the event record field specified as the value of Field.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: NotEquals
-								"not_equals": schema.SetAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "An operator that excludes events that match the exact value of the event record field specified as the value of Field.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: NotStartsWith
-								"not_starts_with": schema.SetAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "An operator that excludes events that match the first few characters of the event record field specified as the value of Field.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: StartsWith
-								"starts_with": schema.SetAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "An operator that includes events that match the first few characters of the event record field specified as the value of Field.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "Contains all selector statements in an advanced event selector.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "An optional, descriptive name for an advanced event selector, such as \"Log data events for only two S3 buckets\".",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The advanced event selectors that were used to select events for the data store.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"advanced_event_selectors": schemaAttribute054773dd1b051563791a2ee4(),
 		// Property: BillingMode
 		// CloudFormation resource type schema:
 		//
@@ -220,10 +450,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The mode that the event data store will use to charge for event storage.",
 		//	  "type": "string"
 		//	}
-		"billing_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The mode that the event data store will use to charge for event storage.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"billing_mode": schemaAttribute9f438be4ba7968cc336308e0(),
 		// Property: ContextKeySelectors
 		// CloudFormation resource type schema:
 		//
@@ -267,25 +494,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"context_key_selectors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Equals
-					"equals": schema.SetAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "An operator that includes events that match the exact value of the event record field specified in Type.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Type
-					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Specifies the type of the event record field in ContextKeySelector. Valid values include RequestContext, TagContext.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array that enriches event records in an existing event data store by including additional information specified in individual ContexKeySelector entries. If you add ContextKeySelectors, you must set MaxEventSize to Large.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"context_key_selectors": schemaAttribute92c3bfcd9b6a45095a690bd3(),
 		// Property: CreatedTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -293,10 +502,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The timestamp of the event data store's creation.",
 		//	  "type": "string"
 		//	}
-		"created_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp of the event data store's creation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_timestamp": schemaAttributee062c72f46f9b1899ca61492(),
 		// Property: EventDataStoreArn
 		// CloudFormation resource type schema:
 		//
@@ -304,10 +510,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The ARN of the event data store.",
 		//	  "type": "string"
 		//	}
-		"event_data_store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the event data store.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"event_data_store_arn": schemaAttribute660b50570c171f5b9c57b564(),
 		// Property: FederationEnabled
 		// CloudFormation resource type schema:
 		//
@@ -315,10 +518,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Indicates whether federation is enabled on an event data store.",
 		//	  "type": "boolean"
 		//	}
-		"federation_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether federation is enabled on an event data store.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"federation_enabled": schemaAttribute925d83ec0f79fb1448b47ddf(),
 		// Property: FederationRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -326,10 +526,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The ARN of the role used for event data store federation.",
 		//	  "type": "string"
 		//	}
-		"federation_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the role used for event data store federation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"federation_role_arn": schemaAttributea0bd29f27f410fd8c4583bdc(),
 		// Property: IngestionEnabled
 		// CloudFormation resource type schema:
 		//
@@ -337,10 +534,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Indicates whether the event data store is ingesting events.",
 		//	  "type": "boolean"
 		//	}
-		"ingestion_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the event data store is ingesting events.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ingestion_enabled": schemaAttribute1a89ee90bd22ef84361e2ee0(),
 		// Property: InsightSelectors
 		// CloudFormation resource type schema:
 		//
@@ -361,19 +555,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"insight_selectors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: InsightType
-					"insight_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of Insights to log on an event data store.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Lets you enable Insights event logging by specifying the Insights selectors that you want to enable on an existing event data store. Both InsightSelectors and InsightsDestination need to have a value in order to enable Insights events on an event data store.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"insight_selectors": schemaAttributea79a4e86439e31b149eb208c(),
 		// Property: InsightsDestination
 		// CloudFormation resource type schema:
 		//
@@ -381,10 +563,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Specifies the ARN of the event data store that will collect Insights events. Both InsightSelectors and InsightsDestination need to have a value in order to enable Insights events on an event data store",
 		//	  "type": "string"
 		//	}
-		"insights_destination": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the ARN of the event data store that will collect Insights events. Both InsightSelectors and InsightsDestination need to have a value in order to enable Insights events on an event data store",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"insights_destination": schemaAttribute2bc88771d86a127a4f9985d2(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -392,10 +571,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttributecbb585cfe56b7082df1a10d2(),
 		// Property: MaxEventSize
 		// CloudFormation resource type schema:
 		//
@@ -407,10 +583,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"max_event_size": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the maximum size allowed for the event. Valid values are Standard and Large. If you add ContextKeySelectors, this value must be set to Large.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"max_event_size": schemaAttribute02b4de4427c634a64798c88a(),
 		// Property: MultiRegionEnabled
 		// CloudFormation resource type schema:
 		//
@@ -418,10 +591,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Indicates whether the event data store includes events from all regions, or only from the region in which it was created.",
 		//	  "type": "boolean"
 		//	}
-		"multi_region_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the event data store includes events from all regions, or only from the region in which it was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"multi_region_enabled": schemaAttributede704006146d3fea5da0257f(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -429,10 +599,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The name of the event data store.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the event data store.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributed1e989102bb3bf380e918af0(),
 		// Property: OrganizationEnabled
 		// CloudFormation resource type schema:
 		//
@@ -440,10 +607,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Indicates that an event data store is collecting logged events for an organization.",
 		//	  "type": "boolean"
 		//	}
-		"organization_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates that an event data store is collecting logged events for an organization.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"organization_enabled": schemaAttribute0ae867b51216d40fd6ea112e(),
 		// Property: RetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -451,10 +615,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The retention period, in days.",
 		//	  "type": "integer"
 		//	}
-		"retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The retention period, in days.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"retention_period": schemaAttribute84fd7f2190a8f5a4fc94291e(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -462,10 +623,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The status of an event data store. Values are STARTING_INGESTION, ENABLED, STOPPING_INGESTION, STOPPED_INGESTION and PENDING_DELETION.",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of an event data store. Values are STARTING_INGESTION, ENABLED, STOPPING_INGESTION, STOPPED_INGESTION and PENDING_DELETION.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute527beaf3c0774c3b9902df4c(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -493,23 +651,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute60e43ccc723edc1cac661ea2(),
 		// Property: TerminationProtectionEnabled
 		// CloudFormation resource type schema:
 		//
@@ -517,10 +659,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Indicates whether the event data store is protected from termination.",
 		//	  "type": "boolean"
 		//	}
-		"termination_protection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the event data store is protected from termination.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"termination_protection_enabled": schemaAttribute302c048d4474fbacc0f21267(),
 		// Property: UpdatedTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -528,10 +667,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The timestamp showing when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.",
 		//	  "type": "string"
 		//	}
-		"updated_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp showing when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_timestamp": schemaAttributec8afa3a3c23feb0feba49ba0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

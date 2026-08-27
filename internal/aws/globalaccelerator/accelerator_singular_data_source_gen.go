@@ -15,6 +15,121 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0c3be453f1ca11b5c814ae60() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The prefix for the location in the Amazon S3 bucket for the flow logs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0dfc3024d7ea53a27a93fff8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Value for the tag. Value can be 1 to 255 characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0ea358da83a1f5989e808e85() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether flow logs are enabled for the accelerator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute172565a1a8db6108d276bfe6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the accelerator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e700c45ba8dee4c831b8dc2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Key of the tag. Value can be 1 to 127 characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44650a8c83117a20cf47472e() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The IPv6 addresses assigned if the accelerator is dualstack",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4881b43d8f5958f7d7099b95() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 addresses.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4d9c30d8ba0547429c1ccaab() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether an accelerator is enabled. The value is true or false.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d3672fe360f50fdea17b0fd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of accelerator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63d8ec750da81d4d6757d4ce() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute2e700c45ba8dee4c831b8dc2(),
+				// Property: Value
+				"value": schemaAttribute0dfc3024d7ea53a27a93fff8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64b40aab2b5f269e7a7556b2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Amazon S3 bucket for the flow logs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute795cce62b7113d4185fa0bc3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "IP Address type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6f6ea648f415a8190ed143b() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The IPv4 addresses assigned to the accelerator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed80a48785842d1c331b11865() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The IP addresses from BYOIP Prefix pool.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2e9796d31dad4fa6c708545() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 and IPv6 addresses.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_globalaccelerator_accelerator", acceleratorDataSource)
 }
@@ -30,10 +145,7 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the accelerator.",
 		//	  "type": "string"
 		//	}
-		"accelerator_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the accelerator.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"accelerator_arn": schemaAttribute172565a1a8db6108d276bfe6(),
 		// Property: DnsName
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +153,7 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 addresses.",
 		//	  "type": "string"
 		//	}
-		"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 addresses.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dns_name": schemaAttribute4881b43d8f5958f7d7099b95(),
 		// Property: DualStackDnsName
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +161,7 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 and IPv6 addresses.",
 		//	  "type": "string"
 		//	}
-		"dual_stack_dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Domain Name System (DNS) name that Global Accelerator creates that points to your accelerator's static IPv4 and IPv6 addresses.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dual_stack_dns_name": schemaAttributee2e9796d31dad4fa6c708545(),
 		// Property: Enabled
 		// CloudFormation resource type schema:
 		//
@@ -64,10 +170,7 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether an accelerator is enabled. The value is true or false.",
 		//	  "type": "boolean"
 		//	}
-		"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether an accelerator is enabled. The value is true or false.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enabled": schemaAttribute4d9c30d8ba0547429c1ccaab(),
 		// Property: FlowLogsEnabled
 		// CloudFormation resource type schema:
 		//
@@ -76,10 +179,7 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether flow logs are enabled for the accelerator.",
 		//	  "type": "boolean"
 		//	}
-		"flow_logs_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether flow logs are enabled for the accelerator.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"flow_logs_enabled": schemaAttribute0ea358da83a1f5989e808e85(),
 		// Property: FlowLogsS3Bucket
 		// CloudFormation resource type schema:
 		//
@@ -88,10 +188,7 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
-		"flow_logs_s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Amazon S3 bucket for the flow logs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"flow_logs_s3_bucket": schemaAttribute64b40aab2b5f269e7a7556b2(),
 		// Property: FlowLogsS3Prefix
 		// CloudFormation resource type schema:
 		//
@@ -100,10 +197,7 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
-		"flow_logs_s3_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The prefix for the location in the Amazon S3 bucket for the flow logs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"flow_logs_s3_prefix": schemaAttribute0c3be453f1ca11b5c814ae60(),
 		// Property: IpAddressType
 		// CloudFormation resource type schema:
 		//
@@ -116,10 +210,7 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IP Address type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ip_address_type": schemaAttribute795cce62b7113d4185fa0bc3(),
 		// Property: IpAddresses
 		// CloudFormation resource type schema:
 		//
@@ -133,11 +224,7 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"ip_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The IP addresses from BYOIP Prefix pool.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ip_addresses": schemaAttributed80a48785842d1c331b11865(),
 		// Property: Ipv4Addresses
 		// CloudFormation resource type schema:
 		//
@@ -149,11 +236,7 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"ipv_4_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The IPv4 addresses assigned to the accelerator.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_4_addresses": schemaAttributec6f6ea648f415a8190ed143b(),
 		// Property: Ipv6Addresses
 		// CloudFormation resource type schema:
 		//
@@ -165,11 +248,7 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"ipv_6_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The IPv6 addresses assigned if the accelerator is dualstack",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_6_addresses": schemaAttribute44650a8c83117a20cf47472e(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -180,10 +259,7 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{0,64}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of accelerator.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute5d3672fe360f50fdea17b0fd(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -214,23 +290,7 @@ func acceleratorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Key of the tag. Value can be 1 to 127 characters.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Value for the tag. Value can be 1 to 255 characters.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute63d8ec750da81d4d6757d4ce(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

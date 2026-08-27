@@ -15,6 +15,71 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0ba3af73377d017004f149cf() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute1a2371022cef2091c79f8369(),
+				// Property: Value
+				"value": schemaAttributeedeb724f33350ecb24843a02(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a2371022cef2091c79f8369() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key for an AWS resource tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute241bfab13910b46517cb2050() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL of the FSx for Lustre location that was described.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31d87e2b64b6179e3d9e892f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Amazon FSx for Lustre file system location that is created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute446269991f04a42219d8a1e9() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The ARNs of the security groups that are to use to configure the FSx for Lustre file system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45aae940d6bca8b9f9a352cb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the FSx for Lustre file system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea799559162f4682216616391() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A subdirectory in the location's path.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeedeb724f33350ecb24843a02() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for an AWS resource tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_datasync_location_fsx_lustre", locationFSxLustreDataSource)
 }
@@ -32,10 +97,7 @@ func locationFSxLustreDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]+:[0-9]{12}:file-system/fs-[0-9a-f]+$",
 		//	  "type": "string"
 		//	}
-		"fsx_filesystem_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the FSx for Lustre file system.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"fsx_filesystem_arn": schemaAttribute45aae940d6bca8b9f9a352cb(),
 		// Property: LocationArn
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +107,7 @@ func locationFSxLustreDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Amazon FSx for Lustre file system location that is created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"location_arn": schemaAttribute31d87e2b64b6179e3d9e892f(),
 		// Property: LocationUri
 		// CloudFormation resource type schema:
 		//
@@ -58,10 +117,7 @@ func locationFSxLustreDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^(efs|nfs|s3|smb|fsxw|hdfs|fsxl)://[a-zA-Z0-9.:/\\-]+$",
 		//	  "type": "string"
 		//	}
-		"location_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The URL of the FSx for Lustre location that was described.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"location_uri": schemaAttribute241bfab13910b46517cb2050(),
 		// Property: SecurityGroupArns
 		// CloudFormation resource type schema:
 		//
@@ -77,11 +133,7 @@ func locationFSxLustreDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"security_group_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The ARNs of the security groups that are to use to configure the FSx for Lustre file system.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_arns": schemaAttribute446269991f04a42219d8a1e9(),
 		// Property: Subdirectory
 		// CloudFormation resource type schema:
 		//
@@ -91,10 +143,7 @@ func locationFSxLustreDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
 		//	  "type": "string"
 		//	}
-		"subdirectory": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A subdirectory in the location's path.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subdirectory": schemaAttributea799559162f4682216616391(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -131,24 +180,7 @@ func locationFSxLustreDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key for an AWS resource tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for an AWS resource tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute0ba3af73377d017004f149cf(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

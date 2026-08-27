@@ -16,6 +16,235 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0a8017c2e82a930d3eb71336() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of concurrent runs allowed for the job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c138332f9f8c9912ce2ae21() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "This field is reserved for future use.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d0b16413dde7be8cc6fa035() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Runtime is used to specify the versions of Ray, Python and additional libraries available in your environment",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e04b51d3a32c9a1d92e5024() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the job command",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26525a2f53b150cee2ce9e27() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttribute1e04b51d3a32c9a1d92e5024(),
+			// Property: PythonVersion
+			"python_version": schemaAttributee65c23b1754a62b96ecde171(),
+			// Property: Runtime
+			"runtime": schemaAttribute0d0b16413dde7be8cc6fa035(),
+			// Property: ScriptLocation
+			"script_location": schemaAttribute7e1e029816d0869a1ccf7eec(),
+		}, /*END SCHEMA*/
+		Description: "The code that executes a job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33bef653ac8c1493fee2598b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Non-overridable arguments for this job, specified as name-value pairs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute47fb6b2ce62a4a8004f02a4a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the job is run with a standard or flexible execution class.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute69e0b5aae94447d30eefd947() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxConcurrentRuns
+			"max_concurrent_runs": schemaAttribute0a8017c2e82a930d3eb71336(),
+		}, /*END SCHEMA*/
+		Description: "The maximum number of concurrent runs that are allowed for this job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f8d4a32d20d9bc6c17d42fc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The tags to use with this job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76de1b0922de3cc42184fd49() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of workers of a defined workerType that are allocated when a job runs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e1e029816d0869a1ccf7eec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that executes a job",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute88c1142dd17a803542c3989a() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of capacity units that are allocated to this job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8afe9ed4db1346ffcf976099() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the SecurityConfiguration structure to be used with this job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94c30b6b706eb86b8ff2034c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "TThe type of predefined worker that is allocated when a job runs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea29767bd7de0496ff29791a5() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Property description not available.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea74d927bc5e4e22168efbbb7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Connections
+			"connections": schemaAttributeac7ede33cb9ad27c790b4d0d(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the connections used by a job",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac7ede33cb9ad27c790b4d0d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of connections used by the job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba154192e9f0eee95a9a5b7c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: NotifyDelayAfter
+			"notify_delay_after": schemaAttributed545c35f05c79aeaf06cc949(),
+		}, /*END SCHEMA*/
+		Description: "Specifies configuration properties of a notification.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec12a347ce3d7a2ccbac117d8() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec141fe221216900c0b68e1d6() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec291887300457dd87cf494cb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Property description not available.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed545c35f05c79aeaf06cc949() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "It is the number of minutes to wait before sending a job run delay notification after a job run starts",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed7601fcb670352a5257eb352() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Glue version determines the versions of Apache Spark and Python that AWS Glue supports.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda210dcd40a4eaaa348763d3() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of times to retry this job after a JobRun fails",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee04a83f658ad8c2dc733822b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name or Amazon Resource Name (ARN) of the IAM role associated with this job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee65c23b1754a62b96ecde171() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Python version being used to execute a Python shell job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee7c75a571f40ac798c77ba46() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name you assign to the job definition",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef824c264ee64e4376191c73() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef84fdb7103922117c4d3673d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The default arguments for this job, specified as name-value pairs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_job", jobDataSource)
 }
@@ -31,10 +260,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of capacity units that are allocated to this job.",
 		//	  "type": "number"
 		//	}
-		"allocated_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of capacity units that are allocated to this job.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"allocated_capacity": schemaAttribute88c1142dd17a803542c3989a(),
 		// Property: Command
 		// CloudFormation resource type schema:
 		//
@@ -61,32 +287,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"command": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the job command",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PythonVersion
-				"python_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Python version being used to execute a Python shell job.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Runtime
-				"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Runtime is used to specify the versions of Ray, Python and additional libraries available in your environment",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ScriptLocation
-				"script_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that executes a job",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The code that executes a job.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"command": schemaAttribute26525a2f53b150cee2ce9e27(),
 		// Property: Connections
 		// CloudFormation resource type schema:
 		//
@@ -105,18 +306,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"connections": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Connections
-				"connections": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of connections used by the job.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies the connections used by a job",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connections": schemaAttributea74d927bc5e4e22168efbbb7(),
 		// Property: DefaultArguments
 		// CloudFormation resource type schema:
 		//
@@ -124,11 +314,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The default arguments for this job, specified as name-value pairs.",
 		//	  "type": "object"
 		//	}
-		"default_arguments": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "The default arguments for this job, specified as name-value pairs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_arguments": schemaAttributef84fdb7103922117c4d3673d(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -136,10 +322,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description of the job.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the job.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeef824c264ee64e4376191c73(),
 		// Property: ExecutionClass
 		// CloudFormation resource type schema:
 		//
@@ -147,10 +330,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether the job is run with a standard or flexible execution class.",
 		//	  "type": "string"
 		//	}
-		"execution_class": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the job is run with a standard or flexible execution class.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"execution_class": schemaAttribute47fb6b2ce62a4a8004f02a4a(),
 		// Property: ExecutionProperty
 		// CloudFormation resource type schema:
 		//
@@ -165,17 +345,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"execution_property": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaxConcurrentRuns
-				"max_concurrent_runs": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum number of concurrent runs allowed for the job.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The maximum number of concurrent runs that are allowed for this job.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"execution_property": schemaAttribute69e0b5aae94447d30eefd947(),
 		// Property: GlueVersion
 		// CloudFormation resource type schema:
 		//
@@ -183,10 +353,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Glue version determines the versions of Apache Spark and Python that AWS Glue supports.",
 		//	  "type": "string"
 		//	}
-		"glue_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Glue version determines the versions of Apache Spark and Python that AWS Glue supports.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"glue_version": schemaAttributed7601fcb670352a5257eb352(),
 		// Property: JobMode
 		// CloudFormation resource type schema:
 		//
@@ -194,10 +361,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Property description not available.",
 		//	  "type": "string"
 		//	}
-		"job_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Property description not available.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"job_mode": schemaAttributec291887300457dd87cf494cb(),
 		// Property: JobRunQueuingEnabled
 		// CloudFormation resource type schema:
 		//
@@ -205,10 +369,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Property description not available.",
 		//	  "type": "boolean"
 		//	}
-		"job_run_queuing_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Property description not available.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"job_run_queuing_enabled": schemaAttributea29767bd7de0496ff29791a5(),
 		// Property: LogUri
 		// CloudFormation resource type schema:
 		//
@@ -216,10 +377,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "This field is reserved for future use.",
 		//	  "type": "string"
 		//	}
-		"log_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "This field is reserved for future use.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"log_uri": schemaAttribute0c138332f9f8c9912ce2ae21(),
 		// Property: MaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -227,10 +385,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Property description not available.",
 		//	  "type": "string"
 		//	}
-		"maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Property description not available.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"maintenance_window": schemaAttributec291887300457dd87cf494cb(),
 		// Property: MaxCapacity
 		// CloudFormation resource type schema:
 		//
@@ -238,10 +393,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs.",
 		//	  "type": "number"
 		//	}
-		"max_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"max_capacity": schemaAttributec141fe221216900c0b68e1d6(),
 		// Property: MaxRetries
 		// CloudFormation resource type schema:
 		//
@@ -249,10 +401,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The maximum number of times to retry this job after a JobRun fails",
 		//	  "type": "number"
 		//	}
-		"max_retries": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum number of times to retry this job after a JobRun fails",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"max_retries": schemaAttributeda210dcd40a4eaaa348763d3(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -260,10 +409,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name you assign to the job definition",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name you assign to the job definition",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributee7c75a571f40ac798c77ba46(),
 		// Property: NonOverridableArguments
 		// CloudFormation resource type schema:
 		//
@@ -271,11 +417,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Non-overridable arguments for this job, specified as name-value pairs.",
 		//	  "type": "object"
 		//	}
-		"non_overridable_arguments": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "Non-overridable arguments for this job, specified as name-value pairs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"non_overridable_arguments": schemaAttribute33bef653ac8c1493fee2598b(),
 		// Property: NotificationProperty
 		// CloudFormation resource type schema:
 		//
@@ -290,17 +432,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"notification_property": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: NotifyDelayAfter
-				"notify_delay_after": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "It is the number of minutes to wait before sending a job run delay notification after a job run starts",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies configuration properties of a notification.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"notification_property": schemaAttributeba154192e9f0eee95a9a5b7c(),
 		// Property: NumberOfWorkers
 		// CloudFormation resource type schema:
 		//
@@ -308,10 +440,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of workers of a defined workerType that are allocated when a job runs.",
 		//	  "type": "integer"
 		//	}
-		"number_of_workers": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of workers of a defined workerType that are allocated when a job runs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"number_of_workers": schemaAttribute76de1b0922de3cc42184fd49(),
 		// Property: Role
 		// CloudFormation resource type schema:
 		//
@@ -319,10 +448,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name or Amazon Resource Name (ARN) of the IAM role associated with this job.",
 		//	  "type": "string"
 		//	}
-		"role": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name or Amazon Resource Name (ARN) of the IAM role associated with this job.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role": schemaAttributee04a83f658ad8c2dc733822b(),
 		// Property: SecurityConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -330,10 +456,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the SecurityConfiguration structure to be used with this job.",
 		//	  "type": "string"
 		//	}
-		"security_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the SecurityConfiguration structure to be used with this job.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_configuration": schemaAttribute8afe9ed4db1346ffcf976099(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -341,11 +464,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The tags to use with this job.",
 		//	  "type": "object"
 		//	}
-		"tags": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "The tags to use with this job.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6f8d4a32d20d9bc6c17d42fc(),
 		// Property: Timeout
 		// CloudFormation resource type schema:
 		//
@@ -353,10 +472,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status.",
 		//	  "type": "integer"
 		//	}
-		"timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"timeout": schemaAttributec12a347ce3d7a2ccbac117d8(),
 		// Property: WorkerType
 		// CloudFormation resource type schema:
 		//
@@ -379,10 +495,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"worker_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TThe type of predefined worker that is allocated when a job runs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"worker_type": schemaAttribute94c30b6b706eb86b8ff2034c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

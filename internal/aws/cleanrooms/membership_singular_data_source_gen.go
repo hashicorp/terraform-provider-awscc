@@ -14,6 +14,143 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1fa13a70fcb90251196689fe() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3
+			"s3": schemaAttributec4039a97631e035f88d9c23d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2bdf7ce453806a033b1d2f11() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: OutputConfiguration
+			"output_configuration": schemaAttribute1fa13a70fcb90251196689fe(),
+			// Property: RoleArn
+			"role_arn": schemaAttribute66924863b6fe019b7322a8cd(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b2f51f58bcc98eb0c9380f7() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3fb8daa6b8ab94d8cff060d4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3
+			"s3": schemaAttribute890f7823cf9adceb16877e66(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4689307fc9c6b41e190e2443() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: OutputConfiguration
+			"output_configuration": schemaAttribute3fb8daa6b8ab94d8cff060d4(),
+			// Property: RoleArn
+			"role_arn": schemaAttribute66924863b6fe019b7322a8cd(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66924863b6fe019b7322a8cd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute764251c6544f4f4e800f9db0() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute66924863b6fe019b7322a8cd(),
+				// Property: Value
+				"value": schemaAttribute66924863b6fe019b7322a8cd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An arbitrary set of tags (key-value pairs) for this cleanrooms membership.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute890f7823cf9adceb16877e66() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Bucket
+			"bucket": schemaAttribute66924863b6fe019b7322a8cd(),
+			// Property: KeyPrefix
+			"key_prefix": schemaAttribute66924863b6fe019b7322a8cd(),
+			// Property: ResultFormat
+			"result_format": schemaAttribute66924863b6fe019b7322a8cd(),
+			// Property: SingleFileOutput
+			"single_file_output": schemaAttribute3b2f51f58bcc98eb0c9380f7(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a12437fdafc144f47fbd2d1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ModelInference
+			"model_inference": schemaAttribute927311da91c1e65a7a218640(),
+			// Property: ModelTraining
+			"model_training": schemaAttribute927311da91c1e65a7a218640(),
+			// Property: SyntheticDataGeneration
+			"synthetic_data_generation": schemaAttribute927311da91c1e65a7a218640(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute927311da91c1e65a7a218640() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IsResponsible
+			"is_responsible": schemaAttribute3b2f51f58bcc98eb0c9380f7(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f60a64154c9a932b53b7013() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: JobCompute
+			"job_compute": schemaAttribute927311da91c1e65a7a218640(),
+			// Property: MachineLearning
+			"machine_learning": schemaAttribute8a12437fdafc144f47fbd2d1(),
+			// Property: QueryCompute
+			"query_compute": schemaAttribute927311da91c1e65a7a218640(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4039a97631e035f88d9c23d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Bucket
+			"bucket": schemaAttribute66924863b6fe019b7322a8cd(),
+			// Property: KeyPrefix
+			"key_prefix": schemaAttribute66924863b6fe019b7322a8cd(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cleanrooms_membership", membershipDataSource)
 }
@@ -29,9 +166,7 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 100,
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute66924863b6fe019b7322a8cd(),
 		// Property: CollaborationArn
 		// CloudFormation resource type schema:
 		//
@@ -39,9 +174,7 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 100,
 		//	  "type": "string"
 		//	}
-		"collaboration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"collaboration_arn": schemaAttribute66924863b6fe019b7322a8cd(),
 		// Property: CollaborationCreatorAccountId
 		// CloudFormation resource type schema:
 		//
@@ -51,9 +184,7 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\d+$",
 		//	  "type": "string"
 		//	}
-		"collaboration_creator_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"collaboration_creator_account_id": schemaAttribute66924863b6fe019b7322a8cd(),
 		// Property: CollaborationIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -63,9 +194,7 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
 		//	  "type": "string"
 		//	}
-		"collaboration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"collaboration_identifier": schemaAttribute66924863b6fe019b7322a8cd(),
 		// Property: DefaultJobResultConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -110,35 +239,7 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"default_job_result_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: OutputConfiguration
-				"output_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: S3
-						"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Bucket
-								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: KeyPrefix
-								"key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: RoleArn
-				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"default_job_result_configuration": schemaAttribute2bdf7ce453806a033b1d2f11(),
 		// Property: DefaultResultConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -193,52 +294,14 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"default_result_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: OutputConfiguration
-				"output_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: S3
-						"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Bucket
-								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: KeyPrefix
-								"key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: ResultFormat
-								"result_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SingleFileOutput
-								"single_file_output": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: RoleArn
-				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"default_result_configuration": schemaAttribute4689307fc9c6b41e190e2443(),
 		// Property: IsMetricsEnabled
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"is_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"is_metrics_enabled": schemaAttribute3b2f51f58bcc98eb0c9380f7(),
 		// Property: JobLogStatus
 		// CloudFormation resource type schema:
 		//
@@ -249,9 +312,7 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"job_log_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"job_log_status": schemaAttribute66924863b6fe019b7322a8cd(),
 		// Property: MembershipIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -261,9 +322,7 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
 		//	  "type": "string"
 		//	}
-		"membership_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"membership_identifier": schemaAttribute66924863b6fe019b7322a8cd(),
 		// Property: PaymentConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -342,67 +401,7 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"payment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: JobCompute
-				"job_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: IsResponsible
-						"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MachineLearning
-				"machine_learning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ModelInference
-						"model_inference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: IsResponsible
-								"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ModelTraining
-						"model_training": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: IsResponsible
-								"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SyntheticDataGeneration
-						"synthetic_data_generation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: IsResponsible
-								"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: QueryCompute
-				"query_compute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: IsResponsible
-						"is_responsible": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"payment_configuration": schemaAttribute9f60a64154c9a932b53b7013(),
 		// Property: QueryLogStatus
 		// CloudFormation resource type schema:
 		//
@@ -413,9 +412,7 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"query_log_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"query_log_status": schemaAttribute66924863b6fe019b7322a8cd(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -445,22 +442,7 @@ func membershipDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An arbitrary set of tags (key-value pairs) for this cleanrooms membership.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute764251c6544f4f4e800f9db0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

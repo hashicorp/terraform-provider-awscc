@@ -16,6 +16,219 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1243178b47fc394ed9070cb9() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1bb7a2a4e42ef99dbbc3f6b7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AnyOf
+			"any_of": schemaAttributeaa7a3f983c32b817eeac1868(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute21186a422780b2b977ebcaef() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConfigurationBundle
+				"configuration_bundle": schemaAttribute814882d066bb5cf5cee0c4a0(),
+				// Property: Description
+				"description": schemaAttribute58b6d1f31c86f60b5e89b85b(),
+				// Property: Metadata
+				"metadata": schemaAttribute1243178b47fc394ed9070cb9(),
+				// Property: Name
+				"name": schemaAttribute58b6d1f31c86f60b5e89b85b(),
+				// Property: Weight
+				"weight": schemaAttributef49e33f164ce095f4e2033cb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2299fd90ef729ebc3c453931() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TrafficSplit
+			"traffic_split": schemaAttribute21186a422780b2b977ebcaef(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute239f0f4106daeddeb3ba92a4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConfigurationBundle
+				"configuration_bundle": schemaAttributee83ce977039d5ac161e8898d(),
+				// Property: RouteToTarget
+				"route_to_target": schemaAttribute7107025601d1da695650ed71(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2883ca5340f0a1b39142e52e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MatchPaths
+				"match_paths": schemaAttribute1bb7a2a4e42ef99dbbc3f6b7(),
+				// Property: MatchPrincipals
+				"match_principals": schemaAttribute4a2b1a2f1b609fe261cf6b5a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34e2e130e5f889609aeb9007() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TargetName
+			"target_name": schemaAttribute58b6d1f31c86f60b5e89b85b(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37bd1f96751bbd8547385e4c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Description
+				"description": schemaAttribute58b6d1f31c86f60b5e89b85b(),
+				// Property: Metadata
+				"metadata": schemaAttribute1243178b47fc394ed9070cb9(),
+				// Property: Name
+				"name": schemaAttribute58b6d1f31c86f60b5e89b85b(),
+				// Property: TargetName
+				"target_name": schemaAttribute58b6d1f31c86f60b5e89b85b(),
+				// Property: Weight
+				"weight": schemaAttributef49e33f164ce095f4e2033cb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a2b1a2f1b609fe261cf6b5a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AnyOf
+			"any_of": schemaAttribute88a0307077b3f08283754480(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58b6d1f31c86f60b5e89b85b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6cf1821979713db79c2c9ceb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttribute58b6d1f31c86f60b5e89b85b(),
+			// Property: Operator
+			"operator": schemaAttribute58b6d1f31c86f60b5e89b85b(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7107025601d1da695650ed71() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: StaticRoute
+			"static_route": schemaAttribute34e2e130e5f889609aeb9007(),
+			// Property: WeightedRoute
+			"weighted_route": schemaAttributea09b64d330f65acf87f06557(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute814882d066bb5cf5cee0c4a0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BundleArn
+			"bundle_arn": schemaAttribute58b6d1f31c86f60b5e89b85b(),
+			// Property: BundleVersion
+			"bundle_version": schemaAttribute58b6d1f31c86f60b5e89b85b(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute88a0307077b3f08283754480() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IamPrincipal
+				"iam_principal": schemaAttribute6cf1821979713db79c2c9ceb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea09b64d330f65acf87f06557() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TrafficSplit
+			"traffic_split": schemaAttribute37bd1f96751bbd8547385e4c(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa7a3f983c32b817eeac1868() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba75326b8a198c8e8cda997e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee83ce977039d5ac161e8898d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: StaticOverride
+			"static_override": schemaAttribute814882d066bb5cf5cee0c4a0(),
+			// Property: WeightedOverride
+			"weighted_override": schemaAttribute2299fd90ef729ebc3c453931(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef49e33f164ce095f4e2033cb() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_gateway_rule", gatewayRuleDataSource)
 }
@@ -204,131 +417,7 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ConfigurationBundle
-					"configuration_bundle": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: StaticOverride
-							"static_override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: BundleArn
-									"bundle_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: BundleVersion
-									"bundle_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: WeightedOverride
-							"weighted_override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: TrafficSplit
-									"traffic_split": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: ConfigurationBundle
-												"configuration_bundle": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: BundleArn
-														"bundle_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Computed: true,
-														}, /*END ATTRIBUTE*/
-														// Property: BundleVersion
-														"bundle_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Computed: true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Description
-												"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Metadata
-												"metadata":          // Pattern: ""
-												schema.MapAttribute{ /*START ATTRIBUTE*/
-													ElementType: types.StringType,
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Name
-												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Weight
-												"weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: RouteToTarget
-					"route_to_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: StaticRoute
-							"static_route": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: TargetName
-									"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: WeightedRoute
-							"weighted_route": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: TrafficSplit
-									"traffic_split": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Description
-												"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Metadata
-												"metadata":          // Pattern: ""
-												schema.MapAttribute{ /*START ATTRIBUTE*/
-													ElementType: types.StringType,
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Name
-												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: TargetName
-												"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Weight
-												"weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"actions": schemaAttribute239f0f4106daeddeb3ba92a4(),
 		// Property: Conditions
 		// CloudFormation resource type schema:
 		//
@@ -401,52 +490,7 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: MatchPaths
-					"match_paths": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AnyOf
-							"any_of": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: MatchPrincipals
-					"match_principals": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AnyOf
-							"any_of": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: IamPrincipal
-										"iam_principal": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Arn
-												"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Operator
-												"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"conditions": schemaAttribute2883ca5340f0a1b39142e52e(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -454,10 +498,7 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributeba75326b8a198c8e8cda997e(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -466,9 +507,7 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute58b6d1f31c86f60b5e89b85b(),
 		// Property: GatewayArn
 		// CloudFormation resource type schema:
 		//
@@ -476,9 +515,7 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(|-cn|-us-gov):bedrock-agentcore:[a-z0-9-]{1,20}:[0-9]{12}:gateway/([0-9a-z][-]?){1,48}-[a-z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"gateway_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"gateway_arn": schemaAttribute58b6d1f31c86f60b5e89b85b(),
 		// Property: GatewayIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -486,9 +523,7 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$",
 		//	  "type": "string"
 		//	}
-		"gateway_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"gateway_identifier": schemaAttribute58b6d1f31c86f60b5e89b85b(),
 		// Property: Priority
 		// CloudFormation resource type schema:
 		//
@@ -497,9 +532,7 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "number"
 		//	}
-		"priority": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"priority": schemaAttributef49e33f164ce095f4e2033cb(),
 		// Property: RuleId
 		// CloudFormation resource type schema:
 		//
@@ -509,9 +542,7 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"rule_id": schemaAttribute58b6d1f31c86f60b5e89b85b(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -524,9 +555,7 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute58b6d1f31c86f60b5e89b85b(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -534,10 +563,7 @@ func gatewayRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttributeba75326b8a198c8e8cda997e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -16,6 +16,183 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute395b5cfe587517c757581186() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute404fb3417cd6c97e5e936fa7() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute528c5c5a00169c1402ac4826() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ResourceTypes
+				"resource_types": schemaAttributee267117014ff6a9ccfe9e9e9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67d03e2fc9b8a4fa88f53ebb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AdvancedBackupSettings
+			"advanced_backup_settings": schemaAttribute7b0faf124584c3155dced215(),
+			// Property: BackupPlanName
+			"backup_plan_name": schemaAttributec0114673744d5182226d0d3b(),
+			// Property: BackupPlanRule
+			"backup_plan_rule": schemaAttributefb0f66b92480cf9b23d5f319(),
+			// Property: ScanSettings
+			"scan_settings": schemaAttributed4fa7bf289863539bf9a5785(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute68eefe3dfb8a34f4d89d4146() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DestinationBackupVaultArn
+				"destination_backup_vault_arn": schemaAttributec0114673744d5182226d0d3b(),
+				// Property: Lifecycle
+				"lifecycle": schemaAttributea2730d94d457a3baeaa6dfe6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b0faf124584c3155dced215() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BackupOptions
+				"backup_options": schemaAttributed4eeb2fcb19216fbc0e0886f(),
+				// Property: ResourceType
+				"resource_type": schemaAttributec0114673744d5182226d0d3b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea11779e2c5dcd874d85ce772() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MalwareScanner
+				"malware_scanner": schemaAttributec0114673744d5182226d0d3b(),
+				// Property: ScanMode
+				"scan_mode": schemaAttributec0114673744d5182226d0d3b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea2730d94d457a3baeaa6dfe6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeleteAfterDays
+			"delete_after_days": schemaAttributebf1d7677e31eea2854e2131d(),
+			// Property: MoveToColdStorageAfterDays
+			"move_to_cold_storage_after_days": schemaAttributebf1d7677e31eea2854e2131d(),
+			// Property: OptInToArchiveForSupportedResources
+			"opt_in_to_archive_for_supported_resources": schemaAttribute404fb3417cd6c97e5e936fa7(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf1d7677e31eea2854e2131d() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec0114673744d5182226d0d3b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4eeb2fcb19216fbc0e0886f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: jsontypes.NormalizedType{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4fa7bf289863539bf9a5785() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MalwareScanner
+				"malware_scanner": schemaAttributec0114673744d5182226d0d3b(),
+				// Property: ResourceTypes
+				"resource_types": schemaAttributee267117014ff6a9ccfe9e9e9(),
+				// Property: ScannerRoleArn
+				"scanner_role_arn": schemaAttributec0114673744d5182226d0d3b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee267117014ff6a9ccfe9e9e9() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb0f66b92480cf9b23d5f319() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CompletionWindowMinutes
+				"completion_window_minutes": schemaAttributebf1d7677e31eea2854e2131d(),
+				// Property: CopyActions
+				"copy_actions": schemaAttribute68eefe3dfb8a34f4d89d4146(),
+				// Property: EnableContinuousBackup
+				"enable_continuous_backup": schemaAttribute404fb3417cd6c97e5e936fa7(),
+				// Property: IndexActions
+				"index_actions": schemaAttribute528c5c5a00169c1402ac4826(),
+				// Property: Lifecycle
+				"lifecycle": schemaAttributea2730d94d457a3baeaa6dfe6(),
+				// Property: RecoveryPointTags
+				"recovery_point_tags": schemaAttribute395b5cfe587517c757581186(),
+				// Property: RuleName
+				"rule_name": schemaAttributec0114673744d5182226d0d3b(),
+				// Property: ScanActions
+				"scan_actions": schemaAttributea11779e2c5dcd874d85ce772(),
+				// Property: ScheduleExpression
+				"schedule_expression": schemaAttributec0114673744d5182226d0d3b(),
+				// Property: ScheduleExpressionTimezone
+				"schedule_expression_timezone": schemaAttributec0114673744d5182226d0d3b(),
+				// Property: StartWindowMinutes
+				"start_window_minutes": schemaAttributebf1d7677e31eea2854e2131d(),
+				// Property: TargetBackupVault
+				"target_backup_vault": schemaAttributec0114673744d5182226d0d3b(),
+				// Property: TargetLogicallyAirGappedBackupVaultArn
+				"target_logically_air_gapped_backup_vault_arn": schemaAttributec0114673744d5182226d0d3b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_backup_backup_plan", backupPlanDataSource)
 }
@@ -31,7 +208,7 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "properties": {
 		//	    "AdvancedBackupSettings": {
-		//	      "insertionOrder": true,
+		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -227,194 +404,21 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"backup_plan": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AdvancedBackupSettings
-				"advanced_backup_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: BackupOptions
-							"backup_options": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType: jsontypes.NormalizedType{},
-								Computed:   true,
-							}, /*END ATTRIBUTE*/
-							// Property: ResourceType
-							"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: BackupPlanName
-				"backup_plan_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: BackupPlanRule
-				"backup_plan_rule": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: CompletionWindowMinutes
-							"completion_window_minutes": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: CopyActions
-							"copy_actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: DestinationBackupVaultArn
-										"destination_backup_vault_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Lifecycle
-										"lifecycle": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: DeleteAfterDays
-												"delete_after_days": schema.Float64Attribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: MoveToColdStorageAfterDays
-												"move_to_cold_storage_after_days": schema.Float64Attribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: OptInToArchiveForSupportedResources
-												"opt_in_to_archive_for_supported_resources": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: EnableContinuousBackup
-							"enable_continuous_backup": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: IndexActions
-							"index_actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ResourceTypes
-										"resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Lifecycle
-							"lifecycle": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DeleteAfterDays
-									"delete_after_days": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: MoveToColdStorageAfterDays
-									"move_to_cold_storage_after_days": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: OptInToArchiveForSupportedResources
-									"opt_in_to_archive_for_supported_resources": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: RecoveryPointTags
-							"recovery_point_tags": // Pattern: ""
-							schema.MapAttribute{   /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: RuleName
-							"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ScanActions
-							"scan_actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: MalwareScanner
-										"malware_scanner": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: ScanMode
-										"scan_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ScheduleExpression
-							"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ScheduleExpressionTimezone
-							"schedule_expression_timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: StartWindowMinutes
-							"start_window_minutes": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: TargetBackupVault
-							"target_backup_vault": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: TargetLogicallyAirGappedBackupVaultArn
-							"target_logically_air_gapped_backup_vault_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ScanSettings
-				"scan_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: MalwareScanner
-							"malware_scanner": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ResourceTypes
-							"resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ScannerRoleArn
-							"scanner_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"backup_plan": schemaAttribute67d03e2fc9b8a4fa88f53ebb(),
 		// Property: BackupPlanArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"backup_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"backup_plan_arn": schemaAttributec0114673744d5182226d0d3b(),
 		// Property: BackupPlanId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"backup_plan_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"backup_plan_id": schemaAttributec0114673744d5182226d0d3b(),
 		// Property: BackupPlanTags
 		// CloudFormation resource type schema:
 		//
@@ -427,20 +431,14 @@ func backupPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"backup_plan_tags":  // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"backup_plan_tags": schemaAttribute395b5cfe587517c757581186(),
 		// Property: VersionId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"version_id": schemaAttributec0114673744d5182226d0d3b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,67 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1f38becfca8a14bc0e8f48c7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33cde4ea47c25e7464006942() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b57b183b6d681c1d5323500() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Configuration
+			"s3_configuration": schemaAttributea20968cc054c8f67994e55a6(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76a2140e21400105731e5867() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea20968cc054c8f67994e55a6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DestinationIdentifier
+			"destination_identifier": schemaAttribute1f38becfca8a14bc0e8f48c7(),
+			// Property: RoleArn
+			"role_arn": schemaAttribute1f38becfca8a14bc0e8f48c7(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec70e6007c3e21a87c7e66ea5() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute1f38becfca8a14bc0e8f48c7(),
+				// Property: Value
+				"value": schemaAttribute1f38becfca8a14bc0e8f48c7(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec87d8eabc6cf2622feede19c() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_logs_scheduled_query", scheduledQueryDataSource)
 }
@@ -29,9 +90,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "type": "number"
 		//	}
-		"creation_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute33cde4ea47c25e7464006942(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -39,9 +98,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute1f38becfca8a14bc0e8f48c7(),
 		// Property: DestinationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -68,34 +125,14 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: S3Configuration
-				"s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DestinationIdentifier
-						"destination_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: RoleArn
-						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"destination_configuration": schemaAttribute6b57b183b6d681c1d5323500(),
 		// Property: ExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"execution_role_arn": schemaAttribute1f38becfca8a14bc0e8f48c7(),
 		// Property: LastExecutionStatus
 		// CloudFormation resource type schema:
 		//
@@ -109,27 +146,21 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"last_execution_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"last_execution_status": schemaAttribute1f38becfca8a14bc0e8f48c7(),
 		// Property: LastTriggeredTime
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "number"
 		//	}
-		"last_triggered_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"last_triggered_time": schemaAttribute33cde4ea47c25e7464006942(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "number"
 		//	}
-		"last_updated_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttribute33cde4ea47c25e7464006942(),
 		// Property: LogGroupIdentifiers
 		// CloudFormation resource type schema:
 		//
@@ -141,10 +172,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"log_group_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"log_group_identifiers": schemaAttributec87d8eabc6cf2622feede19c(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -154,18 +182,14 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9_\\-/.#]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute1f38becfca8a14bc0e8f48c7(),
 		// Property: QueryLanguage
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"query_language": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"query_language": schemaAttribute1f38becfca8a14bc0e8f48c7(),
 		// Property: QueryString
 		// CloudFormation resource type schema:
 		//
@@ -174,18 +198,14 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"query_string": schemaAttribute1f38becfca8a14bc0e8f48c7(),
 		// Property: ScheduleEndTime
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "number"
 		//	}
-		"schedule_end_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"schedule_end_time": schemaAttribute33cde4ea47c25e7464006942(),
 		// Property: ScheduleExpression
 		// CloudFormation resource type schema:
 		//
@@ -193,36 +213,28 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"schedule_expression": schemaAttribute1f38becfca8a14bc0e8f48c7(),
 		// Property: ScheduleStartTime
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "number"
 		//	}
-		"schedule_start_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"schedule_start_time": schemaAttribute33cde4ea47c25e7464006942(),
 		// Property: ScheduledQueryArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"scheduled_query_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"scheduled_query_arn": schemaAttribute1f38becfca8a14bc0e8f48c7(),
 		// Property: StartTimeOffset
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "integer"
 		//	}
-		"start_time_offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"start_time_offset": schemaAttribute76a2140e21400105731e5867(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -233,9 +245,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttribute1f38becfca8a14bc0e8f48c7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -262,21 +272,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributec70e6007c3e21a87c7e66ea5(),
 		// Property: Timezone
 		// CloudFormation resource type schema:
 		//
@@ -284,9 +280,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"timezone": schemaAttribute1f38becfca8a14bc0e8f48c7(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

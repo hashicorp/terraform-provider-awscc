@@ -15,6 +15,49 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1a70025841b7c7cbd4296700() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the service setting.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1cf31ca4e218d0b81c403002() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the service setting, such as /ssm/parameter-store/high-throughput-enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26926af6c0dc3f96ce0b4142() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The last time the service setting was modified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5873337f5bc018e9eb7ecac3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the service setting. The value can be Default, Customized or PendingUpdate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a685d0757c9480d6061e07b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the service setting.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca74e3c9fe8b421a5c086305() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the last modified user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ssm_service_setting", serviceSettingDataSource)
 }
@@ -30,10 +73,7 @@ func serviceSettingDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The ARN of the service setting.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the service setting.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute9a685d0757c9480d6061e07b(),
 		// Property: LastModifiedDate
 		// CloudFormation resource type schema:
 		//
@@ -42,11 +82,7 @@ func serviceSettingDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modified_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The last time the service setting was modified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_date": schemaAttribute26926af6c0dc3f96ce0b4142(),
 		// Property: LastModifiedUser
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +90,7 @@ func serviceSettingDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The ARN of the last modified user.",
 		//	  "type": "string"
 		//	}
-		"last_modified_user": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the last modified user.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_user": schemaAttributeca74e3c9fe8b421a5c086305(),
 		// Property: SettingId
 		// CloudFormation resource type schema:
 		//
@@ -67,10 +100,7 @@ func serviceSettingDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"setting_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the service setting, such as /ssm/parameter-store/high-throughput-enabled.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"setting_id": schemaAttribute1cf31ca4e218d0b81c403002(),
 		// Property: SettingValue
 		// CloudFormation resource type schema:
 		//
@@ -80,10 +110,7 @@ func serviceSettingDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"setting_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The value of the service setting.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"setting_value": schemaAttribute1a70025841b7c7cbd4296700(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -91,10 +118,7 @@ func serviceSettingDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The status of the service setting. The value can be Default, Customized or PendingUpdate.",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the service setting. The value can be Default, Customized or PendingUpdate.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute5873337f5bc018e9eb7ecac3(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

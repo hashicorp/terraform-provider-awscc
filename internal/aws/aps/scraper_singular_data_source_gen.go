@@ -15,6 +15,303 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0d80b6c6e34958388a062830() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute11ec4b03e2fab3f101a97f61() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f51634da9c6678ed4098ffa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of a CloudWatch dataset",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute36b41c13b8ecfdea67a98c02() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "IAM Role in the target account",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38421dc2a240396440412403() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the CloudWatch log group",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute39a2c76e7c72f81de787ed5b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Type of scraper component",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42b7bd30478f286613bfd214() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b9848cac6d402719ac5912f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Options
+			"options": schemaAttribute42b7bd30478f286613bfd214(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6049fd868ac403b3a27aa7df() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SourceRoleArn
+			"source_role_arn": schemaAttribute6f0efac0ef89407a97f84852(),
+			// Property: TargetRoleArn
+			"target_role_arn": schemaAttribute36b41c13b8ecfdea67a98c02(),
+		}, /*END SCHEMA*/
+		Description: "Role configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f0efac0ef89407a97f84852() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "IAM Role in source account",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute726b9abb672f184443e3f4a7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConfigurationBlob
+			"configuration_blob": schemaAttribute8d8095f9e4f684962d8e45b7(),
+		}, /*END SCHEMA*/
+		Description: "Scraper configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7304f9cca5d75fd4cf1991a1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "IAM role ARN for the scraper.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute791b2b52c3acff941ae27fbf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DatasetArn
+			"dataset_arn": schemaAttribute2f51634da9c6678ed4098ffa(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for CloudWatch metrics destination",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e4f330ae55093f3d34e3344() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatchLogs
+			"cloudwatch_logs": schemaAttributeb7725903d0f6ec454f26bf5f(),
+		}, /*END SCHEMA*/
+		Description: "Destination for scraper logging",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85a296d4595f7dde0db9113b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: WorkspaceArn
+			"workspace_arn": schemaAttribute9cef04d9cbf4e60af1ffe91a(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for Amazon Managed Prometheus metrics destination",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute869d7b13e8ec5e6c02ec3dff() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute11ec4b03e2fab3f101a97f61(),
+				// Property: Value
+				"value": schemaAttribute0d80b6c6e34958388a062830(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d8095f9e4f684962d8e45b7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Prometheus compatible scrape configuration in base64 encoded blob format",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9cef04d9cbf4e60af1ffe91a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of an Amazon Managed Prometheus workspace",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8aed9955795d1dca56ec6a1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AmpConfiguration
+			"amp_configuration": schemaAttribute85a296d4595f7dde0db9113b(),
+			// Property: CloudWatchConfiguration
+			"cloudwatch_configuration": schemaAttribute791b2b52c3acff941ae27fbf(),
+		}, /*END SCHEMA*/
+		Description: "Scraper metrics destination",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea97dfe0cd3e421da816943c0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Required to identify a specific scraper.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab4ebfcdb3b5eebd15702510() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Scraper alias.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6105f15d5a9d9bddf722e69() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LoggingDestination
+			"logging_destination": schemaAttribute7e4f330ae55093f3d34e3344(),
+			// Property: ScraperComponents
+			"scraper_components": schemaAttributecc9f04b07ffe3d3ed6ec6676(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for scraper logging",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb7725903d0f6ec454f26bf5f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogGroupArn
+			"log_group_arn": schemaAttribute38421dc2a240396440412403(),
+		}, /*END SCHEMA*/
+		Description: "Represents a cloudwatch logs destination for scraper logging",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb00af2cf1e16fd795c6861b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Scraper ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec56ea354c91994f3abe4baaf() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of security group IDs",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc9f04b07ffe3d3ed6ec6676() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Config
+				"config": schemaAttribute4b9848cac6d402719ac5912f(),
+				// Property: Type
+				"type": schemaAttribute39a2c76e7c72f81de787ed5b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed49dd80de7fa883de2e85af5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EksConfiguration
+			"eks_configuration": schemaAttributef50bb15ee0b66ba6a40de9a6(),
+			// Property: VpcConfiguration
+			"vpc_configuration": schemaAttributef477e08585e3db5bc4fbf488(),
+		}, /*END SCHEMA*/
+		Description: "Scraper metrics source",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf364667613d276dd98b918a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of subnet IDs",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3acf6b016ae021cbd5b983a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of an EKS cluster",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef477e08585e3db5bc4fbf488() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttributec56ea354c91994f3abe4baaf(),
+			// Property: SubnetIds
+			"subnet_ids": schemaAttributedf364667613d276dd98b918a(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for VPC metrics source",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef50bb15ee0b66ba6a40de9a6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClusterArn
+			"cluster_arn": schemaAttributef3acf6b016ae021cbd5b983a(),
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttributec56ea354c91994f3abe4baaf(),
+			// Property: SubnetIds
+			"subnet_ids": schemaAttributedf364667613d276dd98b918a(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for EKS metrics source",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_aps_scraper", scraperDataSource)
 }
@@ -33,10 +330,7 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9A-Za-z][-.0-9A-Z_a-z]*$",
 		//	  "type": "string"
 		//	}
-		"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Scraper alias.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"alias": schemaAttributeab4ebfcdb3b5eebd15702510(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +339,7 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:scraper/s-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Scraper ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributebb00af2cf1e16fd795c6861b(),
 		// Property: Destination
 		// CloudFormation resource type schema:
 		//
@@ -101,36 +392,7 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AmpConfiguration
-				"amp_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: WorkspaceArn
-						"workspace_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "ARN of an Amazon Managed Prometheus workspace",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration for Amazon Managed Prometheus metrics destination",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CloudWatchConfiguration
-				"cloudwatch_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DatasetArn
-						"dataset_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "ARN of a CloudWatch dataset",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration for CloudWatch metrics destination",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Scraper metrics destination",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"destination": schemaAttributea8aed9955795d1dca56ec6a1(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -141,10 +403,7 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):iam::[0-9]{12}:role/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IAM role ARN for the scraper.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute7304f9cca5d75fd4cf1991a1(),
 		// Property: RoleConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -163,22 +422,7 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"role_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SourceRoleArn
-				"source_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "IAM Role in source account",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TargetRoleArn
-				"target_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "IAM Role in the target account",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Role configuration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_configuration": schemaAttribute6049fd868ac403b3a27aa7df(),
 		// Property: ScrapeConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -200,17 +444,7 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"scrape_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConfigurationBlob
-				"configuration_blob": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Prometheus compatible scrape configuration in base64 encoded blob format",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Scraper configuration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scrape_configuration": schemaAttribute726b9abb672f184443e3f4a7(),
 		// Property: ScraperId
 		// CloudFormation resource type schema:
 		//
@@ -221,10 +455,7 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^s-[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"scraper_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Required to identify a specific scraper.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scraper_id": schemaAttributea97dfe0cd3e421da816943c0(),
 		// Property: ScraperLoggingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -297,56 +528,7 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"scraper_logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LoggingDestination
-				"logging_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CloudWatchLogs
-						"cloudwatch_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: LogGroupArn
-								"log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "ARN of the CloudWatch log group",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents a cloudwatch logs destination for scraper logging",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Destination for scraper logging",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ScraperComponents
-				"scraper_components": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Config
-							"config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Options
-									"options":           // Pattern: ""
-									schema.MapAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Type of scraper component",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration for scraper logging",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scraper_logging_configuration": schemaAttributeb6105f15d5a9d9bddf722e69(),
 		// Property: Source
 		// CloudFormation resource type schema:
 		//
@@ -436,55 +618,7 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EksConfiguration
-				"eks_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ClusterArn
-						"cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "ARN of an EKS cluster",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SecurityGroupIds
-						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "List of security group IDs",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SubnetIds
-						"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "List of subnet IDs",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration for EKS metrics source",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VpcConfiguration
-				"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: SecurityGroupIds
-						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "List of security group IDs",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SubnetIds
-						"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "List of subnet IDs",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration for VPC metrics source",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Scraper metrics source",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source": schemaAttributed49dd80de7fa883de2e85af5(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -517,24 +651,7 @@ func scraperDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute869d7b13e8ec5e6c02ec3dff(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

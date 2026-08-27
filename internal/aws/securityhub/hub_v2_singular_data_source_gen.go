@@ -15,6 +15,29 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute120e6c233d18526e1ebfb182() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7032d9eb824c97344d3e01fc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name of the Security Hub V2 resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee94e6edde31636135c24292() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A key-value pair to associate with the Security Hub V2 resource. You can specify a key that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_securityhub_hub_v2", hubV2DataSource)
 }
@@ -31,10 +54,7 @@ func hubV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"hub_v2_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name of the Security Hub V2 resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"hub_v2_arn": schemaAttribute7032d9eb824c97344d3e01fc(),
 		// Property: SubscribedAt
 		// CloudFormation resource type schema:
 		//
@@ -42,9 +62,7 @@ func hubV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$",
 		//	  "type": "string"
 		//	}
-		"subscribed_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"subscribed_at": schemaAttribute120e6c233d18526e1ebfb182(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -61,12 +79,7 @@ func hubV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A key-value pair to associate with the Security Hub V2 resource. You can specify a key that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeee94e6edde31636135c24292(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

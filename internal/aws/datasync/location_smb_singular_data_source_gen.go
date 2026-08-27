@@ -15,6 +15,218 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0cb9d381331ee81dc133c85e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a5131f7520c9e115d86e8ed() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the ARN for a customer created AWS Secrets Manager secret.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b7ce25e374b733655cf041b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies a service principal name (SPN), which is an identity in your Kerberos realm that has permission to access the files, folders, and file metadata in your SMB file server. SPNs are case sensitive and must include a prepended cifs/. For example, an SPN might look like cifs/kerberosuser@EXAMPLE.COM. Your task execution will fail if the SPN that you provide for this parameter doesn't match exactly what's in your keytab or krb5.conf files.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38dad55ce93ceb65a26b7275() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41a94b6c5c2f559613d53534() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49bc29b1fcf6f04292db4a11() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute62253e1285db3e53ac679105(),
+				// Property: Value
+				"value": schemaAttributed2ee9a1029edb065f5be48ba(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5659e35fd204ae5c52b62483() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the ARN for an AWS Secrets Manager secret.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62253e1285db3e53ac679105() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key for an AWS resource tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6fa1b6b47ef188c504170810() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecretAccessRoleArn
+			"secret_access_role_arn": schemaAttributedc2afbc79669884042668bcd(),
+			// Property: SecretArn
+			"secret_arn": schemaAttribute1a5131f7520c9e115d86e8ed(),
+		}, /*END SCHEMA*/
+		Description: "Specifies configuration information for a customer-managed secret, such as a password or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute847d78941be886a49704ae3e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttributed910c2492e57e4bb83c10e6b(),
+			// Property: SecretArn
+			"secret_arn": schemaAttributecc919144608362587957f67a(),
+		}, /*END SCHEMA*/
+		Description: "Specifies configuration information for a DataSync-managed secret, such as a password or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89bf6483724ad6906c8f92fa() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Version
+			"version": schemaAttribute91dd425084f3f8d0013e1e69(),
+		}, /*END SCHEMA*/
+		Description: "The mount options used by DataSync to access the SMB server.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91dd425084f3f8d0013e1e69() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The specific SMB version that you want DataSync to use to mount your SMB share.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea58486379d4b4ff4a5e7a9a6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The string representation of the Krb5Conf file, or the presigned URL to access the Krb5.conf file within an S3 bucket. Specifies a Kerberos configuration file (krb5.conf) that defines your Kerberos realm configuration. To avoid task execution errors, make sure that the service principal name (SPN) in the krb5.conf file matches exactly what you specify for KerberosPrincipal and in your keytab file.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac550ed809e5c9b415f723b4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Windows domain that the SMB server belongs to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf2a34231e2c30778a4d53a9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecretArn
+			"secret_arn": schemaAttribute5659e35fd204ae5c52b62483(),
+		}, /*END SCHEMA*/
+		Description: "Specifies configuration information for a DataSync-managed secret, such as a password or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6e967d4a408df2ebdbd3d44() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Specifies the IPv4 addresses for the DNS servers that your SMB file server belongs to. This parameter applies only if AuthenticationType is set to KERBEROS. If you have multiple domains in your environment, configuring this parameter makes sure that DataSync connects to the right SMB file server.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5547e43fc1dcc6e55f41d44() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6799ccad305462f2414b922() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user who can mount the share, has the permissions to access files and folders in the SMB share.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecab9cd63c942ec5d0e214028() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Base64 string representation of the Keytab file. Specifies your Kerberos key table (keytab) file, which includes mappings between your service principal name (SPN) and encryption keys. To avoid task execution errors, make sure that the SPN in the keytab file matches exactly what you specify for KerberosPrincipal and in your krb5.conf file.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb09c01a015f38cfb6088447() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The authentication mode used to determine identity of user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc919144608362587957f67a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed2ee9a1029edb065f5be48ba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for an AWS resource tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5b1ebc3bcf8f5cf3e02cf96() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL of the SMB location that was described.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed910c2492e57e4bb83c10e6b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc2afbc79669884042668bcd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef393f275a524582c9487a033() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the SMB location that is created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_datasync_location_smb", locationSMBDataSource)
 }
@@ -38,11 +250,7 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"agent_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The Amazon Resource Names (ARNs) of agents to use for a Simple Message Block (SMB) location.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_arns": schemaAttribute41a94b6c5c2f559613d53534(),
 		// Property: AuthenticationType
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +262,7 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The authentication mode used to determine identity of user.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"authentication_type": schemaAttributecb09c01a015f38cfb6088447(),
 		// Property: CmkSecretConfig
 		// CloudFormation resource type schema:
 		//
@@ -80,22 +285,7 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"cmk_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KmsKeyArn
-				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecretArn
-				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies configuration information for a DataSync-managed secret, such as a password or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cmk_secret_config": schemaAttribute847d78941be886a49704ae3e(),
 		// Property: CustomSecretConfig
 		// CloudFormation resource type schema:
 		//
@@ -122,22 +312,7 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"custom_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SecretAccessRoleArn
-				"secret_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecretArn
-				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the ARN for a customer created AWS Secrets Manager secret.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies configuration information for a customer-managed secret, such as a password or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"custom_secret_config": schemaAttribute6fa1b6b47ef188c504170810(),
 		// Property: DnsIpAddresses
 		// CloudFormation resource type schema:
 		//
@@ -153,11 +328,7 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 2,
 		//	  "type": "array"
 		//	}
-		"dns_ip_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Specifies the IPv4 addresses for the DNS servers that your SMB file server belongs to. This parameter applies only if AuthenticationType is set to KERBEROS. If you have multiple domains in your environment, configuring this parameter makes sure that DataSync connects to the right SMB file server.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dns_ip_addresses": schemaAttributeb6e967d4a408df2ebdbd3d44(),
 		// Property: Domain
 		// CloudFormation resource type schema:
 		//
@@ -167,10 +338,7 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$",
 		//	  "type": "string"
 		//	}
-		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Windows domain that the SMB server belongs to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain": schemaAttributeac550ed809e5c9b415f723b4(),
 		// Property: KerberosKeytab
 		// CloudFormation resource type schema:
 		//
@@ -179,10 +347,7 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 87384,
 		//	  "type": "string"
 		//	}
-		"kerberos_keytab": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Base64 string representation of the Keytab file. Specifies your Kerberos key table (keytab) file, which includes mappings between your service principal name (SPN) and encryption keys. To avoid task execution errors, make sure that the SPN in the keytab file matches exactly what you specify for KerberosPrincipal and in your krb5.conf file.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kerberos_keytab": schemaAttributecab9cd63c942ec5d0e214028(),
 		// Property: KerberosKrb5Conf
 		// CloudFormation resource type schema:
 		//
@@ -191,10 +356,7 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 174764,
 		//	  "type": "string"
 		//	}
-		"kerberos_krb_5_conf": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The string representation of the Krb5Conf file, or the presigned URL to access the Krb5.conf file within an S3 bucket. Specifies a Kerberos configuration file (krb5.conf) that defines your Kerberos realm configuration. To avoid task execution errors, make sure that the service principal name (SPN) in the krb5.conf file matches exactly what you specify for KerberosPrincipal and in your keytab file.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kerberos_krb_5_conf": schemaAttributea58486379d4b4ff4a5e7a9a6(),
 		// Property: KerberosPrincipal
 		// CloudFormation resource type schema:
 		//
@@ -205,10 +367,7 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^.+$",
 		//	  "type": "string"
 		//	}
-		"kerberos_principal": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies a service principal name (SPN), which is an identity in your Kerberos realm that has permission to access the files, folders, and file metadata in your SMB file server. SPNs are case sensitive and must include a prepended cifs/. For example, an SPN might look like cifs/kerberosuser@EXAMPLE.COM. Your task execution will fail if the SPN that you provide for this parameter doesn't match exactly what's in your keytab or krb5.conf files.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kerberos_principal": schemaAttribute2b7ce25e374b733655cf041b(),
 		// Property: LocationArn
 		// CloudFormation resource type schema:
 		//
@@ -218,10 +377,7 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the SMB location that is created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"location_arn": schemaAttributef393f275a524582c9487a033(),
 		// Property: LocationUri
 		// CloudFormation resource type schema:
 		//
@@ -231,10 +387,7 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9./\\-]+$",
 		//	  "type": "string"
 		//	}
-		"location_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The URL of the SMB location that was described.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"location_uri": schemaAttributed5b1ebc3bcf8f5cf3e02cf96(),
 		// Property: ManagedSecretConfig
 		// CloudFormation resource type schema:
 		//
@@ -254,17 +407,7 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"managed_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SecretArn
-				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the ARN for an AWS Secrets Manager secret.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies configuration information for a DataSync-managed secret, such as a password or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"managed_secret_config": schemaAttributeaf2a34231e2c30778a4d53a9(),
 		// Property: MountOptions
 		// CloudFormation resource type schema:
 		//
@@ -289,17 +432,7 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"mount_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Version
-				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The specific SMB version that you want DataSync to use to mount your SMB share.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The mount options used by DataSync to access the SMB server.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"mount_options": schemaAttribute89bf6483724ad6906c8f92fa(),
 		// Property: Password
 		// CloudFormation resource type schema:
 		//
@@ -309,10 +442,7 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^.{0,104}$",
 		//	  "type": "string"
 		//	}
-		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"password": schemaAttribute38dad55ce93ceb65a26b7275(),
 		// Property: ServerHostname
 		// CloudFormation resource type schema:
 		//
@@ -322,10 +452,7 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$",
 		//	  "type": "string"
 		//	}
-		"server_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"server_hostname": schemaAttribute0cb9d381331ee81dc133c85e(),
 		// Property: Subdirectory
 		// CloudFormation resource type schema:
 		//
@@ -335,10 +462,7 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
 		//	  "type": "string"
 		//	}
-		"subdirectory": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subdirectory": schemaAttributec5547e43fc1dcc6e55f41d44(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -374,24 +498,7 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key for an AWS resource tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for an AWS resource tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute49bc29b1fcf6f04292db4a11(),
 		// Property: User
 		// CloudFormation resource type schema:
 		//
@@ -401,10 +508,7 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[^\\x5B\\x5D\\\\/:;|=,+*?]{1,104}$",
 		//	  "type": "string"
 		//	}
-		"user": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The user who can mount the share, has the permissions to access files and folders in the SMB share.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"user": schemaAttributec6799ccad305462f2414b922(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

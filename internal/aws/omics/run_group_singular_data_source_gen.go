@@ -16,6 +16,35 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0e99ed9602cb0bdb102d9a1a() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A map of resource tags",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1feac4bc67aa80c86f530b99() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41067482db649f1e01cb0663() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53282b8f3945911d64889688() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_omics_run_group", runGroupDataSource)
 }
@@ -33,9 +62,7 @@ func runGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute41067482db649f1e01cb0663(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +70,7 @@ func runGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute53282b8f3945911d64889688(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -56,9 +80,7 @@ func runGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]+$",
 		//	  "type": "string"
 		//	}
-		"run_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"run_group_id": schemaAttribute41067482db649f1e01cb0663(),
 		// Property: MaxCpus
 		// CloudFormation resource type schema:
 		//
@@ -67,9 +89,7 @@ func runGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "number"
 		//	}
-		"max_cpus": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"max_cpus": schemaAttribute1feac4bc67aa80c86f530b99(),
 		// Property: MaxDuration
 		// CloudFormation resource type schema:
 		//
@@ -78,9 +98,7 @@ func runGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "number"
 		//	}
-		"max_duration": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"max_duration": schemaAttribute1feac4bc67aa80c86f530b99(),
 		// Property: MaxGpus
 		// CloudFormation resource type schema:
 		//
@@ -89,9 +107,7 @@ func runGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "number"
 		//	}
-		"max_gpus": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"max_gpus": schemaAttribute1feac4bc67aa80c86f530b99(),
 		// Property: MaxRuns
 		// CloudFormation resource type schema:
 		//
@@ -100,9 +116,7 @@ func runGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "number"
 		//	}
-		"max_runs": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"max_runs": schemaAttribute1feac4bc67aa80c86f530b99(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -112,9 +126,7 @@ func runGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute41067482db649f1e01cb0663(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -131,12 +143,7 @@ func runGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A map of resource tags",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute0e99ed9602cb0bdb102d9a1a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

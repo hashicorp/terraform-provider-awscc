@@ -15,6 +15,255 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute00eee04b69cf3a9d88863ebd() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute8f590b1c7e9d5e14e810d085(),
+				// Property: Value
+				"value": schemaAttribute3f14b430ec32621a959193c5(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to assign to the Link.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute039fcad7d20956e5e896b601() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a74e1a422ec8a27bc59ca1a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: NoBidReasonCode
+			"no_bid_reason_code": schemaAttribute790b883978c28f83301e8004(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23830f7bbd111a78e09fe058() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PassThroughPercentage
+			"pass_through_percentage": schemaAttribute847ad58bfa0777bc4f04ffb1(),
+			// Property: Reason
+			"reason": schemaAttributefdbdab7cf0630df9d241c2ab(),
+			// Property: ReasonCode
+			"reason_code": schemaAttribute790b883978c28f83301e8004(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute29c35711d2d5e8dc00b4b5e2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LinkApplicationLogSampling
+			"link_application_log_sampling": schemaAttribute7d6f9fe7853627fc9bdd02eb(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f14b430ec32621a959193c5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute445f6a1c82420ef2788a869d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DependsOn
+				"depends_on": schemaAttribute039fcad7d20956e5e896b601(),
+				// Property: ModuleParameters
+				"module_parameters": schemaAttributedf352ec0f16600a8479a5996(),
+				// Property: Name
+				"name": schemaAttributefdbdab7cf0630df9d241c2ab(),
+				// Property: Version
+				"version": schemaAttributefdbdab7cf0630df9d241c2ab(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute481838e0eb2b27bf4eb8b241() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53074ee433e98070026178a5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomerProvidedId
+			"customer_provided_id": schemaAttributefdbdab7cf0630df9d241c2ab(),
+			// Property: ResponderErrorMasking
+			"responder_error_masking": schemaAttributee8bdd139841b9244c4269cfd(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute596aaa2aad4a21da7aaba806() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApplicationLogs
+			"application_logs": schemaAttribute29c35711d2d5e8dc00b4b5e2(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6662500959fa8779dfc4f7b6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Action
+			"action": schemaAttributebc63d4121b815e9181aaaf29(),
+			// Property: FilterConfiguration
+			"filter_configuration": schemaAttributea4673ce913d426d07b385754(),
+			// Property: FilterType
+			"filter_type": schemaAttributefdbdab7cf0630df9d241c2ab(),
+			// Property: HoldbackPercentage
+			"holdback_percentage": schemaAttribute847ad58bfa0777bc4f04ffb1(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute790b883978c28f83301e8004() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b51dc88a1912777967104cf() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d6f9fe7853627fc9bdd02eb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ErrorLog
+			"error_log": schemaAttribute847ad58bfa0777bc4f04ffb1(),
+			// Property: FilterLog
+			"filter_log": schemaAttribute847ad58bfa0777bc4f04ffb1(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute847ad58bfa0777bc4f04ffb1() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f590b1c7e9d5e14e810d085() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4673ce913d426d07b385754() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Criteria
+				"criteria": schemaAttributebd55d5b5494423eddedc13a4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc63d4121b815e9181aaaf29() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HeaderTag
+			"header_tag": schemaAttributebf89fe949fd97c128ef16c51(),
+			// Property: NoBid
+			"no_bid": schemaAttribute0a74e1a422ec8a27bc59ca1a(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd55d5b5494423eddedc13a4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Path
+				"path": schemaAttributefdbdab7cf0630df9d241c2ab(),
+				// Property: Values
+				"values": schemaAttribute039fcad7d20956e5e896b601(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf89fe949fd97c128ef16c51() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttributefdbdab7cf0630df9d241c2ab(),
+			// Property: Value
+			"value": schemaAttributefdbdab7cf0630df9d241c2ab(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf352ec0f16600a8479a5996() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: NoBid
+			"no_bid": schemaAttribute23830f7bbd111a78e09fe058(),
+			// Property: OpenRtbAttribute
+			"open_rtb_attribute": schemaAttribute6662500959fa8779dfc4f7b6(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8bdd139841b9244c4269cfd() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Action
+				"action": schemaAttributefdbdab7cf0630df9d241c2ab(),
+				// Property: HttpCode
+				"http_code": schemaAttributefdbdab7cf0630df9d241c2ab(),
+				// Property: LoggingTypes
+				"logging_types": schemaAttribute7b51dc88a1912777967104cf(),
+				// Property: ResponseLoggingPercentage
+				"response_logging_percentage": schemaAttribute847ad58bfa0777bc4f04ffb1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdbdab7cf0630df9d241c2ab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_rtbfabric_link", linkDataSource)
 }
@@ -32,18 +281,14 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws:rtbfabric:[a-zA-Z0-9_-]+:[0-9]{12}:gateway/[a-zA-Z0-9-]+/link/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributefdbdab7cf0630df9d241c2ab(),
 		// Property: CreatedTimestamp
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"created_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"created_timestamp": schemaAttributefdbdab7cf0630df9d241c2ab(),
 		// Property: GatewayId
 		// CloudFormation resource type schema:
 		//
@@ -51,18 +296,14 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^rtb-gw-[a-z0-9-]{1,25}$",
 		//	  "type": "string"
 		//	}
-		"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"gateway_id": schemaAttributefdbdab7cf0630df9d241c2ab(),
 		// Property: HttpResponderAllowed
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"http_responder_allowed": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"http_responder_allowed": schemaAttribute481838e0eb2b27bf4eb8b241(),
 		// Property: LinkAttributes
 		// CloudFormation resource type schema:
 		//
@@ -126,40 +367,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"link_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomerProvidedId
-				"customer_provided_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResponderErrorMasking
-				"responder_error_masking": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Action
-							"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: HttpCode
-							"http_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: LoggingTypes
-							"logging_types": schema.SetAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ResponseLoggingPercentage
-							"response_logging_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"link_attributes": schemaAttribute53074ee433e98070026178a5(),
 		// Property: LinkDirection
 		// CloudFormation resource type schema:
 		//
@@ -170,9 +378,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"link_direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"link_direction": schemaAttributefdbdab7cf0630df9d241c2ab(),
 		// Property: LinkId
 		// CloudFormation resource type schema:
 		//
@@ -180,9 +386,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^link-[a-z0-9-]{1,25}$",
 		//	  "type": "string"
 		//	}
-		"link_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"link_id": schemaAttributefdbdab7cf0630df9d241c2ab(),
 		// Property: LinkLogSettings
 		// CloudFormation resource type schema:
 		//
@@ -224,31 +428,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"link_log_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ApplicationLogs
-				"application_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: LinkApplicationLogSampling
-						"link_application_log_sampling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ErrorLog
-								"error_log": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: FilterLog
-								"filter_log": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"link_log_settings": schemaAttribute596aaa2aad4a21da7aaba806(),
 		// Property: LinkStatus
 		// CloudFormation resource type schema:
 		//
@@ -271,9 +451,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"link_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"link_status": schemaAttributefdbdab7cf0630df9d241c2ab(),
 		// Property: ModuleConfigurationList
 		// CloudFormation resource type schema:
 		//
@@ -431,119 +609,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"module_configuration_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DependsOn
-					"depends_on": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ModuleParameters
-					"module_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: NoBid
-							"no_bid": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: PassThroughPercentage
-									"pass_through_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Reason
-									"reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: ReasonCode
-									"reason_code": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: OpenRtbAttribute
-							"open_rtb_attribute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Action
-									"action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: HeaderTag
-											"header_tag": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Name
-													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: Value
-													"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: NoBid
-											"no_bid": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: NoBidReasonCode
-													"no_bid_reason_code": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: FilterConfiguration
-									"filter_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Criteria
-												"criteria": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Path
-															"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Computed: true,
-															}, /*END ATTRIBUTE*/
-															// Property: Values
-															"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																ElementType: types.StringType,
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: FilterType
-									"filter_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: HoldbackPercentage
-									"holdback_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Version
-					"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"module_configuration_list": schemaAttribute445f6a1c82420ef2788a869d(),
 		// Property: PeerGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -551,9 +617,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^rtb-gw-[a-z0-9-]{1,25}$",
 		//	  "type": "string"
 		//	}
-		"peer_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"peer_gateway_id": schemaAttributefdbdab7cf0630df9d241c2ab(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -588,33 +652,14 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to assign to the Link.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute00eee04b69cf3a9d88863ebd(),
 		// Property: UpdatedTimestamp
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"updated_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"updated_timestamp": schemaAttributefdbdab7cf0630df9d241c2ab(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

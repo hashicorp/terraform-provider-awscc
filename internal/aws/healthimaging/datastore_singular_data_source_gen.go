@@ -15,6 +15,57 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0584a4a925809b98ce8a0782() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN referencing a KMS key or KMS key alias.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d1106b47b19fce6771c1a6f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Datastore's ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2705aa95232eb3e37ab01e5e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp when the data store was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48d73e7f7ec418ece285e38e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string to denote the Datastore's state.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77e731c493518ada3a56d545() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A Map of key value pairs for Tags.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute81df90db98b47150ce131042() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "User friendly name for Datastore.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef5f8942fd37f5059cdb97697() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_healthimaging_datastore", datastoreDataSource)
 }
@@ -30,10 +81,7 @@ func datastoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp when the data store was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp when the data store was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute2705aa95232eb3e37ab01e5e(),
 		// Property: DatastoreArn
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +92,7 @@ func datastoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:medical-imaging:[a-z0-9-]+:[0-9]{12}:datastore/[0-9a-z]{32}(/imageset/[0-9a-z]{32})?$",
 		//	  "type": "string"
 		//	}
-		"datastore_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Datastore's ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"datastore_arn": schemaAttribute0d1106b47b19fce6771c1a6f(),
 		// Property: DatastoreId
 		// CloudFormation resource type schema:
 		//
@@ -57,9 +102,7 @@ func datastoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-z]{32}$",
 		//	  "type": "string"
 		//	}
-		"datastore_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"datastore_id": schemaAttributef5f8942fd37f5059cdb97697(),
 		// Property: DatastoreName
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +113,7 @@ func datastoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z0-9._/#-]+$",
 		//	  "type": "string"
 		//	}
-		"datastore_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "User friendly name for Datastore.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"datastore_name": schemaAttribute81df90db98b47150ce131042(),
 		// Property: DatastoreStatus
 		// CloudFormation resource type schema:
 		//
@@ -90,10 +130,7 @@ func datastoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"datastore_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A string to denote the Datastore's state.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"datastore_status": schemaAttribute48d73e7f7ec418ece285e38e(),
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -103,10 +140,7 @@ func datastoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ARN referencing a KMS key or KMS key alias.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttribute0584a4a925809b98ce8a0782(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -123,12 +157,7 @@ func datastoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A Map of key value pairs for Tags.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute77e731c493518ada3a56d545(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -136,10 +165,7 @@ func datastoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp when the data store was created.",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp when the data store was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute2705aa95232eb3e37ab01e5e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

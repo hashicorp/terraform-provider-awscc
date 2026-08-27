@@ -16,6 +16,103 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute210b30b4377c8a3208f13cb6() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30e09a4be302cbbe41480e0e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51292d8d8137d7920b13394a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65d032967d0d7acf3a8d2f94() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RoleArn
+			"role_arn": schemaAttribute30e09a4be302cbbe41480e0e(),
+			// Property: StreamName
+			"stream_name": schemaAttribute30e09a4be302cbbe41480e0e(),
+			// Property: StreamingStatus
+			"streaming_status": schemaAttribute30e09a4be302cbbe41480e0e(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e2f14d1462849f8a0929401() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApplicationArns
+			"application_arns": schemaAttribute51292d8d8137d7920b13394a(),
+			// Property: RoleArn
+			"role_arn": schemaAttribute30e09a4be302cbbe41480e0e(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84e6a7ad5940d7e15b8680ed() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute99a11d048183613bdc3ffc9b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9dd73b6c3571716367c67615() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute84e6a7ad5940d7e15b8680ed(),
+				// Property: Value
+				"value": schemaAttribute99a11d048183613bdc3ffc9b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4e2baa9190b979236f294d3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ClientId
+				"client_id": schemaAttribute30e09a4be302cbbe41480e0e(),
+				// Property: ProviderName
+				"provider_name": schemaAttribute30e09a4be302cbbe41480e0e(),
+				// Property: ServerSideTokenCheck
+				"server_side_token_check": schemaAttribute210b30b4377c8a3208f13cb6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebbc6657a61f50eaafd39dbb9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: jsontypes.NormalizedType{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cognito_identity_pool", identityPoolDataSource)
 }
@@ -30,28 +127,21 @@ func identityPoolDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"allow_classic_flow": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"allow_classic_flow": schemaAttribute210b30b4377c8a3208f13cb6(),
 		// Property: AllowUnauthenticatedIdentities
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"allow_unauthenticated_identities": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"allow_unauthenticated_identities": schemaAttribute210b30b4377c8a3208f13cb6(),
 		// Property: CognitoEvents
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "object"
 		//	}
-		"cognito_events": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: jsontypes.NormalizedType{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"cognito_events": schemaAttributebbc6657a61f50eaafd39dbb9(),
 		// Property: CognitoIdentityProviders
 		// CloudFormation resource type schema:
 		//
@@ -79,25 +169,7 @@ func identityPoolDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"cognito_identity_providers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ClientId
-					"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ProviderName
-					"provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ServerSideTokenCheck
-					"server_side_token_check": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"cognito_identity_providers": schemaAttributea4e2baa9190b979236f294d3(),
 		// Property: CognitoStreams
 		// CloudFormation resource type schema:
 		//
@@ -116,50 +188,28 @@ func identityPoolDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"cognito_streams": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RoleArn
-				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: StreamName
-				"stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: StreamingStatus
-				"streaming_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"cognito_streams": schemaAttribute65d032967d0d7acf3a8d2f94(),
 		// Property: DeveloperProviderName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"developer_provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"developer_provider_name": schemaAttribute30e09a4be302cbbe41480e0e(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"identity_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"identity_pool_id": schemaAttribute30e09a4be302cbbe41480e0e(),
 		// Property: IdentityPoolName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"identity_pool_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"identity_pool_name": schemaAttribute30e09a4be302cbbe41480e0e(),
 		// Property: IdentityPoolTags
 		// CloudFormation resource type schema:
 		//
@@ -192,33 +242,14 @@ func identityPoolDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"identity_pool_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"identity_pool_tags": schemaAttribute9dd73b6c3571716367c67615(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute30e09a4be302cbbe41480e0e(),
 		// Property: OpenIdConnectProviderARNs
 		// CloudFormation resource type schema:
 		//
@@ -230,10 +261,7 @@ func identityPoolDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"open_id_connect_provider_ar_ns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"open_id_connect_provider_ar_ns": schemaAttribute51292d8d8137d7920b13394a(),
 		// Property: PushSync
 		// CloudFormation resource type schema:
 		//
@@ -254,20 +282,7 @@ func identityPoolDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"push_sync": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ApplicationArns
-				"application_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RoleArn
-				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"push_sync": schemaAttribute6e2f14d1462849f8a0929401(),
 		// Property: SamlProviderARNs
 		// CloudFormation resource type schema:
 		//
@@ -279,20 +294,14 @@ func identityPoolDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"saml_provider_ar_ns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"saml_provider_ar_ns": schemaAttribute51292d8d8137d7920b13394a(),
 		// Property: SupportedLoginProviders
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "object"
 		//	}
-		"supported_login_providers": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: jsontypes.NormalizedType{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"supported_login_providers": schemaAttributebbc6657a61f50eaafd39dbb9(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

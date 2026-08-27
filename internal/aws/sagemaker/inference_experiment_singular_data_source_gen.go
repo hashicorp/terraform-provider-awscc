@@ -15,6 +15,353 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute05ebaf92bc486c9e69d86092() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The percentage of inference requests that Amazon SageMaker replicates from the production variant to the shadow variant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute096040512ce48690cc2a4f9b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The desired state of the experiment after starting or stopping operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f7e38d06966448baa91da14() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the inference experiment that you want to run.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19fb7b9e4e10db18f5b4d88d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ShadowModelVariants
+			"shadow_model_variants": schemaAttributecc97a3e6298f0aba509a184f(),
+			// Property: SourceModelVariantName
+			"source_model_variant_name": schemaAttributef3d6869f8c3b4ce4b1ca034c(),
+		}, /*END SCHEMA*/
+		Description: "The configuration of ShadowMode inference experiment type. Use this field to specify a production variant which takes all the inference requests, and a shadow variant to which Amazon SageMaker replicates a percentage of the inference requests. For the shadow variant also specify the percentage of requests that Amazon SageMaker replicates.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute226cac7397c8a330721fe6ec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the variant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d41fd71172494dbd65c443c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the shadow variant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute334712216b3a9d98b7d09a77() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContentType
+			"content_type": schemaAttributed73068f574b50a50897fb25b(),
+			// Property: Destination
+			"destination": schemaAttribute9a51cddf3b53300f268f4856(),
+			// Property: KmsKey
+			"kms_key": schemaAttribute8aa5ee32abc7a1ba26e2b176(),
+		}, /*END SCHEMA*/
+		Description: "The Amazon S3 location and configuration for storing inference request and response data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44e50df18c5941ef404f35d3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the inference experiment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a758f7447aa7a1cfa2bd197() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp at which you created the inference experiment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4beee3c270b3b5635bf35e69() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the inference experiment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4fd3325b2514e33728eef014() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Amazon SageMaker Model entity.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute50190084f04a427272505386() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp at which the inference experiment started or will start.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6306885da73295ce6f006f7c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The error message or client-specified reason from the StopInferenceExperiment API, that explains the status of the inference experiment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66572d4136af2a2481519bdb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EndpointConfigName
+			"endpoint_config_name": schemaAttributea5d6a97074f7c08147cd81be(),
+			// Property: EndpointName
+			"endpoint_name": schemaAttribute93d68a6b191617c337728cf1(),
+			// Property: EndpointStatus
+			"endpoint_status": schemaAttributeec76e5da20ce7640e7936ba4(),
+		}, /*END SCHEMA*/
+		Description: "The metadata of the endpoint on which the inference experiment ran.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b8833453b3c9075af8b737b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InfrastructureType
+			"infrastructure_type": schemaAttribute0f7e38d06966448baa91da14(),
+			// Property: RealTimeInferenceConfig
+			"real_time_inference_config": schemaAttribute8e3e9507454d3b4632f83de6(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for the infrastructure that the model will be deployed to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d545f4f8b6386b2be20ef2f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the inference experiment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8085aad29e4435b8958a1275() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp at which the inference experiment ended or will end.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84789b8fdca9f6c790908128() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8aa5ee32abc7a1ba26e2b176() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Key Management Service key that Amazon SageMaker uses to encrypt captured data at rest using Amazon S3 server-side encryption.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e3e9507454d3b4632f83de6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceCount
+			"instance_count": schemaAttributea8b1cf9083971581b1ddb383(),
+			// Property: InstanceType
+			"instance_type": schemaAttributeefa3fa1fe7050c0b9f8d9d9f(),
+		}, /*END SCHEMA*/
+		Description: "The infrastructure configuration for deploying the model to a real-time inference endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93d68a6b191617c337728cf1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the endpoint used to run the inference experiment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96d67d8a2f1a30d3ebee7a4e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributef1a66849f9aba128d3e51f51(),
+				// Property: Value
+				"value": schemaAttribute84789b8fdca9f6c790908128(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a51cddf3b53300f268f4856() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon S3 bucket where the inference request and response data is stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e1f55577b38e86f4ec483ab() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of all content type headers that SageMaker will treat as JSON and capture accordingly.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea2e24afd90c73ab41a0d9f46() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of all content type headers that SageMaker will treat as CSV and capture accordingly.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea5d6a97074f7c08147cd81be() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the endpoint configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8b1cf9083971581b1ddb383() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of instances of the type specified by InstanceType.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab352910b248058562bbfeec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecace003d0accc1d02d1ff27e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EndTime
+			"end_time": schemaAttribute8085aad29e4435b8958a1275(),
+			// Property: StartTime
+			"start_time": schemaAttribute50190084f04a427272505386(),
+		}, /*END SCHEMA*/
+		Description: "The duration for which you want the inference experiment to run.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc97a3e6298f0aba509a184f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SamplingPercentage
+				"sampling_percentage": schemaAttribute05ebaf92bc486c9e69d86092(),
+				// Property: ShadowModelVariantName
+				"shadow_model_variant_name": schemaAttribute2d41fd71172494dbd65c443c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of shadow variant configurations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed2a107446d55dc4ce11c3c4b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to access model artifacts and container images, and manage Amazon SageMaker Inference endpoints for model deployment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed73068f574b50a50897fb25b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CsvContentTypes
+			"csv_content_types": schemaAttributea2e24afd90c73ab41a0d9f46(),
+			// Property: JsonContentTypes
+			"json_content_types": schemaAttribute9e1f55577b38e86f4ec483ab(),
+		}, /*END SCHEMA*/
+		Description: "Configuration specifying how to treat different headers. If no headers are specified SageMaker will by default base64 encode when capturing the data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee111617fdda38e288b44c217() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp at which you last modified the inference experiment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee86ba11679daa9f2b6e991d1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the inference experiment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec76e5da20ce7640e7936ba4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the endpoint. For possible values of the status of an endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeefa3fa1fe7050c0b9f8d9d9f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The instance type the model is deployed to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1a66849f9aba128d3e51f51() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3d6869f8c3b4ce4b1ca034c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the production variant, which takes all the inference requests.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa64ae6aa0599f0cf5e91dd3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InfrastructureConfig
+				"infrastructure_config": schemaAttribute6b8833453b3c9075af8b737b(),
+				// Property: ModelName
+				"model_name": schemaAttribute4fd3325b2514e33728eef014(),
+				// Property: VariantName
+				"variant_name": schemaAttribute226cac7397c8a330721fe6ec(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of ModelVariantConfig objects. Each ModelVariantConfig object in the array describes the infrastructure configuration for the corresponding variant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_inference_experiment", inferenceExperimentDataSource)
 }
@@ -33,10 +380,7 @@ func inferenceExperimentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:inference-experiment/[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the inference experiment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributee86ba11679daa9f2b6e991d1(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +388,7 @@ func inferenceExperimentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The timestamp at which you created the inference experiment.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp at which you created the inference experiment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute4a758f7447aa7a1cfa2bd197(),
 		// Property: DataStorageConfig
 		// CloudFormation resource type schema:
 		//
@@ -104,41 +445,7 @@ func inferenceExperimentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"data_storage_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ContentType
-				"content_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CsvContentTypes
-						"csv_content_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The list of all content type headers that SageMaker will treat as CSV and capture accordingly.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: JsonContentTypes
-						"json_content_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The list of all content type headers that SageMaker will treat as JSON and capture accordingly.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration specifying how to treat different headers. If no headers are specified SageMaker will by default base64 encode when capturing the data.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Destination
-				"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon S3 bucket where the inference request and response data is stored.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: KmsKey
-				"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The AWS Key Management Service key that Amazon SageMaker uses to encrypt captured data at rest using Amazon S3 server-side encryption.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The Amazon S3 location and configuration for storing inference request and response data.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_storage_config": schemaAttribute334712216b3a9d98b7d09a77(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -149,10 +456,7 @@ func inferenceExperimentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the inference experiment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute7d545f4f8b6386b2be20ef2f(),
 		// Property: DesiredState
 		// CloudFormation resource type schema:
 		//
@@ -165,10 +469,7 @@ func inferenceExperimentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"desired_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The desired state of the experiment after starting or stopping operation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"desired_state": schemaAttribute096040512ce48690cc2a4f9b(),
 		// Property: EndpointMetadata
 		// CloudFormation resource type schema:
 		//
@@ -209,27 +510,7 @@ func inferenceExperimentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"endpoint_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EndpointConfigName
-				"endpoint_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the endpoint configuration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EndpointName
-				"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the endpoint used to run the inference experiment.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EndpointStatus
-				"endpoint_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The status of the endpoint. For possible values of the status of an endpoint.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The metadata of the endpoint on which the inference experiment ran.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_metadata": schemaAttribute66572d4136af2a2481519bdb(),
 		// Property: EndpointName
 		// CloudFormation resource type schema:
 		//
@@ -239,10 +520,7 @@ func inferenceExperimentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
 		//	  "type": "string"
 		//	}
-		"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the endpoint used to run the inference experiment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_name": schemaAttribute93d68a6b191617c337728cf1(),
 		// Property: KmsKey
 		// CloudFormation resource type schema:
 		//
@@ -252,10 +530,7 @@ func inferenceExperimentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key": schemaAttributeab352910b248058562bbfeec(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -263,10 +538,7 @@ func inferenceExperimentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The timestamp at which you last modified the inference experiment.",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp at which you last modified the inference experiment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttributee111617fdda38e288b44c217(),
 		// Property: ModelVariants
 		// CloudFormation resource type schema:
 		//
@@ -336,53 +608,7 @@ func inferenceExperimentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "maxItems": 2,
 		//	  "type": "array"
 		//	}
-		"model_variants": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: InfrastructureConfig
-					"infrastructure_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: InfrastructureType
-							"infrastructure_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The type of the inference experiment that you want to run.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: RealTimeInferenceConfig
-							"real_time_inference_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: InstanceCount
-									"instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The number of instances of the type specified by InstanceType.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: InstanceType
-									"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The instance type the model is deployed to.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The infrastructure configuration for deploying the model to a real-time inference endpoint.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The configuration for the infrastructure that the model will be deployed to.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ModelName
-					"model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the Amazon SageMaker Model entity.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: VariantName
-					"variant_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the variant.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of ModelVariantConfig objects. Each ModelVariantConfig object in the array describes the infrastructure configuration for the corresponding variant.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"model_variants": schemaAttributefa64ae6aa0599f0cf5e91dd3(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -392,10 +618,7 @@ func inferenceExperimentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the inference experiment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute4beee3c270b3b5635bf35e69(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -406,10 +629,7 @@ func inferenceExperimentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to access model artifacts and container images, and manage Amazon SageMaker Inference endpoints for model deployment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttributed2a107446d55dc4ce11c3c4b(),
 		// Property: Schedule
 		// CloudFormation resource type schema:
 		//
@@ -428,22 +648,7 @@ func inferenceExperimentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EndTime
-				"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The timestamp at which the inference experiment ended or will end.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StartTime
-				"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The timestamp at which the inference experiment started or will start.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The duration for which you want the inference experiment to run.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schedule": schemaAttributecace003d0accc1d02d1ff27e(),
 		// Property: ShadowModeConfig
 		// CloudFormation resource type schema:
 		//
@@ -492,36 +697,7 @@ func inferenceExperimentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"shadow_mode_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ShadowModelVariants
-				"shadow_model_variants": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: SamplingPercentage
-							"sampling_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The percentage of inference requests that Amazon SageMaker replicates from the production variant to the shadow variant.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ShadowModelVariantName
-							"shadow_model_variant_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the shadow variant.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "List of shadow variant configurations.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourceModelVariantName
-				"source_model_variant_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the production variant, which takes all the inference requests.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration of ShadowMode inference experiment type. Use this field to specify a production variant which takes all the inference requests, and a shadow variant to which Amazon SageMaker replicates a percentage of the inference requests. For the shadow variant also specify the percentage of requests that Amazon SageMaker replicates.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"shadow_mode_config": schemaAttribute19fb7b9e4e10db18f5b4d88d(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -539,10 +715,7 @@ func inferenceExperimentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the inference experiment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute44e50df18c5941ef404f35d3(),
 		// Property: StatusReason
 		// CloudFormation resource type schema:
 		//
@@ -553,10 +726,7 @@ func inferenceExperimentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The error message or client-specified reason from the StopInferenceExperiment API, that explains the status of the inference experiment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status_reason": schemaAttribute6306885da73295ce6f006f7c(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -589,24 +759,7 @@ func inferenceExperimentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute96d67d8a2f1a30d3ebee7a4e(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -617,10 +770,7 @@ func inferenceExperimentDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the inference experiment that you want to run.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute0f7e38d06966448baa91da14(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

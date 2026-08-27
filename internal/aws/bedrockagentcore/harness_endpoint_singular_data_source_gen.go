@@ -15,6 +15,92 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0935acc6d9b56704271949e8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the harness that the endpoint belongs to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1633e642b61ea3129b57f126() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The harness version that the endpoint points to and serves invocations from.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24b95b104a734a99e2577b4d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute93bae083a0019a6a204bccfa(),
+				// Property: Value
+				"value": schemaAttribute93bae083a0019a6a204bccfa(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to apply to the harness endpoint resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37f9a0b3d873f0fe6eb311a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The harness version that the endpoint is currently serving.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute47e857744cdbc0449e8dfe5a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the endpoint. Must start with a letter and contain only alphanumeric characters and underscores.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ca01ec731d6b0d6ed514ae0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the harness that the endpoint belongs to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute542c660a72f52c514e5abdcc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the endpoint was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8bd225c9d3814d5e06c61d2d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the endpoint was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93bae083a0019a6a204bccfa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec13a55fa28c54dd5543b390c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecdaf04121a60d53a4eef1b20() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_harness_endpoint", harnessEndpointDataSource)
 }
@@ -30,10 +116,7 @@ func harnessEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The Amazon Resource Name (ARN) of the endpoint.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributec13a55fa28c54dd5543b390c(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -42,11 +125,7 @@ func harnessEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the endpoint was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute8bd225c9d3814d5e06c61d2d(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +135,7 @@ func harnessEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributecdaf04121a60d53a4eef1b20(),
 		// Property: EndpointName
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +144,7 @@ func harnessEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	  "type": "string"
 		//	}
-		"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the endpoint. Must start with a letter and contain only alphanumeric characters and underscores.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_name": schemaAttribute47e857744cdbc0449e8dfe5a(),
 		// Property: HarnessId
 		// CloudFormation resource type schema:
 		//
@@ -80,10 +153,7 @@ func harnessEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,39}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"harness_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the harness that the endpoint belongs to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"harness_id": schemaAttribute0935acc6d9b56704271949e8(),
 		// Property: HarnessName
 		// CloudFormation resource type schema:
 		//
@@ -91,10 +161,7 @@ func harnessEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The name of the harness that the endpoint belongs to.",
 		//	  "type": "string"
 		//	}
-		"harness_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the harness that the endpoint belongs to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"harness_name": schemaAttribute4ca01ec731d6b0d6ed514ae0(),
 		// Property: LiveVersion
 		// CloudFormation resource type schema:
 		//
@@ -105,10 +172,7 @@ func harnessEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^([1-9][0-9]{0,4})$",
 		//	  "type": "string"
 		//	}
-		"live_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The harness version that the endpoint is currently serving.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"live_version": schemaAttribute37f9a0b3d873f0fe6eb311a5(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -124,9 +188,7 @@ func harnessEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute93bae083a0019a6a204bccfa(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -158,22 +220,7 @@ func harnessEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to apply to the harness endpoint resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute24b95b104a734a99e2577b4d(),
 		// Property: TargetVersion
 		// CloudFormation resource type schema:
 		//
@@ -184,10 +231,7 @@ func harnessEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^([1-9][0-9]{0,4})$",
 		//	  "type": "string"
 		//	}
-		"target_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The harness version that the endpoint points to and serves invocations from.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_version": schemaAttribute1633e642b61ea3129b57f126(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -196,11 +240,7 @@ func harnessEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the endpoint was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute542c660a72f52c514e5abdcc(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

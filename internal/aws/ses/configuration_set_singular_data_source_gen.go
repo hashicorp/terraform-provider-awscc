@@ -15,6 +15,269 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute19bb3eac45bca30495eb700f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ReputationMetricsEnabled
+			"reputation_metrics_enabled": schemaAttribute5cf65a0a54078ad48b88977f(),
+		}, /*END SCHEMA*/
+		Description: "An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a79d214bdc036ad56844f05() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConditionThresholdEnabled
+			"condition_threshold_enabled": schemaAttribute3c422a3d21f5eb551f91608a(),
+			// Property: OverallConfidenceThreshold
+			"overall_confidence_threshold": schemaAttribute7a63ac65f3801b8add8d7d78(),
+		}, /*END SCHEMA*/
+		Description: "The condition threshold settings for suppression validation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute22733fd3e920160a2595a8ad() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list that contains the reasons that email addresses are automatically added to the suppression list for your account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute235424f74f0d8ae54cddef7b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2879d099222f409beade4642() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ArchiveArn
+			"archive_arn": schemaAttribute341c5dfa06048247f00d322b(),
+		}, /*END SCHEMA*/
+		Description: "An object that defines a MailManager archive that is used to preserve emails that you send using the configuration set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c73a3f3c97f925c8d0c8197() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether emails sent with this configuration set have optimized delivery algorithm enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute341c5dfa06048247f00d322b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the MailManager archive to associate with the configuration set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38220a1a465028cdd10565d3() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the maximum time until which SES will retry sending emails",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3957010615b34dbcc508f35f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomRedirectDomain
+			"custom_redirect_domain": schemaAttributeb7c7a26c2fdf8ecaf697483f(),
+			// Property: HttpsPolicy
+			"https_policy": schemaAttributed4f686fee5eab4a3ae88c6f7(),
+		}, /*END SCHEMA*/
+		Description: "An object that defines the open and click tracking options for emails that you send using the configuration set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b82837295a212f489683da1() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c422a3d21f5eb551f91608a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether the condition threshold is enabled or disabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute537fe1330574646dedbb34d5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DashboardOptions
+			"dashboard_options": schemaAttributec195d2f1f846d944c07fd807(),
+			// Property: GuardianOptions
+			"guardian_options": schemaAttributeec7fd13ac2bfb0c8e2a4d000(),
+		}, /*END SCHEMA*/
+		Description: "An object that contains Virtual Deliverability Manager (VDM) settings for this configuration set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58ebb8240f3e56dccc4fd956() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require , messages are only delivered if a TLS connection can be established. If the value is Optional , messages can be delivered in plain text if a TLS connection can't be established.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5cf65a0a54078ad48b88977f() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "If true , tracking of reputation metrics is enabled for the configuration set. If false , tracking of reputation metrics is disabled for the configuration set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d6a0962e80c72aa16e5451e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute235424f74f0d8ae54cddef7b(),
+				// Property: Value
+				"value": schemaAttribute235424f74f0d8ae54cddef7b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags (keys and values) associated with the contact list.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e9d2debf20fa0bf53ff8e32() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxDeliverySeconds
+			"max_delivery_seconds": schemaAttribute38220a1a465028cdd10565d3(),
+			// Property: SendingPoolName
+			"sending_pool_name": schemaAttributec3edf22503e7c47d861f0bb8(),
+			// Property: TlsPolicy
+			"tls_policy": schemaAttribute58ebb8240f3e56dccc4fd956(),
+		}, /*END SCHEMA*/
+		Description: "An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute778f648153b2fe27c4f20b8f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConditionThreshold
+			"condition_threshold": schemaAttribute1a79d214bdc036ad56844f05(),
+		}, /*END SCHEMA*/
+		Description: "An object that contains information about the validation options for your account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a63ac65f3801b8add8d7d78() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConfidenceVerdictThreshold
+			"confidence_verdict_threshold": schemaAttribute9d935b0ec3296cfda496c1fb(),
+		}, /*END SCHEMA*/
+		Description: "The overall confidence threshold settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8754d37fb3c9ee6329b5337b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether emails sent with this configuration set have engagement tracking enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d935b0ec3296cfda496c1fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The confidence verdict threshold level.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaae3b083b1cf3bce53c5e0d5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SuppressedReasons
+			"suppressed_reasons": schemaAttribute22733fd3e920160a2595a8ad(),
+			// Property: ValidationOptions
+			"validation_options": schemaAttribute778f648153b2fe27c4f20b8f(),
+		}, /*END SCHEMA*/
+		Description: "An object that contains information about the suppression list preferences for your account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb7c7a26c2fdf8ecaf697483f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The domain to use for tracking open and click events.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc2164c4a0129c7617cbc261() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the configuration set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec195d2f1f846d944c07fd807() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EngagementMetrics
+			"engagement_metrics": schemaAttribute8754d37fb3c9ee6329b5337b(),
+		}, /*END SCHEMA*/
+		Description: "Preferences regarding the Dashboard feature.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3edf22503e7c47d861f0bb8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the dedicated IP pool to associate with the configuration set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc8aaddedbfcb1890a3e5efd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SendingEnabled
+			"sending_enabled": schemaAttribute3b82837295a212f489683da1(),
+		}, /*END SCHEMA*/
+		Description: "An object that defines whether or not Amazon SES can send email that you send using the configuration set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4f686fee5eab4a3ae88c6f7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The https policy to use for tracking open and click events.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec7fd13ac2bfb0c8e2a4d000() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: OptimizedSharedDelivery
+			"optimized_shared_delivery": schemaAttribute2c73a3f3c97f925c8d0c8197(),
+		}, /*END SCHEMA*/
+		Description: "Preferences regarding the Guardian feature.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ses_configuration_set", configurationSetDataSource)
 }
@@ -37,17 +300,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"archiving_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ArchiveArn
-				"archive_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the MailManager archive to associate with the configuration set.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object that defines a MailManager archive that is used to preserve emails that you send using the configuration set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"archiving_options": schemaAttribute2879d099222f409beade4642(),
 		// Property: DeliveryOptions
 		// CloudFormation resource type schema:
 		//
@@ -73,27 +326,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"delivery_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaxDeliverySeconds
-				"max_delivery_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the maximum time until which SES will retry sending emails",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SendingPoolName
-				"sending_pool_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the dedicated IP pool to associate with the configuration set.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TlsPolicy
-				"tls_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require , messages are only delivered if a TLS connection can be established. If the value is Optional , messages can be delivered in plain text if a TLS connection can't be established.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"delivery_options": schemaAttribute6e9d2debf20fa0bf53ff8e32(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -102,10 +335,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,64}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the configuration set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributebc2164c4a0129c7617cbc261(),
 		// Property: ReputationOptions
 		// CloudFormation resource type schema:
 		//
@@ -121,17 +351,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"reputation_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ReputationMetricsEnabled
-				"reputation_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "If true , tracking of reputation metrics is enabled for the configuration set. If false , tracking of reputation metrics is disabled for the configuration set.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"reputation_options": schemaAttribute19bb3eac45bca30495eb700f(),
 		// Property: SendingOptions
 		// CloudFormation resource type schema:
 		//
@@ -146,16 +366,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"sending_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SendingEnabled
-				"sending_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object that defines whether or not Amazon SES can send email that you send using the configuration set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sending_options": schemaAttributecc8aaddedbfcb1890a3e5efd(),
 		// Property: SuppressionOptions
 		// CloudFormation resource type schema:
 		//
@@ -217,49 +428,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"suppression_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SuppressedReasons
-				"suppressed_reasons": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list that contains the reasons that email addresses are automatically added to the suppression list for your account.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ValidationOptions
-				"validation_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ConditionThreshold
-						"condition_threshold": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ConditionThresholdEnabled
-								"condition_threshold_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Whether the condition threshold is enabled or disabled.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: OverallConfidenceThreshold
-								"overall_confidence_threshold": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ConfidenceVerdictThreshold
-										"confidence_verdict_threshold": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The confidence verdict threshold level.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The overall confidence threshold settings.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The condition threshold settings for suppression validation.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "An object that contains information about the validation options for your account.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object that contains information about the suppression list preferences for your account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"suppression_options": schemaAttributeaae3b083b1cf3bce53c5e0d5(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -290,22 +459,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags (keys and values) associated with the contact list.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute5d6a0962e80c72aa16e5451e(),
 		// Property: TrackingOptions
 		// CloudFormation resource type schema:
 		//
@@ -325,22 +479,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tracking_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomRedirectDomain
-				"custom_redirect_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The domain to use for tracking open and click events.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: HttpsPolicy
-				"https_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The https policy to use for tracking open and click events.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object that defines the open and click tracking options for emails that you send using the configuration set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tracking_options": schemaAttribute3957010615b34dbcc508f35f(),
 		// Property: VdmOptions
 		// CloudFormation resource type schema:
 		//
@@ -381,36 +520,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"vdm_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DashboardOptions
-				"dashboard_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: EngagementMetrics
-						"engagement_metrics": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Whether emails sent with this configuration set have engagement tracking enabled.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Preferences regarding the Dashboard feature.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: GuardianOptions
-				"guardian_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: OptimizedSharedDelivery
-						"optimized_shared_delivery": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Whether emails sent with this configuration set have optimized delivery algorithm enabled.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Preferences regarding the Guardian feature.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object that contains Virtual Deliverability Manager (VDM) settings for this configuration set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vdm_options": schemaAttribute537fe1330574646dedbb34d5(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

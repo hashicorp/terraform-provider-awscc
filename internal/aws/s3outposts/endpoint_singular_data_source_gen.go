@@ -14,6 +14,115 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute089177e0bc3eaf0c90d4a27a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Additional error details describing the endpoint failure and recommended action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2582378ecd58d380cec49e84() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b9b2e4f7017945b39556489() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute46f1d376307dc827e724c19b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e95bed55b6a7ae34031d93c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the subnet in the selected VPC. The subnet must belong to the Outpost.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute69b889e318e90fa60ae0f429() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the security group to use with the endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ef37618ddd09b4d355c6d99() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NetworkInterfaceId
+				"network_interface_id": schemaAttribute2b9b2e4f7017945b39556489(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The network interfaces of the endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f28dc285d73eb7f69c17ae0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The id of the customer outpost on which the bucket resides.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea066fb3e0439b4fecca83113() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ErrorCode
+			"error_code": schemaAttributed88b4744fd2dba3fdbb98eba(),
+			// Property: Message
+			"message": schemaAttribute089177e0bc3eaf0c90d4a27a(),
+		}, /*END SCHEMA*/
+		Description: "The failure reason, if any, for a create or delete endpoint operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeabb991eb7f997554eecfa4e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The VPC CIDR committed by this endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7d95ba1c1c54055a81184c0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time the endpoint was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed88b4744fd2dba3fdbb98eba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The failure code, if any, for a create or delete endpoint operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee760518b04c5351035bd5cc6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of access for the on-premise network connectivity for the Outpost endpoint. To access endpoint from an on-premises network, you must specify the access type and provide the customer owned Ipv4 pool.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3a867d155cc25deda0901bf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the customer-owned IPv4 pool for the Endpoint. IP addresses will be allocated from this pool for the endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_s3outposts_endpoint", endpointDataSource)
 }
@@ -34,10 +143,7 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"access_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of access for the on-premise network connectivity for the Outpost endpoint. To access endpoint from an on-premises network, you must specify the access type and provide the customer owned Ipv4 pool.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"access_type": schemaAttributee760518b04c5351035bd5cc6(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -48,10 +154,7 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/endpoint/[a-zA-Z0-9]{19}$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute46f1d376307dc827e724c19b(),
 		// Property: CidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -61,10 +164,7 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The VPC CIDR committed by this endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cidr_block": schemaAttributeabb991eb7f997554eecfa4e1(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +173,7 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time the endpoint was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttributec7d95ba1c1c54055a81184c0(),
 		// Property: CustomerOwnedIpv4Pool
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +182,7 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^ipv4pool-coip-([0-9a-f]{17})$",
 		//	  "type": "string"
 		//	}
-		"customer_owned_ipv_4_pool": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the customer-owned IPv4 pool for the Endpoint. IP addresses will be allocated from this pool for the endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"customer_owned_ipv_4_pool": schemaAttributef3a867d155cc25deda0901bf(),
 		// Property: FailedReason
 		// CloudFormation resource type schema:
 		//
@@ -107,22 +201,7 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"failed_reason": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ErrorCode
-				"error_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The failure code, if any, for a create or delete endpoint operation.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Message
-				"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Additional error details describing the endpoint failure and recommended action.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The failure reason, if any, for a create or delete endpoint operation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"failed_reason": schemaAttributea066fb3e0439b4fecca83113(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -133,10 +212,7 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]{19}$",
 		//	  "type": "string"
 		//	}
-		"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_id": schemaAttribute2582378ecd58d380cec49e84(),
 		// Property: NetworkInterfaces
 		// CloudFormation resource type schema:
 		//
@@ -161,18 +237,7 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"network_interfaces": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: NetworkInterfaceId
-					"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The network interfaces of the endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_interfaces": schemaAttribute6ef37618ddd09b4d355c6d99(),
 		// Property: OutpostId
 		// CloudFormation resource type schema:
 		//
@@ -181,10 +246,7 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(op-[a-f0-9]{17}|\\d{12}|ec2)$",
 		//	  "type": "string"
 		//	}
-		"outpost_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The id of the customer outpost on which the bucket resides.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"outpost_id": schemaAttribute8f28dc285d73eb7f69c17ae0(),
 		// Property: SecurityGroupId
 		// CloudFormation resource type schema:
 		//
@@ -195,10 +257,7 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^sg-([0-9a-f]{8}|[0-9a-f]{17})$",
 		//	  "type": "string"
 		//	}
-		"security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the security group to use with the endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_id": schemaAttribute69b889e318e90fa60ae0f429(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -212,9 +271,7 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute2b9b2e4f7017945b39556489(),
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -225,10 +282,7 @@ func endpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^subnet-([0-9a-f]{8}|[0-9a-f]{17})$",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the subnet in the selected VPC. The subnet must belong to the Outpost.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_id": schemaAttribute5e95bed55b6a7ae34031d93c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,12 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute97c39ca97b44938d15a89378() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_appstream_application_fleet_association", applicationFleetAssociationDataSource)
 }
@@ -28,18 +34,14 @@ func applicationFleetAssociationDataSource(ctx context.Context) (datasource.Data
 		//	{
 		//	  "type": "string"
 		//	}
-		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"application_arn": schemaAttribute97c39ca97b44938d15a89378(),
 		// Property: FleetName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"fleet_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"fleet_name": schemaAttribute97c39ca97b44938d15a89378(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,219 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0221798473b32c0e5e5f243f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Id
+				"id": schemaAttribute639e6c3ea83dc5189fb22318(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of the task template's read only fields",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute02dc80e217086b81219dc725() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DefaultValue
+				"default_value": schemaAttribute65833e233ec3f4e9b9e064ac(),
+				// Property: Id
+				"id": schemaAttribute639e6c3ea83dc5189fb22318(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute09df93e4a60d982184858cc6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "the client token string in uuid format",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute14522103390216b402376575() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier (arn) of the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a5ebf277946dd3fef866cbf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the task template field",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4dfe099818c4e2b0871843ea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the task template",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute639e6c3ea83dc5189fb22318() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttribute2a5ebf277946dd3fef866cbf(),
+		}, /*END SCHEMA*/
+		Description: "the identifier (name) for the task template field",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65833e233ec3f4e9b9e064ac() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "the default value for the task template's field",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute762119ed18b9df2e617bb321() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the task template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute873fa1cd3ff72a2e9842fb92() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "list of field options to be used with single select",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute919a7c6a24767df1c7b14a99() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the contact flow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute958d19349648f2db7168c962() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Id
+				"id": schemaAttribute639e6c3ea83dc5189fb22318(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of the task template's required fields",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9cd945e3bb350b597a69328c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Description
+				"description": schemaAttributec482dfea91b069a8187d3441(),
+				// Property: Id
+				"id": schemaAttribute639e6c3ea83dc5189fb22318(),
+				// Property: SingleSelectOptions
+				"single_select_options": schemaAttribute873fa1cd3ff72a2e9842fb92(),
+				// Property: Type
+				"type": schemaAttributeeec9a68d917dff446a780ee7(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of task template's fields",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3dca21380434a487121e97e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier (arn) of the task template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7304e9f205560caac1be136() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the task template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeafffc2798f4c9422ff784bcc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3823f6ec2c75bd753e05d74() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InvisibleFields
+			"invisible_fields": schemaAttributeedeca789f4d77dbf8085cb19(),
+			// Property: ReadOnlyFields
+			"read_only_fields": schemaAttribute0221798473b32c0e5e5f243f(),
+			// Property: RequiredFields
+			"required_fields": schemaAttribute958d19349648f2db7168c962(),
+		}, /*END SCHEMA*/
+		Description: "The constraints for the task template",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec482dfea91b069a8187d3441() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the task template's field",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed69cc8bd317157574a46afd9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. . You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeedeca789f4d77dbf8085cb19() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Id
+				"id": schemaAttribute639e6c3ea83dc5189fb22318(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of the task template's invisible fields",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeec9a68d917dff446a780ee7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the task template's field",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef77d3225dc1ab9f903ec38d2() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeafffc2798f4c9422ff784bcc(),
+				// Property: Value
+				"value": schemaAttributed69cc8bd317157574a46afd9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more tags.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_task_template", taskTemplateDataSource)
 }
@@ -31,10 +244,7 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/task-template/[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier (arn) of the task template.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributea3dca21380434a487121e97e(),
 		// Property: ClientToken
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +253,7 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^$|[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "the client token string in uuid format",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"client_token": schemaAttribute09df93e4a60d982184858cc6(),
 		// Property: Constraints
 		// CloudFormation resource type schema:
 		//
@@ -150,75 +357,7 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: InvisibleFields
-				"invisible_fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Id
-							"id": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Name
-									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the task template field",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "the identifier (name) for the task template field",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The list of the task template's invisible fields",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ReadOnlyFields
-				"read_only_fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Id
-							"id": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Name
-									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the task template field",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "the identifier (name) for the task template field",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The list of the task template's read only fields",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RequiredFields
-				"required_fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Id
-							"id": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Name
-									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the task template field",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "the identifier (name) for the task template field",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The list of the task template's required fields",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The constraints for the task template",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"constraints": schemaAttributeb3823f6ec2c75bd753e05d74(),
 		// Property: ContactFlowArn
 		// CloudFormation resource type schema:
 		//
@@ -227,10 +366,7 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$",
 		//	  "type": "string"
 		//	}
-		"contact_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the contact flow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"contact_flow_arn": schemaAttribute919a7c6a24767df1c7b14a99(),
 		// Property: Defaults
 		// CloudFormation resource type schema:
 		//
@@ -272,31 +408,7 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"defaults": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DefaultValue
-					"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "the default value for the task template's field",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Id
-					"id": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the task template field",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "the identifier (name) for the task template field",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"defaults": schemaAttribute02dc80e217086b81219dc725(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -306,10 +418,7 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the task template.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributea7304e9f205560caac1be136(),
 		// Property: Fields
 		// CloudFormation resource type schema:
 		//
@@ -382,42 +491,7 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Description
-					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The description of the task template's field",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Id
-					"id": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the task template field",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "the identifier (name) for the task template field",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SingleSelectOptions
-					"single_select_options": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "list of field options to be used with single select",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Type
-					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of the task template's field",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of task template's fields",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"fields": schemaAttribute9cd945e3bb350b597a69328c(),
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -426,10 +500,7 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier (arn) of the instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_arn": schemaAttribute14522103390216b402376575(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -439,10 +510,7 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the task template.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute762119ed18b9df2e617bb321(),
 		// Property: SelfAssignContactFlowArn
 		// CloudFormation resource type schema:
 		//
@@ -451,10 +519,7 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^$|arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/contact-flow/[-a-zA-Z0-9]*(:[a-zA-Z0-9-]+)?$",
 		//	  "type": "string"
 		//	}
-		"self_assign_contact_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the contact flow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"self_assign_contact_flow_arn": schemaAttribute919a7c6a24767df1c7b14a99(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -466,10 +531,7 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the task template",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute4dfe099818c4e2b0871843ea(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -503,24 +565,7 @@ func taskTemplateDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. . You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "One or more tags.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributef77d3225dc1ab9f903ec38d2(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

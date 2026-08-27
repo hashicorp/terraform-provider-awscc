@@ -14,6 +14,68 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2fb7c30a47e2a27f56402ebd() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute340912e7cbc846d67475b96a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute5f142e4d4068a17b6cecb852(),
+				// Property: Value
+				"value": schemaAttribute5f142e4d4068a17b6cecb852(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49cf51a81547df97691a25e2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DesiredUserSessions
+			"desired_user_sessions": schemaAttribute2fb7c30a47e2a27f56402ebd(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f142e4d4068a17b6cecb852() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee445b9cac3470a4ba5b4ebf7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DisconnectTimeoutInSeconds
+			"disconnect_timeout_in_seconds": schemaAttribute2fb7c30a47e2a27f56402ebd(),
+			// Property: IdleDisconnectTimeoutInSeconds
+			"idle_disconnect_timeout_in_seconds": schemaAttribute2fb7c30a47e2a27f56402ebd(),
+			// Property: MaxUserDurationInSeconds
+			"max_user_duration_in_seconds": schemaAttribute2fb7c30a47e2a27f56402ebd(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefcefa8800f067126ea2ff3ca() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SettingsGroup
+			"settings_group": schemaAttribute5f142e4d4068a17b6cecb852(),
+			// Property: Status
+			"status": schemaAttribute5f142e4d4068a17b6cecb852(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_workspaces_workspaces_pool", workspacesPoolDataSource)
 }
@@ -46,19 +108,7 @@ func workspacesPoolDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"application_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SettingsGroup
-				"settings_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Status
-				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"application_settings": schemaAttributefcefa8800f067126ea2ff3ca(),
 		// Property: BundleId
 		// CloudFormation resource type schema:
 		//
@@ -66,9 +116,7 @@ func workspacesPoolDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^wsb-[0-9a-z]{8,63}$",
 		//	  "type": "string"
 		//	}
-		"bundle_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"bundle_id": schemaAttribute5f142e4d4068a17b6cecb852(),
 		// Property: Capacity
 		// CloudFormation resource type schema:
 		//
@@ -85,24 +133,14 @@ func workspacesPoolDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"capacity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DesiredUserSessions
-				"desired_user_sessions": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"capacity": schemaAttribute49cf51a81547df97691a25e2(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute5f142e4d4068a17b6cecb852(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -112,9 +150,7 @@ func workspacesPoolDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9_./() -]+$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute5f142e4d4068a17b6cecb852(),
 		// Property: DirectoryId
 		// CloudFormation resource type schema:
 		//
@@ -124,9 +160,7 @@ func workspacesPoolDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^wsd-[0-9a-z]{8,63}$",
 		//	  "type": "string"
 		//	}
-		"directory_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"directory_id": schemaAttribute5f142e4d4068a17b6cecb852(),
 		// Property: PoolArn
 		// CloudFormation resource type schema:
 		//
@@ -134,9 +168,7 @@ func workspacesPoolDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws[a-z-]{0,7}:[A-Za-z0-9][A-za-z0-9_/.-]{0,62}:[A-za-z0-9_/.-]{0,63}:[A-za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.-]{0,127}$",
 		//	  "type": "string"
 		//	}
-		"pool_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"pool_arn": schemaAttribute5f142e4d4068a17b6cecb852(),
 		// Property: PoolId
 		// CloudFormation resource type schema:
 		//
@@ -144,9 +176,7 @@ func workspacesPoolDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^wspool-[0-9a-z]{9}$",
 		//	  "type": "string"
 		//	}
-		"pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"pool_id": schemaAttribute5f142e4d4068a17b6cecb852(),
 		// Property: PoolName
 		// CloudFormation resource type schema:
 		//
@@ -154,9 +184,7 @@ func workspacesPoolDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$",
 		//	  "type": "string"
 		//	}
-		"pool_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"pool_name": schemaAttribute5f142e4d4068a17b6cecb852(),
 		// Property: RunningMode
 		// CloudFormation resource type schema:
 		//
@@ -167,9 +195,7 @@ func workspacesPoolDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"running_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"running_mode": schemaAttribute5f142e4d4068a17b6cecb852(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -194,21 +220,7 @@ func workspacesPoolDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute340912e7cbc846d67475b96a(),
 		// Property: TimeoutSettings
 		// CloudFormation resource type schema:
 		//
@@ -233,23 +245,7 @@ func workspacesPoolDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"timeout_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DisconnectTimeoutInSeconds
-				"disconnect_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: IdleDisconnectTimeoutInSeconds
-				"idle_disconnect_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaxUserDurationInSeconds
-				"max_user_duration_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"timeout_settings": schemaAttributee445b9cac3470a4ba5b4ebf7(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

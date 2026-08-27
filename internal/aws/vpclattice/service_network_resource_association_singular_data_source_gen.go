@@ -14,6 +14,32 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute353d77110b5bf2716a6ef3a7() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec26da7b6b6ba76daed5c18a0(),
+				// Property: Value
+				"value": schemaAttributec26da7b6b6ba76daed5c18a0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute986a0b88a6d0edc371f3bada() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec26da7b6b6ba76daed5c18a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_vpclattice_service_network_resource_association", serviceNetworkResourceAssociationDataSource)
 }
@@ -31,9 +57,7 @@ func serviceNetworkResourceAssociationDataSource(ctx context.Context) (datasourc
 		//	  "pattern": "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:servicenetworkresourceassociation/snra-[0-9a-f]{17}$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributec26da7b6b6ba76daed5c18a0(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -43,18 +67,14 @@ func serviceNetworkResourceAssociationDataSource(ctx context.Context) (datasourc
 		//	  "pattern": "^snra-[0-9a-f]{17}$",
 		//	  "type": "string"
 		//	}
-		"service_network_resource_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"service_network_resource_association_id": schemaAttributec26da7b6b6ba76daed5c18a0(),
 		// Property: PrivateDnsEnabled
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"private_dns_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"private_dns_enabled": schemaAttribute986a0b88a6d0edc371f3bada(),
 		// Property: ResourceConfigurationId
 		// CloudFormation resource type schema:
 		//
@@ -64,9 +84,7 @@ func serviceNetworkResourceAssociationDataSource(ctx context.Context) (datasourc
 		//	  "pattern": "^rcfg-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"resource_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"resource_configuration_id": schemaAttributec26da7b6b6ba76daed5c18a0(),
 		// Property: ServiceNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -76,9 +94,7 @@ func serviceNetworkResourceAssociationDataSource(ctx context.Context) (datasourc
 		//	  "pattern": "^((sn-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:servicenetwork/sn-[0-9a-z]{17}))$",
 		//	  "type": "string"
 		//	}
-		"service_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"service_network_id": schemaAttributec26da7b6b6ba76daed5c18a0(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -110,21 +126,7 @@ func serviceNetworkResourceAssociationDataSource(ctx context.Context) (datasourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute353d77110b5bf2716a6ef3a7(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

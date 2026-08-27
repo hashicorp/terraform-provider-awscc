@@ -14,6 +14,82 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0c73af18465385ed09426356() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ResourceType
+				"resource_type": schemaAttributeea6daf9db353dc46605442e6(),
+				// Property: Tags
+				"tags": schemaAttributec6ddc71b5f77ae2ed25de020(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute212bdf1db16143cc85c4dd37() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42607feba0f871205a6db792() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailabilityZone
+				"availability_zone": schemaAttributeea6daf9db353dc46605442e6(),
+				// Property: AvailabilityZoneId
+				"availability_zone_id": schemaAttributeea6daf9db353dc46605442e6(),
+				// Property: EbsOptimized
+				"ebs_optimized": schemaAttribute6e49ebe259a7592f9924c34f(),
+				// Property: InstancePlatform
+				"instance_platform": schemaAttributeea6daf9db353dc46605442e6(),
+				// Property: InstanceType
+				"instance_type": schemaAttributeea6daf9db353dc46605442e6(),
+				// Property: Priority
+				"priority": schemaAttribute212bdf1db16143cc85c4dd37(),
+				// Property: Weight
+				"weight": schemaAttribute708bdadf88bb80036f1c05fd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e49ebe259a7592f9924c34f() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute708bdadf88bb80036f1c05fd() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6ddc71b5f77ae2ed25de020() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeea6daf9db353dc46605442e6(),
+				// Property: Value
+				"value": schemaAttributeea6daf9db353dc46605442e6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea6daf9db353dc46605442e6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_capacity_reservation_fleet", capacityReservationFleetDataSource)
 }
@@ -28,27 +104,21 @@ func capacityReservationFleetDataSource(ctx context.Context) (datasource.DataSou
 		//	{
 		//	  "type": "string"
 		//	}
-		"allocation_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"allocation_strategy": schemaAttributeea6daf9db353dc46605442e6(),
 		// Property: CapacityReservationFleetId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"capacity_reservation_fleet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"capacity_reservation_fleet_id": schemaAttributeea6daf9db353dc46605442e6(),
 		// Property: EndDate
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"end_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"end_date": schemaAttributeea6daf9db353dc46605442e6(),
 		// Property: InstanceMatchCriteria
 		// CloudFormation resource type schema:
 		//
@@ -58,9 +128,7 @@ func capacityReservationFleetDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"instance_match_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"instance_match_criteria": schemaAttributeea6daf9db353dc46605442e6(),
 		// Property: InstanceTypeSpecifications
 		// CloudFormation resource type schema:
 		//
@@ -99,59 +167,21 @@ func capacityReservationFleetDataSource(ctx context.Context) (datasource.DataSou
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"instance_type_specifications": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AvailabilityZone
-					"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: AvailabilityZoneId
-					"availability_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: EbsOptimized
-					"ebs_optimized": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: InstancePlatform
-					"instance_platform": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: InstanceType
-					"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Priority
-					"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Weight
-					"weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"instance_type_specifications": schemaAttribute42607feba0f871205a6db792(),
 		// Property: NoRemoveEndDate
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"no_remove_end_date": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"no_remove_end_date": schemaAttribute6e49ebe259a7592f9924c34f(),
 		// Property: RemoveEndDate
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"remove_end_date": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"remove_end_date": schemaAttribute6e49ebe259a7592f9924c34f(),
 		// Property: TagSpecifications
 		// CloudFormation resource type schema:
 		//
@@ -190,33 +220,7 @@ func capacityReservationFleetDataSource(ctx context.Context) (datasource.DataSou
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tag_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ResourceType
-					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Tags
-					"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Key
-								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Value
-								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tag_specifications": schemaAttribute0c73af18465385ed09426356(),
 		// Property: Tenancy
 		// CloudFormation resource type schema:
 		//
@@ -226,9 +230,7 @@ func capacityReservationFleetDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"tenancy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tenancy": schemaAttributeea6daf9db353dc46605442e6(),
 		// Property: TotalTargetCapacity
 		// CloudFormation resource type schema:
 		//
@@ -237,9 +239,7 @@ func capacityReservationFleetDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"total_target_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"total_target_capacity": schemaAttribute212bdf1db16143cc85c4dd37(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

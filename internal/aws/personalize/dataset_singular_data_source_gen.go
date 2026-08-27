@@ -14,6 +14,127 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute01cbcf987d2eda543a62a7f5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute12a8acd0734e84d034d9b142() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the dataset import job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute16e9e17002b55eb3a7ad586f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM role that has permissions to read from the Amazon S3 data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17289ca772af3eeaae6b7adf() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributef0e01d3ab06632a69c92441f(),
+				// Property: Value
+				"value": schemaAttributef0e01d3ab06632a69c92441f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags used to organize, track, or control access for this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17484c893e8dad6d3f9701a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the dataset group to add the dataset to",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1753ac0e6921550c6d8790cd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataSource
+			"data_source": schemaAttributeba10195d67dcfe5188c75cdd(),
+			// Property: DatasetArn
+			"dataset_arn": schemaAttributea9c6a127ae7c0cfa3c231672(),
+			// Property: DatasetImportJobArn
+			"dataset_import_job_arn": schemaAttributed01a3c6c680ecfded0bdc1bc(),
+			// Property: JobName
+			"job_name": schemaAttribute12a8acd0734e84d034d9b142(),
+			// Property: RoleArn
+			"role_arn": schemaAttribute16e9e17002b55eb3a7ad586f(),
+		}, /*END SCHEMA*/
+		Description: "Initial DatasetImportJob for the created dataset",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d95ec010080d5a3fd86496e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the schema to associate with the dataset. The schema defines the dataset fields.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a52eaf9ab4bf18ab6ad17ea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the dataset",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85baa46deba302e6917f53bd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of dataset",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9c6a127ae7c0cfa3c231672() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the dataset that receives the imported data",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba10195d67dcfe5188c75cdd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataLocation
+			"data_location": schemaAttribute01cbcf987d2eda543a62a7f5(),
+		}, /*END SCHEMA*/
+		Description: "The Amazon S3 bucket that contains the training data to import.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed01a3c6c680ecfded0bdc1bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the dataset import job",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd931809bb01c592e153569d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the dataset",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0e01d3ab06632a69c92441f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_personalize_dataset", datasetDataSource)
 }
@@ -31,10 +152,7 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
 		//	  "type": "string"
 		//	}
-		"dataset_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the dataset",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dataset_arn": schemaAttributedd931809bb01c592e153569d(),
 		// Property: DatasetGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +162,7 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
 		//	  "type": "string"
 		//	}
-		"dataset_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the dataset group to add the dataset to",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dataset_group_arn": schemaAttribute17484c893e8dad6d3f9701a5(),
 		// Property: DatasetImportJob
 		// CloudFormation resource type schema:
 		//
@@ -96,44 +211,7 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"dataset_import_job": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DataSource
-				"data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DataLocation
-						"data_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The Amazon S3 bucket that contains the training data to import.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DatasetArn
-				"dataset_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the dataset that receives the imported data",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DatasetImportJobArn
-				"dataset_import_job_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the dataset import job",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: JobName
-				"job_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name for the dataset import job.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RoleArn
-				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the IAM role that has permissions to read from the Amazon S3 data source.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Initial DatasetImportJob for the created dataset",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dataset_import_job": schemaAttribute1753ac0e6921550c6d8790cd(),
 		// Property: DatasetType
 		// CloudFormation resource type schema:
 		//
@@ -147,10 +225,7 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"dataset_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of dataset",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dataset_type": schemaAttribute85baa46deba302e6917f53bd(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -161,10 +236,7 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the dataset",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute7a52eaf9ab4bf18ab6ad17ea(),
 		// Property: SchemaArn
 		// CloudFormation resource type schema:
 		//
@@ -174,10 +246,7 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
 		//	  "type": "string"
 		//	}
-		"schema_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the schema to associate with the dataset. The schema defines the dataset fields.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schema_arn": schemaAttribute2d95ec010080d5a3fd86496e(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -208,22 +277,7 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags used to organize, track, or control access for this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute17289ca772af3eeaae6b7adf(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

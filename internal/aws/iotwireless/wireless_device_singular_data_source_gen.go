@@ -14,6 +14,248 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0577f5c78adba80512c7e2c8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AppSKey
+			"app_s_key": schemaAttributef681efe72fc632d12d2202e7(),
+			// Property: NwkSKey
+			"nwk_s_key": schemaAttributef681efe72fc632d12d2202e7(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute066e7f5f8b882b1b914093ee() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DevAddr
+			"dev_addr": schemaAttributef681efe72fc632d12d2202e7(),
+			// Property: SessionKeys
+			"session_keys": schemaAttribute0577f5c78adba80512c7e2c8(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute16feba878990758e582219a2() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributef681efe72fc632d12d2202e7(),
+				// Property: Value
+				"value": schemaAttributef681efe72fc632d12d2202e7(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs that contain metadata for the device. Currently not supported, will not create if tags are passed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f1d804622832dc52f5e70fd() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The Fport value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53ba2e1a573d634512522896() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Wireless device description",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73bc48fe6abef96d001efd85() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Application type, which can be specified to obtain real-time position information of your LoRaWAN device.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82c1a187d3dc8aaa75f0a858() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Wireless device name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute843d13cfe7306205beb572e9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date and time when the most recent uplink was received.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89926491dfb16bf2ed40ddd6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Wireless device arn. Returned after successful create.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8aeb2ea9296c16920274c881() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DestinationName
+				"destination_name": schemaAttributea3dc37ad44caf4ea4ec095d7(),
+				// Property: FPort
+				"f_port": schemaAttribute2f1d804622832dc52f5e70fd(),
+				// Property: Type
+				"type": schemaAttribute73bc48fe6abef96d001efd85(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of optional LoRaWAN application information, which can be used for geolocation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8caa71421db03d0763bfd232() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "FPort values for the GNSS, stream, and ClockSync functions of the positioning information.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9dc59e5c423cb019a5d8fb3b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AbpV10x
+			"abp_v10_x": schemaAttribute066e7f5f8b882b1b914093ee(),
+			// Property: AbpV11
+			"abp_v11": schemaAttributec7fa2ec56bc251208e2c7f37(),
+			// Property: DevEui
+			"dev_eui": schemaAttributef681efe72fc632d12d2202e7(),
+			// Property: DeviceProfileId
+			"device_profile_id": schemaAttributef681efe72fc632d12d2202e7(),
+			// Property: FPorts
+			"f_ports": schemaAttributefa605dc7af29c592d1a772e9(),
+			// Property: OtaaV10x
+			"otaa_v10_x": schemaAttributee24c06434f37d8774a609b4f(),
+			// Property: OtaaV11
+			"otaa_v11": schemaAttributeee7b2f59d16191eb0f72051a(),
+			// Property: ServiceProfileId
+			"service_profile_id": schemaAttributef681efe72fc632d12d2202e7(),
+		}, /*END SCHEMA*/
+		Description: "The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Device.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e05ac26d4f5839941ffed11() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Wireless device Id. Returned after successful create.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3dc37ad44caf4ea4ec095d7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0257c8834c32cd8775cd609() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Wireless device destination name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb71a09008df78ed3ad10861c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AppSKey
+			"app_s_key": schemaAttributef681efe72fc632d12d2202e7(),
+			// Property: FNwkSIntKey
+			"f_nwk_s_int_key": schemaAttributef681efe72fc632d12d2202e7(),
+			// Property: NwkSEncKey
+			"nwk_s_enc_key": schemaAttributef681efe72fc632d12d2202e7(),
+			// Property: SNwkSIntKey
+			"s_nwk_s_int_key": schemaAttributef681efe72fc632d12d2202e7(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7fa2ec56bc251208e2c7f37() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DevAddr
+			"dev_addr": schemaAttributef681efe72fc632d12d2202e7(),
+			// Property: SessionKeys
+			"session_keys": schemaAttributeb71a09008df78ed3ad10861c(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9980e6c9144d646b9faea4b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Wireless device type, currently only Sidewalk and LoRa",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee24c06434f37d8774a609b4f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AppEui
+			"app_eui": schemaAttributef681efe72fc632d12d2202e7(),
+			// Property: AppKey
+			"app_key": schemaAttributef681efe72fc632d12d2202e7(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb2aeb61cfdbfc59103be9d6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Thing arn. Passed into update to associate Thing with Wireless device.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee7b2f59d16191eb0f72051a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AppKey
+			"app_key": schemaAttributef681efe72fc632d12d2202e7(),
+			// Property: JoinEui
+			"join_eui": schemaAttributef681efe72fc632d12d2202e7(),
+			// Property: NwkKey
+			"nwk_key": schemaAttributef681efe72fc632d12d2202e7(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef681efe72fc632d12d2202e7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8edf1343d28c06c6fa8ca8b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa605dc7af29c592d1a772e9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Applications
+			"applications": schemaAttribute8aeb2ea9296c16920274c881(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iotwireless_wireless_device", wirelessDeviceDataSource)
 }
@@ -29,10 +271,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Wireless device arn. Returned after successful create.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Wireless device arn. Returned after successful create.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute89926491dfb16bf2ed40ddd6(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +280,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Wireless device description",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute53ba2e1a573d634512522896(),
 		// Property: DestinationName
 		// CloudFormation resource type schema:
 		//
@@ -53,10 +289,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 128,
 		//	  "type": "string"
 		//	}
-		"destination_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Wireless device destination name",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"destination_name": schemaAttributeb0257c8834c32cd8775cd609(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -65,10 +298,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"wireless_device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Wireless device Id. Returned after successful create.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"wireless_device_id": schemaAttribute9e05ac26d4f5839941ffed11(),
 		// Property: LastUplinkReceivedAt
 		// CloudFormation resource type schema:
 		//
@@ -76,10 +306,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The date and time when the most recent uplink was received.",
 		//	  "type": "string"
 		//	}
-		"last_uplink_received_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date and time when the most recent uplink was received.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_uplink_received_at": schemaAttribute843d13cfe7306205beb572e9(),
 		// Property: LoRaWAN
 		// CloudFormation resource type schema:
 		//
@@ -280,142 +507,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"lo_ra_wan": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AbpV10x
-				"abp_v10_x": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DevAddr
-						"dev_addr": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SessionKeys
-						"session_keys": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AppSKey
-								"app_s_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: NwkSKey
-								"nwk_s_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: AbpV11
-				"abp_v11": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DevAddr
-						"dev_addr": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SessionKeys
-						"session_keys": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AppSKey
-								"app_s_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: FNwkSIntKey
-								"f_nwk_s_int_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: NwkSEncKey
-								"nwk_s_enc_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SNwkSIntKey
-								"s_nwk_s_int_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: DevEui
-				"dev_eui": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: DeviceProfileId
-				"device_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: FPorts
-				"f_ports": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Applications
-						"applications": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DestinationName
-									"destination_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the position data destination that describes the AWS IoT rule that processes the device's position data for use by AWS IoT Core for LoRaWAN.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: FPort
-									"f_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The Fport value.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Type
-									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Application type, which can be specified to obtain real-time position information of your LoRaWAN device.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "A list of optional LoRaWAN application information, which can be used for geolocation.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: OtaaV10x
-				"otaa_v10_x": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AppEui
-						"app_eui": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: AppKey
-						"app_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: OtaaV11
-				"otaa_v11": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AppKey
-						"app_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: JoinEui
-						"join_eui": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: NwkKey
-						"nwk_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServiceProfileId
-				"service_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Device.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"lo_ra_wan": schemaAttribute9dc59e5c423cb019a5d8fb3b(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -424,10 +516,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Wireless device name",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute82c1a187d3dc8aaa75f0a858(),
 		// Property: Positioning
 		// CloudFormation resource type schema:
 		//
@@ -439,10 +528,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"positioning": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "FPort values for the GNSS, stream, and ClockSync functions of the positioning information.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"positioning": schemaAttribute8caa71421db03d0763bfd232(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -469,22 +555,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs that contain metadata for the device. Currently not supported, will not create if tags are passed.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute16feba878990758e582219a2(),
 		// Property: ThingArn
 		// CloudFormation resource type schema:
 		//
@@ -492,10 +563,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Thing arn. Passed into update to associate Thing with Wireless device.",
 		//	  "type": "string"
 		//	}
-		"thing_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Thing arn. Passed into update to associate Thing with Wireless device.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"thing_arn": schemaAttributeeb2aeb61cfdbfc59103be9d6(),
 		// Property: ThingName
 		// CloudFormation resource type schema:
 		//
@@ -503,10 +571,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
 		//	  "type": "string"
 		//	}
-		"thing_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"thing_name": schemaAttributef8edf1343d28c06c6fa8ca8b(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -518,10 +583,7 @@ func wirelessDeviceDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Wireless device type, currently only Sidewalk and LoRa",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttributec9980e6c9144d646b9faea4b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

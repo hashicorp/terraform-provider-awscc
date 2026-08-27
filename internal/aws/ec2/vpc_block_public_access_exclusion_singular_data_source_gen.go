@@ -14,6 +14,63 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute12969692274abfcf26d9f3d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the vpc. Required only if you don't specify SubnetId.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute239e44d68567ce6c94e51da0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute97e05f7b8798bf2a00c92a67(),
+				// Property: Value
+				"value": schemaAttribute4e21a6b625fc2ed53623ed0c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48bf0b94e0da9c7bfee41d35() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the exclusion",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4e21a6b625fc2ed53623ed0c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7cbc6069b6f331d92d8393cb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the subnet. Required only if you don't specify VpcId",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute97e05f7b8798bf2a00c92a67() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2e82716f61abee07314aba6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The desired Block Public Access Exclusion Mode for a specific VPC/Subnet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_vpc_block_public_access_exclusion", vPCBlockPublicAccessExclusionDataSource)
 }
@@ -29,10 +86,7 @@ func vPCBlockPublicAccessExclusionDataSource(ctx context.Context) (datasource.Da
 		//	  "description": "The ID of the exclusion",
 		//	  "type": "string"
 		//	}
-		"exclusion_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the exclusion",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"exclusion_id": schemaAttribute48bf0b94e0da9c7bfee41d35(),
 		// Property: InternetGatewayExclusionMode
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +98,7 @@ func vPCBlockPublicAccessExclusionDataSource(ctx context.Context) (datasource.Da
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"internet_gateway_exclusion_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The desired Block Public Access Exclusion Mode for a specific VPC/Subnet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"internet_gateway_exclusion_mode": schemaAttributef2e82716f61abee07314aba6(),
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -55,10 +106,7 @@ func vPCBlockPublicAccessExclusionDataSource(ctx context.Context) (datasource.Da
 		//	  "description": "The ID of the subnet. Required only if you don't specify VpcId",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the subnet. Required only if you don't specify VpcId",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_id": schemaAttribute7cbc6069b6f331d92d8393cb(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -91,24 +139,7 @@ func vPCBlockPublicAccessExclusionDataSource(ctx context.Context) (datasource.Da
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute239e44d68567ce6c94e51da0(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -116,10 +147,7 @@ func vPCBlockPublicAccessExclusionDataSource(ctx context.Context) (datasource.Da
 		//	  "description": "The ID of the vpc. Required only if you don't specify SubnetId.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the vpc. Required only if you don't specify SubnetId.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttribute12969692274abfcf26d9f3d0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,57 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0bfcd10414e840b9f5cadd27() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the user journey.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2432ade4d75b29e0f87ad45c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The system ARN or system ID that owns this user journey.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute268ce7904a344b1a79c51e0d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the user journey was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e8ccd6a3ef6ab1409ea3702() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the resilience policy to associate with this user journey.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8dee1efda9da21979a314167() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the user journey was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb395ca3b2b8621cd88e6c73e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the user journey.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee49df029ef4a2aa053c2252b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The server-generated user journey ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_resiliencehubv2_user_journey", userJourneyDataSource)
 }
@@ -31,11 +82,7 @@ func userJourneyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the user journey was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute8dee1efda9da21979a314167(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +91,7 @@ func userJourneyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 500,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the user journey.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute0bfcd10414e840b9f5cadd27(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +100,7 @@ func userJourneyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9 _\\-]{1,59}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the user journey.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributeb395ca3b2b8621cd88e6c73e(),
 		// Property: PolicyArn
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +109,7 @@ func userJourneyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the resilience policy to associate with this user journey.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_arn": schemaAttribute7e8ccd6a3ef6ab1409ea3702(),
 		// Property: SystemIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -81,10 +119,7 @@ func userJourneyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"system_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The system ARN or system ID that owns this user journey.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"system_identifier": schemaAttribute2432ade4d75b29e0f87ad45c(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -93,11 +128,7 @@ func userJourneyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the user journey was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute268ce7904a344b1a79c51e0d(),
 		// Property: UserJourneyId
 		// CloudFormation resource type schema:
 		//
@@ -106,10 +137,7 @@ func userJourneyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\S{1,255}$",
 		//	  "type": "string"
 		//	}
-		"user_journey_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The server-generated user journey ID.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"user_journey_id": schemaAttributee49df029ef4a2aa053c2252b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

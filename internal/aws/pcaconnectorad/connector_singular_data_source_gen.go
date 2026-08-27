@@ -15,6 +15,40 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2531d8957ebb184f6cf76efe() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IpAddressType
+			"ip_address_type": schemaAttribute7a5f1255eaaafe02d50cb959(),
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttribute82121a5a80c8f7df0362ef23(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a5f1255eaaafe02d50cb959() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82121a5a80c8f7df0362ef23() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebfa816b5f3aa977be33aacf4() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_pcaconnectorad_connector", connectorDataSource)
 }
@@ -32,9 +66,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[\\w-]+:acm-pca:[\\w-]+:[0-9]+:certificate-authority\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"certificate_authority_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"certificate_authority_arn": schemaAttribute7a5f1255eaaafe02d50cb959(),
 		// Property: ConnectorArn
 		// CloudFormation resource type schema:
 		//
@@ -44,9 +76,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"connector_arn": schemaAttribute7a5f1255eaaafe02d50cb959(),
 		// Property: DirectoryId
 		// CloudFormation resource type schema:
 		//
@@ -54,9 +84,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^d-[0-9a-f]{10}$",
 		//	  "type": "string"
 		//	}
-		"directory_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"directory_id": schemaAttribute7a5f1255eaaafe02d50cb959(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -69,11 +97,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributebfa816b5f3aa977be33aacf4(),
 		// Property: VpcInformation
 		// CloudFormation resource type schema:
 		//
@@ -105,20 +129,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"vpc_information": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IpAddressType
-				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecurityGroupIds
-				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"vpc_information": schemaAttribute2531d8957ebb184f6cf76efe(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,62 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0c8d80caa0cd2a9098614fd4() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Middle box attachment Ids",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5fa48f9cac94c091e97659de() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Id of the transit gateway metering policy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b1e846c8dc4aa834cca7e68() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Id of transit gateway",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6be821b013eb5c5d408b9320() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute9827c3f8a2943ecdb2c47d53(),
+				// Property: Value
+				"value": schemaAttribute9827c3f8a2943ecdb2c47d53(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9827c3f8a2943ecdb2c47d53() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6a4a4e140325dd2fa3fb341() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "State of the transit gateway metering policy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff0213e1356664eb2dbb76ad() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp at which the latest action performed on the metering policy will become effective",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_transit_gateway_metering_policy", transitGatewayMeteringPolicyDataSource)
 }
@@ -33,11 +89,7 @@ func transitGatewayMeteringPolicyDataSource(ctx context.Context) (datasource.Dat
 		//	  },
 		//	  "type": "array"
 		//	}
-		"middlebox_attachment_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Middle box attachment Ids",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"middlebox_attachment_ids": schemaAttribute0c8d80caa0cd2a9098614fd4(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +97,7 @@ func transitGatewayMeteringPolicyDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "State of the transit gateway metering policy",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "State of the transit gateway metering policy",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributef6a4a4e140325dd2fa3fb341(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -73,21 +122,7 @@ func transitGatewayMeteringPolicyDataSource(ctx context.Context) (datasource.Dat
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6be821b013eb5c5d408b9320(),
 		// Property: TransitGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -95,10 +130,7 @@ func transitGatewayMeteringPolicyDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The Id of transit gateway",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Id of transit gateway",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_id": schemaAttribute6b1e846c8dc4aa834cca7e68(),
 		// Property: TransitGatewayMeteringPolicyId
 		// CloudFormation resource type schema:
 		//
@@ -106,10 +138,7 @@ func transitGatewayMeteringPolicyDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The Id of the transit gateway metering policy",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_metering_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Id of the transit gateway metering policy",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_metering_policy_id": schemaAttribute5fa48f9cac94c091e97659de(),
 		// Property: UpdateEffectiveAt
 		// CloudFormation resource type schema:
 		//
@@ -117,10 +146,7 @@ func transitGatewayMeteringPolicyDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The timestamp at which the latest action performed on the metering policy will become effective",
 		//	  "type": "string"
 		//	}
-		"update_effective_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp at which the latest action performed on the metering policy will become effective",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"update_effective_at": schemaAttributeff0213e1356664eb2dbb76ad(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

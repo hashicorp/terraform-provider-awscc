@@ -15,6 +15,99 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1015d0c2667a3251454734ef() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A value that indicates whether this endpoint is the default endpoint for the associated DB proxy. Default DB proxy endpoints always have read/write capability. Other endpoints that you associate with the DB proxy can be either read/write or read-only.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10cb354b5f50f5518bbc0b3a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute279ef4720745b5014bc1b880() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier for the DB proxy endpoint. This name must be unique for all DB proxy endpoints owned by your AWS account in the specified AWS Region.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute465081e0191663d0c0944e8b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7576a088e02f6944c6425764() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute465081e0191663d0c0944e8b(),
+				// Property: Value
+				"value": schemaAttribute465081e0191663d0c0944e8b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An optional set of key-value pairs to associate arbitrary data of your choosing with the DB proxy endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute909f38b0256cbf2d523c53bd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the DB proxy endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94d2beb39b7ee4f1f86f151b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A value that indicates whether the DB proxy endpoint can be used for read/write or read-only operations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d7586e6aff61d76d70cf1cf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "VPC ID to associate with the new DB proxy endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa98f8b26cce531b43128e41() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec435d2d2b13954a3b1120981() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The endpoint that you can use to connect to the DB proxy. You include the endpoint value in the connection string for a database client application.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed96ddc6cb0ec0168cb439cab() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "VPC security group IDs to associate with the new DB proxy endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee511722adb7e66b0792025d6() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "VPC subnet IDs to associate with the new DB proxy endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_rds_db_proxy_endpoint", dBProxyEndpointDataSource)
 }
@@ -31,10 +124,7 @@ func dBProxyEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "arn:aws[A-Za-z0-9-]{0,64}:rds:[A-Za-z0-9-]{1,64}:[0-9]{12}:.*",
 		//	  "type": "string"
 		//	}
-		"db_proxy_endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the DB proxy endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"db_proxy_endpoint_arn": schemaAttribute909f38b0256cbf2d523c53bd(),
 		// Property: DBProxyEndpointName
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +134,7 @@ func dBProxyEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "[0-z]*",
 		//	  "type": "string"
 		//	}
-		"db_proxy_endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier for the DB proxy endpoint. This name must be unique for all DB proxy endpoints owned by your AWS account in the specified AWS Region.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"db_proxy_endpoint_name": schemaAttribute279ef4720745b5014bc1b880(),
 		// Property: DBProxyName
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +144,7 @@ func dBProxyEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "[0-z]*",
 		//	  "type": "string"
 		//	}
-		"db_proxy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"db_proxy_name": schemaAttributeaa98f8b26cce531b43128e41(),
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -69,10 +153,7 @@ func dBProxyEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The endpoint that you can use to connect to the DB proxy. You include the endpoint value in the connection string for a database client application.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint": schemaAttributec435d2d2b13954a3b1120981(),
 		// Property: EndpointNetworkType
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +166,7 @@ func dBProxyEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"endpoint_network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The network type of the DB proxy endpoint. The network type determines the IP version that the proxy endpoint supports.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_network_type": schemaAttribute10cb354b5f50f5518bbc0b3a(),
 		// Property: IsDefault
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +174,7 @@ func dBProxyEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "A value that indicates whether this endpoint is the default endpoint for the associated DB proxy. Default DB proxy endpoints always have read/write capability. Other endpoints that you associate with the DB proxy can be either read/write or read-only.",
 		//	  "type": "boolean"
 		//	}
-		"is_default": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A value that indicates whether this endpoint is the default endpoint for the associated DB proxy. Default DB proxy endpoints always have read/write capability. Other endpoints that you associate with the DB proxy can be either read/write or read-only.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"is_default": schemaAttribute1015d0c2667a3251454734ef(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -124,22 +199,7 @@ func dBProxyEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An optional set of key-value pairs to associate arbitrary data of your choosing with the DB proxy endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute7576a088e02f6944c6425764(),
 		// Property: TargetRole
 		// CloudFormation resource type schema:
 		//
@@ -151,10 +211,7 @@ func dBProxyEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"target_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A value that indicates whether the DB proxy endpoint can be used for read/write or read-only operations.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_role": schemaAttribute94d2beb39b7ee4f1f86f151b(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -162,10 +219,7 @@ func dBProxyEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "VPC ID to associate with the new DB proxy endpoint.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC ID to associate with the new DB proxy endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttribute9d7586e6aff61d76d70cf1cf(),
 		// Property: VpcSecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -178,11 +232,7 @@ func dBProxyEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "VPC security group IDs to associate with the new DB proxy endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_security_group_ids": schemaAttributed96ddc6cb0ec0168cb439cab(),
 		// Property: VpcSubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -195,11 +245,7 @@ func dBProxyEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minItems": 2,
 		//	  "type": "array"
 		//	}
-		"vpc_subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "VPC subnet IDs to associate with the new DB proxy endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_subnet_ids": schemaAttributee511722adb7e66b0792025d6(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

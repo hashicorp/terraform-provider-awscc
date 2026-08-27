@@ -14,6 +14,73 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute031efa58e7bd8638afa709cb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the S3 bucket where RDP connection recordings are stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute14b88c2f3d35ef484fbaa3a7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS account number that owns the S3 bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a494d9062bb25cc922daf8a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of a AWS KMS key that is used to encrypt data while it is being processed by the service. This key must exist in the same AWS Region as the node you start an RDP connection to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e644394349792a1fc0d0b24() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BucketName
+				"bucket_name": schemaAttribute031efa58e7bd8638afa709cb(),
+				// Property: BucketOwner
+				"bucket_owner": schemaAttribute14b88c2f3d35ef484fbaa3a7(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The S3 bucket where RDP connection recordings are stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed345213ea709c2a032e0078b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Account Id that the preference is associated with, used as the unique identifier for this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec2c3cbeed7e0f0b29f80cad() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Buckets
+			"s3_buckets": schemaAttribute9e644394349792a1fc0d0b24(),
+		}, /*END SCHEMA*/
+		Description: "Determines where recordings of RDP connections are stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef21326d3635d586bf27d24c4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KMSKeyArn
+			"kms_key_arn": schemaAttribute7a494d9062bb25cc922daf8a(),
+			// Property: RecordingDestinations
+			"recording_destinations": schemaAttributeec2c3cbeed7e0f0b29f80cad(),
+		}, /*END SCHEMA*/
+		Description: "The set of preferences used for recording RDP connections in the requesting AWS account and AWS Region. This includes details such as which S3 bucket recordings are stored in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ssmguiconnect_preferences", preferencesDataSource)
 }
@@ -30,10 +97,7 @@ func preferencesDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "\\d{12}",
 		//	  "type": "string"
 		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS Account Id that the preference is associated with, used as the unique identifier for this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"account_id": schemaAttributed345213ea709c2a032e0078b(),
 		// Property: ConnectionRecordingPreferences
 		// CloudFormation resource type schema:
 		//
@@ -92,43 +156,7 @@ func preferencesDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"connection_recording_preferences": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KMSKeyArn
-				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of a AWS KMS key that is used to encrypt data while it is being processed by the service. This key must exist in the same AWS Region as the node you start an RDP connection to.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RecordingDestinations
-				"recording_destinations": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: S3Buckets
-						"s3_buckets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: BucketName
-									"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the S3 bucket where RDP connection recordings are stored.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: BucketOwner
-									"bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The AWS account number that owns the S3 bucket.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "The S3 bucket where RDP connection recordings are stored.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Determines where recordings of RDP connections are stored.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The set of preferences used for recording RDP connections in the requesting AWS account and AWS Region. This includes details such as which S3 bucket recordings are stored in.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_recording_preferences": schemaAttributef21326d3635d586bf27d24c4(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

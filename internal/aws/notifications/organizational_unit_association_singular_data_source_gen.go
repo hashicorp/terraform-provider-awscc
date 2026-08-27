@@ -14,6 +14,20 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute9896d3b78e3f2561fc93e7ec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the organizational unit.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3ccf1340cae9b295c34090a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN identifier of the NotificationConfiguration.\nExample: arn:aws:notifications::123456789012:configuration/a01jes88qxwkbj05xv9c967pgm1",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_notifications_organizational_unit_association", organizationalUnitAssociationDataSource)
 }
@@ -30,10 +44,7 @@ func organizationalUnitAssociationDataSource(ctx context.Context) (datasource.Da
 		//	  "pattern": "^arn:[a-z-]{3,10}:notifications::[0-9]{12}:configuration/[a-z0-9]{27}$",
 		//	  "type": "string"
 		//	}
-		"notification_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ARN identifier of the NotificationConfiguration.\nExample: arn:aws:notifications::123456789012:configuration/a01jes88qxwkbj05xv9c967pgm1",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"notification_configuration_arn": schemaAttributed3ccf1340cae9b295c34090a(),
 		// Property: OrganizationalUnitId
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +53,7 @@ func organizationalUnitAssociationDataSource(ctx context.Context) (datasource.Da
 		//	  "pattern": "^(r-[0-9a-z]{4,32})|(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$",
 		//	  "type": "string"
 		//	}
-		"organizational_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the organizational unit.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"organizational_unit_id": schemaAttribute9896d3b78e3f2561fc93e7ec(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

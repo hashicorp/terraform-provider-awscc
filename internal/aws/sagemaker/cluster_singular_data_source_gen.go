@@ -16,6 +16,675 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0842310db6ff529856e4946e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a5a6aa02941dca0590b5c06() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the training plan to use for this cluster instance group. For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see CreateTrainingPlan.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c59b98a4dd59aeb73b3bb5a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of auto-scaler to use",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0dfba713202ffc57e9dd5d17() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute11a29e3531fe844707a30c03() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum number of instances required for the instance group to be InService. MinInstanceCount must be less than or equal to InstanceCount.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute126c80621f2cd42d02921bb6() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The storage capacity of the FSx for Lustre file system, specified in gibibytes (GiB).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute143d2413dcff51fd3b14d7eb() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A map of Kubernetes labels to apply to cluster nodes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute176ecde4ed3f0b78a4b3d269() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttributea9975556e9838aaf8089c62e(),
+			// Property: Subnets
+			"subnets": schemaAttribute8f27078205132235efb98b1b(),
+		}, /*END SCHEMA*/
+		Description: "Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute227ed4dc08def005eb7c025a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: OnCreate
+			"on_create": schemaAttribute7e7b7dd219d829727ab61c58(),
+			// Property: SourceS3Uri
+			"source_s3_uri": schemaAttributec68bae2e593b361cd3f1b872(),
+		}, /*END SCHEMA*/
+		Description: "The lifecycle configuration for a SageMaker HyperPod cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26dc8e3106bb3c803f987888() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b64ef04642fdf608879bce1() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of instances that are currently in the restricted instance group of a SageMaker HyperPod cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d64d9be1e254e0af83c03d3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeploymentConfig
+			"deployment_config": schemaAttributecd18bb86c4854699589e3886(),
+			// Property: ScheduleExpression
+			"schedule_expression": schemaAttributed13e4ad334dc0b628e69567d(),
+		}, /*END SCHEMA*/
+		Description: "The configuration object of the schedule that SageMaker follows when updating the AMI.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute301304efd0274e0ee2a72ee8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "AMI Id to be used for launching EC2 instances - HyperPodPublicAmiId or CustomAmiId",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute348f32c4a4e5bd2f4023a6e9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Eks
+			"eks": schemaAttributee61b76fe626824469b88d129(),
+		}, /*END SCHEMA*/
+		Description: "Specifies parameter(s) specific to the orchestrator, e.g. specify the EKS cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ad3dea685458d74f1226295() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Effect
+				"effect": schemaAttribute872cb97d16df39171c931993(),
+				// Property: Key
+				"key": schemaAttributecc1d8221358fa43c9b318f10(),
+				// Property: Value
+				"value": schemaAttribute9b65ccb4f7bb42aa7272285f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of Kubernetes taints to apply to cluster nodes. Maximum of 50 taints.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3da8a6ed74f03bbf3510f080() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "If node auto-recovery is set to true, faulty nodes will be replaced or rebooted when a failure is detected. If set to false, nodes will be labelled when a fault is detected.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3efb7cab7a6324649e7389ec() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CapacityRequirements
+				"capacity_requirements": schemaAttribute943ac3e5a5fac22edf6a8f16(),
+				// Property: CurrentCount
+				"current_count": schemaAttribute5da655566844c5448fc92a3c(),
+				// Property: ExecutionRole
+				"execution_role": schemaAttributec52746dfa4013179972ee61c(),
+				// Property: ImageId
+				"image_id": schemaAttribute301304efd0274e0ee2a72ee8(),
+				// Property: InstanceCount
+				"instance_count": schemaAttributec9b610f66b4cab5ea186a393(),
+				// Property: InstanceGroupName
+				"instance_group_name": schemaAttribute9bc3b40ebad8307f390b2e7c(),
+				// Property: InstanceStorageConfigs
+				"instance_storage_configs": schemaAttribute90e6c3377431c14cf2b666a3(),
+				// Property: InstanceType
+				"instance_type": schemaAttributef26f3798623af599f37620ed(),
+				// Property: KubernetesConfig
+				"kubernetes_config": schemaAttributee0b87de95825022a3c86f3cc(),
+				// Property: LifeCycleConfig
+				"life_cycle_config": schemaAttribute227ed4dc08def005eb7c025a(),
+				// Property: MinInstanceCount
+				"min_instance_count": schemaAttribute11a29e3531fe844707a30c03(),
+				// Property: OnStartDeepHealthChecks
+				"on_start_deep_health_checks": schemaAttribute890956be99ed62c767deceda(),
+				// Property: OverrideVpcConfig
+				"override_vpc_config": schemaAttribute176ecde4ed3f0b78a4b3d269(),
+				// Property: ScheduledUpdateConfig
+				"scheduled_update_config": schemaAttribute2d64d9be1e254e0af83c03d3(),
+				// Property: ThreadsPerCore
+				"threads_per_core": schemaAttribute26dc8e3106bb3c803f987888(),
+				// Property: TrainingPlanArn
+				"training_plan_arn": schemaAttribute0a5a6aa02941dca0590b5c06(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The instance groups of the SageMaker HyperPod cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45b85d5f572cfbbf8f7d0fa6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaximumBatchSize
+			"maximum_batch_size": schemaAttributeca0cf9dabaf9a003ee8ce405(),
+			// Property: RollbackMaximumBatchSize
+			"rollback_maximum_batch_size": schemaAttributeca0cf9dabaf9a003ee8ce405(),
+		}, /*END SCHEMA*/
+		Description: "The policy that SageMaker uses when updating the AMI versions of the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute475a7a079081425b62f86da9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Options for OnDemand capacity",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4e75c1aff887f4f14ea29745() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time at which the HyperPod cluster was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5da655566844c5448fc92a3c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of instances that are currently in the instance group of a SageMaker HyperPod cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5dd255574329ee0cb4c678ba() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AlarmName
+				"alarm_name": schemaAttributeea53992a27825fca904c0477(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array that contains the alarms that SageMaker monitors to know whether to roll back the AMI update.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ecbd5c558233a539435e166() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the HyperPod Cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute670a05ca85f778fffe6406a3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FSxLustreConfig
+			"fsx_lustre_config": schemaAttributeac63f201d93bd4c76f1ee16d(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for the restricted instance groups (RIG) environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f2b8f6465c58fadd12269e0() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute0dfba713202ffc57e9dd5d17(),
+				// Property: Value
+				"value": schemaAttributea3a38a8c522148f474d95567(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Custom tags for managing the SageMaker HyperPod cluster as an AWS resource. You can add tags to your cluster in the same way you add them in other AWS services that support tagging.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7483df59a4b2f15bd70daa0a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The auto-scaling mode for the cluster",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute75f8b3afc22e4131dc4afc71() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the HyperPod Cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute773016e27f6007950d772658() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the HyperPod Cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c4309444c229a7180a139ed() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of instances you specified to add to the restricted instance group of a SageMaker HyperPod cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d09411a921ef57e8e59c8a3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The cluster role for the autoscaler to assume.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7df514b6ff15737371b61c3d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Options for Spot capacity",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e7b7dd219d829727ab61c58() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The file name of the entrypoint script of lifecycle scripts under SourceS3Uri. This entrypoint script runs during cluster creation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84afdf57e364525da3df64e3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The percentage of instance memory to allocate for tiered storage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8728b15e72589d35946cf084() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Determines the scaling strategy for the SageMaker HyperPod cluster. When set to 'Continuous', enables continuous scaling which dynamically manages node provisioning. If the parameter is omitted, uses the standard scaling approach in previous release.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute872cb97d16df39171c931993() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The effect of the taint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute890956be99ed62c767deceda() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Nodes will undergo advanced stress test to detect and replace faulty instances, based on the type of deep health check(s) passed in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a48f87fead256dbe63a056b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the training plan to use for this cluster restricted instance group. For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see CreateTrainingPlan.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f27078205132235efb98b1b() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The ID of the subnets in the VPC to which you want to connect your training job or model.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90e6c3377431c14cf2b666a3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EbsVolumeConfig
+				"ebs_volume_config": schemaAttributeac3fa8585c60c5ccd9a12a82(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The instance storage configuration for the instance group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute943ac3e5a5fac22edf6a8f16() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: OnDemand
+			"on_demand": schemaAttribute475a7a079081425b62f86da9(),
+			// Property: Spot
+			"spot": schemaAttribute7df514b6ff15737371b61c3d(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the capacity requirements configuration for an instance group",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b65ccb4f7bb42aa7272285f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the taint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9bc3b40ebad8307f390b2e7c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the instance group of a SageMaker HyperPod cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3a38a8c522148f474d95567() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9975556e9838aaf8089c62e() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac3fa8585c60c5ccd9a12a82() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RootVolume
+			"root_volume": schemaAttributefa31e861e3010c50a224704e(),
+			// Property: VolumeKmsKeyId
+			"volume_kms_key_id": schemaAttributef898ea4c12ff49eab1a3aa27(),
+			// Property: VolumeSizeInGB
+			"volume_size_in_gb": schemaAttribute0842310db6ff529856e4946e(),
+		}, /*END SCHEMA*/
+		Description: "Defines the configuration for attaching additional Amazon Elastic Block Store (EBS) volumes to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac63f201d93bd4c76f1ee16d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PerUnitStorageThroughput
+			"per_unit_storage_throughput": schemaAttributee1efe6301f2a03282be51c57(),
+			// Property: SizeInGiB
+			"size_in_gi_b": schemaAttribute126c80621f2cd42d02921bb6(),
+		}, /*END SCHEMA*/
+		Description: "Configuration settings for an Amazon FSx for Lustre file system to be used with the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf8ac32518d406ba60795e9d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the EKS cluster, such as arn:aws:eks:us-west-2:123456789012:cluster/my-eks-cluster",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb942ede4e36ada29b196ff49() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the amount or percentage of instances SageMaker updates at a time.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc2f0176122a889fec01a27c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The failure message of the HyperPod Cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec52746dfa4013179972ee61c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The execution role for the instance group to assume.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec608a5b0af50ac2ca7012a4c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceMemoryAllocationPercentage
+			"instance_memory_allocation_percentage": schemaAttribute84afdf57e364525da3df64e3(),
+			// Property: Mode
+			"mode": schemaAttributee47874c7f5749a51e8d58007(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for tiered storage in the SageMaker HyperPod cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec68bae2e593b361cd3f1b872() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An Amazon S3 bucket path where your lifecycle scripts are stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9b610f66b4cab5ea186a393() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of instances you specified to add to the instance group of a SageMaker HyperPod cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca0cf9dabaf9a003ee8ce405() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Type
+			"type": schemaAttributeecb0a5b7c86a667a548916d8(),
+			// Property: Value
+			"value": schemaAttributeb942ede4e36ada29b196ff49(),
+		}, /*END SCHEMA*/
+		Description: "The configuration of the size measurements of the AMI update. Using this configuration, you can specify whether SageMaker should update your instance group by an amount or percentage of instances.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc1d8221358fa43c9b318f10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key of the taint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd18bb86c4854699589e3886() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AutoRollbackConfiguration
+			"auto_rollback_configuration": schemaAttribute5dd255574329ee0cb4c678ba(),
+			// Property: RollingUpdatePolicy
+			"rolling_update_policy": schemaAttribute45b85d5f572cfbbf8f7d0fa6(),
+			// Property: WaitIntervalInSeconds
+			"wait_interval_in_seconds": schemaAttributef8ee157cf3cdb615e62cb23e(),
+		}, /*END SCHEMA*/
+		Description: "The configuration to use when updating the AMI versions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed13e4ad334dc0b628e69567d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A cron expression that specifies the schedule that SageMaker follows when updating the AMI.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0b87de95825022a3c86f3cc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Labels
+			"labels": schemaAttribute143d2413dcff51fd3b14d7eb(),
+			// Property: Taints
+			"taints": schemaAttribute3ad3dea685458d74f1226295(),
+		}, /*END SCHEMA*/
+		Description: "Kubernetes configuration for cluster nodes including labels and taints.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1efe6301f2a03282be51c57() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The throughput capacity of the FSx for Lustre file system, measured in MB/s per TiB of storage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee47874c7f5749a51e8d58007() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The mode of tiered storage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee61b76fe626824469b88d129() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClusterArn
+			"cluster_arn": schemaAttributeaf8ac32518d406ba60795e9d(),
+		}, /*END SCHEMA*/
+		Description: "Specifies parameter(s) related to EKS as orchestrator, e.g. the EKS cluster nodes will attach to,",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8645f4acfb3d8a54703adc1() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CurrentCount
+				"current_count": schemaAttribute2b64ef04642fdf608879bce1(),
+				// Property: EnvironmentConfig
+				"environment_config": schemaAttribute670a05ca85f778fffe6406a3(),
+				// Property: ExecutionRole
+				"execution_role": schemaAttributec52746dfa4013179972ee61c(),
+				// Property: InstanceCount
+				"instance_count": schemaAttribute7c4309444c229a7180a139ed(),
+				// Property: InstanceGroupName
+				"instance_group_name": schemaAttribute9bc3b40ebad8307f390b2e7c(),
+				// Property: InstanceStorageConfigs
+				"instance_storage_configs": schemaAttribute90e6c3377431c14cf2b666a3(),
+				// Property: InstanceType
+				"instance_type": schemaAttributef26f3798623af599f37620ed(),
+				// Property: OnStartDeepHealthChecks
+				"on_start_deep_health_checks": schemaAttribute890956be99ed62c767deceda(),
+				// Property: OverrideVpcConfig
+				"override_vpc_config": schemaAttribute176ecde4ed3f0b78a4b3d269(),
+				// Property: ThreadsPerCore
+				"threads_per_core": schemaAttribute26dc8e3106bb3c803f987888(),
+				// Property: TrainingPlanArn
+				"training_plan_arn": schemaAttribute8a48f87fead256dbe63a056b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The restricted instance groups of the SageMaker HyperPod cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee926979c72bacc02e1dd60ac() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AutoScalerType
+			"auto_scaler_type": schemaAttribute0c59b98a4dd59aeb73b3bb5a(),
+			// Property: Mode
+			"mode": schemaAttribute7483df59a4b2f15bd70daa0a(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for cluster auto-scaling",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea53992a27825fca904c0477() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the alarm.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeecb0a5b7c86a667a548916d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether SageMaker should process the update by amount or percentage of instances.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef26f3798623af599f37620ed() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The instance type of the instance group of a SageMaker HyperPod cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef898ea4c12ff49eab1a3aa27() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8ee157cf3cdb615e62cb23e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The duration in seconds that SageMaker waits before updating more instances in the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa31e861e3010c50a224704e() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_cluster", clusterDataSource)
 }
@@ -53,22 +722,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"auto_scaling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AutoScalerType
-				"auto_scaler_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of auto-scaler to use",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Mode
-				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The auto-scaling mode for the cluster",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration for cluster auto-scaling",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"auto_scaling": schemaAttributee926979c72bacc02e1dd60ac(),
 		// Property: ClusterArn
 		// CloudFormation resource type schema:
 		//
@@ -78,10 +732,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:cluster/[a-z0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the HyperPod Cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cluster_arn": schemaAttribute75f8b3afc22e4131dc4afc71(),
 		// Property: ClusterName
 		// CloudFormation resource type schema:
 		//
@@ -92,10 +743,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
 		//	  "type": "string"
 		//	}
-		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the HyperPod Cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cluster_name": schemaAttribute5ecbd5c558233a539435e166(),
 		// Property: ClusterRole
 		// CloudFormation resource type schema:
 		//
@@ -106,10 +754,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"cluster_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The cluster role for the autoscaler to assume.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cluster_role": schemaAttribute7d09411a921ef57e8e59c8a3(),
 		// Property: ClusterStatus
 		// CloudFormation resource type schema:
 		//
@@ -126,10 +771,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"cluster_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the HyperPod Cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cluster_status": schemaAttribute773016e27f6007950d772658(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -137,10 +779,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time at which the HyperPod cluster was created.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time at which the HyperPod cluster was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute4e75c1aff887f4f14ea29745(),
 		// Property: FailureMessage
 		// CloudFormation resource type schema:
 		//
@@ -148,10 +787,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The failure message of the HyperPod Cluster.",
 		//	  "type": "string"
 		//	}
-		"failure_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The failure message of the HyperPod Cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"failure_message": schemaAttributebc2f0176122a889fec01a27c(),
 		// Property: InstanceGroups
 		// CloudFormation resource type schema:
 		//
@@ -506,266 +1142,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"instance_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: CapacityRequirements
-					"capacity_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: OnDemand
-							"on_demand": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType:  jsontypes.NormalizedType{},
-								Description: "Options for OnDemand capacity",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Spot
-							"spot": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType:  jsontypes.NormalizedType{},
-								Description: "Options for Spot capacity",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Specifies the capacity requirements configuration for an instance group",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: CurrentCount
-					"current_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The number of instances that are currently in the instance group of a SageMaker HyperPod cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ExecutionRole
-					"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The execution role for the instance group to assume.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ImageId
-					"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "AMI Id to be used for launching EC2 instances - HyperPodPublicAmiId or CustomAmiId",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: InstanceCount
-					"instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The number of instances you specified to add to the instance group of a SageMaker HyperPod cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: InstanceGroupName
-					"instance_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the instance group of a SageMaker HyperPod cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: InstanceStorageConfigs
-					"instance_storage_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: EbsVolumeConfig
-								"ebs_volume_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: RootVolume
-										"root_volume": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: VolumeKmsKeyId
-										"volume_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: VolumeSizeInGB
-										"volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Defines the configuration for attaching additional Amazon Elastic Block Store (EBS) volumes to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "The instance storage configuration for the instance group.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: InstanceType
-					"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The instance type of the instance group of a SageMaker HyperPod cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: KubernetesConfig
-					"kubernetes_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Labels
-							"labels":            // Pattern: ""
-							schema.MapAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "A map of Kubernetes labels to apply to cluster nodes.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Taints
-							"taints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Effect
-										"effect": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The effect of the taint.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Key
-										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The key of the taint.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Value
-										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The value of the taint.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "A list of Kubernetes taints to apply to cluster nodes. Maximum of 50 taints.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Kubernetes configuration for cluster nodes including labels and taints.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: LifeCycleConfig
-					"life_cycle_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: OnCreate
-							"on_create": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The file name of the entrypoint script of lifecycle scripts under SourceS3Uri. This entrypoint script runs during cluster creation.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SourceS3Uri
-							"source_s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "An Amazon S3 bucket path where your lifecycle scripts are stored.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The lifecycle configuration for a SageMaker HyperPod cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: MinInstanceCount
-					"min_instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The minimum number of instances required for the instance group to be InService. MinInstanceCount must be less than or equal to InstanceCount.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: OnStartDeepHealthChecks
-					"on_start_deep_health_checks": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "Nodes will undergo advanced stress test to detect and replace faulty instances, based on the type of deep health check(s) passed in.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: OverrideVpcConfig
-					"override_vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: SecurityGroupIds
-							"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Subnets
-							"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "The ID of the subnets in the VPC to which you want to connect your training job or model.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ScheduledUpdateConfig
-					"scheduled_update_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DeploymentConfig
-							"deployment_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AutoRollbackConfiguration
-									"auto_rollback_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: AlarmName
-												"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the alarm.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "An array that contains the alarms that SageMaker monitors to know whether to roll back the AMI update.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: RollingUpdatePolicy
-									"rolling_update_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: MaximumBatchSize
-											"maximum_batch_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Type
-													"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "Specifies whether SageMaker should process the update by amount or percentage of instances.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: Value
-													"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Description: "Specifies the amount or percentage of instances SageMaker updates at a time.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "The configuration of the size measurements of the AMI update. Using this configuration, you can specify whether SageMaker should update your instance group by an amount or percentage of instances.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: RollbackMaximumBatchSize
-											"rollback_maximum_batch_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Type
-													"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "Specifies whether SageMaker should process the update by amount or percentage of instances.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: Value
-													"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Description: "Specifies the amount or percentage of instances SageMaker updates at a time.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "The configuration of the size measurements of the AMI update. Using this configuration, you can specify whether SageMaker should update your instance group by an amount or percentage of instances.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "The policy that SageMaker uses when updating the AMI versions of the cluster.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: WaitIntervalInSeconds
-									"wait_interval_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The duration in seconds that SageMaker waits before updating more instances in the cluster.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The configuration to use when updating the AMI versions.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ScheduleExpression
-							"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A cron expression that specifies the schedule that SageMaker follows when updating the AMI.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The configuration object of the schedule that SageMaker follows when updating the AMI.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ThreadsPerCore
-					"threads_per_core": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: TrainingPlanArn
-					"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Amazon Resource Name (ARN) of the training plan to use for this cluster instance group. For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see CreateTrainingPlan.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The instance groups of the SageMaker HyperPod cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_groups": schemaAttribute3efb7cab7a6324649e7389ec(),
 		// Property: NodeProvisioningMode
 		// CloudFormation resource type schema:
 		//
@@ -776,10 +1153,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"node_provisioning_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Determines the scaling strategy for the SageMaker HyperPod cluster. When set to 'Continuous', enables continuous scaling which dynamically manages node provisioning. If the parameter is omitted, uses the standard scaling approach in previous release.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"node_provisioning_mode": schemaAttribute8728b15e72589d35946cf084(),
 		// Property: NodeRecovery
 		// CloudFormation resource type schema:
 		//
@@ -791,10 +1165,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"node_recovery": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "If node auto-recovery is set to true, faulty nodes will be replaced or rebooted when a failure is detected. If set to false, nodes will be labelled when a fault is detected.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"node_recovery": schemaAttribute3da8a6ed74f03bbf3510f080(),
 		// Property: Orchestrator
 		// CloudFormation resource type schema:
 		//
@@ -822,24 +1193,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"orchestrator": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Eks
-				"eks": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ClusterArn
-						"cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the EKS cluster, such as arn:aws:eks:us-west-2:123456789012:cluster/my-eks-cluster",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Specifies parameter(s) related to EKS as orchestrator, e.g. the EKS cluster nodes will attach to,",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies parameter(s) specific to the orchestrator, e.g. specify the EKS cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"orchestrator": schemaAttribute348f32c4a4e5bd2f4023a6e9(),
 		// Property: RestrictedInstanceGroups
 		// CloudFormation resource type schema:
 		//
@@ -1016,127 +1370,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"restricted_instance_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: CurrentCount
-					"current_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The number of instances that are currently in the restricted instance group of a SageMaker HyperPod cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: EnvironmentConfig
-					"environment_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: FSxLustreConfig
-							"fsx_lustre_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: PerUnitStorageThroughput
-									"per_unit_storage_throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The throughput capacity of the FSx for Lustre file system, measured in MB/s per TiB of storage.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: SizeInGiB
-									"size_in_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The storage capacity of the FSx for Lustre file system, specified in gibibytes (GiB).",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Configuration settings for an Amazon FSx for Lustre file system to be used with the cluster.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The configuration for the restricted instance groups (RIG) environment.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ExecutionRole
-					"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The execution role for the instance group to assume.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: InstanceCount
-					"instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The number of instances you specified to add to the restricted instance group of a SageMaker HyperPod cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: InstanceGroupName
-					"instance_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the instance group of a SageMaker HyperPod cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: InstanceStorageConfigs
-					"instance_storage_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: EbsVolumeConfig
-								"ebs_volume_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: RootVolume
-										"root_volume": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: VolumeKmsKeyId
-										"volume_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: VolumeSizeInGB
-										"volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The size in gigabytes (GB) of the additional EBS volume to be attached to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Defines the configuration for attaching additional Amazon Elastic Block Store (EBS) volumes to the instances in the SageMaker HyperPod cluster instance group. The additional EBS volume is attached to each instance within the SageMaker HyperPod cluster instance group and mounted to /opt/sagemaker.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "The instance storage configuration for the instance group.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: InstanceType
-					"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The instance type of the instance group of a SageMaker HyperPod cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: OnStartDeepHealthChecks
-					"on_start_deep_health_checks": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "Nodes will undergo advanced stress test to detect and replace faulty instances, based on the type of deep health check(s) passed in.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: OverrideVpcConfig
-					"override_vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: SecurityGroupIds
-							"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Subnets
-							"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "The ID of the subnets in the VPC to which you want to connect your training job or model.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ThreadsPerCore
-					"threads_per_core": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The number you specified to TreadsPerCore in CreateCluster for enabling or disabling multithreading. For instance types that support multithreading, you can specify 1 for disabling multithreading and 2 for enabling multithreading.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: TrainingPlanArn
-					"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Amazon Resource Name (ARN) of the training plan to use for this cluster restricted instance group. For more information about how to reserve GPU capacity for your SageMaker HyperPod clusters using Amazon SageMaker Training Plan, see CreateTrainingPlan.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The restricted instance groups of the SageMaker HyperPod cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"restricted_instance_groups": schemaAttributee8645f4acfb3d8a54703adc1(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1172,24 +1406,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Custom tags for managing the SageMaker HyperPod cluster as an AWS resource. You can add tags to your cluster in the same way you add them in other AWS services that support tagging.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6f2b8f6465c58fadd12269e0(),
 		// Property: TieredStorageConfig
 		// CloudFormation resource type schema:
 		//
@@ -1215,22 +1432,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"tiered_storage_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: InstanceMemoryAllocationPercentage
-				"instance_memory_allocation_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The percentage of instance memory to allocate for tiered storage.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Mode
-				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The mode of tiered storage.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration for tiered storage in the SageMaker HyperPod cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tiered_storage_config": schemaAttributec608a5b0af50ac2ca7012a4c(),
 		// Property: VpcConfig
 		// CloudFormation resource type schema:
 		//
@@ -1269,24 +1471,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SecurityGroupIds
-				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The VPC security group IDs, in the form sg-xxxxxxxx. Specify the security groups for the VPC that is specified in the Subnets field.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Subnets
-				"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The ID of the subnets in the VPC to which you want to connect your training job or model.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_config": schemaAttribute176ecde4ed3f0b78a4b3d269(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

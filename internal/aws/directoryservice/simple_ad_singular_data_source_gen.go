@@ -15,6 +15,133 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute14392ee18b0547d790e31c18() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The password for the default administrative user named Admin.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2802d1cdc41f206d6912fe82() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The alias for a directory.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute367afa8dd0daf6e4a6fa2f5e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SubnetIds
+			"subnet_ids": schemaAttribute968295142796a5a38a195014(),
+			// Property: VpcId
+			"vpc_id": schemaAttribute8c8d5c0191799a9fe66c6124(),
+		}, /*END SCHEMA*/
+		Description: "VPC settings of the Simple AD directory server in AWS.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3920ae7a86f4660fb44aac55() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The fully qualified domain name for the AWS Managed Simple AD directory.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a4be9304bb227d7a32ee0e7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Description for the directory.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62bd0ad39577f76927e41958() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier for a directory.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute647fefcbe51825ca8477640c() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the configuration set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6edccf0dfe6686f95494a3aa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c8d5c0191799a9fe66c6124() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the VPC in which to create the directory.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8eba759d8b6ada11dce57dad() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The NetBIOS name for your domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute968295142796a5a38a195014() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The identifiers of the subnets for the directory servers. The two subnets must be in different Availability Zones. AWS Directory Service specifies a directory server and a DNS server in each of these subnets.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute98967a5ba1f7d02d34b6471f() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to enable single sign-on for a Simple Active Directory in AWS.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba4e378470aafb086147ad3f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The size of the directory.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6c67026791687526f11b6f4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecbe1eb107783a173c8cdd831() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec6c67026791687526f11b6f4(),
+				// Property: Value
+				"value": schemaAttribute6edccf0dfe6686f95494a3aa(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed23a9ab6f187b5457137ff93() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The IP addresses of the DNS servers for the directory, such as [ \"172.31.3.154\", \"172.31.63.203\" ].",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_directoryservice_simple_ad", simpleADDataSource)
 }
@@ -30,10 +157,7 @@ func simpleADDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The alias for a directory.",
 		//	  "type": "string"
 		//	}
-		"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The alias for a directory.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"alias": schemaAttribute2802d1cdc41f206d6912fe82(),
 		// Property: CreateAlias
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +165,7 @@ func simpleADDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the configuration set.",
 		//	  "type": "boolean"
 		//	}
-		"create_alias": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the configuration set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"create_alias": schemaAttribute647fefcbe51825ca8477640c(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +173,7 @@ func simpleADDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Description for the directory.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description for the directory.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute3a4be9304bb227d7a32ee0e7(),
 		// Property: DirectoryId
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +181,7 @@ func simpleADDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique identifier for a directory.",
 		//	  "type": "string"
 		//	}
-		"directory_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier for a directory.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"directory_id": schemaAttribute62bd0ad39577f76927e41958(),
 		// Property: DnsIpAddresses
 		// CloudFormation resource type schema:
 		//
@@ -79,11 +194,7 @@ func simpleADDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"dns_ip_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The IP addresses of the DNS servers for the directory, such as [ \"172.31.3.154\", \"172.31.63.203\" ].",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dns_ip_addresses": schemaAttributed23a9ab6f187b5457137ff93(),
 		// Property: EnableSso
 		// CloudFormation resource type schema:
 		//
@@ -91,10 +202,7 @@ func simpleADDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Whether to enable single sign-on for a Simple Active Directory in AWS.",
 		//	  "type": "boolean"
 		//	}
-		"enable_sso": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether to enable single sign-on for a Simple Active Directory in AWS.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enable_sso": schemaAttribute98967a5ba1f7d02d34b6471f(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -102,10 +210,7 @@ func simpleADDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The fully qualified domain name for the AWS Managed Simple AD directory.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The fully qualified domain name for the AWS Managed Simple AD directory.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute3920ae7a86f4660fb44aac55(),
 		// Property: Password
 		// CloudFormation resource type schema:
 		//
@@ -113,10 +218,7 @@ func simpleADDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The password for the default administrative user named Admin.",
 		//	  "type": "string"
 		//	}
-		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The password for the default administrative user named Admin.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"password": schemaAttribute14392ee18b0547d790e31c18(),
 		// Property: ShortName
 		// CloudFormation resource type schema:
 		//
@@ -124,10 +226,7 @@ func simpleADDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The NetBIOS name for your domain.",
 		//	  "type": "string"
 		//	}
-		"short_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The NetBIOS name for your domain.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"short_name": schemaAttribute8eba759d8b6ada11dce57dad(),
 		// Property: Size
 		// CloudFormation resource type schema:
 		//
@@ -135,10 +234,7 @@ func simpleADDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The size of the directory.",
 		//	  "type": "string"
 		//	}
-		"size": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The size of the directory.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"size": schemaAttributeba4e378470aafb086147ad3f(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -170,23 +266,7 @@ func simpleADDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributecbe1eb107783a173c8cdd831(),
 		// Property: VpcSettings
 		// CloudFormation resource type schema:
 		//
@@ -215,23 +295,7 @@ func simpleADDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"vpc_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SubnetIds
-				"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The identifiers of the subnets for the directory servers. The two subnets must be in different Availability Zones. AWS Directory Service specifies a directory server and a DNS server in each of these subnets.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VpcId
-				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The identifier of the VPC in which to create the directory.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "VPC settings of the Simple AD directory server in AWS.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_settings": schemaAttribute367afa8dd0daf6e4a6fa2f5e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

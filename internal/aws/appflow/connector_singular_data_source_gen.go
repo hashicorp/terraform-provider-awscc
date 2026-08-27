@@ -14,6 +14,63 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute12fc007f4733115d8e436a7c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LambdaArn
+			"lambda_arn": schemaAttribute998331000e9812ecca8402f9(),
+		}, /*END SCHEMA*/
+		Description: "Contains information about the configuration of the lambda which is being registered as the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute307cf3e581cf47d77ebc68b8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: " The name of the connector. The name is unique for each ConnectorRegistration in your AWS account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3666850f5ec4074cbd4c2003() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description about the connector that's being registered.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76373d3f5fdb5aa323a4f0b4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Lambda
+			"lambda": schemaAttribute12fc007f4733115d8e436a7c(),
+		}, /*END SCHEMA*/
+		Description: "Contains information about the configuration of the connector being registered.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute998331000e9812ecca8402f9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Lambda ARN of the connector being registered.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb95059b380ceb28a9a8a1db7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The provisioning type of the connector. Currently the only supported value is LAMBDA. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec218cbc497f9811565dca59a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: " The arn of the connector. The arn is unique for each ConnectorRegistration in your AWS account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_appflow_connector", connectorDataSource)
 }
@@ -31,10 +88,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:.*:appflow:.*:[0-9]+:.*",
 		//	  "type": "string"
 		//	}
-		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: " The arn of the connector. The arn is unique for each ConnectorRegistration in your AWS account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connector_arn": schemaAttributec218cbc497f9811565dca59a(),
 		// Property: ConnectorLabel
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +98,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9][\\w!@#.-]+",
 		//	  "type": "string"
 		//	}
-		"connector_label": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: " The name of the connector. The name is unique for each ConnectorRegistration in your AWS account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connector_label": schemaAttribute307cf3e581cf47d77ebc68b8(),
 		// Property: ConnectorProvisioningConfig
 		// CloudFormation resource type schema:
 		//
@@ -74,24 +125,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"connector_provisioning_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Lambda
-				"lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: LambdaArn
-						"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Lambda ARN of the connector being registered.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Contains information about the configuration of the lambda which is being registered as the connector.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Contains information about the configuration of the connector being registered.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connector_provisioning_config": schemaAttribute76373d3f5fdb5aa323a4f0b4(),
 		// Property: ConnectorProvisioningType
 		// CloudFormation resource type schema:
 		//
@@ -102,10 +136,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9][\\w!@#.-]+",
 		//	  "type": "string"
 		//	}
-		"connector_provisioning_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The provisioning type of the connector. Currently the only supported value is LAMBDA. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connector_provisioning_type": schemaAttributeb95059b380ceb28a9a8a1db7(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -115,10 +146,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[\\s\\w/!@#+=.-]*",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description about the connector that's being registered.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute3666850f5ec4074cbd4c2003(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

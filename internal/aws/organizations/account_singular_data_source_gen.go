@@ -15,6 +15,114 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0b37c24e35dadaab93c74b2b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of the account in the organization.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1559bd9434ea5407f8e84a8d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the account in the organization.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ad246976f85cecc01f248c2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date the account became a part of the organization.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24736bc34953e972eadc949c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The friendly name of the member account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38e44af3d031ad2846a511fc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3cdb013fa04c93ccba98cb2a() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute630e58fb676adc581f4232c3(),
+				// Property: Value
+				"value": schemaAttribute38e44af3d031ad2846a511fc(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags that you want to attach to the newly created account. For each tag in the list, you must specify both a tag key and a value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5272adebb1b1117ea42431d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The email address of the owner to assign to the new member account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6301e9f1335325d95c4ce364() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "If the account was created successfully, the unique identifier (ID) of the new account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute630e58fb676adc581f4232c3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key identifier, or name, of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d24a94400ad11c3fb912f1b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76cf63226d510eb76a7ffb36() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The paths in the organization where the account exists.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bb46f52eb7049065f3c6f49() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of parent nodes for the member account. Currently only one parent at a time is supported. Default is root.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f17ad8f18991738b05d44d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of an IAM role that AWS Organizations automatically preconfigures in the new member account. Default name is OrganizationAccountAccessRole if not specified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb13e6ad257e6887c4fb2e66() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The method by which the account joined the organization.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_organizations_account", accountDataSource)
 }
@@ -32,10 +140,7 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "If the account was created successfully, the unique identifier (ID) of the new account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"account_id": schemaAttribute6301e9f1335325d95c4ce364(),
 		// Property: AccountName
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +151,7 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"account_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The friendly name of the member account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"account_name": schemaAttribute24736bc34953e972eadc949c(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -58,10 +160,7 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws.*:organizations::\\d{12}:account\\/o-[a-z0-9]{10,32}\\/\\d{12}",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute6d24a94400ad11c3fb912f1b(),
 		// Property: Email
 		// CloudFormation resource type schema:
 		//
@@ -72,10 +171,7 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[^\\s@]+@[^\\s@]+\\.[^\\s@]+",
 		//	  "type": "string"
 		//	}
-		"email": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The email address of the owner to assign to the new member account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"email": schemaAttribute5272adebb1b1117ea42431d2(),
 		// Property: JoinedMethod
 		// CloudFormation resource type schema:
 		//
@@ -87,10 +183,7 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"joined_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The method by which the account joined the organization.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"joined_method": schemaAttributecb13e6ad257e6887c4fb2e66(),
 		// Property: JoinedTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -98,10 +191,7 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The date the account became a part of the organization.",
 		//	  "type": "string"
 		//	}
-		"joined_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date the account became a part of the organization.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"joined_timestamp": schemaAttribute1ad246976f85cecc01f248c2(),
 		// Property: ParentIds
 		// CloudFormation resource type schema:
 		//
@@ -115,11 +205,7 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"parent_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "List of parent nodes for the member account. Currently only one parent at a time is supported. Default is root.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parent_ids": schemaAttribute7bb46f52eb7049065f3c6f49(),
 		// Property: Paths
 		// CloudFormation resource type schema:
 		//
@@ -131,11 +217,7 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"paths": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The paths in the organization where the account exists.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"paths": schemaAttribute76cf63226d510eb76a7ffb36(),
 		// Property: RoleName
 		// CloudFormation resource type schema:
 		//
@@ -147,10 +229,7 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[\\w+=,.@-]{1,64}",
 		//	  "type": "string"
 		//	}
-		"role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of an IAM role that AWS Organizations automatically preconfigures in the new member account. Default name is OrganizationAccountAccessRole if not specified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_name": schemaAttribute7f17ad8f18991738b05d44d8(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -165,10 +244,7 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The state of the account in the organization.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttribute0b37c24e35dadaab93c74b2b(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -181,10 +257,7 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the account in the organization.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute1559bd9434ea5407f8e84a8d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -219,24 +292,7 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key identifier, or name, of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags that you want to attach to the newly created account. For each tag in the list, you must specify both a tag key and a value.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute3cdb013fa04c93ccba98cb2a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

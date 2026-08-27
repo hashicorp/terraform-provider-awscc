@@ -14,6 +14,12 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributef640966bd565414eb9ceb23d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_appsync_domain_name_api_association", domainNameApiAssociationDataSource)
 }
@@ -28,18 +34,14 @@ func domainNameApiAssociationDataSource(ctx context.Context) (datasource.DataSou
 		//	{
 		//	  "type": "string"
 		//	}
-		"api_association_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"api_association_identifier": schemaAttributef640966bd565414eb9ceb23d(),
 		// Property: ApiId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"api_id": schemaAttributef640966bd565414eb9ceb23d(),
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -49,9 +51,7 @@ func domainNameApiAssociationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^(\\*[a-z\\d-]*\\.)?([a-z\\d-]+\\.)+[a-z\\d-]+$",
 		//	  "type": "string"
 		//	}
-		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"domain_name": schemaAttributef640966bd565414eb9ceb23d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,93 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute270aa22e7739d3010b0a2d63() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Custom data identifier ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2aa273f8e22dff0984f52e09() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag's value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3fcaceba0c715951a93989d7() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Maximum match distance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51fb5f29c0d0580cd422cd8e() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Words to be ignored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ce2ff02a29aa7cddad6fde8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeebe8d316b8d1237e896b2274(),
+				// Property: Value
+				"value": schemaAttribute2aa273f8e22dff0984f52e09(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A collection of tags associated with a resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70089a81790a7c30648e047a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Custom data identifier ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute867258893d2c83f78b34f691() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Keywords to be matched against.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebfb522ee6c7291b856c1ebde() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Regular expression for custom data identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca64e223b7982767dd6c8660() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Description of custom data identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeebe8d316b8d1237e896b2274() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag's key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee45b7768efbe08ffb8a66bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of custom data identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_macie_custom_data_identifier", customDataIdentifierDataSource)
 }
@@ -30,10 +117,7 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Custom data identifier ARN.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Custom data identifier ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute270aa22e7739d3010b0a2d63(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +125,7 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Description of custom data identifier.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description of custom data identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeca64e223b7982767dd6c8660(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +133,7 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Custom data identifier ID.",
 		//	  "type": "string"
 		//	}
-		"custom_data_identifier_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Custom data identifier ID.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"custom_data_identifier_id": schemaAttribute70089a81790a7c30648e047a(),
 		// Property: IgnoreWords
 		// CloudFormation resource type schema:
 		//
@@ -66,11 +144,7 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "array"
 		//	}
-		"ignore_words": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Words to be ignored.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ignore_words": schemaAttribute51fb5f29c0d0580cd422cd8e(),
 		// Property: Keywords
 		// CloudFormation resource type schema:
 		//
@@ -81,11 +155,7 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "array"
 		//	}
-		"keywords": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Keywords to be matched against.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"keywords": schemaAttribute867258893d2c83f78b34f691(),
 		// Property: MaximumMatchDistance
 		// CloudFormation resource type schema:
 		//
@@ -93,10 +163,7 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Maximum match distance.",
 		//	  "type": "integer"
 		//	}
-		"maximum_match_distance": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Maximum match distance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"maximum_match_distance": schemaAttribute3fcaceba0c715951a93989d7(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -104,10 +171,7 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Name of custom data identifier.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of custom data identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributeee45b7768efbe08ffb8a66bb(),
 		// Property: Regex
 		// CloudFormation resource type schema:
 		//
@@ -115,10 +179,7 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Regular expression for custom data identifier.",
 		//	  "type": "string"
 		//	}
-		"regex": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Regular expression for custom data identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"regex": schemaAttributebfb522ee6c7291b856c1ebde(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -146,24 +207,7 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag's key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag's value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A collection of tags associated with a resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute5ce2ff02a29aa7cddad6fde8(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

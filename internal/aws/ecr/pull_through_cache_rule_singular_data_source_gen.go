@@ -14,6 +14,48 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute46f9d48b02bfb29ed68757ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Secrets Manager secret associated with the pull through cache rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c039abe967d55c653f2d5a2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon ECR repository prefix associated with the pull through cache rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d493ea2092613f55bcef84f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The upstream registry URL associated with the pull through cache rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78e577a2c35ea1e02aabf5a2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the upstream source registry associated with the pull through cache rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83788872ae1c93c4f93d115e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM role associated with the pull through cache rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3969a3a3e6b8ed3b407bc33() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The upstream repository prefix associated with the pull through cache rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ecr_pull_through_cache_rule", pullThroughCacheRuleDataSource)
 }
@@ -32,10 +74,7 @@ func pullThroughCacheRuleDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^arn:[a-zA-Z-]+:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$",
 		//	  "type": "string"
 		//	}
-		"credential_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Secrets Manager secret associated with the pull through cache rule.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"credential_arn": schemaAttribute46f9d48b02bfb29ed68757ca(),
 		// Property: CustomRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +83,7 @@ func pullThroughCacheRuleDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"custom_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the IAM role associated with the pull through cache rule.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"custom_role_arn": schemaAttribute83788872ae1c93c4f93d115e(),
 		// Property: EcrRepositoryPrefix
 		// CloudFormation resource type schema:
 		//
@@ -58,10 +94,7 @@ func pullThroughCacheRuleDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$",
 		//	  "type": "string"
 		//	}
-		"ecr_repository_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon ECR repository prefix associated with the pull through cache rule.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ecr_repository_prefix": schemaAttribute4c039abe967d55c653f2d5a2(),
 		// Property: UpstreamRegistry
 		// CloudFormation resource type schema:
 		//
@@ -69,10 +102,7 @@ func pullThroughCacheRuleDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The name of the upstream source registry associated with the pull through cache rule.",
 		//	  "type": "string"
 		//	}
-		"upstream_registry": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the upstream source registry associated with the pull through cache rule.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"upstream_registry": schemaAttribute78e577a2c35ea1e02aabf5a2(),
 		// Property: UpstreamRegistryUrl
 		// CloudFormation resource type schema:
 		//
@@ -80,10 +110,7 @@ func pullThroughCacheRuleDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The upstream registry URL associated with the pull through cache rule.",
 		//	  "type": "string"
 		//	}
-		"upstream_registry_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The upstream registry URL associated with the pull through cache rule.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"upstream_registry_url": schemaAttribute6d493ea2092613f55bcef84f(),
 		// Property: UpstreamRepositoryPrefix
 		// CloudFormation resource type schema:
 		//
@@ -94,10 +121,7 @@ func pullThroughCacheRuleDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$",
 		//	  "type": "string"
 		//	}
-		"upstream_repository_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The upstream repository prefix associated with the pull through cache rule.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"upstream_repository_prefix": schemaAttributec3969a3a3e6b8ed3b407bc33(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

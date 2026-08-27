@@ -14,6 +14,65 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute6b3feae18a20d953eea27b66() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeb1da4da91df73022b5eb305a(),
+				// Property: Value
+				"value": schemaAttributeb1da4da91df73022b5eb305a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An arbitrary set of tags (key-value pairs) for this cleanrooms privacy budget template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9172c557e85925d097b055b9() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoRefresh
+				"auto_refresh": schemaAttributeb1da4da91df73022b5eb305a(),
+				// Property: Budget
+				"budget": schemaAttributed6c132fc4787e2668cdea345(),
+				// Property: Type
+				"type": schemaAttributeb1da4da91df73022b5eb305a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb1da4da91df73022b5eb305a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec86b2cc49727d11a67f4a89b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BudgetParameters
+			"budget_parameters": schemaAttribute9172c557e85925d097b055b9(),
+			// Property: Epsilon
+			"epsilon": schemaAttributed6c132fc4787e2668cdea345(),
+			// Property: ResourceArn
+			"resource_arn": schemaAttributeb1da4da91df73022b5eb305a(),
+			// Property: UsersNoisePerQuery
+			"users_noise_per_query": schemaAttributed6c132fc4787e2668cdea345(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6c132fc4787e2668cdea345() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cleanrooms_privacy_budget_template", privacyBudgetTemplateDataSource)
 }
@@ -29,9 +88,7 @@ func privacyBudgetTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	  "maxLength": 200,
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeb1da4da91df73022b5eb305a(),
 		// Property: AutoRefresh
 		// CloudFormation resource type schema:
 		//
@@ -42,9 +99,7 @@ func privacyBudgetTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"auto_refresh": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"auto_refresh": schemaAttributeb1da4da91df73022b5eb305a(),
 		// Property: CollaborationArn
 		// CloudFormation resource type schema:
 		//
@@ -52,9 +107,7 @@ func privacyBudgetTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	  "maxLength": 100,
 		//	  "type": "string"
 		//	}
-		"collaboration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"collaboration_arn": schemaAttributeb1da4da91df73022b5eb305a(),
 		// Property: CollaborationIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -64,9 +117,7 @@ func privacyBudgetTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
 		//	  "type": "string"
 		//	}
-		"collaboration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"collaboration_identifier": schemaAttributeb1da4da91df73022b5eb305a(),
 		// Property: MembershipArn
 		// CloudFormation resource type schema:
 		//
@@ -74,9 +125,7 @@ func privacyBudgetTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	  "maxLength": 100,
 		//	  "type": "string"
 		//	}
-		"membership_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"membership_arn": schemaAttributeb1da4da91df73022b5eb305a(),
 		// Property: MembershipIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -86,9 +135,7 @@ func privacyBudgetTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
 		//	  "type": "string"
 		//	}
-		"membership_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"membership_identifier": schemaAttributeb1da4da91df73022b5eb305a(),
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -148,43 +195,7 @@ func privacyBudgetTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BudgetParameters
-				"budget_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AutoRefresh
-							"auto_refresh": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Budget
-							"budget": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Epsilon
-				"epsilon": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceArn
-				"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UsersNoisePerQuery
-				"users_noise_per_query": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"parameters": schemaAttributec86b2cc49727d11a67f4a89b(),
 		// Property: PrivacyBudgetTemplateIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -194,9 +205,7 @@ func privacyBudgetTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
 		//	  "type": "string"
 		//	}
-		"privacy_budget_template_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"privacy_budget_template_identifier": schemaAttributeb1da4da91df73022b5eb305a(),
 		// Property: PrivacyBudgetType
 		// CloudFormation resource type schema:
 		//
@@ -207,9 +216,7 @@ func privacyBudgetTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"privacy_budget_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"privacy_budget_type": schemaAttributeb1da4da91df73022b5eb305a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -238,22 +245,7 @@ func privacyBudgetTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An arbitrary set of tags (key-value pairs) for this cleanrooms privacy budget template.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6b3feae18a20d953eea27b66(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

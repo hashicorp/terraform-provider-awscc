@@ -15,6 +15,21 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute41b90c4d9520d04ab992c913() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61acda1b8fcd7902be98089a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_resourceexplorer2_index", indexDataSource)
 }
@@ -29,9 +44,7 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute61acda1b8fcd7902be98089a(),
 		// Property: IndexState
 		// CloudFormation resource type schema:
 		//
@@ -45,9 +58,7 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"index_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"index_state": schemaAttribute61acda1b8fcd7902be98089a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -60,11 +71,7 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute41b90c4d9520d04ab992c913(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -75,9 +82,7 @@ func indexDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute61acda1b8fcd7902be98089a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

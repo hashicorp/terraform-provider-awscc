@@ -14,6 +14,73 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute7935305b0a34acf1e676df24() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Region
+				"region": schemaAttributed1508ba035eef887d50b6beb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of route configuration details. Must contain exactly one route configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d0a9bf2b53bd8537bf4b0d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The optional part of a key-value pair that defines a tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f87b1fe6613989dae7118bf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RouteDetails
+			"route_details": schemaAttribute7935305b0a34acf1e676df24(),
+		}, /*END SCHEMA*/
+		Description: "Contains details of a multi-region endpoint (global-endpoint) being created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea56eada83d40228755fda08a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the multi-region endpoint (global-endpoint).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5832ba47df8edda4c6b0f12() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "One part of a key-value pair that defines a tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1508ba035eef887d50b6beb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of an AWS-Region to be a secondary region for the multi-region endpoint (global-endpoint)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede947c3a7af14a6ea3df7f78() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec5832ba47df8edda4c6b0f12(),
+				// Property: Value
+				"value": schemaAttribute7d0a9bf2b53bd8537bf4b0d8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An Array of objects that define the tags (keys and values) to associate with the multi-region endpoint (global-endpoint).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ses_multi_region_endpoint", multiRegionEndpointDataSource)
 }
@@ -56,26 +123,7 @@ func multiRegionEndpointDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RouteDetails
-				"route_details": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Region
-							"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of an AWS-Region to be a secondary region for the multi-region endpoint (global-endpoint)",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A list of route configuration details. Must contain exactly one route configuration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Contains details of a multi-region endpoint (global-endpoint) being created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"details": schemaAttribute7f87b1fe6613989dae7118bf(),
 		// Property: EndpointName
 		// CloudFormation resource type schema:
 		//
@@ -86,10 +134,7 @@ func multiRegionEndpointDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[\\w\\-_]+$",
 		//	  "type": "string"
 		//	}
-		"endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the multi-region endpoint (global-endpoint).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_name": schemaAttributea56eada83d40228755fda08a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -124,24 +169,7 @@ func multiRegionEndpointDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "One part of a key-value pair that defines a tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The optional part of a key-value pair that defines a tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An Array of objects that define the tags (keys and values) to associate with the multi-region endpoint (global-endpoint).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributede947c3a7af14a6ea3df7f78(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

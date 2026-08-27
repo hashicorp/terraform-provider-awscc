@@ -15,6 +15,79 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute08ca0b6e8d03f2b76c9b482e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of connection for a FEDERATED data catalog",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0cfd6d05fa18154d936e7159() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute7e5301d92682961ba4ec472c(),
+				// Property: Value
+				"value": schemaAttribute7e5301d92682961ba4ec472c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of comma separated tags to add to the data catalog that is created. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28f701743ca2413b90cdbf2c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the data catalog to be created. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d6c5451e0ef34f395d31b5f() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e5301d92682961ba4ec472c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b6077d85826cef4152528db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the data catalog to create. The catalog name must be unique for the AWS account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea975d87ae60eec7d50e2b2e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Text of the error that occurred during data catalog creation or deletion.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed62164fae3572eb8666e14f8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the creation or deletion of the data catalog. LAMBDA, GLUE, and HIVE data catalog types are created synchronously. Their status is either CREATE_COMPLETE or CREATE_FAILED. The FEDERATED data catalog type is created asynchronously.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb05ca29febd889e3cd7da80() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore. FEDERATED is a federated catalog for which Athena creates the connection and the Lambda function for you based on the parameters that you pass.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_athena_data_catalog", dataCatalogDataSource)
 }
@@ -30,10 +103,7 @@ func dataCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of connection for a FEDERATED data catalog",
 		//	  "type": "string"
 		//	}
-		"connection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of connection for a FEDERATED data catalog",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_type": schemaAttribute08ca0b6e8d03f2b76c9b482e(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +113,7 @@ func dataCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the data catalog to be created. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute28f701743ca2413b90cdbf2c(),
 		// Property: Error
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +121,7 @@ func dataCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Text of the error that occurred during data catalog creation or deletion.",
 		//	  "type": "string"
 		//	}
-		"error": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Text of the error that occurred during data catalog creation or deletion.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"error": schemaAttributea975d87ae60eec7d50e2b2e1(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -67,10 +131,7 @@ func dataCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the data catalog to create. The catalog name must be unique for the AWS account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute9b6077d85826cef4152528db(),
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -85,12 +146,7 @@ func dataCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"parameters":        // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Specifies the Lambda function or functions to use for creating the data catalog. This is a mapping whose values depend on the catalog type. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parameters": schemaAttribute6d6c5451e0ef34f395d31b5f(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -109,10 +165,7 @@ func dataCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the creation or deletion of the data catalog. LAMBDA, GLUE, and HIVE data catalog types are created synchronously. Their status is either CREATE_COMPLETE or CREATE_FAILED. The FEDERATED data catalog type is created asynchronously.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributed62164fae3572eb8666e14f8(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -141,22 +194,7 @@ func dataCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of comma separated tags to add to the data catalog that is created. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute0cfd6d05fa18154d936e7159(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -170,10 +208,7 @@ func dataCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS Glue Catalog, or HIVE for an external hive metastore. FEDERATED is a federated catalog for which Athena creates the connection and the Lambda function for you based on the parameters that you pass.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttributefb05ca29febd889e3cd7da80(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

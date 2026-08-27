@@ -14,6 +14,13 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributee69a43491199090586ac8b95() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the rule set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ses_receipt_rule_set", receiptRuleSetDataSource)
 }
@@ -29,10 +36,7 @@ func receiptRuleSetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The name of the rule set.",
 		//	  "type": "string"
 		//	}
-		"rule_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the rule set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rule_set_name": schemaAttributee69a43491199090586ac8b95(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

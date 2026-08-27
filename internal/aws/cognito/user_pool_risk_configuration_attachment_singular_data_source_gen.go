@@ -15,6 +15,131 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1d17ba78a1bd0e2354793a9b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EventAction
+			"event_action": schemaAttributee11d4dfc0bbff0956f33edbe(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27f83e44d8977b64bd718701() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HighAction
+			"high_action": schemaAttribute65b0c9031bb4bef029b12514(),
+			// Property: LowAction
+			"low_action": schemaAttribute65b0c9031bb4bef029b12514(),
+			// Property: MediumAction
+			"medium_action": schemaAttribute65b0c9031bb4bef029b12514(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65b0c9031bb4bef029b12514() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EventAction
+			"event_action": schemaAttributee11d4dfc0bbff0956f33edbe(),
+			// Property: Notify
+			"notify": schemaAttribute77bea4ee89e65077df427e2a(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77bea4ee89e65077df427e2a() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute81a5cccca4e1d5da02b5be64() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BlockedIPRangeList
+			"blocked_ip_range_list": schemaAttribute975fb7e7bc5d38ed0f7e9e80(),
+			// Property: SkippedIPRangeList
+			"skipped_ip_range_list": schemaAttribute975fb7e7bc5d38ed0f7e9e80(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e48c970293ca49478d24b84() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HtmlBody
+			"html_body": schemaAttributee11d4dfc0bbff0956f33edbe(),
+			// Property: Subject
+			"subject": schemaAttributee11d4dfc0bbff0956f33edbe(),
+			// Property: TextBody
+			"text_body": schemaAttributee11d4dfc0bbff0956f33edbe(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute975fb7e7bc5d38ed0f7e9e80() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaac075bb9bc454182aa6195a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BlockEmail
+			"block_email": schemaAttribute8e48c970293ca49478d24b84(),
+			// Property: From
+			"from": schemaAttributee11d4dfc0bbff0956f33edbe(),
+			// Property: MfaEmail
+			"mfa_email": schemaAttribute8e48c970293ca49478d24b84(),
+			// Property: NoActionEmail
+			"no_action_email": schemaAttribute8e48c970293ca49478d24b84(),
+			// Property: ReplyTo
+			"reply_to": schemaAttributee11d4dfc0bbff0956f33edbe(),
+			// Property: SourceArn
+			"source_arn": schemaAttributee11d4dfc0bbff0956f33edbe(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedaafb45c326548494cc9c189() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Actions
+			"actions": schemaAttribute27f83e44d8977b64bd718701(),
+			// Property: NotifyConfiguration
+			"notify_configuration": schemaAttributeaac075bb9bc454182aa6195a(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee11d4dfc0bbff0956f33edbe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef403104cc2f5a8c397fc694() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Actions
+			"actions": schemaAttribute1d17ba78a1bd0e2354793a9b(),
+			// Property: EventFilter
+			"event_filter": schemaAttribute975fb7e7bc5d38ed0f7e9e80(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cognito_user_pool_risk_configuration_attachment", userPoolRiskConfigurationAttachmentDataSource)
 }
@@ -161,140 +286,14 @@ func userPoolRiskConfigurationAttachmentDataSource(ctx context.Context) (datasou
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"account_takeover_risk_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Actions
-				"actions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: HighAction
-						"high_action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: EventAction
-								"event_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Notify
-								"notify": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: LowAction
-						"low_action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: EventAction
-								"event_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Notify
-								"notify": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: MediumAction
-						"medium_action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: EventAction
-								"event_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Notify
-								"notify": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: NotifyConfiguration
-				"notify_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BlockEmail
-						"block_email": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: HtmlBody
-								"html_body": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Subject
-								"subject": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: TextBody
-								"text_body": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: From
-						"from": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: MfaEmail
-						"mfa_email": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: HtmlBody
-								"html_body": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Subject
-								"subject": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: TextBody
-								"text_body": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: NoActionEmail
-						"no_action_email": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: HtmlBody
-								"html_body": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Subject
-								"subject": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: TextBody
-								"text_body": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ReplyTo
-						"reply_to": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SourceArn
-						"source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"account_takeover_risk_configuration": schemaAttributedaafb45c326548494cc9c189(),
 		// Property: ClientId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"client_id": schemaAttributee11d4dfc0bbff0956f33edbe(),
 		// Property: CompromisedCredentialsRiskConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -326,26 +325,7 @@ func userPoolRiskConfigurationAttachmentDataSource(ctx context.Context) (datasou
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"compromised_credentials_risk_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Actions
-				"actions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: EventAction
-						"event_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: EventFilter
-				"event_filter": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"compromised_credentials_risk_configuration": schemaAttributeef403104cc2f5a8c397fc694(),
 		// Property: RiskExceptionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -369,30 +349,14 @@ func userPoolRiskConfigurationAttachmentDataSource(ctx context.Context) (datasou
 		//	  },
 		//	  "type": "object"
 		//	}
-		"risk_exception_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BlockedIPRangeList
-				"blocked_ip_range_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SkippedIPRangeList
-				"skipped_ip_range_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"risk_exception_configuration": schemaAttribute81a5cccca4e1d5da02b5be64(),
 		// Property: UserPoolId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"user_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"user_pool_id": schemaAttributee11d4dfc0bbff0956f33edbe(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

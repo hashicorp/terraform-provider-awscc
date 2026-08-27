@@ -15,6 +15,1080 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute033e02d36c9931defc1925e2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A setting to indicate if IPv6 routing should be enabled along with IPv4 or not",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute03a8b166772e24b169a5ebdc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A CodeRepository (valid URL) to be used within Jupyter's Git extension.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0ec299b9a5f84647ffd5c190() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the application managed by SageMaker in IAM Identity Center. This value is only returned for domains created after October 1, 2023.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f1d52d7f96a7d7e7d4f4ed5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: NotebookOutputOption
+			"notebook_output_option": schemaAttributee28282e8972af70ab03c1020(),
+			// Property: S3KmsKeyId
+			"s3_kms_key_id": schemaAttributeb871e9f51f6c5b90e5d0de78(),
+			// Property: S3OutputPath
+			"s3_output_path": schemaAttribute4f9b6bacb8c9c3acfa65ceb3(),
+		}, /*END SCHEMA*/
+		Description: "The sharing settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f360b9b36fe40e584b78bd3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IdleTimeoutInMinutes
+			"idle_timeout_in_minutes": schemaAttribute4bd78654bc1513fbfc0335bc(),
+			// Property: LifecycleManagement
+			"lifecycle_management": schemaAttribute239c01adccea39a5e9ff48c0(),
+			// Property: MaxIdleTimeoutInMinutes
+			"max_idle_timeout_in_minutes": schemaAttribute537ed6f4cdcbf446cd285899(),
+			// Property: MinIdleTimeoutInMinutes
+			"min_idle_timeout_in_minutes": schemaAttribute7429bb38c44934bd20cdd912(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1013c217ddb21e2438b5ac21() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Default size of the Amazon EBS volume in Gb",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute151952105dad9c3801d5442d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the tags added to Domain, User Profile and Space entity is propagated to all SageMaker resources.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1555e272ce927667c13d826c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the AWS account that has the Amazon SageMaker Unified Studio domain. The default value, if you don't specify an ID, is the ID of the account that has the Amazon SageMaker AI domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17700fd9e19fc368e301d24d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The instance type that the image version runs on.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18d69e1b84b8c53bb5bef9b3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a4f9bae5ae7ade000a1a6c7() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of account id's that would be used to pull images from in VpcOnly mode",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d0fe4efd68043eafedfe970() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute239c01adccea39a5e9ff48c0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A flag to enable/disable AppLifecycleManagement settings",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute256e212e095dd09ea35ee1bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether auto-mounting of an EFS volume is supported for the user profile. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute263fe6390db1ec49c6716181() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26e24534fea37940566a8dee() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Maximum size of the Amazon EBS volume in Gb. Must be greater than or equal to the DefaultEbsVolumeSizeInGb.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute282f523b33c93e3f03e76c0d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The execution role for the space.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ae46165ad2fa16d708abc24() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AppLifecycleManagement
+			"app_lifecycle_management": schemaAttributea61a46b832face02e8862e73(),
+			// Property: BuiltInLifecycleConfigArn
+			"built_in_lifecycle_config_arn": schemaAttributeb4e6d81c4a6e6de31808ef04(),
+			// Property: CodeRepositories
+			"code_repositories": schemaAttributeb43cdb02dc534d01133271b5(),
+			// Property: CustomImages
+			"custom_images": schemaAttribute967aa400e6737057f7cfe9a2(),
+			// Property: DefaultResourceSpec
+			"default_resource_spec": schemaAttributebf7c31dfa06b54ec10fe3284(),
+			// Property: LifecycleConfigArns
+			"lifecycle_config_arns": schemaAttributeefa8b317f52bdce4edb7b09a(),
+		}, /*END SCHEMA*/
+		Description: "The Jupyter lab's app settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ddfb6b3d1635893e68035b5() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30f5eb5149112cd4d652cd61() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the environment that Amazon SageMaker Unified Studio associates with the domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute395f9f95a063eebc1c92a0ff() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute5a3a4f2eaa500b6f9ee3ccf2(),
+				// Property: Value
+				"value": schemaAttribute5a3a4f2eaa500b6f9ee3ccf2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags to apply to the user profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e10795205eeaabdec6c93eb() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The VPC subnets that Studio uses for communication.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute404104faf5502d883042f143() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name for the domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute46ec73d71e10782b99441502() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The instance types you are hiding from the Studio user interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48dea4f71a686b5b4b085f80() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AppImageConfigName
+				"app_image_config_name": schemaAttribute9504180812aa6e4ed5518e43(),
+				// Property: ImageName
+				"image_name": schemaAttribute4aa89618a821f4e6d6d07699(),
+				// Property: ImageVersionNumber
+				"image_version_number": schemaAttribute73f585885de222eab7efdcf9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4aa89618a821f4e6d6d07699() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the CustomImage. Must be unique to your account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4bd78654bc1513fbfc0335bc() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The idle timeout value set in minutes",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4e6a50f7fa9f20b61d4e8442() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Sets whether you can access the domain in Amazon SageMaker Studio:\n\nENABLED\nYou can access the domain in Amazon SageMaker Studio. If you migrate the domain to Amazon SageMaker Unified Studio, you can access it in both studio interfaces.\nDISABLED\nYou can't access the domain in Amazon SageMaker Studio. If you migrate the domain to Amazon SageMaker Unified Studio, you can access it only in that studio interface.\n",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f9b6bacb8c9c3acfa65ceb3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute526433bf15f4f6e105fed3e6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AppImageConfigName
+				"app_image_config_name": schemaAttribute9504180812aa6e4ed5518e43(),
+				// Property: ImageName
+				"image_name": schemaAttribute4aa89618a821f4e6d6d07699(),
+				// Property: ImageVersionNumber
+				"image_version_number": schemaAttribute73f585885de222eab7efdcf9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of custom images for use for CodeEditor apps.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52b996a073d89a8f82c268e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The location where Amazon S3 stores temporary execution data and other artifacts for the project that corresponds to the domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute537ed6f4cdcbf446cd285899() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum idle timeout value set in minutes",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute56f77be466a033b34f67d9c1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomImages
+			"custom_images": schemaAttribute48dea4f71a686b5b4b085f80(),
+			// Property: DefaultResourceSpec
+			"default_resource_spec": schemaAttributeee2cdab5a2dc782110a6e7cf(),
+			// Property: LifecycleConfigArns
+			"lifecycle_config_arns": schemaAttribute9cf18ac02e08b6e051a93190(),
+		}, /*END SCHEMA*/
+		Description: "The kernel gateway app settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a3a4f2eaa500b6f9ee3ccf2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a63e055d58e71a7565ba16f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SSO managed application instance ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b5e3581f3581e0671ba10cb() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c1f08017c83d4f1df06693e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the Studio experience is available to users. If not, users cannot access Studio.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a8c8b09fa51de765bedd515() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HiddenAppTypes
+			"hidden_app_types": schemaAttribute6c89ae3a26187d7096d5a53d(),
+			// Property: HiddenInstanceTypes
+			"hidden_instance_types": schemaAttribute46ec73d71e10782b99441502(),
+			// Property: HiddenMlTools
+			"hidden_ml_tools": schemaAttribute8c5a2d47687d747b1a5e265f(),
+			// Property: HiddenSageMakerImageVersionAliases
+			"hidden_sage_maker_image_version_aliases": schemaAttributec9478b90085d9b0037625966(),
+		}, /*END SCHEMA*/
+		Description: "Studio settings. If these settings are applied on a user level, they take priority over the settings applied on a domain level.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c89ae3a26187d7096d5a53d() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Applications supported in Studio that are hidden from the Studio left navigation pane.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d2920d3982deb0d885056e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the created domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6eafc56c3d2e37715ffa560f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A URL pointing to an RStudio Connect server.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6edcbc072e20f5194d1cb27b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the execution role for the RStudioServerPro Domain-level app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute706c660cb51e40c0958b5637() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DefaultEbsVolumeSizeInGb
+			"default_ebs_volume_size_in_gb": schemaAttribute1013c217ddb21e2438b5ac21(),
+			// Property: MaximumEbsVolumeSizeInGb
+			"maximum_ebs_volume_size_in_gb": schemaAttribute26e24534fea37940566a8dee(),
+		}, /*END SCHEMA*/
+		Description: "Properties related to the Amazon Elastic Block Store volume. Must be provided if storage type is Amazon EBS and must not be provided if storage type is not Amazon EBS",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73f585885de222eab7efdcf9() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The version number of the CustomImage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7429bb38c44934bd20cdd912() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum idle timeout value set in minutes",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7aa36739590eec336be29da1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Amazon SageMaker Unified Studio domain associated with this domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ae59266d8c2ec24788be803() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnableDockerAccess
+			"enable_docker_access": schemaAttributefde633e235088ba507d303ab(),
+			// Property: VpcOnlyTrustedAccounts
+			"vpc_only_trusted_accounts": schemaAttribute1a4f9bae5ae7ade000a1a6c7(),
+		}, /*END SCHEMA*/
+		Description: "A collection of settings that are required to start docker-proxy server.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute807441fc7a15a88575a480f7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether a home EFS file system is created for the domain. Set to Disabled to skip EFS creation and reduce domain creation time.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute81eb7a224f4e01c10ad9af51() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceType
+			"instance_type": schemaAttribute17700fd9e19fc368e301d24d(),
+			// Property: LifecycleConfigArn
+			"lifecycle_config_arn": schemaAttributed28ad0336ee554365a9ef98e(),
+			// Property: SageMakerImageArn
+			"sage_maker_image_arn": schemaAttribute1d0fe4efd68043eafedfe970(),
+			// Property: SageMakerImageVersionArn
+			"sage_maker_image_version_arn": schemaAttributee801c26914d630c1cc5d8d71(),
+			// Property: TrainingPlanArn
+			"training_plan_arn": schemaAttribute960efe2ebd28b479d985aece(),
+		}, /*END SCHEMA*/
+		Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the CodeEditor app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84583549c29481e908052403() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Amazon SageMaker Unified Studio project that corresponds to the domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89d62b47095d8a2b226b4b7d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Gid
+			"gid": schemaAttribute5b5e3581f3581e0671ba10cb(),
+			// Property: Uid
+			"uid": schemaAttribute5b5e3581f3581e0671ba10cb(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c5a2d47687d747b1a5e265f() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The machine learning tools that are hidden from the Studio left navigation pane.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e7c7aec7197faaaa48ce4b6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DefaultEbsStorageSettings
+			"default_ebs_storage_settings": schemaAttribute706c660cb51e40c0958b5637(),
+		}, /*END SCHEMA*/
+		Description: "Default storage settings for a space.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9504180812aa6e4ed5518e43() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Name of the AppImageConfig.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute960efe2ebd28b479d985aece() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute967aa400e6737057f7cfe9a2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AppImageConfigName
+				"app_image_config_name": schemaAttribute9504180812aa6e4ed5518e43(),
+				// Property: ImageName
+				"image_name": schemaAttribute4aa89618a821f4e6d6d07699(),
+				// Property: ImageVersionNumber
+				"image_version_number": schemaAttribute73f585885de222eab7efdcf9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of custom images for use for JupyterLab apps.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9813f2113d07743b899f79e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The execution role for the user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a00373ba153a8bae23e3ee1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AutoMountHomeEFS
+			"auto_mount_home_efs": schemaAttribute256e212e095dd09ea35ee1bc(),
+			// Property: CodeEditorAppSettings
+			"code_editor_app_settings": schemaAttributeaeb36c71ba7f0731f0a824e8(),
+			// Property: CustomFileSystemConfigs
+			"custom_file_system_configs": schemaAttributeb5c5ea98a5edb67826a82611(),
+			// Property: CustomPosixUserConfig
+			"custom_posix_user_config": schemaAttribute89d62b47095d8a2b226b4b7d(),
+			// Property: DefaultLandingUri
+			"default_landing_uri": schemaAttributeda7de2f6c7bb0b4b6a0743d3(),
+			// Property: ExecutionRole
+			"execution_role": schemaAttribute9813f2113d07743b899f79e1(),
+			// Property: JupyterLabAppSettings
+			"jupyter_lab_app_settings": schemaAttributeeeeb45596b029d2b135152a1(),
+			// Property: JupyterServerAppSettings
+			"jupyter_server_app_settings": schemaAttributebc90ee32452fd6134498fe87(),
+			// Property: KernelGatewayAppSettings
+			"kernel_gateway_app_settings": schemaAttribute56f77be466a033b34f67d9c1(),
+			// Property: RSessionAppSettings
+			"r_session_app_settings": schemaAttributef1e18911e51f72ef2afd81be(),
+			// Property: RStudioServerProAppSettings
+			"r_studio_server_pro_app_settings": schemaAttributefa12315cef57b447181f20a3(),
+			// Property: SecurityGroups
+			"security_groups": schemaAttribute9b8ffd0b9b50dea35147c98e(),
+			// Property: SharingSettings
+			"sharing_settings": schemaAttribute0f1d52d7f96a7d7e7d4f4ed5(),
+			// Property: SpaceStorageSettings
+			"space_storage_settings": schemaAttribute8e7c7aec7197faaaa48ce4b6(),
+			// Property: StudioWebPortal
+			"studio_web_portal": schemaAttribute5c1f08017c83d4f1df06693e(),
+			// Property: StudioWebPortalSettings
+			"studio_web_portal_settings": schemaAttribute6a8c8b09fa51de765bedd515(),
+		}, /*END SCHEMA*/
+		Description: "The default user settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9af0cf9dd19c74914b96b7b1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The mode of authentication that members use to access the domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b4298c84d05abdb02da80f7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DefaultResourceSpec
+			"default_resource_spec": schemaAttributea7549b25cfa0822de9b1880d(),
+			// Property: DomainExecutionRoleArn
+			"domain_execution_role_arn": schemaAttribute6edcbc072e20f5194d1cb27b(),
+			// Property: RStudioConnectUrl
+			"r_studio_connect_url": schemaAttribute6eafc56c3d2e37715ffa560f(),
+			// Property: RStudioPackageManagerUrl
+			"r_studio_package_manager_url": schemaAttributee27d902dcb685ecf2e060a0c(),
+		}, /*END SCHEMA*/
+		Description: "A collection of settings that update the current configuration for the RStudioServerPro Domain-level app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b8ffd0b9b50dea35147c98e() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9cf18ac02e08b6e051a93190() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of LifecycleConfigArns available for use with KernelGateway apps.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e2d90417b7684f74178be77() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The level of permissions that the user has within the RStudioServerPro app. This value defaults to User. The Admin value allows the user access to the RStudio Administrative Dashboard.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0c5d513292714699235e14c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DockerSettings
+			"docker_settings": schemaAttribute7ae59266d8c2ec24788be803(),
+			// Property: ExecutionRoleIdentityConfig
+			"execution_role_identity_config": schemaAttribute263fe6390db1ec49c6716181(),
+			// Property: IpAddressType
+			"ip_address_type": schemaAttribute033e02d36c9931defc1925e2(),
+			// Property: RStudioServerProDomainSettings
+			"r_studio_server_pro_domain_settings": schemaAttribute9b4298c84d05abdb02da80f7(),
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttribute2ddfb6b3d1635893e68035b5(),
+			// Property: UnifiedStudioSettings
+			"unified_studio_settings": schemaAttributefd5fbba14ad121b02929cbd8(),
+		}, /*END SCHEMA*/
+		Description: "A collection of Domain settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3db39595d13f36f00f2036c() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of LifecycleConfigArns available for use with CodeEditor apps.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea61a46b832face02e8862e73() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IdleSettings
+			"idle_settings": schemaAttribute0f360b9b36fe40e584b78bd3(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7549b25cfa0822de9b1880d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceType
+			"instance_type": schemaAttribute17700fd9e19fc368e301d24d(),
+			// Property: LifecycleConfigArn
+			"lifecycle_config_arn": schemaAttributed28ad0336ee554365a9ef98e(),
+			// Property: SageMakerImageArn
+			"sage_maker_image_arn": schemaAttribute1d0fe4efd68043eafedfe970(),
+			// Property: SageMakerImageVersionArn
+			"sage_maker_image_version_arn": schemaAttributee801c26914d630c1cc5d8d71(),
+			// Property: TrainingPlanArn
+			"training_plan_arn": schemaAttribute960efe2ebd28b479d985aece(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac033551bd90ff0a13fea065() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType is VPCOnly and DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead47d8cbf93e4cc643f488a1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeadc658391964d6d59a75f768() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Region where the domain is located in Amazon SageMaker Unified Studio. The default value, if you don't specify a Region, is the Region where the Amazon SageMaker AI domain is located.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaeb36c71ba7f0731f0a824e8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AppLifecycleManagement
+			"app_lifecycle_management": schemaAttributea61a46b832face02e8862e73(),
+			// Property: BuiltInLifecycleConfigArn
+			"built_in_lifecycle_config_arn": schemaAttributeb4e6d81c4a6e6de31808ef04(),
+			// Property: CustomImages
+			"custom_images": schemaAttribute526433bf15f4f6e105fed3e6(),
+			// Property: DefaultResourceSpec
+			"default_resource_spec": schemaAttribute81eb7a224f4e01c10ad9af51(),
+			// Property: LifecycleConfigArns
+			"lifecycle_config_arns": schemaAttributea3db39595d13f36f00f2036c(),
+		}, /*END SCHEMA*/
+		Description: "The CodeEditor app settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb43cdb02dc534d01133271b5() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RepositoryUrl
+				"repository_url": schemaAttribute03a8b166772e24b169a5ebdc(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of CodeRepositories available for use with JupyterLab apps.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4e6d81c4a6e6de31808ef04() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The lifecycle configuration that runs before the default lifecycle configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb563a7a9f8d70ee01282393f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomFileSystemConfigs
+			"custom_file_system_configs": schemaAttributeb5c5ea98a5edb67826a82611(),
+			// Property: CustomPosixUserConfig
+			"custom_posix_user_config": schemaAttributee41d2df378d025dd68d444eb(),
+			// Property: ExecutionRole
+			"execution_role": schemaAttribute282f523b33c93e3f03e76c0d(),
+			// Property: JupyterLabAppSettings
+			"jupyter_lab_app_settings": schemaAttribute2ae46165ad2fa16d708abc24(),
+			// Property: JupyterServerAppSettings
+			"jupyter_server_app_settings": schemaAttributebc90ee32452fd6134498fe87(),
+			// Property: KernelGatewayAppSettings
+			"kernel_gateway_app_settings": schemaAttribute56f77be466a033b34f67d9c1(),
+			// Property: SecurityGroups
+			"security_groups": schemaAttribute9b8ffd0b9b50dea35147c98e(),
+			// Property: SpaceStorageSettings
+			"space_storage_settings": schemaAttributed8f184ca42d6c13f7dc945c8(),
+		}, /*END SCHEMA*/
+		Description: "The default space settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5c5ea98a5edb67826a82611() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EFSFileSystemConfig
+				"efs_file_system_config": schemaAttributef4d9d1294ff132982056fec3(),
+				// Property: FSxLustreFileSystemConfig
+				"fsx_lustre_file_system_config": schemaAttributef4d9d1294ff132982056fec3(),
+				// Property: S3FileSystemConfig
+				"s3_file_system_config": schemaAttributee61b2b5db0ba15c4ceafad19(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb871e9f51f6c5b90e5d0de78() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc90ee32452fd6134498fe87() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DefaultResourceSpec
+			"default_resource_spec": schemaAttributea7549b25cfa0822de9b1880d(),
+			// Property: LifecycleConfigArns
+			"lifecycle_config_arns": schemaAttributefd958cf395d4b8ed8b77b1b1(),
+		}, /*END SCHEMA*/
+		Description: "The Jupyter server's app settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf70a27f665407313395281b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Amazon Elastic File System (EFS) managed by this Domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf7c31dfa06b54ec10fe3284() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceType
+			"instance_type": schemaAttribute17700fd9e19fc368e301d24d(),
+			// Property: LifecycleConfigArn
+			"lifecycle_config_arn": schemaAttributed28ad0336ee554365a9ef98e(),
+			// Property: SageMakerImageArn
+			"sage_maker_image_arn": schemaAttribute1d0fe4efd68043eafedfe970(),
+			// Property: SageMakerImageVersionArn
+			"sage_maker_image_version_arn": schemaAttributee801c26914d630c1cc5d8d71(),
+			// Property: TrainingPlanArn
+			"training_plan_arn": schemaAttribute960efe2ebd28b479d985aece(),
+		}, /*END SCHEMA*/
+		Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterLab app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4154f445f835df29660fe3b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the security group that authorizes traffic between the RSessionGateway apps and the RStudioServerPro app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6f3f2e70c00cfdd60bd6c9b() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9478b90085d9b0037625966() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SageMakerImageName
+				"sage_maker_image_name": schemaAttributef45f611f62083915dea7f770(),
+				// Property: VersionAliases
+				"version_aliases": schemaAttributec6f3f2e70c00cfdd60bd6c9b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The version aliases you are hiding from the Studio user interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed28ad0336ee554365a9ef98e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed89d0a7dbd8437d1f1514707() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the current user has access to the RStudioServerPro app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8f184ca42d6c13f7dc945c8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DefaultEbsStorageSettings
+			"default_ebs_storage_settings": schemaAttribute706c660cb51e40c0958b5637(),
+		}, /*END SCHEMA*/
+		Description: "The Jupyter lab's space storage settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda7de2f6c7bb0b4b6a0743d3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Defines which Amazon SageMaker application users are directed to by default.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee27d902dcb685ecf2e060a0c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A URL pointing to an RStudio Package Manager server.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee28282e8972af70ab03c1020() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee41d2df378d025dd68d444eb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Gid
+			"gid": schemaAttribute5b5e3581f3581e0671ba10cb(),
+			// Property: Uid
+			"uid": schemaAttribute5b5e3581f3581e0671ba10cb(),
+		}, /*END SCHEMA*/
+		Description: "The Jupyter lab's custom posix user configurations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee61b2b5db0ba15c4ceafad19() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MountPath
+			"mount_path": schemaAttribute5a3a4f2eaa500b6f9ee3ccf2(),
+			// Property: S3Uri
+			"s3_uri": schemaAttribute5a3a4f2eaa500b6f9ee3ccf2(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee801c26914d630c1cc5d8d71() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee2cdab5a2dc782110a6e7cf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceType
+			"instance_type": schemaAttribute17700fd9e19fc368e301d24d(),
+			// Property: LifecycleConfigArn
+			"lifecycle_config_arn": schemaAttributed28ad0336ee554365a9ef98e(),
+			// Property: SageMakerImageArn
+			"sage_maker_image_arn": schemaAttribute1d0fe4efd68043eafedfe970(),
+			// Property: SageMakerImageVersionArn
+			"sage_maker_image_version_arn": schemaAttributee801c26914d630c1cc5d8d71(),
+			// Property: TrainingPlanArn
+			"training_plan_arn": schemaAttribute960efe2ebd28b479d985aece(),
+		}, /*END SCHEMA*/
+		Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeecdbdc05887bb054daad872() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the VPC used for non-EFS traffic. The default value is PublicInternetOnly.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeeeb45596b029d2b135152a1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AppLifecycleManagement
+			"app_lifecycle_management": schemaAttributea61a46b832face02e8862e73(),
+			// Property: BuiltInLifecycleConfigArn
+			"built_in_lifecycle_config_arn": schemaAttributeb4e6d81c4a6e6de31808ef04(),
+			// Property: CodeRepositories
+			"code_repositories": schemaAttributeb43cdb02dc534d01133271b5(),
+			// Property: CustomImages
+			"custom_images": schemaAttribute967aa400e6737057f7cfe9a2(),
+			// Property: DefaultResourceSpec
+			"default_resource_spec": schemaAttributebf7c31dfa06b54ec10fe3284(),
+			// Property: LifecycleConfigArns
+			"lifecycle_config_arns": schemaAttributeefa8b317f52bdce4edb7b09a(),
+		}, /*END SCHEMA*/
+		Description: "The JupyterLab app settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeefa8b317f52bdce4edb7b09a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of LifecycleConfigArns available for use with JupyterLab apps.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1e18911e51f72ef2afd81be() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomImages
+			"custom_images": schemaAttribute48dea4f71a686b5b4b085f80(),
+			// Property: DefaultResourceSpec
+			"default_resource_spec": schemaAttributea7549b25cfa0822de9b1880d(),
+		}, /*END SCHEMA*/
+		Description: "A collection of settings that apply to an RSessionGateway app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef45f611f62083915dea7f770() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SageMaker image name that you are hiding from the Studio user interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef4d511756217c8ff75772fcb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL to the created domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef4d9d1294ff132982056fec3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FileSystemId
+			"file_system_id": schemaAttribute5a3a4f2eaa500b6f9ee3ccf2(),
+			// Property: FileSystemPath
+			"file_system_path": schemaAttribute5a3a4f2eaa500b6f9ee3ccf2(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa12315cef57b447181f20a3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccessStatus
+			"access_status": schemaAttributed89d0a7dbd8437d1f1514707(),
+			// Property: UserGroup
+			"user_group": schemaAttribute9e2d90417b7684f74178be77(),
+		}, /*END SCHEMA*/
+		Description: "A collection of settings that configure user interaction with the RStudioServerPro app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd5fbba14ad121b02929cbd8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DomainAccountId
+			"domain_account_id": schemaAttribute1555e272ce927667c13d826c(),
+			// Property: DomainId
+			"domain_id": schemaAttribute7aa36739590eec336be29da1(),
+			// Property: DomainRegion
+			"domain_region": schemaAttributeadc658391964d6d59a75f768(),
+			// Property: EnvironmentId
+			"environment_id": schemaAttribute30f5eb5149112cd4d652cd61(),
+			// Property: ProjectId
+			"project_id": schemaAttribute84583549c29481e908052403(),
+			// Property: ProjectS3Path
+			"project_s3_path": schemaAttribute52b996a073d89a8f82c268e1(),
+			// Property: StudioWebPortalAccess
+			"studio_web_portal_access": schemaAttribute4e6a50f7fa9f20b61d4e8442(),
+		}, /*END SCHEMA*/
+		Description: "A collection of settings that apply to an Amazon SageMaker AI domain when you use it in Amazon SageMaker Unified Studio.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd958cf395d4b8ed8b77b1b1() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of LifecycleConfigArns available for use with JupyterServer apps.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdc226a3611fb9a43dda217f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The domain name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefde633e235088ba507d303ab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The flag to enable/disable docker-proxy server",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_domain", domainDataSource)
 }
@@ -34,10 +1108,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"app_network_access_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the VPC used for non-EFS traffic. The default value is PublicInternetOnly.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"app_network_access_type": schemaAttributeeecdbdc05887bb054daad872(),
 		// Property: AppSecurityGroupManagement
 		// CloudFormation resource type schema:
 		//
@@ -49,10 +1120,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"app_security_group_management": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType is VPCOnly and DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"app_security_group_management": schemaAttributeac033551bd90ff0a13fea065(),
 		// Property: AuthMode
 		// CloudFormation resource type schema:
 		//
@@ -64,10 +1132,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"auth_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The mode of authentication that members use to access the domain.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"auth_mode": schemaAttribute9af0cf9dd19c74914b96b7b1(),
 		// Property: DefaultSpaceSettings
 		// CloudFormation resource type schema:
 		//
@@ -1046,345 +2111,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"default_space_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomFileSystemConfigs
-				"custom_file_system_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: EFSFileSystemConfig
-							"efs_file_system_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: FileSystemId
-									"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: FileSystemPath
-									"file_system_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: FSxLustreFileSystemConfig
-							"fsx_lustre_file_system_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: FileSystemId
-									"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: FileSystemPath
-									"file_system_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: S3FileSystemConfig
-							"s3_file_system_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: MountPath
-									"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: S3Uri
-									"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CustomPosixUserConfig
-				"custom_posix_user_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Gid
-						"gid": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Uid
-						"uid": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The Jupyter lab's custom posix user configurations.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ExecutionRole
-				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The execution role for the space.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: JupyterLabAppSettings
-				"jupyter_lab_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AppLifecycleManagement
-						"app_lifecycle_management": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: IdleSettings
-								"idle_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: IdleTimeoutInMinutes
-										"idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The idle timeout value set in minutes",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: LifecycleManagement
-										"lifecycle_management": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "A flag to enable/disable AppLifecycleManagement settings",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: MaxIdleTimeoutInMinutes
-										"max_idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The maximum idle timeout value set in minutes",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: MinIdleTimeoutInMinutes
-										"min_idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The minimum idle timeout value set in minutes",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: BuiltInLifecycleConfigArn
-						"built_in_lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The lifecycle configuration that runs before the default lifecycle configuration.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: CodeRepositories
-						"code_repositories": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: RepositoryUrl
-									"repository_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A CodeRepository (valid URL) to be used within Jupyter's Git extension.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "A list of CodeRepositories available for use with JupyterLab apps.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: CustomImages
-						"custom_images": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AppImageConfigName
-									"app_image_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The Name of the AppImageConfig.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ImageName
-									"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the CustomImage. Must be unique to your account.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ImageVersionNumber
-									"image_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The version number of the CustomImage.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "A list of custom images for use for JupyterLab apps.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DefaultResourceSpec
-						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: InstanceType
-								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The instance type that the image version runs on.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: LifecycleConfigArn
-								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageArn
-								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageVersionArn
-								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TrainingPlanArn
-								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterLab app.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: LifecycleConfigArns
-						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "A list of LifecycleConfigArns available for use with JupyterLab apps.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The Jupyter lab's app settings.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: JupyterServerAppSettings
-				"jupyter_server_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DefaultResourceSpec
-						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: InstanceType
-								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The instance type that the image version runs on.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: LifecycleConfigArn
-								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageArn
-								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageVersionArn
-								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TrainingPlanArn
-								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: LifecycleConfigArns
-						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "A list of LifecycleConfigArns available for use with JupyterServer apps.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The Jupyter server's app settings.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: KernelGatewayAppSettings
-				"kernel_gateway_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CustomImages
-						"custom_images": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AppImageConfigName
-									"app_image_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The Name of the AppImageConfig.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ImageName
-									"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the CustomImage. Must be unique to your account.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ImageVersionNumber
-									"image_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The version number of the CustomImage.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DefaultResourceSpec
-						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: InstanceType
-								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The instance type that the image version runs on.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: LifecycleConfigArn
-								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageArn
-								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageVersionArn
-								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TrainingPlanArn
-								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: LifecycleConfigArns
-						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "A list of LifecycleConfigArns available for use with KernelGateway apps.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The kernel gateway app settings.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecurityGroups
-				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SpaceStorageSettings
-				"space_storage_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DefaultEbsStorageSettings
-						"default_ebs_storage_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DefaultEbsVolumeSizeInGb
-								"default_ebs_volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Default size of the Amazon EBS volume in Gb",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: MaximumEbsVolumeSizeInGb
-								"maximum_ebs_volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Maximum size of the Amazon EBS volume in Gb. Must be greater than or equal to the DefaultEbsVolumeSizeInGb.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Properties related to the Amazon Elastic Block Store volume. Must be provided if storage type is Amazon EBS and must not be provided if storage type is not Amazon EBS",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The Jupyter lab's space storage settings.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The default space settings.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_space_settings": schemaAttributeb563a7a9f8d70ee01282393f(),
 		// Property: DefaultUserSettings
 		// CloudFormation resource type schema:
 		//
@@ -3268,610 +3995,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"default_user_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AutoMountHomeEFS
-				"auto_mount_home_efs": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether auto-mounting of an EFS volume is supported for the user profile. ",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CodeEditorAppSettings
-				"code_editor_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AppLifecycleManagement
-						"app_lifecycle_management": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: IdleSettings
-								"idle_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: IdleTimeoutInMinutes
-										"idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The idle timeout value set in minutes",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: LifecycleManagement
-										"lifecycle_management": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "A flag to enable/disable AppLifecycleManagement settings",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: MaxIdleTimeoutInMinutes
-										"max_idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The maximum idle timeout value set in minutes",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: MinIdleTimeoutInMinutes
-										"min_idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The minimum idle timeout value set in minutes",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: BuiltInLifecycleConfigArn
-						"built_in_lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The lifecycle configuration that runs before the default lifecycle configuration.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: CustomImages
-						"custom_images": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AppImageConfigName
-									"app_image_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The Name of the AppImageConfig.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ImageName
-									"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the CustomImage. Must be unique to your account.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ImageVersionNumber
-									"image_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The version number of the CustomImage.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "A list of custom images for use for CodeEditor apps.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DefaultResourceSpec
-						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: InstanceType
-								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The instance type that the image version runs on.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: LifecycleConfigArn
-								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageArn
-								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageVersionArn
-								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TrainingPlanArn
-								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the CodeEditor app.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: LifecycleConfigArns
-						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "A list of LifecycleConfigArns available for use with CodeEditor apps.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The CodeEditor app settings.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CustomFileSystemConfigs
-				"custom_file_system_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: EFSFileSystemConfig
-							"efs_file_system_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: FileSystemId
-									"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: FileSystemPath
-									"file_system_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: FSxLustreFileSystemConfig
-							"fsx_lustre_file_system_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: FileSystemId
-									"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: FileSystemPath
-									"file_system_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: S3FileSystemConfig
-							"s3_file_system_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: MountPath
-									"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: S3Uri
-									"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CustomPosixUserConfig
-				"custom_posix_user_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Gid
-						"gid": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Uid
-						"uid": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: DefaultLandingUri
-				"default_landing_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Defines which Amazon SageMaker application users are directed to by default.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ExecutionRole
-				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The execution role for the user.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: JupyterLabAppSettings
-				"jupyter_lab_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AppLifecycleManagement
-						"app_lifecycle_management": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: IdleSettings
-								"idle_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: IdleTimeoutInMinutes
-										"idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The idle timeout value set in minutes",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: LifecycleManagement
-										"lifecycle_management": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "A flag to enable/disable AppLifecycleManagement settings",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: MaxIdleTimeoutInMinutes
-										"max_idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The maximum idle timeout value set in minutes",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: MinIdleTimeoutInMinutes
-										"min_idle_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The minimum idle timeout value set in minutes",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: BuiltInLifecycleConfigArn
-						"built_in_lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The lifecycle configuration that runs before the default lifecycle configuration.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: CodeRepositories
-						"code_repositories": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: RepositoryUrl
-									"repository_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A CodeRepository (valid URL) to be used within Jupyter's Git extension.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "A list of CodeRepositories available for use with JupyterLab apps.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: CustomImages
-						"custom_images": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AppImageConfigName
-									"app_image_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The Name of the AppImageConfig.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ImageName
-									"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the CustomImage. Must be unique to your account.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ImageVersionNumber
-									"image_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The version number of the CustomImage.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "A list of custom images for use for JupyterLab apps.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DefaultResourceSpec
-						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: InstanceType
-								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The instance type that the image version runs on.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: LifecycleConfigArn
-								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageArn
-								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageVersionArn
-								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TrainingPlanArn
-								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterLab app.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: LifecycleConfigArns
-						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "A list of LifecycleConfigArns available for use with JupyterLab apps.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The JupyterLab app settings.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: JupyterServerAppSettings
-				"jupyter_server_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DefaultResourceSpec
-						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: InstanceType
-								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The instance type that the image version runs on.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: LifecycleConfigArn
-								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageArn
-								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageVersionArn
-								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TrainingPlanArn
-								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: LifecycleConfigArns
-						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "A list of LifecycleConfigArns available for use with JupyterServer apps.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The Jupyter server's app settings.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: KernelGatewayAppSettings
-				"kernel_gateway_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CustomImages
-						"custom_images": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AppImageConfigName
-									"app_image_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The Name of the AppImageConfig.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ImageName
-									"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the CustomImage. Must be unique to your account.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ImageVersionNumber
-									"image_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The version number of the CustomImage.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DefaultResourceSpec
-						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: InstanceType
-								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The instance type that the image version runs on.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: LifecycleConfigArn
-								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageArn
-								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageVersionArn
-								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TrainingPlanArn
-								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: LifecycleConfigArns
-						"lifecycle_config_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "A list of LifecycleConfigArns available for use with KernelGateway apps.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The kernel gateway app settings.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RSessionAppSettings
-				"r_session_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CustomImages
-						"custom_images": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AppImageConfigName
-									"app_image_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The Name of the AppImageConfig.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ImageName
-									"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the CustomImage. Must be unique to your account.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ImageVersionNumber
-									"image_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The version number of the CustomImage.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DefaultResourceSpec
-						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: InstanceType
-								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The instance type that the image version runs on.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: LifecycleConfigArn
-								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageArn
-								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageVersionArn
-								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TrainingPlanArn
-								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A collection of settings that apply to an RSessionGateway app.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RStudioServerProAppSettings
-				"r_studio_server_pro_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AccessStatus
-						"access_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Indicates whether the current user has access to the RStudioServerPro app.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: UserGroup
-						"user_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The level of permissions that the user has within the RStudioServerPro app. This value defaults to User. The Admin value allows the user access to the RStudio Administrative Dashboard.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A collection of settings that configure user interaction with the RStudioServerPro app.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecurityGroups
-				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SharingSettings
-				"sharing_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: NotebookOutputOption
-						"notebook_output_option": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: S3KmsKeyId
-						"s3_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: S3OutputPath
-						"s3_output_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The sharing settings.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SpaceStorageSettings
-				"space_storage_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DefaultEbsStorageSettings
-						"default_ebs_storage_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DefaultEbsVolumeSizeInGb
-								"default_ebs_volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Default size of the Amazon EBS volume in Gb",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: MaximumEbsVolumeSizeInGb
-								"maximum_ebs_volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Maximum size of the Amazon EBS volume in Gb. Must be greater than or equal to the DefaultEbsVolumeSizeInGb.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Properties related to the Amazon Elastic Block Store volume. Must be provided if storage type is Amazon EBS and must not be provided if storage type is not Amazon EBS",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Default storage settings for a space.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StudioWebPortal
-				"studio_web_portal": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether the Studio experience is available to users. If not, users cannot access Studio.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StudioWebPortalSettings
-				"studio_web_portal_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: HiddenAppTypes
-						"hidden_app_types": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "Applications supported in Studio that are hidden from the Studio left navigation pane.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: HiddenInstanceTypes
-						"hidden_instance_types": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The instance types you are hiding from the Studio user interface.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: HiddenMlTools
-						"hidden_ml_tools": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The machine learning tools that are hidden from the Studio left navigation pane.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: HiddenSageMakerImageVersionAliases
-						"hidden_sage_maker_image_version_aliases": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: SageMakerImageName
-									"sage_maker_image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The SageMaker image name that you are hiding from the Studio user interface.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: VersionAliases
-									"version_aliases": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "The version aliases you are hiding from the Studio user interface.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Studio settings. If these settings are applied on a user level, they take priority over the settings applied on a domain level.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The default user settings.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_user_settings": schemaAttribute9a00373ba153a8bae23e3ee1(),
 		// Property: DomainArn
 		// CloudFormation resource type schema:
 		//
@@ -3881,10 +4005,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:domain/.*",
 		//	  "type": "string"
 		//	}
-		"domain_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the created domain.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_arn": schemaAttribute6d2920d3982deb0d885056e1(),
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
@@ -3894,10 +4015,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^d-(-*[a-z0-9])+",
 		//	  "type": "string"
 		//	}
-		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The domain name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_id": schemaAttributefdc226a3611fb9a43dda217f(),
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -3907,10 +4025,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
 		//	  "type": "string"
 		//	}
-		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the domain.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_name": schemaAttribute404104faf5502d883042f143(),
 		// Property: DomainSettings
 		// CloudFormation resource type schema:
 		//
@@ -4267,141 +4382,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"domain_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DockerSettings
-				"docker_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: EnableDockerAccess
-						"enable_docker_access": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The flag to enable/disable docker-proxy server",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: VpcOnlyTrustedAccounts
-						"vpc_only_trusted_accounts": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "A list of account id's that would be used to pull images from in VpcOnly mode",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A collection of settings that are required to start docker-proxy server.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ExecutionRoleIdentityConfig
-				"execution_role_identity_config": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IpAddressType
-				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A setting to indicate if IPv6 routing should be enabled along with IPv4 or not",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RStudioServerProDomainSettings
-				"r_studio_server_pro_domain_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DefaultResourceSpec
-						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: InstanceType
-								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The instance type that the image version runs on.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: LifecycleConfigArn
-								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageArn
-								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SageMakerImageVersionArn
-								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TrainingPlanArn
-								"training_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the training plan to use for the ResourceSpec.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: DomainExecutionRoleArn
-						"domain_execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the execution role for the RStudioServerPro Domain-level app.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RStudioConnectUrl
-						"r_studio_connect_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "A URL pointing to an RStudio Connect server.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RStudioPackageManagerUrl
-						"r_studio_package_manager_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "A URL pointing to an RStudio Package Manager server.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A collection of settings that update the current configuration for the RStudioServerPro Domain-level app.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecurityGroupIds
-				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: UnifiedStudioSettings
-				"unified_studio_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DomainAccountId
-						"domain_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ID of the AWS account that has the Amazon SageMaker Unified Studio domain. The default value, if you don't specify an ID, is the ID of the account that has the Amazon SageMaker AI domain.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DomainId
-						"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ID of the Amazon SageMaker Unified Studio domain associated with this domain.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DomainRegion
-						"domain_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The AWS Region where the domain is located in Amazon SageMaker Unified Studio. The default value, if you don't specify a Region, is the Region where the Amazon SageMaker AI domain is located.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: EnvironmentId
-						"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ID of the environment that Amazon SageMaker Unified Studio associates with the domain.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ProjectId
-						"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ID of the Amazon SageMaker Unified Studio project that corresponds to the domain.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ProjectS3Path
-						"project_s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The location where Amazon S3 stores temporary execution data and other artifacts for the project that corresponds to the domain.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: StudioWebPortalAccess
-						"studio_web_portal_access": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Sets whether you can access the domain in Amazon SageMaker Studio:\n\nENABLED\nYou can access the domain in Amazon SageMaker Studio. If you migrate the domain to Amazon SageMaker Unified Studio, you can access it in both studio interfaces.\nDISABLED\nYou can't access the domain in Amazon SageMaker Studio. If you migrate the domain to Amazon SageMaker Unified Studio, you can access it only in that studio interface.\n",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A collection of settings that apply to an Amazon SageMaker AI domain when you use it in Amazon SageMaker Unified Studio.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A collection of Domain settings.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_settings": schemaAttributea0c5d513292714699235e14c(),
 		// Property: HomeEfsFileSystemCreation
 		// CloudFormation resource type schema:
 		//
@@ -4413,10 +4394,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"home_efs_file_system_creation": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether a home EFS file system is created for the domain. Set to Disabled to skip EFS creation and reduce domain creation time.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"home_efs_file_system_creation": schemaAttribute807441fc7a15a88575a480f7(),
 		// Property: HomeEfsFileSystemId
 		// CloudFormation resource type schema:
 		//
@@ -4425,10 +4403,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 32,
 		//	  "type": "string"
 		//	}
-		"home_efs_file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Amazon Elastic File System (EFS) managed by this Domain.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"home_efs_file_system_id": schemaAttributebf70a27f665407313395281b(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -4438,10 +4413,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttribute18d69e1b84b8c53bb5bef9b3(),
 		// Property: SecurityGroupIdForDomainBoundary
 		// CloudFormation resource type schema:
 		//
@@ -4451,10 +4423,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[-0-9a-zA-Z]+",
 		//	  "type": "string"
 		//	}
-		"security_group_id_for_domain_boundary": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the security group that authorizes traffic between the RSessionGateway apps and the RStudioServerPro app.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_id_for_domain_boundary": schemaAttributec4154f445f835df29660fe3b(),
 		// Property: SingleSignOnApplicationArn
 		// CloudFormation resource type schema:
 		//
@@ -4463,10 +4432,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::[0-9]+:application/[a-zA-Z0-9-_.]+/apl-[a-zA-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"single_sign_on_application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the application managed by SageMaker in IAM Identity Center. This value is only returned for domains created after October 1, 2023.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"single_sign_on_application_arn": schemaAttribute0ec299b9a5f84647ffd5c190(),
 		// Property: SingleSignOnManagedApplicationInstanceId
 		// CloudFormation resource type schema:
 		//
@@ -4475,10 +4441,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"single_sign_on_managed_application_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The SSO managed application instance ID.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"single_sign_on_managed_application_instance_id": schemaAttribute5a63e055d58e71a7565ba16f(),
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -4495,11 +4458,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The VPC subnets that Studio uses for communication.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_ids": schemaAttribute3e10795205eeaabdec6c93eb(),
 		// Property: TagPropagation
 		// CloudFormation resource type schema:
 		//
@@ -4511,10 +4470,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"tag_propagation": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the tags added to Domain, User Profile and Space entity is propagated to all SageMaker resources.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tag_propagation": schemaAttribute151952105dad9c3801d5442d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -4546,22 +4502,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags to apply to the user profile.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute395f9f95a063eebc1c92a0ff(),
 		// Property: Url
 		// CloudFormation resource type schema:
 		//
@@ -4570,10 +4511,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The URL to the created domain.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"url": schemaAttributef4d511756217c8ff75772fcb(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -4583,10 +4521,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[-0-9a-zA-Z]+",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttributead47d8cbf93e4cc643f488a1(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -16,6 +16,275 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute18783b297579eaf1348dcd38() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxValue
+			"max_value": schemaAttribute34380bd78cbc8fb584e31698(),
+			// Property: MinValue
+			"min_value": schemaAttribute34380bd78cbc8fb584e31698(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c0251ffaa2089e42c0eb640() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Values
+			"values": schemaAttribute8ac1c9af03867d55c92d7d1d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34380bd78cbc8fb584e31698() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute397cb4851114e69f70835eb1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the algorithm.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f5c3401af0701620d727725() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "A timestamp specifying when the algorithm was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4158f43a9ed77c74de127daa() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DefaultValue
+				"default_value": schemaAttribute34380bd78cbc8fb584e31698(),
+				// Property: Description
+				"description": schemaAttribute34380bd78cbc8fb584e31698(),
+				// Property: IsRequired
+				"is_required": schemaAttribute6eb5e639e3a4ab5d6c087182(),
+				// Property: IsTunable
+				"is_tunable": schemaAttribute6eb5e639e3a4ab5d6c087182(),
+				// Property: Name
+				"name": schemaAttribute34380bd78cbc8fb584e31698(),
+				// Property: Range
+				"range": schemaAttributeb6731e75557cbe81538f155c(),
+				// Property: Type
+				"type": schemaAttribute34380bd78cbc8fb584e31698(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5254ea1615cacff9f411fdc4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute34380bd78cbc8fb584e31698(),
+				// Property: Value
+				"value": schemaAttribute34380bd78cbc8fb584e31698(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute56a7124c6ce7a3f374c4a196() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Containers
+			"containers": schemaAttributef980b73850de775a3078d526(),
+			// Property: SupportedContentTypes
+			"supported_content_types": schemaAttribute8ac1c9af03867d55c92d7d1d(),
+			// Property: SupportedRealtimeInferenceInstanceTypes
+			"supported_realtime_inference_instance_types": schemaAttribute8ac1c9af03867d55c92d7d1d(),
+			// Property: SupportedResponseMIMETypes
+			"supported_response_mime_types": schemaAttribute8ac1c9af03867d55c92d7d1d(),
+			// Property: SupportedTransformInstanceTypes
+			"supported_transform_instance_types": schemaAttribute8ac1c9af03867d55c92d7d1d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ef9dad5531e3c0e2a04fda4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataInputConfig
+			"data_input_config": schemaAttribute34380bd78cbc8fb584e31698(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6eb5e639e3a4ab5d6c087182() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ac1c9af03867d55c92d7d1d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92e9f4996e770369fe14c258() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the algorithm.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f2f49edcf35b32c99526749() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MetricDefinitions
+			"metric_definitions": schemaAttributec3f6a983f6cb8a3ba61ce263(),
+			// Property: SupportedHyperParameters
+			"supported_hyper_parameters": schemaAttribute4158f43a9ed77c74de127daa(),
+			// Property: SupportedTrainingInstanceTypes
+			"supported_training_instance_types": schemaAttribute8ac1c9af03867d55c92d7d1d(),
+			// Property: SupportedTuningJobObjectiveMetrics
+			"supported_tuning_job_objective_metrics": schemaAttributef6e71e1f0050e51e9a68a0a0(),
+			// Property: SupportsDistributedTraining
+			"supports_distributed_training": schemaAttribute6eb5e639e3a4ab5d6c087182(),
+			// Property: TrainingChannels
+			"training_channels": schemaAttributea8823419291496fc62cb9a85(),
+			// Property: TrainingImage
+			"training_image": schemaAttribute34380bd78cbc8fb584e31698(),
+			// Property: TrainingImageDigest
+			"training_image_digest": schemaAttribute34380bd78cbc8fb584e31698(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8823419291496fc62cb9a85() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Description
+				"description": schemaAttribute34380bd78cbc8fb584e31698(),
+				// Property: IsRequired
+				"is_required": schemaAttribute6eb5e639e3a4ab5d6c087182(),
+				// Property: Name
+				"name": schemaAttribute34380bd78cbc8fb584e31698(),
+				// Property: SupportedCompressionTypes
+				"supported_compression_types": schemaAttribute8ac1c9af03867d55c92d7d1d(),
+				// Property: SupportedContentTypes
+				"supported_content_types": schemaAttribute8ac1c9af03867d55c92d7d1d(),
+				// Property: SupportedInputModes
+				"supported_input_modes": schemaAttribute8ac1c9af03867d55c92d7d1d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9130a299a3e98f0f804eeab() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6731e75557cbe81538f155c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CategoricalParameterRangeSpecification
+			"categorical_parameter_range_specification": schemaAttribute2c0251ffaa2089e42c0eb640(),
+			// Property: ContinuousParameterRangeSpecification
+			"continuous_parameter_range_specification": schemaAttribute18783b297579eaf1348dcd38(),
+			// Property: IntegerParameterRangeSpecification
+			"integer_parameter_range_specification": schemaAttribute18783b297579eaf1348dcd38(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3f6a983f6cb8a3ba61ce263() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute34380bd78cbc8fb584e31698(),
+				// Property: Regex
+				"regex": schemaAttribute34380bd78cbc8fb584e31698(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedfe7a031cec1e144831c2a35() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to certify the algorithm so that it can be listed in AWS Marketplace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee7a0676853d8f662b1ab1ecf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the algorithm.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6e71e1f0050e51e9a68a0a0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MetricName
+				"metric_name": schemaAttribute34380bd78cbc8fb584e31698(),
+				// Property: Type
+				"type": schemaAttribute34380bd78cbc8fb584e31698(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef980b73850de775a3078d526() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContainerHostname
+				"container_hostname": schemaAttribute34380bd78cbc8fb584e31698(),
+				// Property: Environment
+				"environment": schemaAttributea9130a299a3e98f0f804eeab(),
+				// Property: Framework
+				"framework": schemaAttribute34380bd78cbc8fb584e31698(),
+				// Property: FrameworkVersion
+				"framework_version": schemaAttribute34380bd78cbc8fb584e31698(),
+				// Property: Image
+				"image": schemaAttribute34380bd78cbc8fb584e31698(),
+				// Property: ImageDigest
+				"image_digest": schemaAttribute34380bd78cbc8fb584e31698(),
+				// Property: IsCheckpoint
+				"is_checkpoint": schemaAttribute6eb5e639e3a4ab5d6c087182(),
+				// Property: ModelInput
+				"model_input": schemaAttribute5ef9dad5531e3c0e2a04fda4(),
+				// Property: NearestModelName
+				"nearest_model_name": schemaAttribute34380bd78cbc8fb584e31698(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_algorithm", algorithmDataSource)
 }
@@ -33,10 +302,7 @@ func algorithmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"algorithm_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the algorithm.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"algorithm_arn": schemaAttribute92e9f4996e770369fe14c258(),
 		// Property: AlgorithmDescription
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +311,7 @@ func algorithmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"algorithm_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the algorithm.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"algorithm_description": schemaAttribute397cb4851114e69f70835eb1(),
 		// Property: AlgorithmName
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +322,7 @@ func algorithmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
 		//	  "type": "string"
 		//	}
-		"algorithm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the algorithm.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"algorithm_name": schemaAttributee7a0676853d8f662b1ab1ecf(),
 		// Property: CertifyForMarketplace
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +330,7 @@ func algorithmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Whether to certify the algorithm so that it can be listed in AWS Marketplace.",
 		//	  "type": "boolean"
 		//	}
-		"certify_for_marketplace": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether to certify the algorithm so that it can be listed in AWS Marketplace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certify_for_marketplace": schemaAttributedfe7a031cec1e144831c2a35(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -82,11 +339,7 @@ func algorithmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "A timestamp specifying when the algorithm was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute3f5c3401af0701620d727725(),
 		// Property: InferenceSpecification
 		// CloudFormation resource type schema:
 		//
@@ -191,83 +444,7 @@ func algorithmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"inference_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Containers
-				"containers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ContainerHostname
-							"container_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Environment
-							"environment":       // Pattern: ""
-							schema.MapAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Framework
-							"framework": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: FrameworkVersion
-							"framework_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Image
-							"image": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ImageDigest
-							"image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: IsCheckpoint
-							"is_checkpoint": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ModelInput
-							"model_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DataInputConfig
-									"data_input_config": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: NearestModelName
-							"nearest_model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SupportedContentTypes
-				"supported_content_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SupportedRealtimeInferenceInstanceTypes
-				"supported_realtime_inference_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SupportedResponseMIMETypes
-				"supported_response_mime_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SupportedTransformInstanceTypes
-				"supported_transform_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"inference_specification": schemaAttribute56a7124c6ce7a3f374c4a196(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -296,22 +473,7 @@ func algorithmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute5254ea1615cacff9f411fdc4(),
 		// Property: TrainingSpecification
 		// CloudFormation resource type schema:
 		//
@@ -555,172 +717,7 @@ func algorithmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"training_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MetricDefinitions
-				"metric_definitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Regex
-							"regex": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SupportedHyperParameters
-				"supported_hyper_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DefaultValue
-							"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Description
-							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: IsRequired
-							"is_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: IsTunable
-							"is_tunable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Range
-							"range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: CategoricalParameterRangeSpecification
-									"categorical_parameter_range_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Values
-											"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: ContinuousParameterRangeSpecification
-									"continuous_parameter_range_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: MaxValue
-											"max_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: MinValue
-											"min_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: IntegerParameterRangeSpecification
-									"integer_parameter_range_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: MaxValue
-											"max_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: MinValue
-											"min_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SupportedTrainingInstanceTypes
-				"supported_training_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SupportedTuningJobObjectiveMetrics
-				"supported_tuning_job_objective_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: MetricName
-							"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SupportsDistributedTraining
-				"supports_distributed_training": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: TrainingChannels
-				"training_channels": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Description
-							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: IsRequired
-							"is_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: SupportedCompressionTypes
-							"supported_compression_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SupportedContentTypes
-							"supported_content_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SupportedInputModes
-							"supported_input_modes": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: TrainingImage
-				"training_image": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: TrainingImageDigest
-				"training_image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"training_specification": schemaAttribute9f2f49edcf35b32c99526749(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

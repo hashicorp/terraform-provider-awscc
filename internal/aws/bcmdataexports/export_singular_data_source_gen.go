@@ -15,6 +15,121 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2731f967bb8fe170516829df() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.MapType{ElemType: types.StringType},
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30e9baf368b5643b880a92f8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: QueryStatement
+			"query_statement": schemaAttributee433f12af0d93ae208e3c4f7(),
+			// Property: TableConfigurations
+			"table_configurations": schemaAttribute2731f967bb8fe170516829df(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute312211f8fb98391f86f22b5e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Frequency
+			"frequency": schemaAttributee433f12af0d93ae208e3c4f7(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4cdcbadeaa19778b3d88544f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee433f12af0d93ae208e3c4f7(),
+				// Property: Value
+				"value": schemaAttributee433f12af0d93ae208e3c4f7(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute59fc7b1b699495e18f33ab9d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Bucket
+			"s3_bucket": schemaAttributee433f12af0d93ae208e3c4f7(),
+			// Property: S3BucketOwner
+			"s3_bucket_owner": schemaAttributee433f12af0d93ae208e3c4f7(),
+			// Property: S3OutputConfigurations
+			"s3_output_configurations": schemaAttributeb41c65dbc63140dea4ce57e8(),
+			// Property: S3Prefix
+			"s3_prefix": schemaAttributee433f12af0d93ae208e3c4f7(),
+			// Property: S3Region
+			"s3_region": schemaAttributee433f12af0d93ae208e3c4f7(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a86cb65c13931bd1d072d66() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Destination
+			"s3_destination": schemaAttribute59fc7b1b699495e18f33ab9d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb41c65dbc63140dea4ce57e8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Compression
+			"compression": schemaAttributee433f12af0d93ae208e3c4f7(),
+			// Property: Format
+			"format": schemaAttributee433f12af0d93ae208e3c4f7(),
+			// Property: OutputType
+			"output_type": schemaAttributee433f12af0d93ae208e3c4f7(),
+			// Property: Overwrite
+			"overwrite": schemaAttributee433f12af0d93ae208e3c4f7(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec41cfc155a2e2f61e2a553c4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataQuery
+			"data_query": schemaAttribute30e9baf368b5643b880a92f8(),
+			// Property: Description
+			"description": schemaAttributee433f12af0d93ae208e3c4f7(),
+			// Property: DestinationConfigurations
+			"destination_configurations": schemaAttribute7a86cb65c13931bd1d072d66(),
+			// Property: ExportArn
+			"export_arn": schemaAttributee433f12af0d93ae208e3c4f7(),
+			// Property: Name
+			"name": schemaAttributee433f12af0d93ae208e3c4f7(),
+			// Property: RefreshCadence
+			"refresh_cadence": schemaAttribute312211f8fb98391f86f22b5e(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee433f12af0d93ae208e3c4f7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bcmdataexports_export", exportDataSource)
 }
@@ -191,99 +306,7 @@ func exportDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"export": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DataQuery
-				"data_query": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: QueryStatement
-						"query_statement": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: TableConfigurations
-						"table_configurations": // Pattern: ""
-						schema.MapAttribute{    /*START ATTRIBUTE*/
-							ElementType: types.MapType{ElemType: types.StringType},
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Description
-				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: DestinationConfigurations
-				"destination_configurations": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: S3Destination
-						"s3_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: S3Bucket
-								"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3BucketOwner
-								"s3_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3OutputConfigurations
-								"s3_output_configurations": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Compression
-										"compression": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Format
-										"format": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: OutputType
-										"output_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Overwrite
-										"overwrite": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Prefix
-								"s3_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Region
-								"s3_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ExportArn
-				"export_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: RefreshCadence
-				"refresh_cadence": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Frequency
-						"frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"export": schemaAttributec41cfc155a2e2f61e2a553c4(),
 		// Property: ExportArn
 		// CloudFormation resource type schema:
 		//
@@ -293,9 +316,7 @@ func exportDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:(bcm-data-exports):[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
 		//	  "type": "string"
 		//	}
-		"export_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"export_arn": schemaAttributee433f12af0d93ae208e3c4f7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -324,21 +345,7 @@ func exportDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute4cdcbadeaa19778b3d88544f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,70 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute05b64c2808764238b03433c1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c90b08ce1e7964935003da0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the portal in which to create the project.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute656a2358eb9b9c0feb48cf35() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute05b64c2808764238b03433c1(),
+				// Property: Value
+				"value": schemaAttribute05b64c2808764238b03433c1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs that contain metadata for the project.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute754914d52556f31ed016b0b8() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The IDs of the assets to be associated to the project.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93a02a0a2fdc56617e557591() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the project.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9335b24784f232be49203b9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the project.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba870cb48d291d54efb95cac() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the project.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3abac7b43839e655c1e2563() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A friendly name for the project.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iotsitewise_project", projectDataSource)
 }
@@ -35,11 +99,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"asset_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The IDs of the assets to be associated to the project.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"asset_ids": schemaAttribute754914d52556f31ed016b0b8(),
 		// Property: PortalId
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +107,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the portal in which to create the project.",
 		//	  "type": "string"
 		//	}
-		"portal_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the portal in which to create the project.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"portal_id": schemaAttribute0c90b08ce1e7964935003da0(),
 		// Property: ProjectArn
 		// CloudFormation resource type schema:
 		//
@@ -58,10 +115,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the project.",
 		//	  "type": "string"
 		//	}
-		"project_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the project.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"project_arn": schemaAttributeb9335b24784f232be49203b9(),
 		// Property: ProjectDescription
 		// CloudFormation resource type schema:
 		//
@@ -69,10 +123,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description for the project.",
 		//	  "type": "string"
 		//	}
-		"project_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description for the project.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"project_description": schemaAttributeba870cb48d291d54efb95cac(),
 		// Property: ProjectId
 		// CloudFormation resource type schema:
 		//
@@ -80,10 +131,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the project.",
 		//	  "type": "string"
 		//	}
-		"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the project.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"project_id": schemaAttribute93a02a0a2fdc56617e557591(),
 		// Property: ProjectName
 		// CloudFormation resource type schema:
 		//
@@ -91,10 +139,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A friendly name for the project.",
 		//	  "type": "string"
 		//	}
-		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A friendly name for the project.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"project_name": schemaAttributef3abac7b43839e655c1e2563(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -121,22 +166,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs that contain metadata for the project.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute656a2358eb9b9c0feb48cf35(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

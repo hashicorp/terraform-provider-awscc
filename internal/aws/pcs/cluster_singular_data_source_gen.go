@@ -15,6 +15,430 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute01af37ca0f2231364551faa5() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ParameterName
+				"parameter_name": schemaAttribute0233038e71539bb4c6fc0fa7(),
+				// Property: ParameterValue
+				"parameter_value": schemaAttributeef183163873f17ba8432d637(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Additional slurmdbd-specific configuration that directly maps to slurmdbd.conf settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0233038e71539bb4c6fc0fa7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The slurmdbd.conf parameter name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute04546f1c879bace9ca1e15cd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The detailed error information.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute06bff0a774fd785302bc9d12() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the JWT key secret.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute14a14f6b42f6e2498dcd314c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The endpoint's IPv6 address.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ca74e380158dd7f99f97180() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The default value for all purge settings for `slurmdbd.conf`. For more information, see the [slurmdbd.conf documentation at SchedMD](https://slurm.schedmd.com/slurmdbd.conf.html). The default value is `-1`. A value of `-1` means there is no purge time and records persist as long as the cluster exists.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1f60eb897f2a529053c1c2ff() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of security group IDs associated with the Elastic Network Interface (ENI) created in subnets.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f6b91e9fe61917e19c49a71() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "1 or more tags added to the resource. Each tag consists of a tag key and tag value. The tag value is optional and can be an empty string.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34be5b5b672fdef8ac1103c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the specified scheduling software that AWS PCS uses to manage cluster scaling and job scheduling.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute35f27c40a6535197ecdfd587() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The default value is `NONE`. A value of `STANDARD` means that Slurm accounting is enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute365219b20e7e33f960c460e5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The endpoint's private IP address.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3dbd1d93f68bae72603fdeb0() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The time before an idle node is scaled down.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4420d581c5cf8ac847bcff27() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The provisioning status of the cluster. The provisioning status doesn't indicate the overall health of the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute55bd9cc4a73c8de5ab1469ec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the the shared Slurm key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5731ea134ac5f4aaa1207816() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ParameterName
+				"parameter_name": schemaAttributede965d8e79426b195fc3c797(),
+				// Property: ParameterValue
+				"parameter_value": schemaAttributef1543707c4659401e723f2e4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Additional Slurm-specific configuration that directly maps to Slurm settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58bec1e0fa916b6fd4a09e38() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Accounting
+			"accounting": schemaAttribute6b097bf7931dd0770ff395ce(),
+			// Property: AuthKey
+			"auth_key": schemaAttribute64c6b0657e8fcfe8a1ec511c(),
+			// Property: CgroupCustomSettings
+			"cgroup_custom_settings": schemaAttributec2fd42ab134ad8c090e9b88f(),
+			// Property: JwtAuth
+			"jwt_auth": schemaAttribute7ca06c28a1591922cc63536b(),
+			// Property: ScaleDownIdleTimeInSeconds
+			"scale_down_idle_time_in_seconds": schemaAttribute3dbd1d93f68bae72603fdeb0(),
+			// Property: SlurmCustomSettings
+			"slurm_custom_settings": schemaAttribute5731ea134ac5f4aaa1207816(),
+			// Property: SlurmRest
+			"slurm_rest": schemaAttributeb0d4e70206ffc03ecd320d1f(),
+			// Property: SlurmdbdCustomSettings
+			"slurmdbd_custom_settings": schemaAttribute01af37ca0f2231364551faa5(),
+		}, /*END SCHEMA*/
+		Description: "Additional options related to the Slurm scheduler.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6237bbeb2a0cebfb301a6568() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The endpoint's public IP address.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64c6b0657e8fcfe8a1ec511c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecretArn
+			"secret_arn": schemaAttribute55bd9cc4a73c8de5ab1469ec(),
+			// Property: SecretVersion
+			"secret_version": schemaAttributecaa1436cf3478dd895b975c9(),
+		}, /*END SCHEMA*/
+		Description: "The shared Slurm key for authentication, also known as the cluster secret.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67fe7c524870f46928c48ec0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The software AWS PCS uses to manage cluster scaling and job scheduling.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b097bf7931dd0770ff395ce() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DefaultPurgeTimeInDays
+			"default_purge_time_in_days": schemaAttribute1ca74e380158dd7f99f97180(),
+			// Property: Mode
+			"mode": schemaAttribute35f27c40a6535197ecdfd587(),
+		}, /*END SCHEMA*/
+		Description: "The accounting configuration includes configurable settings for Slurm accounting.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6bba43e799ca60b1063386f8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Ipv6Address
+				"ipv_6_address": schemaAttribute14a14f6b42f6e2498dcd314c(),
+				// Property: Port
+				"port": schemaAttributea3f48590eeb3c917556fe49c(),
+				// Property: PrivateIpAddress
+				"private_ip_address": schemaAttribute365219b20e7e33f960c460e5(),
+				// Property: PublicIpAddress
+				"public_ip_address": schemaAttribute6237bbeb2a0cebfb301a6568(),
+				// Property: Type
+				"type": schemaAttributee2857a9ccb24e61abe13cca3(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of endpoints available for interaction with the scheduler.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ca06c28a1591922cc63536b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: JwtKey
+			"jwt_key": schemaAttributedb2f33d866cc5aa9053a06dc(),
+		}, /*END SCHEMA*/
+		Description: "JWT authentication configuration for Slurm.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8bd92d5c2672fc872f2a05ec() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Type
+			"type": schemaAttribute67fe7c524870f46928c48ec0(),
+			// Property: Version
+			"version": schemaAttribute34be5b5b672fdef8ac1103c4(),
+		}, /*END SCHEMA*/
+		Description: "The cluster management and job scheduling software associated with the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e046e741b08de90014792ca() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of subnet IDs where AWS PCS creates an Elastic Network Interface (ENI) to enable communication between managed controllers and AWS PCS resources. The subnet must have an available IP address, cannot reside in AWS Outposts, AWS Wavelength, or an AWS Local Zone. AWS PCS currently supports only 1 subnet in this list.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9031e9ff6a57471920da7e6c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name that identifies the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91206b7796e23600f3b1d8e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The cgroup.conf parameter name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95d3a9f0929fc2515f545842() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the cgroup.conf parameter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute994446fe2b5fd6c8f782dfd4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Code
+				"code": schemaAttributec1a0ca8b892d308a1be87aa6(),
+				// Property: Message
+				"message": schemaAttribute04546f1c879bace9ca1e15cd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of errors that occurred during cluster provisioning.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3f48590eeb3c917556fe49c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The endpoint's connection port number.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea94bdeabf91f805d3d414fa5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The default value is `NONE`. A value of `STANDARD` means that Slurm Rest is enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaee17b46ffc496ac4b7163d7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The size of the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0d4e70206ffc03ecd320d1f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Mode
+			"mode": schemaAttributea94bdeabf91f805d3d414fa5(),
+		}, /*END SCHEMA*/
+		Description: "The SlurmRest configuration includes configurable settings for Slurm Rest.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec1a0ca8b892d308a1be87aa6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The short-form error code.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec1a87a4b0ec434977ee34101() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique Amazon Resource Name (ARN) of the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2fd42ab134ad8c090e9b88f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ParameterName
+				"parameter_name": schemaAttribute91206b7796e23600f3b1d8e1(),
+				// Property: ParameterValue
+				"parameter_value": schemaAttribute95d3a9f0929fc2515f545842(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Additional cgroup-specific configuration that directly maps to cgroup.conf settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecaa1436cf3478dd895b975c9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the shared Slurm key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5f0c4c44861a79f1a7228e5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IP of the cluster (IPV4 or IPV6)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb2f33d866cc5aa9053a06dc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecretArn
+			"secret_arn": schemaAttribute06bff0a774fd785302bc9d12(),
+			// Property: SecretVersion
+			"secret_version": schemaAttributeea0ffc84d6646704796189b6(),
+		}, /*END SCHEMA*/
+		Description: "JWT key configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede965d8e79426b195fc3c797() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "AWS PCS supports configuration of the following Slurm parameters for clusters: Prolog, Epilog, and SelectTypeParameters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2857a9ccb24e61abe13cca3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates the type of endpoint running at the specific IP address.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee51da0cc785c77d390c40a7f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The generated unique ID of the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea0ffc84d6646704796189b6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the JWT key secret.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef183163873f17ba8432d637() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the slurmdbd.conf parameter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1543707c4659401e723f2e4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the configured Slurm setting.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef31b816645e633ed6a6b2e9d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: NetworkType
+			"network_type": schemaAttributed5f0c4c44861a79f1a7228e5(),
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttribute1f60eb897f2a529053c1c2ff(),
+			// Property: SubnetIds
+			"subnet_ids": schemaAttribute8e046e741b08de90014792ca(),
+		}, /*END SCHEMA*/
+		Description: "The networking configuration for the cluster's control plane.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_pcs_cluster", clusterDataSource)
 }
@@ -30,10 +454,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique Amazon Resource Name (ARN) of the cluster.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique Amazon Resource Name (ARN) of the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributec1a87a4b0ec434977ee34101(),
 		// Property: Endpoints
 		// CloudFormation resource type schema:
 		//
@@ -79,39 +500,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"endpoints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Ipv6Address
-					"ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The endpoint's IPv6 address.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Port
-					"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The endpoint's connection port number.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PrivateIpAddress
-					"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The endpoint's private IP address.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PublicIpAddress
-					"public_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The endpoint's public IP address.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Type
-					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Indicates the type of endpoint running at the specific IP address.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of endpoints available for interaction with the scheduler.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoints": schemaAttribute6bba43e799ca60b1063386f8(),
 		// Property: ErrorInfo
 		// CloudFormation resource type schema:
 		//
@@ -135,24 +524,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"error_info": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Code
-					"code": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The short-form error code.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Message
-					"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The detailed error information.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of errors that occurred during cluster provisioning.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"error_info": schemaAttribute994446fe2b5fd6c8f782dfd4(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -161,10 +533,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(pcs_[a-zA-Z0-9]+|[A-Za-z][A-Za-z0-9-]{1,40})$",
 		//	  "type": "string"
 		//	}
-		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The generated unique ID of the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cluster_id": schemaAttributee51da0cc785c77d390c40a7f(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -172,10 +541,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name that identifies the cluster.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name that identifies the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute9031e9ff6a57471920da7e6c(),
 		// Property: Networking
 		// CloudFormation resource type schema:
 		//
@@ -213,29 +579,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"networking": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: NetworkType
-				"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The IP of the cluster (IPV4 or IPV6)",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecurityGroupIds
-				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The list of security group IDs associated with the Elastic Network Interface (ENI) created in subnets.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SubnetIds
-				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The list of subnet IDs where AWS PCS creates an Elastic Network Interface (ENI) to enable communication between managed controllers and AWS PCS resources. The subnet must have an available IP address, cannot reside in AWS Outposts, AWS Wavelength, or an AWS Local Zone. AWS PCS currently supports only 1 subnet in this list.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The networking configuration for the cluster's control plane.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"networking": schemaAttributef31b816645e633ed6a6b2e9d(),
 		// Property: Scheduler
 		// CloudFormation resource type schema:
 		//
@@ -261,22 +605,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"scheduler": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Type
-				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The software AWS PCS uses to manage cluster scaling and job scheduling.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Version
-				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The version of the specified scheduling software that AWS PCS uses to manage cluster scaling and job scheduling.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The cluster management and job scheduling software associated with the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scheduler": schemaAttribute8bd92d5c2672fc872f2a05ec(),
 		// Property: Size
 		// CloudFormation resource type schema:
 		//
@@ -289,10 +618,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"size": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The size of the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"size": schemaAttributeaee17b46ffc496ac4b7163d7(),
 		// Property: SlurmConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -469,144 +795,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"slurm_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Accounting
-				"accounting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DefaultPurgeTimeInDays
-						"default_purge_time_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The default value for all purge settings for `slurmdbd.conf`. For more information, see the [slurmdbd.conf documentation at SchedMD](https://slurm.schedmd.com/slurmdbd.conf.html). The default value is `-1`. A value of `-1` means there is no purge time and records persist as long as the cluster exists.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Mode
-						"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The default value is `NONE`. A value of `STANDARD` means that Slurm accounting is enabled.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The accounting configuration includes configurable settings for Slurm accounting.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: AuthKey
-				"auth_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: SecretArn
-						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) of the the shared Slurm key.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SecretVersion
-						"secret_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The version of the shared Slurm key.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The shared Slurm key for authentication, also known as the cluster secret.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CgroupCustomSettings
-				"cgroup_custom_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ParameterName
-							"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The cgroup.conf parameter name.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ParameterValue
-							"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The value for the cgroup.conf parameter.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Additional cgroup-specific configuration that directly maps to cgroup.conf settings.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: JwtAuth
-				"jwt_auth": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: JwtKey
-						"jwt_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: SecretArn
-								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name (ARN) of the JWT key secret.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SecretVersion
-								"secret_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The version of the JWT key secret.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "JWT key configuration.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "JWT authentication configuration for Slurm.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ScaleDownIdleTimeInSeconds
-				"scale_down_idle_time_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The time before an idle node is scaled down.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SlurmCustomSettings
-				"slurm_custom_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ParameterName
-							"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "AWS PCS supports configuration of the following Slurm parameters for clusters: Prolog, Epilog, and SelectTypeParameters.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ParameterValue
-							"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The value for the configured Slurm setting.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Additional Slurm-specific configuration that directly maps to Slurm settings.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SlurmRest
-				"slurm_rest": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Mode
-						"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The default value is `NONE`. A value of `STANDARD` means that Slurm Rest is enabled.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The SlurmRest configuration includes configurable settings for Slurm Rest.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SlurmdbdCustomSettings
-				"slurmdbd_custom_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ParameterName
-							"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The slurmdbd.conf parameter name.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ParameterValue
-							"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The value for the slurmdbd.conf parameter.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Additional slurmdbd-specific configuration that directly maps to slurmdbd.conf settings.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Additional options related to the Slurm scheduler.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"slurm_configuration": schemaAttribute58bec1e0fa916b6fd4a09e38(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -623,10 +812,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The provisioning status of the cluster. The provisioning status doesn't indicate the overall health of the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute4420d581c5cf8ac847bcff27(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -639,12 +825,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    }
 		//	  }
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "1 or more tags added to the resource. Each tag consists of a tag key and tag value. The tag value is optional and can be an empty string.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute2f6b91e9fe61917e19c49a71(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

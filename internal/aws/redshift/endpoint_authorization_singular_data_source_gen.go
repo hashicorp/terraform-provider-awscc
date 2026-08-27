@@ -15,6 +15,92 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute05b5b98a5a6e53f78d0f9939() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS account ID of the grantee of the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute072f6db86d1a87f545435b08() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The cluster identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f5bbf3db9b371effa94d773() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time (UTC) when the authorization was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18022afe35e08579aa77c8a2() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: " Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute197299a3ca29dee6ac714bb3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the authorization action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19beeed08b132473112641b7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f9b3b16ba182197f173a858() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS account ID of the cluster owner.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute716030bd4d100bc057a422e1() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of Redshift-managed VPC endpoints created for the authorization.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb073aafbce92618a37c84b28() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether all VPCs in the grantee account are allowed access to the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec04112321ef1262b3fe08bc5() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa2ca85ce1a435e083d8dfd4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The target AWS account ID to grant or revoke access for.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc3d50ab03a5f7e71f4b0f68() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The VPCs allowed access to the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_redshift_endpoint_authorization", endpointAuthorizationDataSource)
 }
@@ -31,10 +117,7 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"account": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The target AWS account ID to grant or revoke access for.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"account": schemaAttributefa2ca85ce1a435e083d8dfd4(),
 		// Property: AllowedAllVPCs
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +125,7 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "Indicates whether all VPCs in the grantee account are allowed access to the cluster.",
 		//	  "type": "boolean"
 		//	}
-		"allowed_all_vp_cs": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether all VPCs in the grantee account are allowed access to the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"allowed_all_vp_cs": schemaAttributeb073aafbce92618a37c84b28(),
 		// Property: AllowedVPCs
 		// CloudFormation resource type schema:
 		//
@@ -62,11 +142,7 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"allowed_vp_cs": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The VPCs allowed access to the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"allowed_vp_cs": schemaAttributefc3d50ab03a5f7e71f4b0f68(),
 		// Property: AuthorizeTime
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +150,7 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The time (UTC) when the authorization was created.",
 		//	  "type": "string"
 		//	}
-		"authorize_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time (UTC) when the authorization was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"authorize_time": schemaAttribute0f5bbf3db9b371effa94d773(),
 		// Property: ClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -86,10 +159,7 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The cluster identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cluster_identifier": schemaAttribute072f6db86d1a87f545435b08(),
 		// Property: ClusterStatus
 		// CloudFormation resource type schema:
 		//
@@ -97,10 +167,7 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The status of the cluster.",
 		//	  "type": "string"
 		//	}
-		"cluster_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cluster_status": schemaAttribute19beeed08b132473112641b7(),
 		// Property: EndpointCount
 		// CloudFormation resource type schema:
 		//
@@ -108,10 +175,7 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The number of Redshift-managed VPC endpoints created for the authorization.",
 		//	  "type": "integer"
 		//	}
-		"endpoint_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of Redshift-managed VPC endpoints created for the authorization.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_count": schemaAttribute716030bd4d100bc057a422e1(),
 		// Property: Force
 		// CloudFormation resource type schema:
 		//
@@ -119,10 +183,7 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": " Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.",
 		//	  "type": "boolean"
 		//	}
-		"force": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: " Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"force": schemaAttribute18022afe35e08579aa77c8a2(),
 		// Property: Grantee
 		// CloudFormation resource type schema:
 		//
@@ -131,10 +192,7 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"grantee": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS account ID of the grantee of the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"grantee": schemaAttribute05b5b98a5a6e53f78d0f9939(),
 		// Property: Grantor
 		// CloudFormation resource type schema:
 		//
@@ -143,10 +201,7 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"grantor": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS account ID of the cluster owner.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"grantor": schemaAttribute5f9b3b16ba182197f173a858(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -154,10 +209,7 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The status of the authorization action.",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the authorization action.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute197299a3ca29dee6ac714bb3(),
 		// Property: VpcIds
 		// CloudFormation resource type schema:
 		//
@@ -174,11 +226,7 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"vpc_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_ids": schemaAttributec04112321ef1262b3fe08bc5(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

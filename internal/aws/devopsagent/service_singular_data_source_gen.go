@@ -16,6 +16,972 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute039fa77b1ba54364e928f10c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "OAuth client ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute071ad5087086a983804e2ce1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the private connection to use for VPC connectivity.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute093dc1300737e9801f7e3257() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccountUrn
+			"account_urn": schemaAttributed4b4e1586754c2a68bba62ee(),
+			// Property: AuthorizationConfig
+			"authorization_config": schemaAttribute5ffc2614a6abdfa2eaa8e43e(),
+		}, /*END SCHEMA*/
+		Description: "Dynatrace service configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0b195828d35a3489dc62e3b0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizationHeader
+			"authorization_header": schemaAttribute87da488c73695cbb22326863(),
+			// Property: TokenName
+			"token_name": schemaAttribute5b5915ad9485a1c112f22ac1(),
+			// Property: TokenValue
+			"token_value": schemaAttribute34908b794bbf7bddce8ccef7(),
+		}, /*END SCHEMA*/
+		Description: "Bearer token authentication details",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f2e23bc859ac8bff83166dc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccountId
+			"account_id": schemaAttributea0bcc6d208296e90bb4f1a2a(),
+			// Property: AlertPolicyIds
+			"alert_policy_ids": schemaAttribute502b0ed93bc188e69913ea76(),
+			// Property: ApiKey
+			"api_key": schemaAttributebcedc813fe187755b7cb44b5(),
+			// Property: ApplicationIds
+			"application_ids": schemaAttribute4fb73ea0fc126309a71b4824(),
+			// Property: EntityGuids
+			"entity_guids": schemaAttributea1a7010216080b85e4fbf000(),
+			// Property: Region
+			"region": schemaAttribute257d160b984291028223eb9d(),
+		}, /*END SCHEMA*/
+		Description: "New Relic API key configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0fad59d88179804357073b17() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "API key value",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute129e9b8f8f1b7ee3bbec550f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClientId
+			"client_id": schemaAttribute039fa77b1ba54364e928f10c(),
+			// Property: ClientName
+			"client_name": schemaAttribute279c8e0cb04157ca1f81867e(),
+			// Property: ClientSecret
+			"client_secret": schemaAttribute93d9a09ad3e403572bdd13b2(),
+			// Property: ExchangeParameters
+			"exchange_parameters": schemaAttributec8bad1612c6d230d7ec8c8d9(),
+			// Property: ExchangeUrl
+			"exchange_url": schemaAttributed962146d3432d86c609d10b1(),
+			// Property: Scopes
+			"scopes": schemaAttribute8a608f5c0a7e7887fb40bcf0(),
+		}, /*END SCHEMA*/
+		Description: "MCP server OAuth client credentials configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute12cacd6aea344d82bd1f668d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Scopes
+			"scopes": schemaAttribute33eb5ceba51085301948d35b(),
+		}, /*END SCHEMA*/
+		Description: "PagerDuty service details returned after registration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15316f5d3729c1da76ddd077() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.MapType{ElemType: types.StringType},
+		Description: "List of accessible resources for this service",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1658b2df1b05a78cd4458b6a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApiKey
+			"api_key": schemaAttribute43d8d36a906bb5bd58cc95b4(),
+			// Property: BearerToken
+			"bearer_token": schemaAttribute0b195828d35a3489dc62e3b0(),
+			// Property: OAuthClientCredentials
+			"o_auth_client_credentials": schemaAttribute129e9b8f8f1b7ee3bbec550f(),
+		}, /*END SCHEMA*/
+		Description: "MCP server authorization configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute181fa283e2ebdb499d7166cc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the service",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute184b18b745bb3a550381ab05() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BearerToken
+			"bearer_token": schemaAttribute0b195828d35a3489dc62e3b0(),
+		}, /*END SCHEMA*/
+		Description: "Grafana MCP server authorization configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1c2c1075613481be22b081ce() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Custom headers for the SigV4 MCP server",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2126fd72b93c964833bb7f69() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "API key header name if using API key authentication",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute257d160b984291028223eb9d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "New Relic region",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute279c8e0cb04157ca1f81867e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "User friendly OAuth client name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27fea0f8a58b5b47db52b272() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3152f3ae07b6da3ec238655a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The MCP server name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3235423536068d2fd474504d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GroupId
+			"group_id": schemaAttributec12fe14c814b13f55a2dfe02(),
+			// Property: TargetUrl
+			"target_url": schemaAttributeb9e7fa68bb6af853e78be67e(),
+			// Property: TokenType
+			"token_type": schemaAttribute44e44baa1d159edc19e5eda9(),
+			// Property: TokenValue
+			"token_value": schemaAttributebd68c0741d326533383d41db(),
+		}, /*END SCHEMA*/
+		Description: "GitLab service configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute331d177d1907ba36757f3faa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Optional description for the MCP server",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33b6411611a07fb3dd2373a6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the private connection to use for OAuth token exchange requests only. Cannot be specified when PrivateConnectionName is provided.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33eb5ceba51085301948d35b() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The scopes assigned to the service",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34908b794bbf7bddce8ccef7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Bearer token value",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute358901f78b35cd375062a808() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "AWS region for SigV4 signing",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37c3f388933f2f0d4b87e04d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GroupId
+			"group_id": schemaAttributec12fe14c814b13f55a2dfe02(),
+			// Property: TargetUrl
+			"target_url": schemaAttributeb9e7fa68bb6af853e78be67e(),
+			// Property: TokenType
+			"token_type": schemaAttribute44e44baa1d159edc19e5eda9(),
+		}, /*END SCHEMA*/
+		Description: "GitLab service details returned after registration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute39ad10adb789bde249552157() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "PagerDuty scopes",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c3f485dd04070e3cf62ea4c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AzureIdentity
+			"azure_identity": schemaAttribute9aafd280db2e78d9a49b9e9c(),
+			// Property: Dynatrace
+			"dynatrace": schemaAttributeaa05caf79509a78af9ae3e74(),
+			// Property: GitLab
+			"git_lab": schemaAttribute37c3f388933f2f0d4b87e04d(),
+			// Property: MCPServer
+			"mcp_server": schemaAttribute5668844acd9d58090fd1356d(),
+			// Property: MCPServerGrafana
+			"mcp_server_grafana": schemaAttribute65e937cb7a3cbc4ff77edc38(),
+			// Property: MCPServerNewRelic
+			"mcp_server_new_relic": schemaAttribute9beceb76e200301b4498ebc5(),
+			// Property: MCPServerSigV4
+			"mcp_server_sig_v4": schemaAttributeb8688e7616633c8a5e7147ad(),
+			// Property: MCPServerSplunk
+			"mcp_server_splunk": schemaAttribute5668844acd9d58090fd1356d(),
+			// Property: PagerDuty
+			"pager_duty": schemaAttribute12cacd6aea344d82bd1f668d(),
+			// Property: ServiceNow
+			"service_now": schemaAttributec22c3bea439433d99b53dacb(),
+		}, /*END SCHEMA*/
+		Description: "Additional details specific to the service type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3dd6fdddb882234d53ff4673() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of audiences for the web identity token",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43d8d36a906bb5bd58cc95b4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApiKeyHeader
+			"api_key_header": schemaAttribute66d735239329bd05b2364590(),
+			// Property: ApiKeyName
+			"api_key_name": schemaAttribute62b85fa8a5919ac68a3cf782(),
+			// Property: ApiKeyValue
+			"api_key_value": schemaAttribute0fad59d88179804357073b17(),
+		}, /*END SCHEMA*/
+		Description: "API key authentication details",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44a4d63623fa15aea9bf4ab7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizationConfig
+			"authorization_config": schemaAttributead4ca540e8e15d0c22e51d51(),
+			// Property: Description
+			"description": schemaAttribute331d177d1907ba36757f3faa(),
+			// Property: Endpoint
+			"endpoint": schemaAttribute7f8a3b8f0f1ddc418e6ee007(),
+			// Property: Name
+			"name": schemaAttribute91399d97da0e9707c66b1abd(),
+		}, /*END SCHEMA*/
+		Description: "Splunk MCP server configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44e44baa1d159edc19e5eda9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Type of GitLab access token",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4fb73ea0fc126309a71b4824() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of monitored APM application IDs",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute502b0ed93bc188e69913ea76() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of alert policy IDs",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51d0b8d46c4d9715d09fda66() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "MCP server authorization method",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5668844acd9d58090fd1356d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApiKeyHeader
+			"api_key_header": schemaAttribute2126fd72b93c964833bb7f69(),
+			// Property: AuthorizationMethod
+			"authorization_method": schemaAttribute51d0b8d46c4d9715d09fda66(),
+			// Property: Description
+			"description": schemaAttribute331d177d1907ba36757f3faa(),
+			// Property: Endpoint
+			"endpoint": schemaAttribute7f8a3b8f0f1ddc418e6ee007(),
+			// Property: Name
+			"name": schemaAttribute91399d97da0e9707c66b1abd(),
+		}, /*END SCHEMA*/
+		Description: "MCP server details returned after registration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b5915ad9485a1c112f22ac1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "User friendly bearer token name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ffc2614a6abdfa2eaa8e43e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: OAuthClientCredentials
+			"o_auth_client_credentials": schemaAttribute8ac5a3b727c10c810000e7e9(),
+		}, /*END SCHEMA*/
+		Description: "Dynatrace OAuth authorization configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62b85fa8a5919ac68a3cf782() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "User friendly API key name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute640258ab9b1204b0774669fc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizationConfig
+			"authorization_config": schemaAttributeddf43ee0768821f8570f11c2(),
+		}, /*END SCHEMA*/
+		Description: "New Relic service configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64baa09da81fbd5ac5a99133() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Service.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65e937cb7a3cbc4ff77edc38() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizationMethod
+			"authorization_method": schemaAttribute51d0b8d46c4d9715d09fda66(),
+			// Property: Description
+			"description": schemaAttribute331d177d1907ba36757f3faa(),
+			// Property: Endpoint
+			"endpoint": schemaAttribute7f8a3b8f0f1ddc418e6ee007(),
+			// Property: Name
+			"name": schemaAttribute91399d97da0e9707c66b1abd(),
+		}, /*END SCHEMA*/
+		Description: "Grafana MCP server details returned after registration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66d735239329bd05b2364590() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "HTTP header name to send the API key",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute679e2182c9727accb7b0f711() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: OAuthClientCredentials
+			"o_auth_client_credentials": schemaAttribute8ac5a3b727c10c810000e7e9(),
+		}, /*END SCHEMA*/
+		Description: "PagerDuty OAuth authorization configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute684d768460b50ac2e02032d6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "AWS region for SigV4 signing. Use '*' for SigV4a multi-region signing.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a1eea2c15c3c7397ae6e1fc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Azure AD application client ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ae3537414ae6bbd627eaec0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Azure AD tenant ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6df1004ba004a19bda3c51ae() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizationConfig
+			"authorization_config": schemaAttribute184b18b745bb3a550381ab05(),
+			// Property: Description
+			"description": schemaAttribute331d177d1907ba36757f3faa(),
+			// Property: Endpoint
+			"endpoint": schemaAttribute7f8a3b8f0f1ddc418e6ee007(),
+			// Property: Name
+			"name": schemaAttribute91399d97da0e9707c66b1abd(),
+		}, /*END SCHEMA*/
+		Description: "Grafana MCP server configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73378b274a343a285c3e01f0() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributebabebdb1cf869c831e64a5b9(),
+				// Property: Value
+				"value": schemaAttribute27fea0f8a58b5b47db52b272(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f8a3b8f0f1ddc418e6ee007() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "MCP server endpoint URL",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80d5073332277237e0adbe6a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the private connection to use for API calls (target URL) only. Cannot be specified when PrivateConnectionName is provided.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87da488c73695cbb22326863() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "HTTP header name to send the bearer token",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a608f5c0a7e7887fb40bcf0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "OAuth scopes",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ac5a3b727c10c810000e7e9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClientId
+			"client_id": schemaAttribute039fa77b1ba54364e928f10c(),
+			// Property: ClientName
+			"client_name": schemaAttribute279c8e0cb04157ca1f81867e(),
+			// Property: ClientSecret
+			"client_secret": schemaAttribute93d9a09ad3e403572bdd13b2(),
+			// Property: ExchangeParameters
+			"exchange_parameters": schemaAttributec8bad1612c6d230d7ec8c8d9(),
+		}, /*END SCHEMA*/
+		Description: "OAuth client credentials",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ce1ee9de84179b7471e3aa5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizationConfig
+			"authorization_config": schemaAttributeee09e0a56556e96f627cef48(),
+			// Property: InstanceUrl
+			"instance_url": schemaAttributed48f14fcf60f718370a74d02(),
+		}, /*END SCHEMA*/
+		Description: "ServiceNow service configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8de0b3927cf6e52315cf981f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizationConfig
+			"authorization_config": schemaAttributea2fd0500ed9964d83d11cf1a(),
+			// Property: Description
+			"description": schemaAttribute331d177d1907ba36757f3faa(),
+			// Property: Endpoint
+			"endpoint": schemaAttribute7f8a3b8f0f1ddc418e6ee007(),
+			// Property: Name
+			"name": schemaAttribute91399d97da0e9707c66b1abd(),
+		}, /*END SCHEMA*/
+		Description: "SigV4-authenticated MCP server configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91399d97da0e9707c66b1abd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "MCP server name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93d9a09ad3e403572bdd13b2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "OAuth client secret",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94b77a4aa893cef966f9185a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "New Relic account ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9aafd280db2e78d9a49b9e9c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClientId
+			"client_id": schemaAttribute6a1eea2c15c3c7397ae6e1fc(),
+			// Property: TenantId
+			"tenant_id": schemaAttribute6ae3537414ae6bbd627eaec0(),
+			// Property: WebIdentityRoleArn
+			"web_identity_role_arn": schemaAttributeb983a5fdff665b2352f881aa(),
+			// Property: WebIdentityTokenAudiences
+			"web_identity_token_audiences": schemaAttribute3dd6fdddb882234d53ff4673(),
+		}, /*END SCHEMA*/
+		Description: "Azure Identity service details returned after registration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9beceb76e200301b4498ebc5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccountId
+			"account_id": schemaAttribute94b77a4aa893cef966f9185a(),
+			// Property: Description
+			"description": schemaAttribute9d4b2a5cb4d5ad864eb26846(),
+			// Property: Region
+			"region": schemaAttribute257d160b984291028223eb9d(),
+		}, /*END SCHEMA*/
+		Description: "New Relic service details returned after registration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d4b2a5cb4d5ad864eb26846() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Optional user description",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e9b53c399857f7691ece4c6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The MCP server endpoint URL",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0bcc6d208296e90bb4f1a2a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "New Relic Account ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea1a7010216080b85e4fbf000() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of globally unique IDs for New Relic resources",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea24fa8ca264dc9038c8bcead() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Deprecated - use McpRoleArn instead. IAM role ARN to assume for SigV4 signing",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea2fd0500ed9964d83d11cf1a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomHeaders
+			"custom_headers": schemaAttribute1c2c1075613481be22b081ce(),
+			// Property: McpRoleArn
+			"mcp_role_arn": schemaAttributeeaf910c65aae989e1ed0f40e(),
+			// Property: Region
+			"region": schemaAttribute684d768460b50ac2e02032d6(),
+			// Property: RoleArn
+			"role_arn": schemaAttributea24fa8ca264dc9038c8bcead(),
+			// Property: Service
+			"service": schemaAttributedcd762803c8bc5c01f546b1c(),
+		}, /*END SCHEMA*/
+		Description: "SigV4 authorization configuration for MCP server",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa05caf79509a78af9ae3e74() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccountUrn
+			"account_urn": schemaAttributed4b4e1586754c2a68bba62ee(),
+		}, /*END SCHEMA*/
+		Description: "Dynatrace service details returned after registration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab540cfc6ccd03b4566150d0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizationConfig
+			"authorization_config": schemaAttribute679e2182c9727accb7b0f711(),
+			// Property: Scopes
+			"scopes": schemaAttribute39ad10adb789bde249552157(),
+		}, /*END SCHEMA*/
+		Description: "PagerDuty service configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead4ca540e8e15d0c22e51d51() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BearerToken
+			"bearer_token": schemaAttribute0b195828d35a3489dc62e3b0(),
+		}, /*END SCHEMA*/
+		Description: "MCP server splunk authorization configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae52acb610092ca7b7868260() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizationConfig
+			"authorization_config": schemaAttribute1658b2df1b05a78cd4458b6a(),
+			// Property: Description
+			"description": schemaAttribute331d177d1907ba36757f3faa(),
+			// Property: Endpoint
+			"endpoint": schemaAttribute7f8a3b8f0f1ddc418e6ee007(),
+			// Property: Name
+			"name": schemaAttribute91399d97da0e9707c66b1abd(),
+		}, /*END SCHEMA*/
+		Description: "MCP server configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8688e7616633c8a5e7147ad() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomHeaders
+			"custom_headers": schemaAttribute1c2c1075613481be22b081ce(),
+			// Property: Description
+			"description": schemaAttribute331d177d1907ba36757f3faa(),
+			// Property: Endpoint
+			"endpoint": schemaAttribute9e9b53c399857f7691ece4c6(),
+			// Property: McpRoleArn
+			"mcp_role_arn": schemaAttributed62cdcec2d14092d5ebfc562(),
+			// Property: Name
+			"name": schemaAttribute3152f3ae07b6da3ec238655a(),
+			// Property: Region
+			"region": schemaAttribute358901f78b35cd375062a808(),
+			// Property: RoleArn
+			"role_arn": schemaAttributef66359557c60b197bae7175b(),
+			// Property: Service
+			"service": schemaAttributedcd762803c8bc5c01f546b1c(),
+		}, /*END SCHEMA*/
+		Description: "SigV4-authenticated MCP server details returned after registration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb983a5fdff665b2352f881aa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the IAM role for web identity token exchange",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9e7fa68bb6af853e78be67e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "GitLab instance URL",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebabebdb1cf869c831e64a5b9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebcedc813fe187755b7cb44b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "New Relic User API Key",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd68c0741d326533383d41db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "GitLab access token value",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec12fe14c814b13f55a2dfe02() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Optional GitLab group ID for group-level access tokens",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec22c3bea439433d99b53dacb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceUrl
+			"instance_url": schemaAttributed48f14fcf60f718370a74d02(),
+		}, /*END SCHEMA*/
+		Description: "ServiceNow service details returned after registration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8bad1612c6d230d7ec8c8d9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "OAuth token exchange parameters",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca016c92486f3da8a55caa56() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClientId
+			"client_id": schemaAttribute6a1eea2c15c3c7397ae6e1fc(),
+			// Property: TenantId
+			"tenant_id": schemaAttribute6ae3537414ae6bbd627eaec0(),
+			// Property: WebIdentityRoleArn
+			"web_identity_role_arn": schemaAttributeb983a5fdff665b2352f881aa(),
+			// Property: WebIdentityTokenAudiences
+			"web_identity_token_audiences": schemaAttribute3dd6fdddb882234d53ff4673(),
+		}, /*END SCHEMA*/
+		Description: "Azure Identity service configuration for federated identity",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecbc4ed5dc52be9d7441a16a9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AzureIdentity
+			"azure_identity": schemaAttributeca016c92486f3da8a55caa56(),
+			// Property: Dynatrace
+			"dynatrace": schemaAttribute093dc1300737e9801f7e3257(),
+			// Property: GitLab
+			"git_lab": schemaAttribute3235423536068d2fd474504d(),
+			// Property: MCPServer
+			"mcp_server": schemaAttributeae52acb610092ca7b7868260(),
+			// Property: MCPServerGrafana
+			"mcp_server_grafana": schemaAttribute6df1004ba004a19bda3c51ae(),
+			// Property: MCPServerNewRelic
+			"mcp_server_new_relic": schemaAttribute640258ab9b1204b0774669fc(),
+			// Property: MCPServerSigV4
+			"mcp_server_sig_v4": schemaAttribute8de0b3927cf6e52315cf981f(),
+			// Property: MCPServerSplunk
+			"mcp_server_splunk": schemaAttribute44a4d63623fa15aea9bf4ab7(),
+			// Property: PagerDuty
+			"pager_duty": schemaAttributeab540cfc6ccd03b4566150d0(),
+			// Property: ServiceNow
+			"service_now": schemaAttribute8ce1ee9de84179b7471e3aa5(),
+		}, /*END SCHEMA*/
+		Description: "Service-specific configuration details for create operation",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecde8bdb9bfdef9d609b8812b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the KMS key to use for encryption.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed48f14fcf60f718370a74d02() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ServiceNow instance URL",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4b4e1586754c2a68bba62ee() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Dynatrace resource account URN",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed62cdcec2d14092d5ebfc562() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "IAM role ARN for SigV4 signing. Absent when no dedicated role is configured.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed91efbbefe9667f1bf87c16e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of service being registered",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed962146d3432d86c609d10b1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "OAuth token exchange URL",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedcd762803c8bc5c01f546b1c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "AWS service name for SigV4 signing",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeddf43ee0768821f8570f11c2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApiKey
+			"api_key": schemaAttribute0f2e23bc859ac8bff83166dc(),
+		}, /*END SCHEMA*/
+		Description: "New Relic authorization configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeaf910c65aae989e1ed0f40e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "IAM role ARN to assume for SigV4 signing. Optional - when omitted, credentials are resolved at runtime via a monitor account association.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee09e0a56556e96f627cef48() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: OAuthClientCredentials
+			"o_auth_client_credentials": schemaAttribute8ac5a3b727c10c810000e7e9(),
+		}, /*END SCHEMA*/
+		Description: "ServiceNow OAuth authorization configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef66359557c60b197bae7175b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Deprecated - use McpRoleArn instead. IAM role ARN for SigV4 signing",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_devopsagent_service", serviceDataSource)
 }
@@ -39,11 +1005,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"accessible_resources": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.MapType{ElemType: types.StringType},
-			Description: "List of accessible resources for this service",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"accessible_resources": schemaAttribute15316f5d3729c1da76ddd077(),
 		// Property: AdditionalServiceDetails
 		// CloudFormation resource type schema:
 		//
@@ -343,261 +1305,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"additional_service_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AzureIdentity
-				"azure_identity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ClientId
-						"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Azure AD application client ID",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TenantId
-						"tenant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Azure AD tenant ID",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: WebIdentityRoleArn
-						"web_identity_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "ARN of the IAM role for web identity token exchange",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: WebIdentityTokenAudiences
-						"web_identity_token_audiences": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "List of audiences for the web identity token",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Azure Identity service details returned after registration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Dynatrace
-				"dynatrace": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AccountUrn
-						"account_urn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Dynatrace resource account URN",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Dynatrace service details returned after registration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: GitLab
-				"git_lab": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: GroupId
-						"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Optional GitLab group ID for group-level access tokens",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TargetUrl
-						"target_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "GitLab instance URL",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TokenType
-						"token_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Type of GitLab access token",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "GitLab service details returned after registration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MCPServer
-				"mcp_server": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ApiKeyHeader
-						"api_key_header": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "API key header name if using API key authentication",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AuthorizationMethod
-						"authorization_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MCP server authorization method",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Description
-						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Optional description for the MCP server",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Endpoint
-						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MCP server endpoint URL",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Name
-						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MCP server name",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "MCP server details returned after registration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MCPServerGrafana
-				"mcp_server_grafana": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AuthorizationMethod
-						"authorization_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MCP server authorization method",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Description
-						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Optional description for the MCP server",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Endpoint
-						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MCP server endpoint URL",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Name
-						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MCP server name",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Grafana MCP server details returned after registration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MCPServerNewRelic
-				"mcp_server_new_relic": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AccountId
-						"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "New Relic account ID",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Description
-						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Optional user description",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Region
-						"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "New Relic region",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "New Relic service details returned after registration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MCPServerSigV4
-				"mcp_server_sig_v4": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CustomHeaders
-						"custom_headers":    // Pattern: ""
-						schema.MapAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "Custom headers for the SigV4 MCP server",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Description
-						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Optional description for the MCP server",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Endpoint
-						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The MCP server endpoint URL",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: McpRoleArn
-						"mcp_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "IAM role ARN for SigV4 signing. Absent when no dedicated role is configured.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Name
-						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The MCP server name",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Region
-						"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "AWS region for SigV4 signing",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RoleArn
-						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Deprecated - use McpRoleArn instead. IAM role ARN for SigV4 signing",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Service
-						"service": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "AWS service name for SigV4 signing",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "SigV4-authenticated MCP server details returned after registration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MCPServerSplunk
-				"mcp_server_splunk": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ApiKeyHeader
-						"api_key_header": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "API key header name if using API key authentication",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AuthorizationMethod
-						"authorization_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MCP server authorization method",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Description
-						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Optional description for the MCP server",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Endpoint
-						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MCP server endpoint URL",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Name
-						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MCP server name",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "MCP server details returned after registration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PagerDuty
-				"pager_duty": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Scopes
-						"scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The scopes assigned to the service",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "PagerDuty service details returned after registration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServiceNow
-				"service_now": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: InstanceUrl
-						"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "ServiceNow instance URL",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "ServiceNow service details returned after registration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Additional details specific to the service type",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"additional_service_details": schemaAttribute3c3f485dd04070e3cf62ea4c(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -605,10 +1313,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the Service.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Service.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute64baa09da81fbd5ac5a99133(),
 		// Property: ExchangeUrlPrivateConnectionName
 		// CloudFormation resource type schema:
 		//
@@ -619,10 +1324,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$",
 		//	  "type": "string"
 		//	}
-		"exchange_url_private_connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the private connection to use for OAuth token exchange requests only. Cannot be specified when PrivateConnectionName is provided.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"exchange_url_private_connection_name": schemaAttribute33b6411611a07fb3dd2373a6(),
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -632,10 +1334,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the KMS key to use for encryption.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttributecde8bdb9bfdef9d609b8812b(),
 		// Property: PrivateConnectionName
 		// CloudFormation resource type schema:
 		//
@@ -646,10 +1345,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$",
 		//	  "type": "string"
 		//	}
-		"private_connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the private connection to use for VPC connectivity.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"private_connection_name": schemaAttribute071ad5087086a983804e2ce1(),
 		// Property: ServiceDetails
 		// CloudFormation resource type schema:
 		//
@@ -1268,533 +1964,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"service_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AzureIdentity
-				"azure_identity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ClientId
-						"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Azure AD application client ID",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TenantId
-						"tenant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Azure AD tenant ID",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: WebIdentityRoleArn
-						"web_identity_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "ARN of the IAM role for web identity token exchange",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: WebIdentityTokenAudiences
-						"web_identity_token_audiences": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "List of audiences for the web identity token",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Azure Identity service configuration for federated identity",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Dynatrace
-				"dynatrace": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AccountUrn
-						"account_urn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Dynatrace resource account URN",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AuthorizationConfig
-						"authorization_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: OAuthClientCredentials
-								"o_auth_client_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ClientId
-										"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "OAuth client ID",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ClientName
-										"client_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "User friendly OAuth client name",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ClientSecret
-										"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "OAuth client secret",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ExchangeParameters
-										"exchange_parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
-											CustomType:  jsontypes.NormalizedType{},
-											Description: "OAuth token exchange parameters",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "OAuth client credentials",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Dynatrace OAuth authorization configuration",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Dynatrace service configuration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: GitLab
-				"git_lab": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: GroupId
-						"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Optional GitLab group ID for group-level access tokens",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TargetUrl
-						"target_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "GitLab instance URL",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TokenType
-						"token_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Type of GitLab access token",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TokenValue
-						"token_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "GitLab access token value",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "GitLab service configuration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MCPServer
-				"mcp_server": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AuthorizationConfig
-						"authorization_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ApiKey
-								"api_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ApiKeyHeader
-										"api_key_header": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "HTTP header name to send the API key",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ApiKeyName
-										"api_key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "User friendly API key name",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ApiKeyValue
-										"api_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "API key value",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "API key authentication details",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: BearerToken
-								"bearer_token": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: AuthorizationHeader
-										"authorization_header": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "HTTP header name to send the bearer token",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: TokenName
-										"token_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "User friendly bearer token name",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: TokenValue
-										"token_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Bearer token value",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Bearer token authentication details",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: OAuthClientCredentials
-								"o_auth_client_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ClientId
-										"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "OAuth client ID",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ClientName
-										"client_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "User friendly OAuth client name",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ClientSecret
-										"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "OAuth client secret",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ExchangeParameters
-										"exchange_parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
-											CustomType:  jsontypes.NormalizedType{},
-											Description: "OAuth token exchange parameters",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ExchangeUrl
-										"exchange_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "OAuth token exchange URL",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Scopes
-										"scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Description: "OAuth scopes",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "MCP server OAuth client credentials configuration",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "MCP server authorization configuration",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Description
-						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Optional description for the MCP server",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Endpoint
-						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MCP server endpoint URL",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Name
-						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MCP server name",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "MCP server configuration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MCPServerGrafana
-				"mcp_server_grafana": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AuthorizationConfig
-						"authorization_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BearerToken
-								"bearer_token": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: AuthorizationHeader
-										"authorization_header": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "HTTP header name to send the bearer token",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: TokenName
-										"token_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "User friendly bearer token name",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: TokenValue
-										"token_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Bearer token value",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Bearer token authentication details",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Grafana MCP server authorization configuration",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Description
-						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Optional description for the MCP server",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Endpoint
-						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MCP server endpoint URL",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Name
-						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MCP server name",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Grafana MCP server configuration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MCPServerNewRelic
-				"mcp_server_new_relic": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AuthorizationConfig
-						"authorization_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ApiKey
-								"api_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: AccountId
-										"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "New Relic Account ID",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: AlertPolicyIds
-										"alert_policy_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Description: "List of alert policy IDs",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ApiKey
-										"api_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "New Relic User API Key",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ApplicationIds
-										"application_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Description: "List of monitored APM application IDs",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: EntityGuids
-										"entity_guids": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Description: "List of globally unique IDs for New Relic resources",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Region
-										"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "New Relic region",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "New Relic API key configuration",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "New Relic authorization configuration",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "New Relic service configuration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MCPServerSigV4
-				"mcp_server_sig_v4": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AuthorizationConfig
-						"authorization_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: CustomHeaders
-								"custom_headers":    // Pattern: ""
-								schema.MapAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "Custom headers for the SigV4 MCP server",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: McpRoleArn
-								"mcp_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "IAM role ARN to assume for SigV4 signing. Optional - when omitted, credentials are resolved at runtime via a monitor account association.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Region
-								"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "AWS region for SigV4 signing. Use '*' for SigV4a multi-region signing.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: RoleArn
-								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Deprecated - use McpRoleArn instead. IAM role ARN to assume for SigV4 signing",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Service
-								"service": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "AWS service name for SigV4 signing",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "SigV4 authorization configuration for MCP server",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Description
-						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Optional description for the MCP server",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Endpoint
-						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MCP server endpoint URL",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Name
-						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MCP server name",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "SigV4-authenticated MCP server configuration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MCPServerSplunk
-				"mcp_server_splunk": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AuthorizationConfig
-						"authorization_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BearerToken
-								"bearer_token": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: AuthorizationHeader
-										"authorization_header": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "HTTP header name to send the bearer token",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: TokenName
-										"token_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "User friendly bearer token name",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: TokenValue
-										"token_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Bearer token value",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Bearer token authentication details",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "MCP server splunk authorization configuration",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Description
-						"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Optional description for the MCP server",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Endpoint
-						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MCP server endpoint URL",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Name
-						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MCP server name",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Splunk MCP server configuration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PagerDuty
-				"pager_duty": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AuthorizationConfig
-						"authorization_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: OAuthClientCredentials
-								"o_auth_client_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ClientId
-										"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "OAuth client ID",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ClientName
-										"client_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "User friendly OAuth client name",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ClientSecret
-										"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "OAuth client secret",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ExchangeParameters
-										"exchange_parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
-											CustomType:  jsontypes.NormalizedType{},
-											Description: "OAuth token exchange parameters",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "OAuth client credentials",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "PagerDuty OAuth authorization configuration",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Scopes
-						"scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "PagerDuty scopes",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "PagerDuty service configuration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServiceNow
-				"service_now": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AuthorizationConfig
-						"authorization_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: OAuthClientCredentials
-								"o_auth_client_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ClientId
-										"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "OAuth client ID",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ClientName
-										"client_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "User friendly OAuth client name",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ClientSecret
-										"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "OAuth client secret",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ExchangeParameters
-										"exchange_parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
-											CustomType:  jsontypes.NormalizedType{},
-											Description: "OAuth token exchange parameters",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "OAuth client credentials",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "ServiceNow OAuth authorization configuration",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: InstanceUrl
-						"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "ServiceNow instance URL",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "ServiceNow service configuration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Service-specific configuration details for create operation",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"service_details": schemaAttributecbc4ed5dc52be9d7441a16a9(),
 		// Property: ServiceId
 		// CloudFormation resource type schema:
 		//
@@ -1804,10 +1974,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"service_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the service",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"service_id": schemaAttribute181fa283e2ebdb499d7166cc(),
 		// Property: ServiceType
 		// CloudFormation resource type schema:
 		//
@@ -1827,10 +1994,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"service_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of service being registered",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"service_type": schemaAttributed91efbbefe9667f1bf87c16e(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1863,24 +2027,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute73378b274a343a285c3e01f0(),
 		// Property: TargetUrlPrivateConnectionName
 		// CloudFormation resource type schema:
 		//
@@ -1891,10 +2038,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$",
 		//	  "type": "string"
 		//	}
-		"target_url_private_connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the private connection to use for API calls (target URL) only. Cannot be specified when PrivateConnectionName is provided.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_url_private_connection_name": schemaAttribute80d5073332277237e0adbe6a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

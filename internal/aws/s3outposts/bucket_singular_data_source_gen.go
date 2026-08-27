@@ -14,6 +14,191 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute01c6ab1896b5cd2896070f52() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Rules
+			"rules": schemaAttributefdc0919c47f34e2bf2ef3b55(),
+		}, /*END SCHEMA*/
+		Description: "Rules that define how Amazon S3Outposts manages objects during their lifetime.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute02baffe95fe31baee57348a1() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Indicates the number of days after creation when objects are deleted from Amazon S3Outposts.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute05bfb3c6d712d7268fd20a9b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Prefix
+			"prefix": schemaAttribute2b58daadd041aac4197f98e3(),
+			// Property: Tags
+			"tags": schemaAttribute3fa16e07773f072fa92aa83c(),
+		}, /*END SCHEMA*/
+		Description: "The container for the AND condition for the lifecycle rule. A combination of Prefix and 1 or more Tags OR a minimum of 2 or more tags.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b58daadd041aac4197f98e3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Prefix identifies one or more objects to which the rule applies.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute357927899291f96d49573e3e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name for the bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e00e0bd6b8ba2e9e043a763() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DaysAfterInitiation
+			"days_after_initiation": schemaAttribute662d005bbe39ac8cb23cb0cc(),
+		}, /*END SCHEMA*/
+		Description: "Specifies a lifecycle rule that stops incomplete multipart uploads to an Amazon S3Outposts bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3fa16e07773f072fa92aa83c() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee8db581bff291724a19a3b5d(),
+				// Property: Value
+				"value": schemaAttributee8db581bff291724a19a3b5d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "All of these tags must exist in the object's tag set in order for the rule to apply.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute458d86aa3739667ade04ed9c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The id of the customer outpost on which the bucket resides.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58168c53a82ee5172e749bdb() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee8db581bff291724a19a3b5d(),
+				// Property: Value
+				"value": schemaAttributee8db581bff291724a19a3b5d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An arbitrary set of tags (key-value pairs) for this S3Outposts bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute662d005bbe39ac8cb23cb0cc() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the number of days after which Amazon S3Outposts aborts an incomplete multipart upload.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute765f95080b5d5d5c75a9af26() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the specified bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaef31f06585a37c4228ef5b7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Key
+			"key": schemaAttributee8db581bff291724a19a3b5d(),
+			// Property: Value
+			"value": schemaAttributee8db581bff291724a19a3b5d(),
+		}, /*END SCHEMA*/
+		Description: "Specifies a tag used to identify a subset of objects for an Amazon S3Outposts bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb08928eb9c5adcd273c22802() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique identifier for the lifecycle rule. The value can't be longer than 255 characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4a25b6c40fc81dbcd8c0c6c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AndOperator
+			"and_operator": schemaAttribute05bfb3c6d712d7268fd20a9b(),
+			// Property: Prefix
+			"prefix": schemaAttributebce3b41dbceb08d367a92c32(),
+			// Property: Tag
+			"tag": schemaAttributeaef31f06585a37c4228ef5b7(),
+		}, /*END SCHEMA*/
+		Description: "The container for the filter of the lifecycle rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebce3b41dbceb08d367a92c32() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Object key prefix that identifies one or more objects to which this rule applies.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc67623e1eb829fcd00f9b4d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates when objects are deleted from Amazon S3Outposts. The date value must be in ISO 8601 format. The time is always midnight UTC.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8db581bff291724a19a3b5d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdc0919c47f34e2bf2ef3b55() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AbortIncompleteMultipartUpload
+				"abort_incomplete_multipart_upload": schemaAttribute3e00e0bd6b8ba2e9e043a763(),
+				// Property: ExpirationDate
+				"expiration_date": schemaAttributecc67623e1eb829fcd00f9b4d(),
+				// Property: ExpirationInDays
+				"expiration_in_days": schemaAttribute02baffe95fe31baee57348a1(),
+				// Property: Filter
+				"filter": schemaAttributeb4a25b6c40fc81dbcd8c0c6c(),
+				// Property: Id
+				"id": schemaAttributeb08928eb9c5adcd273c22802(),
+				// Property: Status
+				"status": schemaAttributee8db581bff291724a19a3b5d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of lifecycle rules for individual objects in an Amazon S3Outposts bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_s3outposts_bucket", bucketDataSource)
 }
@@ -32,10 +217,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the specified bucket.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute765f95080b5d5d5c75a9af26(),
 		// Property: BucketName
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +228,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the bucket.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bucket_name": schemaAttribute357927899291f96d49573e3e(),
 		// Property: LifecycleConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -224,108 +403,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"lifecycle_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Rules
-				"rules": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AbortIncompleteMultipartUpload
-							"abort_incomplete_multipart_upload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DaysAfterInitiation
-									"days_after_initiation": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "Specifies the number of days after which Amazon S3Outposts aborts an incomplete multipart upload.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Specifies a lifecycle rule that stops incomplete multipart uploads to an Amazon S3Outposts bucket.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ExpirationDate
-							"expiration_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Indicates when objects are deleted from Amazon S3Outposts. The date value must be in ISO 8601 format. The time is always midnight UTC.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ExpirationInDays
-							"expiration_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "Indicates the number of days after creation when objects are deleted from Amazon S3Outposts.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Filter
-							"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AndOperator
-									"and_operator": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Prefix
-											"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Prefix identifies one or more objects to which the rule applies.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Tags
-											"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Key
-														"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Computed: true,
-														}, /*END ATTRIBUTE*/
-														// Property: Value
-														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Computed: true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-												}, /*END NESTED OBJECT*/
-												Description: "All of these tags must exist in the object's tag set in order for the rule to apply.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "The container for the AND condition for the lifecycle rule. A combination of Prefix and 1 or more Tags OR a minimum of 2 or more tags.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Prefix
-									"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Object key prefix that identifies one or more objects to which this rule applies.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Tag
-									"tag": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Key
-											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: Value
-											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Specifies a tag used to identify a subset of objects for an Amazon S3Outposts bucket.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The container for the filter of the lifecycle rule.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Unique identifier for the lifecycle rule. The value can't be longer than 255 characters.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Status
-							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A list of lifecycle rules for individual objects in an Amazon S3Outposts bucket.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Rules that define how Amazon S3Outposts manages objects during their lifetime.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"lifecycle_configuration": schemaAttribute01c6ab1896b5cd2896070f52(),
 		// Property: OutpostId
 		// CloudFormation resource type schema:
 		//
@@ -334,10 +412,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(op-[a-f0-9]{17}|\\d{12}|ec2)$",
 		//	  "type": "string"
 		//	}
-		"outpost_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The id of the customer outpost on which the bucket resides.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"outpost_id": schemaAttribute458d86aa3739667ade04ed9c(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -369,22 +444,7 @@ func bucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An arbitrary set of tags (key-value pairs) for this S3Outposts bucket.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute58168c53a82ee5172e749bdb(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

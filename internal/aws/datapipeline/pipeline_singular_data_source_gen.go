@@ -14,6 +14,204 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute076ac1a8326246168356c2e1() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether to validate and start the pipeline or stop an active pipeline. By default, the value is set to true.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0dfbfa66a82b1f503d9f42ea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A field value that you specify as an identifier of another object in the same pipeline definition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1dcb52edebca69101b9bb8e0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the name of a field for a particular object. To view valid values for a particular field, see Pipeline Object Reference in the AWS Data Pipeline Developer Guide.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30977e409d5d0ff69d9bdb29() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The field value, expressed as a String.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34e067beda4cbc45294f9fa0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the parameter object.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49d96eea375e3d5bc3f89aba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b9479485d1457cac83cc470() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A field value that you specify as a string. To view valid values for a particular field, see Pipeline Object Reference in the AWS Data Pipeline Developer Guide.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c0fc5fcd7f903a4314681eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the object.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b10e7b140e86d29ff4a2c8a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of a tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7844012d4f24d5e8d7093ca7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value to associate with the key name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b28668d43fcfa727f0d8967() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The field identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96f32b9cc82032f96a0eea08() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb90f36d73ecd40c98a8d9766() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute6b10e7b140e86d29ff4a2c8a(),
+				// Property: Value
+				"value": schemaAttribute7844012d4f24d5e8d7093ca7(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of arbitrary tags (key-value pairs) to associate with the pipeline, which you can use to control permissions. For more information, see Controlling Access to Pipelines and Resources in the AWS Data Pipeline Developer Guide.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8052e47689893da0560f221() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the object.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc53b593fb6d43e038f0c8ff() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute1dcb52edebca69101b9bb8e0(),
+				// Property: RefValue
+				"ref_value": schemaAttribute0dfbfa66a82b1f503d9f42ea(),
+				// Property: StringValue
+				"string_value": schemaAttribute4b9479485d1457cac83cc470(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Key-value pairs that define the properties of the object.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9609aed978332a2b464f2dc() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute7b28668d43fcfa727f0d8967(),
+				// Property: StringValue
+				"string_value": schemaAttribute30977e409d5d0ff69d9bdb29(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The attributes of the parameter object.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef4cf7cdedadc008f0871c0a1() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Attributes
+				"attributes": schemaAttributee9609aed978332a2b464f2dc(),
+				// Property: Id
+				"id": schemaAttribute34e067beda4cbc45294f9fa0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The parameter objects used with the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef66641c25d3a2a0ff55b90fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the parameter value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef68a2225d7cbee3f2ca0c2ed() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Id
+				"id": schemaAttributef66641c25d3a2a0ff55b90fb(),
+				// Property: StringValue
+				"string_value": schemaAttribute30977e409d5d0ff69d9bdb29(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The parameter values used with the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdecfa09f34b25f22e542a57() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefe64f12ac9c2ce275c7d82f0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Fields
+				"fields": schemaAttributedc53b593fb6d43e038f0c8ff(),
+				// Property: Id
+				"id": schemaAttributed8052e47689893da0560f221(),
+				// Property: Name
+				"name": schemaAttribute4c0fc5fcd7f903a4314681eb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The objects that define the pipeline. These objects overwrite the existing pipeline definition. Not all objects, fields, and values can be updated. For information about restrictions, see Editing Your Pipeline in the AWS Data Pipeline Developer Guide.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_datapipeline_pipeline", pipelineDataSource)
 }
@@ -29,10 +227,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether to validate and start the pipeline or stop an active pipeline. By default, the value is set to true.",
 		//	  "type": "boolean"
 		//	}
-		"activate": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether to validate and start the pipeline or stop an active pipeline. By default, the value is set to true.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"activate": schemaAttribute076ac1a8326246168356c2e1(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +235,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description of the pipeline.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the pipeline.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute49d96eea375e3d5bc3f89aba(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +243,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the pipeline.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the pipeline.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute96f32b9cc82032f96a0eea08(),
 		// Property: ParameterObjects
 		// CloudFormation resource type schema:
 		//
@@ -102,38 +291,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"parameter_objects": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Attributes
-					"attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Key
-								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The field identifier.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: StringValue
-								"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The field value, expressed as a String.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "The attributes of the parameter object.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Id
-					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of the parameter object.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The parameter objects used with the pipeline.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parameter_objects": schemaAttributef4cf7cdedadc008f0871c0a1(),
 		// Property: ParameterValues
 		// CloudFormation resource type schema:
 		//
@@ -161,33 +319,14 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"parameter_values": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Id
-					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of the parameter value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: StringValue
-					"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The field value, expressed as a String.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The parameter values used with the pipeline.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parameter_values": schemaAttributef68a2225d7cbee3f2ca0c2ed(),
 		// Property: PipelineId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"pipeline_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"pipeline_id": schemaAttributefdecfa09f34b25f22e542a57(),
 		// Property: PipelineObjects
 		// CloudFormation resource type schema:
 		//
@@ -243,48 +382,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"pipeline_objects": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Fields
-					"fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Key
-								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies the name of a field for a particular object. To view valid values for a particular field, see Pipeline Object Reference in the AWS Data Pipeline Developer Guide.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: RefValue
-								"ref_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A field value that you specify as an identifier of another object in the same pipeline definition.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: StringValue
-								"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A field value that you specify as a string. To view valid values for a particular field, see Pipeline Object Reference in the AWS Data Pipeline Developer Guide.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "Key-value pairs that define the properties of the object.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Id
-					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of the object.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the object.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The objects that define the pipeline. These objects overwrite the existing pipeline definition. Not all objects, fields, and values can be updated. For information about restrictions, see Editing Your Pipeline in the AWS Data Pipeline Developer Guide.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"pipeline_objects": schemaAttributefe64f12ac9c2ce275c7d82f0(),
 		// Property: PipelineTags
 		// CloudFormation resource type schema:
 		//
@@ -312,24 +410,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"pipeline_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of a tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value to associate with the key name.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of arbitrary tags (key-value pairs) to associate with the pipeline, which you can use to control permissions. For more information, see Controlling Access to Pipelines and Resources in the AWS Data Pipeline Developer Guide.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"pipeline_tags": schemaAttributeb90f36d73ecd40c98a8d9766(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,315 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0e50283c10f10f82af6d1f9e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The app secret provided by Privy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f1e33e1d2e1a16d0c3e3841() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CoinbaseCdpConfiguration
+			"coinbase_cdp_configuration": schemaAttributec2c58e894bdbc3d20c94c136(),
+			// Property: StripePrivyConfiguration
+			"stripe_privy_configuration": schemaAttribute24b6fbbe29a7407ee14453ac(),
+		}, /*END SCHEMA*/
+		Description: "Provider configuration input containing secrets for creation/update",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute13551f86030a1f7a4cdc3a93() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the payment credential provider",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a564f2073adcfa100dccd27() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AppId
+			"app_id": schemaAttribute91bd8a9547069381cb77474e(),
+			// Property: AppSecretArn
+			"app_secret_arn": schemaAttribute7f91a640e6f9be4999a00546(),
+			// Property: AppSecretJsonKey
+			"app_secret_json_key": schemaAttribute9421608337119aa5a6ee8826(),
+			// Property: AppSecretSource
+			"app_secret_source": schemaAttributeb91eb901d7ba3b584c77ef20(),
+			// Property: AuthorizationId
+			"authorization_id": schemaAttributebca1b9d06176c0b35408dc1b(),
+			// Property: AuthorizationPrivateKeyArn
+			"authorization_private_key_arn": schemaAttribute7f91a640e6f9be4999a00546(),
+			// Property: AuthorizationPrivateKeyJsonKey
+			"authorization_private_key_json_key": schemaAttribute6a84f951586685586893137b(),
+			// Property: AuthorizationPrivateKeySource
+			"authorization_private_key_source": schemaAttributeb91eb901d7ba3b584c77ef20(),
+		}, /*END SCHEMA*/
+		Description: "Stripe Privy configuration output with secret ARNs",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24b6fbbe29a7407ee14453ac() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AppId
+			"app_id": schemaAttribute91bd8a9547069381cb77474e(),
+			// Property: AppSecret
+			"app_secret": schemaAttribute0e50283c10f10f82af6d1f9e(),
+			// Property: AppSecretConfig
+			"app_secret_config": schemaAttribute3c64106b6dc8502b4911c2f3(),
+			// Property: AppSecretSource
+			"app_secret_source": schemaAttributeb91eb901d7ba3b584c77ef20(),
+			// Property: AuthorizationId
+			"authorization_id": schemaAttributebca1b9d06176c0b35408dc1b(),
+			// Property: AuthorizationPrivateKey
+			"authorization_private_key": schemaAttribute2c6a7274c93587dac938f1dd(),
+			// Property: AuthorizationPrivateKeyConfig
+			"authorization_private_key_config": schemaAttribute3c64106b6dc8502b4911c2f3(),
+			// Property: AuthorizationPrivateKeySource
+			"authorization_private_key_source": schemaAttributeb91eb901d7ba3b584c77ef20(),
+		}, /*END SCHEMA*/
+		Description: "Stripe Privy configuration with credentials",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute29941e2655dde13539bc62d7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the secret in AWS Secrets Manager",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c6a7274c93587dac938f1dd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The authorization private key for the Stripe Privy integration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c64106b6dc8502b4911c2f3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: JsonKey
+			"json_key": schemaAttribute9e3864e33beea161e75217b4(),
+			// Property: SecretId
+			"secret_id": schemaAttributeff7a80ca7454a72a0ae0901b(),
+		}, /*END SCHEMA*/
+		Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ff61ebd12a86371c52d6e4d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Coinbase CDP API key secret",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4df675c7dc51ae765690cdb0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique name for the payment credential provider",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a1c02a9ecedb3172b46f9bb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApiKeyId
+			"api_key_id": schemaAttributeb0e62868291140839e762318(),
+			// Property: ApiKeySecretArn
+			"api_key_secret_arn": schemaAttribute7f91a640e6f9be4999a00546(),
+			// Property: ApiKeySecretJsonKey
+			"api_key_secret_json_key": schemaAttributeca723e1384de1da84278554f(),
+			// Property: ApiKeySecretSource
+			"api_key_secret_source": schemaAttributeb91eb901d7ba3b584c77ef20(),
+			// Property: WalletSecretArn
+			"wallet_secret_arn": schemaAttribute7f91a640e6f9be4999a00546(),
+			// Property: WalletSecretJsonKey
+			"wallet_secret_json_key": schemaAttributea61e98699cb761766978ca38(),
+			// Property: WalletSecretSource
+			"wallet_secret_source": schemaAttributeb91eb901d7ba3b584c77ef20(),
+		}, /*END SCHEMA*/
+		Description: "Coinbase CDP configuration output with secret ARNs",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a84f951586685586893137b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The JSON key within the secret that contains the authorization private key value",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b484245d45684b75fa6187b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Coinbase CDP wallet secret",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f91a640e6f9be4999a00546() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecretArn
+			"secret_arn": schemaAttribute29941e2655dde13539bc62d7(),
+		}, /*END SCHEMA*/
+		Description: "Contains information about a secret in AWS Secrets Manager",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84e3653b59a633f25b11be6d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the credential provider was last updated",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85b500ac52222cebc45553d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91bd8a9547069381cb77474e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The app ID provided by Privy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9421608337119aa5a6ee8826() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The JSON key within the secret that contains the app secret value",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e3864e33beea161e75217b4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The JSON key within the secret that contains the credential value",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea61e98699cb761766978ca38() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The JSON key within the secret that contains the wallet secret value",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0e62868291140839e762318() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Coinbase CDP API key ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb91eb901d7ba3b584c77ef20() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebca1b9d06176c0b35408dc1b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The authorization ID for the Stripe Privy integration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2c58e894bdbc3d20c94c136() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApiKeyId
+			"api_key_id": schemaAttributeb0e62868291140839e762318(),
+			// Property: ApiKeySecret
+			"api_key_secret": schemaAttribute3ff61ebd12a86371c52d6e4d(),
+			// Property: ApiKeySecretConfig
+			"api_key_secret_config": schemaAttribute3c64106b6dc8502b4911c2f3(),
+			// Property: ApiKeySecretSource
+			"api_key_secret_source": schemaAttributeb91eb901d7ba3b584c77ef20(),
+			// Property: WalletSecret
+			"wallet_secret": schemaAttribute7b484245d45684b75fa6187b(),
+			// Property: WalletSecretConfig
+			"wallet_secret_config": schemaAttribute3c64106b6dc8502b4911c2f3(),
+			// Property: WalletSecretSource
+			"wallet_secret_source": schemaAttributeb91eb901d7ba3b584c77ef20(),
+		}, /*END SCHEMA*/
+		Description: "Coinbase CDP configuration with API credentials",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca723e1384de1da84278554f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The JSON key within the secret that contains the API key secret value",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca9cf048eb536fabd3d05a45() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Supported vendor types for payment providers",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf3fbf8bd3eca3e4382f769a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the credential provider was created",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeebc92a9fac012b86b08a8600() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CoinbaseCdpConfiguration
+			"coinbase_cdp_configuration": schemaAttribute6a1c02a9ecedb3172b46f9bb(),
+			// Property: StripePrivyConfiguration
+			"stripe_privy_configuration": schemaAttribute1a564f2073adcfa100dccd27(),
+		}, /*END SCHEMA*/
+		Description: "Provider configuration output containing secret ARNs (no raw secrets)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee8dfea76ce0fd3270a1efa2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute85b500ac52222cebc45553d0(),
+				// Property: Value
+				"value": schemaAttribute85b500ac52222cebc45553d0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags for the payment credential provider",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff7a80ca7454a72a0ae0901b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID or ARN of the secret in AWS Secrets Manager",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_payment_credential_provider", paymentCredentialProviderDataSource)
 }
@@ -31,11 +340,7 @@ func paymentCredentialProviderDataSource(ctx context.Context) (datasource.DataSo
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the credential provider was created",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttributedf3fbf8bd3eca3e4382f769a(),
 		// Property: CredentialProviderArn
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +349,7 @@ func paymentCredentialProviderDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b|aws-iso-e|aws-iso-f|aws-eusc):(acps|bedrock-agentcore):[A-Za-z0-9-]{1,64}:[0-9]{12}:token-vault/[a-zA-Z0-9-.]+/paymentcredentialprovider/[a-zA-Z0-9_.-]+$",
 		//	  "type": "string"
 		//	}
-		"credential_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the payment credential provider",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"credential_provider_arn": schemaAttribute13551f86030a1f7a4cdc3a93(),
 		// Property: CredentialProviderVendor
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +361,7 @@ func paymentCredentialProviderDataSource(ctx context.Context) (datasource.DataSo
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"credential_provider_vendor": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Supported vendor types for payment providers",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"credential_provider_vendor": schemaAttributeca9cf048eb536fabd3d05a45(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -71,11 +370,7 @@ func paymentCredentialProviderDataSource(ctx context.Context) (datasource.DataSo
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the credential provider was last updated",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttribute84e3653b59a633f25b11be6d(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -86,10 +381,7 @@ func paymentCredentialProviderDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^[a-zA-Z0-9\\-_]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique name for the payment credential provider",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute4df675c7dc51ae765690cdb0(),
 		// Property: ProviderConfigurationInput
 		// CloudFormation resource type schema:
 		//
@@ -287,149 +579,7 @@ func paymentCredentialProviderDataSource(ctx context.Context) (datasource.DataSo
 		//	  },
 		//	  "type": "object"
 		//	}
-		"provider_configuration_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CoinbaseCdpConfiguration
-				"coinbase_cdp_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ApiKeyId
-						"api_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Coinbase CDP API key ID",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ApiKeySecret
-						"api_key_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Coinbase CDP API key secret",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ApiKeySecretConfig
-						"api_key_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: JsonKey
-								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The JSON key within the secret that contains the credential value",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SecretId
-								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ID or ARN of the secret in AWS Secrets Manager",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ApiKeySecretSource
-						"api_key_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: WalletSecret
-						"wallet_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Coinbase CDP wallet secret",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: WalletSecretConfig
-						"wallet_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: JsonKey
-								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The JSON key within the secret that contains the credential value",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SecretId
-								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ID or ARN of the secret in AWS Secrets Manager",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: WalletSecretSource
-						"wallet_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Coinbase CDP configuration with API credentials",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StripePrivyConfiguration
-				"stripe_privy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AppId
-						"app_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The app ID provided by Privy",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AppSecret
-						"app_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The app secret provided by Privy",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AppSecretConfig
-						"app_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: JsonKey
-								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The JSON key within the secret that contains the credential value",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SecretId
-								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ID or ARN of the secret in AWS Secrets Manager",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AppSecretSource
-						"app_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AuthorizationId
-						"authorization_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The authorization ID for the Stripe Privy integration",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AuthorizationPrivateKey
-						"authorization_private_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The authorization private key for the Stripe Privy integration",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AuthorizationPrivateKeyConfig
-						"authorization_private_key_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: JsonKey
-								"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The JSON key within the secret that contains the credential value",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SecretId
-								"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ID or ARN of the secret in AWS Secrets Manager",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "A reference to a customer-provided secret stored in AWS Secrets Manager",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AuthorizationPrivateKeySource
-						"authorization_private_key_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Stripe Privy configuration with credentials",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Provider configuration input containing secrets for creation/update",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"provider_configuration_input": schemaAttribute0f1e33e1d2e1a16d0c3e3841(),
 		// Property: ProviderConfigurationOutput
 		// CloudFormation resource type schema:
 		//
@@ -598,129 +748,7 @@ func paymentCredentialProviderDataSource(ctx context.Context) (datasource.DataSo
 		//	  },
 		//	  "type": "object"
 		//	}
-		"provider_configuration_output": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CoinbaseCdpConfiguration
-				"coinbase_cdp_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ApiKeyId
-						"api_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Coinbase CDP API key ID",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ApiKeySecretArn
-						"api_key_secret_arn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: SecretArn
-								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the secret in AWS Secrets Manager",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Contains information about a secret in AWS Secrets Manager",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ApiKeySecretJsonKey
-						"api_key_secret_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The JSON key within the secret that contains the API key secret value",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ApiKeySecretSource
-						"api_key_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: WalletSecretArn
-						"wallet_secret_arn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: SecretArn
-								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the secret in AWS Secrets Manager",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Contains information about a secret in AWS Secrets Manager",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: WalletSecretJsonKey
-						"wallet_secret_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The JSON key within the secret that contains the wallet secret value",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: WalletSecretSource
-						"wallet_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Coinbase CDP configuration output with secret ARNs",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StripePrivyConfiguration
-				"stripe_privy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AppId
-						"app_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The app ID provided by Privy",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AppSecretArn
-						"app_secret_arn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: SecretArn
-								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the secret in AWS Secrets Manager",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Contains information about a secret in AWS Secrets Manager",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AppSecretJsonKey
-						"app_secret_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The JSON key within the secret that contains the app secret value",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AppSecretSource
-						"app_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AuthorizationId
-						"authorization_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The authorization ID for the Stripe Privy integration",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AuthorizationPrivateKeyArn
-						"authorization_private_key_arn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: SecretArn
-								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the secret in AWS Secrets Manager",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Contains information about a secret in AWS Secrets Manager",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AuthorizationPrivateKeyJsonKey
-						"authorization_private_key_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The JSON key within the secret that contains the authorization private key value",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AuthorizationPrivateKeySource
-						"authorization_private_key_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The source of the secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Stripe Privy configuration output with secret ARNs",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Provider configuration output containing secret ARNs (no raw secrets)",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"provider_configuration_output": schemaAttributeebc92a9fac012b86b08a8600(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -752,22 +780,7 @@ func paymentCredentialProviderDataSource(ctx context.Context) (datasource.DataSo
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags for the payment credential provider",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeee8dfea76ce0fd3270a1efa2(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

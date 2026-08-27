@@ -15,6 +15,129 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1b2e4fc114f44bd2a376b838() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Identifier
+				"identifier": schemaAttributeaa81653579ca8afede601b83(),
+				// Property: Type
+				"type": schemaAttribute4d2173f506923067f78f4427(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The remote resources to monitor.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute456652309d096b92d3ee3736() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The date and time when the monitor was last modified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute478aae71963eabe018075400() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the local resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4d2173f506923067f78f4427() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the remote resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute50d47004470d18abc92ccc3a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the monitor.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute515c9a6d84a171439c82f7f7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the local resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91ab3d1ea1e56c4fdb2701d5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the scope for the monitor.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa81653579ca8afede601b83() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the remote resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaacc74885f3e6f30c55f5b26() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the monitor.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb16cbbd7ceebe3eeb6f5dbd5() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributecc6d1bbedc7069d42df64835(),
+				// Property: Value
+				"value": schemaAttributecc6d1bbedc7069d42df64835(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags for the monitor.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc6d1bbedc7069d42df64835() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedcb28ad53dafb9b7c8ad4a08() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The date and time when the monitor was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1b16d599c2be0a093a8ca13() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Identifier
+				"identifier": schemaAttribute515c9a6d84a171439c82f7f7(),
+				// Property: Type
+				"type": schemaAttribute478aae71963eabe018075400(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The local resources to monitor.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8928e454a4cd46744b7ae87() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the monitor.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_networkflowmonitor_monitor", monitorDataSource)
 }
@@ -33,10 +156,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.*$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the monitor.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute50d47004470d18abc92ccc3a(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -45,11 +165,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The date and time when the monitor was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributedcb28ad53dafb9b7c8ad4a08(),
 		// Property: LocalResources
 		// CloudFormation resource type schema:
 		//
@@ -85,24 +201,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"local_resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Identifier
-					"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The identifier of the local resource.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Type
-					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of the local resource.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The local resources to monitor.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"local_resources": schemaAttributee1b16d599c2be0a093a8ca13(),
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
 		//
@@ -111,11 +210,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The date and time when the monitor was last modified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"modified_at": schemaAttribute456652309d096b92d3ee3736(),
 		// Property: MonitorName
 		// CloudFormation resource type schema:
 		//
@@ -126,10 +221,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_.-]+$",
 		//	  "type": "string"
 		//	}
-		"monitor_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the monitor.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"monitor_name": schemaAttributee8928e454a4cd46744b7ae87(),
 		// Property: MonitorStatus
 		// CloudFormation resource type schema:
 		//
@@ -144,10 +236,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"monitor_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the monitor.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"monitor_status": schemaAttributeaacc74885f3e6f30c55f5b26(),
 		// Property: RemoteResources
 		// CloudFormation resource type schema:
 		//
@@ -182,24 +271,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"remote_resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Identifier
-					"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The identifier of the remote resource.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Type
-					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of the remote resource.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The remote resources to monitor.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"remote_resources": schemaAttribute1b2e4fc114f44bd2a376b838(),
 		// Property: ScopeArn
 		// CloudFormation resource type schema:
 		//
@@ -210,10 +282,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.*$",
 		//	  "type": "string"
 		//	}
-		"scope_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the scope for the monitor.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scope_arn": schemaAttribute91ab3d1ea1e56c4fdb2701d5(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -243,22 +312,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 200,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags for the monitor.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeb16cbbd7ceebe3eeb6f5dbd5(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

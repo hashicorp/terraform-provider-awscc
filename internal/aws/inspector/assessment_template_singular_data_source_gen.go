@@ -15,6 +15,39 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute56c31c0d2d4d41efe8c629dd() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute83466d2450bbd942f09aa454(),
+				// Property: Value
+				"value": schemaAttribute83466d2450bbd942f09aa454(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83466d2450bbd942f09aa454() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95080cf60e08af60d96d5b8d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeffadc1350a40dd68643d674d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_inspector_assessment_template", assessmentTemplateDataSource)
 }
@@ -29,36 +62,28 @@ func assessmentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute83466d2450bbd942f09aa454(),
 		// Property: AssessmentTargetArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"assessment_target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"assessment_target_arn": schemaAttribute83466d2450bbd942f09aa454(),
 		// Property: AssessmentTemplateName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"assessment_template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"assessment_template_name": schemaAttribute83466d2450bbd942f09aa454(),
 		// Property: DurationInSeconds
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "integer"
 		//	}
-		"duration_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"duration_in_seconds": schemaAttribute95080cf60e08af60d96d5b8d(),
 		// Property: RulesPackageArns
 		// CloudFormation resource type schema:
 		//
@@ -69,10 +94,7 @@ func assessmentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"rules_package_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rules_package_arns": schemaAttributeffadc1350a40dd68643d674d(),
 		// Property: UserAttributesForFindings
 		// CloudFormation resource type schema:
 		//
@@ -96,21 +118,7 @@ func assessmentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"user_attributes_for_findings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"user_attributes_for_findings": schemaAttribute56c31c0d2d4d41efe8c629dd(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

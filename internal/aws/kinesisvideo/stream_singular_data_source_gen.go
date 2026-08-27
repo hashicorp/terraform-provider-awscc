@@ -14,6 +14,95 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0c603ef1c5456c52e5c1cadc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. Specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute328e0628ec300a10d41ab2b4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Kinesis Video stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3dc81a60c857ba8768b9d6f4() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of hours till which Kinesis Video will retain the data in the stream",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65b0fa38dcb1c9f24030a36e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the device that is writing to the stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute695bb6ca8809b9ed794f3620() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The storage tier for the Kinesis Video Stream. Determines the storage class used for stream data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ec1b754c74f930734676589() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. Specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f8b90a6859a022bd5dfd26a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "AWS KMS key ID that Kinesis Video Streams uses to encrypt stream data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f93dc757fd5b8a8167468f5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The media type of the stream. Consumers of the stream can use this information when processing the stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8e9a4f26ec27345f39a69c8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Kinesis Video stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefba4e12baa15ce0e8c22da02() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute0c603ef1c5456c52e5c1cadc(),
+				// Property: Value
+				"value": schemaAttribute7ec1b754c74f930734676589(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs associated with the Kinesis Video Stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc1fa8db525e75ba4acdab47() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DefaultStorageTier
+			"default_storage_tier": schemaAttribute695bb6ca8809b9ed794f3620(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for the storage tier of the Kinesis Video Stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_kinesisvideo_stream", streamDataSource)
 }
@@ -29,10 +118,7 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the Kinesis Video stream.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Kinesis Video stream.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute328e0628ec300a10d41ab2b4(),
 		// Property: DataRetentionInHours
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +128,7 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"data_retention_in_hours": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of hours till which Kinesis Video will retain the data in the stream",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_retention_in_hours": schemaAttribute3dc81a60c857ba8768b9d6f4(),
 		// Property: DeviceName
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +139,7 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9_.-]+",
 		//	  "type": "string"
 		//	}
-		"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the device that is writing to the stream.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"device_name": schemaAttribute65b0fa38dcb1c9f24030a36e(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +150,7 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".+",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "AWS KMS key ID that Kinesis Video Streams uses to encrypt stream data.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttribute8f8b90a6859a022bd5dfd26a(),
 		// Property: MediaType
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +161,7 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+(,[\\w\\-\\.\\+]+/[\\w\\-\\.\\+]+)*",
 		//	  "type": "string"
 		//	}
-		"media_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The media type of the stream. Consumers of the stream can use this information when processing the stream.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"media_type": schemaAttribute8f93dc757fd5b8a8167468f5(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -98,10 +172,7 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9_.-]+",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Kinesis Video stream.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributee8e9a4f26ec27345f39a69c8(),
 		// Property: StreamStorageConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -121,17 +192,7 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"stream_storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DefaultStorageTier
-				"default_storage_tier": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The storage tier for the Kinesis Video Stream. Determines the storage class used for stream data.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration for the storage tier of the Kinesis Video Stream.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"stream_storage_configuration": schemaAttributefc1fa8db525e75ba4acdab47(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -166,24 +227,7 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. Specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. Specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs associated with the Kinesis Video Stream.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributefba4e12baa15ce0e8c22da02(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

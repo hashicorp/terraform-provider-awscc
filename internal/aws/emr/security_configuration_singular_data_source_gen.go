@@ -14,6 +14,20 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributed5e1f0d827bf8fb0e5576e86() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The security configuration details in JSON format.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed853b3f4c07407cc01202fdd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the security configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_emr_security_configuration", securityConfigurationDataSource)
 }
@@ -29,10 +43,7 @@ func securityConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The name of the security configuration.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the security configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributed853b3f4c07407cc01202fdd(),
 		// Property: SecurityConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +51,7 @@ func securityConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The security configuration details in JSON format.",
 		//	  "type": "string"
 		//	}
-		"security_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The security configuration details in JSON format.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_configuration": schemaAttributed5e1f0d827bf8fb0e5576e86(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -8,13 +8,146 @@ package elementalinference
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
+
+func schemaAttribute0e5de17a200ff14a97981164() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CallbackMetadata
+			"callback_metadata": schemaAttributea5d384a0b3ddff07c996dd0c(),
+			// Property: DataSourceConfiguration
+			"data_source_configuration": schemaAttribute5749987ae660d38495dda15b(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute138c5cc94559a08cc06980ba() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Height
+			"height": schemaAttributefa4c02f37fff766d178345c3(),
+			// Property: Width
+			"width": schemaAttributefa4c02f37fff766d178345c3(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute493a220fa2610ac188af70ed() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Description
+				"description": schemaAttributea5d384a0b3ddff07c996dd0c(),
+				// Property: Name
+				"name": schemaAttributea5d384a0b3ddff07c996dd0c(),
+				// Property: OutputConfig
+				"output_config": schemaAttribute96d0b0e772af509816a4fd36(),
+				// Property: Status
+				"status": schemaAttributea5d384a0b3ddff07c996dd0c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51653c3a2d7e6d3ac4e18e3d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AspectRatio
+			"aspect_ratio": schemaAttribute138c5cc94559a08cc06980ba(),
+			// Property: Dictionary
+			"dictionary": schemaAttributea5d384a0b3ddff07c996dd0c(),
+			// Property: Language
+			"language": schemaAttributea5d384a0b3ddff07c996dd0c(),
+			// Property: ProfanityFilter
+			"profanity_filter": schemaAttributea5d384a0b3ddff07c996dd0c(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5749987ae660d38495dda15b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FixtureId
+			"fixture_id": schemaAttributea5d384a0b3ddff07c996dd0c(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96d0b0e772af509816a4fd36() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Clipping
+			"clipping": schemaAttribute0e5de17a200ff14a97981164(),
+			// Property: Cropping
+			"cropping": schemaAttributea4a8e55fa7c2b9a9c5eff731(),
+			// Property: Subtitling
+			"subtitling": schemaAttribute51653c3a2d7e6d3ac4e18e3d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4a8e55fa7c2b9a9c5eff731() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TemplateGroups
+			"template_groups": schemaAttributec4861e2ee65f7b201b3a6fd8(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea5d384a0b3ddff07c996dd0c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa1e26286dc34463e466e1f7() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4861e2ee65f7b201b3a6fd8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttributea5d384a0b3ddff07c996dd0c(),
+				// Property: TemplateUris
+				"template_uris": schemaAttributec4a0bc6bcbdcb232cc1102c8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4a0bc6bcbdcb232cc1102c8() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa4c02f37fff766d178345c3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
 
 func init() {
 	registry.AddDataSourceFactory("awscc_elementalinference_feed", feedDataSource)
@@ -24,15 +157,23 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::ElementalInference::Feed resource.
 func feedDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccessRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 32,
+		//	  "pattern": "^arn:aws[a-z\\-]*:iam::[0-9]{12}:role/.+$",
+		//	  "type": "string"
+		//	}
+		"access_role_arn": schemaAttributea5d384a0b3ddff07c996dd0c(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributea5d384a0b3ddff07c996dd0c(),
 		// Property: DataEndpoints
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +183,7 @@ func feedDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"data_endpoints": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_endpoints": schemaAttributec4a0bc6bcbdcb232cc1102c8(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -53,9 +191,7 @@ func feedDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9]{19}$",
 		//	  "type": "string"
 		//	}
-		"feed_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"feed_id": schemaAttributea5d384a0b3ddff07c996dd0c(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -63,9 +199,7 @@ func feedDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,126}[a-zA-Z0-9])?$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributea5d384a0b3ddff07c996dd0c(),
 		// Property: Outputs
 		// CloudFormation resource type schema:
 		//
@@ -91,12 +225,58 @@ func feedDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "maxLength": 1024,
 		//	                "pattern": "^[\\w \\-\\.',@:;]*$",
 		//	                "type": "string"
+		//	              },
+		//	              "DataSourceConfiguration": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "FixtureId": {
+		//	                    "maxLength": 128,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "FixtureId"
+		//	                ],
+		//	                "type": "object"
 		//	              }
 		//	            },
 		//	            "type": "object"
 		//	          },
 		//	          "Cropping": {
 		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "TemplateGroups": {
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Name": {
+		//	                      "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,126}[a-zA-Z0-9])?$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "TemplateUris": {
+		//	                      "items": {
+		//	                        "maxLength": 255,
+		//	                        "minLength": 10,
+		//	                        "pattern": "^s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+$",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "maxItems": 2,
+		//	                      "minItems": 1,
+		//	                      "type": "array"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Name",
+		//	                    "TemplateUris"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "maxItems": 4,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
 		//	            "type": "object"
 		//	          },
 		//	          "Subtitling": {
@@ -172,78 +352,7 @@ func feedDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"outputs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Description
-					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: OutputConfig
-					"output_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Clipping
-							"clipping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: CallbackMetadata
-									"callback_metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Cropping
-							"cropping": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType: jsontypes.NormalizedType{},
-								Computed:   true,
-							}, /*END ATTRIBUTE*/
-							// Property: Subtitling
-							"subtitling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AspectRatio
-									"aspect_ratio": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Height
-											"height": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: Width
-											"width": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Dictionary
-									"dictionary": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Language
-									"language": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: ProfanityFilter
-									"profanity_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Status
-					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"outputs": schemaAttribute493a220fa2610ac188af70ed(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -257,11 +366,7 @@ func feedDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeaa1e26286dc34463e466e1f7(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -279,25 +384,30 @@ func feedDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ElementalInference::Feed").WithTerraformTypeName("awscc_elementalinference_feed")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":               "Arn",
-		"aspect_ratio":      "AspectRatio",
-		"callback_metadata": "CallbackMetadata",
-		"clipping":          "Clipping",
-		"cropping":          "Cropping",
-		"data_endpoints":    "DataEndpoints",
-		"description":       "Description",
-		"dictionary":        "Dictionary",
-		"feed_id":           "Id",
-		"height":            "Height",
-		"language":          "Language",
-		"name":              "Name",
-		"output_config":     "OutputConfig",
-		"outputs":           "Outputs",
-		"profanity_filter":  "ProfanityFilter",
-		"status":            "Status",
-		"subtitling":        "Subtitling",
-		"tags":              "Tags",
-		"width":             "Width",
+		"access_role_arn":           "AccessRoleArn",
+		"arn":                       "Arn",
+		"aspect_ratio":              "AspectRatio",
+		"callback_metadata":         "CallbackMetadata",
+		"clipping":                  "Clipping",
+		"cropping":                  "Cropping",
+		"data_endpoints":            "DataEndpoints",
+		"data_source_configuration": "DataSourceConfiguration",
+		"description":               "Description",
+		"dictionary":                "Dictionary",
+		"feed_id":                   "Id",
+		"fixture_id":                "FixtureId",
+		"height":                    "Height",
+		"language":                  "Language",
+		"name":                      "Name",
+		"output_config":             "OutputConfig",
+		"outputs":                   "Outputs",
+		"profanity_filter":          "ProfanityFilter",
+		"status":                    "Status",
+		"subtitling":                "Subtitling",
+		"tags":                      "Tags",
+		"template_groups":           "TemplateGroups",
+		"template_uris":             "TemplateUris",
+		"width":                     "Width",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

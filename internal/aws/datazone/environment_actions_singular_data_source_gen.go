@@ -14,6 +14,66 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute33e3da0bb12a9c94905250a8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URI of the console link specified as part of the environment action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64740046d3efc8e982a768fd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the Amazon DataZone domain in which the environment is created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7569ae94b6ca7cbc8a1ffd64() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the Amazon DataZone environment action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9583b05255b5a9dcb7b84bd2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the Amazon DataZone environment in which the action is taking place",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9dacd80c0265a8b1510e44bc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Uri
+			"uri": schemaAttribute33e3da0bb12a9c94905250a8(),
+		}, /*END SCHEMA*/
+		Description: "The parameters of the environment action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf675b0cfe0e78b20e899b6f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the environment action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecbce4da37009b03060743ee5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Amazon DataZone environment action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef58039418ffa9b05c024bcb6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the Amazon DataZone domain in which the environment would be created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_datazone_environment_actions", environmentActionsDataSource)
 }
@@ -30,10 +90,7 @@ func environmentActionsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the Amazon DataZone environment action.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute7569ae94b6ca7cbc8a1ffd64(),
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +99,7 @@ func environmentActionsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the Amazon DataZone domain in which the environment is created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_id": schemaAttribute64740046d3efc8e982a768fd(),
 		// Property: DomainIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +108,7 @@ func environmentActionsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the Amazon DataZone domain in which the environment would be created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_identifier": schemaAttributef58039418ffa9b05c024bcb6(),
 		// Property: EnvironmentId
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +119,7 @@ func environmentActionsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the Amazon DataZone environment in which the action is taking place",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"environment_id": schemaAttribute9583b05255b5a9dcb7b84bd2(),
 		// Property: EnvironmentIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +130,7 @@ func environmentActionsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"environment_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the Amazon DataZone environment in which the action is taking place",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"environment_identifier": schemaAttribute9583b05255b5a9dcb7b84bd2(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +141,7 @@ func environmentActionsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"environment_actions_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Amazon DataZone environment action.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"environment_actions_id": schemaAttributecbce4da37009b03060743ee5(),
 		// Property: Identifier
 		// CloudFormation resource type schema:
 		//
@@ -110,10 +152,7 @@ func environmentActionsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Amazon DataZone environment action.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"identifier": schemaAttributecbce4da37009b03060743ee5(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -124,10 +163,7 @@ func environmentActionsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[\\w -]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the environment action.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributebf675b0cfe0e78b20e899b6f(),
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -144,17 +180,7 @@ func environmentActionsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Uri
-				"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The URI of the console link specified as part of the environment action.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The parameters of the environment action.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parameters": schemaAttribute9dacd80c0265a8b1510e44bc(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

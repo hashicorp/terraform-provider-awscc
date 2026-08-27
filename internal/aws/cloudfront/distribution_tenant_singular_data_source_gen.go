@@ -16,6 +16,268 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0e95af8fadd4c9243f5c42f7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Locations
+			"locations": schemaAttributeae2cf3e54be062f915be9c19(),
+			// Property: RestrictionType
+			"restriction_type": schemaAttribute350c12f427ad1a4e40f9216c(),
+		}, /*END SCHEMA*/
+		Description: "The geographic restrictions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10b13826b7709108b974d66c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the connection group for the distribution tenant. If you don't specify a connection group, CloudFront uses the default connection group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18e6e75619e082e3f74205f2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the distribution tenant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1c80e04c81ee59a9fd178ef1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Certificate
+			"certificate": schemaAttributef59cbe57f8bb782ca9848189(),
+			// Property: GeoRestrictions
+			"geo_restrictions": schemaAttribute0e95af8fadd4c9243f5c42f7(),
+			// Property: WebAcl
+			"web_acl": schemaAttributeb15507d055ae07609907a805(),
+		}, /*END SCHEMA*/
+		Description: "Customizations for the distribution tenant. For each distribution tenant, you can specify the geographic restrictions, and the Amazon Resource Names (ARNs) for the ACM certificate and WAF web ACL. These are specific values that you can override or disable from the multi-tenant distribution that was used to create the distribution tenant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28fe102d61ae3399879b7002() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute350c12f427ad1a4e40f9216c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The method that you want to use to restrict distribution of your content by country:\n  +  ``none``: No geographic restriction is enabled, meaning access to content is not restricted by client geo location.\n  +  ``blacklist``: The ``Location`` elements specify the countries in which you don't want CloudFront to distribute your content.\n  +  ``whitelist``: The ``Location`` elements specify the countries in which you want CloudFront to distribute your content.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3843006e6fbfa59bf5812618() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Domain
+				"domain": schemaAttributef69624601aee5171f4122e09(),
+				// Property: Status
+				"status": schemaAttributeb2c506d13d6c1188e6e16a70(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41d45689a6937a3712208ef6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CertificateTransparencyLoggingPreference
+			"certificate_transparency_logging_preference": schemaAttribute4fb389b376aaba2b24a33532(),
+			// Property: PrimaryDomainName
+			"primary_domain_name": schemaAttribute487b3c13ded7b266e48d623a(),
+			// Property: ValidationTokenHost
+			"validation_token_host": schemaAttribute7bcbe53689a317669268a531(),
+		}, /*END SCHEMA*/
+		Description: "An object that represents the request for the Amazon CloudFront managed ACM certificate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44cb20a626e4486b409b3346() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute487b3c13ded7b266e48d623a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The primary domain name associated with the CloudFront managed ACM certificate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4fb389b376aaba2b24a33532() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "You can opt out of certificate transparency logging by specifying the ``disabled`` option. Opt in by specifying ``enabled``. For more information, see [Certificate Transparency Logging](https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency) in the *User Guide*.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ffdb24357cea9f0d9973390() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a63f666ece910039c112987() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute9ef3fe4ea4dda208cea3f5af(),
+				// Property: Value
+				"value": schemaAttributee1a648439d33a79cee5b83e6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of parameter values to add to the resource. A parameter is specified as a key-value pair. A valid parameter value must exist for any parameter that is marked as required in the multi-tenant distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bcbe53689a317669268a531() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specify how the HTTP validation token will be served when requesting the CloudFront managed ACM certificate.\n  +  For ``cloudfront``, CloudFront will automatically serve the validation token. Choose this mode if you can point the domain's DNS to CloudFront immediately.\n  +  For ``self-hosted``, you serve the validation token from your existing infrastructure. Choose this mode when you need to maintain current traffic flow while your certificate is being issued. You can place the validation token at the well-known path on your existing web server, wait for ACM to validate and issue the certificate, and then update your DNS to point to CloudFront.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute975868db0f7502f2ee466b6e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the multi-tenant distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d45bb113d5b348acb07868d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the ACM certificate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ef3fe4ea4dda208cea3f5af() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The parameter name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea1891fa06a42be9890e7147c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The action for the WAF web ACL customization. You can specify ``override`` to specify a separate WAF web ACL for the distribution tenant. If you specify ``disable``, the distribution tenant won't have WAF web ACL protections and won't inherit from the multi-tenant distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae2cf3e54be062f915be9c19() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The locations for geographic restrictions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb15507d055ae07609907a805() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Action
+			"action": schemaAttributea1891fa06a42be9890e7147c(),
+			// Property: Arn
+			"arn": schemaAttributee628e7d757064938c54b3588(),
+		}, /*END SCHEMA*/
+		Description: "The WAF web ACL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2c506d13d6c1188e6e16a70() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether the domain is active or inactive.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec95d8a69b25a664dd702f677() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The domains associated with the distribution tenant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd193b8a97bed4e2563eaf76() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1a648439d33a79cee5b83e6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The parameter value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee600ab25226020aac4756811() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute44cb20a626e4486b409b3346(),
+				// Property: Value
+				"value": schemaAttributecd193b8a97bed4e2563eaf76(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A complex type that contains zero or more ``Tag`` elements.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee628e7d757064938c54b3588() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the WAF web ACL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef59cbe57f8bb782ca9848189() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttribute9d45bb113d5b348acb07868d(),
+		}, /*END SCHEMA*/
+		Description: "The ACMlong (ACM) certificate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef69624601aee5171f4122e09() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The specified domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefcec9f8f34b5d8d431d0f192() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the distribution tenant is in an enabled state. If disabled, the distribution tenant won't serve traffic.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudfront_distribution_tenant", distributionTenantDataSource)
 }
@@ -31,10 +293,7 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute28fe102d61ae3399879b7002(),
 		// Property: ConnectionGroupId
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +301,7 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The ID of the connection group for the distribution tenant. If you don't specify a connection group, CloudFront uses the default connection group.",
 		//	  "type": "string"
 		//	}
-		"connection_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the connection group for the distribution tenant. If you don't specify a connection group, CloudFront uses the default connection group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_group_id": schemaAttribute10b13826b7709108b974d66c(),
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -54,11 +310,7 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttribute4ffdb24357cea9f0d9973390(),
 		// Property: Customizations
 		// CloudFormation resource type schema:
 		//
@@ -123,59 +375,7 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"customizations": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Certificate
-				"certificate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Arn
-						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) of the ACM certificate.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The ACMlong (ACM) certificate.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: GeoRestrictions
-				"geo_restrictions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Locations
-						"locations": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The locations for geographic restrictions.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RestrictionType
-						"restriction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The method that you want to use to restrict distribution of your content by country:\n  +  ``none``: No geographic restriction is enabled, meaning access to content is not restricted by client geo location.\n  +  ``blacklist``: The ``Location`` elements specify the countries in which you don't want CloudFront to distribute your content.\n  +  ``whitelist``: The ``Location`` elements specify the countries in which you want CloudFront to distribute your content.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The geographic restrictions.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: WebAcl
-				"web_acl": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Action
-						"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The action for the WAF web ACL customization. You can specify ``override`` to specify a separate WAF web ACL for the distribution tenant. If you specify ``disable``, the distribution tenant won't have WAF web ACL protections and won't inherit from the multi-tenant distribution.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Arn
-						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) of the WAF web ACL.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The WAF web ACL.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Customizations for the distribution tenant. For each distribution tenant, you can specify the geographic restrictions, and the Amazon Resource Names (ARNs) for the ACM certificate and WAF web ACL. These are specific values that you can override or disable from the multi-tenant distribution that was used to create the distribution tenant.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"customizations": schemaAttribute1c80e04c81ee59a9fd178ef1(),
 		// Property: DistributionId
 		// CloudFormation resource type schema:
 		//
@@ -183,10 +383,7 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The ID of the multi-tenant distribution.",
 		//	  "type": "string"
 		//	}
-		"distribution_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the multi-tenant distribution.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"distribution_id": schemaAttribute975868db0f7502f2ee466b6e(),
 		// Property: DomainResults
 		// CloudFormation resource type schema:
 		//
@@ -214,24 +411,7 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"domain_results": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Domain
-					"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The specified domain.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Status
-					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Whether the domain is active or inactive.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_results": schemaAttribute3843006e6fbfa59bf5812618(),
 		// Property: Domains
 		// CloudFormation resource type schema:
 		//
@@ -243,11 +423,7 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"domains": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The domains associated with the distribution tenant.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domains": schemaAttributec95d8a69b25a664dd702f677(),
 		// Property: ETag
 		// CloudFormation resource type schema:
 		//
@@ -255,10 +431,7 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"e_tag": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"e_tag": schemaAttribute28fe102d61ae3399879b7002(),
 		// Property: Enabled
 		// CloudFormation resource type schema:
 		//
@@ -266,10 +439,7 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "Indicates whether the distribution tenant is in an enabled state. If disabled, the distribution tenant won't serve traffic.",
 		//	  "type": "boolean"
 		//	}
-		"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the distribution tenant is in an enabled state. If disabled, the distribution tenant won't serve traffic.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enabled": schemaAttributefcec9f8f34b5d8d431d0f192(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -277,10 +447,7 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"distribution_tenant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"distribution_tenant_id": schemaAttribute28fe102d61ae3399879b7002(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -289,11 +456,7 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttribute4ffdb24357cea9f0d9973390(),
 		// Property: ManagedCertificateRequest
 		// CloudFormation resource type schema:
 		//
@@ -324,27 +487,7 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"managed_certificate_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CertificateTransparencyLoggingPreference
-				"certificate_transparency_logging_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "You can opt out of certificate transparency logging by specifying the ``disabled`` option. Opt in by specifying ``enabled``. For more information, see [Certificate Transparency Logging](https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency) in the *User Guide*.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PrimaryDomainName
-				"primary_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The primary domain name associated with the CloudFront managed ACM certificate.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ValidationTokenHost
-				"validation_token_host": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specify how the HTTP validation token will be served when requesting the CloudFront managed ACM certificate.\n  +  For ``cloudfront``, CloudFront will automatically serve the validation token. Choose this mode if you can point the domain's DNS to CloudFront immediately.\n  +  For ``self-hosted``, you serve the validation token from your existing infrastructure. Choose this mode when you need to maintain current traffic flow while your certificate is being issued. You can place the validation token at the well-known path on your existing web server, wait for ACM to validate and issue the certificate, and then update your DNS to point to CloudFront.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object that represents the request for the Amazon CloudFront managed ACM certificate.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"managed_certificate_request": schemaAttribute41d45689a6937a3712208ef6(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -352,10 +495,7 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The name of the distribution tenant.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the distribution tenant.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute18e6e75619e082e3f74205f2(),
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -379,24 +519,7 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The parameter name.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The parameter value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of parameter values to add to the resource. A parameter is specified as a key-value pair. A valid parameter value must exist for any parameter that is marked as required in the multi-tenant distribution.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parameters": schemaAttribute5a63f666ece910039c112987(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -404,10 +527,7 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute28fe102d61ae3399879b7002(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -435,24 +555,7 @@ func distributionTenantDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A complex type that contains zero or more ``Tag`` elements.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributee600ab25226020aac4756811(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

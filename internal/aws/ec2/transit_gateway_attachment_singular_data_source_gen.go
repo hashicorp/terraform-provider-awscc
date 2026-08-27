@@ -15,6 +15,71 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0da5d4fe5a0581fe17aa70a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether to enable Security Group referencing support for Vpc Attachment. Valid Values: enable | disable",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15bce0e51fcb8210c46606b6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether to enable DNS Support for Vpc Attachment. Valid Values: enable | disable",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60392a5e101697311768764a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67d77f52077883ebe277c7a7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea961a266e9ec5724ce562818() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa04e152faab54ad1cbea979() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApplianceModeSupport
+			"appliance_mode_support": schemaAttributea961a266e9ec5724ce562818(),
+			// Property: DnsSupport
+			"dns_support": schemaAttribute15bce0e51fcb8210c46606b6(),
+			// Property: Ipv6Support
+			"ipv_6_support": schemaAttributea961a266e9ec5724ce562818(),
+			// Property: SecurityGroupReferencingSupport
+			"security_group_referencing_support": schemaAttribute0da5d4fe5a0581fe17aa70a0(),
+		}, /*END SCHEMA*/
+		Description: "The options for the transit gateway vpc attachment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeedc4cc742fcc239e48e10169() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute67d77f52077883ebe277c7a7(),
+				// Property: Value
+				"value": schemaAttribute67d77f52077883ebe277c7a7(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_transit_gateway_attachment", transitGatewayAttachmentDataSource)
 }
@@ -29,9 +94,7 @@ func transitGatewayAttachmentDataSource(ctx context.Context) (datasource.DataSou
 		//	{
 		//	  "type": "string"
 		//	}
-		"transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_attachment_id": schemaAttribute67d77f52077883ebe277c7a7(),
 		// Property: Options
 		// CloudFormation resource type schema:
 		//
@@ -58,32 +121,7 @@ func transitGatewayAttachmentDataSource(ctx context.Context) (datasource.DataSou
 		//	  },
 		//	  "type": "object"
 		//	}
-		"options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ApplianceModeSupport
-				"appliance_mode_support": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DnsSupport
-				"dns_support": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether to enable DNS Support for Vpc Attachment. Valid Values: enable | disable",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Ipv6Support
-				"ipv_6_support": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecurityGroupReferencingSupport
-				"security_group_referencing_support": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether to enable Security Group referencing support for Vpc Attachment. Valid Values: enable | disable",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The options for the transit gateway vpc attachment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"options": schemaAttributeaa04e152faab54ad1cbea979(),
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -99,10 +137,7 @@ func transitGatewayAttachmentDataSource(ctx context.Context) (datasource.DataSou
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_ids": schemaAttribute60392a5e101697311768764a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -127,39 +162,21 @@ func transitGatewayAttachmentDataSource(ctx context.Context) (datasource.DataSou
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeedc4cc742fcc239e48e10169(),
 		// Property: TransitGatewayId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_id": schemaAttribute67d77f52077883ebe277c7a7(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttribute67d77f52077883ebe277c7a7(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

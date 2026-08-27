@@ -15,6 +15,94 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1dc02a34ee591729e8a16d75() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The subscription endpoint in Security Lake.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c756899d5ebf4361ba5884d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key value for the notification subscription.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80143a9a1ed0e2570d9bab4b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The endpoint the subscriber should listen to for notifications",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ca1fa7756f61054d5e78edb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HttpsNotificationConfiguration
+			"https_notification_configuration": schemaAttributef9e17599b68aa8794b932723(),
+			// Property: SqsNotificationConfiguration
+			"sqs_notification_configuration": schemaAttribute9f6d9247d28703c9851fcd01(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f6d9247d28703c9851fcd01() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The configurations for SQS subscriber notification. The members of this structure are context-dependent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab3973e01abdcfecd25fdfc0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The HTTPS method used for the notification subscription.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5731cc3ae455a75fab9f4be() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name for the notification subscription.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec19b8351af6ababe901e2338() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN for the subscriber",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0c7f4087aeceb9844c2f793() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that you created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9e17599b68aa8794b932723() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizationApiKeyName
+			"authorization_api_key_name": schemaAttributeb5731cc3ae455a75fab9f4be(),
+			// Property: AuthorizationApiKeyValue
+			"authorization_api_key_value": schemaAttribute4c756899d5ebf4361ba5884d(),
+			// Property: Endpoint
+			"endpoint": schemaAttribute1dc02a34ee591729e8a16d75(),
+			// Property: HttpMethod
+			"http_method": schemaAttributeab3973e01abdcfecd25fdfc0(),
+			// Property: TargetRoleArn
+			"target_role_arn": schemaAttributee0c7f4087aeceb9844c2f793(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for HTTPS subscriber notification.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_securitylake_subscriber_notification", subscriberNotificationDataSource)
 }
@@ -85,49 +173,7 @@ func subscriberNotificationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "object"
 		//	}
-		"notification_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: HttpsNotificationConfiguration
-				"https_notification_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AuthorizationApiKeyName
-						"authorization_api_key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The key name for the notification subscription.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AuthorizationApiKeyValue
-						"authorization_api_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The key value for the notification subscription.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Endpoint
-						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The subscription endpoint in Security Lake.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: HttpMethod
-						"http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The HTTPS method used for the notification subscription.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TargetRoleArn
-						"target_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that you created.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration for HTTPS subscriber notification.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SqsNotificationConfiguration
-				"sqs_notification_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType:  jsontypes.NormalizedType{},
-					Description: "The configurations for SQS subscriber notification. The members of this structure are context-dependent.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"notification_configuration": schemaAttribute8ca1fa7756f61054d5e78edb(),
 		// Property: SubscriberArn
 		// CloudFormation resource type schema:
 		//
@@ -136,10 +182,7 @@ func subscriberNotificationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^arn:.*$",
 		//	  "type": "string"
 		//	}
-		"subscriber_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN for the subscriber",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subscriber_arn": schemaAttributec19b8351af6ababe901e2338(),
 		// Property: SubscriberEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -147,10 +190,7 @@ func subscriberNotificationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The endpoint the subscriber should listen to for notifications",
 		//	  "type": "string"
 		//	}
-		"subscriber_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The endpoint the subscriber should listen to for notifications",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subscriber_endpoint": schemaAttribute80143a9a1ed0e2570d9bab4b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

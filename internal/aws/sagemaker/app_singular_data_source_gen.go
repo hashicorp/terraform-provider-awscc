@@ -14,6 +14,121 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute12a7d00baa1853c5f33259e7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the image version created on the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute247c9ccaf995237703f13e71() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the application is launched in recovery mode.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3477171aab5ac9e508f8e0bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The domain ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3511d5eddb821022cdc3072b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a00d49983f53690b14e389a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceType
+			"instance_type": schemaAttribute4f5272510e171fe30d7c20fc(),
+			// Property: LifecycleConfigArn
+			"lifecycle_config_arn": schemaAttributeaa769bd04c275b41ba14cafc(),
+			// Property: SageMakerImageArn
+			"sage_maker_image_arn": schemaAttributebcc9f7fdc42349a19a6b9134(),
+			// Property: SageMakerImageVersionArn
+			"sage_maker_image_version_arn": schemaAttribute12a7d00baa1853c5f33259e7(),
+		}, /*END SCHEMA*/
+		Description: "The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3aeeaef156fd678963673d2b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec6bfa4f9cff0554004d3b61a(),
+				// Property: Value
+				"value": schemaAttributec6bfa4f9cff0554004d3b61a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags to apply to the app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f5272510e171fe30d7c20fc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The instance type that the image version runs on.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e357b93677fbaacd76d1bb7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The lifecycle configuration that runs before the default lifecycle configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa769bd04c275b41ba14cafc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebcc9f7fdc42349a19a6b9134() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the SageMaker image that the image version belongs to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6bfa4f9cff0554004d3b61a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb043a7eafc017d2c4240348() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user profile name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec07a6896062656021684a44() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9cbf4387be7eb45844004de() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the app.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_app", appDataSource)
 }
@@ -32,10 +147,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:app/.*",
 		//	  "type": "string"
 		//	}
-		"app_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the app.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"app_arn": schemaAttributeec07a6896062656021684a44(),
 		// Property: AppName
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +158,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
 		//	  "type": "string"
 		//	}
-		"app_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the app.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"app_name": schemaAttributef9cbf4387be7eb45844004de(),
 		// Property: AppType
 		// CloudFormation resource type schema:
 		//
@@ -64,10 +173,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"app_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of app.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"app_type": schemaAttribute3511d5eddb821022cdc3072b(),
 		// Property: BuiltInLifecycleConfigArn
 		// CloudFormation resource type schema:
 		//
@@ -77,10 +183,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*|None)$",
 		//	  "type": "string"
 		//	}
-		"built_in_lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The lifecycle configuration that runs before the default lifecycle configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"built_in_lifecycle_config_arn": schemaAttribute9e357b93677fbaacd76d1bb7(),
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
@@ -90,10 +193,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The domain ID.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_id": schemaAttribute3477171aab5ac9e508f8e0bb(),
 		// Property: RecoveryMode
 		// CloudFormation resource type schema:
 		//
@@ -101,10 +201,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether the application is launched in recovery mode.",
 		//	  "type": "boolean"
 		//	}
-		"recovery_mode": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the application is launched in recovery mode.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"recovery_mode": schemaAttribute247c9ccaf995237703f13e71(),
 		// Property: ResourceSpec
 		// CloudFormation resource type schema:
 		//
@@ -304,32 +401,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: InstanceType
-				"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The instance type that the image version runs on.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LifecycleConfigArn
-				"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SageMakerImageArn
-				"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the SageMaker image that the image version belongs to.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SageMakerImageVersionArn
-				"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the image version created on the instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_spec": schemaAttribute3a00d49983f53690b14e389a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -360,22 +432,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags to apply to the app.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute3aeeaef156fd678963673d2b(),
 		// Property: UserProfileName
 		// CloudFormation resource type schema:
 		//
@@ -386,10 +443,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
 		//	  "type": "string"
 		//	}
-		"user_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The user profile name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"user_profile_name": schemaAttributedb043a7eafc017d2c4240348(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

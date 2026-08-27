@@ -14,6 +14,20 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute033a2c60301491d2ce97096b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the VPC.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeadc7ed827253c207088feb96() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the DHCP options set, or default to associate no DHCP options with the VPC.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_vpcdhcp_options_association", vPCDHCPOptionsAssociationDataSource)
 }
@@ -29,10 +43,7 @@ func vPCDHCPOptionsAssociationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "The ID of the DHCP options set, or default to associate no DHCP options with the VPC.",
 		//	  "type": "string"
 		//	}
-		"dhcp_options_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the DHCP options set, or default to associate no DHCP options with the VPC.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dhcp_options_id": schemaAttributeadc7ed827253c207088feb96(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +51,7 @@ func vPCDHCPOptionsAssociationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "The ID of the VPC.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the VPC.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttribute033a2c60301491d2ce97096b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,152 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute12670853424105ffaf26ca15() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of document to create.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1418afc9f6543aae72241e9c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1dc5c41c52f5b0c8cb655c9b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1fd964152753ac7acf529990() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The content for the Systems Manager document in JSON, YAML or String format.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2013a4c17e6770db0cde963a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name for the Systems Manager document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26b324ee5088936a00e2056c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a3f78fe422c72bffbb17744() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5dd820ee47bc84e8298013b2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key of a key-value pair that identifies the location of an attachment to a document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64a202cf9166a4bbe9206b51() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specify a target type to define the kinds of resources the document can run on.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6afb45b5912d5900f52e9d32() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute5dd820ee47bc84e8298013b2(),
+				// Property: Name
+				"name": schemaAttribute946a75ec980a2fbbd55d2f98(),
+				// Property: Values
+				"values": schemaAttributeea14d5cce1a2a8958b56c88a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key and value pairs that describe attachments to a version of a document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute946a75ec980a2fbbd55d2f98() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the document attachment file.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95d3091ccdaf18f0c72ea247() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The document version required by the current document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa70e4d471f852787adf20a1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Update method - when set to 'Replace', the update will replace the existing document; when set to 'NewVersion', the update will create a new version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8e6262b7310ada5f773ce7a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute1418afc9f6543aae72241e9c(),
+				// Property: Version
+				"version": schemaAttribute95d3091ccdaf18f0c72ea247(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6478e05a22772ca93f6cbc7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedde60bd62da3ca3498911d55() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute2a3f78fe422c72bffbb17744(),
+				// Property: Value
+				"value": schemaAttributec6478e05a22772ca93f6cbc7(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea14d5cce1a2a8958b56c88a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ssm_document", documentDataSource)
 }
@@ -67,30 +213,7 @@ func documentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"attachments": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key of a key-value pair that identifies the location of an attachment to a document.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the document attachment file.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Values
-					"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key and value pairs that describe attachments to a version of a document.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"attachments": schemaAttribute6afb45b5912d5900f52e9d32(),
 		// Property: Content
 		// CloudFormation resource type schema:
 		//
@@ -98,10 +221,7 @@ func documentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The content for the Systems Manager document in JSON, YAML or String format.",
 		//	  "type": "string"
 		//	}
-		"content": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The content for the Systems Manager document in JSON, YAML or String format.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"content": schemaAttribute1fd964152753ac7acf529990(),
 		// Property: DocumentFormat
 		// CloudFormation resource type schema:
 		//
@@ -115,10 +235,7 @@ func documentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"document_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"document_format": schemaAttribute1dc5c41c52f5b0c8cb655c9b(),
 		// Property: DocumentType
 		// CloudFormation resource type schema:
 		//
@@ -143,10 +260,7 @@ func documentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"document_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of document to create.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"document_type": schemaAttribute12670853424105ffaf26ca15(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -155,10 +269,7 @@ func documentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_\\-.]{3,128}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the Systems Manager document.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute2013a4c17e6770db0cde963a(),
 		// Property: Requires
 		// CloudFormation resource type schema:
 		//
@@ -186,24 +297,7 @@ func documentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"requires": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Version
-					"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The document version required by the current document.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"requires": schemaAttributeb8e6262b7310ada5f773ce7a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -233,24 +327,7 @@ func documentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 1000,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributedde60bd62da3ca3498911d55(),
 		// Property: TargetType
 		// CloudFormation resource type schema:
 		//
@@ -259,10 +336,7 @@ func documentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\/[\\w\\.\\-\\:\\/]*$",
 		//	  "type": "string"
 		//	}
-		"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specify a target type to define the kinds of resources the document can run on.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_type": schemaAttribute64a202cf9166a4bbe9206b51(),
 		// Property: UpdateMethod
 		// CloudFormation resource type schema:
 		//
@@ -275,10 +349,7 @@ func documentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"update_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Update method - when set to 'Replace', the update will replace the existing document; when set to 'NewVersion', the update will create a new version.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"update_method": schemaAttributeaa70e4d471f852787adf20a1(),
 		// Property: VersionName
 		// CloudFormation resource type schema:
 		//
@@ -287,10 +358,7 @@ func documentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_\\-.]{1,128}$",
 		//	  "type": "string"
 		//	}
-		"version_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version_name": schemaAttribute26b324ee5088936a00e2056c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

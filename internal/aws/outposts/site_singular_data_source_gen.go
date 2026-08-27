@@ -14,6 +14,82 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute62a4e2264756606a307d7c46() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f26fec8771c6eae4c2c479f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FiberOpticCableType
+			"fiber_optic_cable_type": schemaAttribute62a4e2264756606a307d7c46(),
+			// Property: MaximumSupportedWeightLbs
+			"maximum_supported_weight_lbs": schemaAttribute62a4e2264756606a307d7c46(),
+			// Property: OpticalStandard
+			"optical_standard": schemaAttribute62a4e2264756606a307d7c46(),
+			// Property: PowerConnector
+			"power_connector": schemaAttribute62a4e2264756606a307d7c46(),
+			// Property: PowerDrawKva
+			"power_draw_kva": schemaAttribute62a4e2264756606a307d7c46(),
+			// Property: PowerFeedDrop
+			"power_feed_drop": schemaAttribute62a4e2264756606a307d7c46(),
+			// Property: PowerPhase
+			"power_phase": schemaAttribute62a4e2264756606a307d7c46(),
+			// Property: UplinkCount
+			"uplink_count": schemaAttribute62a4e2264756606a307d7c46(),
+			// Property: UplinkGbps
+			"uplink_gbps": schemaAttribute62a4e2264756606a307d7c46(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a7a38c5f381474c905423c5() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute62a4e2264756606a307d7c46(),
+				// Property: Value
+				"value": schemaAttribute62a4e2264756606a307d7c46(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9746efb7286854a602c16a19() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AddressLine1
+			"address_line_1": schemaAttribute62a4e2264756606a307d7c46(),
+			// Property: AddressLine2
+			"address_line_2": schemaAttribute62a4e2264756606a307d7c46(),
+			// Property: AddressLine3
+			"address_line_3": schemaAttribute62a4e2264756606a307d7c46(),
+			// Property: City
+			"city": schemaAttribute62a4e2264756606a307d7c46(),
+			// Property: ContactName
+			"contact_name": schemaAttribute62a4e2264756606a307d7c46(),
+			// Property: ContactPhoneNumber
+			"contact_phone_number": schemaAttribute62a4e2264756606a307d7c46(),
+			// Property: CountryCode
+			"country_code": schemaAttribute62a4e2264756606a307d7c46(),
+			// Property: DistrictOrCounty
+			"district_or_county": schemaAttribute62a4e2264756606a307d7c46(),
+			// Property: Municipality
+			"municipality": schemaAttribute62a4e2264756606a307d7c46(),
+			// Property: PostalCode
+			"postal_code": schemaAttribute62a4e2264756606a307d7c46(),
+			// Property: StateOrRegion
+			"state_or_region": schemaAttribute62a4e2264756606a307d7c46(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_outposts_site", siteDataSource)
 }
@@ -31,9 +107,7 @@ func siteDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\S ]+$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute62a4e2264756606a307d7c46(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -43,9 +117,7 @@ func siteDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\S ]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute62a4e2264756606a307d7c46(),
 		// Property: Notes
 		// CloudFormation resource type schema:
 		//
@@ -55,9 +127,7 @@ func siteDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\S \\n]+$",
 		//	  "type": "string"
 		//	}
-		"notes": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"notes": schemaAttribute62a4e2264756606a307d7c46(),
 		// Property: OperatingAddress
 		// CloudFormation resource type schema:
 		//
@@ -142,55 +212,7 @@ func siteDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"operating_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AddressLine1
-				"address_line_1": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: AddressLine2
-				"address_line_2": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: AddressLine3
-				"address_line_3": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: City
-				"city": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ContactName
-				"contact_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ContactPhoneNumber
-				"contact_phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CountryCode
-				"country_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: DistrictOrCounty
-				"district_or_county": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Municipality
-				"municipality": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PostalCode
-				"postal_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: StateOrRegion
-				"state_or_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"operating_address": schemaAttribute9746efb7286854a602c16a19(),
 		// Property: RackPhysicalProperties
 		// CloudFormation resource type schema:
 		//
@@ -292,47 +314,7 @@ func siteDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"rack_physical_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FiberOpticCableType
-				"fiber_optic_cable_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaximumSupportedWeightLbs
-				"maximum_supported_weight_lbs": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: OpticalStandard
-				"optical_standard": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PowerConnector
-				"power_connector": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PowerDrawKva
-				"power_draw_kva": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PowerFeedDrop
-				"power_feed_drop": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PowerPhase
-				"power_phase": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UplinkCount
-				"uplink_count": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UplinkGbps
-				"uplink_gbps": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"rack_physical_properties": schemaAttribute6f26fec8771c6eae4c2c479f(),
 		// Property: ShippingAddress
 		// CloudFormation resource type schema:
 		//
@@ -417,55 +399,7 @@ func siteDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"shipping_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AddressLine1
-				"address_line_1": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: AddressLine2
-				"address_line_2": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: AddressLine3
-				"address_line_3": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: City
-				"city": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ContactName
-				"contact_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ContactPhoneNumber
-				"contact_phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CountryCode
-				"country_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: DistrictOrCounty
-				"district_or_county": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Municipality
-				"municipality": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PostalCode
-				"postal_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: StateOrRegion
-				"state_or_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"shipping_address": schemaAttribute9746efb7286854a602c16a19(),
 		// Property: SiteArn
 		// CloudFormation resource type schema:
 		//
@@ -475,9 +409,7 @@ func siteDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:site/(os-[a-f0-9]{17})$",
 		//	  "type": "string"
 		//	}
-		"site_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"site_arn": schemaAttribute62a4e2264756606a307d7c46(),
 		// Property: SiteId
 		// CloudFormation resource type schema:
 		//
@@ -487,9 +419,7 @@ func siteDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:site/)?(os-[a-f0-9]{17})$",
 		//	  "type": "string"
 		//	}
-		"site_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"site_id": schemaAttribute62a4e2264756606a307d7c46(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -518,21 +448,7 @@ func siteDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute8a7a38c5f381474c905423c5(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

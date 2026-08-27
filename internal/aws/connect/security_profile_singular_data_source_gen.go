@@ -15,6 +15,262 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1046c71538db01fd4d61eaf7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataTableAccessControlConfiguration
+			"data_table_access_control_configuration": schemaAttribute1b67ee11b24f14e4bc446fc8(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1457f0afdc1732cee1a7f050() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute167e0714f9d1a3ad4f383b94() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApplicationPermissions
+				"application_permissions": schemaAttribute87183db27f5e915fd10df799(),
+				// Property: Namespace
+				"namespace": schemaAttribute7f2967669c68e8a57f2f0920(),
+				// Property: Type
+				"type": schemaAttributec1a80a0a156e5c52ae234219(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of third-party applications that the security profile will give access to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute198141f31d7e893a9d0123f9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the security profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1b67ee11b24f14e4bc446fc8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PrimaryAttributeAccessControlConfiguration
+			"primary_attribute_access_control_configuration": schemaAttribute5943fb44c054711491eb52b2(),
+		}, /*END SCHEMA*/
+		Description: "Defines the access control configuration for data tables.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2010455fea1dc3ca362e1c63() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccessType
+				"access_type": schemaAttributee299388a412eba37d8184ac8(),
+				// Property: AttributeName
+				"attribute_name": schemaAttribute918d0fdbd416030c28267785(),
+				// Property: Values
+				"values": schemaAttribute8003953582eacee4b09d69ab(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of PrimaryAttributeValue objects.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2168fafbbdc8241a86d799d4() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute532dc376ed1885b3bf21bfb2(),
+				// Property: Value
+				"value": schemaAttribute5b4e718f830892cd771210e4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags used to organize, track, or control access for this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute267db7731c4ade5cb28b5c14() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Region where this resource was last modified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute288c8e55b3b4474d023985ed() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of resources that a security profile applies hierarchy restrictions to in Amazon Connect.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute29fae1d16f435469017f9c94() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the Amazon Connect instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute492e8d937d09b98addd1402f() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Permissions assigned to the security profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4fda6e10331c0eeb863be9aa() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute532dc376ed1885b3bf21bfb2(),
+				// Property: Value
+				"value": schemaAttribute5b4e718f830892cd771210e4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of tags that a security profile uses to restrict access to resources in Amazon Connect.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute532dc376ed1885b3bf21bfb2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5943fb44c054711491eb52b2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PrimaryAttributeValues
+			"primary_attribute_values": schemaAttribute2010455fea1dc3ca362e1c63(),
+		}, /*END SCHEMA*/
+		Description: "Contains the configuration for record-based access control.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b4e718f830892cd771210e4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5df4fbbf8ca13fcea0bc846c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the application that you want to give access to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a45c0de2edae8dd60133502() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp when this resource was last modified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f2967669c68e8a57f2f0920() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Namespace of the application that you want to give access to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8003953582eacee4b09d69ab() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "An array of allowed primary values for the specified primary attribute.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute820e989218a5a35c566f0b7a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the security profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87183db27f5e915fd10df799() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The permissions that the agent is granted on the application",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89c7122ce2bca6326cc02ad4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the first-party application",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8bda59ae2b2863cf302730e6() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FlowModuleId
+				"flow_module_id": schemaAttribute5df4fbbf8ca13fcea0bc846c(),
+				// Property: Type
+				"type": schemaAttribute89c7122ce2bca6326cc02ad4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of flow-module resources to be linked to a security profile in Amazon Connect.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute918d0fdbd416030c28267785() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the primary attribute.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeacbca3c7296ecd8e694be992() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of resources that a security profile applies tag restrictions to in Amazon Connect.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec1a80a0a156e5c52ae234219() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the application.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee299388a412eba37d8184ac8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the type of access granted. Currently, only \"ALLOW\" is supported",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4483b55aecc84619ff2d524() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the security profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_security_profile", securityProfileDataSource)
 }
@@ -33,10 +289,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"allowed_access_control_hierarchy_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"allowed_access_control_hierarchy_group_id": schemaAttribute1457f0afdc1732cee1a7f050(),
 		// Property: AllowedAccessControlTags
 		// CloudFormation resource type schema:
 		//
@@ -71,24 +324,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"allowed_access_control_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of tags that a security profile uses to restrict access to resources in Amazon Connect.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"allowed_access_control_tags": schemaAttribute4fda6e10331c0eeb863be9aa(),
 		// Property: AllowedFlowModules
 		// CloudFormation resource type schema:
 		//
@@ -118,24 +354,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"allowed_flow_modules": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: FlowModuleId
-					"flow_module_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The identifier of the application that you want to give access to.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Type
-					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of the first-party application",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of flow-module resources to be linked to a security profile in Amazon Connect.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"allowed_flow_modules": schemaAttribute8bda59ae2b2863cf302730e6(),
 		// Property: Applications
 		// CloudFormation resource type schema:
 		//
@@ -180,30 +399,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"applications": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ApplicationPermissions
-					"application_permissions": schema.SetAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The permissions that the agent is granted on the application",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Namespace
-					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Namespace of the application that you want to give access to.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Type
-					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of the application.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of third-party applications that the security profile will give access to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"applications": schemaAttribute167e0714f9d1a3ad4f383b94(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -213,10 +409,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the security profile.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute820e989218a5a35c566f0b7a(),
 		// Property: GranularAccessControlConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -281,50 +474,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"granular_access_control_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DataTableAccessControlConfiguration
-				"data_table_access_control_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: PrimaryAttributeAccessControlConfiguration
-						"primary_attribute_access_control_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: PrimaryAttributeValues
-								"primary_attribute_values": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: AccessType
-											"access_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Specifies the type of access granted. Currently, only \"ALLOW\" is supported",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: AttributeName
-											"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The name of the primary attribute.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Values
-											"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Description: "An array of allowed primary values for the specified primary attribute.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "An array of PrimaryAttributeValue objects.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Contains the configuration for record-based access control.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Defines the access control configuration for data tables.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"granular_access_control_configuration": schemaAttribute1046c71538db01fd4d61eaf7(),
 		// Property: HierarchyRestrictedResources
 		// CloudFormation resource type schema:
 		//
@@ -341,11 +491,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"hierarchy_restricted_resources": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of resources that a security profile applies hierarchy restrictions to in Amazon Connect.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"hierarchy_restricted_resources": schemaAttribute288c8e55b3b4474d023985ed(),
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -354,10 +500,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the Amazon Connect instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_arn": schemaAttribute29fae1d16f435469017f9c94(),
 		// Property: LastModifiedRegion
 		// CloudFormation resource type schema:
 		//
@@ -366,10 +509,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "[a-z]{2}(-[a-z]+){1,2}(-[0-9])?",
 		//	  "type": "string"
 		//	}
-		"last_modified_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS Region where this resource was last modified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_region": schemaAttribute267db7731c4ade5cb28b5c14(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -377,10 +517,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The timestamp when this resource was last modified.",
 		//	  "type": "number"
 		//	}
-		"last_modified_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp when this resource was last modified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttribute6a45c0de2edae8dd60133502(),
 		// Property: Permissions
 		// CloudFormation resource type schema:
 		//
@@ -397,11 +534,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"permissions": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Permissions assigned to the security profile.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"permissions": schemaAttribute492e8d937d09b98addd1402f(),
 		// Property: SecurityProfileArn
 		// CloudFormation resource type schema:
 		//
@@ -410,10 +543,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/security-profile/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"security_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the security profile.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_profile_arn": schemaAttribute198141f31d7e893a9d0123f9(),
 		// Property: SecurityProfileName
 		// CloudFormation resource type schema:
 		//
@@ -424,10 +554,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[ a-zA-Z0-9_@-]+$",
 		//	  "type": "string"
 		//	}
-		"security_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the security profile.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_profile_name": schemaAttributee4483b55aecc84619ff2d524(),
 		// Property: TagRestrictedResources
 		// CloudFormation resource type schema:
 		//
@@ -444,11 +571,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tag_restricted_resources": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of resources that a security profile applies tag restrictions to in Amazon Connect.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tag_restricted_resources": schemaAttributeacbca3c7296ecd8e694be992(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -483,24 +606,7 @@ func securityProfileDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags used to organize, track, or control access for this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute2168fafbbdc8241a86d799d4(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

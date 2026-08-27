@@ -15,6 +15,150 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute01c2faf219be48c4c755f137() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2071797d6fb51d5a10460b67() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2083d8bf382779484d3812ee() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CreatedAt
+			"created_at": schemaAttribute9ba19d0d43a9faa36c80cc7f(),
+			// Property: IdcApplicationArn
+			"idc_application_arn": schemaAttribute01c2faf219be48c4c755f137(),
+			// Property: IdcInstanceArn
+			"idc_instance_arn": schemaAttribute01c2faf219be48c4c755f137(),
+			// Property: OperatorAppRoleArn
+			"operator_app_role_arn": schemaAttribute01c2faf219be48c4c755f137(),
+			// Property: UpdatedAt
+			"updated_at": schemaAttribute9ba19d0d43a9faa36c80cc7f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23e92cece11084ea86521008() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a90c7b4789866ef8ef55a09() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the AgentSpace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e07e252c7c3202c0988a86d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the AgentSpace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ed4efb01b440a0dae19562b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the AgentSpace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute59f6038daf3488c578625309() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Iam
+			"iam": schemaAttribute9dc99a9b9c9977a94a908b51(),
+			// Property: Idc
+			"idc": schemaAttribute2083d8bf382779484d3812ee(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87ed3dea2c364a399a5ccb54() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the KMS key to use for encryption.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93e5979249f94a1daecee77b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the resource was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95fec24705eac4f8c1f3f0d4() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute23e92cece11084ea86521008(),
+				// Property: Value
+				"value": schemaAttribute2071797d6fb51d5a10460b67(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ba19d0d43a9faa36c80cc7f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9dc99a9b9c9977a94a908b51() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CreatedAt
+			"created_at": schemaAttribute9ba19d0d43a9faa36c80cc7f(),
+			// Property: OperatorAppRoleArn
+			"operator_app_role_arn": schemaAttribute01c2faf219be48c4c755f137(),
+			// Property: UpdatedAt
+			"updated_at": schemaAttribute9ba19d0d43a9faa36c80cc7f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6bd2ff58c92c30e02d79055() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The locale for the AgentSpace, which determines the language used in agent responses.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee12d4610a7e5713808c6bcea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the AgentSpace",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1411bf253a521473b1e6a98() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the resource was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_devopsagent_agent_space", agentSpaceDataSource)
 }
@@ -32,10 +176,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"agent_space_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the AgentSpace",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_space_id": schemaAttributee12d4610a7e5713808c6bcea(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +184,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the AgentSpace.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the AgentSpace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute2ed4efb01b440a0dae19562b(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -55,11 +193,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the resource was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute93e5979249f94a1daecee77b(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -69,10 +203,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the AgentSpace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute2a90c7b4789866ef8ef55a09(),
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +213,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the KMS key to use for encryption.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttribute87ed3dea2c364a399a5ccb54(),
 		// Property: Locale
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +224,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z]{2,3}(-[a-zA-Z0-9]{2,8})*$",
 		//	  "type": "string"
 		//	}
-		"locale": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The locale for the AgentSpace, which determines the language used in agent responses.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"locale": schemaAttributec6bd2ff58c92c30e02d79055(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -109,10 +234,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the AgentSpace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute2e07e252c7c3202c0988a86d(),
 		// Property: OperatorApp
 		// CloudFormation resource type schema:
 		//
@@ -169,59 +291,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"operator_app": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Iam
-				"iam": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CreatedAt
-						"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType: timetypes.RFC3339Type{},
-							Computed:   true,
-						}, /*END ATTRIBUTE*/
-						// Property: OperatorAppRoleArn
-						"operator_app_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: UpdatedAt
-						"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType: timetypes.RFC3339Type{},
-							Computed:   true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Idc
-				"idc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CreatedAt
-						"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType: timetypes.RFC3339Type{},
-							Computed:   true,
-						}, /*END ATTRIBUTE*/
-						// Property: IdcApplicationArn
-						"idc_application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: IdcInstanceArn
-						"idc_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: OperatorAppRoleArn
-						"operator_app_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: UpdatedAt
-						"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType: timetypes.RFC3339Type{},
-							Computed:   true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"operator_app": schemaAttribute59f6038daf3488c578625309(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -254,24 +324,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute95fec24705eac4f8c1f3f0d4(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -280,11 +333,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the resource was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttributee1411bf253a521473b1e6a98(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

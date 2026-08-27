@@ -14,6 +14,48 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0a97fd9316644368e76844b0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The product identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f9c722ea313b78e08e4fbcc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A json encoded string of the template constraint rules",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute540199a59332285dfdfaca27() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The language code.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d6a9818d512662c9cf21fa1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the constraint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fcdc7dc2f9a71496fb58e0d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique identifier for the constraint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb01fee4c6edb76506946949() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The portfolio identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_servicecatalog_launch_template_constraint", launchTemplateConstraintDataSource)
 }
@@ -29,10 +71,7 @@ func launchTemplateConstraintDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The language code.",
 		//	  "type": "string"
 		//	}
-		"accept_language": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The language code.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"accept_language": schemaAttribute540199a59332285dfdfaca27(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +79,7 @@ func launchTemplateConstraintDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The description of the constraint.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the constraint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute8d6a9818d512662c9cf21fa1(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +87,7 @@ func launchTemplateConstraintDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "Unique identifier for the constraint",
 		//	  "type": "string"
 		//	}
-		"launch_template_constraint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique identifier for the constraint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"launch_template_constraint_id": schemaAttribute9fcdc7dc2f9a71496fb58e0d(),
 		// Property: PortfolioId
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +95,7 @@ func launchTemplateConstraintDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The portfolio identifier.",
 		//	  "type": "string"
 		//	}
-		"portfolio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The portfolio identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"portfolio_id": schemaAttributebb01fee4c6edb76506946949(),
 		// Property: ProductId
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +103,7 @@ func launchTemplateConstraintDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The product identifier.",
 		//	  "type": "string"
 		//	}
-		"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The product identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"product_id": schemaAttribute0a97fd9316644368e76844b0(),
 		// Property: Rules
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +111,7 @@ func launchTemplateConstraintDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "A json encoded string of the template constraint rules",
 		//	  "type": "string"
 		//	}
-		"rules": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A json encoded string of the template constraint rules",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rules": schemaAttribute0f9c722ea313b78e08e4fbcc(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,128 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute076447277ab854e0ee053cd5() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a03e1398442954cfa0bef17() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38def13812bcaaba93cddd96() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d4528522fca72f5f220c3a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3fa747746bce062ec94a139c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Route settings for the stage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67eb0ccd84b2e553a6bf958a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DestinationArn
+			"destination_arn": schemaAttribute38def13812bcaaba93cddd96(),
+			// Property: Format
+			"format": schemaAttribute38def13812bcaaba93cddd96(),
+		}, /*END SCHEMA*/
+		Description: "Settings for logging access in this stage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute717999e0129f2d54fac1fa20() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description for the API stage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bf9d31382f374e4df546446() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The deployment identifier for the API stage. Can't be updated if autoDeploy is enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7fffad142b4a7ed43ec707b4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataTraceEnabled
+			"data_trace_enabled": schemaAttribute1a03e1398442954cfa0bef17(),
+			// Property: DetailedMetricsEnabled
+			"detailed_metrics_enabled": schemaAttribute1a03e1398442954cfa0bef17(),
+			// Property: LoggingLevel
+			"logging_level": schemaAttribute38def13812bcaaba93cddd96(),
+			// Property: ThrottlingBurstLimit
+			"throttling_burst_limit": schemaAttribute076447277ab854e0ee053cd5(),
+			// Property: ThrottlingRateLimit
+			"throttling_rate_limit": schemaAttribute9b453c4d1b71be9a4c5223a6(),
+		}, /*END SCHEMA*/
+		Description: "The default route settings for the stage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f461279affd92b0d462a2e4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of a client certificate for a Stage. Supported only for WebSocket APIs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute930696361197cc39e07036e5() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether updates to an API automatically trigger a new deployment. The default value is false.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b453c4d1b71be9a4c5223a6() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea090d3085b04115d028cba92() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The collection of tags. Each tag element is associated with a given resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedcefc64070c004299d09987b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The API identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1a92b3990d4366b50ebf55c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The stage name. Stage names can contain only alphanumeric characters, hyphens, and underscores, or be $default. Maximum length is 128 characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_apigatewayv2_stage", stageDataSource)
 }
@@ -39,20 +161,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"access_log_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DestinationArn
-				"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Format
-				"format": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Settings for logging access in this stage.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"access_log_settings": schemaAttribute67eb0ccd84b2e553a6bf958a(),
 		// Property: ApiId
 		// CloudFormation resource type schema:
 		//
@@ -60,10 +169,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The API identifier.",
 		//	  "type": "string"
 		//	}
-		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"api_id": schemaAttributedcefc64070c004299d09987b(),
 		// Property: AutoDeploy
 		// CloudFormation resource type schema:
 		//
@@ -71,10 +177,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether updates to an API automatically trigger a new deployment. The default value is false.",
 		//	  "type": "boolean"
 		//	}
-		"auto_deploy": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether updates to an API automatically trigger a new deployment. The default value is false.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"auto_deploy": schemaAttribute930696361197cc39e07036e5(),
 		// Property: ClientCertificateId
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +185,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The identifier of a client certificate for a Stage. Supported only for WebSocket APIs.",
 		//	  "type": "string"
 		//	}
-		"client_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of a client certificate for a Stage. Supported only for WebSocket APIs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"client_certificate_id": schemaAttribute8f461279affd92b0d462a2e4(),
 		// Property: DefaultRouteSettings
 		// CloudFormation resource type schema:
 		//
@@ -111,32 +211,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"default_route_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DataTraceEnabled
-				"data_trace_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: DetailedMetricsEnabled
-				"detailed_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: LoggingLevel
-				"logging_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ThrottlingBurstLimit
-				"throttling_burst_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ThrottlingRateLimit
-				"throttling_rate_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The default route settings for the stage.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_route_settings": schemaAttribute7fffad142b4a7ed43ec707b4(),
 		// Property: DeploymentId
 		// CloudFormation resource type schema:
 		//
@@ -144,10 +219,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The deployment identifier for the API stage. Can't be updated if autoDeploy is enabled.",
 		//	  "type": "string"
 		//	}
-		"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The deployment identifier for the API stage. Can't be updated if autoDeploy is enabled.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"deployment_id": schemaAttribute7bf9d31382f374e4df546446(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -155,10 +227,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description for the API stage.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description for the API stage.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute717999e0129f2d54fac1fa20(),
 		// Property: RouteSettings
 		// CloudFormation resource type schema:
 		//
@@ -166,11 +235,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Route settings for the stage.",
 		//	  "type": "object"
 		//	}
-		"route_settings": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "Route settings for the stage.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"route_settings": schemaAttribute3fa747746bce062ec94a139c(),
 		// Property: StageName
 		// CloudFormation resource type schema:
 		//
@@ -178,10 +243,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The stage name. Stage names can contain only alphanumeric characters, hyphens, and underscores, or be $default. Maximum length is 128 characters.",
 		//	  "type": "string"
 		//	}
-		"stage_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The stage name. Stage names can contain only alphanumeric characters, hyphens, and underscores, or be $default. Maximum length is 128 characters.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"stage_name": schemaAttributef1a92b3990d4366b50ebf55c(),
 		// Property: StageVariables
 		// CloudFormation resource type schema:
 		//
@@ -189,11 +251,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#\u0026=,]+.",
 		//	  "type": "object"
 		//	}
-		"stage_variables": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"stage_variables": schemaAttribute3d4528522fca72f5f220c3a5(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -201,11 +259,7 @@ func stageDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The collection of tags. Each tag element is associated with a given resource.",
 		//	  "type": "object"
 		//	}
-		"tags": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "The collection of tags. Each tag element is associated with a given resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributea090d3085b04115d028cba92(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

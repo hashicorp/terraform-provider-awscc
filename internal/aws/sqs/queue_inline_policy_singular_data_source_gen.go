@@ -15,6 +15,21 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute8a8cccc5d4e4e720ff465ea5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL of the SQS queue.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributece0f49e270fcb2edd694a83e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "A policy document that contains permissions to add to the specified SQS queue",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sqs_queue_inline_policy", queueInlinePolicyDataSource)
 }
@@ -30,11 +45,7 @@ func queueInlinePolicyDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "A policy document that contains permissions to add to the specified SQS queue",
 		//	  "type": "object"
 		//	}
-		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "A policy document that contains permissions to add to the specified SQS queue",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_document": schemaAttributece0f49e270fcb2edd694a83e(),
 		// Property: Queue
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +53,7 @@ func queueInlinePolicyDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The URL of the SQS queue.",
 		//	  "type": "string"
 		//	}
-		"queue": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The URL of the SQS queue.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"queue": schemaAttribute8a8cccc5d4e4e720ff465ea5(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,64 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute161d156c03377368a55ce2b3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "AWS Signer signing profile ARN to use for matched repositories.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48bb268778173cd69badf84e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Repository name pattern (supports '*' wildcard).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a8db7f3b5a0e45695e9691d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "12-digit AWS account ID of the ECR registry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9374de9ed06dcae24a5fd474() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RepositoryFilters
+				"repository_filters": schemaAttributecc6d555e836237a4b05934e4(),
+				// Property: SigningProfileArn
+				"signing_profile_arn": schemaAttribute161d156c03377368a55ce2b3(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Array of signing rules that define which repositories should be signed and with which signing profiles.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec52b51af895b319419c618e0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Type of repository filter",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc6d555e836237a4b05934e4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Filter
+				"filter": schemaAttribute48bb268778173cd69badf84e(),
+				// Property: FilterType
+				"filter_type": schemaAttributec52b51af895b319419c618e0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Optional array of repository filters. If omitted, the rule matches all repositories. If provided, must contain at least one filter. Empty arrays are not allowed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ecr_signing_configuration", signingConfigurationDataSource)
 }
@@ -30,10 +88,7 @@ func signingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"registry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "12-digit AWS account ID of the ECR registry.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"registry_id": schemaAttribute7a8db7f3b5a0e45695e9691d(),
 		// Property: Rules
 		// CloudFormation resource type schema:
 		//
@@ -91,38 +146,7 @@ func signingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: RepositoryFilters
-					"repository_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Filter
-								"filter": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Repository name pattern (supports '*' wildcard).",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: FilterType
-								"filter_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Type of repository filter",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "Optional array of repository filters. If omitted, the rule matches all repositories. If provided, must contain at least one filter. Empty arrays are not allowed.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SigningProfileArn
-					"signing_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "AWS Signer signing profile ARN to use for matched repositories.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Array of signing rules that define which repositories should be signed and with which signing profiles.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rules": schemaAttribute9374de9ed06dcae24a5fd474(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

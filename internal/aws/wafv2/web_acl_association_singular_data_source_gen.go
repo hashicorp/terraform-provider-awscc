@@ -14,6 +14,12 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute34856732a1603a93bd32169d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_wafv2_web_acl_association", webACLAssociationDataSource)
 }
@@ -30,9 +36,7 @@ func webACLAssociationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"resource_arn": schemaAttribute34856732a1603a93bd32169d(),
 		// Property: WebACLArn
 		// CloudFormation resource type schema:
 		//
@@ -41,9 +45,7 @@ func webACLAssociationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"web_acl_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"web_acl_arn": schemaAttribute34856732a1603a93bd32169d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

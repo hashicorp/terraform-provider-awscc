@@ -15,6 +15,356 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute05b7cb9320c8057e7148f32b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the hours of operation override.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19b31e162667003b487a41b2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the hours of operation override.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23473b586c5bde1c8407e0dd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date from which the hours of operation override would be effective.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28ac997ab06a0b789540dcf1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute35b88c903032ad05bd49b1c2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ByMonth
+			"by_month": schemaAttributebf5bca954eaed4b380ddc813(),
+			// Property: ByMonthDay
+			"by_month_day": schemaAttribute64c6b68c9f777dc8cb9b6314(),
+			// Property: ByWeekdayOccurrence
+			"by_weekday_occurrence": schemaAttribute4ccbd69948e17900a044e80c(),
+			// Property: Frequency
+			"frequency": schemaAttribute8a2c8a182c00f0d41b4156fc(),
+			// Property: Interval
+			"interval": schemaAttribute7b4ee3ffae743b98e0080b1e(),
+		}, /*END SCHEMA*/
+		Description: "Pattern for recurring hours of operation overrides.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute35e8cfca2281abba2ae8c58a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Resource Identifier for the hours of operation override.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40c0f6a401779f6bc9f4de63() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Hours
+			"hours": schemaAttribute96ee524a540847bf20729b91(),
+			// Property: Minutes
+			"minutes": schemaAttributecabc33843fc8e7b3e84e6a62(),
+		}, /*END SCHEMA*/
+		Description: "The start time that your contact center opens.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43c5c04d3de65cf1d8d21208() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ccbd69948e17900a044e80c() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.Int64Type,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute575eeffa8228f6f87bf93a82() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Id
+				"id": schemaAttribute972d6d889428665d96d63a6e(),
+				// Property: Name
+				"name": schemaAttribute74a545fcc084b4db45397d62(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of parent hours of operations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58bb41353fc591659e2a3135() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The day that the hours of operation applies to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute591d8f1fe53a7b1e8613041a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Id
+				"id": schemaAttribute972d6d889428665d96d63a6e(),
+				// Property: Name
+				"name": schemaAttribute74a545fcc084b4db45397d62(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of child hours of operations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ac69795550fa328ac4018b6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of hours of operation override.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64c6b68c9f777dc8cb9b6314() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.Int64Type,
+		Description: "List of month days (-1 to 31) for recurrence pattern.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute74a545fcc084b4db45397d62() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the hours of operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b4ee3ffae743b98e0080b1e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e0bdee8bdf448d6b341a043() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the hours of operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a2c8a182c00f0d41b4156fc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The frequency of recurrence for hours of operation overrides.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a3f7e43f35664008cb8a7cf() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Day
+				"day": schemaAttributeadc910c619eb1dc058e34f85(),
+				// Property: EndTime
+				"end_time": schemaAttributecf6d91e93fe3ff9aaf20513c(),
+				// Property: StartTime
+				"start_time": schemaAttribute9eea56a774a7546733514824(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Configuration information for the hours of operation override: day, start time, and end time.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute935786d8b08e12d1b8d25895() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EffectiveFrom
+				"effective_from": schemaAttribute23473b586c5bde1c8407e0dd(),
+				// Property: EffectiveTill
+				"effective_till": schemaAttributea29eb8c26fb249b49adb1d59(),
+				// Property: HoursOfOperationOverrideId
+				"hours_of_operation_override_id": schemaAttribute35e8cfca2281abba2ae8c58a(),
+				// Property: OverrideConfig
+				"override_config": schemaAttribute8a3f7e43f35664008cb8a7cf(),
+				// Property: OverrideDescription
+				"override_description": schemaAttribute05b7cb9320c8057e7148f32b(),
+				// Property: OverrideName
+				"override_name": schemaAttribute19b31e162667003b487a41b2(),
+				// Property: OverrideType
+				"override_type": schemaAttribute5ac69795550fa328ac4018b6(),
+				// Property: RecurrenceConfig
+				"recurrence_config": schemaAttributecc349a29a9073db8ddbf814d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more hours of operation overrides assigned to an hour of operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96ee524a540847bf20729b91() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The hours.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute972d6d889428665d96d63a6e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier for the hours of operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a53e0e186899b998a0859e0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the hours of operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9eea56a774a7546733514824() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Hours
+			"hours": schemaAttribute96ee524a540847bf20729b91(),
+			// Property: Minutes
+			"minutes": schemaAttributecabc33843fc8e7b3e84e6a62(),
+		}, /*END SCHEMA*/
+		Description: "The new start time that your contact center opens for the overriden days.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea29eb8c26fb249b49adb1d59() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date till which the hours of operation override would be effective.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeadc910c619eb1dc058e34f85() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The day that the hours of operation override applies to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb31aca7c1dd9e9ef07f4159() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time zone of the hours of operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf5bca954eaed4b380ddc813() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.Int64Type,
+		Description: "List of months (1-12) for recurrence pattern.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecabc33843fc8e7b3e84e6a62() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minutes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc349a29a9073db8ddbf814d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RecurrencePattern
+			"recurrence_pattern": schemaAttribute35b88c903032ad05bd49b1c2(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for recurring hours of operation overrides.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf6d91e93fe3ff9aaf20513c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Hours
+			"hours": schemaAttribute96ee524a540847bf20729b91(),
+			// Property: Minutes
+			"minutes": schemaAttributecabc33843fc8e7b3e84e6a62(),
+		}, /*END SCHEMA*/
+		Description: "The new end time that your contact center closes for the overriden days.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed03b35b84ac12add0c9464d8() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Day
+				"day": schemaAttribute58bb41353fc591659e2a3135(),
+				// Property: EndTime
+				"end_time": schemaAttributee55966b8e59df6192567e6ff(),
+				// Property: StartTime
+				"start_time": schemaAttribute40c0f6a401779f6bc9f4de63(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Configuration information for the hours of operation: day, start time, and end time.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee55966b8e59df6192567e6ff() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Hours
+			"hours": schemaAttribute96ee524a540847bf20729b91(),
+			// Property: Minutes
+			"minutes": schemaAttributecabc33843fc8e7b3e84e6a62(),
+		}, /*END SCHEMA*/
+		Description: "The end time that your contact center closes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef66e24684e2ffe49219da9f1() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute28ac997ab06a0b789540dcf1(),
+				// Property: Value
+				"value": schemaAttribute43c5c04d3de65cf1d8d21208(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more tags.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef867c4e63b1035955af572bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the Amazon Connect instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_hours_of_operation", hoursOfOperationDataSource)
 }
@@ -51,24 +401,7 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"child_hours_of_operations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Id
-					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The identifier for the hours of operation.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the hours of operation.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "List of child hours of operations.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"child_hours_of_operations": schemaAttribute591d8f1fe53a7b1e8613041a(),
 		// Property: Config
 		// CloudFormation resource type schema:
 		//
@@ -150,53 +483,7 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"config": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Day
-					"day": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The day that the hours of operation applies to.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: EndTime
-					"end_time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Hours
-							"hours": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The hours.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Minutes
-							"minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The minutes.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The end time that your contact center closes.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: StartTime
-					"start_time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Hours
-							"hours": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The hours.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Minutes
-							"minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The minutes.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The start time that your contact center opens.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Configuration information for the hours of operation: day, start time, and end time.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"config": schemaAttributed03b35b84ac12add0c9464d8(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -206,10 +493,7 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the hours of operation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute7e0bdee8bdf448d6b341a043(),
 		// Property: HoursOfOperationArn
 		// CloudFormation resource type schema:
 		//
@@ -218,10 +502,7 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/operating-hours/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"hours_of_operation_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the hours of operation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"hours_of_operation_arn": schemaAttribute9a53e0e186899b998a0859e0(),
 		// Property: HoursOfOperationOverrides
 		// CloudFormation resource type schema:
 		//
@@ -417,132 +698,7 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"hours_of_operation_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: EffectiveFrom
-					"effective_from": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The date from which the hours of operation override would be effective.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: EffectiveTill
-					"effective_till": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The date till which the hours of operation override would be effective.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: HoursOfOperationOverrideId
-					"hours_of_operation_override_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Resource Identifier for the hours of operation override.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: OverrideConfig
-					"override_config": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Day
-								"day": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The day that the hours of operation override applies to.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: EndTime
-								"end_time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Hours
-										"hours": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The hours.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Minutes
-										"minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The minutes.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The new end time that your contact center closes for the overriden days.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: StartTime
-								"start_time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Hours
-										"hours": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The hours.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Minutes
-										"minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The minutes.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The new start time that your contact center opens for the overriden days.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "Configuration information for the hours of operation override: day, start time, and end time.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: OverrideDescription
-					"override_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The description of the hours of operation override.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: OverrideName
-					"override_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the hours of operation override.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: OverrideType
-					"override_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of hours of operation override.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: RecurrenceConfig
-					"recurrence_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: RecurrencePattern
-							"recurrence_pattern": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: ByMonth
-									"by_month": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.Int64Type,
-										Description: "List of months (1-12) for recurrence pattern.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ByMonthDay
-									"by_month_day": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.Int64Type,
-										Description: "List of month days (-1 to 31) for recurrence pattern.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ByWeekdayOccurrence
-									"by_weekday_occurrence": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.Int64Type,
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Frequency
-									"frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The frequency of recurrence for hours of operation overrides.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Interval
-									"interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Pattern for recurring hours of operation overrides.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Configuration for recurring hours of operation overrides.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "One or more hours of operation overrides assigned to an hour of operation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"hours_of_operation_overrides": schemaAttribute935786d8b08e12d1b8d25895(),
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -551,10 +707,7 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the Amazon Connect instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_arn": schemaAttributef867c4e63b1035955af572bc(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -564,10 +717,7 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the hours of operation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute74a545fcc084b4db45397d62(),
 		// Property: ParentHoursOfOperations
 		// CloudFormation resource type schema:
 		//
@@ -596,24 +746,7 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"parent_hours_of_operations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Id
-					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The identifier for the hours of operation.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the hours of operation.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "List of parent hours of operations.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parent_hours_of_operations": schemaAttribute575eeffa8228f6f87bf93a82(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -647,24 +780,7 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "One or more tags.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributef66e24684e2ffe49219da9f1(),
 		// Property: TimeZone
 		// CloudFormation resource type schema:
 		//
@@ -672,10 +788,7 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The time zone of the hours of operation.",
 		//	  "type": "string"
 		//	}
-		"time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time zone of the hours of operation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"time_zone": schemaAttributebb31aca7c1dd9e9ef07f4159(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

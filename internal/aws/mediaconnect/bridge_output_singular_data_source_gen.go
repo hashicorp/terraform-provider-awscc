@@ -14,6 +14,74 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0d18cc73a82fe2ac544c3d00() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The network output's gateway network name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute202e6656d52b88e018e2a2ac() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The network output protocol.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2480056d581332180bf37f6a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IpAddress
+			"ip_address": schemaAttribute32065d1b83456accf443f8fb(),
+			// Property: NetworkName
+			"network_name": schemaAttribute0d18cc73a82fe2ac544c3d00(),
+			// Property: Port
+			"port": schemaAttributea14ce10e9aebf26a0773bf63(),
+			// Property: Protocol
+			"protocol": schemaAttribute202e6656d52b88e018e2a2ac(),
+			// Property: Ttl
+			"ttl": schemaAttributecb41962c95b83e7a06ca7687(),
+		}, /*END SCHEMA*/
+		Description: "The output of the bridge.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute32065d1b83456accf443f8fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The network output IP Address.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute662e533c4104cac0b9c4b2c2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Number (ARN) of the bridge.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea14ce10e9aebf26a0773bf63() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The network output port.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca3fe612b8ae845ce06fac1c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The network output name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb41962c95b83e7a06ca7687() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The network output TTL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_mediaconnect_bridge_output", bridgeOutputDataSource)
 }
@@ -29,10 +97,7 @@ func bridgeOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The Amazon Resource Number (ARN) of the bridge.",
 		//	  "type": "string"
 		//	}
-		"bridge_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Number (ARN) of the bridge.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bridge_arn": schemaAttribute662e533c4104cac0b9c4b2c2(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +105,7 @@ func bridgeOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The network output name.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The network output name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributeca3fe612b8ae845ce06fac1c(),
 		// Property: NetworkOutput
 		// CloudFormation resource type schema:
 		//
@@ -86,37 +148,7 @@ func bridgeOutputDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"network_output": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IpAddress
-				"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The network output IP Address.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NetworkName
-				"network_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The network output's gateway network name.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Port
-				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The network output port.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Protocol
-				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The network output protocol.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Ttl
-				"ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The network output TTL.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The output of the bridge.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_output": schemaAttribute2480056d581332180bf37f6a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

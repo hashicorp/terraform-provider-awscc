@@ -14,6 +14,76 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0c95a8aa84a822f90fb8bb2c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the trust store, could be either of ACTIVE or CREATING.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a0d0f0b6b3b70330d8b94f8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the trust store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1dab88359158760051021b71() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute32c43d0f6f66db68ad40db27(),
+				// Property: Value
+				"value": schemaAttribute32c43d0f6f66db68ad40db27(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags to assign to the trust store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2495d2074edbd5a241b83c35() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the trust store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2986e28df3ec60aa48751ad5() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of certificates associated with the trust store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute32c43d0f6f66db68ad40db27() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e7daace2e97430b387c815d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the S3 bucket to fetch the CA certificate bundle from.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2754d7f65f3d43b1b08a954() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the S3 object to fetch the CA certificate bundle from.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec16f47df9be7f9a5e2f9a4b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the S3 bucket that contains the CA certificate bundle.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_elasticloadbalancingv2_trust_store", trustStoreDataSource)
 }
@@ -29,10 +99,7 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the S3 bucket to fetch the CA certificate bundle from.",
 		//	  "type": "string"
 		//	}
-		"ca_certificates_bundle_s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the S3 bucket to fetch the CA certificate bundle from.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ca_certificates_bundle_s3_bucket": schemaAttribute9e7daace2e97430b387c815d(),
 		// Property: CaCertificatesBundleS3Key
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +107,7 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the S3 object to fetch the CA certificate bundle from.",
 		//	  "type": "string"
 		//	}
-		"ca_certificates_bundle_s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the S3 object to fetch the CA certificate bundle from.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ca_certificates_bundle_s3_key": schemaAttributeb2754d7f65f3d43b1b08a954(),
 		// Property: CaCertificatesBundleS3ObjectVersion
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +115,7 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version of the S3 bucket that contains the CA certificate bundle.",
 		//	  "type": "string"
 		//	}
-		"ca_certificates_bundle_s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of the S3 bucket that contains the CA certificate bundle.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ca_certificates_bundle_s3_object_version": schemaAttributec16f47df9be7f9a5e2f9a4b5(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +123,7 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the trust store.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the trust store.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute2495d2074edbd5a241b83c35(),
 		// Property: NumberOfCaCertificates
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +131,7 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of certificates associated with the trust store.",
 		//	  "type": "integer"
 		//	}
-		"number_of_ca_certificates": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of certificates associated with the trust store.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"number_of_ca_certificates": schemaAttribute2986e28df3ec60aa48751ad5(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +139,7 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The status of the trust store, could be either of ACTIVE or CREATING.",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the trust store, could be either of ACTIVE or CREATING.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute0c95a8aa84a822f90fb8bb2c(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -113,22 +165,7 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags to assign to the trust store.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute1dab88359158760051021b71(),
 		// Property: TrustStoreArn
 		// CloudFormation resource type schema:
 		//
@@ -136,10 +173,7 @@ func trustStoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the trust store.",
 		//	  "type": "string"
 		//	}
-		"trust_store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the trust store.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"trust_store_arn": schemaAttribute1a0d0f0b6b3b70330d8b94f8(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,32 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute207e1be331b5799cbf43cd23() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute404dfd903b2e86e51d39765d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute207e1be331b5799cbf43cd23(),
+				// Property: Value
+				"value": schemaAttribute207e1be331b5799cbf43cd23(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8cc793d64e113976e0045ade() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_guardduty_threat_intel_set", threatIntelSetDataSource)
 }
@@ -28,9 +54,7 @@ func threatIntelSetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"activate": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"activate": schemaAttribute8cc793d64e113976e0045ade(),
 		// Property: DetectorId
 		// CloudFormation resource type schema:
 		//
@@ -39,18 +63,14 @@ func threatIntelSetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"detector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"detector_id": schemaAttribute207e1be331b5799cbf43cd23(),
 		// Property: ExpectedBucketOwner
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"expected_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"expected_bucket_owner": schemaAttribute207e1be331b5799cbf43cd23(),
 		// Property: Format
 		// CloudFormation resource type schema:
 		//
@@ -59,18 +79,14 @@ func threatIntelSetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"format": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"format": schemaAttribute207e1be331b5799cbf43cd23(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"threat_intel_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"threat_intel_set_id": schemaAttribute207e1be331b5799cbf43cd23(),
 		// Property: Location
 		// CloudFormation resource type schema:
 		//
@@ -79,18 +95,14 @@ func threatIntelSetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"location": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"location": schemaAttribute207e1be331b5799cbf43cd23(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute207e1be331b5799cbf43cd23(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -117,21 +129,7 @@ func threatIntelSetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute404dfd903b2e86e51d39765d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

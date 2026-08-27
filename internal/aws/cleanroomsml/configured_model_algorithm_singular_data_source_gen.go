@@ -15,6 +15,74 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2132dc4b0212bb73d9d9941e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute286940e1fbc77570d33fcfe2() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute2132dc4b0212bb73d9d9941e(),
+				// Property: Value
+				"value": schemaAttribute2132dc4b0212bb73d9d9941e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An arbitrary set of tags (key-value pairs) for this cleanrooms-ml configured model algorithm.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b25696fc4d91ae00c881b28() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53568d5ae0270839e9543a79() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute2132dc4b0212bb73d9d9941e(),
+				// Property: Regex
+				"regex": schemaAttribute2132dc4b0212bb73d9d9941e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec93b66cd2c5c3767d26935e5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ImageUri
+			"image_uri": schemaAttribute2132dc4b0212bb73d9d9941e(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed085b620625e342a5091913() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arguments
+			"arguments": schemaAttribute2b25696fc4d91ae00c881b28(),
+			// Property: Entrypoint
+			"entrypoint": schemaAttribute2b25696fc4d91ae00c881b28(),
+			// Property: ImageUri
+			"image_uri": schemaAttribute2132dc4b0212bb73d9d9941e(),
+			// Property: MetricDefinitions
+			"metric_definitions": schemaAttribute53568d5ae0270839e9543a79(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cleanroomsml_configured_model_algorithm", configuredModelAlgorithmDataSource)
 }
@@ -32,9 +100,7 @@ func configuredModelAlgorithmDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:[0-9]{12}:configured-model-algorithm/[-a-zA-Z0-9_/.]+$",
 		//	  "type": "string"
 		//	}
-		"configured_model_algorithm_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"configured_model_algorithm_arn": schemaAttribute2132dc4b0212bb73d9d9941e(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -43,9 +109,7 @@ func configuredModelAlgorithmDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute2132dc4b0212bb73d9d9941e(),
 		// Property: InferenceContainerConfig
 		// CloudFormation resource type schema:
 		//
@@ -64,15 +128,7 @@ func configuredModelAlgorithmDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"inference_container_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ImageUri
-				"image_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"inference_container_config": schemaAttributec93b66cd2c5c3767d26935e5(),
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -82,9 +138,7 @@ func configuredModelAlgorithmDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^arn:aws[-a-z]*:kms:[-a-z0-9]+:[0-9]{12}:key/.+$",
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttribute2132dc4b0212bb73d9d9941e(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -94,9 +148,7 @@ func configuredModelAlgorithmDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute2132dc4b0212bb73d9d9941e(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -106,9 +158,7 @@ func configuredModelAlgorithmDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^arn:aws[-a-z]*:iam::[0-9]{12}:role/.+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute2132dc4b0212bb73d9d9941e(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -138,22 +188,7 @@ func configuredModelAlgorithmDataSource(ctx context.Context) (datasource.DataSou
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An arbitrary set of tags (key-value pairs) for this cleanrooms-ml configured model algorithm.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute286940e1fbc77570d33fcfe2(),
 		// Property: TrainingContainerConfig
 		// CloudFormation resource type schema:
 		//
@@ -224,41 +259,7 @@ func configuredModelAlgorithmDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"training_container_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arguments
-				"arguments": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Entrypoint
-				"entrypoint": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ImageUri
-				"image_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MetricDefinitions
-				"metric_definitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Regex
-							"regex": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"training_container_config": schemaAttributeed085b620625e342a5091913(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

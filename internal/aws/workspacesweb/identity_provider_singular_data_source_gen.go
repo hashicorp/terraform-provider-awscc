@@ -15,6 +15,35 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributea8ab19a102b0f050423515f4() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7e94052a9005188638f4674() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6934d7ada464acc160f1099() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec7e94052a9005188638f4674(),
+				// Property: Value
+				"value": schemaAttributec7e94052a9005188638f4674(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_workspacesweb_identity_provider", identityProviderDataSource)
 }
@@ -32,9 +61,7 @@ func identityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36}){2,}$",
 		//	  "type": "string"
 		//	}
-		"identity_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"identity_provider_arn": schemaAttributec7e94052a9005188638f4674(),
 		// Property: IdentityProviderDetails
 		// CloudFormation resource type schema:
 		//
@@ -50,11 +77,7 @@ func identityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"identity_provider_details": // Pattern: ""
-		schema.MapAttribute{         /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"identity_provider_details": schemaAttributea8ab19a102b0f050423515f4(),
 		// Property: IdentityProviderName
 		// CloudFormation resource type schema:
 		//
@@ -64,9 +87,7 @@ func identityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[^_][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_]+$",
 		//	  "type": "string"
 		//	}
-		"identity_provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"identity_provider_name": schemaAttributec7e94052a9005188638f4674(),
 		// Property: IdentityProviderType
 		// CloudFormation resource type schema:
 		//
@@ -81,9 +102,7 @@ func identityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"identity_provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"identity_provider_type": schemaAttributec7e94052a9005188638f4674(),
 		// Property: PortalArn
 		// CloudFormation resource type schema:
 		//
@@ -93,9 +112,7 @@ func identityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36})+$",
 		//	  "type": "string"
 		//	}
-		"portal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"portal_arn": schemaAttributec7e94052a9005188638f4674(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -127,21 +144,7 @@ func identityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributee6934d7ada464acc160f1099(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

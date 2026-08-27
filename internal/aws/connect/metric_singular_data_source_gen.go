@@ -15,6 +15,351 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute034feae28b9924fe652f77a0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BooleanCondition
+				"boolean_condition": schemaAttribute0e78c7978df4588ff96556cd(),
+				// Property: MetricFilterKey
+				"metric_filter_key": schemaAttribute44017c49c63b4191e98d8f9f(),
+				// Property: Negate
+				"negate": schemaAttribute980f47de8d8726cd7f828793(),
+				// Property: NumberCondition
+				"number_condition": schemaAttributea02e15a5237914efc8d59c63(),
+				// Property: StringCondition
+				"string_condition": schemaAttribute82e3629bfc90f484b39b518a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute06378131d09019e1dc8d6f2f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Recommended time to wait between each refresh of data for the metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute06cc4d131c848eafafa3a43f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Display unit for the metric data",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c2a54aa9aadc250d7ed30c1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AWSIdentityArn
+			"aws_identity_arn": schemaAttribute46f972aa9a45168723b99ba3(),
+			// Property: ConnectUserArn
+			"connect_user_arn": schemaAttribute573975499e4a2e0869aaf2b5(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0cfb9d404137be76aeca6bb4() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp where the metric was created",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0e78c7978df4588ff96556cd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Comparison
+			"comparison": schemaAttribute44017c49c63b4191e98d8f9f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19ee032468ed7f1e3c8a74b4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether the metric is provided out-of-the-box or created by each customer",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute298688ed913f38ded8c6af97() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Main provider of the document/row-level data for the metric; should match Data Lake table names",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2cfac4396ab5150ed89033e8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Metric calculation component alias for use within a calculation",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute32208eabbbdbb2d43491d09d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS region where the metric was last modified",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute39cf103fd84ac21db0c4611f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the Amazon Connect instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44017c49c63b4191e98d8f9f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute46f972aa9a45168723b99ba3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "STS or IAM ARN representing the identity of API Caller. SDK users cannot populate this and this value is calculated automatically if ConnectUserArn is not provided.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4df2dc0a05488e56b6288d23() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f089e3cc7b4a49e6bb209d1() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The metric may be used to compose other (custom) metrics",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f4528bda3ec24fe85c1cbbe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute573975499e4a2e0869aaf2b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An agent ARN representing a connect user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c063e3221626703f51834ba() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Calculation
+			"calculation": schemaAttributefdb62f6bd43dc38624ab9e18(),
+			// Property: CalculationComponents
+			"calculation_components": schemaAttributefaa9f80e4698058b6f355430(),
+		}, /*END SCHEMA*/
+		Description: "The calculation configuration for the metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66d9880e105d15a91d1d5db0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether the metric was built with the guided Service Level (SL) experience, or with the free-form metric builder",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7256eb75fd48cae277859496() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of stat aggregations available for the metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute75a4e3eed8e04251ce99c362() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The metric may be used to compose other (custom) metrics, meaning it can be used inside of aggregate stat functions",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76d58363fa1cf64ef730c13e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Identifies the timestamp used to place the metrics on a time-series; should match public attribute name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute776214cd3d07be0a0b9101ba() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Id
+				"id": schemaAttribute44017c49c63b4191e98d8f9f(),
+				// Property: Type
+				"type": schemaAttribute44017c49c63b4191e98d8f9f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of filter types that may be used with this metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e46c309d2e57797e4ef74f2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the custom metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82e3629bfc90f484b39b518a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Comparison
+			"comparison": schemaAttribute44017c49c63b4191e98d8f9f(),
+			// Property: Values
+			"values": schemaAttributeca9e4dad34343e67a5c9773e(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84aea18a87e8aa880713ce2c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates how to classify a positive trend in metric data on the UI",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f19b16a29418205d16bfd3b() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.Float64Type,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute980f47de8d8726cd7f828793() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ca725efa937b6fdcc748ae4() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute4f4528bda3ec24fe85c1cbbe(),
+				// Property: Value
+				"value": schemaAttribute4df2dc0a05488e56b6288d23(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more tags.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea02e15a5237914efc8d59c63() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Comparison
+			"comparison": schemaAttribute44017c49c63b4191e98d8f9f(),
+			// Property: Values
+			"values": schemaAttribute8f19b16a29418205d16bfd3b(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea718e2cc335ae353d375f3d4() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "Earliest time that can be queried for this metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb56d89493f9b4d838f87d9db() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of groupings that may be used with this metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb952d93922babc5a3d75f3f6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The category of the custom metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca9e4dad34343e67a5c9773e() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed772e7b95a020f9812c51f6d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the custom metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0f6b96aef27d3fa4cfd6894() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the custom metric.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef4514bd70e3fd6da631e0f37() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp where the metric was last modified",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef488e8e5e01e1546e43d2c69() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the custom metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefaa9f80e4698058b6f355430() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Alias
+				"alias": schemaAttribute2cfac4396ab5150ed89033e8(),
+				// Property: MetricFilters
+				"metric_filters": schemaAttribute034feae28b9924fe652f77a0(),
+				// Property: MetricId
+				"metric_id": schemaAttribute44017c49c63b4191e98d8f9f(),
+				// Property: MetricName
+				"metric_name": schemaAttribute44017c49c63b4191e98d8f9f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The calculation components for the metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdb62f6bd43dc38624ab9e18() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The calculation formula",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_metric", metricDataSource)
 }
@@ -30,10 +375,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The category of the custom metric",
 		//	  "type": "string"
 		//	}
-		"category": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The category of the custom metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"category": schemaAttributeb952d93922babc5a3d75f3f6(),
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +383,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp where the metric was created",
 		//	  "type": "number"
 		//	}
-		"created_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp where the metric was created",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttribute0cfb9d404137be76aeca6bb4(),
 		// Property: CreatedUser
 		// CloudFormation resource type schema:
 		//
@@ -61,21 +400,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"created_user": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AWSIdentityArn
-				"aws_identity_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "STS or IAM ARN representing the identity of API Caller. SDK users cannot populate this and this value is calculated automatically if ConnectUserArn is not provided.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ConnectUserArn
-				"connect_user_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "An agent ARN representing a connect user.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"created_user": schemaAttribute0c2a54aa9aadc250d7ed30c1(),
 		// Property: CreationMethod
 		// CloudFormation resource type schema:
 		//
@@ -87,10 +412,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"creation_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether the metric was built with the guided Service Level (SL) experience, or with the free-form metric builder",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_method": schemaAttribute66d9880e105d15a91d1d5db0(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -100,10 +422,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the custom metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributef488e8e5e01e1546e43d2c69(),
 		// Property: EffectiveTime
 		// CloudFormation resource type schema:
 		//
@@ -111,10 +430,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Earliest time that can be queried for this metric",
 		//	  "type": "number"
 		//	}
-		"effective_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "Earliest time that can be queried for this metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"effective_time": schemaAttributea718e2cc335ae353d375f3d4(),
 		// Property: Filters
 		// CloudFormation resource type schema:
 		//
@@ -142,22 +458,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Id
-					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Type
-					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "List of filter types that may be used with this metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"filters": schemaAttribute776214cd3d07be0a0b9101ba(),
 		// Property: Groupings
 		// CloudFormation resource type schema:
 		//
@@ -168,11 +469,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"groupings": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "List of groupings that may be used with this metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"groupings": schemaAttributeb56d89493f9b4d838f87d9db(),
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -181,10 +478,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the Amazon Connect instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_arn": schemaAttribute39cf103fd84ac21db0c4611f(),
 		// Property: LastModifiedRegion
 		// CloudFormation resource type schema:
 		//
@@ -192,10 +486,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AWS region where the metric was last modified",
 		//	  "type": "string"
 		//	}
-		"last_modified_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS region where the metric was last modified",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_region": schemaAttribute32208eabbbdbb2d43491d09d(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -203,10 +494,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp where the metric was last modified",
 		//	  "type": "number"
 		//	}
-		"last_modified_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp where the metric was last modified",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttributef4514bd70e3fd6da631e0f37(),
 		// Property: LastModifiedUser
 		// CloudFormation resource type schema:
 		//
@@ -223,21 +511,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"last_modified_user": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AWSIdentityArn
-				"aws_identity_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "STS or IAM ARN representing the identity of API Caller. SDK users cannot populate this and this value is calculated automatically if ConnectUserArn is not provided.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ConnectUserArn
-				"connect_user_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "An agent ARN representing a connect user.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_user": schemaAttribute0c2a54aa9aadc250d7ed30c1(),
 		// Property: MetricArn
 		// CloudFormation resource type schema:
 		//
@@ -246,10 +520,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/metric/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"metric_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the custom metric.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"metric_arn": schemaAttributee0f6b96aef27d3fa4cfd6894(),
 		// Property: MetricCalculation
 		// CloudFormation resource type schema:
 		//
@@ -388,95 +659,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"metric_calculation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Calculation
-				"calculation": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The calculation formula",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CalculationComponents
-				"calculation_components": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Alias
-							"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Metric calculation component alias for use within a calculation",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: MetricFilters
-							"metric_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: BooleanCondition
-										"boolean_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Comparison
-												"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: MetricFilterKey
-										"metric_filter_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Negate
-										"negate": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: NumberCondition
-										"number_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Comparison
-												"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Values
-												"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-													ElementType: types.Float64Type,
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: StringCondition
-										"string_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Comparison
-												"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Values
-												"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-													ElementType: types.StringType,
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: MetricId
-							"metric_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: MetricName
-							"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The calculation components for the metric",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The calculation configuration for the metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"metric_calculation": schemaAttribute5c063e3221626703f51834ba(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -486,10 +669,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the custom metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributed772e7b95a020f9812c51f6d(),
 		// Property: PositiveTrendIndicator
 		// CloudFormation resource type schema:
 		//
@@ -502,10 +682,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"positive_trend_indicator": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates how to classify a positive trend in metric data on the UI",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"positive_trend_indicator": schemaAttribute84aea18a87e8aa880713ce2c(),
 		// Property: PrimaryEventSource
 		// CloudFormation resource type schema:
 		//
@@ -513,10 +690,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Main provider of the document/row-level data for the metric; should match Data Lake table names",
 		//	  "type": "string"
 		//	}
-		"primary_event_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Main provider of the document/row-level data for the metric; should match Data Lake table names",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"primary_event_source": schemaAttribute298688ed913f38ded8c6af97(),
 		// Property: PrimaryEventSourceEffectiveTimestampType
 		// CloudFormation resource type schema:
 		//
@@ -524,10 +698,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Identifies the timestamp used to place the metrics on a time-series; should match public attribute name",
 		//	  "type": "string"
 		//	}
-		"primary_event_source_effective_timestamp_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Identifies the timestamp used to place the metrics on a time-series; should match public attribute name",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"primary_event_source_effective_timestamp_type": schemaAttribute76d58363fa1cf64ef730c13e(),
 		// Property: RefreshRate
 		// CloudFormation resource type schema:
 		//
@@ -537,10 +708,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"refresh_rate": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Recommended time to wait between each refresh of data for the metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"refresh_rate": schemaAttribute06378131d09019e1dc8d6f2f(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -552,10 +720,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the custom metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute7e46c309d2e57797e4ef74f2(),
 		// Property: SupportedStats
 		// CloudFormation resource type schema:
 		//
@@ -566,11 +731,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"supported_stats": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "List of stat aggregations available for the metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"supported_stats": schemaAttribute7256eb75fd48cae277859496(),
 		// Property: SupportsCustomCalculation
 		// CloudFormation resource type schema:
 		//
@@ -578,10 +739,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The metric may be used to compose other (custom) metrics",
 		//	  "type": "boolean"
 		//	}
-		"supports_custom_calculation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "The metric may be used to compose other (custom) metrics",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"supports_custom_calculation": schemaAttribute4f089e3cc7b4a49e6bb209d1(),
 		// Property: SupportsPreaggregateCalculation
 		// CloudFormation resource type schema:
 		//
@@ -589,10 +747,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The metric may be used to compose other (custom) metrics, meaning it can be used inside of aggregate stat functions",
 		//	  "type": "boolean"
 		//	}
-		"supports_preaggregate_calculation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "The metric may be used to compose other (custom) metrics, meaning it can be used inside of aggregate stat functions",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"supports_preaggregate_calculation": schemaAttribute75a4e3eed8e04251ce99c362(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -626,24 +781,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "One or more tags.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute9ca725efa937b6fdcc748ae4(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -655,10 +793,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether the metric is provided out-of-the-box or created by each customer",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute19ee032468ed7f1e3c8a74b4(),
 		// Property: Unit
 		// CloudFormation resource type schema:
 		//
@@ -672,10 +807,7 @@ func metricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Display unit for the metric data",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"unit": schemaAttribute06cc4d131c848eafafa3a43f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,63 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute06c94e0908b1638f1ce1666b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Kinesis Video Signaling Channel.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute338c758eb63ba75bb423432f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Kinesis Video Signaling Channel.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3cfe0ef4a450f935f49d108a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute6b48bd6957f57a66c715b130(),
+				// Property: Value
+				"value": schemaAttributebcfc936c3496c8658a533e99(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b48bd6957f57a66c715b130() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. Specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9275b743be2073d90c3fefbb() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The period of time a signaling channel retains undelivered messages before they are discarded.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0050b7ac3e97e9453d79971() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the Kinesis Video Signaling Channel to create. Currently, SINGLE_MASTER is the only supported channel type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebcfc936c3496c8658a533e99() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. Specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:.  The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_kinesisvideo_signaling_channel", signalingChannelDataSource)
 }
@@ -29,10 +86,7 @@ func signalingChannelDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The Amazon Resource Name (ARN) of the Kinesis Video Signaling Channel.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Kinesis Video Signaling Channel.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute338c758eb63ba75bb423432f(),
 		// Property: MessageTtlSeconds
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +96,7 @@ func signalingChannelDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minimum": 5,
 		//	  "type": "integer"
 		//	}
-		"message_ttl_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The period of time a signaling channel retains undelivered messages before they are discarded.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"message_ttl_seconds": schemaAttribute9275b743be2073d90c3fefbb(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +107,7 @@ func signalingChannelDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "[a-zA-Z0-9_.-]+",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Kinesis Video Signaling Channel.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute06c94e0908b1638f1ce1666b(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -94,24 +142,7 @@ func signalingChannelDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. Specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. Specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:.  The following characters can be used: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute3cfe0ef4a450f935f49d108a(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -122,10 +153,7 @@ func signalingChannelDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the Kinesis Video Signaling Channel to create. Currently, SINGLE_MASTER is the only supported channel type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttributea0050b7ac3e97e9453d79971(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

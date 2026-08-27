@@ -14,6 +14,34 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2c4649646a4448271ce30b8b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The language code.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4fdd4821b54d67cca05ff252() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the principal (user, role, or group).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c619aed81560c77b3a5ac27() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The principal type. The supported value is IAM if you use a fully defined Amazon Resource Name (ARN), or IAM_PATTERN if you use an ARN with no accountID, with or without wildcard characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefcc06357d62c2ac1a0644d93() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The portfolio identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_servicecatalog_portfolio_principal_association", portfolioPrincipalAssociationDataSource)
 }
@@ -29,10 +57,7 @@ func portfolioPrincipalAssociationDataSource(ctx context.Context) (datasource.Da
 		//	  "description": "The language code.",
 		//	  "type": "string"
 		//	}
-		"accept_language": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The language code.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"accept_language": schemaAttribute2c4649646a4448271ce30b8b(),
 		// Property: PortfolioId
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +65,7 @@ func portfolioPrincipalAssociationDataSource(ctx context.Context) (datasource.Da
 		//	  "description": "The portfolio identifier.",
 		//	  "type": "string"
 		//	}
-		"portfolio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The portfolio identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"portfolio_id": schemaAttributefcc06357d62c2ac1a0644d93(),
 		// Property: PrincipalARN
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +74,7 @@ func portfolioPrincipalAssociationDataSource(ctx context.Context) (datasource.Da
 		//	  "pattern": "arn:(aws|aws-cn|aws-us-gov):iam::[0-9]*:(role|user|group)\\/.*",
 		//	  "type": "string"
 		//	}
-		"principal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the principal (user, role, or group).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"principal_arn": schemaAttribute4fdd4821b54d67cca05ff252(),
 		// Property: PrincipalType
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +82,7 @@ func portfolioPrincipalAssociationDataSource(ctx context.Context) (datasource.Da
 		//	  "description": "The principal type. The supported value is IAM if you use a fully defined Amazon Resource Name (ARN), or IAM_PATTERN if you use an ARN with no accountID, with or without wildcard characters.",
 		//	  "type": "string"
 		//	}
-		"principal_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The principal type. The supported value is IAM if you use a fully defined Amazon Resource Name (ARN), or IAM_PATTERN if you use an ARN with no accountID, with or without wildcard characters.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"principal_type": schemaAttribute7c619aed81560c77b3a5ac27(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

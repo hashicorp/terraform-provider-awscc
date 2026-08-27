@@ -14,6 +14,20 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributeb89efc04d276df48bffc7faf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the AWS CloudTrail resource to which the policy applies.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebeb092d4a0a06196e47fd9f7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A policy document containing permissions to add to the specified resource. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudtrail_resource_policy", resourcePolicyDataSource)
 }
@@ -29,10 +43,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The ARN of the AWS CloudTrail resource to which the policy applies.",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the AWS CloudTrail resource to which the policy applies.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_arn": schemaAttributeb89efc04d276df48bffc7faf(),
 		// Property: ResourcePolicy
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +51,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "A policy document containing permissions to add to the specified resource. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
 		//	  "type": "string"
 		//	}
-		"resource_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A policy document containing permissions to add to the specified resource. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_policy": schemaAttributebeb092d4a0a06196e47fd9f7(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

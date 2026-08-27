@@ -16,6 +16,67 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute582773e96d2c08b3086219e4() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A map of key-value pairs to associate with a resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c3661132675444e33a00546() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8542f6ea7fa8ef47deb63733() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the S3 bucket where resources associated with the workspace are stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8b30eaada420332ad99c5a1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The date and time when the workspace was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecdb6200fea83953c8fa80bec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the execution role associated with the workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed75757f57dd8b56e0926782c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8c8fc58677d196fa9f98873() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The date and time of the current update.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedaab7d6e9808b9b39d22a57d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iottwinmaker_workspace", workspaceDataSource)
 }
@@ -34,10 +95,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:((aws)|(aws-cn)|(aws-us-gov)):iottwinmaker:[a-z0-9-]+:[0-9]{12}:[\\/a-zA-Z0-9_\\-\\.:]+",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the workspace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributedaab7d6e9808b9b39d22a57d(),
 		// Property: CreationDateTime
 		// CloudFormation resource type schema:
 		//
@@ -46,11 +104,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_date_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The date and time when the workspace was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_date_time": schemaAttributeb8b30eaada420332ad99c5a1(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -60,10 +114,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the workspace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributed75757f57dd8b56e0926782c(),
 		// Property: Role
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +125,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:((aws)|(aws-cn)|(aws-us-gov)):iam::[0-9]{12}:role/.*",
 		//	  "type": "string"
 		//	}
-		"role": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the execution role associated with the workspace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role": schemaAttributecdb6200fea83953c8fa80bec(),
 		// Property: S3Location
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +133,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the S3 bucket where resources associated with the workspace are stored.",
 		//	  "type": "string"
 		//	}
-		"s3_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the S3 bucket where resources associated with the workspace are stored.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"s3_location": schemaAttribute8542f6ea7fa8ef47deb63733(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -104,12 +149,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A map of key-value pairs to associate with a resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute582773e96d2c08b3086219e4(),
 		// Property: UpdateDateTime
 		// CloudFormation resource type schema:
 		//
@@ -118,11 +158,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"update_date_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The date and time of the current update.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"update_date_time": schemaAttributed8c8fc58677d196fa9f98873(),
 		// Property: WorkspaceId
 		// CloudFormation resource type schema:
 		//
@@ -133,10 +169,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+",
 		//	  "type": "string"
 		//	}
-		"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the workspace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"workspace_id": schemaAttribute6c3661132675444e33a00546(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

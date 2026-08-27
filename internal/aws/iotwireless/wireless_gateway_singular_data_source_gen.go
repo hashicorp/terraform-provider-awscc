@@ -14,6 +14,89 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1f20319c0839179c9c7d713a() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec9b42293503b12556b9eb163(),
+				// Property: Value
+				"value": schemaAttributec9b42293503b12556b9eb163(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs that contain metadata for the gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38570fbf5f157a1ffd1862ea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Thing Name. If there is a Thing created, this can be returned with a Get call.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute75ec1d6931b1a9fdeda442f4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Arn for Wireless Gateway. Returned upon successful create.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b1dd1d4ed9d26e9bd137964() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date and time when the most recent uplink was received.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f26b126c78c40ef54084628() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Id for Wireless Gateway. Returned upon successful create.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute980e8f47fbec2383c67fbb27() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GatewayEui
+			"gateway_eui": schemaAttributec9b42293503b12556b9eb163(),
+			// Property: RfRegion
+			"rf_region": schemaAttributec9b42293503b12556b9eb163(),
+		}, /*END SCHEMA*/
+		Description: "The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6f6abd6a638782ee52048c8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Description of Wireless Gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb78a3f8115c84a710c9603bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of Wireless Gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9b42293503b12556b9eb163() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc62b16a4dbcbc206eca41a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Thing Arn. Passed into Update to associate a Thing with the Wireless Gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iotwireless_wireless_gateway", wirelessGatewayDataSource)
 }
@@ -29,10 +112,7 @@ func wirelessGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Arn for Wireless Gateway. Returned upon successful create.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Arn for Wireless Gateway. Returned upon successful create.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute75ec1d6931b1a9fdeda442f4(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +121,7 @@ func wirelessGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description of Wireless Gateway.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeb6f6abd6a638782ee52048c8(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -53,10 +130,7 @@ func wirelessGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"wireless_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Id for Wireless Gateway. Returned upon successful create.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"wireless_gateway_id": schemaAttribute8f26b126c78c40ef54084628(),
 		// Property: LastUplinkReceivedAt
 		// CloudFormation resource type schema:
 		//
@@ -64,10 +138,7 @@ func wirelessGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The date and time when the most recent uplink was received.",
 		//	  "type": "string"
 		//	}
-		"last_uplink_received_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date and time when the most recent uplink was received.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_uplink_received_at": schemaAttribute8b1dd1d4ed9d26e9bd137964(),
 		// Property: LoRaWAN
 		// CloudFormation resource type schema:
 		//
@@ -90,20 +161,7 @@ func wirelessGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"lo_ra_wan": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: GatewayEui
-				"gateway_eui": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: RfRegion
-				"rf_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Gateway.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"lo_ra_wan": schemaAttribute980e8f47fbec2383c67fbb27(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -112,10 +170,7 @@ func wirelessGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of Wireless Gateway.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributeb78a3f8115c84a710c9603bb(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -142,22 +197,7 @@ func wirelessGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs that contain metadata for the gateway.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute1f20319c0839179c9c7d713a(),
 		// Property: ThingArn
 		// CloudFormation resource type schema:
 		//
@@ -165,10 +205,7 @@ func wirelessGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Thing Arn. Passed into Update to associate a Thing with the Wireless Gateway.",
 		//	  "type": "string"
 		//	}
-		"thing_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Thing Arn. Passed into Update to associate a Thing with the Wireless Gateway.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"thing_arn": schemaAttributedc62b16a4dbcbc206eca41a0(),
 		// Property: ThingName
 		// CloudFormation resource type schema:
 		//
@@ -176,10 +213,7 @@ func wirelessGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Thing Name. If there is a Thing created, this can be returned with a Get call.",
 		//	  "type": "string"
 		//	}
-		"thing_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Thing Name. If there is a Thing created, this can be returned with a Get call.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"thing_name": schemaAttribute38570fbf5f157a1ffd1862ea(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

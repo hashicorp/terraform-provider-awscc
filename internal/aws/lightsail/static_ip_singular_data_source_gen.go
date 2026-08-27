@@ -14,6 +14,40 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1992fbea9ef2b394fc680d6e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The instance where the static IP is attached.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19ac50e7da7afe892557441b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a56169fd173546cec4598d5() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean value indicating whether the static IP is attached.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9da4edc5639c07b3ff61829a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The static IP address.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec65fcc08c44af1e53af0cfda() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the static IP address.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_lightsail_static_ip", staticIpDataSource)
 }
@@ -29,10 +63,7 @@ func staticIpDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The instance where the static IP is attached.",
 		//	  "type": "string"
 		//	}
-		"attached_to": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The instance where the static IP is attached.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"attached_to": schemaAttribute1992fbea9ef2b394fc680d6e(),
 		// Property: IpAddress
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +71,7 @@ func staticIpDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The static IP address.",
 		//	  "type": "string"
 		//	}
-		"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The static IP address.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ip_address": schemaAttribute9da4edc5639c07b3ff61829a(),
 		// Property: IsAttached
 		// CloudFormation resource type schema:
 		//
@@ -51,19 +79,14 @@ func staticIpDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A Boolean value indicating whether the static IP is attached.",
 		//	  "type": "boolean"
 		//	}
-		"is_attached": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A Boolean value indicating whether the static IP is attached.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"is_attached": schemaAttribute4a56169fd173546cec4598d5(),
 		// Property: StaticIpArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"static_ip_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"static_ip_arn": schemaAttribute19ac50e7da7afe892557441b(),
 		// Property: StaticIpName
 		// CloudFormation resource type schema:
 		//
@@ -71,10 +94,7 @@ func staticIpDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the static IP address.",
 		//	  "type": "string"
 		//	}
-		"static_ip_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the static IP address.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"static_ip_name": schemaAttributec65fcc08c44af1e53af0cfda(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

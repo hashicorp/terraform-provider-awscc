@@ -16,6 +16,56 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2025ce1fddf963f20dbd8de4() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute445b2210ad786404270a1f89() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute670fa1ae9af41d4b26f2715c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7990217022b2b5b0e7aed815() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute88951e267d8698f3960171a0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KeyArn
+			"key_arn": schemaAttribute445b2210ad786404270a1f89(),
+			// Property: Type
+			"type": schemaAttribute445b2210ad786404270a1f89(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebfc7b189e9e7c226e22407a0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ReferenceArn
+			"reference_arn": schemaAttribute445b2210ad786404270a1f89(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_omics_variant_store", variantStoreDataSource)
 }
@@ -31,10 +81,7 @@ func variantStoreDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute670fa1ae9af41d4b26f2715c(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -43,9 +90,7 @@ func variantStoreDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute445b2210ad786404270a1f89(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -53,9 +98,7 @@ func variantStoreDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"variant_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"variant_store_id": schemaAttribute445b2210ad786404270a1f89(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -63,9 +106,7 @@ func variantStoreDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^([a-z]){1}([a-z0-9_]){2,254}",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute445b2210ad786404270a1f89(),
 		// Property: Reference
 		// CloudFormation resource type schema:
 		//
@@ -84,15 +125,7 @@ func variantStoreDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"reference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ReferenceArn
-				"reference_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"reference": schemaAttributebfc7b189e9e7c226e22407a0(),
 		// Property: SseConfig
 		// CloudFormation resource type schema:
 		//
@@ -117,19 +150,7 @@ func variantStoreDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"sse_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KeyArn
-				"key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Type
-				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"sse_config": schemaAttribute88951e267d8698f3960171a0(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -143,9 +164,7 @@ func variantStoreDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute445b2210ad786404270a1f89(),
 		// Property: StatusMessage
 		// CloudFormation resource type schema:
 		//
@@ -154,9 +173,7 @@ func variantStoreDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status_message": schemaAttribute445b2210ad786404270a1f89(),
 		// Property: StoreArn
 		// CloudFormation resource type schema:
 		//
@@ -166,18 +183,14 @@ func variantStoreDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:([^:\n]*):([^:\n]*):([^:\n]*):([0-9]{12}):([^:\n]*)$",
 		//	  "type": "string"
 		//	}
-		"store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"store_arn": schemaAttribute445b2210ad786404270a1f89(),
 		// Property: StoreSizeBytes
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "number"
 		//	}
-		"store_size_bytes": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"store_size_bytes": schemaAttribute2025ce1fddf963f20dbd8de4(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -192,11 +205,7 @@ func variantStoreDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute7990217022b2b5b0e7aed815(),
 		// Property: UpdateTime
 		// CloudFormation resource type schema:
 		//
@@ -204,10 +213,7 @@ func variantStoreDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"update_time": schemaAttribute670fa1ae9af41d4b26f2715c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

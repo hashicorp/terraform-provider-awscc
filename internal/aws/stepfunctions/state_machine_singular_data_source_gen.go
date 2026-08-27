@@ -16,6 +16,108 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute140e0ae35ab9bab94e40f348() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17927fd70f02e055b110ce58() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ce2aec3c15ab3802ca71905() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Enabled
+			"enabled": schemaAttribute17927fd70f02e055b110ce58(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute490fc894d8e22928364c2876() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: jsontypes.NormalizedType{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c62bf0e164e0b2258b217f9() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CloudWatchLogsLogGroup
+				"cloudwatch_logs_log_group": schemaAttributefe330da3d26be06e6510848c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute655480760bbc85ede82a3467() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6bf23c89daa1b632e3931bdd() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute140e0ae35ab9bab94e40f348(),
+				// Property: Value
+				"value": schemaAttribute140e0ae35ab9bab94e40f348(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb02945897ae0f52ea8bd377b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Destinations
+			"destinations": schemaAttribute5c62bf0e164e0b2258b217f9(),
+			// Property: IncludeExecutionData
+			"include_execution_data": schemaAttribute17927fd70f02e055b110ce58(),
+			// Property: Level
+			"level": schemaAttribute140e0ae35ab9bab94e40f348(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee482422ab89c95029b61912b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Bucket
+			"bucket": schemaAttribute140e0ae35ab9bab94e40f348(),
+			// Property: Key
+			"key": schemaAttribute140e0ae35ab9bab94e40f348(),
+			// Property: Version
+			"version": schemaAttribute140e0ae35ab9bab94e40f348(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefe330da3d26be06e6510848c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogGroupArn
+			"log_group_arn": schemaAttribute140e0ae35ab9bab94e40f348(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_stepfunctions_state_machine", stateMachineDataSource)
 }
@@ -32,19 +134,14 @@ func stateMachineDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute140e0ae35ab9bab94e40f348(),
 		// Property: Definition
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "object"
 		//	}
-		"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: jsontypes.NormalizedType{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"definition": schemaAttribute490fc894d8e22928364c2876(),
 		// Property: DefinitionS3Location
 		// CloudFormation resource type schema:
 		//
@@ -67,23 +164,7 @@ func stateMachineDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"definition_s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Bucket
-				"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Key
-				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Version
-				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"definition_s3_location": schemaAttributee482422ab89c95029b61912b(),
 		// Property: DefinitionString
 		// CloudFormation resource type schema:
 		//
@@ -92,9 +173,7 @@ func stateMachineDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"definition_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"definition_string": schemaAttribute140e0ae35ab9bab94e40f348(),
 		// Property: DefinitionSubstitutions
 		// CloudFormation resource type schema:
 		//
@@ -107,11 +186,7 @@ func stateMachineDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"definition_substitutions": // Pattern: ""
-		schema.MapAttribute{        /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"definition_substitutions": schemaAttribute655480760bbc85ede82a3467(),
 		// Property: LoggingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -155,37 +230,7 @@ func stateMachineDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Destinations
-				"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: CloudWatchLogsLogGroup
-							"cloudwatch_logs_log_group": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: LogGroupArn
-									"log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: IncludeExecutionData
-				"include_execution_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Level
-				"level": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"logging_configuration": schemaAttributeb02945897ae0f52ea8bd377b(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -194,9 +239,7 @@ func stateMachineDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute140e0ae35ab9bab94e40f348(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -205,9 +248,7 @@ func stateMachineDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute140e0ae35ab9bab94e40f348(),
 		// Property: StateMachineName
 		// CloudFormation resource type schema:
 		//
@@ -216,9 +257,7 @@ func stateMachineDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"state_machine_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"state_machine_name": schemaAttribute140e0ae35ab9bab94e40f348(),
 		// Property: StateMachineType
 		// CloudFormation resource type schema:
 		//
@@ -229,9 +268,7 @@ func stateMachineDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state_machine_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"state_machine_type": schemaAttribute140e0ae35ab9bab94e40f348(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -260,21 +297,7 @@ func stateMachineDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6bf23c89daa1b632e3931bdd(),
 		// Property: TracingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -287,15 +310,7 @@ func stateMachineDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tracing_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Enabled
-				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tracing_configuration": schemaAttribute2ce2aec3c15ab3802ca71905(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

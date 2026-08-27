@@ -14,6 +14,82 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute18659d27ddf6744f11eeee1f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Group
+			"group": schemaAttribute60a7b6652199a826cec9c7a7(),
+			// Property: User
+			"user": schemaAttribute69c4e86a1ac73a17be11cf6e(),
+		}, /*END SCHEMA*/
+		Description: "The owner that you want to add to the entity.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f07ee109f97091193571a2c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the owner user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60a7b6652199a826cec9c7a7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GroupIdentifier
+			"group_identifier": schemaAttribute94cb9352688b3f442f2a9f8e(),
+		}, /*END SCHEMA*/
+		Description: "The properties of the domain unit owners group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute69c4e86a1ac73a17be11cf6e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: UserIdentifier
+			"user_identifier": schemaAttribute3f07ee109f97091193571a2c(),
+		}, /*END SCHEMA*/
+		Description: "The properties of the owner user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e1e84ef5f403138cdb56f75() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94cb9352688b3f442f2a9f8e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the domain unit owners group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9811c23c9ee78d5049818f7f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the entity to which you want to add an owner.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaaa546d46483109e4698cf49() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of an entity.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0b02cfec34cb6eed02e935f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the domain in which you want to add the entity owner.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_datazone_owner", ownerDataSource)
 }
@@ -30,10 +106,7 @@ func ownerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the domain in which you want to add the entity owner.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_identifier": schemaAttributef0b02cfec34cb6eed02e935f(),
 		// Property: EntityIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +114,7 @@ func ownerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the entity to which you want to add an owner.",
 		//	  "type": "string"
 		//	}
-		"entity_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the entity to which you want to add an owner.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"entity_identifier": schemaAttribute9811c23c9ee78d5049818f7f(),
 		// Property: EntityType
 		// CloudFormation resource type schema:
 		//
@@ -55,10 +125,7 @@ func ownerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"entity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of an entity.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"entity_type": schemaAttributeaaa546d46483109e4698cf49(),
 		// Property: Owner
 		// CloudFormation resource type schema:
 		//
@@ -92,45 +159,14 @@ func ownerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"owner": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Group
-				"group": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: GroupIdentifier
-						"group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ID of the domain unit owners group.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The properties of the domain unit owners group.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: User
-				"user": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: UserIdentifier
-						"user_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ID of the owner user.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The properties of the owner user.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The owner that you want to add to the entity.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"owner": schemaAttribute18659d27ddf6744f11eeee1f(),
 		// Property: OwnerIdentifier
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"owner_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"owner_identifier": schemaAttribute8e1e84ef5f403138cdb56f75(),
 		// Property: OwnerType
 		// CloudFormation resource type schema:
 		//
@@ -141,9 +177,7 @@ func ownerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"owner_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"owner_type": schemaAttribute8e1e84ef5f403138cdb56f75(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,112 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute13afe6a435038b52bc155909() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33a8950df42e1257a9218885() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Linux
+			"linux": schemaAttribute13afe6a435038b52bc155909(),
+			// Property: Windows
+			"windows": schemaAttribute13afe6a435038b52bc155909(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute534d029aaafa2b4435617795() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Iops
+			"iops": schemaAttributea63d67cac6820623a2fd61de(),
+			// Property: Size
+			"size": schemaAttributea63d67cac6820623a2fd61de(),
+			// Property: Throughput
+			"throughput": schemaAttributea63d67cac6820623a2fd61de(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d2a8298ab5c48de465cc6ea() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute886daa3c1aec265b40a1d589() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxBackupsToRetain
+			"max_backups_to_retain": schemaAttributea63d67cac6820623a2fd61de(),
+			// Property: Mode
+			"mode": schemaAttribute13afe6a435038b52bc155909(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea63d67cac6820623a2fd61de() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaac3cc189ce10a3a196ff707() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AutomaticTerminationMode
+			"automatic_termination_mode": schemaAttribute13afe6a435038b52bc155909(),
+			// Property: ClipboardMode
+			"clipboard_mode": schemaAttribute13afe6a435038b52bc155909(),
+			// Property: Ec2InstanceTypes
+			"ec_2_instance_types": schemaAttribute6d2a8298ab5c48de465cc6ea(),
+			// Property: MaxSessionLengthInMinutes
+			"max_session_length_in_minutes": schemaAttributea63d67cac6820623a2fd61de(),
+			// Property: MaxStoppedSessionLengthInMinutes
+			"max_stopped_session_length_in_minutes": schemaAttributea63d67cac6820623a2fd61de(),
+			// Property: SessionBackup
+			"session_backup": schemaAttribute886daa3c1aec265b40a1d589(),
+			// Property: SessionPersistenceMode
+			"session_persistence_mode": schemaAttribute13afe6a435038b52bc155909(),
+			// Property: SessionStorage
+			"session_storage": schemaAttributedcb0b78f00c008cdb35f6471(),
+			// Property: StreamingImageIds
+			"streaming_image_ids": schemaAttribute6d2a8298ab5c48de465cc6ea(),
+			// Property: VolumeConfiguration
+			"volume_configuration": schemaAttribute534d029aaafa2b4435617795(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac62bbc229cd3a7f49ff9124() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedcb0b78f00c008cdb35f6471() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Mode
+			"mode": schemaAttribute6d2a8298ab5c48de465cc6ea(),
+			// Property: Root
+			"root": schemaAttribute33a8950df42e1257a9218885(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_nimblestudio_launch_profile", launchProfileDataSource)
 }
@@ -29,9 +135,7 @@ func launchProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	{
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute13afe6a435038b52bc155909(),
 		// Property: Ec2SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -42,19 +146,14 @@ func launchProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"ec_2_subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ec_2_subnet_ids": schemaAttribute6d2a8298ab5c48de465cc6ea(),
 		// Property: LaunchProfileId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"launch_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"launch_profile_id": schemaAttribute13afe6a435038b52bc155909(),
 		// Property: LaunchProfileProtocolVersions
 		// CloudFormation resource type schema:
 		//
@@ -65,19 +164,14 @@ func launchProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"launch_profile_protocol_versions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"launch_profile_protocol_versions": schemaAttribute6d2a8298ab5c48de465cc6ea(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute13afe6a435038b52bc155909(),
 		// Property: StreamConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -176,98 +270,7 @@ func launchProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"stream_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AutomaticTerminationMode
-				"automatic_termination_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ClipboardMode
-				"clipboard_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Ec2InstanceTypes
-				"ec_2_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaxSessionLengthInMinutes
-				"max_session_length_in_minutes": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaxStoppedSessionLengthInMinutes
-				"max_stopped_session_length_in_minutes": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SessionBackup
-				"session_backup": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: MaxBackupsToRetain
-						"max_backups_to_retain": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Mode
-						"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SessionPersistenceMode
-				"session_persistence_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SessionStorage
-				"session_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Mode
-						"mode": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Root
-						"root": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Linux
-								"linux": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Windows
-								"windows": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: StreamingImageIds
-				"streaming_image_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VolumeConfiguration
-				"volume_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Iops
-						"iops": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Size
-						"size": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Throughput
-						"throughput": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"stream_configuration": schemaAttributeaac3cc189ce10a3a196ff707(),
 		// Property: StudioComponentIds
 		// CloudFormation resource type schema:
 		//
@@ -278,19 +281,14 @@ func launchProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"studio_component_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"studio_component_ids": schemaAttribute6d2a8298ab5c48de465cc6ea(),
 		// Property: StudioId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"studio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"studio_id": schemaAttribute13afe6a435038b52bc155909(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -302,11 +300,7 @@ func launchProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeac62bbc229cd3a7f49ff9124(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

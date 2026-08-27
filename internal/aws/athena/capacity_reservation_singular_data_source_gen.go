@@ -15,6 +15,107 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute27278245f7765c6f95bbb5d8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: WorkgroupNames
+				"workgroup_names": schemaAttributee3a42a0fac100d18c0689836(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of capacity assignments",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4965fb122afa78bbf0a4aeec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The reservation name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ba159947f2a2a4609ddef2a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the reservation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5808ececddafa33fc66aa115() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CapacityAssignments
+			"capacity_assignments": schemaAttribute27278245f7765c6f95bbb5d8(),
+		}, /*END SCHEMA*/
+		Description: "Assignment configuration to assign workgroups to a reservation",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute751458143c6e38fc11b2a62e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp when the last successful allocated was made",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea17b8dbb37f8d3ba8c6ed623() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab0400c9f87f927df274fed8() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributea17b8dbb37f8d3ba8c6ed623(),
+				// Property: Value
+				"value": schemaAttributea17b8dbb37f8d3ba8c6ed623(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0475ccdfb9d6d43527d94ec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the specified capacity reservation",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc1818e065df97c51726af7b() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of DPUs Athena has provisioned and allocated for the reservation",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3a42a0fac100d18c0689836() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8ea6f0e9d916f30b535fdf0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date and time the reservation was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefeadfaa138df6dc3093a34a9() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of DPUs to request to be allocated to the reservation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_athena_capacity_reservation", capacityReservationDataSource)
 }
@@ -32,10 +133,7 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"allocated_dpus": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of DPUs Athena has provisioned and allocated for the reservation",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"allocated_dpus": schemaAttributebc1818e065df97c51726af7b(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +141,7 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The Amazon Resource Name (ARN) of the specified capacity reservation",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the specified capacity reservation",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeb0475ccdfb9d6d43527d94ec(),
 		// Property: CapacityAssignmentConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -82,26 +177,7 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"capacity_assignment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CapacityAssignments
-				"capacity_assignments": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: WorkgroupNames
-							"workgroup_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "List of capacity assignments",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Assignment configuration to assign workgroups to a reservation",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"capacity_assignment_configuration": schemaAttribute5808ececddafa33fc66aa115(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -109,10 +185,7 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The date and time the reservation was created.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date and time the reservation was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttributef8ea6f0e9d916f30b535fdf0(),
 		// Property: LastSuccessfulAllocationTime
 		// CloudFormation resource type schema:
 		//
@@ -120,10 +193,7 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The timestamp when the last successful allocated was made",
 		//	  "type": "string"
 		//	}
-		"last_successful_allocation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp when the last successful allocated was made",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_successful_allocation_time": schemaAttribute751458143c6e38fc11b2a62e(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -132,10 +202,7 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "[a-zA-Z0-9._-]{1,128}",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The reservation name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute4965fb122afa78bbf0a4aeec(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -151,10 +218,7 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the reservation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute4ba159947f2a2a4609ddef2a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -184,22 +248,7 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeab0400c9f87f927df274fed8(),
 		// Property: TargetDpus
 		// CloudFormation resource type schema:
 		//
@@ -209,10 +258,7 @@ func capacityReservationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"target_dpus": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of DPUs to request to be allocated to the reservation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_dpus": schemaAttributefeadfaa138df6dc3093a34a9(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

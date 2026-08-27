@@ -15,6 +15,373 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute008a0f195a875c3c11842486() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LoadBalancerArn
+			"load_balancer_arn": schemaAttribute5dbd4f2adba758741786043b(),
+			// Property: Port
+			"port": schemaAttributee102a2044993861f7fa06825(),
+			// Property: PortRanges
+			"port_ranges": schemaAttributed58f2a8623c29d368f3b9742(),
+			// Property: Protocol
+			"protocol": schemaAttributeeca9cb2805139e103fc57417(),
+			// Property: SubnetIds
+			"subnet_ids": schemaAttribute8ae30f159476cf1b9e49f8c8(),
+		}, /*END SCHEMA*/
+		Description: "The load balancer details if creating the AWS Verified Access endpoint as load-balancer type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a90b9aded09ce596d7d5be2() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The first port in the range.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0b556a1d4e23a3c94a32427c() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute742c2bf79e1fef9b05f7e51e(),
+				// Property: Value
+				"value": schemaAttribute218e27e12aa091cc64d643c1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1fac398f549151115df5e0c3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of attachment used to provide connectivity between the AWS Verified Access endpoint and the application.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute200cb2522d1588d3376fa969() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the RDS DB proxy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20884ab49eced051aff007fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the RDS DB cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute218e27e12aa091cc64d643c1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute21b195051fdb690d1a0e6626() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the Verified Access policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute231c38c28c855b1a27b294c4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Cidr
+			"cidr": schemaAttributeff2ef0fcf31c6577515498f3(),
+			// Property: PortRanges
+			"port_ranges": schemaAttributed58f2a8623c29d368f3b9742(),
+			// Property: Protocol
+			"protocol": schemaAttributeeca9cb2805139e103fc57417(),
+			// Property: SubnetIds
+			"subnet_ids": schemaAttribute8ae30f159476cf1b9e49f8c8(),
+		}, /*END SCHEMA*/
+		Description: "The options for cidr type endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26721e28ce4b8dce71b57f0b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: NetworkInterfaceId
+			"network_interface_id": schemaAttributeb88bef8349dcc1063b2867a8(),
+			// Property: Port
+			"port": schemaAttributee102a2044993861f7fa06825(),
+			// Property: PortRanges
+			"port_ranges": schemaAttribute749469d47d7353cd8a3cf1f1(),
+			// Property: Protocol
+			"protocol": schemaAttributeeca9cb2805139e103fc57417(),
+		}, /*END SCHEMA*/
+		Description: "The options for network-interface type endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute318699b18db0f61cf8b14512() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the RDS DB instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ac82bb9cfffcea861de2473() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Returned if endpoint has a device trust provider attached.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ad1f379e9ec35df33036e06() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A DNS name that is generated for the endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c0cb6ecdb69a8f619477c5f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The last port in the range.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute50fceefa6ee513b9049324de() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The last updated time.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51e13a83ca5540af0002110e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "KMS Key Arn used to encrypt the group policy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute592d5d11f1d141efb38a7340() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A custom identifier that gets prepended to a DNS name that is generated for the endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a43527ceb30af9b61e58b35() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the AWS Verified Access instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5dbd4f2adba758741786043b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6703a006f390bf131b7a02d6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The DNS name for users to reach your application.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute691dad911653f06ef5b760d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the AWS Verified Access endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b48778c1fb72e33b4aff545() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the AWS Verified Access endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute742c2bf79e1fef9b05f7e51e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute749469d47d7353cd8a3cf1f1() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FromPort
+				"from_port": schemaAttribute0a90b9aded09ce596d7d5be2(),
+				// Property: ToPort
+				"to_port": schemaAttribute3c0cb6ecdb69a8f619477c5f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of port ranges.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7baf2119a89ce1c58ec76924() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of a public TLS/SSL certificate imported into or created with ACM.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f3cb76219306b98b38f6727() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Verified Access policy document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ae30f159476cf1b9e49f8c8() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The IDs of the subnets.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d74106ee5c19a2d5fc9d4e4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Port
+			"port": schemaAttributee102a2044993861f7fa06825(),
+			// Property: Protocol
+			"protocol": schemaAttributeeca9cb2805139e103fc57417(),
+			// Property: RdsDbClusterArn
+			"rds_db_cluster_arn": schemaAttribute20884ab49eced051aff007fb(),
+			// Property: RdsDbInstanceArn
+			"rds_db_instance_arn": schemaAttribute318699b18db0f61cf8b14512(),
+			// Property: RdsDbProxyArn
+			"rds_db_proxy_arn": schemaAttribute200cb2522d1588d3376fa969(),
+			// Property: RdsEndpoint
+			"rds_endpoint": schemaAttribute9b6868f25545ae520115db2c(),
+			// Property: SubnetIds
+			"subnet_ids": schemaAttribute8ae30f159476cf1b9e49f8c8(),
+		}, /*END SCHEMA*/
+		Description: "The options for rds type endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90e7f85acc993df304a838c1() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The IDs of the security groups for the endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b6868f25545ae520115db2c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The RDS endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb45516e65c7359567edc11dc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomerManagedKeyEnabled
+			"customer_managed_key_enabled": schemaAttributec48ab639823c0d6f9bea3e8c(),
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttribute51e13a83ca5540af0002110e(),
+		}, /*END SCHEMA*/
+		Description: "The configuration options for customer provided KMS encryption.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb85b65863b31511a76fd15d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of AWS Verified Access endpoint. Incoming application requests will be sent to an IP address, load balancer or a network interface depending on the endpoint type specified.The type of AWS Verified Access endpoint. Incoming application requests will be sent to an IP address, load balancer or a network interface depending on the endpoint type specified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb88bef8349dcc1063b2867a8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2ce6b32d9d09e31643cd4e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The creation time.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec48ab639823c0d6f9bea3e8c() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to encrypt the policy with the provided key or disable encryption",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1506578f24a72a8e18adf51() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The endpoint status.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed54e2ad34370a1bd1d3a4c95() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the AWS Verified Access group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed58f2a8623c29d368f3b9742() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FromPort
+				"from_port": schemaAttribute0a90b9aded09ce596d7d5be2(),
+				// Property: ToPort
+				"to_port": schemaAttribute3c0cb6ecdb69a8f619477c5f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of port range.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee102a2044993861f7fa06825() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The IP port number.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeca9cb2805139e103fc57417() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IP protocol.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff2ef0fcf31c6577515498f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IP address range, in CIDR notation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_verified_access_endpoint", verifiedAccessEndpointDataSource)
 }
@@ -30,10 +397,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The DNS name for users to reach your application.",
 		//	  "type": "string"
 		//	}
-		"application_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The DNS name for users to reach your application.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"application_domain": schemaAttribute6703a006f390bf131b7a02d6(),
 		// Property: AttachmentType
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +405,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The type of attachment used to provide connectivity between the AWS Verified Access endpoint and the application.",
 		//	  "type": "string"
 		//	}
-		"attachment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of attachment used to provide connectivity between the AWS Verified Access endpoint and the application.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"attachment_type": schemaAttribute1fac398f549151115df5e0c3(),
 		// Property: CidrOptions
 		// CloudFormation resource type schema:
 		//
@@ -98,47 +459,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "object"
 		//	}
-		"cidr_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Cidr
-				"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The IP address range, in CIDR notation.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PortRanges
-				"port_ranges": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: FromPort
-							"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The first port in the range.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ToPort
-							"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The last port in the range.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The list of port range.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Protocol
-				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The IP protocol.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SubnetIds
-				"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The IDs of the subnets.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The options for cidr type endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cidr_options": schemaAttribute231c38c28c855b1a27b294c4(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -146,10 +467,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The creation time.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The creation time.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttributec2ce6b32d9d09e31643cd4e1(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -157,10 +475,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "A description for the AWS Verified Access endpoint.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description for the AWS Verified Access endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute6b48778c1fb72e33b4aff545(),
 		// Property: DeviceValidationDomain
 		// CloudFormation resource type schema:
 		//
@@ -168,10 +483,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "Returned if endpoint has a device trust provider attached.",
 		//	  "type": "string"
 		//	}
-		"device_validation_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Returned if endpoint has a device trust provider attached.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"device_validation_domain": schemaAttribute3ac82bb9cfffcea861de2473(),
 		// Property: DomainCertificateArn
 		// CloudFormation resource type schema:
 		//
@@ -179,10 +491,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The ARN of a public TLS/SSL certificate imported into or created with ACM.",
 		//	  "type": "string"
 		//	}
-		"domain_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of a public TLS/SSL certificate imported into or created with ACM.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_certificate_arn": schemaAttribute7baf2119a89ce1c58ec76924(),
 		// Property: EndpointDomain
 		// CloudFormation resource type schema:
 		//
@@ -190,10 +499,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "A DNS name that is generated for the endpoint.",
 		//	  "type": "string"
 		//	}
-		"endpoint_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A DNS name that is generated for the endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_domain": schemaAttribute3ad1f379e9ec35df33036e06(),
 		// Property: EndpointDomainPrefix
 		// CloudFormation resource type schema:
 		//
@@ -201,10 +507,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "A custom identifier that gets prepended to a DNS name that is generated for the endpoint.",
 		//	  "type": "string"
 		//	}
-		"endpoint_domain_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A custom identifier that gets prepended to a DNS name that is generated for the endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_domain_prefix": schemaAttribute592d5d11f1d141efb38a7340(),
 		// Property: EndpointType
 		// CloudFormation resource type schema:
 		//
@@ -212,10 +515,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The type of AWS Verified Access endpoint. Incoming application requests will be sent to an IP address, load balancer or a network interface depending on the endpoint type specified.The type of AWS Verified Access endpoint. Incoming application requests will be sent to an IP address, load balancer or a network interface depending on the endpoint type specified.",
 		//	  "type": "string"
 		//	}
-		"endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of AWS Verified Access endpoint. Incoming application requests will be sent to an IP address, load balancer or a network interface depending on the endpoint type specified.The type of AWS Verified Access endpoint. Incoming application requests will be sent to an IP address, load balancer or a network interface depending on the endpoint type specified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_type": schemaAttributeb85b65863b31511a76fd15d8(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -223,10 +523,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The last updated time.",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The last updated time.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttribute50fceefa6ee513b9049324de(),
 		// Property: LoadBalancerOptions
 		// CloudFormation resource type schema:
 		//
@@ -286,52 +583,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "object"
 		//	}
-		"load_balancer_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LoadBalancerArn
-				"load_balancer_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the load balancer.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Port
-				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The IP port number.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PortRanges
-				"port_ranges": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: FromPort
-							"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The first port in the range.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ToPort
-							"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The last port in the range.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The list of port range.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Protocol
-				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The IP protocol.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SubnetIds
-				"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The IDs of the subnets.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The load balancer details if creating the AWS Verified Access endpoint as load-balancer type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"load_balancer_options": schemaAttribute008a0f195a875c3c11842486(),
 		// Property: NetworkInterfaceOptions
 		// CloudFormation resource type schema:
 		//
@@ -381,46 +633,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "object"
 		//	}
-		"network_interface_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: NetworkInterfaceId
-				"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID of the network interface.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Port
-				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The IP port number.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PortRanges
-				"port_ranges": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: FromPort
-							"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The first port in the range.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ToPort
-							"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The last port in the range.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The list of port ranges.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Protocol
-				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The IP protocol.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The options for network-interface type endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_interface_options": schemaAttribute26721e28ce4b8dce71b57f0b(),
 		// Property: PolicyDocument
 		// CloudFormation resource type schema:
 		//
@@ -428,10 +641,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The AWS Verified Access policy document.",
 		//	  "type": "string"
 		//	}
-		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS Verified Access policy document.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_document": schemaAttribute7f3cb76219306b98b38f6727(),
 		// Property: PolicyEnabled
 		// CloudFormation resource type schema:
 		//
@@ -439,10 +649,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The status of the Verified Access policy.",
 		//	  "type": "boolean"
 		//	}
-		"policy_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the Verified Access policy.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_enabled": schemaAttribute21b195051fdb690d1a0e6626(),
 		// Property: RdsOptions
 		// CloudFormation resource type schema:
 		//
@@ -489,48 +696,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "object"
 		//	}
-		"rds_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Port
-				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The IP port number.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Protocol
-				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The IP protocol.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RdsDbClusterArn
-				"rds_db_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the RDS DB cluster.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RdsDbInstanceArn
-				"rds_db_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the RDS DB instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RdsDbProxyArn
-				"rds_db_proxy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the RDS DB proxy.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RdsEndpoint
-				"rds_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The RDS endpoint.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SubnetIds
-				"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The IDs of the subnets.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The options for rds type endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rds_options": schemaAttribute8d74106ee5c19a2d5fc9d4e4(),
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -544,11 +710,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The IDs of the security groups for the endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_ids": schemaAttribute90e7f85acc993df304a838c1(),
 		// Property: SseSpecification
 		// CloudFormation resource type schema:
 		//
@@ -567,22 +729,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "object"
 		//	}
-		"sse_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomerManagedKeyEnabled
-				"customer_managed_key_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Whether to encrypt the policy with the provided key or disable encryption",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: KmsKeyArn
-				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "KMS Key Arn used to encrypt the group policy",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration options for customer provided KMS encryption.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sse_specification": schemaAttributeb45516e65c7359567edc11dc(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -590,10 +737,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The endpoint status.",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The endpoint status.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributed1506578f24a72a8e18adf51(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -626,24 +770,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute0b556a1d4e23a3c94a32427c(),
 		// Property: VerifiedAccessEndpointId
 		// CloudFormation resource type schema:
 		//
@@ -651,10 +778,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The ID of the AWS Verified Access endpoint.",
 		//	  "type": "string"
 		//	}
-		"verified_access_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the AWS Verified Access endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"verified_access_endpoint_id": schemaAttribute691dad911653f06ef5b760d0(),
 		// Property: VerifiedAccessGroupId
 		// CloudFormation resource type schema:
 		//
@@ -662,10 +786,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The ID of the AWS Verified Access group.",
 		//	  "type": "string"
 		//	}
-		"verified_access_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the AWS Verified Access group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"verified_access_group_id": schemaAttributed54e2ad34370a1bd1d3a4c95(),
 		// Property: VerifiedAccessInstanceId
 		// CloudFormation resource type schema:
 		//
@@ -673,10 +794,7 @@ func verifiedAccessEndpointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The ID of the AWS Verified Access instance.",
 		//	  "type": "string"
 		//	}
-		"verified_access_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the AWS Verified Access instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"verified_access_instance_id": schemaAttribute5a43527ceb30af9b61e58b35(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

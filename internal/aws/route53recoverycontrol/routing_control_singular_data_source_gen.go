@@ -14,6 +14,41 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute083563f245452d82ed02e3e4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the routing control. You can use any non-white space character in the name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0b10a8c0f014fc0935b50380() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the control panel.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaac31d89e12d5b4686bc5657() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the routing control.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc5ea127410c0bb98a32b87e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Arn associated with Control Panel",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec57071e1ef9d4b5193b83809() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The deployment status of the routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_route53recoverycontrol_routing_control", routingControlDataSource)
 }
@@ -30,10 +65,7 @@ func routingControlDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[A-Za-z0-9:\\/_-]*$",
 		//	  "type": "string"
 		//	}
-		"cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Arn associated with Control Panel",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cluster_arn": schemaAttributebc5ea127410c0bb98a32b87e(),
 		// Property: ControlPanelArn
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +74,7 @@ func routingControlDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[A-Za-z0-9:\\/_-]*$",
 		//	  "type": "string"
 		//	}
-		"control_panel_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the control panel.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"control_panel_arn": schemaAttribute0b10a8c0f014fc0935b50380(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -55,10 +84,7 @@ func routingControlDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the routing control. You can use any non-white space character in the name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute083563f245452d82ed02e3e4(),
 		// Property: RoutingControlArn
 		// CloudFormation resource type schema:
 		//
@@ -67,10 +93,7 @@ func routingControlDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[A-Za-z0-9:\\/_-]*$",
 		//	  "type": "string"
 		//	}
-		"routing_control_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the routing control.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"routing_control_arn": schemaAttributeaac31d89e12d5b4686bc5657(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -83,10 +106,7 @@ func routingControlDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The deployment status of the routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributec57071e1ef9d4b5193b83809(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,28 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributeb48d15b39f48f37e01a57f3c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttributebab560c1f9ca679bbc282968(),
+				// Property: Path
+				"path": schemaAttributebab560c1f9ca679bbc282968(),
+				// Property: Type
+				"type": schemaAttributebab560c1f9ca679bbc282968(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebab560c1f9ca679bbc282968() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_deadline_storage_profile", storageProfileDataSource)
 }
@@ -30,9 +52,7 @@ func storageProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"display_name": schemaAttributebab560c1f9ca679bbc282968(),
 		// Property: FarmId
 		// CloudFormation resource type schema:
 		//
@@ -40,9 +60,7 @@ func storageProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^farm-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"farm_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"farm_id": schemaAttributebab560c1f9ca679bbc282968(),
 		// Property: FileSystemLocations
 		// CloudFormation resource type schema:
 		//
@@ -80,25 +98,7 @@ func storageProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"file_system_locations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Path
-					"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Type
-					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"file_system_locations": schemaAttributeb48d15b39f48f37e01a57f3c(),
 		// Property: OsFamily
 		// CloudFormation resource type schema:
 		//
@@ -110,9 +110,7 @@ func storageProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"os_family": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"os_family": schemaAttributebab560c1f9ca679bbc282968(),
 		// Property: StorageProfileId
 		// CloudFormation resource type schema:
 		//
@@ -120,9 +118,7 @@ func storageProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^sp-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"storage_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"storage_profile_id": schemaAttributebab560c1f9ca679bbc282968(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

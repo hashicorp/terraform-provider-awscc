@@ -15,6 +15,79 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1663aea9b4e5fbb5a53d8fa4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the experiment as displayed. The name does not need to be unique.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38fc3dd936addefe87085807() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the experiment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute656e9483ced69720127988d4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "When the experiment was last modified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7dc0420edd1c3659ea5bbd80() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "When the experiment was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8af3e852a90914d18586e368() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecea19907ac0381aeee6013bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the experiment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed002e983d52eac490a1cd49() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute8af3e852a90914d18586e368(),
+				// Property: Value
+				"value": schemaAttributeef4cc7463ba80f9e88853b36(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags to associate with the experiment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef4cc7463ba80f9e88853b36() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc3fb520f177eb0270d3b551() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the experiment. Must be unique in your AWS account and is not case-sensitive.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_experiment", experimentDataSource)
 }
@@ -32,10 +105,7 @@ func experimentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:experiment/",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the experiment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributecea19907ac0381aeee6013bb(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -44,11 +114,7 @@ func experimentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "When the experiment was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute7dc0420edd1c3659ea5bbd80(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -58,10 +124,7 @@ func experimentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the experiment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute38fc3dd936addefe87085807(),
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -72,10 +135,7 @@ func experimentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,119}$",
 		//	  "type": "string"
 		//	}
-		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the experiment as displayed. The name does not need to be unique.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"display_name": schemaAttribute1663aea9b4e5fbb5a53d8fa4(),
 		// Property: ExperimentName
 		// CloudFormation resource type schema:
 		//
@@ -86,10 +146,7 @@ func experimentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,119}$",
 		//	  "type": "string"
 		//	}
-		"experiment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the experiment. Must be unique in your AWS account and is not case-sensitive.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"experiment_name": schemaAttributefc3fb520f177eb0270d3b551(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -98,11 +155,7 @@ func experimentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "When the experiment was last modified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttribute656e9483ced69720127988d4(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -135,24 +188,7 @@ func experimentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags to associate with the experiment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeed002e983d52eac490a1cd49(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

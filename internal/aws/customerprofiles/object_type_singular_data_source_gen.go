@@ -15,6 +15,214 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute211149c86cedb39545cf1081() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A field of a ProfileObject. For example: _source.FirstName, where \"_source\" is a ProfileObjectType of a Zendesk user and \"FirstName\" is a field in that ObjectType.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3de7cf2aece2d091163f50f9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time of this integration got created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40cc2246b94556584c99f6a2() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum available number of profile objects",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4dc6b578e50d908a2afb1f27() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time of this integration got last updated at.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e550f96098b6d6c9aafa41f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The default encryption key",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute716e466a52304251396a98cc() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The default number of days until the data within the domain expires.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute749a5eae4fc188fa21a60b7a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute7b5821e86e995526f58d06d9(),
+				// Property: Value
+				"value": schemaAttribute7b5821e86e995526f58d06d9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags (keys and values) associated with the integration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b5821e86e995526f58d06d9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f65fec117d8481463c6cd3c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The format of your sourceLastUpdatedTimestamp that was previously set up.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute81d921ce3fbc5460bc394b84() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContentType
+			"content_type": schemaAttributee0ff465085a89357de4512a6(),
+			// Property: Source
+			"source": schemaAttribute211149c86cedb39545cf1081(),
+			// Property: Target
+			"target": schemaAttributec4a2c41cad25a048b9f733bd(),
+		}, /*END SCHEMA*/
+		Description: "Represents a field in a ProfileObjectType.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b34bb041732f2bebf04f78e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Defines the priority order of object types. Lower value indicates higher priority.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c147bc1009a6e80fd8f6dfc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Description of the profile object type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fa8b3ee0c551c8d6f802b51() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE means that this key can be used to tie an object to a PROFILE. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7ca3c1275c267f8f29cadca() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute7b5821e86e995526f58d06d9(),
+				// Property: ObjectTypeField
+				"object_type_field": schemaAttribute81d921ce3fbc5460bc394b84(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of the name and ObjectType field.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb525c87d6f838be57bf3be27() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the object template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb991eb2fc65e1b8c314196a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique name of the domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba7fb84d9fd3f15eb6facf8d() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether a profile should be created when data is received.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4a2c41cad25a048b9f733bd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The location of the data in the standard ProfileObject model. For example: _profile.Address.PostalCode.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6e12eecdce5c8d327aa8768() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute7b5821e86e995526f58d06d9(),
+				// Property: ObjectTypeKeyList
+				"object_type_key_list": schemaAttributee00b5f350ef4d0fbee03bd9b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of unique keys that can be used to map data to the profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede5b33bccf01d0c48b1674b7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the profile object type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee00b5f350ef4d0fbee03bd9b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FieldNames
+				"field_names": schemaAttributefba6f2a797d3f6d3788b69a4(),
+				// Property: StandardIdentifiers
+				"standard_identifiers": schemaAttribute9fa8b3ee0c551c8d6f802b51(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0ff465085a89357de4512a6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The content type of the field. Used for determining equality when searching.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef88a2fe852dac40b080dbd45() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of profile objects for this object type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefba6f2a797d3f6d3788b69a4() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The reference for the key name of the fields map. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_customerprofiles_object_type", objectTypeDataSource)
 }
@@ -30,10 +238,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether a profile should be created when data is received.",
 		//	  "type": "boolean"
 		//	}
-		"allow_profile_creation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether a profile should be created when data is received.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"allow_profile_creation": schemaAttributeba7fb84d9fd3f15eb6facf8d(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +246,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time of this integration got created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time of this integration got created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute3de7cf2aece2d091163f50f9(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +256,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description of the profile object type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute8c147bc1009a6e80fd8f6dfc(),
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +267,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique name of the domain.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_name": schemaAttributeb991eb2fc65e1b8c314196a5(),
 		// Property: EncryptionKey
 		// CloudFormation resource type schema:
 		//
@@ -81,10 +277,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"encryption_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The default encryption key",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"encryption_key": schemaAttribute5e550f96098b6d6c9aafa41f(),
 		// Property: ExpirationDays
 		// CloudFormation resource type schema:
 		//
@@ -94,10 +287,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"expiration_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The default number of days until the data within the domain expires.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"expiration_days": schemaAttribute716e466a52304251396a98cc(),
 		// Property: Fields
 		// CloudFormation resource type schema:
 		//
@@ -148,40 +338,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ObjectTypeField
-					"object_type_field": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ContentType
-							"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The content type of the field. Used for determining equality when searching.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Source
-							"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A field of a ProfileObject. For example: _source.FirstName, where \"_source\" is a ProfileObjectType of a Zendesk user and \"FirstName\" is a field in that ObjectType.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Target
-							"target": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The location of the data in the standard ProfileObject model. For example: _profile.Address.PostalCode.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Represents a field in a ProfileObjectType.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of the name and ObjectType field.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"fields": schemaAttributea7ca3c1275c267f8f29cadca(),
 		// Property: Keys
 		// CloudFormation resource type schema:
 		//
@@ -252,38 +409,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"keys": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ObjectTypeKeyList
-					"object_type_key_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: FieldNames
-								"field_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "The reference for the key name of the fields map. ",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: StandardIdentifiers
-								"standard_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE means that this key can be used to tie an object to a PROFILE. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of unique keys that can be used to map data to the profile.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"keys": schemaAttributec6e12eecdce5c8d327aa8768(),
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -291,10 +417,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time of this integration got last updated at.",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time of this integration got last updated at.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_at": schemaAttribute4dc6b578e50d908a2afb1f27(),
 		// Property: MaxAvailableProfileObjectCount
 		// CloudFormation resource type schema:
 		//
@@ -303,10 +426,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"max_available_profile_object_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum available number of profile objects",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"max_available_profile_object_count": schemaAttribute40cc2246b94556584c99f6a2(),
 		// Property: MaxProfileObjectCount
 		// CloudFormation resource type schema:
 		//
@@ -315,10 +435,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"max_profile_object_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum number of profile objects for this object type",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"max_profile_object_count": schemaAttributef88a2fe852dac40b080dbd45(),
 		// Property: ObjectTypeName
 		// CloudFormation resource type schema:
 		//
@@ -329,10 +446,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z_][a-zA-Z_0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"object_type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the profile object type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"object_type_name": schemaAttributede5b33bccf01d0c48b1674b7(),
 		// Property: SourceLastUpdatedTimestampFormat
 		// CloudFormation resource type schema:
 		//
@@ -342,10 +456,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"source_last_updated_timestamp_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The format of your sourceLastUpdatedTimestamp that was previously set up.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_last_updated_timestamp_format": schemaAttribute7f65fec117d8481463c6cd3c(),
 		// Property: SourcePriority
 		// CloudFormation resource type schema:
 		//
@@ -354,10 +465,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"source_priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Defines the priority order of object types. Lower value indicates higher priority.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_priority": schemaAttribute8b34bb041732f2bebf04f78e(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -388,22 +496,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags (keys and values) associated with the integration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute749a5eae4fc188fa21a60b7a(),
 		// Property: TemplateId
 		// CloudFormation resource type schema:
 		//
@@ -414,10 +507,7 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for the object template.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"template_id": schemaAttributeb525c87d6f838be57bf3be27(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

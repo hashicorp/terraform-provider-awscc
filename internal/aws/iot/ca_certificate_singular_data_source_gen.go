@@ -14,6 +14,68 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0c502155580066a87cfd7c8c() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute21221fd5d02e70add2ff3d01() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute750a105a837f85e18a744c63(),
+				// Property: Value
+				"value": schemaAttributec45dee458ae12865bbb3b959(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c6429f58df9f9680328bb31() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RoleArn
+			"role_arn": schemaAttributee5e2b2ddbef2d31641923182(),
+			// Property: TemplateBody
+			"template_body": schemaAttributee5e2b2ddbef2d31641923182(),
+			// Property: TemplateName
+			"template_name": schemaAttributee5e2b2ddbef2d31641923182(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute750a105a837f85e18a744c63() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec45dee458ae12865bbb3b959() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7902e79c7d8b6eb663cab65() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The private key verification certificate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5e2b2ddbef2d31641923182() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iot_ca_certificate", cACertificateDataSource)
 }
@@ -28,9 +90,7 @@ func cACertificateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributee5e2b2ddbef2d31641923182(),
 		// Property: AutoRegistrationStatus
 		// CloudFormation resource type schema:
 		//
@@ -41,9 +101,7 @@ func cACertificateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"auto_registration_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"auto_registration_status": schemaAttributee5e2b2ddbef2d31641923182(),
 		// Property: CACertificatePem
 		// CloudFormation resource type schema:
 		//
@@ -53,9 +111,7 @@ func cACertificateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "[\\s\\S]*",
 		//	  "type": "string"
 		//	}
-		"ca_certificate_pem": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"ca_certificate_pem": schemaAttributee5e2b2ddbef2d31641923182(),
 		// Property: CertificateMode
 		// CloudFormation resource type schema:
 		//
@@ -66,18 +122,14 @@ func cACertificateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"certificate_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"certificate_mode": schemaAttributee5e2b2ddbef2d31641923182(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"ca_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"ca_certificate_id": schemaAttributee5e2b2ddbef2d31641923182(),
 		// Property: RegistrationConfig
 		// CloudFormation resource type schema:
 		//
@@ -105,32 +157,14 @@ func cACertificateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"registration_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RoleArn
-				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: TemplateBody
-				"template_body": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: TemplateName
-				"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"registration_config": schemaAttribute5c6429f58df9f9680328bb31(),
 		// Property: RemoveAutoRegistration
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"remove_auto_registration": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"remove_auto_registration": schemaAttribute0c502155580066a87cfd7c8c(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -141,9 +175,7 @@ func cACertificateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributee5e2b2ddbef2d31641923182(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -176,24 +208,7 @@ func cACertificateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute21221fd5d02e70add2ff3d01(),
 		// Property: VerificationCertificatePem
 		// CloudFormation resource type schema:
 		//
@@ -204,10 +219,7 @@ func cACertificateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "[\\s\\S]*",
 		//	  "type": "string"
 		//	}
-		"verification_certificate_pem": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The private key verification certificate.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"verification_certificate_pem": schemaAttributec7902e79c7d8b6eb663cab65(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

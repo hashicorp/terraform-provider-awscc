@@ -15,6 +15,199 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute4871c80cc3d235e35ea50171() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SchemaDefinition
+			"schema_definition": schemaAttributef77e8a6278c51e73429e439a(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48c9130b0f8be32fef91c7d0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Bucket
+			"bucket": schemaAttribute4bde0db0750cd895a7c7fc5d(),
+			// Property: KeyPrefix
+			"key_prefix": schemaAttribute4bde0db0750cd895a7c7fc5d(),
+			// Property: RoleArn
+			"role_arn": schemaAttribute4bde0db0750cd895a7c7fc5d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4bde0db0750cd895a7c7fc5d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f3ca67b1725628f18affe21() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: jsontypes.NormalizedType{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51a07c8d6a4d3e636f83cc6c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute4bde0db0750cd895a7c7fc5d(),
+				// Property: Value
+				"value": schemaAttribute4bde0db0750cd895a7c7fc5d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute69dc98a9e1e155bdcbd5ab6c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Partition
+				"partition": schemaAttributef292df437d20dba8df61bc2f(),
+				// Property: TimestampPartition
+				"timestamp_partition": schemaAttributeebde872e0737bae33bc73877(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d925b66893729bbe07716c4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Bucket
+			"bucket": schemaAttribute4bde0db0750cd895a7c7fc5d(),
+			// Property: KeyPrefix
+			"key_prefix": schemaAttribute4bde0db0750cd895a7c7fc5d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80fb13330f2dc52f0cf4f09e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute4bde0db0750cd895a7c7fc5d(),
+				// Property: Type
+				"type": schemaAttribute4bde0db0750cd895a7c7fc5d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute822e128523c1e78eabc20d2d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomerManagedS3Storage
+			"customer_managed_s3_storage": schemaAttribute6d925b66893729bbe07716c4(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c41d2692bcd39793cdf42a3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Partitions
+			"partitions": schemaAttribute69dc98a9e1e155bdcbd5ab6c(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae3150a8db54c0a270393011() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomerManagedS3
+			"customer_managed_s3": schemaAttribute48c9130b0f8be32fef91c7d0(),
+			// Property: IotSiteWiseMultiLayerStorage
+			"iot_site_wise_multi_layer_storage": schemaAttribute822e128523c1e78eabc20d2d(),
+			// Property: ServiceManagedS3
+			"service_managed_s3": schemaAttribute4f3ca67b1725628f18affe21(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb789309d08231b130b689937() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: NumberOfDays
+			"number_of_days": schemaAttributee4622e3390299868b064e887(),
+			// Property: Unlimited
+			"unlimited": schemaAttributec283d69fb850cf1325ab66c5(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec283d69fb850cf1325ab66c5() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1c3c18d68e8b26377365721() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: JsonConfiguration
+			"json_configuration": schemaAttribute4f3ca67b1725628f18affe21(),
+			// Property: ParquetConfiguration
+			"parquet_configuration": schemaAttribute4871c80cc3d235e35ea50171(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4622e3390299868b064e887() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeebde872e0737bae33bc73877() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AttributeName
+			"attribute_name": schemaAttribute4bde0db0750cd895a7c7fc5d(),
+			// Property: TimestampFormat
+			"timestamp_format": schemaAttribute4bde0db0750cd895a7c7fc5d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef292df437d20dba8df61bc2f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AttributeName
+			"attribute_name": schemaAttribute4bde0db0750cd895a7c7fc5d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef77e8a6278c51e73429e439a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Columns
+			"columns": schemaAttribute80fb13330f2dc52f0cf4f09e(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iotanalytics_datastore", datastoreDataSource)
 }
@@ -32,9 +225,7 @@ func datastoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9_]+",
 		//	  "type": "string"
 		//	}
-		"datastore_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"datastore_name": schemaAttribute4bde0db0750cd895a7c7fc5d(),
 		// Property: DatastorePartitions
 		// CloudFormation resource type schema:
 		//
@@ -87,43 +278,7 @@ func datastoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"datastore_partitions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Partitions
-				"partitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Partition
-							"partition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AttributeName
-									"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: TimestampPartition
-							"timestamp_partition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AttributeName
-									"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: TimestampFormat
-									"timestamp_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"datastore_partitions": schemaAttribute8c41d2692bcd39793cdf42a3(),
 		// Property: DatastoreStorage
 		// CloudFormation resource type schema:
 		//
@@ -191,54 +346,7 @@ func datastoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"datastore_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomerManagedS3
-				"customer_managed_s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Bucket
-						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: KeyPrefix
-						"key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: RoleArn
-						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: IotSiteWiseMultiLayerStorage
-				"iot_site_wise_multi_layer_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CustomerManagedS3Storage
-						"customer_managed_s3_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Bucket
-								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: KeyPrefix
-								"key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServiceManagedS3
-				"service_managed_s3": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType: jsontypes.NormalizedType{},
-					Computed:   true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"datastore_storage": schemaAttributeae3150a8db54c0a270393011(),
 		// Property: FileFormatConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -287,53 +395,14 @@ func datastoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"file_format_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: JsonConfiguration
-				"json_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType: jsontypes.NormalizedType{},
-					Computed:   true,
-				}, /*END ATTRIBUTE*/
-				// Property: ParquetConfiguration
-				"parquet_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: SchemaDefinition
-						"schema_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Columns
-								"columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Name
-											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: Type
-											"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"file_format_configuration": schemaAttributed1c3c18d68e8b26377365721(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"datastore_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"datastore_id": schemaAttribute4bde0db0750cd895a7c7fc5d(),
 		// Property: RetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -351,19 +420,7 @@ func datastoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"retention_period": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: NumberOfDays
-				"number_of_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Unlimited
-				"unlimited": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"retention_period": schemaAttributeb789309d08231b130b689937(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -394,21 +451,7 @@ func datastoreDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute51a07c8d6a4d3e636f83cc6c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

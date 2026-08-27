@@ -15,6 +15,187 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute027760db900baefc4bf7e7a6() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Filter to match any of the specified suffixes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute129d5a9d9055198ac346b633() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Maximum object size to which the rule applies.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1c619db9a44419e7503a2dbd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MatchAnyPrefix
+			"match_any_prefix": schemaAttributecf9fe0b8e7dc99547bd7e6f5(),
+			// Property: MatchAnySuffix
+			"match_any_suffix": schemaAttribute027760db900baefc4bf7e7a6(),
+			// Property: MatchAnyTag
+			"match_any_tag": schemaAttributed2df85c0c10c0e6dff5cc590(),
+			// Property: MatchObjectAge
+			"match_object_age": schemaAttribute7ee99898a1a5b9fac533f851(),
+			// Property: MatchObjectSize
+			"match_object_size": schemaAttributeb9d90f7186cd0a35c59c75f8(),
+		}, /*END SCHEMA*/
+		Description: "The Storage Lens group will include objects that match all of the specified filter values.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e795f9b6690ae93ca3b7755() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributef8e9144389918b9a56938a66(),
+				// Property: Value
+				"value": schemaAttributef8e9144389918b9a56938a66(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A set of tags (key-value pairs) for this Amazon S3 Storage Lens Group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d7c2ba2bd76fd37386d32a2() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Minimum object age to which the rule applies.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ee99898a1a5b9fac533f851() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DaysGreaterThan
+			"days_greater_than": schemaAttribute6d7c2ba2bd76fd37386d32a2(),
+			// Property: DaysLessThan
+			"days_less_than": schemaAttributef0e5a0d37ea77147fea23e43(),
+		}, /*END SCHEMA*/
+		Description: "Filter to match all of the specified values for the minimum and maximum object age.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8304526710405f1536249bde() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: And
+			"and": schemaAttribute1c619db9a44419e7503a2dbd(),
+			// Property: MatchAnyPrefix
+			"match_any_prefix": schemaAttributecf9fe0b8e7dc99547bd7e6f5(),
+			// Property: MatchAnySuffix
+			"match_any_suffix": schemaAttribute027760db900baefc4bf7e7a6(),
+			// Property: MatchAnyTag
+			"match_any_tag": schemaAttributed2df85c0c10c0e6dff5cc590(),
+			// Property: MatchObjectAge
+			"match_object_age": schemaAttribute7ee99898a1a5b9fac533f851(),
+			// Property: MatchObjectSize
+			"match_object_size": schemaAttributeb9d90f7186cd0a35c59c75f8(),
+			// Property: Or
+			"or": schemaAttributea352b74df2122e124195c001(),
+		}, /*END SCHEMA*/
+		Description: "Sets the Storage Lens Group filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea341ef1aff4dfcf9ee519bca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN for the Amazon S3 Storage Lens Group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea352b74df2122e124195c001() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MatchAnyPrefix
+			"match_any_prefix": schemaAttributecf9fe0b8e7dc99547bd7e6f5(),
+			// Property: MatchAnySuffix
+			"match_any_suffix": schemaAttribute027760db900baefc4bf7e7a6(),
+			// Property: MatchAnyTag
+			"match_any_tag": schemaAttributed2df85c0c10c0e6dff5cc590(),
+			// Property: MatchObjectAge
+			"match_object_age": schemaAttribute7ee99898a1a5b9fac533f851(),
+			// Property: MatchObjectSize
+			"match_object_size": schemaAttributeb9d90f7186cd0a35c59c75f8(),
+		}, /*END SCHEMA*/
+		Description: "The Storage Lens group will include objects that match any of the specified filter values.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9d90f7186cd0a35c59c75f8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BytesGreaterThan
+			"bytes_greater_than": schemaAttributed02c725036c675846e359396(),
+			// Property: BytesLessThan
+			"bytes_less_than": schemaAttribute129d5a9d9055198ac346b633(),
+		}, /*END SCHEMA*/
+		Description: "Filter to match all of the specified values for the minimum and maximum object size.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf9fe0b8e7dc99547bd7e6f5() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Filter to match any of the specified prefixes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed02c725036c675846e359396() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Minimum object size to which the rule applies.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed2df85c0c10c0e6dff5cc590() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributef8e9144389918b9a56938a66(),
+				// Property: Value
+				"value": schemaAttributef8e9144389918b9a56938a66(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Filter to match any of the specified object tags.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee7ff53eb63147545fd0b4c18() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name that identifies the Amazon S3 Storage Lens Group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0e5a0d37ea77147fea23e43() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Maximum object age to which the rule applies.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8e9144389918b9a56938a66() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_s3_storage_lens_group", storageLensGroupDataSource)
 }
@@ -295,215 +476,7 @@ func storageLensGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: And
-				"and": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: MatchAnyPrefix
-						"match_any_prefix": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "Filter to match any of the specified prefixes.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MatchAnySuffix
-						"match_any_suffix": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "Filter to match any of the specified suffixes.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MatchAnyTag
-						"match_any_tag": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Key
-									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "Filter to match any of the specified object tags.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MatchObjectAge
-						"match_object_age": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DaysGreaterThan
-								"days_greater_than": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Minimum object age to which the rule applies.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: DaysLessThan
-								"days_less_than": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Maximum object age to which the rule applies.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Filter to match all of the specified values for the minimum and maximum object age.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MatchObjectSize
-						"match_object_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BytesGreaterThan
-								"bytes_greater_than": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Minimum object size to which the rule applies.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: BytesLessThan
-								"bytes_less_than": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Maximum object size to which the rule applies.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Filter to match all of the specified values for the minimum and maximum object size.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The Storage Lens group will include objects that match all of the specified filter values.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MatchAnyPrefix
-				"match_any_prefix": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Filter to match any of the specified prefixes.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MatchAnySuffix
-				"match_any_suffix": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Filter to match any of the specified suffixes.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MatchAnyTag
-				"match_any_tag": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Key
-							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Filter to match any of the specified object tags.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MatchObjectAge
-				"match_object_age": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DaysGreaterThan
-						"days_greater_than": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Minimum object age to which the rule applies.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DaysLessThan
-						"days_less_than": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Maximum object age to which the rule applies.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Filter to match all of the specified values for the minimum and maximum object age.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MatchObjectSize
-				"match_object_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BytesGreaterThan
-						"bytes_greater_than": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Minimum object size to which the rule applies.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: BytesLessThan
-						"bytes_less_than": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Maximum object size to which the rule applies.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Filter to match all of the specified values for the minimum and maximum object size.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Or
-				"or": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: MatchAnyPrefix
-						"match_any_prefix": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "Filter to match any of the specified prefixes.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MatchAnySuffix
-						"match_any_suffix": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "Filter to match any of the specified suffixes.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MatchAnyTag
-						"match_any_tag": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Key
-									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "Filter to match any of the specified object tags.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MatchObjectAge
-						"match_object_age": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DaysGreaterThan
-								"days_greater_than": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Minimum object age to which the rule applies.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: DaysLessThan
-								"days_less_than": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Maximum object age to which the rule applies.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Filter to match all of the specified values for the minimum and maximum object age.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MatchObjectSize
-						"match_object_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BytesGreaterThan
-								"bytes_greater_than": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Minimum object size to which the rule applies.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: BytesLessThan
-								"bytes_less_than": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Maximum object size to which the rule applies.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Filter to match all of the specified values for the minimum and maximum object size.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The Storage Lens group will include objects that match any of the specified filter values.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Sets the Storage Lens Group filter.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"filter": schemaAttribute8304526710405f1536249bde(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -514,10 +487,7 @@ func storageLensGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z0-9\\-_]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name that identifies the Amazon S3 Storage Lens Group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributee7ff53eb63147545fd0b4c18(),
 		// Property: StorageLensGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -525,10 +495,7 @@ func storageLensGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The ARN for the Amazon S3 Storage Lens Group.",
 		//	  "type": "string"
 		//	}
-		"storage_lens_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN for the Amazon S3 Storage Lens Group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"storage_lens_group_arn": schemaAttributea341ef1aff4dfcf9ee519bca(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -558,22 +525,7 @@ func storageLensGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A set of tags (key-value pairs) for this Amazon S3 Storage Lens Group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute1e795f9b6690ae93ca3b7755(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

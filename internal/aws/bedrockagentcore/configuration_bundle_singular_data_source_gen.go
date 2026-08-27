@@ -17,6 +17,188 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute008194f354fa78732f0054d0() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Configuration
+				"configuration": schemaAttribute51cde52e7cfbcf13c4ea0938(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A map of component identifiers to their configurations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1599183cb554b8045e0f51ba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A commit message describing the changes in this version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute162f21a37cd70d3c2162f4a0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributecb43e7a383fa5fd2ceba1119(),
+				// Property: Value
+				"value": schemaAttributecb43e7a383fa5fd2ceba1119(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to assign to the configuration bundle.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c76e3d6e24d8d2b093f82da() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of parent version identifiers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute479c238be0da09b4f44c4d13() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the source, if applicable.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b3d8c6ffa11e4623fb91ba0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A commit message describing the version of the configuration bundle.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b60a42c899286d768cbe756() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the configuration bundle.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ba3c25fa9909bde4107a8f0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the configuration bundle was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ea5b7fa676602f8fae51770() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The branch name for this version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51cde52e7cfbcf13c4ea0938() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The configuration values as a flexible JSON document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ccc431759f47bf180dc9026() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttribute479c238be0da09b4f44c4d13(),
+			// Property: Name
+			"name": schemaAttribute94b6fcb86c8c6d581675808c(),
+		}, /*END SCHEMA*/
+		Description: "The source that created a configuration bundle version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f25291e3033ae26f283f68a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BranchName
+			"branch_name": schemaAttribute4ea5b7fa676602f8fae51770(),
+			// Property: CommitMessage
+			"commit_message": schemaAttribute1599183cb554b8045e0f51ba(),
+			// Property: CreatedBy
+			"created_by": schemaAttribute6ccc431759f47bf180dc9026(),
+			// Property: ParentVersionIds
+			"parent_version_ids": schemaAttribute2c76e3d6e24d8d2b093f82da(),
+		}, /*END SCHEMA*/
+		Description: "The version lineage metadata that tracks parent versions and creation source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72bff4ded6a485cf2038bc5a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description for the configuration bundle.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b51ddb89c5ce4c539a78bca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the configuration bundle was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8677b0430f97a13d597c67b2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The branch name for version tracking.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94962e751bca4ff6bbf61cbc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the configuration bundle. Names must be unique within your account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94b6fcb86c8c6d581675808c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the source (for example, user, optimization-job, or system).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9d4d3aafff7a578965654c2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the configuration bundle.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb43e7a383fa5fd2ceba1119() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea6a8cc328b8f026b1ee9b52() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version identifier of the configuration bundle.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef245f492570ce7e0427f0015() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the KMS key used to encrypt component configurations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_configuration_bundle", configurationBundleDataSource)
 }
@@ -35,10 +217,7 @@ func configurationBundleDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_/-]{0,127}$",
 		//	  "type": "string"
 		//	}
-		"branch_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The branch name for version tracking.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"branch_name": schemaAttribute8677b0430f97a13d597c67b2(),
 		// Property: BundleArn
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +226,7 @@ func configurationBundleDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:configuration-bundle/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"bundle_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the configuration bundle.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bundle_arn": schemaAttribute4b60a42c899286d768cbe756(),
 		// Property: BundleId
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +235,7 @@ func configurationBundleDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"bundle_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the configuration bundle.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bundle_id": schemaAttributec9d4d3aafff7a578965654c2(),
 		// Property: BundleName
 		// CloudFormation resource type schema:
 		//
@@ -71,10 +244,7 @@ func configurationBundleDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,99}$",
 		//	  "type": "string"
 		//	}
-		"bundle_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the configuration bundle. Names must be unique within your account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bundle_name": schemaAttribute94962e751bca4ff6bbf61cbc(),
 		// Property: CommitMessage
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +254,7 @@ func configurationBundleDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"commit_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A commit message describing the version of the configuration bundle.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"commit_message": schemaAttribute4b3d8c6ffa11e4623fb91ba0(),
 		// Property: Components
 		// CloudFormation resource type schema:
 		//
@@ -112,21 +279,7 @@ func configurationBundleDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"components":              // Pattern: ""
-		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Configuration
-					"configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-						CustomType:  jsontypes.NormalizedType{},
-						Description: "The configuration values as a flexible JSON document.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A map of component identifiers to their configurations.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"components": schemaAttribute008194f354fa78732f0054d0(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -135,11 +288,7 @@ func configurationBundleDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the configuration bundle was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute4ba3c25fa9909bde4107a8f0(),
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -161,22 +310,7 @@ func configurationBundleDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"created_by": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the source, if applicable.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the source (for example, user, optimization-job, or system).",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The source that created a configuration bundle version.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_by": schemaAttribute6ccc431759f47bf180dc9026(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -187,10 +321,7 @@ func configurationBundleDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^.+$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description for the configuration bundle.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute72bff4ded6a485cf2038bc5a(),
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -201,10 +332,7 @@ func configurationBundleDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the KMS key used to encrypt component configurations.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttributef245f492570ce7e0427f0015(),
 		// Property: LineageMetadata
 		// CloudFormation resource type schema:
 		//
@@ -254,45 +382,7 @@ func configurationBundleDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"lineage_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BranchName
-				"branch_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The branch name for this version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CommitMessage
-				"commit_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A commit message describing the changes in this version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreatedBy
-				"created_by": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Arn
-						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) of the source, if applicable.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Name
-						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the source (for example, user, optimization-job, or system).",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The source that created a configuration bundle version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ParentVersionIds
-				"parent_version_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of parent version identifiers.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The version lineage metadata that tracks parent versions and creation source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"lineage_metadata": schemaAttribute6f25291e3033ae26f283f68a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -325,22 +415,7 @@ func configurationBundleDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to assign to the configuration bundle.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute162f21a37cd70d3c2162f4a0(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -349,11 +424,7 @@ func configurationBundleDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the configuration bundle was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute7b51ddb89c5ce4c539a78bca(),
 		// Property: VersionId
 		// CloudFormation resource type schema:
 		//
@@ -362,10 +433,7 @@ func configurationBundleDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version identifier of the configuration bundle.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version_id": schemaAttributeea6a8cc328b8f026b1ee9b52(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

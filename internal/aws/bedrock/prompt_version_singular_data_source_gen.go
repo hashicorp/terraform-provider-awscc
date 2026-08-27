@@ -17,6 +17,509 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute06aae76c18bcef91a91951d9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Json
+			"json": schemaAttribute1a210973f3f6fb6959b1dc27(),
+		}, /*END SCHEMA*/
+		Description: "Tool input schema",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute145fb71c82e81ae4d02953c2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute20da9beb55c45bc4e65fbaa8(),
+				// Property: Value
+				"value": schemaAttribute21f5ddb1571c221318b5eb10(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of metadata to associate with the prompt variant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute14d9b0610d40ee5d1536e8e5() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "Cumulative probability cutoff for token selection",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15af52832adca4f5d3f7c1fb() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CachePoint
+				"cache_point": schemaAttributed4d9614b86dc7af4cb62d3b7(),
+				// Property: Text
+				"text": schemaAttribute7ccb0346f6b0cd6a5c9d5bff(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Configuration for chat prompt template",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1700b46f0bf0c165e40fd2c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Identifier for a Prompt",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17b0c415c97d75b77b175ce5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Prompt content for String prompt template",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a210973f3f6fb6959b1dc27() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: jsontypes.NormalizedType{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ad7132a24afa3cab679232c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxTokens
+			"max_tokens": schemaAttribute6400df875337d9d5e6d1a3bb(),
+			// Property: StopSequences
+			"stop_sequences": schemaAttributecc19167aad9da36cec40f17d(),
+			// Property: Temperature
+			"temperature": schemaAttributee9a4f49be94fe3aac8abad25(),
+			// Property: TopP
+			"top_p": schemaAttribute14d9b0610d40ee5d1536e8e5(),
+		}, /*END SCHEMA*/
+		Description: "Prompt model inference configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20da9beb55c45bc4e65fbaa8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key of a metadata tag for a prompt variant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute21f5ddb1571c221318b5eb10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of a metadata tag for a prompt variant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2416d9d65d4129a268fc2104() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Description
+			"description": schemaAttribute6db837b72010e85c5d54e586(),
+			// Property: InputSchema
+			"input_schema": schemaAttribute06aae76c18bcef91a91951d9(),
+			// Property: Name
+			"name": schemaAttribute833e06751b141a66cceb658b(),
+		}, /*END SCHEMA*/
+		Description: "Tool specification",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28561c5335faf8cdbe67cfba() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InputVariables
+			"input_variables": schemaAttributec2cc573cef5d4ecd0cba64f8(),
+			// Property: Messages
+			"messages": schemaAttributebd3cd4111a851fac21c7f1b0(),
+			// Property: System
+			"system": schemaAttribute15af52832adca4f5d3f7c1fb(),
+			// Property: ToolConfiguration
+			"tool_configuration": schemaAttributee137aeeba6ef876902b7392e(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for chat prompt template",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute29b80d6ea2bde99ea2d39b78() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Description for a prompt version resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f39edbca6c7876062a933c3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name for a prompt resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f028a68635bc13a31508279() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A KMS key ARN",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5afba847a3913429806c7645() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CachePoint
+				"cache_point": schemaAttributed4d9614b86dc7af4cb62d3b7(),
+				// Property: Text
+				"text": schemaAttribute7ccb0346f6b0cd6a5c9d5bff(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of Content Blocks",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63d44dd901a33dc396564e81() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Prompt template type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6400df875337d9d5e6d1a3bb() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "Maximum length of output",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67cb76e1cc30150fed0c38f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "Time Stamp.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6987ecf766662972824fe3a6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Agent
+			"agent": schemaAttribute95aaae1347f7bda53e44c437(),
+		}, /*END SCHEMA*/
+		Description: "Target resource to invoke with Prompt",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c5f16ef03fb77e1fa497482() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of a prompt version resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6db837b72010e85c5d54e586() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ccb0346f6b0cd6a5c9d5bff() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Configuration for chat prompt template",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute81494a4bc34d18e670e11cd6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Arn representation of the Agent Alias.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute833e06751b141a66cceb658b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Tool name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute835d1b1acbb32e906fc58bf4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83b32c18ef71aaf96fd809df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Conversation roles for the chat prompt",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute88e2bf17db8d9ee07e9ca887() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Text
+			"text": schemaAttribute1ad7132a24afa3cab679232c(),
+		}, /*END SCHEMA*/
+		Description: "Model inference configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94162f699cc0ed93bbd5e800() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Auto Tool choice",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94702d15311addd009fd985d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CachePoint
+				"cache_point": schemaAttributed4d9614b86dc7af4cb62d3b7(),
+				// Property: ToolSpec
+				"tool_spec": schemaAttribute2416d9d65d4129a268fc2104(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of Tools",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95aaae1347f7bda53e44c437() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AgentIdentifier
+			"agent_identifier": schemaAttribute81494a4bc34d18e670e11cd6(),
+		}, /*END SCHEMA*/
+		Description: "Target Agent to invoke with Prompt",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e568ac0f5d54092b756ee13() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AdditionalModelRequestFields
+				"additional_model_request_fields": schemaAttributea2f376ff393e42e9d2aba265(),
+				// Property: GenAiResource
+				"gen_ai_resource": schemaAttribute6987ecf766662972824fe3a6(),
+				// Property: InferenceConfiguration
+				"inference_configuration": schemaAttribute88e2bf17db8d9ee07e9ca887(),
+				// Property: Metadata
+				"metadata": schemaAttribute145fb71c82e81ae4d02953c2(),
+				// Property: ModelId
+				"model_id": schemaAttributed4c9a32b8b4ff1bfdd8f96b0(),
+				// Property: Name
+				"name": schemaAttributea26dc7e92e5cd56a90efdb9e(),
+				// Property: TemplateConfiguration
+				"template_configuration": schemaAttributec0a231ad037825ccb95c40fe(),
+				// Property: TemplateType
+				"template_type": schemaAttribute63d44dd901a33dc396564e81(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of prompt variants",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea26dc7e92e5cd56a90efdb9e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name for a variant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea2f376ff393e42e9d2aba265() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Contains model-specific configurations",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0d5e9ec22792c61a70a9a75() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Any Tool choice",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd3cd4111a851fac21c7f1b0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Content
+				"content": schemaAttribute5afba847a3913429806c7645(),
+				// Property: Role
+				"role": schemaAttribute83b32c18ef71aaf96fd809df(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of messages for chat prompt template",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec0a231ad037825ccb95c40fe() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Chat
+			"chat": schemaAttribute28561c5335faf8cdbe67cfba(),
+			// Property: Text
+			"text": schemaAttributedb66dffd51358fe632a74525(),
+		}, /*END SCHEMA*/
+		Description: "Prompt template configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2cc573cef5d4ecd0cba64f8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttributed6783b967f33596a3d889712(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of input variables",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5adefbfb9f0b3270aa977de() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttribute833e06751b141a66cceb658b(),
+		}, /*END SCHEMA*/
+		Description: "Specific Tool choice",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecaf0d891e87f90cb86366f98() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of a prompt resource possibly with a version",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc19167aad9da36cec40f17d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of stop sequences",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed120709d1f2f73d0c07b2c78() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "CachePoint types for CachePointBlock",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed14029449ee635c56e1787e7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Any
+			"any": schemaAttributeb0d5e9ec22792c61a70a9a75(),
+			// Property: Auto
+			"auto": schemaAttribute94162f699cc0ed93bbd5e800(),
+			// Property: Tool
+			"tool": schemaAttributec5adefbfb9f0b3270aa977de(),
+		}, /*END SCHEMA*/
+		Description: "Tool choice",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4c9a32b8b4ff1bfdd8f96b0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4d9614b86dc7af4cb62d3b7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Type
+			"type": schemaAttributed120709d1f2f73d0c07b2c78(),
+		}, /*END SCHEMA*/
+		Description: "CachePointBlock",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6783b967f33596a3d889712() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name for an input variable",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb66dffd51358fe632a74525() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CachePoint
+			"cache_point": schemaAttributed4d9614b86dc7af4cb62d3b7(),
+			// Property: InputVariables
+			"input_variables": schemaAttributec2cc573cef5d4ecd0cba64f8(),
+			// Property: Text
+			"text": schemaAttribute17b0c415c97d75b77b175ce5(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for text prompt template",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd02c0e79b2f78cd4bd07685() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A map of tag keys and values",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee137aeeba6ef876902b7392e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ToolChoice
+			"tool_choice": schemaAttributed14029449ee635c56e1787e7(),
+			// Property: Tools
+			"tools": schemaAttribute94702d15311addd009fd985d(),
+		}, /*END SCHEMA*/
+		Description: "Tool configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9a4f49be94fe3aac8abad25() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "Controls randomness, higher values increase diversity",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrock_prompt_version", promptVersionDataSource)
 }
@@ -35,10 +538,7 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:prompt/[0-9a-zA-Z]{10}:[0-9]{1,20})$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ARN of a prompt version resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute6c5f16ef03fb77e1fa497482(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -47,11 +547,7 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "Time Stamp.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute67cb76e1cc30150fed0c38f3(),
 		// Property: CustomerEncryptionKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +558,7 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
 		//	  "type": "string"
 		//	}
-		"customer_encryption_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A KMS key ARN",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"customer_encryption_key_arn": schemaAttribute3f028a68635bc13a31508279(),
 		// Property: DefaultVariant
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +567,7 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^([0-9a-zA-Z][_-]?){1,100}$",
 		//	  "type": "string"
 		//	}
-		"default_variant": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name for a variant.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_variant": schemaAttributea26dc7e92e5cd56a90efdb9e(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -87,10 +577,7 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description for a prompt version resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute29b80d6ea2bde99ea2d39b78(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -99,10 +586,7 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^([0-9a-zA-Z][_-]?){1,100}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name for a prompt resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute2f39edbca6c7876062a933c3(),
 		// Property: PromptArn
 		// CloudFormation resource type schema:
 		//
@@ -113,10 +597,7 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:prompt/[0-9a-zA-Z]{10})$",
 		//	  "type": "string"
 		//	}
-		"prompt_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ARN of a prompt resource possibly with a version",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"prompt_arn": schemaAttributecaf0d891e87f90cb86366f98(),
 		// Property: PromptId
 		// CloudFormation resource type schema:
 		//
@@ -125,10 +606,7 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[0-9a-zA-Z]{10}$",
 		//	  "type": "string"
 		//	}
-		"prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Identifier for a Prompt",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"prompt_id": schemaAttribute1700b46f0bf0c165e40fd2c4(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -146,12 +624,7 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A map of tag keys and values",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributedd02c0e79b2f78cd4bd07685(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -160,11 +633,7 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "Time Stamp.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute67cb76e1cc30150fed0c38f3(),
 		// Property: Variants
 		// CloudFormation resource type schema:
 		//
@@ -589,327 +1058,7 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"variants": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AdditionalModelRequestFields
-					"additional_model_request_fields": schema.StringAttribute{ /*START ATTRIBUTE*/
-						CustomType:  jsontypes.NormalizedType{},
-						Description: "Contains model-specific configurations",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: GenAiResource
-					"gen_ai_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Agent
-							"agent": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AgentIdentifier
-									"agent_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Arn representation of the Agent Alias.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Target Agent to invoke with Prompt",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Target resource to invoke with Prompt",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: InferenceConfiguration
-					"inference_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Text
-							"text": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: MaxTokens
-									"max_tokens": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "Maximum length of output",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: StopSequences
-									"stop_sequences": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
-										Description: "List of stop sequences",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Temperature
-									"temperature": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "Controls randomness, higher values increase diversity",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: TopP
-									"top_p": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "Cumulative probability cutoff for token selection",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Prompt model inference configuration",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Model inference configuration",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Metadata
-					"metadata": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Key
-								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The key of a metadata tag for a prompt variant.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Value
-								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The value of a metadata tag for a prompt variant.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "List of metadata to associate with the prompt variant.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ModelId
-					"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "ARN or Id of a Bedrock Foundational Model or Inference Profile, or the ARN of a imported model, or a provisioned throughput ARN for custom models.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Name for a variant.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: TemplateConfiguration
-					"template_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Chat
-							"chat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: InputVariables
-									"input_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Name
-												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Name for an input variable",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "List of input variables",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Messages
-									"messages": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Content
-												"content": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: CachePoint
-															"cache_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Type
-																	"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "CachePoint types for CachePointBlock",
-																		Computed:    true,
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "CachePointBlock",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Text
-															"text": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "Configuration for chat prompt template",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "List of Content Blocks",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Role
-												"role": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Conversation roles for the chat prompt",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "List of messages for chat prompt template",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: System
-									"system": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: CachePoint
-												"cache_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Type
-														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "CachePoint types for CachePointBlock",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "CachePointBlock",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Text
-												"text": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Configuration for chat prompt template",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "Configuration for chat prompt template",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ToolConfiguration
-									"tool_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: ToolChoice
-											"tool_choice": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Any
-													"any": schema.StringAttribute{ /*START ATTRIBUTE*/
-														CustomType:  jsontypes.NormalizedType{},
-														Description: "Any Tool choice",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: Auto
-													"auto": schema.StringAttribute{ /*START ATTRIBUTE*/
-														CustomType:  jsontypes.NormalizedType{},
-														Description: "Auto Tool choice",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: Tool
-													"tool": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Name
-															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "Tool name",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "Specific Tool choice",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Tool choice",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Tools
-											"tools": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: CachePoint
-														"cache_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: Type
-																"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "CachePoint types for CachePointBlock",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "CachePointBlock",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: ToolSpec
-														"tool_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: Description
-																"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Computed: true,
-																}, /*END ATTRIBUTE*/
-																// Property: InputSchema
-																"input_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																		// Property: Json
-																		"json": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			CustomType: jsontypes.NormalizedType{},
-																			Computed:   true,
-																		}, /*END ATTRIBUTE*/
-																	}, /*END SCHEMA*/
-																	Description: "Tool input schema",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Name
-																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "Tool name",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Tool specification",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-												}, /*END NESTED OBJECT*/
-												Description: "List of Tools",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Tool configuration",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Configuration for chat prompt template",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Text
-							"text": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: CachePoint
-									"cache_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Type
-											"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "CachePoint types for CachePointBlock",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "CachePointBlock",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: InputVariables
-									"input_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Name
-												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Name for an input variable",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "List of input variables",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Text
-									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Prompt content for String prompt template",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Configuration for text prompt template",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Prompt template configuration",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: TemplateType
-					"template_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Prompt template type",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "List of prompt variants",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"variants": schemaAttribute9e568ac0f5d54092b756ee13(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -920,10 +1069,7 @@ func promptVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^(DRAFT|[0-9]{0,4}[1-9][0-9]{0,4})$",
 		//	  "type": "string"
 		//	}
-		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Version.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttribute835d1b1acbb32e906fc58bf4(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

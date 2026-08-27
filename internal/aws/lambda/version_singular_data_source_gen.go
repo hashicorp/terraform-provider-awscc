@@ -14,6 +14,113 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute08f66538df1d54272f81b6d9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Lambda function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0cc7933c8dc439ebfee3952b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the runtime the function is configured to use. If the runtime update mode is manual, the ARN is returned, otherwise null is returned.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2847f976653828108621867a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxExecutionEnvironments
+			"max_execution_environments": schemaAttribute5d2c0a945ed366228c5c4999(),
+			// Property: MinExecutionEnvironments
+			"min_execution_environments": schemaAttribute47d8ffbffd8cf3af44fa662a(),
+		}, /*END SCHEMA*/
+		Description: "The scaling configuration to apply to the function, including minimum and maximum execution environment limits.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2911f20c170b3eb2688e71e3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The runtime update mode.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute47d8ffbffd8cf3af44fa662a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum number of execution environments to maintain for the function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d2c0a945ed366228c5c4999() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of execution environments that can be provisioned for the function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f79c65cea6eda48c61e63ec() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ProvisionedConcurrentExecutions
+			"provisioned_concurrent_executions": schemaAttribute81b2a52fb0b916bd6b50b052(),
+		}, /*END SCHEMA*/
+		Description: "Specifies a provisioned concurrency configuration for a function's version. Updates are not supported for this property.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7362caff54efac8611907a97() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Only publish a version if the hash value matches the value that's specified. Use this option to avoid publishing a version if the function code has changed since you last updated it. Updates are not supported for this property.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute81b2a52fb0b916bd6b50b052() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount of provisioned concurrency to allocate for the version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute909fd1a3b4749fb234bcd604() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the version to override the description in the function configuration. Updates are not supported for this property.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb17eb54d0754c58c4d4663b8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RuntimeVersionArn
+			"runtime_version_arn": schemaAttribute0cc7933c8dc439ebfee3952b(),
+			// Property: UpdateRuntimeOn
+			"update_runtime_on": schemaAttribute2911f20c170b3eb2688e71e3(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the runtime management configuration of a function. Displays runtimeVersionArn only for Manual.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec063bc3b1f929a17cc49aff7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version number.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee62b0d83b556cb71af6931e7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_lambda_version", versionDataSource)
 }
@@ -29,10 +136,7 @@ func versionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Only publish a version if the hash value matches the value that's specified. Use this option to avoid publishing a version if the function code has changed since you last updated it. Updates are not supported for this property.",
 		//	  "type": "string"
 		//	}
-		"code_sha_256": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Only publish a version if the hash value matches the value that's specified. Use this option to avoid publishing a version if the function code has changed since you last updated it. Updates are not supported for this property.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"code_sha_256": schemaAttribute7362caff54efac8611907a97(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +146,7 @@ func versionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description for the version to override the description in the function configuration. Updates are not supported for this property.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute909fd1a3b4749fb234bcd604(),
 		// Property: FunctionArn
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +155,7 @@ func versionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
 		//	  "type": "string"
 		//	}
-		"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the version.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"function_arn": schemaAttributee62b0d83b556cb71af6931e7(),
 		// Property: FunctionName
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +166,7 @@ func versionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST|[a-zA-Z0-9-_]+))?$",
 		//	  "type": "string"
 		//	}
-		"function_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Lambda function.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"function_name": schemaAttribute08f66538df1d54272f81b6d9(),
 		// Property: FunctionScalingConfig
 		// CloudFormation resource type schema:
 		//
@@ -92,22 +187,7 @@ func versionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"function_scaling_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaxExecutionEnvironments
-				"max_execution_environments": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum number of execution environments that can be provisioned for the function.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MinExecutionEnvironments
-				"min_execution_environments": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The minimum number of execution environments to maintain for the function.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The scaling configuration to apply to the function, including minimum and maximum execution environment limits.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"function_scaling_config": schemaAttribute2847f976653828108621867a(),
 		// Property: ProvisionedConcurrencyConfig
 		// CloudFormation resource type schema:
 		//
@@ -125,17 +205,7 @@ func versionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"provisioned_concurrency_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ProvisionedConcurrentExecutions
-				"provisioned_concurrent_executions": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The amount of provisioned concurrency to allocate for the version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies a provisioned concurrency configuration for a function's version. Updates are not supported for this property.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"provisioned_concurrency_config": schemaAttribute5f79c65cea6eda48c61e63ec(),
 		// Property: RuntimePolicy
 		// CloudFormation resource type schema:
 		//
@@ -160,22 +230,7 @@ func versionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"runtime_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RuntimeVersionArn
-				"runtime_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the runtime the function is configured to use. If the runtime update mode is manual, the ARN is returned, otherwise null is returned.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: UpdateRuntimeOn
-				"update_runtime_on": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The runtime update mode.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies the runtime management configuration of a function. Displays runtimeVersionArn only for Manual.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"runtime_policy": schemaAttributeb17eb54d0754c58c4d4663b8(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -183,10 +238,7 @@ func versionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version number.",
 		//	  "type": "string"
 		//	}
-		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version number.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttributec063bc3b1f929a17cc49aff7(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

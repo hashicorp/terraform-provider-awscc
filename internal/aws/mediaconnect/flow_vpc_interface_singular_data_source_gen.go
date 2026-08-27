@@ -15,6 +15,71 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1a542ddc0eaac4f829b4643b() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Security Group IDs to be used on ENI.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute36b06628aaa87c6727305e2d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Role Arn MediaConnect can assume to create ENIs in customer's account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4130a8bd62a7ca6bd65ad125() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeb8a0b54b47ce969571a15ad6(),
+				// Property: Value
+				"value": schemaAttributeb8a0b54b47ce969571a15ad6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Key-value pairs that can be used to tag and organize this VPC network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58c11cf1d2be11800a32196b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Subnet must be in the AZ of the Flow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8a0b54b47ce969571a15ad6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda37311674d6b7aa615c7397() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "IDs of the network interfaces created in customer's account by MediaConnect.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8306a6ec045b7cf0f53cb90() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Immutable and has to be a unique against other VpcInterfaces in this Flow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef14175f6ececfe600ca15287() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_mediaconnect_flow_vpc_interface", flowVpcInterfaceDataSource)
 }
@@ -31,10 +96,7 @@ func flowVpcInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:flow:[a-zA-Z0-9-]+:[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"flow_arn": schemaAttributef14175f6ececfe600ca15287(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +104,7 @@ func flowVpcInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Immutable and has to be a unique against other VpcInterfaces in this Flow.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Immutable and has to be a unique against other VpcInterfaces in this Flow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributee8306a6ec045b7cf0f53cb90(),
 		// Property: NetworkInterfaceIds
 		// CloudFormation resource type schema:
 		//
@@ -56,11 +115,7 @@ func flowVpcInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"network_interface_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "IDs of the network interfaces created in customer's account by MediaConnect.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_interface_ids": schemaAttributeda37311674d6b7aa615c7397(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -69,10 +124,7 @@ func flowVpcInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*):iam::[0-9]{12}:role/[a-zA-Z0-9_+=,.@-]+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Role Arn MediaConnect can assume to create ENIs in customer's account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute36b06628aaa87c6727305e2d(),
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -83,11 +135,7 @@ func flowVpcInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Security Group IDs to be used on ENI.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_ids": schemaAttribute1a542ddc0eaac4f829b4643b(),
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -95,10 +143,7 @@ func flowVpcInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Subnet must be in the AZ of the Flow",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Subnet must be in the AZ of the Flow",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_id": schemaAttribute58c11cf1d2be11800a32196b(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -124,22 +169,7 @@ func flowVpcInterfaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Key-value pairs that can be used to tag and organize this VPC network interface.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute4130a8bd62a7ca6bd65ad125(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

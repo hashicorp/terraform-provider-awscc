@@ -15,6 +15,157 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2a0c713f79fb00cc856b11d6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Duration
+			"duration": schemaAttribute4ef0fc878b7b282566113951(),
+			// Property: Expression
+			"expression": schemaAttributed1bf788da093f550d03f156d(),
+			// Property: Timezone
+			"timezone": schemaAttributee3887e667af818de08d6fae9(),
+		}, /*END SCHEMA*/
+		Description: "Schedule for the mute to be active",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ef0fc878b7b282566113951() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The duration of the schedule when it triggers",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute74e67788acaf29da58a6e710() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The alarm names to be mute by the AlarmMuteRule",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76eb3315074998366bab3d29() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AlarmNames
+			"alarm_names": schemaAttribute74e67788acaf29da58a6e710(),
+		}, /*END SCHEMA*/
+		Description: "Targets to be muted",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7cfc2a7f566ed5af816d2341() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date, with the same timezone offset as \"ScheduleTimezone\" after which the alarm mute rule will be expired.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d0bea331996479101df277d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the AlarmMuteRule",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9924096eed85fedf9f6459c9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name (ARN) of the AlarmMuteRule",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fbf154a52dd1bf954d8a31c() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributefdfa9b60d9e58ee515ca6ad4(),
+				// Property: Value
+				"value": schemaAttributeee3ed0ebfb494cb63770da44(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea24ac8ec8ead93dda52a77b2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current status of the AlarmMuteRule",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb08d88aa7f4b8b90e2e14818() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The last update timestamp of the alarm mute schedule",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd70b7aa6a37d81e3986aab3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Schedule
+			"schedule": schemaAttribute2a0c713f79fb00cc856b11d6(),
+		}, /*END SCHEMA*/
+		Description: "The rule for the mute",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1bf788da093f550d03f156d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The expression of the schedule",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3887e667af818de08d6fae9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timezone of the schedule",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee43091cd1d2d88b72b96eaaa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date, with the same timezone offset as \"ScheduleTimezone\", after which the alarm mute rule will become active.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee3ed0ebfb494cb63770da44() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef990df5f7ed3b89791d4d90f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The mute type of the alarm mute ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9e9edae030ecb85859c7be8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the AlarmMuteRule",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdfa9b60d9e58ee515ca6ad4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudwatch_alarm_mute_rule", alarmMuteRuleDataSource)
 }
@@ -32,10 +183,7 @@ func alarmMuteRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name (ARN) of the AlarmMuteRule",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute9924096eed85fedf9f6459c9(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +193,7 @@ func alarmMuteRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the AlarmMuteRule",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributef9e9edae030ecb85859c7be8(),
 		// Property: ExpireDate
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +201,7 @@ func alarmMuteRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The date, with the same timezone offset as \"ScheduleTimezone\" after which the alarm mute rule will be expired.",
 		//	  "type": "string"
 		//	}
-		"expire_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date, with the same timezone offset as \"ScheduleTimezone\" after which the alarm mute rule will be expired.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"expire_date": schemaAttribute7cfc2a7f566ed5af816d2341(),
 		// Property: LastUpdatedTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -67,10 +209,7 @@ func alarmMuteRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The last update timestamp of the alarm mute schedule",
 		//	  "type": "string"
 		//	}
-		"last_updated_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The last update timestamp of the alarm mute schedule",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_timestamp": schemaAttributeb08d88aa7f4b8b90e2e14818(),
 		// Property: MuteTargets
 		// CloudFormation resource type schema:
 		//
@@ -97,18 +236,7 @@ func alarmMuteRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"mute_targets": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AlarmNames
-				"alarm_names": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The alarm names to be mute by the AlarmMuteRule",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Targets to be muted",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"mute_targets": schemaAttribute76eb3315074998366bab3d29(),
 		// Property: MuteType
 		// CloudFormation resource type schema:
 		//
@@ -116,10 +244,7 @@ func alarmMuteRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The mute type of the alarm mute ",
 		//	  "type": "string"
 		//	}
-		"mute_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The mute type of the alarm mute ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"mute_type": schemaAttributef990df5f7ed3b89791d4d90f(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -129,10 +254,7 @@ func alarmMuteRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the AlarmMuteRule",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute8d0bea331996479101df277d(),
 		// Property: Rule
 		// CloudFormation resource type schema:
 		//
@@ -175,34 +297,7 @@ func alarmMuteRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Schedule
-				"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Duration
-						"duration": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The duration of the schedule when it triggers",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Expression
-						"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The expression of the schedule",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Timezone
-						"timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The timezone of the schedule",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Schedule for the mute to be active",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The rule for the mute",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rule": schemaAttributebd70b7aa6a37d81e3986aab3(),
 		// Property: StartDate
 		// CloudFormation resource type schema:
 		//
@@ -210,10 +305,7 @@ func alarmMuteRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The date, with the same timezone offset as \"ScheduleTimezone\", after which the alarm mute rule will become active.",
 		//	  "type": "string"
 		//	}
-		"start_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date, with the same timezone offset as \"ScheduleTimezone\", after which the alarm mute rule will become active.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"start_date": schemaAttributee43091cd1d2d88b72b96eaaa(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -226,10 +318,7 @@ func alarmMuteRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current status of the AlarmMuteRule",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributea24ac8ec8ead93dda52a77b2(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -262,24 +351,7 @@ func alarmMuteRuleDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute9fbf154a52dd1bf954d8a31c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

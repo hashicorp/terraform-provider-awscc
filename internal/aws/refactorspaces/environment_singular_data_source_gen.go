@@ -14,6 +14,41 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute3bb8c83e2aeb387014825c1f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string used to identify this tag",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5fd3632f26d2167aedc83923() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83cc2394571e89df5b81382e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string containing the value for the tag",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1497ad94f20b0bc11238485() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute3bb8c83e2aeb387014825c1f(),
+				// Property: Value
+				"value": schemaAttribute83cc2394571e89df5b81382e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_refactorspaces_environment", environmentDataSource)
 }
@@ -31,9 +66,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*)?:refactor-spaces:[a-zA-Z0-9\\-]+:\\w{12}:[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute5fd3632f26d2167aedc83923(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -43,9 +76,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-_\\s\\.\\!\\*\\#\\@\\']+$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute5fd3632f26d2167aedc83923(),
 		// Property: EnvironmentIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -55,9 +86,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^env-([0-9A-Za-z]{10}$)",
 		//	  "type": "string"
 		//	}
-		"environment_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"environment_identifier": schemaAttribute5fd3632f26d2167aedc83923(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -67,9 +96,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute5fd3632f26d2167aedc83923(),
 		// Property: NetworkFabricType
 		// CloudFormation resource type schema:
 		//
@@ -80,9 +107,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"network_fabric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"network_fabric_type": schemaAttribute5fd3632f26d2167aedc83923(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -115,24 +140,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string used to identify this tag",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string containing the value for the tag",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributed1497ad94f20b0bc11238485(),
 		// Property: TransitGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -142,9 +150,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^tgw-[-a-f0-9]{17}$",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_id": schemaAttribute5fd3632f26d2167aedc83923(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

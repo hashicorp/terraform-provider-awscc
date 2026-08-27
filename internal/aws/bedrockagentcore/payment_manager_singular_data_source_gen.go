@@ -16,6 +16,163 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute14947b163cd2b2e572e751bc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClaimMatchOperator
+			"claim_match_operator": schemaAttribute2aad6523ce0a1f53d24ffc7d(),
+			// Property: ClaimMatchValue
+			"claim_match_value": schemaAttributeed1c2f0c55f81a6a7a0c6800(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute154a862505fd552fdfe69f48() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute2aad6523ce0a1f53d24ffc7d(),
+				// Property: Value
+				"value": schemaAttribute2aad6523ce0a1f53d24ffc7d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to assign to the payment manager",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17c77fb8269aa7fde5f66547() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM role for the payment manager",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18d017a332515b9e20a7cd45() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier for the payment manager",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27cb903c818fbf9e5eb82474() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the payment manager",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2aad6523ce0a1f53d24ffc7d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30f01082ce036dcb9fe3743a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AllowedAudience
+			"allowed_audience": schemaAttribute9bac106fec511284fbc21f93(),
+			// Property: AllowedClients
+			"allowed_clients": schemaAttribute9bac106fec511284fbc21f93(),
+			// Property: AllowedScopes
+			"allowed_scopes": schemaAttribute9bac106fec511284fbc21f93(),
+			// Property: CustomClaims
+			"custom_claims": schemaAttribute5bcb776dc4d41809ad0f285d(),
+			// Property: DiscoveryUrl
+			"discovery_url": schemaAttribute2aad6523ce0a1f53d24ffc7d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e93f049360ba72718c37397() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the payment manager",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5bcb776dc4d41809ad0f285d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthorizingClaimMatchValue
+				"authorizing_claim_match_value": schemaAttribute14947b163cd2b2e572e751bc(),
+				// Property: InboundTokenClaimName
+				"inbound_token_claim_name": schemaAttribute2aad6523ce0a1f53d24ffc7d(),
+				// Property: InboundTokenClaimValueType
+				"inbound_token_claim_value_type": schemaAttribute2aad6523ce0a1f53d24ffc7d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8edf085b6df08f22886c2f64() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the payment manager was last updated",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9bac106fec511284fbc21f93() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e04c4a69498c93a1700ffb0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the payment manager",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea78c75225e33bb496eb8b658() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomJWTAuthorizer
+			"custom_jwt_authorizer": schemaAttribute30f01082ce036dcb9fe3743a(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9a0e532877cf7586078636e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the payment manager was created",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9cd90def0ef994240d99211() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: WorkloadIdentityArn
+			"workload_identity_arn": schemaAttribute2aad6523ce0a1f53d24ffc7d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed1c2f0c55f81a6a7a0c6800() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MatchValueString
+			"match_value_string": schemaAttribute2aad6523ce0a1f53d24ffc7d(),
+			// Property: MatchValueStringList
+			"match_value_string_list": schemaAttribute9bac106fec511284fbc21f93(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_payment_manager", paymentManagerDataSource)
 }
@@ -145,77 +302,7 @@ func paymentManagerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"authorizer_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomJWTAuthorizer
-				"custom_jwt_authorizer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AllowedAudience
-						"allowed_audience": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AllowedClients
-						"allowed_clients": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AllowedScopes
-						"allowed_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: CustomClaims
-						"custom_claims": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AuthorizingClaimMatchValue
-									"authorizing_claim_match_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: ClaimMatchOperator
-											"claim_match_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: ClaimMatchValue
-											"claim_match_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: MatchValueString
-													"match_value_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: MatchValueStringList
-													"match_value_string_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-														ElementType: types.StringType,
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: InboundTokenClaimName
-									"inbound_token_claim_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: InboundTokenClaimValueType
-									"inbound_token_claim_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: DiscoveryUrl
-						"discovery_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"authorizer_configuration": schemaAttributea78c75225e33bb496eb8b658(),
 		// Property: AuthorizerType
 		// CloudFormation resource type schema:
 		//
@@ -226,9 +313,7 @@ func paymentManagerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"authorizer_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"authorizer_type": schemaAttribute2aad6523ce0a1f53d24ffc7d(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -237,11 +322,7 @@ func paymentManagerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the payment manager was created",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributec9a0e532877cf7586078636e(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -252,10 +333,7 @@ func paymentManagerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9\\s]+$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the payment manager",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute27cb903c818fbf9e5eb82474(),
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -264,11 +342,7 @@ func paymentManagerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the payment manager was last updated",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_at": schemaAttribute8edf085b6df08f22886c2f64(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -277,10 +351,7 @@ func paymentManagerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9]{0,47}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the payment manager",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute9e04c4a69498c93a1700ffb0(),
 		// Property: PaymentManagerArn
 		// CloudFormation resource type schema:
 		//
@@ -289,10 +360,7 @@ func paymentManagerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws[-a-z]{0,7}:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:payment-manager/([0-9a-z][-]?){1,48}-[a-z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"payment_manager_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the payment manager",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"payment_manager_arn": schemaAttribute3e93f049360ba72718c37397(),
 		// Property: PaymentManagerId
 		// CloudFormation resource type schema:
 		//
@@ -301,10 +369,7 @@ func paymentManagerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$",
 		//	  "type": "string"
 		//	}
-		"payment_manager_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier for the payment manager",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"payment_manager_id": schemaAttribute18d017a332515b9e20a7cd45(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -315,10 +380,7 @@ func paymentManagerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the IAM role for the payment manager",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute17c77fb8269aa7fde5f66547(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -334,9 +396,7 @@ func paymentManagerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute2aad6523ce0a1f53d24ffc7d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -366,22 +426,7 @@ func paymentManagerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to assign to the payment manager",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute154a862505fd552fdfe69f48(),
 		// Property: WorkloadIdentityDetails
 		// CloudFormation resource type schema:
 		//
@@ -399,15 +444,7 @@ func paymentManagerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"workload_identity_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: WorkloadIdentityArn
-				"workload_identity_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"workload_identity_details": schemaAttributec9cd90def0ef994240d99211(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

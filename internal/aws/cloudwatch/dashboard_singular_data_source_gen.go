@@ -14,6 +14,49 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute38fd2023f81c1b9f2cb06b29() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The detailed information about the dashboard in JSON format, including the widgets to include and their location on the dashboard",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute509c057926f33fdf6c9d50e5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the dashboard. The name must be between 1 and 255 characters. If you do not specify a name, one will be generated automatically.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91ba8dd029990653714ef00d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the specified tag key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute938b60f974abb34df0985ee8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8caee05dc48eb1b64a57f16() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute938b60f974abb34df0985ee8(),
+				// Property: Value
+				"value": schemaAttribute91ba8dd029990653714ef00d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs to associate with the cloudwatch dashboard. You can associate up to 50 tags with a dashboard",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudwatch_dashboard", dashboardDataSource)
 }
@@ -29,10 +72,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The detailed information about the dashboard in JSON format, including the widgets to include and their location on the dashboard",
 		//	  "type": "string"
 		//	}
-		"dashboard_body": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The detailed information about the dashboard in JSON format, including the widgets to include and their location on the dashboard",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dashboard_body": schemaAttribute38fd2023f81c1b9f2cb06b29(),
 		// Property: DashboardName
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +80,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the dashboard. The name must be between 1 and 255 characters. If you do not specify a name, one will be generated automatically.",
 		//	  "type": "string"
 		//	}
-		"dashboard_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the dashboard. The name must be between 1 and 255 characters. If you do not specify a name, one will be generated automatically.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dashboard_name": schemaAttribute509c057926f33fdf6c9d50e5(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -77,24 +114,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the specified tag key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs to associate with the cloudwatch dashboard. You can associate up to 50 tags with a dashboard",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributef8caee05dc48eb1b64a57f16(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

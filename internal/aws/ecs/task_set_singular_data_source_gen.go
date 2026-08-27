@@ -15,6 +15,257 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute028dd4be7b0f6254c1bcb8f4() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute034c761b0b15cf13813948c0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The short name or full Amazon Resource Name (ARN) of the service to create the task set in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute061c59c1eafd27a23e8aab41() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute06df10c9fd3bb9217491b114() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether the task's elastic network interface receives a public IP address. The default value is DISABLED.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute21d5554b45f6e24f4e09048c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An optional non-unique tag that identifies this task set in external systems. If the task set is associated with a service discovery registry, the tasks in this task set will have the ECS_TASK_SET_EXTERNAL_ID AWS Cloud Map attribute set to the provided value. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute237f3ad0fc48b70719c5dd92() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The short name or full Amazon Resource Name (ARN) of the task definition for the tasks in the task set to use.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2937ffb49d5e64b769f872fd() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The subnets associated with the task or service. There is a limit of 16 subnets that can be specified per AwsVpcConfiguration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3577ba5c7ef60ff67c896720() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AwsVpcConfiguration
+			"aws_vpc_configuration": schemaAttribute9a90899b779e2e89aad2414b(),
+		}, /*END SCHEMA*/
+		Description: "An object representing the network configuration for a task or service.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b99781775963239217a9cea() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContainerName
+				"container_name": schemaAttribute8084f4d1eb9c6b7040f7ffc2(),
+				// Property: ContainerPort
+				"container_port": schemaAttributef1f60560314f90af5c3c82d4(),
+				// Property: TargetGroupArn
+				"target_group_arn": schemaAttribute79f7640f509df50788ec14d3(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f21c16a2eaf17b9aeebb46f() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The value, specified as a percent total of a service's desiredCount, to scale the task set. Accepted values are numbers between 0 and 100.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43d3a28734b847d91c532d97() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The container name value, already specified in the task definition, to be used for your service discovery service. If the task definition that your service task specifies uses the bridge or host network mode, you must specify a containerName and containerPort combination from the task definition. If the task definition that your service task specifies uses the awsvpc network mode and a type SRV DNS record is used, you must specify either a containerName and containerPort combination or a port value, but not both.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a233724e03bc27f32397064() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The port value used if your service discovery service specified an SRV record. This field may be used if both the awsvpc network mode and SRV records are used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e3ec687ea221f58c10677f1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unit of measure for the scale value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute715ecb73433e383d011ebf88() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContainerName
+				"container_name": schemaAttribute43d3a28734b847d91c532d97(),
+				// Property: ContainerPort
+				"container_port": schemaAttributed3ae69b102339fdd96f8d33f(),
+				// Property: Port
+				"port": schemaAttribute4a233724e03bc27f32397064(),
+				// Property: RegistryArn
+				"registry_arn": schemaAttributeb948dcf27909495e7b0cb230(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The details of the service discovery registries to assign to this task set. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77c9da955a7dd5eb5da36df2() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used. There is a limit of 5 security groups that can be specified per AwsVpcConfiguration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79f7640f509df50788ec14d3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The full Amazon Resource Name (ARN) of the Elastic Load Balancing target group or groups associated with a service or task set. A target group ARN is only specified when using an Application Load Balancer or Network Load Balancer. If you are using a Classic Load Balancer this should be omitted. For services using the ECS deployment controller, you can specify one or multiple target groups. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html in the Amazon Elastic Container Service Developer Guide. For services using the CODE_DEPLOY deployment controller, you are required to define two target groups for the load balancer. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html in the Amazon Elastic Container Service Developer Guide. If your service's task definition uses the awsvpc network mode (which is required for the Fargate launch type), you must choose ip as the target type, not instance, when creating your target groups because tasks that use the awsvpc network mode are associated with an elastic network interface, not an Amazon EC2 instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8084f4d1eb9c6b7040f7ffc2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the container (as it appears in a container definition) to associate with the load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute826703964531e4eee0abdb07() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The platform version that the tasks in the task set should use. A platform version is specified only for tasks using the Fargate launch type. If one isn't specified, the LATEST platform version is used by default.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ded449a4bdd23107226eb2b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the task set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a90899b779e2e89aad2414b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AssignPublicIp
+			"assign_public_ip": schemaAttribute06df10c9fd3bb9217491b114(),
+			// Property: SecurityGroups
+			"security_groups": schemaAttribute77c9da955a7dd5eb5da36df2(),
+			// Property: Subnets
+			"subnets": schemaAttribute2937ffb49d5e64b769f872fd(),
+		}, /*END SCHEMA*/
+		Description: "The VPC subnets and security groups associated with a task. All specified subnets and security groups must be from the same VPC.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea746f249334f33312fb206a4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Base
+				"base": schemaAttribute028dd4be7b0f6254c1bcb8f4(),
+				// Property: CapacityProvider
+				"capacity_provider": schemaAttribute061c59c1eafd27a23e8aab41(),
+				// Property: Weight
+				"weight": schemaAttribute028dd4be7b0f6254c1bcb8f4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb1995f5cbd05fa9f060b74d8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Unit
+			"unit": schemaAttribute6e3ec687ea221f58c10677f1(),
+			// Property: Value
+			"value": schemaAttribute3f21c16a2eaf17b9aeebb46f(),
+		}, /*END SCHEMA*/
+		Description: "A floating-point percentage of the desired number of tasks to place and keep running in the task set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb948dcf27909495e7b0cb230() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the service registry. The currently supported service registry is AWS Cloud Map. For more information, see https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecac6bab60fcc2f7436a0dc44() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd145cd266c2c7b1ad282079() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute061c59c1eafd27a23e8aab41(),
+				// Property: Value
+				"value": schemaAttribute061c59c1eafd27a23e8aab41(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3ae69b102339fdd96f8d33f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The port value, already specified in the task definition, to be used for your service discovery service. If the task definition your service task specifies uses the bridge or host network mode, you must specify a containerName and containerPort combination from the task definition. If the task definition your service task specifies uses the awsvpc network mode and a type SRV DNS record is used, you must specify either a containerName and containerPort combination or a port value, but not both.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee77f4b58c3158c230c5618c2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The launch type that new tasks in the task set will use. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html in the Amazon Elastic Container Service Developer Guide. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1f60560314f90af5c3c82d4() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The port on the container to associate with the load balancer. This port must correspond to a containerPort in the task definition the tasks in the service are using. For tasks that use the EC2 launch type, the container instance they are launched on must allow ingress traffic on the hostPort of the port mapping.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ecs_task_set", taskSetDataSource)
 }
@@ -44,25 +295,7 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"capacity_provider_strategy": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Base
-					"base": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: CapacityProvider
-					"capacity_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Weight
-					"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"capacity_provider_strategy": schemaAttributea746f249334f33312fb206a4(),
 		// Property: Cluster
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +303,7 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.",
 		//	  "type": "string"
 		//	}
-		"cluster": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cluster": schemaAttributecac6bab60fcc2f7436a0dc44(),
 		// Property: ExternalId
 		// CloudFormation resource type schema:
 		//
@@ -81,10 +311,7 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "An optional non-unique tag that identifies this task set in external systems. If the task set is associated with a service discovery registry, the tasks in this task set will have the ECS_TASK_SET_EXTERNAL_ID AWS Cloud Map attribute set to the provided value. ",
 		//	  "type": "string"
 		//	}
-		"external_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An optional non-unique tag that identifies this task set in external systems. If the task set is associated with a service discovery registry, the tasks in this task set will have the ECS_TASK_SET_EXTERNAL_ID AWS Cloud Map attribute set to the provided value. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"external_id": schemaAttribute21d5554b45f6e24f4e09048c(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -92,10 +319,7 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the task set.",
 		//	  "type": "string"
 		//	}
-		"task_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the task set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"task_set_id": schemaAttribute8ded449a4bdd23107226eb2b(),
 		// Property: LaunchType
 		// CloudFormation resource type schema:
 		//
@@ -107,10 +331,7 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"launch_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The launch type that new tasks in the task set will use. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html in the Amazon Elastic Container Service Developer Guide. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"launch_type": schemaAttributee77f4b58c3158c230c5618c2(),
 		// Property: LoadBalancers
 		// CloudFormation resource type schema:
 		//
@@ -136,28 +357,7 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"load_balancers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ContainerName
-					"container_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the container (as it appears in a container definition) to associate with the load balancer.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ContainerPort
-					"container_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The port on the container to associate with the load balancer. This port must correspond to a containerPort in the task definition the tasks in the service are using. For tasks that use the EC2 launch type, the container instance they are launched on must allow ingress traffic on the hostPort of the port mapping.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: TargetGroupArn
-					"target_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The full Amazon Resource Name (ARN) of the Elastic Load Balancing target group or groups associated with a service or task set. A target group ARN is only specified when using an Application Load Balancer or Network Load Balancer. If you are using a Classic Load Balancer this should be omitted. For services using the ECS deployment controller, you can specify one or multiple target groups. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html in the Amazon Elastic Container Service Developer Guide. For services using the CODE_DEPLOY deployment controller, you are required to define two target groups for the load balancer. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-bluegreen.html in the Amazon Elastic Container Service Developer Guide. If your service's task definition uses the awsvpc network mode (which is required for the Fargate launch type), you must choose ip as the target type, not instance, when creating your target groups because tasks that use the awsvpc network mode are associated with an elastic network interface, not an Amazon EC2 instance.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"load_balancers": schemaAttribute3b99781775963239217a9cea(),
 		// Property: NetworkConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -202,36 +402,7 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AwsVpcConfiguration
-				"aws_vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AssignPublicIp
-						"assign_public_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Whether the task's elastic network interface receives a public IP address. The default value is DISABLED.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SecurityGroups
-						"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used. There is a limit of 5 security groups that can be specified per AwsVpcConfiguration.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Subnets
-						"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The subnets associated with the task or service. There is a limit of 16 subnets that can be specified per AwsVpcConfiguration.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The VPC subnets and security groups associated with a task. All specified subnets and security groups must be from the same VPC.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object representing the network configuration for a task or service.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_configuration": schemaAttribute3577ba5c7ef60ff67c896720(),
 		// Property: PlatformVersion
 		// CloudFormation resource type schema:
 		//
@@ -239,10 +410,7 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The platform version that the tasks in the task set should use. A platform version is specified only for tasks using the Fargate launch type. If one isn't specified, the LATEST platform version is used by default.",
 		//	  "type": "string"
 		//	}
-		"platform_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The platform version that the tasks in the task set should use. A platform version is specified only for tasks using the Fargate launch type. If one isn't specified, the LATEST platform version is used by default.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"platform_version": schemaAttribute826703964531e4eee0abdb07(),
 		// Property: Scale
 		// CloudFormation resource type schema:
 		//
@@ -266,22 +434,7 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"scale": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Unit
-				"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The unit of measure for the scale value.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Value
-				"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The value, specified as a percent total of a service's desiredCount, to scale the task set. Accepted values are numbers between 0 and 100.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A floating-point percentage of the desired number of tasks to place and keep running in the task set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scale": schemaAttributeb1995f5cbd05fa9f060b74d8(),
 		// Property: Service
 		// CloudFormation resource type schema:
 		//
@@ -289,10 +442,7 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The short name or full Amazon Resource Name (ARN) of the service to create the task set in.",
 		//	  "type": "string"
 		//	}
-		"service": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The short name or full Amazon Resource Name (ARN) of the service to create the task set in.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"service": schemaAttribute034c761b0b15cf13813948c0(),
 		// Property: ServiceRegistries
 		// CloudFormation resource type schema:
 		//
@@ -322,34 +472,7 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"service_registries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ContainerName
-					"container_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The container name value, already specified in the task definition, to be used for your service discovery service. If the task definition that your service task specifies uses the bridge or host network mode, you must specify a containerName and containerPort combination from the task definition. If the task definition that your service task specifies uses the awsvpc network mode and a type SRV DNS record is used, you must specify either a containerName and containerPort combination or a port value, but not both.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ContainerPort
-					"container_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The port value, already specified in the task definition, to be used for your service discovery service. If the task definition your service task specifies uses the bridge or host network mode, you must specify a containerName and containerPort combination from the task definition. If the task definition your service task specifies uses the awsvpc network mode and a type SRV DNS record is used, you must specify either a containerName and containerPort combination or a port value, but not both.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Port
-					"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The port value used if your service discovery service specified an SRV record. This field may be used if both the awsvpc network mode and SRV records are used.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: RegistryArn
-					"registry_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Amazon Resource Name (ARN) of the service registry. The currently supported service registry is AWS Cloud Map. For more information, see https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The details of the service discovery registries to assign to this task set. For more information, see https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"service_registries": schemaAttribute715ecb73433e383d011ebf88(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -368,21 +491,7 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributecd145cd266c2c7b1ad282079(),
 		// Property: TaskDefinition
 		// CloudFormation resource type schema:
 		//
@@ -390,10 +499,7 @@ func taskSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The short name or full Amazon Resource Name (ARN) of the task definition for the tasks in the task set to use.",
 		//	  "type": "string"
 		//	}
-		"task_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The short name or full Amazon Resource Name (ARN) of the task definition for the tasks in the task set to use.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"task_definition": schemaAttribute237f3ad0fc48b70719c5dd92(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

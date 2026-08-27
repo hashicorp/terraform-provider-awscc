@@ -15,6 +15,187 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute112d6baeabb15f56703462e3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContainerArguments
+			"container_arguments": schemaAttribute485931e353bf19dfdf932aa1(),
+			// Property: ContainerEntrypoint
+			"container_entrypoint": schemaAttributeb99e89d94c8fd3c03b7e77d5(),
+			// Property: ContainerEnvironmentVariables
+			"container_environment_variables": schemaAttributec89e8a1b3949ea073534b2f3(),
+		}, /*END SCHEMA*/
+		Description: "The container configuration for a SageMaker image.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute123163a878f18991ee918e76() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContainerConfig
+			"container_config": schemaAttribute112d6baeabb15f56703462e3(),
+		}, /*END SCHEMA*/
+		Description: "The JupyterLabAppImageConfig.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ad1523f1a1545654cc0e4ec() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute4772dc2fd42b9ffffa541ca1(),
+				// Property: Value
+				"value": schemaAttribute4772dc2fd42b9ffffa541ca1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags to apply to the AppImageConfig.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f8486e0279459d71bd1f948() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DisplayName
+				"display_name": schemaAttribute9f220c0e481139b1279cc360(),
+				// Property: Name
+				"name": schemaAttribute73eb61ae2db66be1689586bc(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The specification of the Jupyter kernels in the image.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4772dc2fd42b9ffffa541ca1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute485931e353bf19dfdf932aa1() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of arguments to apply to the container.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49da015c634a0355aec0bbfb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Name of the AppImageConfig.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4d74daea25a3284e05340ca3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The default POSIX group ID (GID). If not specified, defaults to 100.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52fb061757c41745902bfbaf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContainerConfig
+			"container_config": schemaAttribute112d6baeabb15f56703462e3(),
+		}, /*END SCHEMA*/
+		Description: "The CodeEditorAppImageConfig.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute69fc957f2dc44ca1ead7162e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the AppImageConfig.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73eb61ae2db66be1689586bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the kernel.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8799dc73b79d87d294c2a946() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FileSystemConfig
+			"file_system_config": schemaAttributef12b2a95943d74d6e8ee858e(),
+			// Property: KernelSpecs
+			"kernel_specs": schemaAttribute3f8486e0279459d71bd1f948(),
+		}, /*END SCHEMA*/
+		Description: "The KernelGatewayImageConfig.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f220c0e481139b1279cc360() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The display name of the kernel.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb99e89d94c8fd3c03b7e77d5() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The custom entry point to use on container.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec0e7cd6ebef6d3808c745e52() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The default POSIX user ID (UID). If not specified, defaults to 1000.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec89e8a1b3949ea073534b2f3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute4772dc2fd42b9ffffa541ca1(),
+				// Property: Value
+				"value": schemaAttribute4772dc2fd42b9ffffa541ca1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of variables to apply to the custom container.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4c182e1f3e1c884859468af() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef12b2a95943d74d6e8ee858e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DefaultGid
+			"default_gid": schemaAttribute4d74daea25a3284e05340ca3(),
+			// Property: DefaultUid
+			"default_uid": schemaAttributec0e7cd6ebef6d3808c745e52(),
+			// Property: MountPath
+			"mount_path": schemaAttributee4c182e1f3e1c884859468af(),
+		}, /*END SCHEMA*/
+		Description: "The Amazon Elastic File System (EFS) storage configuration for a SageMaker image.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_app_image_config", appImageConfigDataSource)
 }
@@ -33,10 +214,7 @@ func appImageConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:app-image-config/.*",
 		//	  "type": "string"
 		//	}
-		"app_image_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the AppImageConfig.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"app_image_config_arn": schemaAttribute69fc957f2dc44ca1ead7162e(),
 		// Property: AppImageConfigName
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +225,7 @@ func appImageConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
 		//	  "type": "string"
 		//	}
-		"app_image_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Name of the AppImageConfig.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"app_image_config_name": schemaAttribute49da015c634a0355aec0bbfb(),
 		// Property: CodeEditorAppImageConfig
 		// CloudFormation resource type schema:
 		//
@@ -125,48 +300,7 @@ func appImageConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"code_editor_app_image_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ContainerConfig
-				"container_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ContainerArguments
-						"container_arguments": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "A list of arguments to apply to the container.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ContainerEntrypoint
-						"container_entrypoint": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The custom entry point to use on container.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ContainerEnvironmentVariables
-						"container_environment_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Key
-									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "A list of variables to apply to the custom container.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The container configuration for a SageMaker image.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The CodeEditorAppImageConfig.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"code_editor_app_image_config": schemaAttribute52fb061757c41745902bfbaf(),
 		// Property: JupyterLabAppImageConfig
 		// CloudFormation resource type schema:
 		//
@@ -241,48 +375,7 @@ func appImageConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"jupyter_lab_app_image_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ContainerConfig
-				"container_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ContainerArguments
-						"container_arguments": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "A list of arguments to apply to the container.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ContainerEntrypoint
-						"container_entrypoint": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The custom entry point to use on container.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ContainerEnvironmentVariables
-						"container_environment_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Key
-									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "A list of variables to apply to the custom container.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The container configuration for a SageMaker image.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The JupyterLabAppImageConfig.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"jupyter_lab_app_image_config": schemaAttribute123163a878f18991ee918e76(),
 		// Property: KernelGatewayImageConfig
 		// CloudFormation resource type schema:
 		//
@@ -349,53 +442,7 @@ func appImageConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"kernel_gateway_image_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FileSystemConfig
-				"file_system_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DefaultGid
-						"default_gid": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The default POSIX group ID (GID). If not specified, defaults to 100.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DefaultUid
-						"default_uid": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The default POSIX user ID (UID). If not specified, defaults to 1000.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MountPath
-						"mount_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The Amazon Elastic File System (EFS) storage configuration for a SageMaker image.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: KernelSpecs
-				"kernel_specs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DisplayName
-							"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The display name of the kernel.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the kernel.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The specification of the Jupyter kernels in the image.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The KernelGatewayImageConfig.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kernel_gateway_image_config": schemaAttribute8799dc73b79d87d294c2a946(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -426,22 +473,7 @@ func appImageConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags to apply to the AppImageConfig.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute2ad1523f1a1545654cc0e4ec(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

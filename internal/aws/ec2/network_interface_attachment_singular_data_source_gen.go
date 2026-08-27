@@ -14,6 +14,85 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2f1ce90ad3238be489a060a7() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to delete the network interface when the instance terminates. By default, this value is set to ``true``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f4cd2513c9f7702b6b36d8a() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute71b1b3fe701073ad31bdd3c2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80c28cc89001e17981fc8839() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnaSrdEnabled
+			"ena_srd_enabled": schemaAttributed3b12a0374087af7c402e8c4(),
+			// Property: EnaSrdUdpSpecification
+			"ena_srd_udp_specification": schemaAttribute951b0c76e2b1ca37a8c5fe46(),
+		}, /*END SCHEMA*/
+		Description: "Configures ENA Express for the network interface that this action attaches to the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a92e144c11931630201c44e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The network interface's position in the attachment order. For example, the first attached network interface has a ``DeviceIndex`` of 0.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute951b0c76e2b1ca37a8c5fe46() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnaSrdUdpEnabled
+			"ena_srd_udp_enabled": schemaAttribute3f4cd2513c9f7702b6b36d8a(),
+		}, /*END SCHEMA*/
+		Description: "Configures ENA Express for UDP network traffic.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea6e68c957714aafcf1bde9eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the instance to which you will attach the ENI.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8c7609b67a06cfad3b23c48() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of ENA queues created with the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3b12a0374087af7c402e8c4() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether ENA Express is enabled for the network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec89f6c8a54aeee95542dd69() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the ENI that you want to attach.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_network_interface_attachment", networkInterfaceAttachmentDataSource)
 }
@@ -29,10 +108,7 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"attachment_id": schemaAttribute71b1b3fe701073ad31bdd3c2(),
 		// Property: DeleteOnTermination
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +117,7 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "Whether to delete the network interface when the instance terminates. By default, this value is set to ``true``.",
 		//	  "type": "boolean"
 		//	}
-		"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether to delete the network interface when the instance terminates. By default, this value is set to ``true``.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"delete_on_termination": schemaAttribute2f1ce90ad3238be489a060a7(),
 		// Property: DeviceIndex
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +125,7 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The network interface's position in the attachment order. For example, the first attached network interface has a ``DeviceIndex`` of 0.",
 		//	  "type": "string"
 		//	}
-		"device_index": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The network interface's position in the attachment order. For example, the first attached network interface has a ``DeviceIndex`` of 0.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"device_index": schemaAttribute8a92e144c11931630201c44e(),
 		// Property: EnaQueueCount
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +133,7 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The number of ENA queues created with the instance.",
 		//	  "type": "integer"
 		//	}
-		"ena_queue_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of ENA queues created with the instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ena_queue_count": schemaAttributec8c7609b67a06cfad3b23c48(),
 		// Property: EnaSrdSpecification
 		// CloudFormation resource type schema:
 		//
@@ -91,28 +158,7 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 		//	  },
 		//	  "type": "object"
 		//	}
-		"ena_srd_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EnaSrdEnabled
-				"ena_srd_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether ENA Express is enabled for the network interface.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EnaSrdUdpSpecification
-				"ena_srd_udp_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: EnaSrdUdpEnabled
-						"ena_srd_udp_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configures ENA Express for UDP network traffic.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configures ENA Express for the network interface that this action attaches to the instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ena_srd_specification": schemaAttribute80c28cc89001e17981fc8839(),
 		// Property: InstanceId
 		// CloudFormation resource type schema:
 		//
@@ -120,10 +166,7 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The ID of the instance to which you will attach the ENI.",
 		//	  "type": "string"
 		//	}
-		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the instance to which you will attach the ENI.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_id": schemaAttributea6e68c957714aafcf1bde9eb(),
 		// Property: NetworkInterfaceId
 		// CloudFormation resource type schema:
 		//
@@ -131,10 +174,7 @@ func networkInterfaceAttachmentDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The ID of the ENI that you want to attach.",
 		//	  "type": "string"
 		//	}
-		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the ENI that you want to attach.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_interface_id": schemaAttributeec89f6c8a54aeee95542dd69(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

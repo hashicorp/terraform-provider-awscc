@@ -15,6 +15,42 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1e0c20624e9aafea49c0c606() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enable or disable user background sessions for Glue Identity Center",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute22b97d28d8ca350223896576() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Glue IAM identity center application arn",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c84a9ed4d5e36bb1644030e() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The downstream scopes that Glue identity center configuration can access",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6858c213fcaba3d9fd7b6df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier for the specified AWS account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9fbdb13f49831c31c81f6fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IAM identity center instance arn",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_identity_center_configuration", identityCenterConfigurationDataSource)
 }
@@ -30,10 +66,7 @@ func identityCenterConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The identifier for the specified AWS account.",
 		//	  "type": "string"
 		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier for the specified AWS account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"account_id": schemaAttributeb6858c213fcaba3d9fd7b6df(),
 		// Property: ApplicationArn
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +77,7 @@ func identityCenterConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$",
 		//	  "type": "string"
 		//	}
-		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Glue IAM identity center application arn",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"application_arn": schemaAttribute22b97d28d8ca350223896576(),
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -58,10 +88,7 @@ func identityCenterConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IAM identity center instance arn",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_arn": schemaAttributec9fbdb13f49831c31c81f6fb(),
 		// Property: Scopes
 		// CloudFormation resource type schema:
 		//
@@ -74,11 +101,7 @@ func identityCenterConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The downstream scopes that Glue identity center configuration can access",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scopes": schemaAttribute5c84a9ed4d5e36bb1644030e(),
 		// Property: UserBackgroundSessionsEnabled
 		// CloudFormation resource type schema:
 		//
@@ -86,10 +109,7 @@ func identityCenterConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "Enable or disable user background sessions for Glue Identity Center",
 		//	  "type": "boolean"
 		//	}
-		"user_background_sessions_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Enable or disable user background sessions for Glue Identity Center",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"user_background_sessions_enabled": schemaAttribute1e0c20624e9aafea49c0c606(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

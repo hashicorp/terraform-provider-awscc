@@ -14,6 +14,41 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute07d801411e4fb14f3263b78b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0bdf5cd22c15b7279116286d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Amazon S3 bucket to which the certificate was uploaded.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute39a20c005881523d2d916fb8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6fe2be6c0aed28b5b2f4a122() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the ACM certificate with which to associate the IAM role.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f255c21364487f89de2d8cf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the AWS KMS CMK used to encrypt the private key of the certificate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_enclave_certificate_iam_role_association", enclaveCertificateIamRoleAssociationDataSource)
 }
@@ -32,10 +67,7 @@ func enclaveCertificateIamRoleAssociationDataSource(ctx context.Context) (dataso
 		//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:acm:[A-Za-z0-9-]{1,64}:([0-9]{12})?:certificate/.+$",
 		//	  "type": "string"
 		//	}
-		"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the ACM certificate with which to associate the IAM role.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate_arn": schemaAttribute6fe2be6c0aed28b5b2f4a122(),
 		// Property: CertificateS3BucketName
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +75,7 @@ func enclaveCertificateIamRoleAssociationDataSource(ctx context.Context) (dataso
 		//	  "description": "The name of the Amazon S3 bucket to which the certificate was uploaded.",
 		//	  "type": "string"
 		//	}
-		"certificate_s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Amazon S3 bucket to which the certificate was uploaded.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate_s3_bucket_name": schemaAttribute0bdf5cd22c15b7279116286d(),
 		// Property: CertificateS3ObjectKey
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +83,7 @@ func enclaveCertificateIamRoleAssociationDataSource(ctx context.Context) (dataso
 		//	  "description": "The Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored.",
 		//	  "type": "string"
 		//	}
-		"certificate_s3_object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate_s3_object_key": schemaAttribute39a20c005881523d2d916fb8(),
 		// Property: EncryptionKmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -65,10 +91,7 @@ func enclaveCertificateIamRoleAssociationDataSource(ctx context.Context) (dataso
 		//	  "description": "The ID of the AWS KMS CMK used to encrypt the private key of the certificate.",
 		//	  "type": "string"
 		//	}
-		"encryption_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the AWS KMS CMK used to encrypt the private key of the certificate.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"encryption_kms_key_id": schemaAttribute7f255c21364487f89de2d8cf(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -79,10 +102,7 @@ func enclaveCertificateIamRoleAssociationDataSource(ctx context.Context) (dataso
 		//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:iam:.*:([0-9]{12})?:role/.+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute07d801411e4fb14f3263b78b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

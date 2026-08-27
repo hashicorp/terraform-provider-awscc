@@ -15,6 +15,183 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0446b5d5ffbdf6f7cfc61317() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the cloud connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute175747e30fab915145308d60() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Azure subscription ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute229669c2cdfd2c4f51ef5752() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Subscriptions
+			"subscriptions": schemaAttributee297135f698bcdb02f2945a0(),
+		}, /*END SCHEMA*/
+		Description: "The targets for the cloud connector. If omitted, the entire tenant is targeted.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2818457ca71521e16e30fa95() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AzureConfiguration
+			"azure_configuration": schemaAttribute2ed5810c707be5ec79af0298(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for the cloud connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute29342a86693e147d194ccfc7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Azure AD application ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ed5810c707be5ec79af0298() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApplicationDisplayName
+			"application_display_name": schemaAttribute3b87f384f5d7fb2d2db8962e(),
+			// Property: ApplicationId
+			"application_id": schemaAttribute29342a86693e147d194ccfc7(),
+			// Property: Targets
+			"targets": schemaAttribute229669c2cdfd2c4f51ef5752(),
+			// Property: TenantDisplayName
+			"tenant_display_name": schemaAttribute70a54c50658bf14c16ad2685(),
+			// Property: TenantId
+			"tenant_id": schemaAttribute988c375b2e519cb01a107d56(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for connecting to Azure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f89814b2687a94c83a3fbb5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The display name of the Azure subscription.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33a04cc1e8d6a140d64ab864() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute3d4e4f4b0fea837a9de294b5(),
+				// Property: Value
+				"value": schemaAttribute3d4e4f4b0fea837a9de294b5(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to apply to the cloud connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a8be445e97fb293c86bc7bf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The display name of the cloud connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b87f384f5d7fb2d2db8962e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The display name of the Azure AD application.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d4e4f4b0fea837a9de294b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute470bcc68db14dbc89ca155ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the cloud connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b27fbe4771a8553b2685bd4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the cloud connector was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ff2a749e41ea2d1b81eafea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the AWS Config connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70a54c50658bf14c16ad2685() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The display name of the Azure AD tenant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93dc36a85c26428a28955e68() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the cloud connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute988c375b2e519cb01a107d56() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Azure AD tenant ID. Cannot be changed after creation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c06191b88675cfec4c7ae45() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the cloud connector was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed585eb7b536985ed0bb5bf7b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IAM role ARN used by the cloud connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee297135f698bcdb02f2945a0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DisplayName
+				"display_name": schemaAttribute2f89814b2687a94c83a3fbb5(),
+				// Property: Id
+				"id": schemaAttribute175747e30fab915145308d60(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of Azure subscriptions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ssm_cloud_connector", cloudConnectorDataSource)
 }
@@ -31,10 +208,7 @@ func cloudConnectorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws(-cn|-us-gov)?:ssm:[a-z0-9-]+:\\d{12}:cloud-connector/[a-f0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"cloud_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the cloud connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cloud_connector_arn": schemaAttribute470bcc68db14dbc89ca155ca(),
 		// Property: CloudConnectorId
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +217,7 @@ func cloudConnectorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"cloud_connector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the cloud connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cloud_connector_id": schemaAttribute93dc36a85c26428a28955e68(),
 		// Property: ConfigConnectorArn
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +228,7 @@ func cloudConnectorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws(-cn|-us-gov)?:config:[a-z0-9-]+:\\d{12}:connector/.+$",
 		//	  "type": "string"
 		//	}
-		"config_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the AWS Config connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"config_connector_arn": schemaAttribute6ff2a749e41ea2d1b81eafea(),
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -150,65 +318,7 @@ func cloudConnectorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AzureConfiguration
-				"azure_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ApplicationDisplayName
-						"application_display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The display name of the Azure AD application.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ApplicationId
-						"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Azure AD application ID.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Targets
-						"targets": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Subscriptions
-								"subscriptions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: DisplayName
-											"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The display name of the Azure subscription.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Id
-											"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The Azure subscription ID.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "List of Azure subscriptions.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The targets for the cloud connector. If omitted, the entire tenant is targeted.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TenantDisplayName
-						"tenant_display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The display name of the Azure AD tenant.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TenantId
-						"tenant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Azure AD tenant ID. Cannot be changed after creation.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration for connecting to Azure.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration for the cloud connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"configuration": schemaAttribute2818457ca71521e16e30fa95(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -217,11 +327,7 @@ func cloudConnectorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the cloud connector was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute6b27fbe4771a8553b2685bd4(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -232,10 +338,7 @@ func cloudConnectorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[\\p{L}\\p{Z}\\p{N}\\p{P}\\p{M}]*$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the cloud connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute0446b5d5ffbdf6f7cfc61317(),
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -246,10 +349,7 @@ func cloudConnectorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[\\p{L}\\p{Z}\\p{N}\\p{P}\\p{M}]*$",
 		//	  "type": "string"
 		//	}
-		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The display name of the cloud connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"display_name": schemaAttribute3a8be445e97fb293c86bc7bf(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -260,10 +360,7 @@ func cloudConnectorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IAM role ARN used by the cloud connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttributed585eb7b536985ed0bb5bf7b(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -293,22 +390,7 @@ func cloudConnectorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to apply to the cloud connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute33a04cc1e8d6a140d64ab864(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -317,11 +399,7 @@ func cloudConnectorDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the cloud connector was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute9c06191b88675cfec4c7ae45(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

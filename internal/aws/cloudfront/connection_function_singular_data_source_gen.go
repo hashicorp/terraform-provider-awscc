@@ -15,6 +15,120 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1fc571204b25c47efe19f0f4() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3fb8d7b882c758b8a92152ac() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3fc44d55669394cf248bb585() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The connection function name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b70e8968bfdcf8b6fd90738() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KeyValueStoreARN
+				"key_value_store_arn": schemaAttributef34700618f9c2eb7b1cca22c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The configuration for the key value store associations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62445b6518d81a0e058d4134() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The code for the connection function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62d485ed6cd5a5d9f8fd186c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63557c785eb80e27bfbf796e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ee66ef1ba09b4f9323bd435() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A comment to describe the function. The comment cannot be longer than 128 characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7391246e4ee49755fbfaff9e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute3fb8d7b882c758b8a92152ac(),
+				// Property: Value
+				"value": schemaAttribute62d485ed6cd5a5d9f8fd186c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A complex type that contains zero or more ``Tag`` elements.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a01e13c5404d8ee0a16b8e6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Comment
+			"comment": schemaAttribute6ee66ef1ba09b4f9323bd435(),
+			// Property: KeyValueStoreAssociations
+			"key_value_store_associations": schemaAttribute5b70e8968bfdcf8b6fd90738(),
+			// Property: Runtime
+			"runtime": schemaAttributeea9cd9f27188498381b77c19(),
+		}, /*END SCHEMA*/
+		Description: "Contains configuration information about a CloudFront function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea9cd9f27188498381b77c19() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The function's runtime environment version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2abc6c4b7763ba9cb0a2050() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef34700618f9c2eb7b1cca22c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the key value store association.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudfront_connection_function", connectionFunctionDataSource)
 }
@@ -31,10 +145,7 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.",
 		//	  "type": "boolean"
 		//	}
-		"auto_publish": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"auto_publish": schemaAttribute1fc571204b25c47efe19f0f4(),
 		// Property: ConnectionFunctionArn
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +153,7 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"connection_function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_function_arn": schemaAttributef2abc6c4b7763ba9cb0a2050(),
 		// Property: ConnectionFunctionCode
 		// CloudFormation resource type schema:
 		//
@@ -53,10 +161,7 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The code for the connection function.",
 		//	  "type": "string"
 		//	}
-		"connection_function_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The code for the connection function.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_function_code": schemaAttribute62445b6518d81a0e058d4134(),
 		// Property: ConnectionFunctionConfig
 		// CloudFormation resource type schema:
 		//
@@ -101,36 +206,7 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"connection_function_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Comment
-				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A comment to describe the function. The comment cannot be longer than 128 characters.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: KeyValueStoreAssociations
-				"key_value_store_associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: KeyValueStoreARN
-							"key_value_store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Amazon Resource Name (ARN) of the key value store association.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The configuration for the key value store associations.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Runtime
-				"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The function's runtime environment version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Contains configuration information about a CloudFront function.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_function_config": schemaAttribute8a01e13c5404d8ee0a16b8e6(),
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -139,11 +215,7 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttribute63557c785eb80e27bfbf796e(),
 		// Property: ETag
 		// CloudFormation resource type schema:
 		//
@@ -151,10 +223,7 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"e_tag": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"e_tag": schemaAttributef2abc6c4b7763ba9cb0a2050(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -162,10 +231,7 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"connection_function_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_function_id": schemaAttributef2abc6c4b7763ba9cb0a2050(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -174,11 +240,7 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttribute63557c785eb80e27bfbf796e(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -186,10 +248,7 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The connection function name.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The connection function name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute3fc44d55669394cf248bb585(),
 		// Property: Stage
 		// CloudFormation resource type schema:
 		//
@@ -201,10 +260,7 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"stage": schemaAttributef2abc6c4b7763ba9cb0a2050(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -219,10 +275,7 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributef2abc6c4b7763ba9cb0a2050(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -255,24 +308,7 @@ func connectionFunctionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A complex type that contains zero or more ``Tag`` elements.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute7391246e4ee49755fbfaff9e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

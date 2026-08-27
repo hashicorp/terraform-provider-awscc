@@ -16,6 +16,42 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute3c0c775f29be3c247f85534d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute683fff526098e7bbfa4e6c5b() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6fd32707575bc3d68afd25a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: jsontypes.NormalizedType{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute902c8ed875348046e9fe5c51() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the attribute group. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ac68738b4e19bcbf86ccbf3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the attribute group. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_servicecatalogappregistry_attribute_group", attributeGroupDataSource)
 }
@@ -31,19 +67,14 @@ func attributeGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute3c0c775f29be3c247f85534d(),
 		// Property: Attributes
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "object"
 		//	}
-		"attributes": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: jsontypes.NormalizedType{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"attributes": schemaAttribute6fd32707575bc3d68afd25a5(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +83,7 @@ func attributeGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the attribute group. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute902c8ed875348046e9fe5c51(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -63,9 +91,7 @@ func attributeGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[a-z0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"attribute_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"attribute_group_id": schemaAttribute3c0c775f29be3c247f85534d(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -76,10 +102,7 @@ func attributeGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "\\w+",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the attribute group. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute9ac68738b4e19bcbf86ccbf3(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -93,11 +116,7 @@ func attributeGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute683fff526098e7bbfa4e6c5b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

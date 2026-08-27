@@ -14,6 +14,168 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute02873cf9f0a7086663e4a554() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute2949aee373477379462d8b10(),
+				// Property: Value
+				"value": schemaAttributefa7df4f2000598c72db43a95(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of tags to be added to the resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute04e7d221eda4efdcbc0baf62() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute06ecabc48777b261fbb244a1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Key Management Service key used to encrypt the collection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute09a54c511d1487373f7edbb5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether GPU acceleration is enabled for vector indexing",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17aaa7d5edbd57b49f7bdf97() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The possible standby replicas for the collection",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2949aee373477379462d8b10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key in the key-value pair",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f2be08fcdcbb7e9ba44ab39() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether to use an AWS owned key for encryption.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3300f46a9ba92f4d540aaa12() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the collection",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute440cad969e5c972cd794a1d9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the collection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4cfc9530de4e2d5856236b1f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ServerlessVectorAcceleration
+			"serverless_vector_acceleration": schemaAttribute09a54c511d1487373f7edbb5(),
+		}, /*END SCHEMA*/
+		Description: "Vector search configuration options for the collection",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f8b8ea8d3495cf7a53fec30() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the collection group to associate with the collection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f4c48fa3b34a6428b956a54() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The deletion protection state of the collection",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7429e59f6c651a95dca28aed() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CollectionEndpoint
+			"collection_endpoint": schemaAttribute04e7d221eda4efdcbc0baf62(),
+			// Property: DashboardEndpoint
+			"dashboard_endpoint": schemaAttribute04e7d221eda4efdcbc0baf62(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute760284eda4a00f024a441a98() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The OpenSearch Dashboards endpoint for the collection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7df1141aa0d8d2f224704e24() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The possible types for the collection",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d95c608edc38c8414f6c74b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the collection",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3220f8af9d0aa514e66260f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the collection.\n\nThe name must meet the following criteria:\nUnique to your account and AWS Region\nStarts with a lowercase letter\nContains only lowercase letters a-z, the numbers 0-9 and the hyphen (-)\nContains between 3 and 64 characters\n",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb07e43fa907599e69faeac56() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The endpoint for the collection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecbe5ee24bd6293a654c96238() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AWSOwnedKey
+			"aws_owned_key": schemaAttribute2f2be08fcdcbb7e9ba44ab39(),
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttribute06ecabc48777b261fbb244a1(),
+		}, /*END SCHEMA*/
+		Description: "Encryption settings for the collection",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa7df4f2000598c72db43a95() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value in the key-value pair",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_opensearchserverless_collection", collectionDataSource)
 }
@@ -29,10 +191,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the collection.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the collection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute440cad969e5c972cd794a1d9(),
 		// Property: CollectionEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +199,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The endpoint for the collection.",
 		//	  "type": "string"
 		//	}
-		"collection_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The endpoint for the collection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"collection_endpoint": schemaAttributeb07e43fa907599e69faeac56(),
 		// Property: CollectionGroupName
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +207,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the collection group to associate with the collection.",
 		//	  "type": "string"
 		//	}
-		"collection_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the collection group to associate with the collection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"collection_group_name": schemaAttribute4f8b8ea8d3495cf7a53fec30(),
 		// Property: DashboardEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +215,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The OpenSearch Dashboards endpoint for the collection.",
 		//	  "type": "string"
 		//	}
-		"dashboard_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The OpenSearch Dashboards endpoint for the collection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dashboard_endpoint": schemaAttribute760284eda4a00f024a441a98(),
 		// Property: DeletionProtection
 		// CloudFormation resource type schema:
 		//
@@ -77,10 +227,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"deletion_protection": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The deletion protection state of the collection",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"deletion_protection": schemaAttribute6f4c48fa3b34a6428b956a54(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -89,10 +236,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the collection",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute3300f46a9ba92f4d540aaa12(),
 		// Property: EncryptionConfig
 		// CloudFormation resource type schema:
 		//
@@ -111,22 +255,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"encryption_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AWSOwnedKey
-				"aws_owned_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether to use an AWS owned key for encryption.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: KmsKeyArn
-				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Key Management Service key used to encrypt the collection.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Encryption settings for the collection",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"encryption_config": schemaAttributecbe5ee24bd6293a654c96238(),
 		// Property: FipsEndpoints
 		// CloudFormation resource type schema:
 		//
@@ -142,19 +271,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"fips_endpoints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CollectionEndpoint
-				"collection_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: DashboardEndpoint
-				"dashboard_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"fips_endpoints": schemaAttribute7429e59f6c651a95dca28aed(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -164,10 +281,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"collection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the collection",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"collection_id": schemaAttribute9d95c608edc38c8414f6c74b(),
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -175,10 +289,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Key Management Service key used to encrypt the collection.",
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Key Management Service key used to encrypt the collection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttribute06ecabc48777b261fbb244a1(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -189,10 +300,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z][a-z0-9-]{2,63}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the collection.\n\nThe name must meet the following criteria:\nUnique to your account and AWS Region\nStarts with a lowercase letter\nContains only lowercase letters a-z, the numbers 0-9 and the hyphen (-)\nContains between 3 and 64 characters\n",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributea3220f8af9d0aa514e66260f(),
 		// Property: StandbyReplicas
 		// CloudFormation resource type schema:
 		//
@@ -204,10 +312,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"standby_replicas": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The possible standby replicas for the collection",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"standby_replicas": schemaAttribute17aaa7d5edbd57b49f7bdf97(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -241,24 +346,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key in the key-value pair",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value in the key-value pair",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "List of tags to be added to the resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute02873cf9f0a7086663e4a554(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -271,10 +359,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The possible types for the collection",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute7df1141aa0d8d2f224704e24(),
 		// Property: VectorOptions
 		// CloudFormation resource type schema:
 		//
@@ -294,17 +379,7 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"vector_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ServerlessVectorAcceleration
-				"serverless_vector_acceleration": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether GPU acceleration is enabled for vector indexing",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Vector search configuration options for the collection",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vector_options": schemaAttribute4cfc9530de4e2d5856236b1f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

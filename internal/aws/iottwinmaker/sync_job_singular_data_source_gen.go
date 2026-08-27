@@ -16,6 +16,67 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2b4cb1104c50364e57a3fdaa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source of the SyncJob.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e7658d6c80f3a2d429ae8d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute358ff5cb3a6c2e257aa0a171() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the SyncJob.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute382fa78bef982741873a9d9d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IAM Role that execute SyncJob.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c5f120dbc1fa48746165ea5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The date and time when the sync job was updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60ba0fc4084812c2d2f267f4() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A key-value pair to associate with a resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a8ceef33131f903a1d63985() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The date and time when the sync job was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba532912d534fc42070225c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of SyncJob.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iottwinmaker_sync_job", syncJobDataSource)
 }
@@ -34,10 +95,7 @@ func syncJobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:((aws)|(aws-cn)|(aws-us-gov)):iottwinmaker:[a-z0-9-]+:[0-9]{12}:[\\/a-zA-Z0-9_\\-\\.:]+",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the SyncJob.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute358ff5cb3a6c2e257aa0a171(),
 		// Property: CreationDateTime
 		// CloudFormation resource type schema:
 		//
@@ -46,11 +104,7 @@ func syncJobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_date_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The date and time when the sync job was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_date_time": schemaAttribute7a8ceef33131f903a1d63985(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -61,10 +115,7 @@ func syncJobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z_\\-0-9]+",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The state of SyncJob.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributeba532912d534fc42070225c4(),
 		// Property: SyncRole
 		// CloudFormation resource type schema:
 		//
@@ -75,10 +126,7 @@ func syncJobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:((aws)|(aws-cn)|(aws-us-gov)):iam::[0-9]{12}:role/.*",
 		//	  "type": "string"
 		//	}
-		"sync_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IAM Role that execute SyncJob.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sync_role": schemaAttribute382fa78bef982741873a9d9d(),
 		// Property: SyncSource
 		// CloudFormation resource type schema:
 		//
@@ -88,10 +136,7 @@ func syncJobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"sync_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The source of the SyncJob.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sync_source": schemaAttribute2b4cb1104c50364e57a3fdaa(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -107,12 +152,7 @@ func syncJobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A key-value pair to associate with a resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute60ba0fc4084812c2d2f267f4(),
 		// Property: UpdateDateTime
 		// CloudFormation resource type schema:
 		//
@@ -121,11 +161,7 @@ func syncJobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"update_date_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The date and time when the sync job was updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"update_date_time": schemaAttribute5c5f120dbc1fa48746165ea5(),
 		// Property: WorkspaceId
 		// CloudFormation resource type schema:
 		//
@@ -136,10 +172,7 @@ func syncJobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+",
 		//	  "type": "string"
 		//	}
-		"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the workspace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"workspace_id": schemaAttribute2e7658d6c80f3a2d429ae8d2(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

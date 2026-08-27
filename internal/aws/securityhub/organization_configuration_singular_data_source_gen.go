@@ -14,6 +14,55 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2e773dfb4f790e7197d23875() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to automatically enable Security Hub default standards in new member accounts when they join the organization.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5dba67801d25736701956974() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Describes whether central configuration could be enabled as the ConfigurationType for the organization.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute939115c9c44eb6bd8d388a79() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the OrganizationConfiguration being created and assigned as the unique identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa4562c03fbba50a6a705a65() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether the maximum number of allowed member accounts are already associated with the Security Hub administrator account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede104d769f69543f9248c87a() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to automatically enable Security Hub in new member accounts when they join the organization.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5efbdba6caf74e202335cef() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Provides an explanation if the value of Status is equal to FAILED when ConfigurationType is equal to CENTRAL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef78cfd86a0124345780c427d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the organization uses local or central configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_securityhub_organization_configuration", organizationConfigurationDataSource)
 }
@@ -29,10 +78,7 @@ func organizationConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "Whether to automatically enable Security Hub in new member accounts when they join the organization.",
 		//	  "type": "boolean"
 		//	}
-		"auto_enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether to automatically enable Security Hub in new member accounts when they join the organization.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"auto_enable": schemaAttributede104d769f69543f9248c87a(),
 		// Property: AutoEnableStandards
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +90,7 @@ func organizationConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"auto_enable_standards": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether to automatically enable Security Hub default standards in new member accounts when they join the organization.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"auto_enable_standards": schemaAttribute2e773dfb4f790e7197d23875(),
 		// Property: ConfigurationType
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +102,7 @@ func organizationConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"configuration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the organization uses local or central configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"configuration_type": schemaAttributef78cfd86a0124345780c427d(),
 		// Property: MemberAccountLimitReached
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +110,7 @@ func organizationConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "Whether the maximum number of allowed member accounts are already associated with the Security Hub administrator account.",
 		//	  "type": "boolean"
 		//	}
-		"member_account_limit_reached": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether the maximum number of allowed member accounts are already associated with the Security Hub administrator account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"member_account_limit_reached": schemaAttributeaa4562c03fbba50a6a705a65(),
 		// Property: OrganizationConfigurationIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +119,7 @@ func organizationConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^[0-9]{12}/[a-zA-Z0-9-]{1,32}/securityhub-organization-configuration$",
 		//	  "type": "string"
 		//	}
-		"organization_configuration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the OrganizationConfiguration being created and assigned as the unique identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"organization_configuration_identifier": schemaAttribute939115c9c44eb6bd8d388a79(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -98,10 +132,7 @@ func organizationConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Describes whether central configuration could be enabled as the ConfigurationType for the organization.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute5dba67801d25736701956974(),
 		// Property: StatusMessage
 		// CloudFormation resource type schema:
 		//
@@ -109,10 +140,7 @@ func organizationConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "Provides an explanation if the value of Status is equal to FAILED when ConfigurationType is equal to CENTRAL.",
 		//	  "type": "string"
 		//	}
-		"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Provides an explanation if the value of Status is equal to FAILED when ConfigurationType is equal to CENTRAL.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status_message": schemaAttributee5efbdba6caf74e202335cef(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

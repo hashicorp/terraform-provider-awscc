@@ -14,6 +14,12 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2051bbda48f6347e281e2963() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_verifiedpermissions_policy_template", policyTemplateDataSource)
 }
@@ -30,9 +36,7 @@ func policyTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute2051bbda48f6347e281e2963(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -42,9 +46,7 @@ func policyTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9-/_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute2051bbda48f6347e281e2963(),
 		// Property: PolicyStoreId
 		// CloudFormation resource type schema:
 		//
@@ -54,9 +56,7 @@ func policyTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"policy_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"policy_store_id": schemaAttribute2051bbda48f6347e281e2963(),
 		// Property: PolicyTemplateId
 		// CloudFormation resource type schema:
 		//
@@ -66,9 +66,7 @@ func policyTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"policy_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"policy_template_id": schemaAttribute2051bbda48f6347e281e2963(),
 		// Property: Statement
 		// CloudFormation resource type schema:
 		//
@@ -77,9 +75,7 @@ func policyTemplateDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"statement": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"statement": schemaAttribute2051bbda48f6347e281e2963(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

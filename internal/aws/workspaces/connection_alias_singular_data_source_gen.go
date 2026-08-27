@@ -14,6 +14,44 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1d3b8a6812975293913f21a4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5254f4ad3c7564e33d207205() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AssociatedAccountId
+				"associated_account_id": schemaAttribute1d3b8a6812975293913f21a4(),
+				// Property: AssociationStatus
+				"association_status": schemaAttribute1d3b8a6812975293913f21a4(),
+				// Property: ConnectionIdentifier
+				"connection_identifier": schemaAttribute1d3b8a6812975293913f21a4(),
+				// Property: ResourceId
+				"resource_id": schemaAttribute1d3b8a6812975293913f21a4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead4212e9aa0a5171add2b947() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute1d3b8a6812975293913f21a4(),
+				// Property: Value
+				"value": schemaAttribute1d3b8a6812975293913f21a4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_workspaces_connection_alias", connectionAliasDataSource)
 }
@@ -31,9 +69,7 @@ func connectionAliasDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^wsca-[0-9a-z]{8,63}$",
 		//	  "type": "string"
 		//	}
-		"alias_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"alias_id": schemaAttribute1d3b8a6812975293913f21a4(),
 		// Property: Associations
 		// CloudFormation resource type schema:
 		//
@@ -74,29 +110,7 @@ func connectionAliasDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "array"
 		//	}
-		"associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AssociatedAccountId
-					"associated_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: AssociationStatus
-					"association_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ConnectionIdentifier
-					"connection_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ResourceId
-					"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"associations": schemaAttribute5254f4ad3c7564e33d207205(),
 		// Property: ConnectionAliasState
 		// CloudFormation resource type schema:
 		//
@@ -108,9 +122,7 @@ func connectionAliasDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"connection_alias_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"connection_alias_state": schemaAttribute1d3b8a6812975293913f21a4(),
 		// Property: ConnectionString
 		// CloudFormation resource type schema:
 		//
@@ -120,9 +132,7 @@ func connectionAliasDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[.0-9a-zA-Z\\-]{1,255}$",
 		//	  "type": "string"
 		//	}
-		"connection_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"connection_string": schemaAttribute1d3b8a6812975293913f21a4(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -147,21 +157,7 @@ func connectionAliasDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributead4212e9aa0a5171add2b947(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

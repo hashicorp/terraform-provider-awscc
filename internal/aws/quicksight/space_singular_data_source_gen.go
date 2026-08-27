@@ -16,6 +16,152 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0b883998f046f61591c55dfd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1095c1f831d8959a943ed83d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The display name of the space.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23fda436b1b69e8d9205836e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the space.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute243bcc0aeeb2ba5a1defc992() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the principal (user or group) receiving the permission.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45d283f9454dd93b4d0bb66a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of QuickSight resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4aa8b2e011ca8ba325bff70a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of actions granted to the principal.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e3adccd95b193b5f6be1500() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The date and time the space was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b722ccff565573ce73b810d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute0b883998f046f61591c55dfd(),
+				// Property: Value
+				"value": schemaAttributea11317208dccc65ccd36123f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs to associate with the space resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bec118d438bb5f5b12dc47f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ResourceArn
+				"resource_arn": schemaAttributeb05aa8871ae6a6e7cb981907(),
+				// Property: ResourceType
+				"resource_type": schemaAttribute45d283f9454dd93b4d0bb66a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of QuickSight resources attached to the space.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80b58b15bbc7ed8fbbc1addc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The date and time the space was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute88cb70915406be2321607e5b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier for the space.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea11317208dccc65ccd36123f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea2b1d6385ac55df86f7fd0ca() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Actions
+				"actions": schemaAttribute4aa8b2e011ca8ba325bff70a(),
+				// Property: Principal
+				"principal": schemaAttribute243bcc0aeeb2ba5a1defc992(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of permissions granted on the space.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea69982037403ce0765caeb88() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user name of the principal who created the space.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb05aa8871ae6a6e7cb981907() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the QuickSight resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1b9e2fb5e7f6864aaa87412() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Amazon Web Services account where the space is being created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb01ac067ed454088edcc0a9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the space.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_quicksight_space", spaceDataSource)
 }
@@ -32,10 +178,7 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-zA-Z-]*:quicksight:[a-z0-9-]+:[0-9]{12}:space/.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the space.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeeb01ac067ed454088edcc0a9(),
 		// Property: AwsAccountId
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +189,7 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Amazon Web Services account where the space is being created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"aws_account_id": schemaAttributed1b9e2fb5e7f6864aaa87412(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -58,11 +198,7 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The date and time the space was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute6e3adccd95b193b5f6be1500(),
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +206,7 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The user name of the principal who created the space.",
 		//	  "type": "string"
 		//	}
-		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The user name of the principal who created the space.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_by": schemaAttributea69982037403ce0765caeb88(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -83,10 +216,7 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the space.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute23fda436b1b69e8d9205836e(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +226,7 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The display name of the space.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute1095c1f831d8959a943ed83d(),
 		// Property: Permissions
 		// CloudFormation resource type schema:
 		//
@@ -135,25 +262,7 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"permissions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Actions
-					"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The list of actions granted to the principal.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Principal
-					"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ARN of the principal (user or group) receiving the permission.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of permissions granted on the space.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"permissions": schemaAttributea2b1d6385ac55df86f7fd0ca(),
 		// Property: Resources
 		// CloudFormation resource type schema:
 		//
@@ -188,24 +297,7 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ResourceArn
-					"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ARN of the QuickSight resource.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ResourceType
-					"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of QuickSight resource.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of QuickSight resources attached to the space.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resources": schemaAttribute7bec118d438bb5f5b12dc47f(),
 		// Property: SpaceId
 		// CloudFormation resource type schema:
 		//
@@ -215,10 +307,7 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"space_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier for the space.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"space_id": schemaAttribute88cb70915406be2321607e5b(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -251,24 +340,7 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 200,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs to associate with the space resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute7b722ccff565573ce73b810d(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -277,11 +349,7 @@ func spaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The date and time the space was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute80b58b15bbc7ed8fbbc1addc(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

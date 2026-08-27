@@ -14,6 +14,85 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0d113462fee56529ab0b9a87() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1236af967b9a36632fa254c1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of destination for events arriving from a channel.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65bff2c5d25a297670a65c73() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70626474ab29ab51112f8d3b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute0d113462fee56529ab0b9a87(),
+				// Property: Value
+				"value": schemaAttribute65bff2c5d25a297670a65c73(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9aa2a46f4bb8e507c4290b42() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of an on-premises storage solution or application, or a partner event source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb60f6aad02f8fd01bbe32025() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of a channel.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3a6f120fc26bcf845af2a6b() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Location
+				"location": schemaAttributeed3dade384b46887065ecc30(),
+				// Property: Type
+				"type": schemaAttribute1236af967b9a36632fa254c1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more resources to which events arriving through a channel are logged and stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed3dade384b46887065ecc30() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of a resource that receives events from a channel.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9b153fb9c584288e23559dd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the channel.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudtrail_channel", channelDataSource)
 }
@@ -32,10 +111,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "(^[a-zA-Z0-9._/\\-:]+$)",
 		//	  "type": "string"
 		//	}
-		"channel_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of a channel.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"channel_arn": schemaAttributeb60f6aad02f8fd01bbe32025(),
 		// Property: Destinations
 		// CloudFormation resource type schema:
 		//
@@ -71,24 +147,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"destinations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Location
-					"location": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ARN of a resource that receives events from a channel.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Type
-					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of destination for events arriving from a channel.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "One or more resources to which events arriving through a channel are logged and stored.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"destinations": schemaAttributec3a6f120fc26bcf845af2a6b(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -99,10 +158,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "(^[a-zA-Z0-9._\\-]+$)",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the channel.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributef9b153fb9c584288e23559dd(),
 		// Property: Source
 		// CloudFormation resource type schema:
 		//
@@ -113,10 +169,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "(.*)",
 		//	  "type": "string"
 		//	}
-		"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of an on-premises storage solution or application, or a partner event source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source": schemaAttribute9aa2a46f4bb8e507c4290b42(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -149,24 +202,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute70626474ab29ab51112f8d3b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

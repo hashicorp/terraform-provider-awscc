@@ -15,6 +15,88 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0ef71dbe8a4838a81f1633f6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the predefined attribute.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1964ba7c61876cf81605af10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the Amazon Connect instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3967a7be7c71d05037777bb0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Last modified region.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute416d6dad6a3eb230de18afeb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnableValueValidationOnAssociation
+			"enable_value_validation_on_association": schemaAttribute7ff6f44e85ba6bc37e92a9eb(),
+			// Property: IsReadOnly
+			"is_read_only": schemaAttribute931ac767522d35cc3edc550a(),
+		}, /*END SCHEMA*/
+		Description: "Custom metadata associated to a Predefined attribute that controls how the attribute behaves when used by upstream services.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute688fb5e4a520ab25df7dabe3() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "Last modified time.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70070a274fe731a1d22ed71f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: StringList
+			"string_list": schemaAttributef1140bd12d0c5eaaa9aebfa1(),
+		}, /*END SCHEMA*/
+		Description: "The values of a predefined attribute.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ff6f44e85ba6bc37e92a9eb() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables customers to enforce strict validation on the specific values that this predefined attribute can hold.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute931ac767522d35cc3edc550a() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Allows the predefined attribute to show up and be managed in the Amazon Connect UI.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea66b37acb67bafa864eb8a2b() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The assigned purposes of the predefined attribute.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1140bd12d0c5eaaa9aebfa1() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Predefined attribute values of type string list.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_predefined_attribute", predefinedAttributeDataSource)
 }
@@ -41,22 +123,7 @@ func predefinedAttributeDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"attribute_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EnableValueValidationOnAssociation
-				"enable_value_validation_on_association": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Enables customers to enforce strict validation on the specific values that this predefined attribute can hold.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IsReadOnly
-				"is_read_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Allows the predefined attribute to show up and be managed in the Amazon Connect UI.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Custom metadata associated to a Predefined attribute that controls how the attribute behaves when used by upstream services.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"attribute_configuration": schemaAttribute416d6dad6a3eb230de18afeb(),
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -65,10 +132,7 @@ func predefinedAttributeDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the Amazon Connect instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_arn": schemaAttribute1964ba7c61876cf81605af10(),
 		// Property: LastModifiedRegion
 		// CloudFormation resource type schema:
 		//
@@ -77,10 +141,7 @@ func predefinedAttributeDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "[a-z]{2}(-[a-z]+){1,2}(-[0-9])?",
 		//	  "type": "string"
 		//	}
-		"last_modified_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Last modified region.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_region": schemaAttribute3967a7be7c71d05037777bb0(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -88,10 +149,7 @@ func predefinedAttributeDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "Last modified time.",
 		//	  "type": "number"
 		//	}
-		"last_modified_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "Last modified time.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttribute688fb5e4a520ab25df7dabe3(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -101,10 +159,7 @@ func predefinedAttributeDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the predefined attribute.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute0ef71dbe8a4838a81f1633f6(),
 		// Property: Purposes
 		// CloudFormation resource type schema:
 		//
@@ -121,11 +176,7 @@ func predefinedAttributeDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"purposes": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The assigned purposes of the predefined attribute.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"purposes": schemaAttributea66b37acb67bafa864eb8a2b(),
 		// Property: Values
 		// CloudFormation resource type schema:
 		//
@@ -149,18 +200,7 @@ func predefinedAttributeDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"values": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: StringList
-				"string_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Predefined attribute values of type string list.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The values of a predefined attribute.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"values": schemaAttribute70070a274fe731a1d22ed71f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

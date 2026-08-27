@@ -16,6 +16,176 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute000ff9d41a8a07bf80c85644() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "These key-value pairs define parameters and properties of the database.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute037bc1057b7549ab49ab1efb() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Permissions
+				"permissions": schemaAttribute4038baacbe8c53018a722d2e(),
+				// Property: Principal
+				"principal": schemaAttributedea13fd9b09934339a951b1a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Creates a set of default permissions on the table for principals. Used by AWS Lake Formation. Not used in the normal course of AWS Glue operations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1389c63d3d7f557ad3a9f43d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Data Catalog in which the database resides.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1afa929ce95df4da6871a29c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the database. For hive compatibility, this is folded to lowercase when it is store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e7e75695502b8a6d518b4c8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the connection to the external metastore.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30ef6506281b33c79a75cfaf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConnectionName
+			"connection_name": schemaAttribute1e7e75695502b8a6d518b4c8(),
+			// Property: Identifier
+			"identifier": schemaAttributee73a6dbb36b7809d0ae3ac24(),
+		}, /*END SCHEMA*/
+		Description: "A FederatedDatabase structure that references an entity outside the AWS Glue Data Catalog.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f07e93d5cb7986435b2b791() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An identifier for the AWS Lake Formation principal.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4038baacbe8c53018a722d2e() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The permissions that are granted to the principal.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute56a9e33f8a358d58162576af() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS account ID for the account in which to create the catalog object.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute714a9de57972241bc7eaac30() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CatalogId
+			"catalog_id": schemaAttribute1389c63d3d7f557ad3a9f43d(),
+			// Property: DatabaseName
+			"database_name": schemaAttribute87a716d55c858b3bc3527289(),
+			// Property: Region
+			"region": schemaAttributebc42f1275e058cecff19b3f1(),
+		}, /*END SCHEMA*/
+		Description: "A DatabaseIdentifier structure that describes a target database for resource linking.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute852131fc084ff58b85260faa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the database.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute86ed95b144a6d8b583da82ac() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CreateTableDefaultPermissions
+			"create_table_default_permissions": schemaAttribute037bc1057b7549ab49ab1efb(),
+			// Property: Description
+			"description": schemaAttribute852131fc084ff58b85260faa(),
+			// Property: FederatedDatabase
+			"federated_database": schemaAttribute30ef6506281b33c79a75cfaf(),
+			// Property: LocationUri
+			"location_uri": schemaAttribute9151f3e1089ac955725f870f(),
+			// Property: Name
+			"name": schemaAttributec111b2731b0ee41f03502827(),
+			// Property: Parameters
+			"parameters": schemaAttribute000ff9d41a8a07bf80c85644(),
+			// Property: TargetDatabase
+			"target_database": schemaAttribute714a9de57972241bc7eaac30(),
+		}, /*END SCHEMA*/
+		Description: "The metadata for the database.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87a716d55c858b3bc3527289() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the catalog database.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9151f3e1089ac955725f870f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The location of the database (for example, an HDFS path).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc42f1275e058cecff19b3f1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Region of the target database.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec111b2731b0ee41f03502827() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the database. For hive compatibility, this is folded to lowercase when it is stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedea13fd9b09934339a951b1a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataLakePrincipalIdentifier
+			"data_lake_principal_identifier": schemaAttribute3f07e93d5cb7986435b2b791(),
+		}, /*END SCHEMA*/
+		Description: "The principal who is granted permissions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee73a6dbb36b7809d0ae3ac24() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the federated database.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_database", databaseDataSource)
 }
@@ -31,10 +201,7 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AWS account ID for the account in which to create the catalog object.",
 		//	  "type": "string"
 		//	}
-		"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS account ID for the account in which to create the catalog object.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"catalog_id": schemaAttribute56a9e33f8a358d58162576af(),
 		// Property: DatabaseInput
 		// CloudFormation resource type schema:
 		//
@@ -128,99 +295,7 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"database_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CreateTableDefaultPermissions
-				"create_table_default_permissions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Permissions
-							"permissions": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "The permissions that are granted to the principal.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Principal
-							"principal": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DataLakePrincipalIdentifier
-									"data_lake_principal_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "An identifier for the AWS Lake Formation principal.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The principal who is granted permissions.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Creates a set of default permissions on the table for principals. Used by AWS Lake Formation. Not used in the normal course of AWS Glue operations.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Description
-				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A description of the database.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FederatedDatabase
-				"federated_database": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ConnectionName
-						"connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the connection to the external metastore.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Identifier
-						"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "A unique identifier for the federated database.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A FederatedDatabase structure that references an entity outside the AWS Glue Data Catalog.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LocationUri
-				"location_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The location of the database (for example, an HDFS path).",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the database. For hive compatibility, this is folded to lowercase when it is stored.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Parameters
-				"parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType:  jsontypes.NormalizedType{},
-					Description: "These key-value pairs define parameters and properties of the database.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TargetDatabase
-				"target_database": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CatalogId
-						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ID of the Data Catalog in which the database resides.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DatabaseName
-						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the catalog database.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Region
-						"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Region of the target database.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A DatabaseIdentifier structure that describes a target database for resource linking.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The metadata for the database.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"database_input": schemaAttribute86ed95b144a6d8b583da82ac(),
 		// Property: DatabaseName
 		// CloudFormation resource type schema:
 		//
@@ -228,10 +303,7 @@ func databaseDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the database. For hive compatibility, this is folded to lowercase when it is store.",
 		//	  "type": "string"
 		//	}
-		"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the database. For hive compatibility, this is folded to lowercase when it is store.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"database_name": schemaAttribute1afa929ce95df4da6871a29c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

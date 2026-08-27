@@ -15,6 +15,48 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute25eda2e6f84ec943ab5f6508() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34058f49b40dd4566cbf8aea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute387129863a4caa778e1b95cc() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute34058f49b40dd4566cbf8aea(),
+				// Property: Value
+				"value": schemaAttribute25eda2e6f84ec943ab5f6508(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d55265c31d68e480cab8d67() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7266146406496bee58d62f1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_deadline_license_endpoint", licenseEndpointDataSource)
 }
@@ -30,18 +72,14 @@ func licenseEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*):deadline:[a-z0-9-]+:[0-9]{12}:license-endpoint/le-[0-9a-z]{32}",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributea7266146406496bee58d62f1(),
 		// Property: DnsName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"dns_name": schemaAttributea7266146406496bee58d62f1(),
 		// Property: LicenseEndpointId
 		// CloudFormation resource type schema:
 		//
@@ -49,9 +87,7 @@ func licenseEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^le-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"license_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"license_endpoint_id": schemaAttributea7266146406496bee58d62f1(),
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +99,7 @@ func licenseEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_ids": schemaAttribute6d55265c31d68e480cab8d67(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -79,9 +112,7 @@ func licenseEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributea7266146406496bee58d62f1(),
 		// Property: StatusMessage
 		// CloudFormation resource type schema:
 		//
@@ -90,9 +121,7 @@ func licenseEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status_message": schemaAttributea7266146406496bee58d62f1(),
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -106,10 +135,7 @@ func licenseEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_ids": schemaAttribute6d55265c31d68e480cab8d67(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -143,24 +169,7 @@ func licenseEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute387129863a4caa778e1b95cc(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -169,9 +178,7 @@ func licenseEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttributea7266146406496bee58d62f1(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

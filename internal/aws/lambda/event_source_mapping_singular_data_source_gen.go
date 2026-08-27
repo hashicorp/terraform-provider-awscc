@@ -15,6 +15,523 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute033c26663e5cc10e382b7456() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Pattern
+				"pattern": schemaAttribute19c8e7d49b69c5777c48a2b2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of filters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute059b222e8aa0cd135122b08c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Set this property to filter the system logs for your function that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level of detail and lower, where ``DEBUG`` is the highest level and ``WARN`` is the lowest.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1177d93740f0de6438ad771f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of authentication Lambda uses to access your schema registry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1275b33ad9e6c9b98a523a23() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Metrics
+			"metrics": schemaAttributecf3f5fa540b4added9ab49a8(),
+		}, /*END SCHEMA*/
+		Description: "The metrics configuration for your event source. For more information, see [Event source mapping metrics](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute171f51fbe3180736fbf867d9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of authentication protocol, VPC components, or virtual host for your event source. For example: ``\"Type\":\"SASL_SCRAM_512_AUTH\"``.\n  +  ``BASIC_AUTH`` – (Amazon MQ) The ASMlong secret that stores your broker credentials.\n  +  ``BASIC_AUTH`` – (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.\n  +  ``VPC_SUBNET`` – (Self-managed Apache Kafka) The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.\n  +  ``VPC_SECURITY_GROUP`` – (Self-managed Apache Kafka) The VPC security group used to manage access to your self-managed Apache Kafka brokers.\n  +  ``SASL_SCRAM_256_AUTH`` – (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.\n  +  ``SASL_SCRAM_512_AUTH`` – (Amazon MSK, Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.\n  +  ``VIRTUAL_HOST`` –- (RabbitMQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source. This property cannot be specified in an UpdateEventSourceMapping API call.\n  +  ``CLIENT_CERTIFICATE_TLS_AUTH`` – (Amazon MSK, self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the certificate chain (X.509 PEM), private key (PKCS#8 PEM), and private key password (optional) used for mutual TLS authentication of your MSK/Apache Kafka brokers.\n  +  ``SERVER_ROOT_CA_CERTIFICATE`` – (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the root CA certificate (X.509 PEM) used for TLS encryption of your Apache Kafka brokers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19c8e7d49b69c5777c48a2b2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A filter pattern. For more information on the syntax of a filter pattern, see [Filter rule syntax](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-syntax).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e3461a9e4dba8d6f472331b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Attribute
+				"attribute": schemaAttributed97ad24e62c3d9ee236baed0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute224796129ee4b69203339aab() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccessConfigs
+			"access_configs": schemaAttribute5e6f78f0179c9b3f92c00466(),
+			// Property: EventRecordFormat
+			"event_record_format": schemaAttributee74f8100733a4b6430db9a4b(),
+			// Property: SchemaRegistryURI
+			"schema_registry_uri": schemaAttributebfdb7be8c6ed60454d341545(),
+			// Property: SchemaValidationConfigs
+			"schema_validation_configs": schemaAttribute1e3461a9e4dba8d6f472331b(),
+		}, /*END SCHEMA*/
+		Description: "Specific configuration settings for a Kafka schema registry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2553ad67d44f27fdd76d3ed0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b2e6bda4cec10c0f1f0cb91() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Filters
+			"filters": schemaAttribute033c26663e5cc10e382b7456(),
+		}, /*END SCHEMA*/
+		Description: "An object that defines the filter criteria that determine whether Lambda should process an event. For more information, see [Lambda event filtering](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2cd095f0f85fabc4fd306f8a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConsumerGroupId
+			"consumer_group_id": schemaAttribute710aeb2ee0f064d9d9fa05c7(),
+			// Property: SchemaRegistryConfig
+			"schema_registry_config": schemaAttribute224796129ee4b69203339aab(),
+		}, /*END SCHEMA*/
+		Description: "Specific configuration settings for a self-managed Apache Kafka event source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute318f95f63d0885cd007a961c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the database to consume within the DocumentDB cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3831d03793b9caa316ca560b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the event source.\n  +  *Amazon Kinesis* – The ARN of the data stream or a stream consumer.\n  +  *Amazon DynamoDB Streams* – The ARN of the stream.\n  +  *Amazon Simple Queue Service* – The ARN of the queue.\n  +  *Amazon Managed Streaming for Apache Kafka* – The ARN of the cluster or the ARN of the VPC connection (for [cross-account event source mappings](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc)).\n  +  *Amazon MQ* – The ARN of the broker.\n  +  *Amazon DocumentDB* – The ARN of the DocumentDB change stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a410e2838b49615e04e96d3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of event pollers this event source can scale up to. For Amazon SQS events source mappings, default is 200, and minimum value allowed is 2. For Amazon MSK and self-managed Apache Kafka event source mappings, default is 200, and minimum value allowed is 1.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b0446e0365fde0796c73df1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier for the Kafka consumer group to join. The consumer group ID must be unique among all your Kafka event sources. After creating a Kafka event source mapping with the consumer group ID specified, you cannot update this value. For more information, see [Customizable consumer group ID](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41e91ebc1bc91bd2f84d39cf() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Limits the number of concurrent instances that the SQS event source can invoke.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute491e7d2a9983febef223cb99() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CollectionName
+			"collection_name": schemaAttributeba96af00d2bb88f2da84c2c9(),
+			// Property: DatabaseName
+			"database_name": schemaAttribute318f95f63d0885cd007a961c(),
+			// Property: FullDocument
+			"full_document": schemaAttributef4e7cae88bf7806a12bd6612(),
+		}, /*END SCHEMA*/
+		Description: "Specific configuration settings for a DocumentDB event source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49cdd729a034c5afb0e354c3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum number of event pollers this event source can scale down to. For Amazon SQS events source mappings, default is 2, and minimum 2 required. For Amazon MSK and self-managed Apache Kafka event source mappings, default is 1.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54ece6c6c3d3676966a93501() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of bootstrap servers for your Kafka brokers in the following format: ``\"KafkaBootstrapServers\": [\"abc.xyz.com:xxxx\",\"abc2.xyz.com:xxxx\"]``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute586751f98580cc8435573282() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for your chosen configuration in ``Type``. For example: ``\"URI\": \"arn:aws:secretsmanager:us-east-1:01234567890:secret:MyBrokerSecretName\"``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5bf4fab878f555e30da35ed9() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributed5e909e28fbf385f753c79cf(),
+				// Property: Value
+				"value": schemaAttribute9d8aea648f2940cace3bee49(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags to add to the event source mapping.\n  You must have the ``lambda:TagResource``, ``lambda:UntagResource``, and ``lambda:ListTags`` permissions for your [principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html) to manage the CFN stack. If you don't have these permissions, there might be unexpected behavior with stack-level tags propagating to the resource during resource creation and update.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e6f78f0179c9b3f92c00466() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Type
+				"type": schemaAttribute1177d93740f0de6438ad771f(),
+				// Property: URI
+				"uri": schemaAttributedfa2b1b8b9cf0dd36cda124a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of access configuration objects that tell Lambda how to authenticate with your schema registry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute707582c02d0e78cfec222f5c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the destination resource.\n To retain records of failed invocations from [Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html), [DynamoDB](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html), [self-managed Apache Kafka](https://docs.aws.amazon.com/lambda/latest/dg/kafka-on-failure.html), or [Amazon MSK](https://docs.aws.amazon.com/lambda/latest/dg/kafka-on-failure.html), you can configure an Amazon SNS topic, Amazon SQS queue, Amazon S3 bucket, or Kafka topic as the destination.\n  Amazon SNS destinations have a message size limit of 256 KB. If the combined size of the function request and response payload exceeds the limit, Lambda will drop the payload when sending ``OnFailure`` event to the destination. For details on this behavior, refer to [Retaining records of asynchronous invocations](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html).\n  To retain records of failed invocations from [Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html), [DynamoDB](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html), [self-managed Kafka](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination) or [Amazon MSK](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination), you can configure an Amazon SNS topic, Amazon SQS queue, or Amazon S3 bucket as the destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute710aeb2ee0f064d9d9fa05c7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier for the Kafka consumer group to join. The consumer group ID must be unique among all your Kafka event sources. After creating a Kafka event source mapping with the consumer group ID specified, you cannot update this value. For more information, see [Customizable consumer group ID](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka-process.html#services-smaa-topic-add).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c36f15bf3eea0d1d9fb9ff8() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).\n  +  *Amazon Kinesis* – Default 100. Max 10,000.\n  +  *Amazon DynamoDB Streams* – Default 100. Max 10,000.\n  +  *Amazon Simple Queue Service* – Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.\n  +  *Amazon Managed Streaming for Apache Kafka* – Default 100. Max 10,000.\n  +  *Self-managed Apache Kafka* – Default 100. Max 10,000.\n  +  *Amazon MQ (ActiveMQ and RabbitMQ)* – Default 100. Max 10,000.\n  +  *DocumentDB* – Default 100. Max 10,000.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d25290cbb522610a88e6f08() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "(Kinesis and DynamoDB Streams only) The number of batches to process concurrently from each shard. The default value is 1.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d8b508908b4c0f79001f7c7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaximumPollers
+			"maximum_pollers": schemaAttribute3a410e2838b49615e04e96d3(),
+			// Property: MinimumPollers
+			"minimum_pollers": schemaAttribute49cdd729a034c5afb0e354c3(),
+			// Property: PollerGroupName
+			"poller_group_name": schemaAttributed4c965a94ee6ef903ff788be(),
+		}, /*END SCHEMA*/
+		Description: "(Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see [provisioned mode](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83549dad509cdc62796ac96f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "(Amazon MQ) The name of the Amazon MQ broker destination queue to consume.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute845588d0003e86ad2e05e0e4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Type
+				"type": schemaAttribute171f51fbe3180736fbf867d9(),
+				// Property: URI
+				"uri": schemaAttribute586751f98580cc8435573282(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of the authentication protocol, VPC components, or virtual host to secure and define your event source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d12b7e3e663fa71afa96804() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "With ``StartingPosition`` set to ``AT_TIMESTAMP``, the time from which to start reading, in Unix time seconds. ``StartingPositionTimestamp`` cannot be in the future.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute98fd7418b2b02a71afb75cb3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.\n *Default (, , event sources)*: 0\n *Default (, Kafka, , event sources)*: 500 ms\n *Related setting:* For SQS event sources, when you set ``BatchSize`` to a value greater than 10, you must set ``MaximumBatchingWindowInSeconds`` to at least 1.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9cd7eb45581b3f14b4155793() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: OnFailure
+			"on_failure": schemaAttributefdf12f0266aa3a14f5f8a340(),
+		}, /*END SCHEMA*/
+		Description: "(Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) A configuration object that specifies the destination of an event after Lambda processes it.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d8aea648f2940cace3bee49() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for this tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea28fa867c9a978ec63a34189() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the KMSlong (KMS) customer managed key that Lambda uses to encrypt your function's [filter criteria](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-basics).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea2ee6230e432c2d26022ba01() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaximumConcurrency
+			"maximum_concurrency": schemaAttribute41e91ebc1bc91bd2f84d39cf(),
+		}, /*END SCHEMA*/
+		Description: "This property is for Amazon SQS event sources only. You cannot use ``ProvisionedPollerConfig`` while using ``ScalingConfig``. These options are mutually exclusive. To remove the scaling configuration, pass an empty value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea328f9da46041a6aa989774f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The name of the Kafka topic.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac4bb4d56186839840fd47b1() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "(Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records.\n  The minimum valid value for maximum record age is 60s. Although values less than 60 and greater than -1 fall within the parameter's absolute range, they are not allowed",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae49358926a79a62c0dc50e4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SystemLogLevel
+			"system_log_level": schemaAttribute059b222e8aa0cd135122b08c(),
+		}, /*END SCHEMA*/
+		Description: "(Amazon MSK, and self-managed Apache Kafka only) The logging configuration for your event source. For more information, see [Event source mapping logging](https://docs.aws.amazon.com/lambda/latest/dg/esm-logging.html).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaef9b15fccb804c5ea39e290() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "When true, the event source mapping is active. When false, Lambda pauses polling and invocation.\n Default: True",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf6e449f0f83313c601859d6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB.\n  +  *LATEST* - Read only new records.\n  +  *TRIM_HORIZON* - Process all available records.\n  +  *AT_TIMESTAMP* - Specify a time from which to start reading records.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb1d2101b5a935fc6631bfaf7() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "(Kinesis and DynamoDB Streams only) The duration in seconds of a processing window for DynamoDB and Kinesis Streams event sources. A value of 0 seconds indicates no tumbling window.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb1d6762a7cc70320513376e8() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "(Kinesis and DynamoDB Streams only) If the function returns an error, split the batch in two and retry. The default value is false.\n  When using ``BisectBatchOnFunctionError``, check the ``BatchSize`` parameter in the ``OnFailure`` destination message's metadata. The ``BatchSize`` could be greater than 1 since LAM consolidates failed messages metadata when writing to the ``OnFailure`` destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba96af00d2bb88f2da84c2c9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the collection to consume within the database. If you do not specify a collection, Lambda consumes all collections.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebfdb7be8c6ed60454d341545() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.\n  +  For GLU schema registries, use the ARN of the registry.\n  +  For Confluent schema registries, use the URL of the registry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf3f5fa540b4added9ab49a8() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The metrics you want your event source mapping to produce, including ``EventCount``, ``ErrorCount``, ``KafkaMetrics``. \n  +  ``EventCount`` to receive metrics related to the number of events processed by your event source mapping.\n  +  ``ErrorCount`` (Amazon MSK and self-managed Apache Kafka) to receive metrics related to the number of errors in your event source mapping processing.\n  +  ``KafkaMetrics`` (Amazon MSK and self-managed Apache Kafka) to receive metrics related to the Kafka consumers from your event source mapping.\n  \n  For more information about these metrics, see [Event source mapping metrics](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4c965a94ee6ef903ff788be() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "(Amazon MSK and self-managed Apache Kafka) The name of the provisioned poller group. Use this option to group multiple ESMs within the event source's VPC to share Event Poller Unit (EPU) capacity. You can use this option to optimize Provisioned mode costs for your ESMs. You can group up to 100 ESMs per poller group and aggregate maximum pollers across all ESMs in a group cannot exceed 2000.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5e909e28fbf385f753c79cf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key for this tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed97ad24e62c3d9ee236baed0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The attributes you want your schema registry to validate and filter for. If you selected ``JSON`` as the ``EventRecordFormat``, Lambda also deserializes the selected message attributes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc5f1705eb1c8582c9a05078() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "(Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) Discard records after the specified number of retries. The default value is -1, which sets the maximum number of retries to infinite. When MaximumRetryAttempts is infinite, Lambda retries failed records until the record expires in the event source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeddcf096b90c767305bbae12f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "(Kinesis, DynamoDB Streams, and SQS) A list of current response type enums applied to the event source mapping.\n Valid Values: ``ReportBatchItemFailures``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedfa2b1b8b9cf0dd36cda124a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee74f8100733a4b6430db9a4b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The record format that Lambda delivers to your function after schema validation.\n  +  Choose ``JSON`` to have Lambda deliver the record to your function as a standard JSON object.\n  +  Choose ``SOURCE`` to have Lambda deliver the record to your function in its original source format. Lambda removes all schema metadata, such as the schema ID, before sending the record to your function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2913bd0df059185f0fbe048() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConsumerGroupId
+			"consumer_group_id": schemaAttribute3b0446e0365fde0796c73df1(),
+			// Property: SchemaRegistryConfig
+			"schema_registry_config": schemaAttribute224796129ee4b69203339aab(),
+		}, /*END SCHEMA*/
+		Description: "Specific configuration settings for an Amazon Managed Streaming for Apache Kafka (Amazon MSK) event source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef4e7cae88bf7806a12bd6612() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Determines what DocumentDB sends to your event stream during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7fe98cadfb82de6081c301a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KafkaBootstrapServers
+			"kafka_bootstrap_servers": schemaAttribute54ece6c6c3d3676966a93501(),
+		}, /*END SCHEMA*/
+		Description: "The list of bootstrap servers for your Kafka brokers in the following format: ``\"KafkaBootstrapServers\": [\"abc.xyz.com:xxxx\",\"abc2.xyz.com:xxxx\"]``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdcabd5c57caadbcdbb0b9c3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name or ARN of the Lambda function.\n  **Name formats**\n +  *Function name* – ``MyFunction``.\n  +  *Function ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction``.\n  +  *Version or Alias ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD``.\n  +  *Partial ARN* – ``123456789012:function:MyFunction``.\n  \n The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdf12f0266aa3a14f5f8a340() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Destination
+			"destination": schemaAttribute707582c02d0e78cfec222f5c(),
+		}, /*END SCHEMA*/
+		Description: "The destination configuration for failed invocations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefefb33360fc304345320a044() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Endpoints
+			"endpoints": schemaAttributef7fe98cadfb82de6081c301a(),
+		}, /*END SCHEMA*/
+		Description: "The self-managed Apache Kafka cluster for your event source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_lambda_event_source_mapping", eventSourceMappingDataSource)
 }
@@ -113,67 +630,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"amazon_managed_kafka_event_source_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConsumerGroupId
-				"consumer_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The identifier for the Kafka consumer group to join. The consumer group ID must be unique among all your Kafka event sources. After creating a Kafka event source mapping with the consumer group ID specified, you cannot update this value. For more information, see [Customizable consumer group ID](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-consumer-group-id).",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SchemaRegistryConfig
-				"schema_registry_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AccessConfigs
-						"access_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Type
-									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The type of authentication Lambda uses to access your schema registry.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: URI
-									"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "An array of access configuration objects that tell Lambda how to authenticate with your schema registry.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: EventRecordFormat
-						"event_record_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The record format that Lambda delivers to your function after schema validation.\n  +  Choose ``JSON`` to have Lambda deliver the record to your function as a standard JSON object.\n  +  Choose ``SOURCE`` to have Lambda deliver the record to your function in its original source format. Lambda removes all schema metadata, such as the schema ID, before sending the record to your function.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SchemaRegistryURI
-						"schema_registry_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.\n  +  For GLU schema registries, use the ARN of the registry.\n  +  For Confluent schema registries, use the URL of the registry.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SchemaValidationConfigs
-						"schema_validation_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Attribute
-									"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The attributes you want your schema registry to validate and filter for. If you selected ``JSON`` as the ``EventRecordFormat``, Lambda also deserializes the selected message attributes.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Specific configuration settings for a Kafka schema registry.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specific configuration settings for an Amazon Managed Streaming for Apache Kafka (Amazon MSK) event source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"amazon_managed_kafka_event_source_config": schemaAttributef2913bd0df059185f0fbe048(),
 		// Property: BatchSize
 		// CloudFormation resource type schema:
 		//
@@ -183,10 +640,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).\n  +  *Amazon Kinesis* – Default 100. Max 10,000.\n  +  *Amazon DynamoDB Streams* – Default 100. Max 10,000.\n  +  *Amazon Simple Queue Service* – Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.\n  +  *Amazon Managed Streaming for Apache Kafka* – Default 100. Max 10,000.\n  +  *Self-managed Apache Kafka* – Default 100. Max 10,000.\n  +  *Amazon MQ (ActiveMQ and RabbitMQ)* – Default 100. Max 10,000.\n  +  *DocumentDB* – Default 100. Max 10,000.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"batch_size": schemaAttribute7c36f15bf3eea0d1d9fb9ff8(),
 		// Property: BisectBatchOnFunctionError
 		// CloudFormation resource type schema:
 		//
@@ -194,10 +648,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "(Kinesis and DynamoDB Streams only) If the function returns an error, split the batch in two and retry. The default value is false.\n  When using ``BisectBatchOnFunctionError``, check the ``BatchSize`` parameter in the ``OnFailure`` destination message's metadata. The ``BatchSize`` could be greater than 1 since LAM consolidates failed messages metadata when writing to the ``OnFailure`` destination.",
 		//	  "type": "boolean"
 		//	}
-		"bisect_batch_on_function_error": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "(Kinesis and DynamoDB Streams only) If the function returns an error, split the batch in two and retry. The default value is false.\n  When using ``BisectBatchOnFunctionError``, check the ``BatchSize`` parameter in the ``OnFailure`` destination message's metadata. The ``BatchSize`` could be greater than 1 since LAM consolidates failed messages metadata when writing to the ``OnFailure`` destination.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bisect_batch_on_function_error": schemaAttributeb1d6762a7cc70320513376e8(),
 		// Property: DestinationConfig
 		// CloudFormation resource type schema:
 		//
@@ -222,24 +673,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"destination_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: OnFailure
-				"on_failure": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Destination
-						"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) of the destination resource.\n To retain records of failed invocations from [Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html), [DynamoDB](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html), [self-managed Apache Kafka](https://docs.aws.amazon.com/lambda/latest/dg/kafka-on-failure.html), or [Amazon MSK](https://docs.aws.amazon.com/lambda/latest/dg/kafka-on-failure.html), you can configure an Amazon SNS topic, Amazon SQS queue, Amazon S3 bucket, or Kafka topic as the destination.\n  Amazon SNS destinations have a message size limit of 256 KB. If the combined size of the function request and response payload exceeds the limit, Lambda will drop the payload when sending ``OnFailure`` event to the destination. For details on this behavior, refer to [Retaining records of asynchronous invocations](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async-retain-records.html).\n  To retain records of failed invocations from [Kinesis](https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html), [DynamoDB](https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html), [self-managed Kafka](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka.html#services-smaa-onfailure-destination) or [Amazon MSK](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#services-msk-onfailure-destination), you can configure an Amazon SNS topic, Amazon SQS queue, or Amazon S3 bucket as the destination.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The destination configuration for failed invocations.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "(Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) A configuration object that specifies the destination of an event after Lambda processes it.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"destination_config": schemaAttribute9cd7eb45581b3f14b4155793(),
 		// Property: DocumentDBEventSourceConfig
 		// CloudFormation resource type schema:
 		//
@@ -270,27 +704,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"document_db_event_source_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CollectionName
-				"collection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the collection to consume within the database. If you do not specify a collection, Lambda consumes all collections.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DatabaseName
-				"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the database to consume within the DocumentDB cluster.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FullDocument
-				"full_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Determines what DocumentDB sends to your event stream during document update operations. If set to UpdateLookup, DocumentDB sends a delta describing the changes, along with a copy of the entire document. Otherwise, DocumentDB sends only a partial document that contains the changes.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specific configuration settings for a DocumentDB event source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"document_db_event_source_config": schemaAttribute491e7d2a9983febef223cb99(),
 		// Property: Enabled
 		// CloudFormation resource type schema:
 		//
@@ -298,10 +712,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "When true, the event source mapping is active. When false, Lambda pauses polling and invocation.\n Default: True",
 		//	  "type": "boolean"
 		//	}
-		"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "When true, the event source mapping is active. When false, Lambda pauses polling and invocation.\n Default: True",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enabled": schemaAttributeaef9b15fccb804c5ea39e290(),
 		// Property: EventSourceArn
 		// CloudFormation resource type schema:
 		//
@@ -312,10 +723,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
 		//	  "type": "string"
 		//	}
-		"event_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the event source.\n  +  *Amazon Kinesis* – The ARN of the data stream or a stream consumer.\n  +  *Amazon DynamoDB Streams* – The ARN of the stream.\n  +  *Amazon Simple Queue Service* – The ARN of the queue.\n  +  *Amazon Managed Streaming for Apache Kafka* – The ARN of the cluster or the ARN of the VPC connection (for [cross-account event source mappings](https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html#msk-multi-vpc)).\n  +  *Amazon MQ* – The ARN of the broker.\n  +  *Amazon DocumentDB* – The ARN of the DocumentDB change stream.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"event_source_arn": schemaAttribute3831d03793b9caa316ca560b(),
 		// Property: EventSourceMappingArn
 		// CloudFormation resource type schema:
 		//
@@ -326,10 +734,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "arn:(aws[a-zA-Z-]*)?:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:event-source-mapping:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
 		//	  "type": "string"
 		//	}
-		"event_source_mapping_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"event_source_mapping_arn": schemaAttribute2553ad67d44f27fdd76d3ed0(),
 		// Property: FilterCriteria
 		// CloudFormation resource type schema:
 		//
@@ -361,26 +766,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"filter_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Filters
-				"filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Pattern
-							"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A filter pattern. For more information on the syntax of a filter pattern, see [Filter rule syntax](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-syntax).",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A list of filters.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object that defines the filter criteria that determine whether Lambda should process an event. For more information, see [Lambda event filtering](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"filter_criteria": schemaAttribute2b2e6bda4cec10c0f1f0cb91(),
 		// Property: FunctionName
 		// CloudFormation resource type schema:
 		//
@@ -391,10 +777,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "(arn:(aws[a-zA-Z-]*)?:lambda:)?((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST(\\.PUBLISHED)?|[a-zA-Z0-9-_]+))?",
 		//	  "type": "string"
 		//	}
-		"function_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name or ARN of the Lambda function.\n  **Name formats**\n +  *Function name* – ``MyFunction``.\n  +  *Function ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction``.\n  +  *Version or Alias ARN* – ``arn:aws:lambda:us-west-2:123456789012:function:MyFunction:PROD``.\n  +  *Partial ARN* – ``123456789012:function:MyFunction``.\n  \n The length constraint applies only to the full ARN. If you specify only the function name, it's limited to 64 characters in length.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"function_name": schemaAttributefdcabd5c57caadbcdbb0b9c3(),
 		// Property: FunctionResponseTypes
 		// CloudFormation resource type schema:
 		//
@@ -411,11 +794,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"function_response_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "(Kinesis, DynamoDB Streams, and SQS) A list of current response type enums applied to the event source mapping.\n Valid Values: ``ReportBatchItemFailures``",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"function_response_types": schemaAttributeddcf096b90c767305bbae12f(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -426,10 +805,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"event_source_mapping_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"event_source_mapping_id": schemaAttribute2553ad67d44f27fdd76d3ed0(),
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -440,10 +816,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()",
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the KMSlong (KMS) customer managed key that Lambda uses to encrypt your function's [filter criteria](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-basics).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttributea28fa867c9a978ec63a34189(),
 		// Property: LoggingConfig
 		// CloudFormation resource type schema:
 		//
@@ -463,17 +836,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"logging_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SystemLogLevel
-				"system_log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Set this property to filter the system logs for your function that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level of detail and lower, where ``DEBUG`` is the highest level and ``WARN`` is the lowest.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "(Amazon MSK, and self-managed Apache Kafka only) The logging configuration for your event source. For more information, see [Event source mapping logging](https://docs.aws.amazon.com/lambda/latest/dg/esm-logging.html).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"logging_config": schemaAttributeae49358926a79a62c0dc50e4(),
 		// Property: MaximumBatchingWindowInSeconds
 		// CloudFormation resource type schema:
 		//
@@ -483,10 +846,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.\n *Default (, , event sources)*: 0\n *Default (, Kafka, , event sources)*: 500 ms\n *Related setting:* For SQS event sources, when you set ``BatchSize`` to a value greater than 10, you must set ``MaximumBatchingWindowInSeconds`` to at least 1.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"maximum_batching_window_in_seconds": schemaAttribute98fd7418b2b02a71afb75cb3(),
 		// Property: MaximumRecordAgeInSeconds
 		// CloudFormation resource type schema:
 		//
@@ -496,10 +856,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minimum": -1,
 		//	  "type": "integer"
 		//	}
-		"maximum_record_age_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "(Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) Discard records older than the specified age. The default value is -1, which sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records.\n  The minimum valid value for maximum record age is 60s. Although values less than 60 and greater than -1 fall within the parameter's absolute range, they are not allowed",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"maximum_record_age_in_seconds": schemaAttributeac4bb4d56186839840fd47b1(),
 		// Property: MaximumRetryAttempts
 		// CloudFormation resource type schema:
 		//
@@ -509,10 +866,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minimum": -1,
 		//	  "type": "integer"
 		//	}
-		"maximum_retry_attempts": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "(Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) Discard records after the specified number of retries. The default value is -1, which sets the maximum number of retries to infinite. When MaximumRetryAttempts is infinite, Lambda retries failed records until the record expires in the event source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"maximum_retry_attempts": schemaAttributedc5f1705eb1c8582c9a05078(),
 		// Property: MetricsConfig
 		// CloudFormation resource type schema:
 		//
@@ -538,18 +892,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"metrics_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Metrics
-				"metrics": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The metrics you want your event source mapping to produce, including ``EventCount``, ``ErrorCount``, ``KafkaMetrics``. \n  +  ``EventCount`` to receive metrics related to the number of events processed by your event source mapping.\n  +  ``ErrorCount`` (Amazon MSK and self-managed Apache Kafka) to receive metrics related to the number of errors in your event source mapping processing.\n  +  ``KafkaMetrics`` (Amazon MSK and self-managed Apache Kafka) to receive metrics related to the Kafka consumers from your event source mapping.\n  \n  For more information about these metrics, see [Event source mapping metrics](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics).",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The metrics configuration for your event source. For more information, see [Event source mapping metrics](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics-types.html#event-source-mapping-metrics).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"metrics_config": schemaAttribute1275b33ad9e6c9b98a523a23(),
 		// Property: ParallelizationFactor
 		// CloudFormation resource type schema:
 		//
@@ -559,10 +902,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"parallelization_factor": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "(Kinesis and DynamoDB Streams only) The number of batches to process concurrently from each shard. The default value is 1.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parallelization_factor": schemaAttribute7d25290cbb522610a88e6f08(),
 		// Property: ProvisionedPollerConfig
 		// CloudFormation resource type schema:
 		//
@@ -591,27 +931,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"provisioned_poller_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaximumPollers
-				"maximum_pollers": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum number of event pollers this event source can scale up to. For Amazon SQS events source mappings, default is 200, and minimum value allowed is 2. For Amazon MSK and self-managed Apache Kafka event source mappings, default is 200, and minimum value allowed is 1.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MinimumPollers
-				"minimum_pollers": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The minimum number of event pollers this event source can scale down to. For Amazon SQS events source mappings, default is 2, and minimum 2 required. For Amazon MSK and self-managed Apache Kafka event source mappings, default is 1.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PollerGroupName
-				"poller_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "(Amazon MSK and self-managed Apache Kafka) The name of the provisioned poller group. Use this option to group multiple ESMs within the event source's VPC to share Event Poller Unit (EPU) capacity. You can use this option to optimize Provisioned mode costs for your ESMs. You can group up to 100 ESMs per poller group and aggregate maximum pollers across all ESMs in a group cannot exceed 2000.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "(Amazon SQS, Amazon MSK, and self-managed Apache Kafka only) The provisioned mode configuration for the event source. For more information, see [provisioned mode](https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html#invocation-eventsourcemapping-provisioned-mode).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"provisioned_poller_config": schemaAttribute7d8b508908b4c0f79001f7c7(),
 		// Property: Queues
 		// CloudFormation resource type schema:
 		//
@@ -628,11 +948,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"queues": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "(Amazon MQ) The name of the Amazon MQ broker destination queue to consume.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"queues": schemaAttribute83549dad509cdc62796ac96f(),
 		// Property: ScalingConfig
 		// CloudFormation resource type schema:
 		//
@@ -649,17 +965,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"scaling_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaximumConcurrency
-				"maximum_concurrency": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Limits the number of concurrent instances that the SQS event source can invoke.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "This property is for Amazon SQS event sources only. You cannot use ``ProvisionedPollerConfig`` while using ``ScalingConfig``. These options are mutually exclusive. To remove the scaling configuration, pass an empty value.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scaling_config": schemaAttributea2ee6230e432c2d26022ba01(),
 		// Property: SelfManagedEventSource
 		// CloudFormation resource type schema:
 		//
@@ -691,25 +997,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"self_managed_event_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Endpoints
-				"endpoints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: KafkaBootstrapServers
-						"kafka_bootstrap_servers": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The list of bootstrap servers for your Kafka brokers in the following format: ``\"KafkaBootstrapServers\": [\"abc.xyz.com:xxxx\",\"abc2.xyz.com:xxxx\"]``.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The list of bootstrap servers for your Kafka brokers in the following format: ``\"KafkaBootstrapServers\": [\"abc.xyz.com:xxxx\",\"abc2.xyz.com:xxxx\"]``.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The self-managed Apache Kafka cluster for your event source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"self_managed_event_source": schemaAttributefefb33360fc304345320a044(),
 		// Property: SelfManagedKafkaEventSourceConfig
 		// CloudFormation resource type schema:
 		//
@@ -800,67 +1088,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"self_managed_kafka_event_source_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConsumerGroupId
-				"consumer_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The identifier for the Kafka consumer group to join. The consumer group ID must be unique among all your Kafka event sources. After creating a Kafka event source mapping with the consumer group ID specified, you cannot update this value. For more information, see [Customizable consumer group ID](https://docs.aws.amazon.com/lambda/latest/dg/with-kafka-process.html#services-smaa-topic-add).",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SchemaRegistryConfig
-				"schema_registry_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AccessConfigs
-						"access_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Type
-									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The type of authentication Lambda uses to access your schema registry.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: URI
-									"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The URI of the secret (Secrets Manager secret ARN) to authenticate with your schema registry.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "An array of access configuration objects that tell Lambda how to authenticate with your schema registry.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: EventRecordFormat
-						"event_record_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The record format that Lambda delivers to your function after schema validation.\n  +  Choose ``JSON`` to have Lambda deliver the record to your function as a standard JSON object.\n  +  Choose ``SOURCE`` to have Lambda deliver the record to your function in its original source format. Lambda removes all schema metadata, such as the schema ID, before sending the record to your function.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SchemaRegistryURI
-						"schema_registry_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The URI for your schema registry. The correct URI format depends on the type of schema registry you're using.\n  +  For GLU schema registries, use the ARN of the registry.\n  +  For Confluent schema registries, use the URL of the registry.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SchemaValidationConfigs
-						"schema_validation_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Attribute
-									"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The attributes you want your schema registry to validate and filter for. If you selected ``JSON`` as the ``EventRecordFormat``, Lambda also deserializes the selected message attributes.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "An array of schema validation configuration objects, which tell Lambda the message attributes you want to validate and filter using your schema registry.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Specific configuration settings for a Kafka schema registry.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specific configuration settings for a self-managed Apache Kafka event source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"self_managed_kafka_event_source_config": schemaAttribute2cd095f0f85fabc4fd306f8a(),
 		// Property: SourceAccessConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -899,24 +1127,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"source_access_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Type
-					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of authentication protocol, VPC components, or virtual host for your event source. For example: ``\"Type\":\"SASL_SCRAM_512_AUTH\"``.\n  +  ``BASIC_AUTH`` – (Amazon MQ) The ASMlong secret that stores your broker credentials.\n  +  ``BASIC_AUTH`` – (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.\n  +  ``VPC_SUBNET`` – (Self-managed Apache Kafka) The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.\n  +  ``VPC_SECURITY_GROUP`` – (Self-managed Apache Kafka) The VPC security group used to manage access to your self-managed Apache Kafka brokers.\n  +  ``SASL_SCRAM_256_AUTH`` – (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.\n  +  ``SASL_SCRAM_512_AUTH`` – (Amazon MSK, Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.\n  +  ``VIRTUAL_HOST`` –- (RabbitMQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source. This property cannot be specified in an UpdateEventSourceMapping API call.\n  +  ``CLIENT_CERTIFICATE_TLS_AUTH`` – (Amazon MSK, self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the certificate chain (X.509 PEM), private key (PKCS#8 PEM), and private key password (optional) used for mutual TLS authentication of your MSK/Apache Kafka brokers.\n  +  ``SERVER_ROOT_CA_CERTIFICATE`` – (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the root CA certificate (X.509 PEM) used for TLS encryption of your Apache Kafka brokers.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: URI
-					"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for your chosen configuration in ``Type``. For example: ``\"URI\": \"arn:aws:secretsmanager:us-east-1:01234567890:secret:MyBrokerSecretName\"``.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of the authentication protocol, VPC components, or virtual host to secure and define your event source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_access_configurations": schemaAttribute845588d0003e86ad2e05e0e4(),
 		// Property: StartingPosition
 		// CloudFormation resource type schema:
 		//
@@ -927,10 +1138,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "(LATEST|TRIM_HORIZON|AT_TIMESTAMP)+",
 		//	  "type": "string"
 		//	}
-		"starting_position": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The position in a stream from which to start reading. Required for Amazon Kinesis and Amazon DynamoDB.\n  +  *LATEST* - Read only new records.\n  +  *TRIM_HORIZON* - Process all available records.\n  +  *AT_TIMESTAMP* - Specify a time from which to start reading records.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"starting_position": schemaAttributeaf6e449f0f83313c601859d6(),
 		// Property: StartingPositionTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -938,10 +1146,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "With ``StartingPosition`` set to ``AT_TIMESTAMP``, the time from which to start reading, in Unix time seconds. ``StartingPositionTimestamp`` cannot be in the future.",
 		//	  "type": "number"
 		//	}
-		"starting_position_timestamp": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "With ``StartingPosition`` set to ``AT_TIMESTAMP``, the time from which to start reading, in Unix time seconds. ``StartingPositionTimestamp`` cannot be in the future.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"starting_position_timestamp": schemaAttribute8d12b7e3e663fa71afa96804(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -973,24 +1178,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key for this tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for this tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags to add to the event source mapping.\n  You must have the ``lambda:TagResource``, ``lambda:UntagResource``, and ``lambda:ListTags`` permissions for your [principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html) to manage the CFN stack. If you don't have these permissions, there might be unexpected behavior with stack-level tags propagating to the resource during resource creation and update.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute5bf4fab878f555e30da35ed9(),
 		// Property: Topics
 		// CloudFormation resource type schema:
 		//
@@ -1007,11 +1195,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"topics": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The name of the Kafka topic.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"topics": schemaAttributea328f9da46041a6aa989774f(),
 		// Property: TumblingWindowInSeconds
 		// CloudFormation resource type schema:
 		//
@@ -1021,10 +1205,7 @@ func eventSourceMappingDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"tumbling_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "(Kinesis and DynamoDB Streams only) The duration in seconds of a processing window for DynamoDB and Kinesis Streams event sources. A value of 0 seconds indicates no tumbling window.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tumbling_window_in_seconds": schemaAttributeb1d2101b5a935fc6631bfaf7(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

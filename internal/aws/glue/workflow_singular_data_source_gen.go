@@ -15,6 +15,43 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute490d379db2bc6090401e063b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the workflow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51793edd1be8f826b788ff3d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The tags to use with this workflow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute519876685ab2082bff392379() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute520c582cb3b26327694aeeaa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "A collection of properties to be used as part of each execution of the workflow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute69fce9178628e7320a1c3147() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the workflow representing the flow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_workflow", workflowDataSource)
 }
@@ -30,11 +67,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A collection of properties to be used as part of each execution of the workflow",
 		//	  "type": "object"
 		//	}
-		"default_run_properties": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "A collection of properties to be used as part of each execution of the workflow",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_run_properties": schemaAttribute520c582cb3b26327694aeeaa(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +75,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description of the workflow",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the workflow",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute490d379db2bc6090401e063b(),
 		// Property: MaxConcurrentRuns
 		// CloudFormation resource type schema:
 		//
@@ -53,10 +83,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.",
 		//	  "type": "integer"
 		//	}
-		"max_concurrent_runs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"max_concurrent_runs": schemaAttribute519876685ab2082bff392379(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -64,10 +91,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the workflow representing the flow",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the workflow representing the flow",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute69fce9178628e7320a1c3147(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -75,11 +99,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The tags to use with this workflow.",
 		//	  "type": "object"
 		//	}
-		"tags": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "The tags to use with this workflow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute51793edd1be8f826b788ff3d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,49 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute05bdf3252834a8414f50f117() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AlarmIdentifier
+				"alarm_identifier": schemaAttributea0c016e003e1ec8baf8f3155(),
+				// Property: Type
+				"type": schemaAttributea0c016e003e1ec8baf8f3155(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute406d7b81e7199eb6ffa01d51() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0c016e003e1ec8baf8f3155() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8102621ad7ae52b5100e817() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BlockedDates
+			"blocked_dates": schemaAttribute406d7b81e7199eb6ffa01d51(),
+			// Property: BlockedWindows
+			"blocked_windows": schemaAttribute406d7b81e7199eb6ffa01d51(),
+			// Property: BlockingAlarms
+			"blocking_alarms": schemaAttribute05bdf3252834a8414f50f117(),
+			// Property: OutcomeAlarms
+			"outcome_alarms": schemaAttribute05bdf3252834a8414f50f117(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_arczonalshift_zonal_autoshift_configuration", zonalAutoshiftConfigurationDataSource)
 }
@@ -115,53 +158,7 @@ func zonalAutoshiftConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"practice_run_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BlockedDates
-				"blocked_dates": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: BlockedWindows
-				"blocked_windows": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: BlockingAlarms
-				"blocking_alarms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AlarmIdentifier
-							"alarm_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: OutcomeAlarms
-				"outcome_alarms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AlarmIdentifier
-							"alarm_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"practice_run_configuration": schemaAttributed8102621ad7ae52b5100e817(),
 		// Property: ResourceIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -170,9 +167,7 @@ func zonalAutoshiftConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  "minLength": 8,
 		//	  "type": "string"
 		//	}
-		"resource_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"resource_identifier": schemaAttributea0c016e003e1ec8baf8f3155(),
 		// Property: ZonalAutoshiftStatus
 		// CloudFormation resource type schema:
 		//
@@ -182,9 +177,7 @@ func zonalAutoshiftConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"zonal_autoshift_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"zonal_autoshift_status": schemaAttributea0c016e003e1ec8baf8f3155(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

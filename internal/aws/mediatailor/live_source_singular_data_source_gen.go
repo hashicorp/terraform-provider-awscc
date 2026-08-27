@@ -14,6 +14,65 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute3ddb2304a04ad77f5db2f2c7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The ARN of the live source.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f2f8512be9e760b1aada6e6() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute47f17ebe1ff8f1f73308ec5d(),
+				// Property: Value
+				"value": schemaAttribute47f17ebe1ff8f1f73308ec5d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags to assign to the live source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute47f17ebe1ff8f1f73308ec5d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute68acd1d285d8c7648f9f495b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The name of the source group. This has to match one of the <code>Channel::Outputs::SourceGroup</code>.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7624073923126eeb66e79257() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Path
+				"path": schemaAttributea74e20a61a9eff9c4f32d06b(),
+				// Property: SourceGroup
+				"source_group": schemaAttribute68acd1d285d8c7648f9f495b(),
+				// Property: Type
+				"type": schemaAttribute47f17ebe1ff8f1f73308ec5d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>A list of HTTP package configuration parameters for this live source.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea74e20a61a9eff9c4f32d06b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The relative path to the URL for this VOD source. This is combined with <code>SourceLocation::HttpConfiguration::BaseUrl</code> to form a valid URL.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_mediatailor_live_source", liveSourceDataSource)
 }
@@ -29,10 +88,7 @@ func liveSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "\u003cp\u003eThe ARN of the live source.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The ARN of the live source.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute3ddb2304a04ad77f5db2f2c7(),
 		// Property: HttpPackageConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -67,46 +123,21 @@ func liveSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"http_package_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Path
-					"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>The relative path to the URL for this VOD source. This is combined with <code>SourceLocation::HttpConfiguration::BaseUrl</code> to form a valid URL.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SourceGroup
-					"source_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>The name of the source group. This has to match one of the <code>Channel::Outputs::SourceGroup</code>.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Type
-					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "<p>A list of HTTP package configuration parameters for this live source.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"http_package_configurations": schemaAttribute7624073923126eeb66e79257(),
 		// Property: LiveSourceName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"live_source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"live_source_name": schemaAttribute47f17ebe1ff8f1f73308ec5d(),
 		// Property: SourceLocationName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"source_location_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"source_location_name": schemaAttribute47f17ebe1ff8f1f73308ec5d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -132,22 +163,7 @@ func liveSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags to assign to the live source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute3f2f8512be9e760b1aada6e6(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,94 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0f5669d5d2e2447eae757259() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon S3 key of the layer archive.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute216d91ca4a7707ed93c21c83() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether Lambda should copy the deployment package to its internal storage (COPY) or reference it directly from your S3 bucket (REFERENCE).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26b34a10c5f858107d7eb232() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of compatible instruction set architectures.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d9f3657ae0b09f916937fbf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The layer's software license.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute410facdca9485cec61500ad2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute59bfb8832a14b469d4696dab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "For versioned objects, the version of the layer archive object to use.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeacddf9d3eb98fe58e55b7133() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Bucket
+			"s3_bucket": schemaAttributeb2fcdaf1a615507d65976b33(),
+			// Property: S3Key
+			"s3_key": schemaAttribute0f5669d5d2e2447eae757259(),
+			// Property: S3ObjectStorageMode
+			"s3_object_storage_mode": schemaAttribute216d91ca4a7707ed93c21c83(),
+			// Property: S3ObjectVersion
+			"s3_object_version": schemaAttribute59bfb8832a14b469d4696dab(),
+		}, /*END SCHEMA*/
+		Description: "The function layer archive.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2fcdaf1a615507d65976b33() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon S3 bucket of the layer archive.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb85b3771ccbc69620b5ef390() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name or Amazon Resource Name (ARN) of the layer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9d2709398f250c0f6947dad() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee66d2a8e49f77b14246799ae() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of compatible function runtimes. Used for filtering with ListLayers and ListLayerVersions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_lambda_layer_version", layerVersionDataSource)
 }
@@ -35,11 +123,7 @@ func layerVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"compatible_architectures": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of compatible instruction set architectures.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"compatible_architectures": schemaAttribute26b34a10c5f858107d7eb232(),
 		// Property: CompatibleRuntimes
 		// CloudFormation resource type schema:
 		//
@@ -52,11 +136,7 @@ func layerVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"compatible_runtimes": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of compatible function runtimes. Used for filtering with ListLayers and ListLayerVersions.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"compatible_runtimes": schemaAttributee66d2a8e49f77b14246799ae(),
 		// Property: Content
 		// CloudFormation resource type schema:
 		//
@@ -91,32 +171,7 @@ func layerVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"content": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: S3Bucket
-				"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon S3 bucket of the layer archive.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: S3Key
-				"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon S3 key of the layer archive.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: S3ObjectStorageMode
-				"s3_object_storage_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether Lambda should copy the deployment package to its internal storage (COPY) or reference it directly from your S3 bucket (REFERENCE).",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: S3ObjectVersion
-				"s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "For versioned objects, the version of the layer archive object to use.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The function layer archive.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"content": schemaAttributeacddf9d3eb98fe58e55b7133(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -124,10 +179,7 @@ func layerVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The description of the version.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the version.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeb9d2709398f250c0f6947dad(),
 		// Property: LayerName
 		// CloudFormation resource type schema:
 		//
@@ -135,19 +187,14 @@ func layerVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The name or Amazon Resource Name (ARN) of the layer.",
 		//	  "type": "string"
 		//	}
-		"layer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name or Amazon Resource Name (ARN) of the layer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"layer_name": schemaAttributeb85b3771ccbc69620b5ef390(),
 		// Property: LayerVersionArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"layer_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"layer_version_arn": schemaAttribute410facdca9485cec61500ad2(),
 		// Property: LicenseInfo
 		// CloudFormation resource type schema:
 		//
@@ -155,10 +202,7 @@ func layerVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The layer's software license.",
 		//	  "type": "string"
 		//	}
-		"license_info": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The layer's software license.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"license_info": schemaAttribute3d9f3657ae0b09f916937fbf(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

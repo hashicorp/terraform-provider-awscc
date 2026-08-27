@@ -15,6 +15,388 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute04b074d3aeca151bb642ba41() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute087c57692241ce3f556d9c18() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0e38fc036056b8f10668557a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TemplateV2
+			"template_v2": schemaAttribute5ee6106b56c6772ddc28d980(),
+			// Property: TemplateV3
+			"template_v3": schemaAttribute2319afd2e03e9f3b06400499(),
+			// Property: TemplateV4
+			"template_v4": schemaAttribute8581c3401b6e79e1b63a7539(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0eac5f08a063d6bfe9fb1c24() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute150dd20f0c827b49a5866076() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClientVersion
+			"client_version": schemaAttributef3f282865d7981d0eeaabc8e(),
+			// Property: ExportableKey
+			"exportable_key": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: StrongKeyProtectionRequired
+			"strong_key_protection_required": schemaAttribute04b074d3aeca151bb642ba41(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19ee0d47fb1e5e0a6032f117() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2001994d8d6a44ccd157e395() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnableKeyReuseOnNtTokenKeysetStorageFull
+			"enable_key_reuse_on_nt_token_keyset_storage_full": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: IncludeSymmetricAlgorithms
+			"include_symmetric_algorithms": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: NoSecurityExtension
+			"no_security_extension": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: RemoveInvalidCertificateFromPersonalStore
+			"remove_invalid_certificate_from_personal_store": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: UserInteractionRequired
+			"user_interaction_required": schemaAttribute04b074d3aeca151bb642ba41(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2319afd2e03e9f3b06400499() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CertificateValidity
+			"certificate_validity": schemaAttributef9046a8d2919fd8ba85826d1(),
+			// Property: EnrollmentFlags
+			"enrollment_flags": schemaAttribute2001994d8d6a44ccd157e395(),
+			// Property: Extensions
+			"extensions": schemaAttributed5adfc6e000fa3ccb695fcdc(),
+			// Property: GeneralFlags
+			"general_flags": schemaAttribute46426bbd61767bbb7cfb26f4(),
+			// Property: HashAlgorithm
+			"hash_algorithm": schemaAttributef3f282865d7981d0eeaabc8e(),
+			// Property: PrivateKeyAttributes
+			"private_key_attributes": schemaAttributeb31aa5faff9c1d27d0113204(),
+			// Property: PrivateKeyFlags
+			"private_key_flags": schemaAttribute6b05908392b3ada56b00652d(),
+			// Property: SubjectNameFlags
+			"subject_name_flags": schemaAttributeaee42f1d610a24ed00e024bb(),
+			// Property: SupersededTemplates
+			"superseded_templates": schemaAttribute0eac5f08a063d6bfe9fb1c24(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d86a4a69b853a77fedf24dc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClientVersion
+			"client_version": schemaAttributef3f282865d7981d0eeaabc8e(),
+			// Property: ExportableKey
+			"exportable_key": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: RequireAlternateSignatureAlgorithm
+			"require_alternate_signature_algorithm": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: RequireSameKeyRenewal
+			"require_same_key_renewal": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: StrongKeyProtectionRequired
+			"strong_key_protection_required": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: UseLegacyProvider
+			"use_legacy_provider": schemaAttribute04b074d3aeca151bb642ba41(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute46426bbd61767bbb7cfb26f4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AutoEnrollment
+			"auto_enrollment": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: MachineType
+			"machine_type": schemaAttribute04b074d3aeca151bb642ba41(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4fe69ca25670562d504edd9a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Critical
+			"critical": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: UsageFlags
+			"usage_flags": schemaAttribute9193fae2958c9f1388caa2db(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ee6106b56c6772ddc28d980() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CertificateValidity
+			"certificate_validity": schemaAttributef9046a8d2919fd8ba85826d1(),
+			// Property: EnrollmentFlags
+			"enrollment_flags": schemaAttribute2001994d8d6a44ccd157e395(),
+			// Property: Extensions
+			"extensions": schemaAttributed5adfc6e000fa3ccb695fcdc(),
+			// Property: GeneralFlags
+			"general_flags": schemaAttribute46426bbd61767bbb7cfb26f4(),
+			// Property: PrivateKeyAttributes
+			"private_key_attributes": schemaAttributeed62a850e89299d295dbbc8b(),
+			// Property: PrivateKeyFlags
+			"private_key_flags": schemaAttribute150dd20f0c827b49a5866076(),
+			// Property: SubjectNameFlags
+			"subject_name_flags": schemaAttributeaee42f1d610a24ed00e024bb(),
+			// Property: SupersededTemplates
+			"superseded_templates": schemaAttribute0eac5f08a063d6bfe9fb1c24(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b05908392b3ada56b00652d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClientVersion
+			"client_version": schemaAttributef3f282865d7981d0eeaabc8e(),
+			// Property: ExportableKey
+			"exportable_key": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: RequireAlternateSignatureAlgorithm
+			"require_alternate_signature_algorithm": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: StrongKeyProtectionRequired
+			"strong_key_protection_required": schemaAttribute04b074d3aeca151bb642ba41(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b2df458ebbcceb16770d2ff() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Critical
+			"critical": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: Policies
+			"policies": schemaAttribute7189842be0c0b9eef44f9919(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7189842be0c0b9eef44f9919() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PolicyObjectIdentifier
+				"policy_object_identifier": schemaAttributef3f282865d7981d0eeaabc8e(),
+				// Property: PolicyType
+				"policy_type": schemaAttributef3f282865d7981d0eeaabc8e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8581c3401b6e79e1b63a7539() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CertificateValidity
+			"certificate_validity": schemaAttributef9046a8d2919fd8ba85826d1(),
+			// Property: EnrollmentFlags
+			"enrollment_flags": schemaAttribute2001994d8d6a44ccd157e395(),
+			// Property: Extensions
+			"extensions": schemaAttributed5adfc6e000fa3ccb695fcdc(),
+			// Property: GeneralFlags
+			"general_flags": schemaAttribute46426bbd61767bbb7cfb26f4(),
+			// Property: HashAlgorithm
+			"hash_algorithm": schemaAttributef3f282865d7981d0eeaabc8e(),
+			// Property: PrivateKeyAttributes
+			"private_key_attributes": schemaAttributeb31aa5faff9c1d27d0113204(),
+			// Property: PrivateKeyFlags
+			"private_key_flags": schemaAttribute3d86a4a69b853a77fedf24dc(),
+			// Property: SubjectNameFlags
+			"subject_name_flags": schemaAttributeaee42f1d610a24ed00e024bb(),
+			// Property: SupersededTemplates
+			"superseded_templates": schemaAttribute0eac5f08a063d6bfe9fb1c24(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8756f032a97935693d248e9c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Period
+			"period": schemaAttribute19ee0d47fb1e5e0a6032f117(),
+			// Property: PeriodType
+			"period_type": schemaAttributef3f282865d7981d0eeaabc8e(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e52cad441102c63b8b26aa9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Decrypt
+			"decrypt": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: KeyAgreement
+			"key_agreement": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: Sign
+			"sign": schemaAttribute04b074d3aeca151bb642ba41(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9193fae2958c9f1388caa2db() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataEncipherment
+			"data_encipherment": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: DigitalSignature
+			"digital_signature": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: KeyAgreement
+			"key_agreement": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: KeyEncipherment
+			"key_encipherment": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: NonRepudiation
+			"non_repudiation": schemaAttribute04b074d3aeca151bb642ba41(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea1e1f39fda897a5fd6e78cfa() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PropertyFlags
+			"property_flags": schemaAttribute8e52cad441102c63b8b26aa9(),
+			// Property: PropertyType
+			"property_type": schemaAttributef3f282865d7981d0eeaabc8e(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaee42f1d610a24ed00e024bb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RequireCommonName
+			"require_common_name": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: RequireDirectoryPath
+			"require_directory_path": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: RequireDnsAsCn
+			"require_dns_as_cn": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: RequireEmail
+			"require_email": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: SanRequireDirectoryGuid
+			"san_require_directory_guid": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: SanRequireDns
+			"san_require_dns": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: SanRequireDomainDns
+			"san_require_domain_dns": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: SanRequireEmail
+			"san_require_email": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: SanRequireSpn
+			"san_require_spn": schemaAttribute04b074d3aeca151bb642ba41(),
+			// Property: SanRequireUpn
+			"san_require_upn": schemaAttribute04b074d3aeca151bb642ba41(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb31aa5faff9c1d27d0113204() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Algorithm
+			"algorithm": schemaAttributef3f282865d7981d0eeaabc8e(),
+			// Property: CryptoProviders
+			"crypto_providers": schemaAttribute0eac5f08a063d6bfe9fb1c24(),
+			// Property: KeySpec
+			"key_spec": schemaAttributef3f282865d7981d0eeaabc8e(),
+			// Property: KeyUsageProperty
+			"key_usage_property": schemaAttributea1e1f39fda897a5fd6e78cfa(),
+			// Property: MinimalKeyLength
+			"minimal_key_length": schemaAttribute19ee0d47fb1e5e0a6032f117(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5adfc6e000fa3ccb695fcdc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApplicationPolicies
+			"application_policies": schemaAttribute6b2df458ebbcceb16770d2ff(),
+			// Property: KeyUsage
+			"key_usage": schemaAttribute4fe69ca25670562d504edd9a(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed62a850e89299d295dbbc8b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CryptoProviders
+			"crypto_providers": schemaAttribute0eac5f08a063d6bfe9fb1c24(),
+			// Property: KeySpec
+			"key_spec": schemaAttributef3f282865d7981d0eeaabc8e(),
+			// Property: MinimalKeyLength
+			"minimal_key_length": schemaAttribute19ee0d47fb1e5e0a6032f117(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3f282865d7981d0eeaabc8e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9046a8d2919fd8ba85826d1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RenewalPeriod
+			"renewal_period": schemaAttribute8756f032a97935693d248e9c(),
+			// Property: ValidityPeriod
+			"validity_period": schemaAttribute8756f032a97935693d248e9c(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_pcaconnectorad_template", templateDataSource)
 }
@@ -32,9 +414,7 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"connector_arn": schemaAttributef3f282865d7981d0eeaabc8e(),
 		// Property: Definition
 		// CloudFormation resource type schema:
 		//
@@ -1211,807 +1591,7 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: TemplateV2
-				"template_v2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CertificateValidity
-						"certificate_validity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: RenewalPeriod
-								"renewal_period": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Period
-										"period": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: PeriodType
-										"period_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: ValidityPeriod
-								"validity_period": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Period
-										"period": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: PeriodType
-										"period_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: EnrollmentFlags
-						"enrollment_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: EnableKeyReuseOnNtTokenKeysetStorageFull
-								"enable_key_reuse_on_nt_token_keyset_storage_full": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: IncludeSymmetricAlgorithms
-								"include_symmetric_algorithms": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: NoSecurityExtension
-								"no_security_extension": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: RemoveInvalidCertificateFromPersonalStore
-								"remove_invalid_certificate_from_personal_store": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: UserInteractionRequired
-								"user_interaction_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Extensions
-						"extensions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ApplicationPolicies
-								"application_policies": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Critical
-										"critical": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Policies
-										"policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: PolicyObjectIdentifier
-													"policy_object_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: PolicyType
-													"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: KeyUsage
-								"key_usage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Critical
-										"critical": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: UsageFlags
-										"usage_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: DataEncipherment
-												"data_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: DigitalSignature
-												"digital_signature": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: KeyAgreement
-												"key_agreement": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: KeyEncipherment
-												"key_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: NonRepudiation
-												"non_repudiation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: GeneralFlags
-						"general_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AutoEnrollment
-								"auto_enrollment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: MachineType
-								"machine_type": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: PrivateKeyAttributes
-						"private_key_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: CryptoProviders
-								"crypto_providers": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: KeySpec
-								"key_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: MinimalKeyLength
-								"minimal_key_length": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: PrivateKeyFlags
-						"private_key_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ClientVersion
-								"client_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: ExportableKey
-								"exportable_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: StrongKeyProtectionRequired
-								"strong_key_protection_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SubjectNameFlags
-						"subject_name_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: RequireCommonName
-								"require_common_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: RequireDirectoryPath
-								"require_directory_path": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: RequireDnsAsCn
-								"require_dns_as_cn": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: RequireEmail
-								"require_email": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireDirectoryGuid
-								"san_require_directory_guid": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireDns
-								"san_require_dns": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireDomainDns
-								"san_require_domain_dns": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireEmail
-								"san_require_email": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireSpn
-								"san_require_spn": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireUpn
-								"san_require_upn": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SupersededTemplates
-						"superseded_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: TemplateV3
-				"template_v3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CertificateValidity
-						"certificate_validity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: RenewalPeriod
-								"renewal_period": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Period
-										"period": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: PeriodType
-										"period_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: ValidityPeriod
-								"validity_period": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Period
-										"period": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: PeriodType
-										"period_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: EnrollmentFlags
-						"enrollment_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: EnableKeyReuseOnNtTokenKeysetStorageFull
-								"enable_key_reuse_on_nt_token_keyset_storage_full": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: IncludeSymmetricAlgorithms
-								"include_symmetric_algorithms": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: NoSecurityExtension
-								"no_security_extension": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: RemoveInvalidCertificateFromPersonalStore
-								"remove_invalid_certificate_from_personal_store": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: UserInteractionRequired
-								"user_interaction_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Extensions
-						"extensions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ApplicationPolicies
-								"application_policies": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Critical
-										"critical": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Policies
-										"policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: PolicyObjectIdentifier
-													"policy_object_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: PolicyType
-													"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: KeyUsage
-								"key_usage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Critical
-										"critical": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: UsageFlags
-										"usage_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: DataEncipherment
-												"data_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: DigitalSignature
-												"digital_signature": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: KeyAgreement
-												"key_agreement": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: KeyEncipherment
-												"key_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: NonRepudiation
-												"non_repudiation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: GeneralFlags
-						"general_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AutoEnrollment
-								"auto_enrollment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: MachineType
-								"machine_type": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: HashAlgorithm
-						"hash_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: PrivateKeyAttributes
-						"private_key_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Algorithm
-								"algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: CryptoProviders
-								"crypto_providers": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: KeySpec
-								"key_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: KeyUsageProperty
-								"key_usage_property": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: PropertyFlags
-										"property_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Decrypt
-												"decrypt": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: KeyAgreement
-												"key_agreement": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Sign
-												"sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: PropertyType
-										"property_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: MinimalKeyLength
-								"minimal_key_length": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: PrivateKeyFlags
-						"private_key_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ClientVersion
-								"client_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: ExportableKey
-								"exportable_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: RequireAlternateSignatureAlgorithm
-								"require_alternate_signature_algorithm": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: StrongKeyProtectionRequired
-								"strong_key_protection_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SubjectNameFlags
-						"subject_name_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: RequireCommonName
-								"require_common_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: RequireDirectoryPath
-								"require_directory_path": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: RequireDnsAsCn
-								"require_dns_as_cn": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: RequireEmail
-								"require_email": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireDirectoryGuid
-								"san_require_directory_guid": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireDns
-								"san_require_dns": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireDomainDns
-								"san_require_domain_dns": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireEmail
-								"san_require_email": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireSpn
-								"san_require_spn": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireUpn
-								"san_require_upn": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SupersededTemplates
-						"superseded_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: TemplateV4
-				"template_v4": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CertificateValidity
-						"certificate_validity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: RenewalPeriod
-								"renewal_period": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Period
-										"period": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: PeriodType
-										"period_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: ValidityPeriod
-								"validity_period": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Period
-										"period": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: PeriodType
-										"period_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: EnrollmentFlags
-						"enrollment_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: EnableKeyReuseOnNtTokenKeysetStorageFull
-								"enable_key_reuse_on_nt_token_keyset_storage_full": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: IncludeSymmetricAlgorithms
-								"include_symmetric_algorithms": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: NoSecurityExtension
-								"no_security_extension": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: RemoveInvalidCertificateFromPersonalStore
-								"remove_invalid_certificate_from_personal_store": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: UserInteractionRequired
-								"user_interaction_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Extensions
-						"extensions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ApplicationPolicies
-								"application_policies": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Critical
-										"critical": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Policies
-										"policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: PolicyObjectIdentifier
-													"policy_object_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: PolicyType
-													"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: KeyUsage
-								"key_usage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Critical
-										"critical": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: UsageFlags
-										"usage_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: DataEncipherment
-												"data_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: DigitalSignature
-												"digital_signature": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: KeyAgreement
-												"key_agreement": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: KeyEncipherment
-												"key_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: NonRepudiation
-												"non_repudiation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: GeneralFlags
-						"general_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AutoEnrollment
-								"auto_enrollment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: MachineType
-								"machine_type": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: HashAlgorithm
-						"hash_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: PrivateKeyAttributes
-						"private_key_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Algorithm
-								"algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: CryptoProviders
-								"crypto_providers": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: KeySpec
-								"key_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: KeyUsageProperty
-								"key_usage_property": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: PropertyFlags
-										"property_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Decrypt
-												"decrypt": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: KeyAgreement
-												"key_agreement": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Sign
-												"sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: PropertyType
-										"property_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: MinimalKeyLength
-								"minimal_key_length": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: PrivateKeyFlags
-						"private_key_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ClientVersion
-								"client_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: ExportableKey
-								"exportable_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: RequireAlternateSignatureAlgorithm
-								"require_alternate_signature_algorithm": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: RequireSameKeyRenewal
-								"require_same_key_renewal": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: StrongKeyProtectionRequired
-								"strong_key_protection_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: UseLegacyProvider
-								"use_legacy_provider": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SubjectNameFlags
-						"subject_name_flags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: RequireCommonName
-								"require_common_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: RequireDirectoryPath
-								"require_directory_path": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: RequireDnsAsCn
-								"require_dns_as_cn": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: RequireEmail
-								"require_email": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireDirectoryGuid
-								"san_require_directory_guid": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireDns
-								"san_require_dns": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireDomainDns
-								"san_require_domain_dns": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireEmail
-								"san_require_email": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireSpn
-								"san_require_spn": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SanRequireUpn
-								"san_require_upn": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SupersededTemplates
-						"superseded_templates": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"definition": schemaAttribute0e38fc036056b8f10668557a(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -2021,18 +1601,14 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributef3f282865d7981d0eeaabc8e(),
 		// Property: ReenrollAllCertificateHolders
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"reenroll_all_certificate_holders": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"reenroll_all_certificate_holders": schemaAttribute04b074d3aeca151bb642ba41(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -2045,11 +1621,7 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute087c57692241ce3f556d9c18(),
 		// Property: TemplateArn
 		// CloudFormation resource type schema:
 		//
@@ -2059,9 +1631,7 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}\\/template\\/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"template_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"template_arn": schemaAttributef3f282865d7981d0eeaabc8e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

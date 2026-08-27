@@ -14,6 +14,113 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1c16e53071456d34d7d88817() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the site.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1de7f856492cf3837a5a4fb7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute241ce3101e2461685a11496c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The longitude.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute32c79189bf058caa717b107f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the global network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute354e461475a50c68d4c89f31() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the site.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e19dcc58cec06e7d7941b55() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the site.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79ef6d898cdf1832f59201c8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of the site.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e1bcf18528b94834a6cd874() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date and time that the device was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebbe147da4c82c6094045b1f0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The physical address.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf0a5719725b82ba23436c09() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee271aa300dac4240edb8c5ec(),
+				// Property: Value
+				"value": schemaAttribute1de7f856492cf3837a5a4fb7(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags for the site.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1b60cd9feb8ed309cf7cb8b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The latitude.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee271aa300dac4240edb8c5ec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea05645e8046440f0a731bb0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Address
+			"address": schemaAttributebbe147da4c82c6094045b1f0(),
+			// Property: Latitude
+			"latitude": schemaAttributed1b60cd9feb8ed309cf7cb8b(),
+			// Property: Longitude
+			"longitude": schemaAttribute241ce3101e2461685a11496c(),
+		}, /*END SCHEMA*/
+		Description: "The location of the site.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_networkmanager_site", siteDataSource)
 }
@@ -29,10 +136,7 @@ func siteDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The date and time that the device was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date and time that the device was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute9e1bcf18528b94834a6cd874(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +144,7 @@ func siteDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of the site.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the site.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute354e461475a50c68d4c89f31(),
 		// Property: GlobalNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +152,7 @@ func siteDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the global network.",
 		//	  "type": "string"
 		//	}
-		"global_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the global network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"global_network_id": schemaAttribute32c79189bf058caa717b107f(),
 		// Property: Location
 		// CloudFormation resource type schema:
 		//
@@ -77,27 +175,7 @@ func siteDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Address
-				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The physical address.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Latitude
-				"latitude": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The latitude.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Longitude
-				"longitude": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The longitude.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The location of the site.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"location": schemaAttributeea05645e8046440f0a731bb0(),
 		// Property: SiteArn
 		// CloudFormation resource type schema:
 		//
@@ -105,10 +183,7 @@ func siteDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the site.",
 		//	  "type": "string"
 		//	}
-		"site_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the site.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"site_arn": schemaAttribute1c16e53071456d34d7d88817(),
 		// Property: SiteId
 		// CloudFormation resource type schema:
 		//
@@ -116,10 +191,7 @@ func siteDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the site.",
 		//	  "type": "string"
 		//	}
-		"site_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the site.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"site_id": schemaAttribute5e19dcc58cec06e7d7941b55(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -127,10 +199,7 @@ func siteDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The state of the site.",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The state of the site.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttribute79ef6d898cdf1832f59201c8(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -159,24 +228,7 @@ func siteDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags for the site.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributecf0a5719725b82ba23436c09(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

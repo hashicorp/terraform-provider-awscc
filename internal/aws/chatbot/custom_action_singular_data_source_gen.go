@@ -15,6 +15,79 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2c24602e49055019ba48a9dd() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43ba5ce9a6cbb388ec6786fc() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ButtonText
+				"button_text": schemaAttributed2faa5887ecea2fd860bba3a(),
+				// Property: Criteria
+				"criteria": schemaAttributec6b6c22066f44d2462178fa6(),
+				// Property: NotificationType
+				"notification_type": schemaAttributed2faa5887ecea2fd860bba3a(),
+				// Property: Variables
+				"variables": schemaAttribute2c24602e49055019ba48a9dd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute71a48bd6f95ba4135f329a59() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CommandText
+			"command_text": schemaAttributed2faa5887ecea2fd860bba3a(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6b6c22066f44d2462178fa6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Operator
+				"operator": schemaAttributed2faa5887ecea2fd860bba3a(),
+				// Property: Value
+				"value": schemaAttributed2faa5887ecea2fd860bba3a(),
+				// Property: VariableName
+				"variable_name": schemaAttributed2faa5887ecea2fd860bba3a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed2faa5887ecea2fd860bba3a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3e38343ed050717bf96c35d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributed2faa5887ecea2fd860bba3a(),
+				// Property: Value
+				"value": schemaAttributed2faa5887ecea2fd860bba3a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_chatbot_custom_action", customActionDataSource)
 }
@@ -32,9 +105,7 @@ func customActionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,64}$",
 		//	  "type": "string"
 		//	}
-		"action_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"action_name": schemaAttributed2faa5887ecea2fd860bba3a(),
 		// Property: AliasName
 		// CloudFormation resource type schema:
 		//
@@ -44,9 +115,7 @@ func customActionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[A-Za-z0-9-_]+$",
 		//	  "type": "string"
 		//	}
-		"alias_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"alias_name": schemaAttributed2faa5887ecea2fd860bba3a(),
 		// Property: Attachments
 		// CloudFormation resource type schema:
 		//
@@ -112,47 +181,7 @@ func customActionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"attachments": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ButtonText
-					"button_text": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Criteria
-					"criteria": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Operator
-								"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Value
-								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: VariableName
-								"variable_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: NotificationType
-					"notification_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Variables
-					"variables":         // Pattern: ""
-					schema.MapAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"attachments": schemaAttribute43ba5ce9a6cbb388ec6786fc(),
 		// Property: CustomActionArn
 		// CloudFormation resource type schema:
 		//
@@ -162,9 +191,7 @@ func customActionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*)?:chatbot:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:custom-action/[a-zA-Z0-9_-]{1,64}$",
 		//	  "type": "string"
 		//	}
-		"custom_action_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"custom_action_arn": schemaAttributed2faa5887ecea2fd860bba3a(),
 		// Property: Definition
 		// CloudFormation resource type schema:
 		//
@@ -182,15 +209,7 @@ func customActionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CommandText
-				"command_text": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"definition": schemaAttribute71a48bd6f95ba4135f329a59(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -220,21 +239,7 @@ func customActionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributee3e38343ed050717bf96c35d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

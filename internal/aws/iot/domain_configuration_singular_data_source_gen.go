@@ -15,6 +15,101 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute05b20ce43d2569c44aa5a0c9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AllowAuthorizerOverride
+			"allow_authorizer_override": schemaAttribute4b33ce932f30bebeef2ce002(),
+			// Property: DefaultAuthorizerName
+			"default_authorizer_name": schemaAttribute9b9af1fdb111f301a7c56cae(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b33ce932f30bebeef2ce002() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52957dd1c1141883887c9788() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClientCertificateCallbackArn
+			"client_certificate_callback_arn": schemaAttribute9b9af1fdb111f301a7c56cae(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53c85b59c6bbdcb3d9aff114() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ServerCertificateArn
+				"server_certificate_arn": schemaAttribute9b9af1fdb111f301a7c56cae(),
+				// Property: ServerCertificateStatus
+				"server_certificate_status": schemaAttribute9b9af1fdb111f301a7c56cae(),
+				// Property: ServerCertificateStatusDetail
+				"server_certificate_status_detail": schemaAttribute9b9af1fdb111f301a7c56cae(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8516026be6281846764493a8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecurityPolicy
+			"security_policy": schemaAttribute9b9af1fdb111f301a7c56cae(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b9af1fdb111f301a7c56cae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac4f56d98f6ff68db07ae187() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute9b9af1fdb111f301a7c56cae(),
+				// Property: Value
+				"value": schemaAttribute9b9af1fdb111f301a7c56cae(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec07751388c1574ca355cf134() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnableOCSPCheck
+			"enable_ocsp_check": schemaAttribute4b33ce932f30bebeef2ce002(),
+			// Property: OcspAuthorizedResponderArn
+			"ocsp_authorized_responder_arn": schemaAttribute9b9af1fdb111f301a7c56cae(),
+			// Property: OcspLambdaArn
+			"ocsp_lambda_arn": schemaAttribute9b9af1fdb111f301a7c56cae(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6ae995aa8bff7997a126571() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iot_domain_configuration", domainConfigurationDataSource)
 }
@@ -35,18 +130,14 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"application_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"application_protocol": schemaAttribute9b9af1fdb111f301a7c56cae(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute9b9af1fdb111f301a7c56cae(),
 		// Property: AuthenticationType
 		// CloudFormation resource type schema:
 		//
@@ -60,9 +151,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"authentication_type": schemaAttribute9b9af1fdb111f301a7c56cae(),
 		// Property: AuthorizerConfig
 		// CloudFormation resource type schema:
 		//
@@ -81,19 +170,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"authorizer_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllowAuthorizerOverride
-				"allow_authorizer_override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: DefaultAuthorizerName
-				"default_authorizer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"authorizer_config": schemaAttribute05b20ce43d2569c44aa5a0c9(),
 		// Property: ClientCertificateConfig
 		// CloudFormation resource type schema:
 		//
@@ -108,15 +185,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"client_certificate_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ClientCertificateCallbackArn
-				"client_certificate_callback_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"client_certificate_config": schemaAttribute52957dd1c1141883887c9788(),
 		// Property: DomainConfigurationName
 		// CloudFormation resource type schema:
 		//
@@ -126,9 +195,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[\\w.-]+$",
 		//	  "type": "string"
 		//	}
-		"domain_configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"domain_configuration_name": schemaAttribute9b9af1fdb111f301a7c56cae(),
 		// Property: DomainConfigurationStatus
 		// CloudFormation resource type schema:
 		//
@@ -139,9 +206,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"domain_configuration_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"domain_configuration_status": schemaAttribute9b9af1fdb111f301a7c56cae(),
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -150,9 +215,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"domain_name": schemaAttribute9b9af1fdb111f301a7c56cae(),
 		// Property: DomainType
 		// CloudFormation resource type schema:
 		//
@@ -164,9 +227,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"domain_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"domain_type": schemaAttribute9b9af1fdb111f301a7c56cae(),
 		// Property: ServerCertificateArns
 		// CloudFormation resource type schema:
 		//
@@ -182,10 +243,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"server_certificate_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"server_certificate_arns": schemaAttributec6ae995aa8bff7997a126571(),
 		// Property: ServerCertificateConfig
 		// CloudFormation resource type schema:
 		//
@@ -209,23 +267,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"server_certificate_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EnableOCSPCheck
-				"enable_ocsp_check": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: OcspAuthorizedResponderArn
-				"ocsp_authorized_responder_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: OcspLambdaArn
-				"ocsp_lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"server_certificate_config": schemaAttributec07751388c1574ca355cf134(),
 		// Property: ServerCertificates
 		// CloudFormation resource type schema:
 		//
@@ -255,25 +297,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"server_certificates": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ServerCertificateArn
-					"server_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ServerCertificateStatus
-					"server_certificate_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ServerCertificateStatusDetail
-					"server_certificate_status_detail": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"server_certificates": schemaAttribute53c85b59c6bbdcb3d9aff114(),
 		// Property: ServiceType
 		// CloudFormation resource type schema:
 		//
@@ -285,9 +309,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"service_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"service_type": schemaAttribute9b9af1fdb111f301a7c56cae(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -312,21 +334,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeac4f56d98f6ff68db07ae187(),
 		// Property: TlsConfig
 		// CloudFormation resource type schema:
 		//
@@ -340,15 +348,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tls_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SecurityPolicy
-				"security_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tls_config": schemaAttribute8516026be6281846764493a8(),
 		// Property: ValidationCertificateArn
 		// CloudFormation resource type schema:
 		//
@@ -356,9 +356,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
 		//	  "type": "string"
 		//	}
-		"validation_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"validation_certificate_arn": schemaAttribute9b9af1fdb111f301a7c56cae(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

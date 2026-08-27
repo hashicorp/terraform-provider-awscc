@@ -16,6 +16,903 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute00133811448ae5397b1d4664() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>When enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0089d34f8ea7335529505171() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute062bb004cc2edd905df82c7a(),
+				// Property: Value
+				"value": schemaAttribute062bb004cc2edd905df82c7a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute00a553d7b457fc997c445073() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PresetSpeke20Audio
+			"preset_speke_20_audio": schemaAttribute062bb004cc2edd905df82c7a(),
+			// Property: PresetSpeke20Video
+			"preset_speke_20_video": schemaAttribute062bb004cc2edd905df82c7a(),
+		}, /*END SCHEMA*/
+		Description: "<p>Configure one or more content encryption keys for your endpoints that use SPEKE Version 2.0. The encryption contract defines which content keys are used to encrypt the audio and video tracks in your stream. To configure the encryption contract, specify which audio and video encryption presets to use.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute015d74422599a947ad2b2e10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>A source location for segments.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute01f429141768fc163c4d3ea5() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DvbPriority
+				"dvb_priority": schemaAttribute5871482b699ed88b31fd620d(),
+				// Property: DvbWeight
+				"dvb_weight": schemaAttributee644539a54d9cd25ab851b3f(),
+				// Property: ServiceLocation
+				"service_location": schemaAttributecb43f89e5c6acd3c04487ceb(),
+				// Property: Url
+				"url": schemaAttribute015d74422599a947ad2b2e10(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>The base URL to use for retrieving segments.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0351eba4de706f26b9482849() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CertificateArn
+			"certificate_arn": schemaAttribute389fcbce87576636576cf72d(),
+			// Property: DrmSystems
+			"drm_systems": schemaAttribute6f92b4c272885b4a0e027c7d(),
+			// Property: EncryptionContractConfiguration
+			"encryption_contract_configuration": schemaAttribute00a553d7b457fc997c445073(),
+			// Property: ResourceId
+			"resource_id": schemaAttributed18ffc8411597f1c101aaec3(),
+			// Property: RoleArn
+			"role_arn": schemaAttribute84bb23cbe5cde943fdce3413(),
+			// Property: Url
+			"url": schemaAttribute88569fd5ae64bb71b61d140f(),
+		}, /*END SCHEMA*/
+		Description: "<p>The parameters for the SPEKE key provider.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute062bb004cc2edd905df82c7a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0b36568e9b43590301fb1a61() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The URL for downloading fonts for subtitles.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0bc4b49ae5d3020344f8f2e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>Optionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c8e35eb504ba5a09c359fa1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The Amazon Resource Name (ARN) associated with the resource.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute11a0b47d6991ebba634e69ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The language code for this manifest.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute12e6ae60cb1ba9fb69d1ee95() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>Minimum amount of content (in seconds) that a player must keep available in the buffer.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1f268488ff726755120dfe7e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Precise
+			"precise": schemaAttributebad2a6e26159b642ebbd6381(),
+			// Property: TimeOffset
+			"time_offset": schemaAttribute561ca18bc0d30eda53d92909(),
+		}, /*END SCHEMA*/
+		Description: "<p>To insert an EXT-X-START tag in your HLS playlist, specify a StartTag configuration object with a valid TimeOffset. When you do, you can also optionally specify whether to include a PRECISE value in the EXT-X-START tag.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2132b41722116651dcf96848() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FontFamily
+			"font_family": schemaAttribute5423f1876a1e05e399703efc(),
+			// Property: MimeType
+			"mime_type": schemaAttribute540523f034d742cedbf30edb(),
+			// Property: Url
+			"url": schemaAttribute0b36568e9b43590301fb1a61(),
+		}, /*END SCHEMA*/
+		Description: "<p>For use with DVB-DASH profiles only. The settings for font downloads that you want Elemental MediaPackage to pass through to the manifest.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25ed194df131486947db8c6c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "<p>The fixed availability start time for the DASH manifest, in ISO 8601 date-time format. The value must have hourly granularity, meaning that the minutes, seconds, and fractional seconds must be zero. The value must be on or after <code>2024-01-01T00:00:00Z</code> and must be at least 14 days before the current time.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2790041cdf9f97fd38adce5c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>Minimum amount of time (in seconds) that the player should wait before requesting updates to the manifest.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3399e4421e769dd350fad904() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>A short string that's appended to the endpoint URL. The child manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default child manifest name, index_1. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34ee84a972763c909ea57655() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>Optionally specify the time delay for all of your manifest egress requests. Enter a value that is smaller than your endpoint's startover window. When you include time delay, note that you cannot use time delay query parameters for this manifest's endpoint URL.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute389fcbce87576636576cf72d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The ARN for the certificate that you imported to Amazon Web Services Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3940158a0b4753b9c8573317() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>When enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3994d10abe13425e99821ce0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "<p>The SCTE-35 message types that you want to be treated as ad markers in the output.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3bb60b968b3b68dab9f6a055() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomAdTypes
+			"custom_ad_types": schemaAttribute58a901f9d951650deb433cae(),
+			// Property: ScteFilter
+			"scte_filter": schemaAttribute3994d10abe13425e99821ce0(),
+			// Property: ScteInSegments
+			"scte_in_segments": schemaAttribute062bb004cc2edd905df82c7a(),
+		}, /*END SCHEMA*/
+		Description: "<p>The SCTE configuration.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e0ea24c184455a698932228() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The egress domain URL for stream delivery from MediaPackage.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43b54a29b81ac18250007a8a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ErrorMetrics
+			"error_metrics": schemaAttribute86ce1bab7eb0dddb9c692aea(),
+			// Property: FontDownload
+			"font_download": schemaAttribute2132b41722116651dcf96848(),
+		}, /*END SCHEMA*/
+		Description: "<p>For endpoints that use the DVB-DASH profile only. The font download and error reporting information that you want MediaPackage to pass through to the manifest.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4554801d86a2000f7f83d296() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FilterConfiguration
+				"filter_configuration": schemaAttribute5a7897030eefc9a65efcf515(),
+				// Property: ManifestLayout
+				"manifest_layout": schemaAttribute062bb004cc2edd905df82c7a(),
+				// Property: ManifestName
+				"manifest_name": schemaAttributecbcda841b5936eee06069a86(),
+				// Property: ManifestWindowSeconds
+				"manifest_window_seconds": schemaAttribute9634e96f631184756e8ad792(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>The Microsoft Smooth Streaming (MSS) manifest configurations associated with this origin endpoint.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4686d87c72e701169cc3b2b3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "<p>Optionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4be30b40b0f9ba6ee51a9efc() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ChildManifestName
+				"child_manifest_name": schemaAttribute3399e4421e769dd350fad904(),
+				// Property: FilterConfiguration
+				"filter_configuration": schemaAttribute5a7897030eefc9a65efcf515(),
+				// Property: ManifestName
+				"manifest_name": schemaAttributedfdea87fb1e34b61d44ad637(),
+				// Property: ManifestWindowSeconds
+				"manifest_window_seconds": schemaAttribute6af3854db056f987c46442e1(),
+				// Property: ProgramDateTimeIntervalSeconds
+				"program_date_time_interval_seconds": schemaAttribute862f664bc7fbb736a9b11db4(),
+				// Property: ScteHls
+				"scte_hls": schemaAttributecb5dee84aed65c349a31e442(),
+				// Property: StartTag
+				"start_tag": schemaAttribute1f268488ff726755120dfe7e(),
+				// Property: UriPathType
+				"uri_path_type": schemaAttribute062bb004cc2edd905df82c7a(),
+				// Property: Url
+				"url": schemaAttribute3e0ea24c184455a698932228(),
+				// Property: UrlEncodeChildManifest
+				"url_encode_child_manifest": schemaAttribute00133811448ae5397b1d4664(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>A low-latency HLS manifest configuration.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute50b7534527388364e4edc9a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>A copyright statement about the content.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52d99c3805940b9eaab7a492() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "<p>A list of triggers that controls when AWS Elemental MediaPackage separates the MPEG-DASH manifest into multiple periods. Leave this value empty to indicate that the manifest is contained all in one period. For more information about periods in the DASH manifest, see <a href=\"https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html\">Multi-period DASH in AWS Elemental MediaPackage</a>.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute540523f034d742cedbf30edb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The <code>mimeType</code> of the resource that's at the font download URL.</p> <p>For information about font MIME types, see the <a href=\"https://dvb.org/wp-content/uploads/2021/06/A168r4_MPEG-DASH-Profile-for-Transport-of-ISO-BMFF-Based-DVB-Services_Draft-ts_103-285-v140_November_2021.pdf\">MPEG-DASH Profile for Transport of ISO BMFF Based DVB Services over IP Based Networks</a> document. </p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5423f1876a1e05e399703efc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The <code>fontFamily</code> name for subtitles, as described in <a href=\"https://tech.ebu.ch/publications/tech3380\">EBU-TT-D Subtitling Distribution Format</a>. </p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute561ca18bc0d30eda53d92909() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>Specify the value for TIME-OFFSET within your EXT-X-START tag. Enter a signed floating point value which, if positive, must be less than the configured manifest duration minus three times the configured segment target duration. If negative, the absolute value must be larger than three times the configured segment target duration, and the absolute value must be smaller than the configured manifest duration.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5871482b699ed88b31fd620d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>For use with DVB-DASH profiles only. The priority of this location for servings segments. The lower the number, the higher the priority.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58a901f9d951650deb433cae() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "<p>A list of additional non-Ad SCTE-35 event types to treat as advertisements. When configured, events matching these types produce ad markers (such as <code>SCTE35-OUT</code> and <code>SCTE35-IN</code> in HLS DATERANGE tags) in manifests.</p> <p>Valid values: <code>PROGRAM</code> | <code>CHAPTER</code> | <code>UNSCHEDULED_EVENT</code> | <code>ALTERNATE_CONTENT_OPPORTUNITY</code> | <code>NETWORK</code> </p> <p>If you don't specify any values, the default is empty (only default ad types are used).</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a7897030eefc9a65efcf515() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClipStartTime
+			"clip_start_time": schemaAttribute4686d87c72e701169cc3b2b3(),
+			// Property: DrmSettings
+			"drm_settings": schemaAttributec3f7425e3b6a9bd645b9879d(),
+			// Property: End
+			"end": schemaAttributee2a86dc12d42664c16505691(),
+			// Property: ManifestFilter
+			"manifest_filter": schemaAttribute0bc4b49ae5d3020344f8f2e1(),
+			// Property: Start
+			"start": schemaAttributeb7ef2e4fd23872ffad66d107(),
+			// Property: TimeDelaySeconds
+			"time_delay_seconds": schemaAttribute34ee84a972763c909ea57655(),
+		}, /*END SCHEMA*/
+		Description: "<p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e74e49acd8d24331827ebd0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The the method that the player uses to synchronize to coordinated universal time (UTC) wall clock time.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60dd35ea52b9b03393db39b2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TimingMode
+			"timing_mode": schemaAttribute062bb004cc2edd905df82c7a(),
+			// Property: TimingSource
+			"timing_source": schemaAttribute5e74e49acd8d24331827ebd0(),
+		}, /*END SCHEMA*/
+		Description: "<p>Determines the type of UTC timing included in the DASH Media Presentation Description (MPD).</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute694b781b7d962e2d2d755813() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "<p>The failover conditions for the endpoint. The options are:</p> <ul> <li> <p> <code>STALE_MANIFEST</code> - The manifest stalled and there are no new segments or parts.</p> </li> <li> <p> <code>INCOMPLETE_MANIFEST</code> - There is a gap in the manifest.</p> </li> <li> <p> <code>MISSING_DRM_KEY</code> - Key rotation is enabled but we're unable to fetch the key for the current key period.</p> </li> <li> <p> <code>SLATE_INPUT</code> - The segments which contain slate content are considered to be missing content.</p> </li> </ul>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a6083e0ff75a4558e11d854() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>The amount of time (in seconds) that the player should be from the end of the manifest.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6af3854db056f987c46442e1() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>The total duration (in seconds) of the manifest's content.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d4b1463cc89f36b9a3a3764() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>The size of the window (in seconds) to create a window of the live stream that's available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window. The maximum startover window is 1,209,600 seconds (14 days).</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f92b4c272885b4a0e027c7d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "<p>The DRM solution provider you're using to protect your content during distribution.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76ffb72528a9992e048eed87() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The title for the manifest.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b71fe3b4ca7ad46979f1304() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FixedAvailabilityStartTime
+			"fixed_availability_start_time": schemaAttribute25ed194df131486947db8c6c(),
+		}, /*END SCHEMA*/
+		Description: "<p>The configuration for the DASH <code>availabilityStartTime</code> attribute of the Media Presentation Description (MPD). Use this configuration to set a custom availability start time for your DASH manifest.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7de9edaa02fcbb83fa2125db() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>The duration (in seconds) of each segment. Enter a value equal to, or a multiple of, the input segment duration. If the value that you enter is different from the input segment duration, MediaPackage rounds segments to the nearest multiple of the input segment duration.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute800fc223667aa0982ad87e74() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The name that describes the segment. The name is the base name of the segment used in all content manifests inside of the endpoint. You can't use spaces in the name.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84bb23cbe5cde943fdce3413() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The ARN for the IAM role granted by the key provider that provides access to the key provider API. This role must have a trust policy that allows MediaPackage to assume the role, and it must have a sufficient permissions policy to allow access to the specific key retrieval URL. Get this from your DRM solution provider.</p> <p>Valid format: <code>arn:aws:iam::{accountID}:role/{name}</code>. The following example shows a role ARN: <code>arn:aws:iam::444455556666:role/SpekeAccess</code> </p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute862f664bc7fbb736a9b11db4() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p> <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute86ce1bab7eb0dddb9c692aea() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Probability
+				"probability": schemaAttributee2ff5bf37303ba51b43d31ed(),
+				// Property: ReportingUrl
+				"reporting_url": schemaAttributeec5519ea7c5436f55c9d4396(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>Playback device error reporting settings.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute88569fd5ae64bb71b61d140f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The URL of the API Gateway proxy that you set up to talk to your key server. The API Gateway proxy must reside in the same AWS Region as MediaPackage and must start with https://.</p> <p>The following example shows a URL: <code>https://1wm2dx1f33.execute-api.us-west-2.amazonaws.com/SpekeSample/copyProtection</code> </p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93d01566804c677577a2f95a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>Enter any descriptive text that helps you to identify the origin endpoint.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95638156101b5fa97b83c0e3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Encryption
+			"encryption": schemaAttribute9d7173526efecc4174f948e9(),
+			// Property: IncludeIframeOnlyStreams
+			"include_iframe_only_streams": schemaAttributeeba6fe09237c8155c0f2881f(),
+			// Property: OutputTimestampMode
+			"output_timestamp_mode": schemaAttribute062bb004cc2edd905df82c7a(),
+			// Property: Scte
+			"scte": schemaAttribute3bb60b968b3b68dab9f6a055(),
+			// Property: SegmentDurationSeconds
+			"segment_duration_seconds": schemaAttribute7de9edaa02fcbb83fa2125db(),
+			// Property: SegmentName
+			"segment_name": schemaAttribute800fc223667aa0982ad87e74(),
+			// Property: TsIncludeDvbSubtitles
+			"ts_include_dvb_subtitles": schemaAttributea84133e4d85b358fee302f24(),
+			// Property: TsUseAudioRenditionGroup
+			"ts_use_audio_rendition_group": schemaAttributebb2ce693b7f762916160475b(),
+		}, /*END SCHEMA*/
+		Description: "<p>The segment configuration, including the segment name, duration, and other configuration values.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9634e96f631184756e8ad792() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>The duration (in seconds) of the manifest window. This represents the total amount of content available in the manifest at any given time.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9722a35d6d4a2de626d7a449() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "<p>The date and time the origin endpoint was modified.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute98cd810486b3f00825938909() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EndpointErrorConditions
+			"endpoint_error_conditions": schemaAttribute694b781b7d962e2d2d755813(),
+		}, /*END SCHEMA*/
+		Description: "<p>The failover settings for the endpoint.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a46a12a2669e4313e74e6a2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>Information about the content provider.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d7173526efecc4174f948e9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CmafExcludeSegmentDrmMetadata
+			"cmaf_exclude_segment_drm_metadata": schemaAttributec64303b80d1b5fd15f2766f0(),
+			// Property: ConstantInitializationVector
+			"constant_initialization_vector": schemaAttributeb2b1a57d77f897edf7e2ff2a(),
+			// Property: EncryptionMethod
+			"encryption_method": schemaAttributea89107d250ff564e56614309(),
+			// Property: KeyRotationIntervalSeconds
+			"key_rotation_interval_seconds": schemaAttributeef7f93481f60c44e0d67d3dc(),
+			// Property: SpekeKeyProvider
+			"speke_key_provider": schemaAttribute0351eba4de706f26b9482849(),
+		}, /*END SCHEMA*/
+		Description: "<p>The parameters for encrypting content.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3b5a3c6e67bc8f1b55f9a73() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>An absolute URL that contains more information about this content.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea84133e4d85b358fee302f24() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>By default, MediaPackage excludes all digital video broadcasting (DVB) subtitles from the output. When selected, MediaPackage passes through DVB subtitles into the output.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea89107d250ff564e56614309() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CmafEncryptionMethod
+			"cmaf_encryption_method": schemaAttribute062bb004cc2edd905df82c7a(),
+			// Property: IsmEncryptionMethod
+			"ism_encryption_method": schemaAttribute062bb004cc2edd905df82c7a(),
+			// Property: TsEncryptionMethod
+			"ts_encryption_method": schemaAttribute062bb004cc2edd905df82c7a(),
+		}, /*END SCHEMA*/
+		Description: "<p>The encryption type.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2b1a57d77f897edf7e2ff2a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>A 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting content. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb7ef2e4fd23872ffad66d107() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "<p>Optionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba2bfa27b754036d95faeb56() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AdMarkerDash
+			"ad_marker_dash": schemaAttribute062bb004cc2edd905df82c7a(),
+			// Property: ScteInManifests
+			"scte_in_manifests": schemaAttribute062bb004cc2edd905df82c7a(),
+		}, /*END SCHEMA*/
+		Description: "<p>The SCTE configuration.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebad2a6e26159b642ebbd6381() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>Specify the value for PRECISE within your EXT-X-START tag. Leave blank, or choose false, to use the default value NO. Choose yes to use the value YES.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb2ce693b7f762916160475b() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>When selected, MediaPackage bundles all audio tracks in a rendition group. All other tracks in the stream can be used with any audio rendition from the group.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec06fd5c3f41298fbcc2b2012() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Copyright
+			"copyright": schemaAttribute50b7534527388364e4edc9a5(),
+			// Property: LanguageCode
+			"language_code": schemaAttribute11a0b47d6991ebba634e69ae(),
+			// Property: MoreInformationUrl
+			"more_information_url": schemaAttributea3b5a3c6e67bc8f1b55f9a73(),
+			// Property: Source
+			"source": schemaAttribute9a46a12a2669e4313e74e6a2(),
+			// Property: Title
+			"title": schemaAttribute76ffb72528a9992e048eed87(),
+		}, /*END SCHEMA*/
+		Description: "<p>Details about the content that you want MediaPackage to pass through in the manifest to the playback device.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3cb9c6302c49f6c469faf92() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>A short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. </p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3f7425e3b6a9bd645b9879d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>Optionally specify one or more DRM settings for all of your manifest egress requests. When you include a DRM setting, note that you cannot use an identical DRM setting query parameter for this manifest's endpoint URL.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec64303b80d1b5fd15f2766f0() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>Excludes SEIG and SGPD boxes from segment metadata in CMAF containers.</p> <p>When set to <code>true</code>, MediaPackage omits these DRM metadata boxes from CMAF segments, which can improve compatibility with certain devices and players that don't support these boxes.</p> <p>Important considerations:</p> <ul> <li> <p>This setting only affects CMAF container formats</p> </li> <li> <p>Key rotation can still be handled through media playlist signaling</p> </li> <li> <p>PSSH and TENC boxes remain unaffected</p> </li> <li> <p>Default behavior is preserved when this setting is disabled</p> </li> </ul> <p>Valid values: <code>true</code> | <code>false</code> </p> <p>Default: <code>false</code> </p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec83f89c903208c685c0bd13b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AudioTimelinePattern
+				"audio_timeline_pattern": schemaAttribute062bb004cc2edd905df82c7a(),
+				// Property: AvailabilityStartTimeConfiguration
+				"availability_start_time_configuration": schemaAttribute7b71fe3b4ca7ad46979f1304(),
+				// Property: BaseUrls
+				"base_urls": schemaAttribute01f429141768fc163c4d3ea5(),
+				// Property: Compactness
+				"compactness": schemaAttribute062bb004cc2edd905df82c7a(),
+				// Property: DrmSignaling
+				"drm_signaling": schemaAttribute062bb004cc2edd905df82c7a(),
+				// Property: DvbSettings
+				"dvb_settings": schemaAttribute43b54a29b81ac18250007a8a(),
+				// Property: FilterConfiguration
+				"filter_configuration": schemaAttribute5a7897030eefc9a65efcf515(),
+				// Property: ManifestName
+				"manifest_name": schemaAttributec3cb9c6302c49f6c469faf92(),
+				// Property: ManifestWindowSeconds
+				"manifest_window_seconds": schemaAttribute6af3854db056f987c46442e1(),
+				// Property: MinBufferTimeSeconds
+				"min_buffer_time_seconds": schemaAttribute12e6ae60cb1ba9fb69d1ee95(),
+				// Property: MinUpdatePeriodSeconds
+				"min_update_period_seconds": schemaAttribute2790041cdf9f97fd38adce5c(),
+				// Property: PeriodTriggers
+				"period_triggers": schemaAttribute52d99c3805940b9eaab7a492(),
+				// Property: Profiles
+				"profiles": schemaAttributee5ba2ce482a75199e85552e7(),
+				// Property: ProgramInformation
+				"program_information": schemaAttributec06fd5c3f41298fbcc2b2012(),
+				// Property: ScteDash
+				"scte_dash": schemaAttributeba2bfa27b754036d95faeb56(),
+				// Property: SegmentTemplateFormat
+				"segment_template_format": schemaAttribute062bb004cc2edd905df82c7a(),
+				// Property: SubtitleConfiguration
+				"subtitle_configuration": schemaAttributee9219c9f2e1c2c42b19cbea5(),
+				// Property: SuggestedPresentationDelaySeconds
+				"suggested_presentation_delay_seconds": schemaAttribute6a6083e0ff75a4558e11d854(),
+				// Property: UriPathType
+				"uri_path_type": schemaAttribute062bb004cc2edd905df82c7a(),
+				// Property: UtcTiming
+				"utc_timing": schemaAttribute60dd35ea52b9b03393db39b2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>A DASH manifest configuration.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb43f89e5c6acd3c04487ceb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The name of the source location.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb5dee84aed65c349a31e442() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AdMarkerHls
+			"ad_marker_hls": schemaAttribute062bb004cc2edd905df82c7a(),
+			// Property: ScteInManifests
+			"scte_in_manifests": schemaAttribute062bb004cc2edd905df82c7a(),
+		}, /*END SCHEMA*/
+		Description: "<p>The SCTE configuration.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecbcda841b5936eee06069a86() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The name of the MSS manifest. This name is appended to the origin endpoint URL to create the unique path for accessing this specific MSS manifest.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed18ffc8411597f1c101aaec3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The unique identifier for the content. The service sends this to the key server to identify the current endpoint. How unique you make this depends on how fine-grained you want access controls to be. The service does not permit you to use the same ID for two simultaneous encryption processes. The resource ID is also known as the content ID.</p> <p>The following example shows a resource ID: <code>MovieNight20171126093045</code> </p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed7f1de8285216bda97fda439() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedfdea87fb1e34b61d44ad637() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>A short short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can't use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2a86dc12d42664c16505691() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "<p>Optionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2ff5bf37303ba51b43d31ed() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>The number of playback devices per 1000 that will send error reports to the reporting URL. This represents the probability that a playback device will be a reporting player for this session.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5ba2ce482a75199e85552e7() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "<p>The profile that the output is compliant with.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee644539a54d9cd25ab851b3f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>For use with DVB-DASH profiles only. The weighting for source locations that have the same priority. </p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9219c9f2e1c2c42b19cbea5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TtmlConfiguration
+			"ttml_configuration": schemaAttributef8ce67e4cc9e5422f3b3bf6a(),
+		}, /*END SCHEMA*/
+		Description: "<p>The configuration for DASH subtitles.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9b71a921ba0788cd44ac671() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "<p>The date and time the origin endpoint was created.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeba6fe09237c8155c0f2881f() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>When selected, the stream set includes an additional I-frame only stream, along with the other tracks. If false, this extra stream is not included. MediaPackage generates an I-frame only stream from the first rendition in the manifest. The service inserts EXT-I-FRAMES-ONLY tags in the output manifest, and then generates and includes an I-frames only playlist in the stream. This playlist permits player functionality like fast forward and rewind.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec5519ea7c5436f55c9d4396() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The URL where playback devices send error reports.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef7f93481f60c44e0d67d3dc() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>The frequency (in seconds) of key changes for live workflows, in which content is streamed real time. The service retrieves content keys before the live content begins streaming, and then retrieves them as needed over the lifetime of the workflow. By default, key rotation is set to 300 seconds (5 minutes), the minimum rotation interval, which is equivalent to setting it to 300. If you don't enter an interval, content keys aren't rotated.</p> <p>The following example setting causes the service to rotate keys every thirty minutes: <code>1800</code> </p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8ce67e4cc9e5422f3b3bf6a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TtmlProfile
+			"ttml_profile": schemaAttribute062bb004cc2edd905df82c7a(),
+		}, /*END SCHEMA*/
+		Description: "<p>The settings for TTML subtitles.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc1247f75eb0a501a066cf1b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ChildManifestName
+				"child_manifest_name": schemaAttribute3399e4421e769dd350fad904(),
+				// Property: FilterConfiguration
+				"filter_configuration": schemaAttribute5a7897030eefc9a65efcf515(),
+				// Property: ManifestName
+				"manifest_name": schemaAttributedfdea87fb1e34b61d44ad637(),
+				// Property: ManifestWindowSeconds
+				"manifest_window_seconds": schemaAttribute6af3854db056f987c46442e1(),
+				// Property: ProgramDateTimeIntervalSeconds
+				"program_date_time_interval_seconds": schemaAttribute862f664bc7fbb736a9b11db4(),
+				// Property: ScteHls
+				"scte_hls": schemaAttributecb5dee84aed65c349a31e442(),
+				// Property: StartTag
+				"start_tag": schemaAttribute1f268488ff726755120dfe7e(),
+				// Property: UriPathType
+				"uri_path_type": schemaAttribute062bb004cc2edd905df82c7a(),
+				// Property: Url
+				"url": schemaAttribute3e0ea24c184455a698932228(),
+				// Property: UrlEncodeChildManifest
+				"url_encode_child_manifest": schemaAttribute3940158a0b4753b9c8573317(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>An HTTP live streaming (HLS) manifest configuration.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_mediapackagev2_origin_endpoint", originEndpointDataSource)
 }
@@ -31,10 +928,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) associated with the resource.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The Amazon Resource Name (ARN) associated with the resource.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute0c8e35eb504ba5a09c359fa1(),
 		// Property: ChannelGroupName
 		// CloudFormation resource type schema:
 		//
@@ -44,9 +938,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"channel_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"channel_group_name": schemaAttribute062bb004cc2edd905df82c7a(),
 		// Property: ChannelName
 		// CloudFormation resource type schema:
 		//
@@ -56,9 +948,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"channel_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"channel_name": schemaAttribute062bb004cc2edd905df82c7a(),
 		// Property: ContainerType
 		// CloudFormation resource type schema:
 		//
@@ -70,9 +960,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"container_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"container_type": schemaAttribute062bb004cc2edd905df82c7a(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -81,11 +969,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "<p>The date and time the origin endpoint was created.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributee9b71a921ba0788cd44ac671(),
 		// Property: DashManifestUrls
 		// CloudFormation resource type schema:
 		//
@@ -95,10 +979,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"dash_manifest_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dash_manifest_urls": schemaAttributed7f1de8285216bda97fda439(),
 		// Property: DashManifests
 		// CloudFormation resource type schema:
 		//
@@ -458,282 +1339,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"dash_manifests": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AudioTimelinePattern
-					"audio_timeline_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: AvailabilityStartTimeConfiguration
-					"availability_start_time_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: FixedAvailabilityStartTime
-							"fixed_availability_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType:  timetypes.RFC3339Type{},
-								Description: "<p>The fixed availability start time for the DASH manifest, in ISO 8601 date-time format. The value must have hourly granularity, meaning that the minutes, seconds, and fractional seconds must be zero. The value must be on or after <code>2024-01-01T00:00:00Z</code> and must be at least 14 days before the current time.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "<p>The configuration for the DASH <code>availabilityStartTime</code> attribute of the Media Presentation Description (MPD). Use this configuration to set a custom availability start time for your DASH manifest.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: BaseUrls
-					"base_urls": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DvbPriority
-								"dvb_priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "<p>For use with DVB-DASH profiles only. The priority of this location for servings segments. The lower the number, the higher the priority.</p>",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: DvbWeight
-								"dvb_weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "<p>For use with DVB-DASH profiles only. The weighting for source locations that have the same priority. </p>",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ServiceLocation
-								"service_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "<p>The name of the source location.</p>",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Url
-								"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "<p>A source location for segments.</p>",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "<p>The base URL to use for retrieving segments.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Compactness
-					"compactness": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: DrmSignaling
-					"drm_signaling": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: DvbSettings
-					"dvb_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ErrorMetrics
-							"error_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Probability
-										"probability": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "<p>The number of playback devices per 1000 that will send error reports to the reporting URL. This represents the probability that a playback device will be a reporting player for this session.</p>",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ReportingUrl
-										"reporting_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "<p>The URL where playback devices send error reports.</p>",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "<p>Playback device error reporting settings.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: FontDownload
-							"font_download": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: FontFamily
-									"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "<p>The <code>fontFamily</code> name for subtitles, as described in <a href=\"https://tech.ebu.ch/publications/tech3380\">EBU-TT-D Subtitling Distribution Format</a>. </p>",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: MimeType
-									"mime_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "<p>The <code>mimeType</code> of the resource that's at the font download URL.</p> <p>For information about font MIME types, see the <a href=\"https://dvb.org/wp-content/uploads/2021/06/A168r4_MPEG-DASH-Profile-for-Transport-of-ISO-BMFF-Based-DVB-Services_Draft-ts_103-285-v140_November_2021.pdf\">MPEG-DASH Profile for Transport of ISO BMFF Based DVB Services over IP Based Networks</a> document. </p>",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Url
-									"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "<p>The URL for downloading fonts for subtitles.</p>",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "<p>For use with DVB-DASH profiles only. The settings for font downloads that you want Elemental MediaPackage to pass through to the manifest.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "<p>For endpoints that use the DVB-DASH profile only. The font download and error reporting information that you want MediaPackage to pass through to the manifest.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: FilterConfiguration
-					"filter_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ClipStartTime
-							"clip_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType:  timetypes.RFC3339Type{},
-								Description: "<p>Optionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: DrmSettings
-							"drm_settings": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>Optionally specify one or more DRM settings for all of your manifest egress requests. When you include a DRM setting, note that you cannot use an identical DRM setting query parameter for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: End
-							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType:  timetypes.RFC3339Type{},
-								Description: "<p>Optionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ManifestFilter
-							"manifest_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>Optionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Start
-							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType:  timetypes.RFC3339Type{},
-								Description: "<p>Optionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TimeDelaySeconds
-							"time_delay_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "<p>Optionally specify the time delay for all of your manifest egress requests. Enter a value that is smaller than your endpoint's startover window. When you include time delay, note that you cannot use time delay query parameters for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "<p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ManifestName
-					"manifest_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>A short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. </p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ManifestWindowSeconds
-					"manifest_window_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "<p>The total duration (in seconds) of the manifest's content.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: MinBufferTimeSeconds
-					"min_buffer_time_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "<p>Minimum amount of content (in seconds) that a player must keep available in the buffer.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: MinUpdatePeriodSeconds
-					"min_update_period_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "<p>Minimum amount of time (in seconds) that the player should wait before requesting updates to the manifest.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PeriodTriggers
-					"period_triggers": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "<p>A list of triggers that controls when AWS Elemental MediaPackage separates the MPEG-DASH manifest into multiple periods. Leave this value empty to indicate that the manifest is contained all in one period. For more information about periods in the DASH manifest, see <a href=\"https://docs.aws.amazon.com/mediapackage/latest/userguide/multi-period.html\">Multi-period DASH in AWS Elemental MediaPackage</a>.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Profiles
-					"profiles": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "<p>The profile that the output is compliant with.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ProgramInformation
-					"program_information": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Copyright
-							"copyright": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>A copyright statement about the content.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: LanguageCode
-							"language_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>The language code for this manifest.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: MoreInformationUrl
-							"more_information_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>An absolute URL that contains more information about this content.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Source
-							"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>Information about the content provider.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Title
-							"title": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>The title for the manifest.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "<p>Details about the content that you want MediaPackage to pass through in the manifest to the playback device.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ScteDash
-					"scte_dash": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AdMarkerDash
-							"ad_marker_dash": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ScteInManifests
-							"scte_in_manifests": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "<p>The SCTE configuration.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SegmentTemplateFormat
-					"segment_template_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SubtitleConfiguration
-					"subtitle_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: TtmlConfiguration
-							"ttml_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: TtmlProfile
-									"ttml_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "<p>The settings for TTML subtitles.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "<p>The configuration for DASH subtitles.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SuggestedPresentationDelaySeconds
-					"suggested_presentation_delay_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "<p>The amount of time (in seconds) that the player should be from the end of the manifest.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: UriPathType
-					"uri_path_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: UtcTiming
-					"utc_timing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: TimingMode
-							"timing_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: TimingSource
-							"timing_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>The the method that the player uses to synchronize to coordinated universal time (UTC) wall clock time.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "<p>Determines the type of UTC timing included in the DASH Media Presentation Description (MPD).</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "<p>A DASH manifest configuration.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dash_manifests": schemaAttributec83f89c903208c685c0bd13b(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -743,10 +1349,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>Enter any descriptive text that helps you to identify the origin endpoint.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute93d01566804c677577a2f95a(),
 		// Property: ForceEndpointErrorConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -770,18 +1373,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"force_endpoint_error_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EndpointErrorConditions
-				"endpoint_error_conditions": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "<p>The failover conditions for the endpoint. The options are:</p> <ul> <li> <p> <code>STALE_MANIFEST</code> - The manifest stalled and there are no new segments or parts.</p> </li> <li> <p> <code>INCOMPLETE_MANIFEST</code> - There is a gap in the manifest.</p> </li> <li> <p> <code>MISSING_DRM_KEY</code> - Key rotation is enabled but we're unable to fetch the key for the current key period.</p> </li> <li> <p> <code>SLATE_INPUT</code> - The segments which contain slate content are considered to be missing content.</p> </li> </ul>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "<p>The failover settings for the endpoint.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"force_endpoint_error_configuration": schemaAttribute98cd810486b3f00825938909(),
 		// Property: HlsManifestUrls
 		// CloudFormation resource type schema:
 		//
@@ -791,10 +1383,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"hls_manifest_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"hls_manifest_urls": schemaAttributed7f1de8285216bda97fda439(),
 		// Property: HlsManifests
 		// CloudFormation resource type schema:
 		//
@@ -928,120 +1517,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"hls_manifests": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ChildManifestName
-					"child_manifest_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>A short string that's appended to the endpoint URL. The child manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default child manifest name, index_1. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: FilterConfiguration
-					"filter_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ClipStartTime
-							"clip_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType:  timetypes.RFC3339Type{},
-								Description: "<p>Optionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: DrmSettings
-							"drm_settings": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>Optionally specify one or more DRM settings for all of your manifest egress requests. When you include a DRM setting, note that you cannot use an identical DRM setting query parameter for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: End
-							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType:  timetypes.RFC3339Type{},
-								Description: "<p>Optionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ManifestFilter
-							"manifest_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>Optionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Start
-							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType:  timetypes.RFC3339Type{},
-								Description: "<p>Optionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TimeDelaySeconds
-							"time_delay_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "<p>Optionally specify the time delay for all of your manifest egress requests. Enter a value that is smaller than your endpoint's startover window. When you include time delay, note that you cannot use time delay query parameters for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "<p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ManifestName
-					"manifest_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>A short short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can't use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ManifestWindowSeconds
-					"manifest_window_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "<p>The total duration (in seconds) of the manifest's content.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ProgramDateTimeIntervalSeconds
-					"program_date_time_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p> <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ScteHls
-					"scte_hls": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AdMarkerHls
-							"ad_marker_hls": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ScteInManifests
-							"scte_in_manifests": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "<p>The SCTE configuration.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: StartTag
-					"start_tag": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Precise
-							"precise": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>Specify the value for PRECISE within your EXT-X-START tag. Leave blank, or choose false, to use the default value NO. Choose yes to use the value YES.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TimeOffset
-							"time_offset": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "<p>Specify the value for TIME-OFFSET within your EXT-X-START tag. Enter a signed floating point value which, if positive, must be less than the configured manifest duration minus three times the configured segment target duration. If negative, the absolute value must be larger than three times the configured segment target duration, and the absolute value must be smaller than the configured manifest duration.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "<p>To insert an EXT-X-START tag in your HLS playlist, specify a StartTag configuration object with a valid TimeOffset. When you do, you can also optionally specify whether to include a PRECISE value in the EXT-X-START tag.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: UriPathType
-					"uri_path_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Url
-					"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>The egress domain URL for stream delivery from MediaPackage.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: UrlEncodeChildManifest
-					"url_encode_child_manifest": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>When enabled, MediaPackage URL-encodes the query string for API requests for HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "<p>An HTTP live streaming (HLS) manifest configuration.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"hls_manifests": schemaAttributefc1247f75eb0a501a066cf1b(),
 		// Property: LowLatencyHlsManifestUrls
 		// CloudFormation resource type schema:
 		//
@@ -1051,10 +1527,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"low_latency_hls_manifest_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"low_latency_hls_manifest_urls": schemaAttributed7f1de8285216bda97fda439(),
 		// Property: LowLatencyHlsManifests
 		// CloudFormation resource type schema:
 		//
@@ -1188,120 +1661,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"low_latency_hls_manifests": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ChildManifestName
-					"child_manifest_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>A short string that's appended to the endpoint URL. The child manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default child manifest name, index_1. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: FilterConfiguration
-					"filter_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ClipStartTime
-							"clip_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType:  timetypes.RFC3339Type{},
-								Description: "<p>Optionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: DrmSettings
-							"drm_settings": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>Optionally specify one or more DRM settings for all of your manifest egress requests. When you include a DRM setting, note that you cannot use an identical DRM setting query parameter for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: End
-							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType:  timetypes.RFC3339Type{},
-								Description: "<p>Optionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ManifestFilter
-							"manifest_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>Optionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Start
-							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType:  timetypes.RFC3339Type{},
-								Description: "<p>Optionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TimeDelaySeconds
-							"time_delay_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "<p>Optionally specify the time delay for all of your manifest egress requests. Enter a value that is smaller than your endpoint's startover window. When you include time delay, note that you cannot use time delay query parameters for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "<p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ManifestName
-					"manifest_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>A short short string that's appended to the endpoint URL. The manifest name creates a unique path to this endpoint. If you don't enter a value, MediaPackage uses the default manifest name, index. MediaPackage automatically inserts the format extension, such as .m3u8. You can't use the same manifest name if you use HLS manifest and low-latency HLS manifest. The manifestName on the HLSManifest object overrides the manifestName you provided on the originEndpoint object.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ManifestWindowSeconds
-					"manifest_window_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "<p>The total duration (in seconds) of the manifest's content.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ProgramDateTimeIntervalSeconds
-					"program_date_time_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "<p>Inserts EXT-X-PROGRAM-DATE-TIME tags in the output manifest at the interval that you specify. If you don't enter an interval, EXT-X-PROGRAM-DATE-TIME tags aren't included in the manifest. The tags sync the stream to the wall clock so that viewers can seek to a specific time in the playback timeline on the player.</p> <p>Irrespective of this parameter, if any ID3Timed metadata is in the HLS input, it is passed through to the HLS output.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ScteHls
-					"scte_hls": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AdMarkerHls
-							"ad_marker_hls": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ScteInManifests
-							"scte_in_manifests": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "<p>The SCTE configuration.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: StartTag
-					"start_tag": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Precise
-							"precise": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>Specify the value for PRECISE within your EXT-X-START tag. Leave blank, or choose false, to use the default value NO. Choose yes to use the value YES.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TimeOffset
-							"time_offset": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "<p>Specify the value for TIME-OFFSET within your EXT-X-START tag. Enter a signed floating point value which, if positive, must be less than the configured manifest duration minus three times the configured segment target duration. If negative, the absolute value must be larger than three times the configured segment target duration, and the absolute value must be smaller than the configured manifest duration.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "<p>To insert an EXT-X-START tag in your HLS playlist, specify a StartTag configuration object with a valid TimeOffset. When you do, you can also optionally specify whether to include a PRECISE value in the EXT-X-START tag.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: UriPathType
-					"uri_path_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Url
-					"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>The egress domain URL for stream delivery from MediaPackage.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: UrlEncodeChildManifest
-					"url_encode_child_manifest": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>When enabled, MediaPackage URL-encodes the query string for API requests for LL-HLS child manifests to comply with Amazon Web Services Signature Version 4 (SigV4) signature signing protocol. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html\">Amazon Web Services Signature Version 4 for API requests</a> in <i>Identity and Access Management User Guide</i>.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "<p>A low-latency HLS manifest configuration.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"low_latency_hls_manifests": schemaAttribute4be30b40b0f9ba6ee51a9efc(),
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
 		//
@@ -1310,11 +1670,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "<p>The date and time the origin endpoint was modified.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"modified_at": schemaAttribute9722a35d6d4a2de626d7a449(),
 		// Property: MssManifestUrls
 		// CloudFormation resource type schema:
 		//
@@ -1324,10 +1680,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"mss_manifest_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"mss_manifest_urls": schemaAttributed7f1de8285216bda97fda439(),
 		// Property: MssManifests
 		// CloudFormation resource type schema:
 		//
@@ -1403,68 +1756,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"mss_manifests": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: FilterConfiguration
-					"filter_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ClipStartTime
-							"clip_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType:  timetypes.RFC3339Type{},
-								Description: "<p>Optionally specify the clip start time for all of your manifest egress requests. When you include clip start time, note that you cannot use clip start time query parameters for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: DrmSettings
-							"drm_settings": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>Optionally specify one or more DRM settings for all of your manifest egress requests. When you include a DRM setting, note that you cannot use an identical DRM setting query parameter for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: End
-							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType:  timetypes.RFC3339Type{},
-								Description: "<p>Optionally specify the end time for all of your manifest egress requests. When you include end time, note that you cannot use end time query parameters for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ManifestFilter
-							"manifest_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>Optionally specify one or more manifest filters for all of your manifest egress requests. When you include a manifest filter, note that you cannot use an identical manifest filter query parameter for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Start
-							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
-								CustomType:  timetypes.RFC3339Type{},
-								Description: "<p>Optionally specify the start time for all of your manifest egress requests. When you include start time, note that you cannot use start time query parameters for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TimeDelaySeconds
-							"time_delay_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "<p>Optionally specify the time delay for all of your manifest egress requests. Enter a value that is smaller than your endpoint's startover window. When you include time delay, note that you cannot use time delay query parameters for this manifest's endpoint URL.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "<p>Filter configuration includes settings for manifest filtering, start and end times, and time delay that apply to all of your egress requests for this manifest. </p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ManifestLayout
-					"manifest_layout": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ManifestName
-					"manifest_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>The name of the MSS manifest. This name is appended to the origin endpoint URL to create the unique path for accessing this specific MSS manifest.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ManifestWindowSeconds
-					"manifest_window_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "<p>The duration (in seconds) of the manifest window. This represents the total amount of content available in the manifest at any given time.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "<p>The Microsoft Smooth Streaming (MSS) manifest configurations associated with this origin endpoint.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"mss_manifests": schemaAttribute4554801d86a2000f7f83d296(),
 		// Property: OriginEndpointName
 		// CloudFormation resource type schema:
 		//
@@ -1474,9 +1766,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"origin_endpoint_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"origin_endpoint_name": schemaAttribute062bb004cc2edd905df82c7a(),
 		// Property: Segment
 		// CloudFormation resource type schema:
 		//
@@ -1727,153 +2017,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"segment": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Encryption
-				"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CmafExcludeSegmentDrmMetadata
-						"cmaf_exclude_segment_drm_metadata": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>Excludes SEIG and SGPD boxes from segment metadata in CMAF containers.</p> <p>When set to <code>true</code>, MediaPackage omits these DRM metadata boxes from CMAF segments, which can improve compatibility with certain devices and players that don't support these boxes.</p> <p>Important considerations:</p> <ul> <li> <p>This setting only affects CMAF container formats</p> </li> <li> <p>Key rotation can still be handled through media playlist signaling</p> </li> <li> <p>PSSH and TENC boxes remain unaffected</p> </li> <li> <p>Default behavior is preserved when this setting is disabled</p> </li> </ul> <p>Valid values: <code>true</code> | <code>false</code> </p> <p>Default: <code>false</code> </p>",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ConstantInitializationVector
-						"constant_initialization_vector": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>A 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting content. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).</p>",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: EncryptionMethod
-						"encryption_method": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: CmafEncryptionMethod
-								"cmaf_encryption_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: IsmEncryptionMethod
-								"ism_encryption_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: TsEncryptionMethod
-								"ts_encryption_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "<p>The encryption type.</p>",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: KeyRotationIntervalSeconds
-						"key_rotation_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "<p>The frequency (in seconds) of key changes for live workflows, in which content is streamed real time. The service retrieves content keys before the live content begins streaming, and then retrieves them as needed over the lifetime of the workflow. By default, key rotation is set to 300 seconds (5 minutes), the minimum rotation interval, which is equivalent to setting it to 300. If you don't enter an interval, content keys aren't rotated.</p> <p>The following example setting causes the service to rotate keys every thirty minutes: <code>1800</code> </p>",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SpekeKeyProvider
-						"speke_key_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: CertificateArn
-								"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "<p>The ARN for the certificate that you imported to Amazon Web Services Certificate Manager to add content key encryption to this endpoint. For this feature to work, your DRM key provider must support content key encryption.</p>",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: DrmSystems
-								"drm_systems": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "<p>The DRM solution provider you're using to protect your content during distribution.</p>",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: EncryptionContractConfiguration
-								"encryption_contract_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: PresetSpeke20Audio
-										"preset_speke_20_audio": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: PresetSpeke20Video
-										"preset_speke_20_video": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "<p>Configure one or more content encryption keys for your endpoints that use SPEKE Version 2.0. The encryption contract defines which content keys are used to encrypt the audio and video tracks in your stream. To configure the encryption contract, specify which audio and video encryption presets to use.</p>",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ResourceId
-								"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "<p>The unique identifier for the content. The service sends this to the key server to identify the current endpoint. How unique you make this depends on how fine-grained you want access controls to be. The service does not permit you to use the same ID for two simultaneous encryption processes. The resource ID is also known as the content ID.</p> <p>The following example shows a resource ID: <code>MovieNight20171126093045</code> </p>",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: RoleArn
-								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "<p>The ARN for the IAM role granted by the key provider that provides access to the key provider API. This role must have a trust policy that allows MediaPackage to assume the role, and it must have a sufficient permissions policy to allow access to the specific key retrieval URL. Get this from your DRM solution provider.</p> <p>Valid format: <code>arn:aws:iam::{accountID}:role/{name}</code>. The following example shows a role ARN: <code>arn:aws:iam::444455556666:role/SpekeAccess</code> </p>",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Url
-								"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "<p>The URL of the API Gateway proxy that you set up to talk to your key server. The API Gateway proxy must reside in the same AWS Region as MediaPackage and must start with https://.</p> <p>The following example shows a URL: <code>https://1wm2dx1f33.execute-api.us-west-2.amazonaws.com/SpekeSample/copyProtection</code> </p>",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "<p>The parameters for the SPEKE key provider.</p>",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "<p>The parameters for encrypting content.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IncludeIframeOnlyStreams
-				"include_iframe_only_streams": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>When selected, the stream set includes an additional I-frame only stream, along with the other tracks. If false, this extra stream is not included. MediaPackage generates an I-frame only stream from the first rendition in the manifest. The service inserts EXT-I-FRAMES-ONLY tags in the output manifest, and then generates and includes an I-frames only playlist in the stream. This playlist permits player functionality like fast forward and rewind.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: OutputTimestampMode
-				"output_timestamp_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Scte
-				"scte": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CustomAdTypes
-						"custom_ad_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "<p>A list of additional non-Ad SCTE-35 event types to treat as advertisements. When configured, events matching these types produce ad markers (such as <code>SCTE35-OUT</code> and <code>SCTE35-IN</code> in HLS DATERANGE tags) in manifests.</p> <p>Valid values: <code>PROGRAM</code> | <code>CHAPTER</code> | <code>UNSCHEDULED_EVENT</code> | <code>ALTERNATE_CONTENT_OPPORTUNITY</code> | <code>NETWORK</code> </p> <p>If you don't specify any values, the default is empty (only default ad types are used).</p>",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ScteFilter
-						"scte_filter": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "<p>The SCTE-35 message types that you want to be treated as ad markers in the output.</p>",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ScteInSegments
-						"scte_in_segments": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "<p>The SCTE configuration.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SegmentDurationSeconds
-				"segment_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "<p>The duration (in seconds) of each segment. Enter a value equal to, or a multiple of, the input segment duration. If the value that you enter is different from the input segment duration, MediaPackage rounds segments to the nearest multiple of the input segment duration.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SegmentName
-				"segment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>The name that describes the segment. The name is the base name of the segment used in all content manifests inside of the endpoint. You can't use spaces in the name.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TsIncludeDvbSubtitles
-				"ts_include_dvb_subtitles": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>By default, MediaPackage excludes all digital video broadcasting (DVB) subtitles from the output. When selected, MediaPackage passes through DVB subtitles into the output.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TsUseAudioRenditionGroup
-				"ts_use_audio_rendition_group": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>When selected, MediaPackage bundles all audio tracks in a rendition group. All other tracks in the stream can be used with any audio rendition from the group.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "<p>The segment configuration, including the segment name, duration, and other configuration values.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"segment": schemaAttribute95638156101b5fa97b83c0e3(),
 		// Property: StartoverWindowSeconds
 		// CloudFormation resource type schema:
 		//
@@ -1883,10 +2027,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"startover_window_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "<p>The size of the window (in seconds) to create a window of the live stream that's available for on-demand viewing. Viewers can start-over or catch-up on content that falls within the window. The maximum startover window is 1,209,600 seconds (14 days).</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"startover_window_seconds": schemaAttribute6d4b1463cc89f36b9a3a3764(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1906,21 +2047,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute0089d34f8ea7335529505171(),
 		// Property: UriSeparator
 		// CloudFormation resource type schema:
 		//
@@ -1931,9 +2058,7 @@ func originEndpointDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"uri_separator": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"uri_separator": schemaAttribute062bb004cc2edd905df82c7a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

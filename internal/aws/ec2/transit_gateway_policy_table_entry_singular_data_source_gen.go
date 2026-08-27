@@ -14,6 +14,88 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute18672f592fd3c4074296208c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DestinationCidrBlock
+			"destination_cidr_block": schemaAttribute6b15028340928d2b9f857ff3(),
+			// Property: DestinationPortRange
+			"destination_port_range": schemaAttribute4e8e2a4134df6058b1295d03(),
+			// Property: Protocol
+			"protocol": schemaAttributeb5f1751f9c31a2d6800861eb(),
+			// Property: SourceCidrBlock
+			"source_cidr_block": schemaAttributecea55f39b8933910bc7e056d(),
+			// Property: SourcePortRange
+			"source_port_range": schemaAttribute65589864aee096386f70d858(),
+		}, /*END SCHEMA*/
+		Description: "The policy rule associated with the entry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4e8e2a4134df6058b1295d03() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The destination port range for the transit gateway policy rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65589864aee096386f70d858() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source port range for the transit gateway policy rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b15028340928d2b9f857ff3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The destination CIDR block for the transit gateway policy rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute840d1a340cb71198f92bcd3e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The rule number for the policy table entry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8604b3897192823ec01cdbc8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the transit gateway policy table.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5f1751f9c31a2d6800861eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The protocol for the transit gateway policy rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd652820343b763bafe2835e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the target route table.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecea55f39b8933910bc7e056d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source CIDR block for the transit gateway policy rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee837eddc9a8cc793311271ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of the policy table entry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_transit_gateway_policy_table_entry", transitGatewayPolicyTableEntryDataSource)
 }
@@ -52,37 +134,7 @@ func transitGatewayPolicyTableEntryDataSource(ctx context.Context) (datasource.D
 		//	  },
 		//	  "type": "object"
 		//	}
-		"policy_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DestinationCidrBlock
-				"destination_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The destination CIDR block for the transit gateway policy rule.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DestinationPortRange
-				"destination_port_range": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The destination port range for the transit gateway policy rule.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Protocol
-				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The protocol for the transit gateway policy rule.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourceCidrBlock
-				"source_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The source CIDR block for the transit gateway policy rule.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourcePortRange
-				"source_port_range": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The source port range for the transit gateway policy rule.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The policy rule associated with the entry.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_rule": schemaAttribute18672f592fd3c4074296208c(),
 		// Property: PolicyRuleNumber
 		// CloudFormation resource type schema:
 		//
@@ -90,10 +142,7 @@ func transitGatewayPolicyTableEntryDataSource(ctx context.Context) (datasource.D
 		//	  "description": "The rule number for the policy table entry.",
 		//	  "type": "string"
 		//	}
-		"policy_rule_number": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The rule number for the policy table entry.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_rule_number": schemaAttribute840d1a340cb71198f92bcd3e(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -101,10 +150,7 @@ func transitGatewayPolicyTableEntryDataSource(ctx context.Context) (datasource.D
 		//	  "description": "The state of the policy table entry.",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The state of the policy table entry.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributee837eddc9a8cc793311271ae(),
 		// Property: TargetRouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -112,10 +158,7 @@ func transitGatewayPolicyTableEntryDataSource(ctx context.Context) (datasource.D
 		//	  "description": "The ID of the target route table.",
 		//	  "type": "string"
 		//	}
-		"target_route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the target route table.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_route_table_id": schemaAttributecd652820343b763bafe2835e(),
 		// Property: TransitGatewayPolicyTableId
 		// CloudFormation resource type schema:
 		//
@@ -123,10 +166,7 @@ func transitGatewayPolicyTableEntryDataSource(ctx context.Context) (datasource.D
 		//	  "description": "The ID of the transit gateway policy table.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_policy_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the transit gateway policy table.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_policy_table_id": schemaAttribute8604b3897192823ec01cdbc8(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

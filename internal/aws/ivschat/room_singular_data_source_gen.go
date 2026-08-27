@@ -15,6 +15,105 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0a9442baa2d0967c1cd7ae9b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the room. The value does not need to be unique.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5796a40ed2dedd21439440a8() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute8377d57acb8ec39ca50afa5c(),
+				// Property: Value
+				"value": schemaAttribute9e8bcfb029a10d3d201fc6f1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f677d46088f74e1abd7ed1a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FallbackResult
+			"fallback_result": schemaAttribute6a67026d75a75cb135771ed6(),
+			// Property: Uri
+			"uri": schemaAttribute8394d666ddeb8bb3a01c0897(),
+		}, /*END SCHEMA*/
+		Description: "Configuration information for optional review of messages.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a67026d75a75cb135771ed6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the fallback behavior if the handler does not return a valid response, encounters an error, or times out.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7200c11f992d0055baa74acc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Room ARN is automatically generated on creation and assigned as the unique identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8377d57acb8ec39ca50afa5c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8394d666ddeb8bb3a01c0897() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Identifier of the message review handler.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84286db0b92306268bb94168() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The system-generated ID of the room.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a214ff150977917091d8446() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of messages per second that can be sent to the room.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96dcd94cad34541ef65bf1dc() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Array of logging configuration identifiers attached to the room.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e8bcfb029a10d3d201fc6f1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed08eaf689ed7b929b5dcc0f2() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of characters in a single message.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ivschat_room", roomDataSource)
 }
@@ -33,10 +132,7 @@ func roomDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws:ivschat:[a-z0-9-]+:[0-9]+:room/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Room ARN is automatically generated on creation and assigned as the unique identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute7200c11f992d0055baa74acc(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +143,7 @@ func roomDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"room_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The system-generated ID of the room.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"room_id": schemaAttribute84286db0b92306268bb94168(),
 		// Property: LoggingConfigurationIdentifiers
 		// CloudFormation resource type schema:
 		//
@@ -68,11 +161,7 @@ func roomDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"logging_configuration_identifiers": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Array of logging configuration identifiers attached to the room.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"logging_configuration_identifiers": schemaAttribute96dcd94cad34541ef65bf1dc(),
 		// Property: MaximumMessageLength
 		// CloudFormation resource type schema:
 		//
@@ -83,10 +172,7 @@ func roomDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"maximum_message_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum number of characters in a single message.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"maximum_message_length": schemaAttributed08eaf689ed7b929b5dcc0f2(),
 		// Property: MaximumMessageRatePerSecond
 		// CloudFormation resource type schema:
 		//
@@ -97,10 +183,7 @@ func roomDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"maximum_message_rate_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum number of messages per second that can be sent to the room.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"maximum_message_rate_per_second": schemaAttribute8a214ff150977917091d8446(),
 		// Property: MessageReviewHandler
 		// CloudFormation resource type schema:
 		//
@@ -127,22 +210,7 @@ func roomDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"message_review_handler": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FallbackResult
-				"fallback_result": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the fallback behavior if the handler does not return a valid response, encounters an error, or times out.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Uri
-				"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Identifier of the message review handler.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration information for optional review of messages.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"message_review_handler": schemaAttribute5f677d46088f74e1abd7ed1a(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -153,10 +221,7 @@ func roomDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the room. The value does not need to be unique.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute0a9442baa2d0967c1cd7ae9b(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -189,24 +254,7 @@ func roomDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute5796a40ed2dedd21439440a8(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

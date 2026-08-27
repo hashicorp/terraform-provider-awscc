@@ -15,6 +15,71 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute097ae7cbd37ddb5e4bc3ec45() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Value for the tag",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25e412ead2de90c2dd4e0ef3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The time at which the schedule group was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fe3c629f6274015a53f962a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the state of the schedule group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea26a1c6857502ff869a4e155() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec64b585c3b46404cdacfb34a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributed45572d3e3738b9bfb181d9b(),
+				// Property: Value
+				"value": schemaAttribute097ae7cbd37ddb5e4bc3ec45(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of tags to associate with the schedule group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed45572d3e3738b9bfb181d9b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Key for the tag",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedfb1e83d6da27db5591b49a9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The time at which the schedule group was last modified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee37759c4f1de18af3edef513() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the schedule group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_scheduler_schedule_group", scheduleGroupDataSource)
 }
@@ -33,10 +98,7 @@ func scheduleGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^arn:aws[a-z-]*:scheduler:[a-z0-9\\-]+:\\d{12}:schedule-group\\/[0-9a-zA-Z-_.]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the schedule group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributee37759c4f1de18af3edef513(),
 		// Property: CreationDate
 		// CloudFormation resource type schema:
 		//
@@ -45,11 +107,7 @@ func scheduleGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time at which the schedule group was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_date": schemaAttribute25e412ead2de90c2dd4e0ef3(),
 		// Property: LastModificationDate
 		// CloudFormation resource type schema:
 		//
@@ -58,11 +116,7 @@ func scheduleGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modification_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time at which the schedule group was last modified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modification_date": schemaAttributedfb1e83d6da27db5591b49a9(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -72,9 +126,7 @@ func scheduleGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[0-9a-zA-Z-_.]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributea26a1c6857502ff869a4e155(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -86,10 +138,7 @@ func scheduleGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the state of the schedule group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttribute9fe3c629f6274015a53f962a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -123,24 +172,7 @@ func scheduleGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Key for the tag",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Value for the tag",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of tags to associate with the schedule group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributec64b585c3b46404cdacfb34a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

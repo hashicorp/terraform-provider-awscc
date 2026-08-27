@@ -16,6 +16,151 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0d7ee48739146af73b342674() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon DataZone user who updated the subscription target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25e8567c1de330219f091bd4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the subscription target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2bde531a5c86de859e85de95() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp of when the subscription target was updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f2b32b3703f453f3737baae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The content of the subscription target configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2fc87915a46a841a96e9fb1c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The provider of the subscription target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute423b79c3c6c7100efa500600() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the project specified in the subscription target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c414ad6d6f78c1497df7699() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the environment in which subscription target is created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b1f5057152fae2526d15e77() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Amazon DataZone domain in which subscription target would be created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e0138b80df53965d294dbc6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon DataZone user who created the subscription target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a809f61674a6ba915886129() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Amazon DataZone domain in which subscription target is created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0225a13d6da72324f9561af() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Content
+				"content": schemaAttribute2f2b32b3703f453f3737baae(),
+				// Property: FormName
+				"form_name": schemaAttributef811728dc570243de29fe67f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The configuration of the subscription target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea50b7e03102562e4296f3584() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The manage access role that is used to create the subscription target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9240532494a31c379019394() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the subscription target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeafc4a34f2ff7658686def73d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the subscription target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb7224a43caaae9fd8e11b0e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp of when the subscription target was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed95baf0a86963e74605620f7() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The authorized principals of the subscription target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedbade511c3892ad34ccee10f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the environment in which subscription target would be created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee83bd5dde2b0d6a1ad7e9dde() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The asset types that can be included in the subscription target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef811728dc570243de29fe67f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The form name included in the subscription target configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_datazone_subscription_target", subscriptionTargetDataSource)
 }
@@ -38,11 +183,7 @@ func subscriptionTargetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "array"
 		//	}
-		"applicable_asset_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The asset types that can be included in the subscription target.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"applicable_asset_types": schemaAttributee83bd5dde2b0d6a1ad7e9dde(),
 		// Property: AuthorizedPrincipals
 		// CloudFormation resource type schema:
 		//
@@ -57,11 +198,7 @@ func subscriptionTargetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"authorized_principals": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The authorized principals of the subscription target.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"authorized_principals": schemaAttributed95baf0a86963e74605620f7(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -70,11 +207,7 @@ func subscriptionTargetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp of when the subscription target was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributebb7224a43caaae9fd8e11b0e(),
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +215,7 @@ func subscriptionTargetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The Amazon DataZone user who created the subscription target.",
 		//	  "type": "string"
 		//	}
-		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon DataZone user who created the subscription target.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_by": schemaAttribute8e0138b80df53965d294dbc6(),
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
@@ -94,10 +224,7 @@ func subscriptionTargetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Amazon DataZone domain in which subscription target is created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_id": schemaAttribute9a809f61674a6ba915886129(),
 		// Property: DomainIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -106,10 +233,7 @@ func subscriptionTargetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Amazon DataZone domain in which subscription target would be created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_identifier": schemaAttribute7b1f5057152fae2526d15e77(),
 		// Property: EnvironmentId
 		// CloudFormation resource type schema:
 		//
@@ -118,10 +242,7 @@ func subscriptionTargetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the environment in which subscription target is created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"environment_id": schemaAttribute4c414ad6d6f78c1497df7699(),
 		// Property: EnvironmentIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -130,10 +251,7 @@ func subscriptionTargetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"environment_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the environment in which subscription target would be created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"environment_identifier": schemaAttributedbade511c3892ad34ccee10f(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -142,10 +260,7 @@ func subscriptionTargetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"subscription_target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the subscription target.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subscription_target_id": schemaAttribute25e8567c1de330219f091bd4(),
 		// Property: ManageAccessRole
 		// CloudFormation resource type schema:
 		//
@@ -153,10 +268,7 @@ func subscriptionTargetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The manage access role that is used to create the subscription target.",
 		//	  "type": "string"
 		//	}
-		"manage_access_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The manage access role that is used to create the subscription target.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"manage_access_role": schemaAttributea50b7e03102562e4296f3584(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -166,10 +278,7 @@ func subscriptionTargetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the subscription target.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributeafc4a34f2ff7658686def73d(),
 		// Property: ProjectId
 		// CloudFormation resource type schema:
 		//
@@ -178,10 +287,7 @@ func subscriptionTargetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the project specified in the subscription target.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"project_id": schemaAttribute423b79c3c6c7100efa500600(),
 		// Property: Provider
 		// CloudFormation resource type schema:
 		//
@@ -189,10 +295,7 @@ func subscriptionTargetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The provider of the subscription target.",
 		//	  "type": "string"
 		//	}
-		"provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The provider of the subscription target.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"provider_name": schemaAttribute2fc87915a46a841a96e9fb1c(),
 		// Property: SubscriptionTargetConfig
 		// CloudFormation resource type schema:
 		//
@@ -223,24 +326,7 @@ func subscriptionTargetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "array"
 		//	}
-		"subscription_target_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Content
-					"content": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The content of the subscription target configuration.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: FormName
-					"form_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The form name included in the subscription target configuration.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The configuration of the subscription target.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subscription_target_config": schemaAttributea0225a13d6da72324f9561af(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -248,10 +334,7 @@ func subscriptionTargetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The type of the subscription target.",
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the subscription target.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttributea9240532494a31c379019394(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -260,11 +343,7 @@ func subscriptionTargetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp of when the subscription target was updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute2bde531a5c86de859e85de95(),
 		// Property: UpdatedBy
 		// CloudFormation resource type schema:
 		//
@@ -272,10 +351,7 @@ func subscriptionTargetDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The Amazon DataZone user who updated the subscription target.",
 		//	  "type": "string"
 		//	}
-		"updated_by": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon DataZone user who updated the subscription target.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_by": schemaAttribute0d7ee48739146af73b342674(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

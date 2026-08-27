@@ -14,6 +14,77 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1bb017ad93f5b56a93fafeb7() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute5d324996636dd602652bca6b(),
+				// Property: Value
+				"value": schemaAttributeadbaa2befdc1c94605ccb961(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40955da545a842839b3235c2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The cluster identifier of the global database cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d324996636dd602652bca6b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute666870e5cc6995a59bb7e303() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether deletion protection is enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab4baabce355ddb95cec17a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of an existing Neptune DB cluster to use as the primary cluster of the new global database.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeadbaa2befdc1c94605ccb961() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe08ffa49ab12e041144e261() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version number of the database engine.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4323b7309103d0d2a3d11b9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the database engine.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1c4adf4c9793103932c722d() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether the global database cluster is storage encrypted.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_neptune_global_cluster", globalClusterDataSource)
 }
@@ -29,10 +100,7 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Whether deletion protection is enabled.",
 		//	  "type": "boolean"
 		//	}
-		"deletion_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether deletion protection is enabled.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"deletion_protection": schemaAttribute666870e5cc6995a59bb7e303(),
 		// Property: Engine
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +111,7 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the database engine.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"engine": schemaAttributec4323b7309103d0d2a3d11b9(),
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +119,7 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The version number of the database engine.",
 		//	  "type": "string"
 		//	}
-		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version number of the database engine.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"engine_version": schemaAttributebe08ffa49ab12e041144e261(),
 		// Property: GlobalClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +130,7 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[A-Za-z][0-9A-Za-z-:._]*$",
 		//	  "type": "string"
 		//	}
-		"global_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The cluster identifier of the global database cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"global_cluster_identifier": schemaAttribute40955da545a842839b3235c2(),
 		// Property: SourceDBClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -79,10 +138,7 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The Amazon Resource Name (ARN) of an existing Neptune DB cluster to use as the primary cluster of the new global database.",
 		//	  "type": "string"
 		//	}
-		"source_db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of an existing Neptune DB cluster to use as the primary cluster of the new global database.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_db_cluster_identifier": schemaAttributeab4baabce355ddb95cec17a5(),
 		// Property: StorageEncrypted
 		// CloudFormation resource type schema:
 		//
@@ -90,10 +146,7 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Whether the global database cluster is storage encrypted.",
 		//	  "type": "boolean"
 		//	}
-		"storage_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether the global database cluster is storage encrypted.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"storage_encrypted": schemaAttributee1c4adf4c9793103932c722d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -126,24 +179,7 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute1bb017ad93f5b56a93fafeb7(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

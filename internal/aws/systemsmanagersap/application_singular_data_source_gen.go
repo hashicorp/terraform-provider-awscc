@@ -15,6 +15,95 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute08a8f7b141f9f98c37c7012c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributef71a0faaf847913e8f17c237(),
+				// Property: Value
+				"value": schemaAttributea488fca21168a0f229f06f1c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags of a SystemsManagerSAP application.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d501ae431b1eddb89c035ec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the SSM-SAP application",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b0507776c4c809b12e799ee() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CredentialType
+				"credential_type": schemaAttributeae46c116e06a7cf6e8927dd5(),
+				// Property: DatabaseName
+				"database_name": schemaAttributeae46c116e06a7cf6e8927dd5(),
+				// Property: SecretId
+				"secret_id": schemaAttributeae46c116e06a7cf6e8927dd5(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c09b2710f7f3f1dc199eaf1() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea488fca21168a0f229f06f1c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae46c116e06a7cf6e8927dd5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6c95b54d0b1a608ad7a12a9() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ComponentType
+				"component_type": schemaAttributeae46c116e06a7cf6e8927dd5(),
+				// Property: Ec2InstanceId
+				"ec_2_instance_id": schemaAttributeae46c116e06a7cf6e8927dd5(),
+				// Property: Sid
+				"sid": schemaAttributeae46c116e06a7cf6e8927dd5(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "This is an optional parameter for component details to which the SAP ABAP application is attached, such as Web Dispatcher.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeecd45eea8f3fa9353d74c956() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the SAP HANA database",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef71a0faaf847913e8f17c237() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_systemsmanagersap_application", applicationDataSource)
 }
@@ -30,9 +119,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[\\w\\d\\.-]{1,60}",
 		//	  "type": "string"
 		//	}
-		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"application_id": schemaAttributeae46c116e06a7cf6e8927dd5(),
 		// Property: ApplicationType
 		// CloudFormation resource type schema:
 		//
@@ -43,9 +130,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"application_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"application_type": schemaAttributeae46c116e06a7cf6e8927dd5(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +139,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\\/.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the SSM-SAP application",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute1d501ae431b1eddb89c035ec(),
 		// Property: ComponentsInfo
 		// CloudFormation resource type schema:
 		//
@@ -93,26 +175,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"components_info": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ComponentType
-					"component_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Ec2InstanceId
-					"ec_2_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Sid
-					"sid": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "This is an optional parameter for component details to which the SAP ABAP application is attached, such as Web Dispatcher.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"components_info": schemaAttributec6c95b54d0b1a608ad7a12a9(),
 		// Property: Credentials
 		// CloudFormation resource type schema:
 		//
@@ -141,25 +204,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"credentials": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: CredentialType
-					"credential_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: DatabaseName
-					"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SecretId
-					"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"credentials": schemaAttribute6b0507776c4c809b12e799ee(),
 		// Property: DatabaseArn
 		// CloudFormation resource type schema:
 		//
@@ -168,10 +213,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\\/.+$",
 		//	  "type": "string"
 		//	}
-		"database_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the SAP HANA database",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"database_arn": schemaAttributeecd45eea8f3fa9353d74c956(),
 		// Property: Instances
 		// CloudFormation resource type schema:
 		//
@@ -184,10 +226,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"instances": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instances": schemaAttribute7c09b2710f7f3f1dc199eaf1(),
 		// Property: SapInstanceNumber
 		// CloudFormation resource type schema:
 		//
@@ -195,9 +234,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[0-9]{2}",
 		//	  "type": "string"
 		//	}
-		"sap_instance_number": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"sap_instance_number": schemaAttributeae46c116e06a7cf6e8927dd5(),
 		// Property: Sid
 		// CloudFormation resource type schema:
 		//
@@ -205,9 +242,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[A-Z][A-Z0-9]{2}",
 		//	  "type": "string"
 		//	}
-		"sid": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"sid": schemaAttributeae46c116e06a7cf6e8927dd5(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -239,24 +274,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags of a SystemsManagerSAP application.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute08a8f7b141f9f98c37c7012c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

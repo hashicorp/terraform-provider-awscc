@@ -15,6 +15,58 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute3f21ab49ce43d1f8d92df97b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description for this cache parameter group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d4daa937d538862239d6919() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A comma-delimited list of parameter name/value pairs. For more information see ModifyCacheParameterGroup in the Amazon ElastiCache API Reference Guide.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91489d7ed907cb15f5f4652a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the cache parameter group family that this cache parameter group is compatible with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec94c3055f84948e8059df8dc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Cache Parameter Group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee56c04090e30c4becafcd286() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee70d67122701f1feba1908f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee56c04090e30c4becafcd286(),
+				// Property: Value
+				"value": schemaAttributee56c04090e30c4becafcd286(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags are composed of a Key/Value pair. You can use tags to categorize and track each parameter group. The tag value null is permitted.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_elasticache_parameter_group", parameterGroupDataSource)
 }
@@ -30,10 +82,7 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The name of the cache parameter group family that this cache parameter group is compatible with.",
 		//	  "type": "string"
 		//	}
-		"cache_parameter_group_family": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the cache parameter group family that this cache parameter group is compatible with.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cache_parameter_group_family": schemaAttribute91489d7ed907cb15f5f4652a(),
 		// Property: CacheParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +90,7 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The name of the Cache Parameter Group.",
 		//	  "type": "string"
 		//	}
-		"cache_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Cache Parameter Group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cache_parameter_group_name": schemaAttributec94c3055f84948e8059df8dc(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +98,7 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The description for this cache parameter group.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description for this cache parameter group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute3f21ab49ce43d1f8d92df97b(),
 		// Property: Properties
 		// CloudFormation resource type schema:
 		//
@@ -69,12 +112,7 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"properties":        // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A comma-delimited list of parameter name/value pairs. For more information see ModifyCacheParameterGroup in the Amazon ElastiCache API Reference Guide.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"properties": schemaAttribute6d4daa937d538862239d6919(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -100,22 +138,7 @@ func parameterGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags are composed of a Key/Value pair. You can use tags to categorize and track each parameter group. The tag value null is permitted.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeee70d67122701f1feba1908f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

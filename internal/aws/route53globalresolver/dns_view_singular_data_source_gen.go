@@ -14,6 +14,26 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributecbd384cd2a29dac10c01e638() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee3ce24d122d7268f4fa6522b(),
+				// Property: Value
+				"value": schemaAttributee3ce24d122d7268f4fa6522b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3ce24d122d7268f4fa6522b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_route53globalresolver_dns_view", dnsViewDataSource)
 }
@@ -30,9 +50,7 @@ func dnsViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributee3ce24d122d7268f4fa6522b(),
 		// Property: ClientToken
 		// CloudFormation resource type schema:
 		//
@@ -41,18 +59,14 @@ func dnsViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"client_token": schemaAttributee3ce24d122d7268f4fa6522b(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributee3ce24d122d7268f4fa6522b(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -61,9 +75,7 @@ func dnsViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributee3ce24d122d7268f4fa6522b(),
 		// Property: DnsViewId
 		// CloudFormation resource type schema:
 		//
@@ -72,9 +84,7 @@ func dnsViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"dns_view_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"dns_view_id": schemaAttributee3ce24d122d7268f4fa6522b(),
 		// Property: DnssecValidation
 		// CloudFormation resource type schema:
 		//
@@ -85,9 +95,7 @@ func dnsViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"dnssec_validation": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"dnssec_validation": schemaAttributee3ce24d122d7268f4fa6522b(),
 		// Property: EdnsClientSubnet
 		// CloudFormation resource type schema:
 		//
@@ -98,9 +106,7 @@ func dnsViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"edns_client_subnet": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"edns_client_subnet": schemaAttributee3ce24d122d7268f4fa6522b(),
 		// Property: FirewallRulesFailOpen
 		// CloudFormation resource type schema:
 		//
@@ -111,9 +117,7 @@ func dnsViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"firewall_rules_fail_open": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"firewall_rules_fail_open": schemaAttributee3ce24d122d7268f4fa6522b(),
 		// Property: GlobalResolverId
 		// CloudFormation resource type schema:
 		//
@@ -122,9 +126,7 @@ func dnsViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"global_resolver_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"global_resolver_id": schemaAttributee3ce24d122d7268f4fa6522b(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -134,9 +136,7 @@ func dnsViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributee3ce24d122d7268f4fa6522b(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -152,9 +152,7 @@ func dnsViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributee3ce24d122d7268f4fa6522b(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -182,30 +180,14 @@ func dnsViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributecbd384cd2a29dac10c01e638(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttributee3ce24d122d7268f4fa6522b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

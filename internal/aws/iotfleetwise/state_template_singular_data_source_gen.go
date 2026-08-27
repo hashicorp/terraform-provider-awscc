@@ -16,6 +16,40 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute273c4c3b6c1f4048afde6344() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute55f9afda75cd08d19d244b77() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee930d5115703f7388a138d80(),
+				// Property: Value
+				"value": schemaAttributee930d5115703f7388a138d80(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee930d5115703f7388a138d80() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8d84fc9a2dbc5f8981fe374() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iotfleetwise_state_template", stateTemplateDataSource)
 }
@@ -30,9 +64,7 @@ func stateTemplateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributee930d5115703f7388a138d80(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +72,7 @@ func stateTemplateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute273c4c3b6c1f4048afde6344(),
 		// Property: DataExtraDimensions
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +88,7 @@ func stateTemplateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"data_extra_dimensions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_extra_dimensions": schemaAttributef8d84fc9a2dbc5f8981fe374(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -72,9 +98,7 @@ func stateTemplateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributee930d5115703f7388a138d80(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -84,9 +108,7 @@ func stateTemplateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[A-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"state_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"state_template_id": schemaAttributee930d5115703f7388a138d80(),
 		// Property: LastModificationTime
 		// CloudFormation resource type schema:
 		//
@@ -94,10 +116,7 @@ func stateTemplateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modification_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"last_modification_time": schemaAttribute273c4c3b6c1f4048afde6344(),
 		// Property: MetadataExtraDimensions
 		// CloudFormation resource type schema:
 		//
@@ -113,10 +132,7 @@ func stateTemplateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"metadata_extra_dimensions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"metadata_extra_dimensions": schemaAttributef8d84fc9a2dbc5f8981fe374(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -126,18 +142,14 @@ func stateTemplateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[a-zA-Z\\d\\-_:]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributee930d5115703f7388a138d80(),
 		// Property: SignalCatalogArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"signal_catalog_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"signal_catalog_arn": schemaAttributee930d5115703f7388a138d80(),
 		// Property: StateTemplateProperties
 		// CloudFormation resource type schema:
 		//
@@ -153,10 +165,7 @@ func stateTemplateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"state_template_properties": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state_template_properties": schemaAttributef8d84fc9a2dbc5f8981fe374(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -187,21 +196,7 @@ func stateTemplateDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute55f9afda75cd08d19d244b77(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

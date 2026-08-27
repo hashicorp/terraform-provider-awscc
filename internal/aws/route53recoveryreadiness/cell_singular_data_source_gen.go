@@ -15,6 +15,57 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2fca234525ce6ddc4e0b5d61() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of cell Amazon Resource Names (ARNs) contained within this cell, for use in nested cells. For example, Availability Zones within specific Regions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b345033c7c8cdcb749ea74d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f6be2f6b1e98b149ba4c23b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the cell to create.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4cbbc305fb15740207debf56() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e6559639e13c7b25da9c38e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute4cbbc305fb15740207debf56(),
+				// Property: Value
+				"value": schemaAttribute4cbbc305fb15740207debf56(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A collection of tags associated with a resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2cda64235a59362c7f29739() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the cell.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_route53recoveryreadiness_cell", cellDataSource)
 }
@@ -31,10 +82,7 @@ func cellDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"cell_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the cell.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cell_arn": schemaAttributee2cda64235a59362c7f29739(),
 		// Property: CellName
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +92,7 @@ func cellDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9_]+",
 		//	  "type": "string"
 		//	}
-		"cell_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the cell to create.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cell_name": schemaAttribute3f6be2f6b1e98b149ba4c23b(),
 		// Property: Cells
 		// CloudFormation resource type schema:
 		//
@@ -60,11 +105,7 @@ func cellDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 5,
 		//	  "type": "array"
 		//	}
-		"cells": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of cell Amazon Resource Names (ARNs) contained within this cell, for use in nested cells. For example, Availability Zones within specific Regions.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cells": schemaAttribute2fca234525ce6ddc4e0b5d61(),
 		// Property: ParentReadinessScopes
 		// CloudFormation resource type schema:
 		//
@@ -77,11 +118,7 @@ func cellDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 5,
 		//	  "type": "array"
 		//	}
-		"parent_readiness_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The readiness scope for the cell, which can be a cell Amazon Resource Name (ARN) or a recovery group ARN. This is a list but currently can have only one element.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parent_readiness_scopes": schemaAttribute3b345033c7c8cdcb749ea74d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -106,22 +143,7 @@ func cellDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A collection of tags associated with a resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6e6559639e13c7b25da9c38e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

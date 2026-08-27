@@ -16,6 +16,184 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0fd5844b2a6b1ad45e81380b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ActionCondition
+				"action_condition": schemaAttribute507f9270c1f53a7ccfbe1692(),
+				// Property: LabelNameCondition
+				"label_name_condition": schemaAttributee71741059631479fb323b040(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Match conditions for the filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute12171ee4e5f2a3554293d075() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The label name that a log record must contain in order to meet the condition. This must be a fully qualified label name. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a79229fa58e88c039a99dd0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the web ACL that you want to associate with LogDestinationConfigs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1c71d270c6b4a511edb75c61() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The Amazon Resource Names (ARNs) of the logging destinations that you want to associate with the web ACL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute22b70064af6c79818b019ab1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute431230d486960b27f123e0af() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Default handling for logs that don't match any of the specified filtering conditions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4edd0735127eaa0ac38d8426() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "How to handle logs that satisfy the filter's conditions and requirement. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute507f9270c1f53a7ccfbe1692() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Action
+			"action": schemaAttribute22b70064af6c79818b019ab1(),
+		}, /*END SCHEMA*/
+		Description: "A single action condition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62c9d122071b76314395a41a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Behavior
+				"behavior": schemaAttribute4edd0735127eaa0ac38d8426(),
+				// Property: Conditions
+				"conditions": schemaAttribute0fd5844b2a6b1ad45e81380b(),
+				// Property: Requirement
+				"requirement": schemaAttribute22b70064af6c79818b019ab1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The filters that you want to apply to the logs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute75852bbef50d8a89eceb12f0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the query header to inspect.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute75a77a5bfa9620f3649198f4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DefaultBehavior
+			"default_behavior": schemaAttribute431230d486960b27f123e0af(),
+			// Property: Filters
+			"filters": schemaAttribute62c9d122071b76314395a41a(),
+		}, /*END SCHEMA*/
+		Description: "Filtering that specifies which web requests are kept in the logs and which are dropped. You can filter on the rule action and on the web request labels that were applied by matching rules during web ACL evaluation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8189b19a69dfc081fc758adc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Inspect the HTTP method. The method indicates the type of operation that the request is asking the origin to perform. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8297ab906e3293bda464fb52() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Inspect the query string. This is the part of a URL that appears after a ? character, if any. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90e5cfa19f2bdda725e733da() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Inspect the request URI path. This is the part of a web request that identifies a resource, for example, /images/daily-ad.jpg. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute974d3a5c537e92a0f0865625() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttribute75852bbef50d8a89eceb12f0(),
+		}, /*END SCHEMA*/
+		Description: "Inspect a single header. Provide the name of the header to inspect, for example, User-Agent or Referer. This setting isn't case sensitive.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb783c778866f5177c4f1ce4c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Method
+				"method": schemaAttribute8189b19a69dfc081fc758adc(),
+				// Property: QueryString
+				"query_string": schemaAttribute8297ab906e3293bda464fb52(),
+				// Property: SingleHeader
+				"single_header": schemaAttribute974d3a5c537e92a0f0865625(),
+				// Property: UriPath
+				"uri_path": schemaAttribute90e5cfa19f2bdda725e733da(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The parts of the request that you want to keep out of the logs. For example, if you redact the HEADER field, the HEADER field in the firehose will be xxx.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee71741059631479fb323b040() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LabelName
+			"label_name": schemaAttribute12171ee4e5f2a3554293d075(),
+		}, /*END SCHEMA*/
+		Description: "A single label name condition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefad87f099955da98db1350a5() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the logging configuration was created by AWS Firewall Manager, as part of an AWS WAF policy configuration. If true, only Firewall Manager can modify or delete the configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_wafv2_logging_configuration", loggingConfigurationDataSource)
 }
@@ -34,11 +212,7 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "array"
 		//	}
-		"log_destination_configs": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The Amazon Resource Names (ARNs) of the logging destinations that you want to associate with the web ACL.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"log_destination_configs": schemaAttribute1c71d270c6b4a511edb75c61(),
 		// Property: LoggingFilter
 		// CloudFormation resource type schema:
 		//
@@ -141,69 +315,7 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"logging_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DefaultBehavior
-				"default_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Default handling for logs that don't match any of the specified filtering conditions.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Filters
-				"filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Behavior
-							"behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "How to handle logs that satisfy the filter's conditions and requirement. ",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Conditions
-							"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ActionCondition
-										"action_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Action
-												"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "A single action condition.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: LabelNameCondition
-										"label_name_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: LabelName
-												"label_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The label name that a log record must contain in order to meet the condition. This must be a fully qualified label name. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label. ",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "A single label name condition.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "Match conditions for the filter.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Requirement
-							"requirement": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The filters that you want to apply to the logs.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Filtering that specifies which web requests are kept in the logs and which are dropped. You can filter on the rule action and on the web request labels that were applied by matching rules during web ACL evaluation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"logging_filter": schemaAttribute75a77a5bfa9620f3649198f4(),
 		// Property: ManagedByFirewallManager
 		// CloudFormation resource type schema:
 		//
@@ -211,10 +323,7 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Indicates whether the logging configuration was created by AWS Firewall Manager, as part of an AWS WAF policy configuration. If true, only Firewall Manager can modify or delete the configuration.",
 		//	  "type": "boolean"
 		//	}
-		"managed_by_firewall_manager": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the logging configuration was created by AWS Firewall Manager, as part of an AWS WAF policy configuration. If true, only Firewall Manager can modify or delete the configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"managed_by_firewall_manager": schemaAttributefad87f099955da98db1350a5(),
 		// Property: RedactedFields
 		// CloudFormation resource type schema:
 		//
@@ -256,44 +365,7 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "array"
 		//	}
-		"redacted_fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Method
-					"method": schema.StringAttribute{ /*START ATTRIBUTE*/
-						CustomType:  jsontypes.NormalizedType{},
-						Description: "Inspect the HTTP method. The method indicates the type of operation that the request is asking the origin to perform. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: QueryString
-					"query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-						CustomType:  jsontypes.NormalizedType{},
-						Description: "Inspect the query string. This is the part of a URL that appears after a ? character, if any. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SingleHeader
-					"single_header": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the query header to inspect.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Inspect a single header. Provide the name of the header to inspect, for example, User-Agent or Referer. This setting isn't case sensitive.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: UriPath
-					"uri_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-						CustomType:  jsontypes.NormalizedType{},
-						Description: "Inspect the request URI path. This is the part of a web request that identifies a resource, for example, /images/daily-ad.jpg. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The parts of the request that you want to keep out of the logs. For example, if you redact the HEADER field, the HEADER field in the firehose will be xxx.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"redacted_fields": schemaAttributeb783c778866f5177c4f1ce4c(),
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -301,10 +373,7 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Amazon Resource Name (ARN) of the web ACL that you want to associate with LogDestinationConfigs.",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the web ACL that you want to associate with LogDestinationConfigs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_arn": schemaAttribute1a79229fa58e88c039a99dd0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

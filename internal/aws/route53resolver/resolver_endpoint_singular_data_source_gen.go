@@ -15,6 +15,180 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute14e7b3e0aa6695cc9145823b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the Resolver endpoint allows inbound or outbound DNS queries:\n- INBOUND: allows DNS queries to your VPC from your network \n- OUTBOUND: allows DNS queries from your VPC to your network \n- INBOUND_DELEGATION: allows DNS queries to your VPC from your network with authoritative answers from private hosted zones",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute21567f4ced82b23854c53bfb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the resolver endpoint, such as arn:aws:route53resolver:us-east-1:123456789012:resolver-endpoint/resolver-endpoint-a1bzhi.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute36c02942224f09f29e7a9cec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the tag. For example, if you want to associate Resolver resources with the account IDs of your customers for billing purposes, the value of Key might be account-id.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute374ceb44a840d848f883e573() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether IPv6 Internet Gateway access is enabled through the Outbound Resolver Endpoint. When set to true, this property allows your Endpoint ENIs to reach public IPv6 target nameservers through an internet gateway. Default is false.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37adf46bd4dfed0dcfa1186c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IPv6 address that you want to use for DNS queries.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute47139feadfea69d5ed64b451() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute36c02942224f09f29e7a9cec(),
+				// Property: Value
+				"value": schemaAttributecf05c6d58ce88ab02e77cfae(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute592a791773782cc8cd41bed0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN (Amazon Resource Name) for the Outpost.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute59808259dafb96a90b7af5d1() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The ID of one or more security groups that control access to this VPC. The security group must include one or more inbound rules (for inbound endpoints) or outbound rules (for outbound endpoints). Inbound and outbound rules must allow TCP and UDP access. For inbound access, open port 53. For outbound access, open the port that you're using for DNS queries on your network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c2ee84c0fa157e4a0df3c77() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon EC2 instance type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ea43300b4896c72e97246e3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the resolver endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61d89d1a0f6508dd5c6b475f() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether target name server metrics are enabled for the Outbound Resolver Endpoint. When set to true, one-minute granular metrics are published in CloudWatch for each target name server associated with this endpoint. When set to false, metrics are not published. Default is false.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f6be98a0d1edfec5db8725a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A friendly name that lets you easily find a configuration in the Resolver dashboard in the Route 53 console.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c66d3ed8a5f7661bb03ee30() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether RNI enhanced metrics are enabled for the Resolver Endpoints. When set to true, one-minute granular metrics are published in CloudWatch for each RNI associated with this endpoint. When set to false, metrics are not published. Default is false.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9aeaf3e7da9e47097ea02319() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The number of IP addresses that the resolver endpoint can use for DNS queries.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0f77a6b953482ce33102fd4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Resolver endpoint IP address type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac4b3272078b89bd89a096a9() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Protocols used for the endpoint. DoH-FIPS is applicable for inbound endpoints only.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc20a9c9f31318870432eda2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IPv4 address that you want to use for DNS queries.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca38f13000e19d7d9f8853e3() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether DNS64 is enabled for the Inbound Resolver Endpoint. When set to true, if a DNS AAAA query is made for a domain that has only an A (IPv4) record, the resolver automatically synthesizes an AAAA (IPv6) response by embedding the IPv4 address into the well-known prefix 64:ff9b::/96. Default is false.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf05c6d58ce88ab02e77cfae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. For example, if Key is account-id, then Value might be the ID of the customer account that you're creating the resource for.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4c1e3ed689c06a4224d1f55() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the VPC that you want to create the resolver endpoint in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5e93a5483c4a72b26964352() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the subnet that contains the IP address.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefaea3b2c71f37cacb028d0a7() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Ip
+				"ip": schemaAttributebc20a9c9f31318870432eda2(),
+				// Property: Ipv6
+				"ipv_6": schemaAttribute37adf46bd4dfed0dcfa1186c(),
+				// Property: SubnetId
+				"subnet_id": schemaAttributed5e93a5483c4a72b26964352(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The subnets and IP addresses in your VPC that DNS queries originate from (for outbound endpoints) or that you forward DNS queries to (for inbound endpoints). The subnet ID uniquely identifies a VPC.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_route53resolver_resolver_endpoint", resolverEndpointDataSource)
 }
@@ -30,10 +204,7 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The Amazon Resource Name (ARN) of the resolver endpoint, such as arn:aws:route53resolver:us-east-1:123456789012:resolver-endpoint/resolver-endpoint-a1bzhi.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the resolver endpoint, such as arn:aws:route53resolver:us-east-1:123456789012:resolver-endpoint/resolver-endpoint-a1bzhi.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute21567f4ced82b23854c53bfb(),
 		// Property: Direction
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +212,7 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Indicates whether the Resolver endpoint allows inbound or outbound DNS queries:\n- INBOUND: allows DNS queries to your VPC from your network \n- OUTBOUND: allows DNS queries from your VPC to your network \n- INBOUND_DELEGATION: allows DNS queries to your VPC from your network with authoritative answers from private hosted zones",
 		//	  "type": "string"
 		//	}
-		"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the Resolver endpoint allows inbound or outbound DNS queries:\n- INBOUND: allows DNS queries to your VPC from your network \n- OUTBOUND: allows DNS queries from your VPC to your network \n- INBOUND_DELEGATION: allows DNS queries to your VPC from your network with authoritative answers from private hosted zones",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"direction": schemaAttribute14e7b3e0aa6695cc9145823b(),
 		// Property: Dns64Enabled
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +220,7 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Specifies whether DNS64 is enabled for the Inbound Resolver Endpoint. When set to true, if a DNS AAAA query is made for a domain that has only an A (IPv4) record, the resolver automatically synthesizes an AAAA (IPv6) response by embedding the IPv4 address into the well-known prefix 64:ff9b::/96. Default is false.",
 		//	  "type": "boolean"
 		//	}
-		"dns_64_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether DNS64 is enabled for the Inbound Resolver Endpoint. When set to true, if a DNS AAAA query is made for a domain that has only an A (IPv4) record, the resolver automatically synthesizes an AAAA (IPv6) response by embedding the IPv4 address into the well-known prefix 64:ff9b::/96. Default is false.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dns_64_enabled": schemaAttributeca38f13000e19d7d9f8853e3(),
 		// Property: HostVPCId
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +228,7 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The ID of the VPC that you want to create the resolver endpoint in.",
 		//	  "type": "string"
 		//	}
-		"host_vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the VPC that you want to create the resolver endpoint in.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"host_vpc_id": schemaAttributed4c1e3ed689c06a4224d1f55(),
 		// Property: IpAddressCount
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +236,7 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The number of IP addresses that the resolver endpoint can use for DNS queries.",
 		//	  "type": "string"
 		//	}
-		"ip_address_count": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The number of IP addresses that the resolver endpoint can use for DNS queries.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ip_address_count": schemaAttribute9aeaf3e7da9e47097ea02319(),
 		// Property: IpAddresses
 		// CloudFormation resource type schema:
 		//
@@ -108,29 +267,7 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"ip_addresses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Ip
-					"ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The IPv4 address that you want to use for DNS queries.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Ipv6
-					"ipv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The IPv6 address that you want to use for DNS queries.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SubnetId
-					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of the subnet that contains the IP address.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The subnets and IP addresses in your VPC that DNS queries originate from (for outbound endpoints) or that you forward DNS queries to (for inbound endpoints). The subnet ID uniquely identifies a VPC.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ip_addresses": schemaAttributefaea3b2c71f37cacb028d0a7(),
 		// Property: Ipv6InternetAccessEnabled
 		// CloudFormation resource type schema:
 		//
@@ -138,10 +275,7 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Specifies whether IPv6 Internet Gateway access is enabled through the Outbound Resolver Endpoint. When set to true, this property allows your Endpoint ENIs to reach public IPv6 target nameservers through an internet gateway. Default is false.",
 		//	  "type": "boolean"
 		//	}
-		"ipv_6_internet_access_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether IPv6 Internet Gateway access is enabled through the Outbound Resolver Endpoint. When set to true, this property allows your Endpoint ENIs to reach public IPv6 target nameservers through an internet gateway. Default is false.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_6_internet_access_enabled": schemaAttribute374ceb44a840d848f883e573(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -149,10 +283,7 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "A friendly name that lets you easily find a configuration in the Resolver dashboard in the Route 53 console.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A friendly name that lets you easily find a configuration in the Resolver dashboard in the Route 53 console.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute6f6be98a0d1edfec5db8725a(),
 		// Property: OutpostArn
 		// CloudFormation resource type schema:
 		//
@@ -160,10 +291,7 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The ARN (Amazon Resource Name) for the Outpost.",
 		//	  "type": "string"
 		//	}
-		"outpost_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN (Amazon Resource Name) for the Outpost.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"outpost_arn": schemaAttribute592a791773782cc8cd41bed0(),
 		// Property: PreferredInstanceType
 		// CloudFormation resource type schema:
 		//
@@ -171,10 +299,7 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The Amazon EC2 instance type.",
 		//	  "type": "string"
 		//	}
-		"preferred_instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon EC2 instance type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"preferred_instance_type": schemaAttribute5c2ee84c0fa157e4a0df3c77(),
 		// Property: Protocols
 		// CloudFormation resource type schema:
 		//
@@ -187,11 +312,7 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Protocols used for the endpoint. DoH-FIPS is applicable for inbound endpoints only.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"protocols": schemaAttributeac4b3272078b89bd89a096a9(),
 		// Property: ResolverEndpointId
 		// CloudFormation resource type schema:
 		//
@@ -199,10 +320,7 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The ID of the resolver endpoint.",
 		//	  "type": "string"
 		//	}
-		"resolver_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the resolver endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resolver_endpoint_id": schemaAttribute5ea43300b4896c72e97246e3(),
 		// Property: ResolverEndpointType
 		// CloudFormation resource type schema:
 		//
@@ -215,10 +333,7 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"resolver_endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Resolver endpoint IP address type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resolver_endpoint_type": schemaAttributea0f77a6b953482ce33102fd4(),
 		// Property: RniEnhancedMetricsEnabled
 		// CloudFormation resource type schema:
 		//
@@ -226,10 +341,7 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Specifies whether RNI enhanced metrics are enabled for the Resolver Endpoints. When set to true, one-minute granular metrics are published in CloudWatch for each RNI associated with this endpoint. When set to false, metrics are not published. Default is false.",
 		//	  "type": "boolean"
 		//	}
-		"rni_enhanced_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether RNI enhanced metrics are enabled for the Resolver Endpoints. When set to true, one-minute granular metrics are published in CloudWatch for each RNI associated with this endpoint. When set to false, metrics are not published. Default is false.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rni_enhanced_metrics_enabled": schemaAttribute8c66d3ed8a5f7661bb03ee30(),
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -242,11 +354,7 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The ID of one or more security groups that control access to this VPC. The security group must include one or more inbound rules (for inbound endpoints) or outbound rules (for outbound endpoints). Inbound and outbound rules must allow TCP and UDP access. For inbound access, open port 53. For outbound access, open the port that you're using for DNS queries on your network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_ids": schemaAttribute59808259dafb96a90b7af5d1(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -274,24 +382,7 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name for the tag. For example, if you want to associate Resolver resources with the account IDs of your customers for billing purposes, the value of Key might be account-id.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. For example, if Key is account-id, then Value might be the ID of the customer account that you're creating the resource for.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute47139feadfea69d5ed64b451(),
 		// Property: TargetNameServerMetricsEnabled
 		// CloudFormation resource type schema:
 		//
@@ -299,10 +390,7 @@ func resolverEndpointDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Specifies whether target name server metrics are enabled for the Outbound Resolver Endpoint. When set to true, one-minute granular metrics are published in CloudWatch for each target name server associated with this endpoint. When set to false, metrics are not published. Default is false.",
 		//	  "type": "boolean"
 		//	}
-		"target_name_server_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether target name server metrics are enabled for the Outbound Resolver Endpoint. When set to true, one-minute granular metrics are published in CloudWatch for each target name server associated with this endpoint. When set to false, metrics are not published. Default is false.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_name_server_metrics_enabled": schemaAttribute61d89d1a0f6508dd5c6b475f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

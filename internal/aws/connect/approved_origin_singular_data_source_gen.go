@@ -14,6 +14,20 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute46f126ce2e84e80830fa558b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Connect instance identifier",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8767dd51c1b012a8055c85e2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Domain name to be added to the allowlist of instance",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_approved_origin", approvedOriginDataSource)
 }
@@ -32,10 +46,7 @@ func approvedOriginDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Connect instance identifier",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_id": schemaAttribute46f126ce2e84e80830fa558b(),
 		// Property: Origin
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +55,7 @@ func approvedOriginDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 267,
 		//	  "type": "string"
 		//	}
-		"origin": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Domain name to be added to the allowlist of instance",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"origin": schemaAttribute8767dd51c1b012a8055c85e2(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

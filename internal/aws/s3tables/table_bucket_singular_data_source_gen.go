@@ -14,6 +14,201 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute03ab09b10ec4610dc4953c60() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Tag key must be between 1 to 128 characters in length. Tag key cannot start with 'aws:' and can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute042cdb69c753af6ebea07126() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Status
+			"status": schemaAttribute214fcc1e582b514e37783313(),
+		}, /*END SCHEMA*/
+		Description: "Settings governing the Metric configuration for the table bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d415a67ec8330077ef4db76() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DestinationTableBucketARN
+				"destination_table_bucket_arn": schemaAttribute9cd87e4c6848898602674675(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of replication destinations",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute214fcc1e582b514e37783313() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether Metrics are enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2eb716b98bab0ea6e875e9e8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Role
+			"role": schemaAttributef174880dc0e649f82baa6694(),
+			// Property: Rules
+			"rules": schemaAttribute640333357de7373108756f64(),
+		}, /*END SCHEMA*/
+		Description: "Specifies replication configuration for the table bucket",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4e0c07e4896fe50156e2dd35() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The storage class for the table bucket",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54089ba15ae4ca69d248f69b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Tag value must be between 0 to 256 characters in length. Tag value can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ebf9d616c9a92b7971007ee() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the KMS key to use for encryption",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute640333357de7373108756f64() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Destinations
+				"destinations": schemaAttribute0d415a67ec8330077ef4db76(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of replication rules",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6463f6b8cb4dfdd3604f3a93() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute03ab09b10ec4610dc4953c60(),
+				// Property: Value
+				"value": schemaAttribute54089ba15ae4ca69d248f69b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "User tags (key-value pairs) to associate with the table bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute666a7c7fe92654179fb15e23() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: NoncurrentDays
+			"noncurrent_days": schemaAttributecc05eaa05d03152bd457a2a2(),
+			// Property: Status
+			"status": schemaAttribute67f5a3987d7007d065e2b48b(),
+			// Property: UnreferencedDays
+			"unreferenced_days": schemaAttribute767fa26d93bb64da2b07d1d3(),
+		}, /*END SCHEMA*/
+		Description: "Settings governing the Unreferenced File Removal maintenance action. Unreferenced file removal identifies and deletes all objects that are not referenced by any table snapshots.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67f5a3987d7007d065e2b48b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the Unreferenced File Removal maintenance action is enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute747e2e436d38cdcc58165f32() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KMSKeyArn
+			"kms_key_arn": schemaAttribute5ebf9d616c9a92b7971007ee(),
+			// Property: SSEAlgorithm
+			"sse_algorithm": schemaAttributeb40660778ba05cef6b2b851c(),
+		}, /*END SCHEMA*/
+		Description: "Specifies encryption settings for the table bucket",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute767fa26d93bb64da2b07d1d3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "For any object not referenced by your table and older than the UnreferencedDays property, S3 creates a delete marker and marks the object version as noncurrent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9cd87e4c6848898602674675() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the destination table bucket",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae760ce0cbc4df1776546262() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name for the table bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb40660778ba05cef6b2b851c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Server-side encryption algorithm",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc05eaa05d03152bd457a2a2() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "S3 permanently deletes noncurrent objects after the number of days specified by the NoncurrentDays property.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecdc490a87cf276eb17695296() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the specified table bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeece618326a4e695c89939480() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: StorageClass
+			"storage_class": schemaAttribute4e0c07e4896fe50156e2dd35(),
+		}, /*END SCHEMA*/
+		Description: "Specifies storage class settings for the table bucket",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef174880dc0e649f82baa6694() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM role to use for replication",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_s3tables_table_bucket", tableBucketDataSource)
 }
@@ -44,22 +239,7 @@ func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KMSKeyArn
-				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "ARN of the KMS key to use for encryption",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SSEAlgorithm
-				"sse_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Server-side encryption algorithm",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies encryption settings for the table bucket",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"encryption_configuration": schemaAttribute747e2e436d38cdcc58165f32(),
 		// Property: MetricsConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -79,17 +259,7 @@ func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"metrics_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Status
-				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether Metrics are enabled.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Settings governing the Metric configuration for the table bucket.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"metrics_configuration": schemaAttribute042cdb69c753af6ebea07126(),
 		// Property: ReplicationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -144,40 +314,7 @@ func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"replication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Role
-				"role": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the IAM role to use for replication",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Rules
-				"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Destinations
-							"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: DestinationTableBucketARN
-										"destination_table_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The ARN of the destination table bucket",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "List of replication destinations",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "List of replication rules",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies replication configuration for the table bucket",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"replication_configuration": schemaAttribute2eb716b98bab0ea6e875e9e8(),
 		// Property: StorageClassConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -196,17 +333,7 @@ func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"storage_class_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: StorageClass
-				"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The storage class for the table bucket",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies storage class settings for the table bucket",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"storage_class_configuration": schemaAttributeece618326a4e695c89939480(),
 		// Property: TableBucketARN
 		// CloudFormation resource type schema:
 		//
@@ -217,10 +344,7 @@ func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"table_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the specified table bucket.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"table_bucket_arn": schemaAttributecdc490a87cf276eb17695296(),
 		// Property: TableBucketName
 		// CloudFormation resource type schema:
 		//
@@ -230,10 +354,7 @@ func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"table_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the table bucket.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"table_bucket_name": schemaAttributeae760ce0cbc4df1776546262(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -264,24 +385,7 @@ func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Tag key must be between 1 to 128 characters in length. Tag key cannot start with 'aws:' and can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Tag value must be between 0 to 256 characters in length. Tag value can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "User tags (key-value pairs) to associate with the table bucket.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6463f6b8cb4dfdd3604f3a93(),
 		// Property: UnreferencedFileRemoval
 		// CloudFormation resource type schema:
 		//
@@ -310,27 +414,7 @@ func tableBucketDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"unreferenced_file_removal": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: NoncurrentDays
-				"noncurrent_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "S3 permanently deletes noncurrent objects after the number of days specified by the NoncurrentDays property.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Status
-				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether the Unreferenced File Removal maintenance action is enabled.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: UnreferencedDays
-				"unreferenced_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "For any object not referenced by your table and older than the UnreferencedDays property, S3 creates a delete marker and marks the object version as noncurrent.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Settings governing the Unreferenced File Removal maintenance action. Unreferenced file removal identifies and deletes all objects that are not referenced by any table snapshots.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"unreferenced_file_removal": schemaAttribute666a7c7fe92654179fb15e23(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

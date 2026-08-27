@@ -15,6 +15,48 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1d17bd1a52bf42a881d27d49() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute950c5c49d7a1d253c192a39b(),
+				// Property: Value
+				"value": schemaAttribute950c5c49d7a1d253c192a39b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4063bded3b204db47db76342() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute812551a31cf7976bcd30ad99() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute81fb8b1abd9e817c451feb38() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute950c5c49d7a1d253c192a39b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cognito_user_pool_user", userPoolUserDataSource)
 }
@@ -35,11 +77,7 @@ func userPoolUserDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"client_metadata":   // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"client_metadata": schemaAttribute81fb8b1abd9e817c451feb38(),
 		// Property: DesiredDeliveryMediums
 		// CloudFormation resource type schema:
 		//
@@ -49,28 +87,21 @@ func userPoolUserDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"desired_delivery_mediums": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"desired_delivery_mediums": schemaAttribute812551a31cf7976bcd30ad99(),
 		// Property: ForceAliasCreation
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"force_alias_creation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"force_alias_creation": schemaAttribute4063bded3b204db47db76342(),
 		// Property: MessageAction
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"message_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"message_action": schemaAttribute950c5c49d7a1d253c192a39b(),
 		// Property: UserAttributes
 		// CloudFormation resource type schema:
 		//
@@ -89,39 +120,21 @@ func userPoolUserDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"user_attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"user_attributes": schemaAttribute1d17bd1a52bf42a881d27d49(),
 		// Property: UserPoolId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"user_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"user_pool_id": schemaAttribute950c5c49d7a1d253c192a39b(),
 		// Property: Username
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"username": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"username": schemaAttribute950c5c49d7a1d253c192a39b(),
 		// Property: ValidationData
 		// CloudFormation resource type schema:
 		//
@@ -140,21 +153,7 @@ func userPoolUserDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"validation_data": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"validation_data": schemaAttribute1d17bd1a52bf42a881d27d49(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

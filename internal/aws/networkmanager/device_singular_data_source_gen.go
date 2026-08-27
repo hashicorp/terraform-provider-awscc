@@ -14,6 +14,175 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute16f8f475cecdca6e9543bf08() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18a3246b89122c61503a42ed() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The latitude.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1cfb64bcb97ef528f12387c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1f30e1fc91554ca6f4b0b93e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The device type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28bbf37e553aa3eaa4dc45e6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The device model",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute313e43d8c71cefec97740a31() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The device serial number.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d4ac298e87286afdd834175() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute16f8f475cecdca6e9543bf08(),
+				// Property: Value
+				"value": schemaAttribute1cfb64bcb97ef528f12387c4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags for the device.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f3a21c88080076e55afb713() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of the device.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4be21ac691df7198144a5b83() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the subnet that the device is located in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a87cf57924e46de847bfb06() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The physical address.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute68903b3f25016618ba7da246() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Address
+			"address": schemaAttribute5a87cf57924e46de847bfb06(),
+			// Property: Latitude
+			"latitude": schemaAttribute18a3246b89122c61503a42ed(),
+			// Property: Longitude
+			"longitude": schemaAttribute6a134f083fecd1cd48633d21(),
+		}, /*END SCHEMA*/
+		Description: "The site location.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a134f083fecd1cd48633d21() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The longitude.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80f2ee5642e23ba42f15d651() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The site ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8dff0b5d5cd864fd1aebfcc9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date and time that the device was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb08e837a63c3fc95d2b226a9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the device.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebdd449c87a91bc172d26d631() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the device.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec014bee7e9888fe518287799() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the global network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee27962902f31d382b8160a04() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SubnetArn
+			"subnet_arn": schemaAttribute4be21ac691df7198144a5b83(),
+			// Property: Zone
+			"zone": schemaAttributefc35adff5b71cb6068709273(),
+		}, /*END SCHEMA*/
+		Description: "The Amazon Web Services location of the device, if applicable.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef661f7afd7ae7e2b70541a4e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The device vendor.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc35adff5b71cb6068709273() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Zone that the device is located in. Specify the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefcbe14d2cd1132914cc09b7a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the device.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_networkmanager_device", deviceDataSource)
 }
@@ -40,22 +209,7 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"aws_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SubnetArn
-				"subnet_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the subnet that the device is located in.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Zone
-				"zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Zone that the device is located in. Specify the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The Amazon Web Services location of the device, if applicable.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"aws_location": schemaAttributee27962902f31d382b8160a04(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +217,7 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The date and time that the device was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date and time that the device was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute8dff0b5d5cd864fd1aebfcc9(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +225,7 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of the device.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the device.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributefcbe14d2cd1132914cc09b7a(),
 		// Property: DeviceArn
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +233,7 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the device.",
 		//	  "type": "string"
 		//	}
-		"device_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the device.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"device_arn": schemaAttributebdd449c87a91bc172d26d631(),
 		// Property: DeviceId
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +241,7 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the device.",
 		//	  "type": "string"
 		//	}
-		"device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the device.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"device_id": schemaAttributeb08e837a63c3fc95d2b226a9(),
 		// Property: GlobalNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -107,10 +249,7 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the global network.",
 		//	  "type": "string"
 		//	}
-		"global_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the global network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"global_network_id": schemaAttributec014bee7e9888fe518287799(),
 		// Property: Location
 		// CloudFormation resource type schema:
 		//
@@ -133,27 +272,7 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Address
-				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The physical address.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Latitude
-				"latitude": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The latitude.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Longitude
-				"longitude": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The longitude.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The site location.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"location": schemaAttribute68903b3f25016618ba7da246(),
 		// Property: Model
 		// CloudFormation resource type schema:
 		//
@@ -161,10 +280,7 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The device model",
 		//	  "type": "string"
 		//	}
-		"model": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The device model",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"model": schemaAttribute28bbf37e553aa3eaa4dc45e6(),
 		// Property: SerialNumber
 		// CloudFormation resource type schema:
 		//
@@ -172,10 +288,7 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The device serial number.",
 		//	  "type": "string"
 		//	}
-		"serial_number": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The device serial number.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"serial_number": schemaAttribute313e43d8c71cefec97740a31(),
 		// Property: SiteId
 		// CloudFormation resource type schema:
 		//
@@ -183,10 +296,7 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The site ID.",
 		//	  "type": "string"
 		//	}
-		"site_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The site ID.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"site_id": schemaAttribute80f2ee5642e23ba42f15d651(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -194,10 +304,7 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The state of the device.",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The state of the device.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttribute3f3a21c88080076e55afb713(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -226,24 +333,7 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags for the device.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute3d4ac298e87286afdd834175(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -251,10 +341,7 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The device type.",
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The device type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute1f30e1fc91554ca6f4b0b93e(),
 		// Property: Vendor
 		// CloudFormation resource type schema:
 		//
@@ -262,10 +349,7 @@ func deviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The device vendor.",
 		//	  "type": "string"
 		//	}
-		"vendor": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The device vendor.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vendor": schemaAttributef661f7afd7ae7e2b70541a4e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

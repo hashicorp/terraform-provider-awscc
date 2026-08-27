@@ -15,6 +15,25 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute3aee2da001c15172e6458c8f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54621d23b1dc7b8f8c7bc9ed() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: jsontypes.NormalizedType{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute671e561d1e983675403d8587() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_events_archive", archiveDataSource)
 }
@@ -32,9 +51,7 @@ func archiveDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[\\.\\-_A-Za-z0-9]+",
 		//	  "type": "string"
 		//	}
-		"archive_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"archive_name": schemaAttribute671e561d1e983675403d8587(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -42,28 +59,21 @@ func archiveDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:.+\\/.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute671e561d1e983675403d8587(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute671e561d1e983675403d8587(),
 		// Property: EventPattern
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "object"
 		//	}
-		"event_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: jsontypes.NormalizedType{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"event_pattern": schemaAttribute54621d23b1dc7b8f8c7bc9ed(),
 		// Property: KmsKeyIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -72,27 +82,21 @@ func archiveDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_identifier": schemaAttribute671e561d1e983675403d8587(),
 		// Property: RetentionDays
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "integer"
 		//	}
-		"retention_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"retention_days": schemaAttribute3aee2da001c15172e6458c8f(),
 		// Property: SourceArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"source_arn": schemaAttribute671e561d1e983675403d8587(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

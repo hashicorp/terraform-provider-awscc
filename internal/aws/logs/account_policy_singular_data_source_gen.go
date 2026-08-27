@@ -14,6 +14,48 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0ae89c253fb371ae2a185c7e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the account policy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2fd499ab41b2ffaf8cbb9ec2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Log group  selection criteria to apply policy only to a subset of log groups. SelectionCriteria string can be up to 25KB and cloudwatchlogs determines the length of selectionCriteria by using its UTF-8 bytes",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute712d229e44578b779ed232f6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Scope for policy application",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb92b5ded9e77b04bfe60e72b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The body of the policy document you want to use for this topic.\n\nYou can only add one policy per PolicyType.\n\nThe policy must be in JSON string format.\n\nLength Constraints: Maximum length of 30720",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6c46a1203006a7466775bb0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "User account id",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef77317b8316ce6f911855a58() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Type of the policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_logs_account_policy", accountPolicyDataSource)
 }
@@ -30,10 +72,7 @@ func accountPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "User account id",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"account_id": schemaAttributee6c46a1203006a7466775bb0(),
 		// Property: PolicyDocument
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +82,7 @@ func accountPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The body of the policy document you want to use for this topic.\n\nYou can only add one policy per PolicyType.\n\nThe policy must be in JSON string format.\n\nLength Constraints: Maximum length of 30720",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_document": schemaAttributeb92b5ded9e77b04bfe60e72b(),
 		// Property: PolicyName
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +93,7 @@ func accountPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[^:*]{1,256}$",
 		//	  "type": "string"
 		//	}
-		"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the account policy",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_name": schemaAttribute0ae89c253fb371ae2a185c7e(),
 		// Property: PolicyType
 		// CloudFormation resource type schema:
 		//
@@ -75,10 +108,7 @@ func accountPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Type of the policy.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_type": schemaAttributef77317b8316ce6f911855a58(),
 		// Property: Scope
 		// CloudFormation resource type schema:
 		//
@@ -89,10 +119,7 @@ func accountPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Scope for policy application",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scope": schemaAttribute712d229e44578b779ed232f6(),
 		// Property: SelectionCriteria
 		// CloudFormation resource type schema:
 		//
@@ -100,10 +127,7 @@ func accountPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Log group  selection criteria to apply policy only to a subset of log groups. SelectionCriteria string can be up to 25KB and cloudwatchlogs determines the length of selectionCriteria by using its UTF-8 bytes",
 		//	  "type": "string"
 		//	}
-		"selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Log group  selection criteria to apply policy only to a subset of log groups. SelectionCriteria string can be up to 25KB and cloudwatchlogs determines the length of selectionCriteria by using its UTF-8 bytes",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"selection_criteria": schemaAttribute2fd499ab41b2ffaf8cbb9ec2(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

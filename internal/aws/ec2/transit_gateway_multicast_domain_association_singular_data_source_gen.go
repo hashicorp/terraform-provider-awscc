@@ -14,6 +14,48 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute951d98bf0152adb022cbfd7c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of resource, for example a VPC attachment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea33c15031d1cb21edcef2151() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the transit gateway attachment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8402a5a01a99c0168d56100() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of the subnet association.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3be59d0161714361c5c3efa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee07f453f2f7a1e3f0662d457() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the transit gateway multicast domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee403e117bddebc41a0cd1e29() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IDs of the subnets to associate with the transit gateway multicast domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_transit_gateway_multicast_domain_association", transitGatewayMulticastDomainAssociationDataSource)
 }
@@ -29,10 +71,7 @@ func transitGatewayMulticastDomainAssociationDataSource(ctx context.Context) (da
 		//	  "description": "The ID of the resource.",
 		//	  "type": "string"
 		//	}
-		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_id": schemaAttributec3be59d0161714361c5c3efa(),
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +79,7 @@ func transitGatewayMulticastDomainAssociationDataSource(ctx context.Context) (da
 		//	  "description": "The type of resource, for example a VPC attachment.",
 		//	  "type": "string"
 		//	}
-		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of resource, for example a VPC attachment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_type": schemaAttribute951d98bf0152adb022cbfd7c(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +87,7 @@ func transitGatewayMulticastDomainAssociationDataSource(ctx context.Context) (da
 		//	  "description": "The state of the subnet association.",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The state of the subnet association.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributea8402a5a01a99c0168d56100(),
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +95,7 @@ func transitGatewayMulticastDomainAssociationDataSource(ctx context.Context) (da
 		//	  "description": "The IDs of the subnets to associate with the transit gateway multicast domain.",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IDs of the subnets to associate with the transit gateway multicast domain.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_id": schemaAttributee403e117bddebc41a0cd1e29(),
 		// Property: TransitGatewayAttachmentId
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +103,7 @@ func transitGatewayMulticastDomainAssociationDataSource(ctx context.Context) (da
 		//	  "description": "The ID of the transit gateway attachment.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the transit gateway attachment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_attachment_id": schemaAttributea33c15031d1cb21edcef2151(),
 		// Property: TransitGatewayMulticastDomainId
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +111,7 @@ func transitGatewayMulticastDomainAssociationDataSource(ctx context.Context) (da
 		//	  "description": "The ID of the transit gateway multicast domain.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_multicast_domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the transit gateway multicast domain.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_multicast_domain_id": schemaAttributee07f453f2f7a1e3f0662d457(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

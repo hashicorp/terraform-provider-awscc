@@ -14,6 +14,56 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute436bff9890398e918b6a7e93() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ac8536a2710da5bb7848337() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the registry to identify where the Schema is located.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f0595c341af4f5c6df1af64() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RegistryName
+			"registry_name": schemaAttribute5ac8536a2710da5bb7848337(),
+			// Property: SchemaArn
+			"schema_arn": schemaAttribute436bff9890398e918b6a7e93(),
+			// Property: SchemaName
+			"schema_name": schemaAttributeed6fb5f02a03008661787064(),
+		}, /*END SCHEMA*/
+		Description: "Identifier for the schema where the schema version will be created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec37f5b9fbbd463d9c6a888f0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Represents the version ID associated with the schema version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed6fb5f02a03008661787064() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the schema. This parameter requires RegistryName to be provided.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef87710638ca382adac2f6e0f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Complete definition of the schema in plain-text.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_schema_version", schemaVersionDataSource)
 }
@@ -49,27 +99,7 @@ func schemaVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RegistryName
-				"registry_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Name of the registry to identify where the Schema is located.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SchemaArn
-				"schema_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SchemaName
-				"schema_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Name of the schema. This parameter requires RegistryName to be provided.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Identifier for the schema where the schema version will be created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schema": schemaAttribute6f0595c341af4f5c6df1af64(),
 		// Property: SchemaDefinition
 		// CloudFormation resource type schema:
 		//
@@ -79,10 +109,7 @@ func schemaVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"schema_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Complete definition of the schema in plain-text.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schema_definition": schemaAttributef87710638ca382adac2f6e0f(),
 		// Property: VersionId
 		// CloudFormation resource type schema:
 		//
@@ -91,10 +118,7 @@ func schemaVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Represents the version ID associated with the schema version.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version_id": schemaAttributec37f5b9fbbd463d9c6a888f0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

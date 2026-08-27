@@ -14,6 +14,32 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute8557cfe5cb6dfd8c1e6002da() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute921998cbcbbfd276fbbd1e1a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute8557cfe5cb6dfd8c1e6002da(),
+				// Property: Value
+				"value": schemaAttribute8557cfe5cb6dfd8c1e6002da(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefec942d1ad4f51979daea4cb() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_network_insights_access_scope_analysis", networkInsightsAccessScopeAnalysisDataSource)
 }
@@ -28,18 +54,14 @@ func networkInsightsAccessScopeAnalysisDataSource(ctx context.Context) (datasour
 		//	{
 		//	  "type": "integer"
 		//	}
-		"analyzed_eni_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"analyzed_eni_count": schemaAttributefec942d1ad4f51979daea4cb(),
 		// Property: EndDate
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"end_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"end_date": schemaAttribute8557cfe5cb6dfd8c1e6002da(),
 		// Property: FindingsFound
 		// CloudFormation resource type schema:
 		//
@@ -51,45 +73,35 @@ func networkInsightsAccessScopeAnalysisDataSource(ctx context.Context) (datasour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"findings_found": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"findings_found": schemaAttribute8557cfe5cb6dfd8c1e6002da(),
 		// Property: NetworkInsightsAccessScopeAnalysisArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"network_insights_access_scope_analysis_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"network_insights_access_scope_analysis_arn": schemaAttribute8557cfe5cb6dfd8c1e6002da(),
 		// Property: NetworkInsightsAccessScopeAnalysisId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"network_insights_access_scope_analysis_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"network_insights_access_scope_analysis_id": schemaAttribute8557cfe5cb6dfd8c1e6002da(),
 		// Property: NetworkInsightsAccessScopeId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"network_insights_access_scope_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"network_insights_access_scope_id": schemaAttribute8557cfe5cb6dfd8c1e6002da(),
 		// Property: StartDate
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"start_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"start_date": schemaAttribute8557cfe5cb6dfd8c1e6002da(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -101,18 +113,14 @@ func networkInsightsAccessScopeAnalysisDataSource(ctx context.Context) (datasour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute8557cfe5cb6dfd8c1e6002da(),
 		// Property: StatusMessage
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status_message": schemaAttribute8557cfe5cb6dfd8c1e6002da(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -135,21 +143,7 @@ func networkInsightsAccessScopeAnalysisDataSource(ctx context.Context) (datasour
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute921998cbcbbfd276fbbd1e1a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

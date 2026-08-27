@@ -15,6 +15,49 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute10c06908a679414fe705842f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute52fb309eb948e8102940edae(),
+				// Property: Value
+				"value": schemaAttribute52fb309eb948e8102940edae(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags for a traffic mirror filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5083332977c4086010cfe53d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of a traffic mirror filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52fb309eb948e8102940edae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f711c239351d96d7968557b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of a traffic mirror filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef56cab0886ac06fc6fc9d290() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The network service that is associated with the traffic mirror filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_traffic_mirror_filter", trafficMirrorFilterDataSource)
 }
@@ -30,10 +73,7 @@ func trafficMirrorFilterDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The description of a traffic mirror filter.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of a traffic mirror filter.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute9f711c239351d96d7968557b(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +81,7 @@ func trafficMirrorFilterDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The ID of a traffic mirror filter.",
 		//	  "type": "string"
 		//	}
-		"traffic_mirror_filter_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of a traffic mirror filter.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"traffic_mirror_filter_id": schemaAttribute5083332977c4086010cfe53d(),
 		// Property: NetworkServices
 		// CloudFormation resource type schema:
 		//
@@ -61,11 +98,7 @@ func trafficMirrorFilterDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"network_services": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The network service that is associated with the traffic mirror filter.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_services": schemaAttributef56cab0886ac06fc6fc9d290(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -91,22 +124,7 @@ func trafficMirrorFilterDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags for a traffic mirror filter.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute10c06908a679414fe705842f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

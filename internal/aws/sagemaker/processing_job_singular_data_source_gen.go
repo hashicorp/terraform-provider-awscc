@@ -15,6 +15,765 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute000eed244f0e070e628fa11b() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the maximum runtime in seconds.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute018db35803645293a22c0e9b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Redshift database used in Redshift query execution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute02157fdf9baf51d15555d290() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URI of the Amazon S3 prefix Amazon SageMaker downloads data required to run a processing job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0bdac22302b158bb5ae7cf1e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AthenaDatasetDefinition
+			"athena_dataset_definition": schemaAttribute596db0550c1503db43370adb(),
+			// Property: DataDistributionType
+			"data_distribution_type": schemaAttribute2e0c06650f6ffecea0ce5f67(),
+			// Property: InputMode
+			"input_mode": schemaAttribute342d5656f68399e15385e0fd(),
+			// Property: LocalPath
+			"local_path": schemaAttribute697ac91739d2cd173eb8e21f(),
+			// Property: RedshiftDatasetDefinition
+			"redshift_dataset_definition": schemaAttribute3ae5f55a2d029b861b6cf7b1(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for Dataset Definition inputs. The Dataset Definition input must specify exactly one of either `AthenaDatasetDefinition` or `RedshiftDatasetDefinition` types.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0e63b6e3aaba2c1f7f58f413() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Amazon SageMaker FeatureGroup to use as the destination for processing job output. Note that your processing script is responsible for putting records into your Feature Store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute12cf1b671a93ad7e98451418() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the processing job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1316caf1f9b7cb254359599b() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The size of the ML storage volume in gigabytes that you want to provision. You must specify sufficient ML storage for your scenario.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17d4727ed015914204c0dc24() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "When True, input operations such as data download are managed natively by the processing job application. When False (default), input operations are managed by Amazon SageMaker.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d6d42f44fa7b431116a62dc() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The arguments for a container used to run a processing job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1f30f8a1812c3e7631be625e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data generated from an Athena query execution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute216f1444fd6096c822271a20() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "When True, output operations such as data upload are managed natively by the processing job application. When False (default), output operations are managed by Amazon SageMaker.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2184bbc4db48135d75637600() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceCount
+			"instance_count": schemaAttribute2b60adb1bf4755ff43df0c9c(),
+			// Property: InstanceType
+			"instance_type": schemaAttribute8a87c5f323eab65d5bcf0638(),
+			// Property: VolumeKmsKeyId
+			"volume_kms_key_id": schemaAttributed0e84dd7b8935f41f47ebc64(),
+			// Property: VolumeSizeInGB
+			"volume_size_in_gb": schemaAttribute1316caf1f9b7cb254359599b(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for the cluster used to run a processing job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27aacfd610d94aacf22b5d8f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The display name for the trial component. If this key isn't specified, the display name is the trial component name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b60adb1bf4755ff43df0c9c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of ML compute instances to use in the processing job. For distributed processing jobs, specify a value greater than 1. The default value is 1.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e0c06650f6ffecea0ce5f67() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether the generated dataset is FullyReplicated or ShardedByS3Key (default).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3335ba4d37c9deb842b70e5c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AppManaged
+				"app_managed": schemaAttribute17d4727ed015914204c0dc24(),
+				// Property: DatasetDefinition
+				"dataset_definition": schemaAttribute0bdac22302b158bb5ae7cf1e(),
+				// Property: InputName
+				"input_name": schemaAttributeab6761207d1378907565da83(),
+				// Property: S3Input
+				"s3_input": schemaAttribute922325b789f9c7cf9ec04cb1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of inputs configuring the data to download into the processing container.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute342d5656f68399e15385e0fd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to use File or Pipe input mode. In File (default) mode, Amazon SageMaker copies the data from the input source onto the local Amazon Elastic Block Store (Amazon EBS) volumes before starting your training algorithm. This is the most commonly used input mode. In Pipe mode, Amazon SageMaker streams input data from the source directly to your algorithm without using the EBS volume.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3543ab9f3ee6772d433a7c2b() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Sets the environment variables in the Docker container",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute387fa699b9f80cf03a1f89d8() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The VPC security group IDs, in the form 'sg-xxxxxxxx'. Specify the security groups for the VPC that is specified in the 'Subnets' field.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ae5f55a2d029b861b6cf7b1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClusterId
+			"cluster_id": schemaAttribute3c507387410ef0c815e6afc2(),
+			// Property: ClusterRoleArn
+			"cluster_role_arn": schemaAttribute3f60cb9082777784b3f71958(),
+			// Property: Database
+			"database": schemaAttribute018db35803645293a22c0e9b(),
+			// Property: DbUser
+			"db_user": schemaAttributeba1b46ecdcdf349c2ae90889(),
+			// Property: KmsKeyId
+			"kms_key_id": schemaAttributeba4a6c5b78c703d51ace86cb(),
+			// Property: OutputCompression
+			"output_compression": schemaAttributef8bf5abfcdd3abdd34dc1234(),
+			// Property: OutputFormat
+			"output_format": schemaAttribute41395e5de5d1430e30704d3f(),
+			// Property: OutputS3Uri
+			"output_s3_uri": schemaAttributebf25b387ef9548b368e86571(),
+			// Property: QueryString
+			"query_string": schemaAttributecdec52d299f6dcd783dd2e64(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for Redshift Dataset Definition input.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c507387410ef0c815e6afc2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Redshift cluster Identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c76bb848d09d09b6b29eae1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the processing job output.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f60cb9082777784b3f71958() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IAM role attached to your Redshift cluster that Amazon SageMaker uses to generate datasets.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41395e5de5d1430e30704d3f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The data storage format for Redshift query results.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute537e81a3396910cc9d2e4198() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of a training job associated with this processing job",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5590a977663af5e8f0609101() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time at which the processing job started.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute596db0550c1503db43370adb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Catalog
+			"catalog": schemaAttribute9c3ba74503ea472829bf1ad5(),
+			// Property: Database
+			"database": schemaAttributec3a727cbb40465a8f6c6f514(),
+			// Property: KmsKeyId
+			"kms_key_id": schemaAttribute1f30f8a1812c3e7631be625e(),
+			// Property: OutputCompression
+			"output_compression": schemaAttributeb27e195ca872650c85bf0ced(),
+			// Property: OutputFormat
+			"output_format": schemaAttributec405405f4c3a73981703c7fd(),
+			// Property: OutputS3Uri
+			"output_s3_uri": schemaAttribute8744642eb3a907c491f4402c(),
+			// Property: QueryString
+			"query_string": schemaAttributeb7ef7fe38137a2b20f976172(),
+			// Property: WorkGroup
+			"work_group": schemaAttributee230cd0e9d519e73d6b93897(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for Athena Dataset Definition input.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c99170e19c0837ecbac45f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time at which the processing job was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5cf739ca0be91088c60ab0be() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time at which the processing job completed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f7460fcff2cd791e6423df6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KmsKeyId
+			"kms_key_id": schemaAttributeebb9e8875dbd4f9cdd90aa88(),
+			// Property: Outputs
+			"outputs": schemaAttributed10944f4cd2534b0668f7b72(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for uploading output from the processing container.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f872625059bf68b330f43f0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of a monitoring schedule for an endpoint associated with this processing job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f9101460b2455ead01f7e14() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of an existing experiment to associate with the trial component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6101e1f0fb523574bcc849f4() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to encrypt all communications between distributed processing jobs. Choose True to encrypt communications. Encryption provides greater security for distributed processing jobs, but the processing might take longer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61c5d4ca9c4f9afd49ed7ad1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxRuntimeInSeconds
+			"max_runtime_in_seconds": schemaAttribute000eed244f0e070e628fa11b(),
+		}, /*END SCHEMA*/
+		Description: "Configures conditions under which the processing job should be stopped, such as how long the processing job has been running. After the condition is met, the processing job is stopped.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61d69a923cc1e1a9c06360c9() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The ID of the subnets in the VPC to which you want to connect your training job or model. For information about the availability of specific instance types, see https://docs.aws.amazon.com/sagemaker/latest/dg/regions-quotas.html",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62145919924296943710458e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the experiment run to associate with the trial component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62940fcf35fafbe87664af4a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64c7465cf2a1852672b8bce7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag key. Tag keys must be unique per resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute697ac91739d2cd173eb8e21f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The local path where you want Amazon SageMaker to download the Dataset Definition inputs to run a processing job. LocalPath is an absolute path to the input data. This is a required parameter when AppManaged is False (default).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute69d514f6a180e177230160da() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContainerArguments
+			"container_arguments": schemaAttribute1d6d42f44fa7b431116a62dc(),
+			// Property: ContainerEntrypoint
+			"container_entrypoint": schemaAttributecca026fd979dca63a1496071(),
+			// Property: ImageUri
+			"image_uri": schemaAttribute801fcd4fb3febe4a8ee0bae5(),
+		}, /*END SCHEMA*/
+		Description: "Configures the processing job to run a specified Docker container image.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a9fc2fe5b0da26afd8f15f9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to GZIP-decompress the data in Amazon S3 as it is streamed into the processing container. `Gzip` can only be used when `Pipe` mode is specified as the `S3InputMode`. In `Pipe` mode, Amazon SageMaker streams input data from the source directly to your container without using the EBS volume.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute722373d4d61c4b299f19f04a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the processing job. The name must be unique within an AWS Region in the AWS account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute801fcd4fb3febe4a8ee0bae5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The container image to be run by the processing job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82358c8dd9ae9ac5b4d79141() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FeatureGroupName
+			"feature_group_name": schemaAttribute0e63b6e3aaba2c1f7f58f413(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for processing job outputs in Amazon SageMaker Feature Store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8744642eb3a907c491f4402c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The location in Amazon S3 where Athena query results are stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a87c5f323eab65d5bcf0638() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ML compute instance type for the processing job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d99f63b517197faf6b04d34() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Provides the status of a processing job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8fecf38de39c18f352b44dca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to distribute the data from Amazon S3 to all processing instances with `FullyReplicated`, or whether the data from Amazon S3 is shared by Amazon S3 key, downloading one shard of data to each processing instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute922325b789f9c7cf9ec04cb1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LocalPath
+			"local_path": schemaAttributeb53fe983730d885693707372(),
+			// Property: S3CompressionType
+			"s3_compression_type": schemaAttribute6a9fc2fe5b0da26afd8f15f9(),
+			// Property: S3DataDistributionType
+			"s3_data_distribution_type": schemaAttribute8fecf38de39c18f352b44dca(),
+			// Property: S3DataType
+			"s3_data_type": schemaAttributefdac72bc24b9deef7853e9fe(),
+			// Property: S3InputMode
+			"s3_input_mode": schemaAttributedd49ffcaf314a49966e1f3be(),
+			// Property: S3Uri
+			"s3_uri": schemaAttribute02157fdf9baf51d15555d290(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for downloading input data from Amazon S3 into the processing container.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c3ba74503ea472829bf1ad5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the data catalog used in Athena query execution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fb4d5eeef0be76c51094b2f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time at which the processing job was last modified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7b2759c0d281185315c4761() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The local path of a directory where you want Amazon SageMaker to upload its contents to Amazon S3. LocalPath is an absolute path to a directory containing output files. This directory will be created by the platform and exist when your container's entrypoint is invoked.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab6761207d1378907565da83() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the processing job input.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae682ddddf179421891d5af1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnableInterContainerTrafficEncryption
+			"enable_inter_container_traffic_encryption": schemaAttribute6101e1f0fb523574bcc849f4(),
+			// Property: EnableNetworkIsolation
+			"enable_network_isolation": schemaAttributedeaede2c3259d85a28c32a54(),
+			// Property: VpcConfig
+			"vpc_config": schemaAttributee3bf4f79bec22e44885d4d90(),
+		}, /*END SCHEMA*/
+		Description: "Networking options for a job, such as network traffic encryption between containers, whether to allow inbound and outbound network calls to and from containers, and the VPC subnets and security groups to use for VPC-enabled jobs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeafa912afea4af2f210af08eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to upload the results of the processing job continuously or after the job completes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb27e195ca872650c85bf0ced() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The compression used for Athena query results.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3bafcd857b757e1abfca944() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string, up to one KB in size, that contains the reason a processing job failed, if it failed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb53fe983730d885693707372() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The local path in your container where you want Amazon SageMaker to write input data to. `LocalPath` is an absolute path to the input data and must begin with `/opt/ml/processing/`. LocalPath is a required parameter when `AppManaged` is `False` (default).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb7ef7fe38137a2b20f976172() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SQL query statements, to be executed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8562f1cc603e88174f6442c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ExperimentName
+			"experiment_name": schemaAttribute5f9101460b2455ead01f7e14(),
+			// Property: RunName
+			"run_name": schemaAttribute62145919924296943710458e(),
+			// Property: TrialComponentDisplayName
+			"trial_component_display_name": schemaAttribute27aacfd610d94aacf22b5d8f(),
+			// Property: TrialName
+			"trial_name": schemaAttributef6ce90f4b29d6efeb61a6b46(),
+		}, /*END SCHEMA*/
+		Description: "Associates a SageMaker job as a trial component with an experiment and trial.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba1b46ecdcdf349c2ae90889() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The database user name used in Redshift query execution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba4a6c5b78c703d51ace86cb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data from a Redshift execution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe0b3ba4795c68f217b0e19a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClusterConfig
+			"cluster_config": schemaAttribute2184bbc4db48135d75637600(),
+		}, /*END SCHEMA*/
+		Description: "Identifies the resources, ML compute instances, and ML storage volumes to deploy for a processing job. In distributed training, you specify more than one instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf25b387ef9548b368e86571() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The location in Amazon S3 where the Redshift query results are stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3a727cbb40465a8f6c6f514() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the database used in the Athena query execution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec405405f4c3a73981703c7fd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The data storage format for Athena query results.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecca026fd979dca63a1496071() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The entrypoint for a container used to run a processing job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecdec52d299f6dcd783dd2e64() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SQL query statements to be executed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed0e84dd7b8935f41f47ebc64() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the processing job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed10944f4cd2534b0668f7b72() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AppManaged
+				"app_managed": schemaAttribute216f1444fd6096c822271a20(),
+				// Property: FeatureStoreOutput
+				"feature_store_output": schemaAttribute82358c8dd9ae9ac5b4d79141(),
+				// Property: OutputName
+				"output_name": schemaAttribute3c76bb848d09d09b6b29eae1(),
+				// Property: S3Output
+				"s3_output": schemaAttributefed3125c3f90d2939a893548(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of outputs configuring the data to upload from the processing container.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd49ffcaf314a49966e1f3be() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to use File or Pipe input mode. In File mode, Amazon SageMaker copies the data from the input source onto the local ML storage volume before starting your processing container. This is the most commonly used input mode. In Pipe mode, Amazon SageMaker streams input data from the source directly to your processing container into named pipes without using the ML storage volume.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedeaede2c3259d85a28c32a54() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to allow inbound and outbound network calls to and from the containers used for the processing job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee230cd0e9d519e73d6b93897() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the workgroup in which the Athena query is being started.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3bf4f79bec22e44885d4d90() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttribute387fa699b9f80cf03a1f89d8(),
+			// Property: Subnets
+			"subnets": schemaAttribute61d69a923cc1e1a9c06360c9(),
+		}, /*END SCHEMA*/
+		Description: "Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. For more information, see https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea9563bae25fd1fedd95428f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A URI that identifies the Amazon S3 bucket where you want Amazon SageMaker to save the results of a processing job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeebb9e8875dbd4f9cdd90aa88() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the processing job output. KmsKeyId can be an ID of a KMS key, ARN of a KMS key, or alias of a KMS key. The KmsKeyId is applied to all outputs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1874906d22bd1a30f36122a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An optional string, up to one KB in size, that contains metadata from the processing container when the processing job exits.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6ce90f4b29d6efeb61a6b46() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of an existing trial to associate the trial component with. If not specified, a new trial is created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6e8f6e7feb53890c1aca267() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8bf5abfcdd3abdd34dc1234() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The compression used for Redshift query results.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9a8dd0eba06cad83612ce6a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of an AutoML job associated with this processing job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa1645bf7d706b48d43c2516() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute64c7465cf2a1852672b8bce7(),
+				// Property: Value
+				"value": schemaAttribute62940fcf35fafbe87664af4a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "(Optional) An array of key-value pairs. For more information, see Using Cost Allocation Tags(https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL) in the AWS Billing and Cost Management User Guide.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdac72bc24b9deef7853e9fe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether you use an S3Prefix or a ManifestFile for the data type. If you choose S3Prefix, S3Uri identifies a key name prefix. Amazon SageMaker uses all objects with the specified key name prefix for the processing job. If you choose ManifestFile, S3Uri identifies an object that is a manifest file containing a list of object keys that you want Amazon SageMaker to use for the processing job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefed3125c3f90d2939a893548() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LocalPath
+			"local_path": schemaAttributea7b2759c0d281185315c4761(),
+			// Property: S3UploadMode
+			"s3_upload_mode": schemaAttributeafa912afea4af2f210af08eb(),
+			// Property: S3Uri
+			"s3_uri": schemaAttributeea9563bae25fd1fedd95428f(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for uploading output data to Amazon S3 from the processing container.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_processing_job", processingJobDataSource)
 }
@@ -71,29 +830,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"app_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ContainerArguments
-				"container_arguments": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The arguments for a container used to run a processing job.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ContainerEntrypoint
-				"container_entrypoint": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The entrypoint for a container used to run a processing job.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ImageUri
-				"image_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The container image to be run by the processing job.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configures the processing job to run a specified Docker container image.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"app_specification": schemaAttribute69d514f6a180e177230160da(),
 		// Property: AutoMLJobArn
 		// CloudFormation resource type schema:
 		//
@@ -102,10 +839,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"auto_ml_job_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of an AutoML job associated with this processing job.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"auto_ml_job_arn": schemaAttributef9a8dd0eba06cad83612ce6a(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -113,10 +847,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The time at which the processing job was created.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time at which the processing job was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute5c99170e19c0837ecbac45f3(),
 		// Property: Environment
 		// CloudFormation resource type schema:
 		//
@@ -132,12 +863,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"environment":       // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Sets the environment variables in the Docker container",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"environment": schemaAttribute3543ab9f3ee6772d433a7c2b(),
 		// Property: ExitMessage
 		// CloudFormation resource type schema:
 		//
@@ -147,10 +873,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "[\\S\\s]*",
 		//	  "type": "string"
 		//	}
-		"exit_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An optional string, up to one KB in size, that contains metadata from the processing container when the processing job exits.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"exit_message": schemaAttributef1874906d22bd1a30f36122a(),
 		// Property: ExperimentConfig
 		// CloudFormation resource type schema:
 		//
@@ -185,32 +908,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"experiment_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ExperimentName
-				"experiment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of an existing experiment to associate with the trial component.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RunName
-				"run_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the experiment run to associate with the trial component.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TrialComponentDisplayName
-				"trial_component_display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The display name for the trial component. If this key isn't specified, the display name is the trial component name.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TrialName
-				"trial_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of an existing trial to associate the trial component with. If not specified, a new trial is created.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Associates a SageMaker job as a trial component with an experiment and trial.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"experiment_config": schemaAttributeb8562f1cc603e88174f6442c(),
 		// Property: FailureReason
 		// CloudFormation resource type schema:
 		//
@@ -219,10 +917,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A string, up to one KB in size, that contains the reason a processing job failed, if it failed.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"failure_reason": schemaAttributeb3bafcd857b757e1abfca944(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -230,10 +925,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The time at which the processing job was last modified.",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time at which the processing job was last modified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttribute9fb4d5eeef0be76c51094b2f(),
 		// Property: MonitoringScheduleArn
 		// CloudFormation resource type schema:
 		//
@@ -242,10 +934,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"monitoring_schedule_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of a monitoring schedule for an endpoint associated with this processing job.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"monitoring_schedule_arn": schemaAttribute5f872625059bf68b330f43f0(),
 		// Property: NetworkConfig
 		// CloudFormation resource type schema:
 		//
@@ -303,41 +992,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"network_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EnableInterContainerTrafficEncryption
-				"enable_inter_container_traffic_encryption": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Whether to encrypt all communications between distributed processing jobs. Choose True to encrypt communications. Encryption provides greater security for distributed processing jobs, but the processing might take longer.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EnableNetworkIsolation
-				"enable_network_isolation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Whether to allow inbound and outbound network calls to and from the containers used for the processing job.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VpcConfig
-				"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: SecurityGroupIds
-						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The VPC security group IDs, in the form 'sg-xxxxxxxx'. Specify the security groups for the VPC that is specified in the 'Subnets' field.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Subnets
-						"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The ID of the subnets in the VPC to which you want to connect your training job or model. For information about the availability of specific instance types, see https://docs.aws.amazon.com/sagemaker/latest/dg/regions-quotas.html",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs, hosted models, and compute resources have access to. You can control access to and from your resources by configuring a VPC. For more information, see https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Networking options for a job, such as network traffic encryption between containers, whether to allow inbound and outbound network calls to and from containers, and the VPC subnets and security groups to use for VPC-enabled jobs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_config": schemaAttributeae682ddddf179421891d5af1(),
 		// Property: ProcessingEndTime
 		// CloudFormation resource type schema:
 		//
@@ -345,10 +1000,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The time at which the processing job completed.",
 		//	  "type": "string"
 		//	}
-		"processing_end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time at which the processing job completed.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"processing_end_time": schemaAttribute5cf739ca0be91088c60ab0be(),
 		// Property: ProcessingInputs
 		// CloudFormation resource type schema:
 		//
@@ -616,182 +1268,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"processing_inputs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AppManaged
-					"app_managed": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "When True, input operations such as data download are managed natively by the processing job application. When False (default), input operations are managed by Amazon SageMaker.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: DatasetDefinition
-					"dataset_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AthenaDatasetDefinition
-							"athena_dataset_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Catalog
-									"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the data catalog used in Athena query execution.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Database
-									"database": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the database used in the Athena query execution.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: KmsKeyId
-									"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data generated from an Athena query execution.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: OutputCompression
-									"output_compression": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The compression used for Athena query results.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: OutputFormat
-									"output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The data storage format for Athena query results.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: OutputS3Uri
-									"output_s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The location in Amazon S3 where Athena query results are stored.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: QueryString
-									"query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The SQL query statements, to be executed.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: WorkGroup
-									"work_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the workgroup in which the Athena query is being started.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Configuration for Athena Dataset Definition input.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: DataDistributionType
-							"data_distribution_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Whether the generated dataset is FullyReplicated or ShardedByS3Key (default).",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: InputMode
-							"input_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Whether to use File or Pipe input mode. In File (default) mode, Amazon SageMaker copies the data from the input source onto the local Amazon Elastic Block Store (Amazon EBS) volumes before starting your training algorithm. This is the most commonly used input mode. In Pipe mode, Amazon SageMaker streams input data from the source directly to your algorithm without using the EBS volume.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: LocalPath
-							"local_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The local path where you want Amazon SageMaker to download the Dataset Definition inputs to run a processing job. LocalPath is an absolute path to the input data. This is a required parameter when AppManaged is False (default).",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: RedshiftDatasetDefinition
-							"redshift_dataset_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: ClusterId
-									"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The Redshift cluster Identifier.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ClusterRoleArn
-									"cluster_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The IAM role attached to your Redshift cluster that Amazon SageMaker uses to generate datasets.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Database
-									"database": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the Redshift database used in Redshift query execution.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: DbUser
-									"db_user": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The database user name used in Redshift query execution.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: KmsKeyId
-									"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data from a Redshift execution.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: OutputCompression
-									"output_compression": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The compression used for Redshift query results.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: OutputFormat
-									"output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The data storage format for Redshift query results.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: OutputS3Uri
-									"output_s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The location in Amazon S3 where the Redshift query results are stored.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: QueryString
-									"query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The SQL query statements to be executed.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Configuration for Redshift Dataset Definition input.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Configuration for Dataset Definition inputs. The Dataset Definition input must specify exactly one of either `AthenaDatasetDefinition` or `RedshiftDatasetDefinition` types.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: InputName
-					"input_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name for the processing job input.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: S3Input
-					"s3_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: LocalPath
-							"local_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The local path in your container where you want Amazon SageMaker to write input data to. `LocalPath` is an absolute path to the input data and must begin with `/opt/ml/processing/`. LocalPath is a required parameter when `AppManaged` is `False` (default).",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: S3CompressionType
-							"s3_compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Whether to GZIP-decompress the data in Amazon S3 as it is streamed into the processing container. `Gzip` can only be used when `Pipe` mode is specified as the `S3InputMode`. In `Pipe` mode, Amazon SageMaker streams input data from the source directly to your container without using the EBS volume.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: S3DataDistributionType
-							"s3_data_distribution_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Whether to distribute the data from Amazon S3 to all processing instances with `FullyReplicated`, or whether the data from Amazon S3 is shared by Amazon S3 key, downloading one shard of data to each processing instance.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: S3DataType
-							"s3_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Whether you use an S3Prefix or a ManifestFile for the data type. If you choose S3Prefix, S3Uri identifies a key name prefix. Amazon SageMaker uses all objects with the specified key name prefix for the processing job. If you choose ManifestFile, S3Uri identifies an object that is a manifest file containing a list of object keys that you want Amazon SageMaker to use for the processing job.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: S3InputMode
-							"s3_input_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Whether to use File or Pipe input mode. In File mode, Amazon SageMaker copies the data from the input source onto the local ML storage volume before starting your processing container. This is the most commonly used input mode. In Pipe mode, Amazon SageMaker streams input data from the source directly to your processing container into named pipes without using the ML storage volume.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: S3Uri
-							"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The URI of the Amazon S3 prefix Amazon SageMaker downloads data required to run a processing job.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Configuration for downloading input data from Amazon S3 into the processing container.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of inputs configuring the data to download into the processing container.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"processing_inputs": schemaAttribute3335ba4d37c9deb842b70e5c(),
 		// Property: ProcessingJobArn
 		// CloudFormation resource type schema:
 		//
@@ -802,10 +1279,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:processing-job/.*",
 		//	  "type": "string"
 		//	}
-		"processing_job_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the processing job.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"processing_job_arn": schemaAttribute12cf1b671a93ad7e98451418(),
 		// Property: ProcessingJobName
 		// CloudFormation resource type schema:
 		//
@@ -816,10 +1290,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
 		//	  "type": "string"
 		//	}
-		"processing_job_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the processing job. The name must be unique within an AWS Region in the AWS account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"processing_job_name": schemaAttribute722373d4d61c4b299f19f04a(),
 		// Property: ProcessingJobStatus
 		// CloudFormation resource type schema:
 		//
@@ -834,10 +1305,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"processing_job_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Provides the status of a processing job.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"processing_job_status": schemaAttribute8d99f63b517197faf6b04d34(),
 		// Property: ProcessingOutputConfig
 		// CloudFormation resource type schema:
 		//
@@ -930,70 +1398,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"processing_output_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KmsKeyId
-				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the processing job output. KmsKeyId can be an ID of a KMS key, ARN of a KMS key, or alias of a KMS key. The KmsKeyId is applied to all outputs.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Outputs
-				"outputs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AppManaged
-							"app_managed": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "When True, output operations such as data upload are managed natively by the processing job application. When False (default), output operations are managed by Amazon SageMaker.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: FeatureStoreOutput
-							"feature_store_output": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: FeatureGroupName
-									"feature_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the Amazon SageMaker FeatureGroup to use as the destination for processing job output. Note that your processing script is responsible for putting records into your Feature Store.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Configuration for processing job outputs in Amazon SageMaker Feature Store.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: OutputName
-							"output_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name for the processing job output.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: S3Output
-							"s3_output": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: LocalPath
-									"local_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The local path of a directory where you want Amazon SageMaker to upload its contents to Amazon S3. LocalPath is an absolute path to a directory containing output files. This directory will be created by the platform and exist when your container's entrypoint is invoked.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: S3UploadMode
-									"s3_upload_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Whether to upload the results of the processing job continuously or after the job completes.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: S3Uri
-									"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A URI that identifies the Amazon S3 bucket where you want Amazon SageMaker to save the results of a processing job.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Configuration for uploading output data to Amazon S3 from the processing container.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "An array of outputs configuring the data to upload from the processing container.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration for uploading output from the processing container.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"processing_output_config": schemaAttribute5f7460fcff2cd791e6423df6(),
 		// Property: ProcessingResources
 		// CloudFormation resource type schema:
 		//
@@ -1158,39 +1563,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"processing_resources": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ClusterConfig
-				"cluster_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: InstanceCount
-						"instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The number of ML compute instances to use in the processing job. For distributed processing jobs, specify a value greater than 1. The default value is 1.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: InstanceType
-						"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ML compute instance type for the processing job.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: VolumeKmsKeyId
-						"volume_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance(s) that run the processing job.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: VolumeSizeInGB
-						"volume_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The size of the ML storage volume in gigabytes that you want to provision. You must specify sufficient ML storage for your scenario.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration for the cluster used to run a processing job.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Identifies the resources, ML compute instances, and ML storage volumes to deploy for a processing job. In distributed training, you specify more than one instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"processing_resources": schemaAttributebe0b3ba4795c68f217b0e19a(),
 		// Property: ProcessingStartTime
 		// CloudFormation resource type schema:
 		//
@@ -1198,10 +1571,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The time at which the processing job started.",
 		//	  "type": "string"
 		//	}
-		"processing_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time at which the processing job started.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"processing_start_time": schemaAttribute5590a977663af5e8f0609101(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -1212,10 +1582,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttributef6e8f6e7feb53890c1aca267(),
 		// Property: StoppingCondition
 		// CloudFormation resource type schema:
 		//
@@ -1235,17 +1602,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"stopping_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaxRuntimeInSeconds
-				"max_runtime_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the maximum runtime in seconds.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configures conditions under which the processing job should be stopped, such as how long the processing job has been running. After the condition is met, the processing job is stopped.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"stopping_condition": schemaAttribute61c5d4ca9c4f9afd49ed7ad1(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1279,24 +1636,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag key. Tag keys must be unique per resource.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "(Optional) An array of key-value pairs. For more information, see Using Cost Allocation Tags(https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL) in the AWS Billing and Cost Management User Guide.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributefa1645bf7d706b48d43c2516(),
 		// Property: TrainingJobArn
 		// CloudFormation resource type schema:
 		//
@@ -1305,10 +1645,7 @@ func processingJobDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"training_job_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of a training job associated with this processing job",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"training_job_arn": schemaAttribute537e81a3396910cc9d2e4198(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,153 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute159b25ea45d745ac651d58e3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "[Private NAT gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT gateway. For more information about secondary addresses, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon Virtual Private Cloud User Guide*.\n ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18be2c0da20eb49e1984f067() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1f7722d8ab2ef76b09a69480() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37887ec77e35482dacd3d225() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute1f7722d8ab2ef76b09a69480(),
+				// Property: Value
+				"value": schemaAttribute4ca446d5a053f0941d3a293d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags for the NAT gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3cd65576248e886cd828ba49() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Secondary EIP allocation IDs. For more information, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html) in the *Amazon VPC User Guide*.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a7a5965ebff03c78cdb82bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether this is a zonal (single-AZ) or regional (multi-AZ) NAT gateway.\n A zonal NAT gateway is a NAT Gateway that provides redundancy and scalability within a single availability zone. A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.\n For more information, see [Regional NAT gateways for automatic multi-AZ expansion](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html) in the *Amazon VPC User Guide*.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b513d4a3db3d31436c3419c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "For regional NAT gateways only: The Availability Zone where this specific NAT gateway configuration will be active. Each AZ in a regional NAT gateway has its own configuration to handle outbound NAT traffic from that AZ. \n A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ca446d5a053f0941d3a293d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ca908d8961d115c2b84fe80() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "For regional NAT gateways only: The ID of the Availability Zone where this specific NAT gateway configuration will be active. Each AZ in a regional NAT gateway has its own configuration to handle outbound NAT traffic from that AZ. Use this instead of AvailabilityZone for consistent identification of AZs across AWS Regions. \n A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bac1325e93bab02285ddfd3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress. Default value is 350 seconds.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80c13f42a433764bf6243d42() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the NAT gateway supports public or private connectivity. The default is public connectivity.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c790de44b643a4303c70bba() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllocationIds
+				"allocation_ids": schemaAttributedb0a7fd1d9a0a289ff87f0cd(),
+				// Property: AvailabilityZone
+				"availability_zone": schemaAttribute4b513d4a3db3d31436c3419c(),
+				// Property: AvailabilityZoneId
+				"availability_zone_id": schemaAttribute6ca908d8961d115c2b84fe80(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "For regional NAT gateways only: Specifies which Availability Zones you want the NAT gateway to support and the Elastic IP addresses (EIPs) to use in each AZ. The regional NAT gateway uses these EIPs to handle outbound NAT traffic from their respective AZs. If not specified, the NAT gateway will automatically expand to new AZs and associate EIPs upon detection of an elastic network interface. If you specify this parameter, auto-expansion is disabled and you must manually manage AZ coverage.\n A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.\n For more information, see [Regional NAT gateways for automatic multi-AZ expansion](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html) in the *Amazon VPC User Guide*.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0a1ef2a720faaf0ee9cca5b() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Secondary private IPv4 addresses. For more information about secondary addresses, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon Virtual Private Cloud User Guide*.\n ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb52d7cd10cc8d0ae4bb02f16() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf5efeea01f0bc650c367db7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the subnet in which the NAT gateway is located.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb0a7fd1d9a0a289ff87f0cd() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The allocation IDs of the Elastic IP addresses (EIPs) to be used for handling outbound NAT traffic in this specific Availability Zone.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefbd29042f9dbfd76ead61901() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "[Public NAT gateway only] The allocation ID of the Elastic IP address that's associated with the NAT gateway. This property is required for a public NAT gateway and cannot be specified with a private NAT gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefeec762fa7a96a335910f31f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the VPC in which the NAT gateway is located.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_nat_gateway", natGatewayDataSource)
 }
@@ -30,10 +177,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "[Public NAT gateway only] The allocation ID of the Elastic IP address that's associated with the NAT gateway. This property is required for a public NAT gateway and cannot be specified with a private NAT gateway.",
 		//	  "type": "string"
 		//	}
-		"allocation_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "[Public NAT gateway only] The allocation ID of the Elastic IP address that's associated with the NAT gateway. This property is required for a public NAT gateway and cannot be specified with a private NAT gateway.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"allocation_id": schemaAttributefbd29042f9dbfd76ead61901(),
 		// Property: AutoProvisionZones
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +185,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"auto_provision_zones": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"auto_provision_zones": schemaAttributeb52d7cd10cc8d0ae4bb02f16(),
 		// Property: AutoScalingIps
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +193,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"auto_scaling_ips": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"auto_scaling_ips": schemaAttributeb52d7cd10cc8d0ae4bb02f16(),
 		// Property: AvailabilityMode
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +201,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether this is a zonal (single-AZ) or regional (multi-AZ) NAT gateway.\n A zonal NAT gateway is a NAT Gateway that provides redundancy and scalability within a single availability zone. A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.\n For more information, see [Regional NAT gateways for automatic multi-AZ expansion](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html) in the *Amazon VPC User Guide*.",
 		//	  "type": "string"
 		//	}
-		"availability_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether this is a zonal (single-AZ) or regional (multi-AZ) NAT gateway.\n A zonal NAT gateway is a NAT Gateway that provides redundancy and scalability within a single availability zone. A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.\n For more information, see [Regional NAT gateways for automatic multi-AZ expansion](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html) in the *Amazon VPC User Guide*.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"availability_mode": schemaAttribute4a7a5965ebff03c78cdb82bb(),
 		// Property: AvailabilityZoneAddresses
 		// CloudFormation resource type schema:
 		//
@@ -103,30 +238,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"availability_zone_addresses": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AllocationIds
-					"allocation_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The allocation IDs of the Elastic IP addresses (EIPs) to be used for handling outbound NAT traffic in this specific Availability Zone.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: AvailabilityZone
-					"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "For regional NAT gateways only: The Availability Zone where this specific NAT gateway configuration will be active. Each AZ in a regional NAT gateway has its own configuration to handle outbound NAT traffic from that AZ. \n A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: AvailabilityZoneId
-					"availability_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "For regional NAT gateways only: The ID of the Availability Zone where this specific NAT gateway configuration will be active. Each AZ in a regional NAT gateway has its own configuration to handle outbound NAT traffic from that AZ. Use this instead of AvailabilityZone for consistent identification of AZs across AWS Regions. \n A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "For regional NAT gateways only: Specifies which Availability Zones you want the NAT gateway to support and the Elastic IP addresses (EIPs) to use in each AZ. The regional NAT gateway uses these EIPs to handle outbound NAT traffic from their respective AZs. If not specified, the NAT gateway will automatically expand to new AZs and associate EIPs upon detection of an elastic network interface. If you specify this parameter, auto-expansion is disabled and you must manually manage AZ coverage.\n A regional NAT gateway is a single NAT Gateway that works across multiple availability zones (AZs) in your VPC, providing redundancy, scalability and availability across all the AZs in a Region.\n For more information, see [Regional NAT gateways for automatic multi-AZ expansion](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html) in the *Amazon VPC User Guide*.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"availability_zone_addresses": schemaAttribute8c790de44b643a4303c70bba(),
 		// Property: ConnectivityType
 		// CloudFormation resource type schema:
 		//
@@ -134,10 +246,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether the NAT gateway supports public or private connectivity. The default is public connectivity.",
 		//	  "type": "string"
 		//	}
-		"connectivity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the NAT gateway supports public or private connectivity. The default is public connectivity.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connectivity_type": schemaAttribute80c13f42a433764bf6243d42(),
 		// Property: EniId
 		// CloudFormation resource type schema:
 		//
@@ -145,10 +254,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"eni_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"eni_id": schemaAttributeb52d7cd10cc8d0ae4bb02f16(),
 		// Property: MaxDrainDurationSeconds
 		// CloudFormation resource type schema:
 		//
@@ -156,10 +262,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress. Default value is 350 seconds.",
 		//	  "type": "integer"
 		//	}
-		"max_drain_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum amount of time to wait (in seconds) before forcibly releasing the IP addresses if connections are still in progress. Default value is 350 seconds.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"max_drain_duration_seconds": schemaAttribute7bac1325e93bab02285ddfd3(),
 		// Property: NatGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -167,10 +270,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"nat_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"nat_gateway_id": schemaAttributeb52d7cd10cc8d0ae4bb02f16(),
 		// Property: PrivateIpAddress
 		// CloudFormation resource type schema:
 		//
@@ -178,10 +278,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.",
 		//	  "type": "string"
 		//	}
-		"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"private_ip_address": schemaAttribute18be2c0da20eb49e1984f067(),
 		// Property: RouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -189,10 +286,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"route_table_id": schemaAttributeb52d7cd10cc8d0ae4bb02f16(),
 		// Property: SecondaryAllocationIds
 		// CloudFormation resource type schema:
 		//
@@ -205,11 +299,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"secondary_allocation_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Secondary EIP allocation IDs. For more information, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html) in the *Amazon VPC User Guide*.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"secondary_allocation_ids": schemaAttribute3cd65576248e886cd828ba49(),
 		// Property: SecondaryPrivateIpAddressCount
 		// CloudFormation resource type schema:
 		//
@@ -218,10 +308,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"secondary_private_ip_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "[Private NAT gateway only] The number of secondary private IPv4 addresses you want to assign to the NAT gateway. For more information about secondary addresses, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon Virtual Private Cloud User Guide*.\n ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"secondary_private_ip_address_count": schemaAttribute159b25ea45d745ac651d58e3(),
 		// Property: SecondaryPrivateIpAddresses
 		// CloudFormation resource type schema:
 		//
@@ -234,11 +321,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"secondary_private_ip_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Secondary private IPv4 addresses. For more information about secondary addresses, see [Create a NAT gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating) in the *Amazon Virtual Private Cloud User Guide*.\n ``SecondaryPrivateIpAddressCount`` and ``SecondaryPrivateIpAddresses`` cannot be set at the same time.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"secondary_private_ip_addresses": schemaAttributeb0a1ef2a720faaf0ee9cca5b(),
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -246,10 +329,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the subnet in which the NAT gateway is located.",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the subnet in which the NAT gateway is located.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_id": schemaAttributecf5efeea01f0bc650c367db7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -278,24 +358,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags for the NAT gateway.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute37887ec77e35482dacd3d225(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -303,10 +366,7 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the VPC in which the NAT gateway is located.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the VPC in which the NAT gateway is located.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttributefeec762fa7a96a335910f31f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

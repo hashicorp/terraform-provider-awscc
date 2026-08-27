@@ -15,6 +15,219 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0000f596280cb1bc961cb30e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute08c4e67d5f632580d2c98380() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FunctionList
+			"function_list": schemaAttributefb10cf6499593058429fc18a(),
+			// Property: Output
+			"output": schemaAttribute41b1efa8ac9eeaa5a6926c64(),
+			// Property: Runtime
+			"runtime": schemaAttribute6344f02f59cdf697cc279dba(),
+			// Property: TimeoutMilliseconds
+			"timeout_milliseconds": schemaAttributef3ec323e0dc261576a4a28aa(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for sequential executor functions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10d80c47efe92b471f47df54() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the function to execute.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1def7fc889c256673a17de21() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL endpoint for the HTTP request.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e381f7a465653504bb5e72e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Output
+			"output": schemaAttribute71463de18e327badc87b1bd9(),
+			// Property: Runtime
+			"runtime": schemaAttribute6344f02f59cdf697cc279dba(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for custom output functions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2536eb5d205511fa6a5bb426() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A map of output key-value pairs. Keys must start with session., temp., avail., scte., or be a valid adsRequest directive.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2627ac8bc642862f312db413() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute976b5c4be3f1a1997ec80afb(),
+				// Property: Value
+				"value": schemaAttribute976b5c4be3f1a1997ec80afb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags to assign to the function resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute265518931a128a0ed62db145() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The body of the HTTP request.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3686a8deba66528cbfaeeba1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A conditional expression that determines whether this function should execute.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c5389c99f695bebcabf797b() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A map of HTTP headers to include in the request.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41b1efa8ac9eeaa5a6926c64() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A map of output key-value pairs that define the final output from sequential execution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6344f02f59cdf697cc279dba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The runtime environment for the function expression language.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute71463de18e327badc87b1bd9() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A map of output key-value pairs that define the custom output.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78db24b6166d807c31590847() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the function. Determines which configuration object is used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e4cb13938dbabfded92456c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Body
+			"body": schemaAttribute265518931a128a0ed62db145(),
+			// Property: Headers
+			"headers": schemaAttribute3c5389c99f695bebcabf797b(),
+			// Property: MethodType
+			"method_type": schemaAttributed52db68575af0a3439f7c13c(),
+			// Property: Output
+			"output": schemaAttribute2536eb5d205511fa6a5bb426(),
+			// Property: RequestTimeoutMilliseconds
+			"request_timeout_milliseconds": schemaAttributec20e0ad095a5042dff3b3c6c(),
+			// Property: Runtime
+			"runtime": schemaAttribute6344f02f59cdf697cc279dba(),
+			// Property: Url
+			"url": schemaAttribute1def7fc889c256673a17de21(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for HTTP request functions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89c6cfd7ea54c29932301b45() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute976b5c4be3f1a1997ec80afb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec20e0ad095a5042dff3b3c6c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The timeout in milliseconds for the HTTP request. Maximum value is 2000.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed52db68575af0a3439f7c13c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The HTTP method type for the request.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea063895f1727873e2db4372() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier for the function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3ec323e0dc261576a4a28aa() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The timeout in milliseconds for the entire sequential execution chain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb10cf6499593058429fc18a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FunctionId
+				"function_id": schemaAttribute10d80c47efe92b471f47df54(),
+				// Property: RunCondition
+				"run_condition": schemaAttribute3686a8deba66528cbfaeeba1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of functions to execute sequentially.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_mediatailor_function", functionDataSource)
 }
@@ -30,10 +243,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the function.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the function.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute0000f596280cb1bc961cb30e(),
 		// Property: CustomOutputConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -64,24 +274,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"custom_output_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Output
-				"output":            // Pattern: ""
-				schema.MapAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A map of output key-value pairs that define the custom output.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Runtime
-				"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The runtime environment for the function expression language.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration for custom output functions.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"custom_output_configuration": schemaAttribute1e381f7a465653504bb5e72e(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -89,10 +282,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description of the function.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the function.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute89c6cfd7ea54c29932301b45(),
 		// Property: FunctionId
 		// CloudFormation resource type schema:
 		//
@@ -100,10 +290,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique identifier for the function.",
 		//	  "type": "string"
 		//	}
-		"function_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier for the function.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"function_id": schemaAttributeea063895f1727873e2db4372(),
 		// Property: FunctionType
 		// CloudFormation resource type schema:
 		//
@@ -116,10 +303,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"function_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the function. Determines which configuration object is used.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"function_type": schemaAttribute78db24b6166d807c31590847(),
 		// Property: HttpRequestConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -183,51 +367,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"http_request_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Body
-				"body": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The body of the HTTP request.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Headers
-				"headers":           // Pattern: ""
-				schema.MapAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A map of HTTP headers to include in the request.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MethodType
-				"method_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The HTTP method type for the request.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Output
-				"output":            // Pattern: ""
-				schema.MapAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A map of output key-value pairs. Keys must start with session., temp., avail., scte., or be a valid adsRequest directive.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RequestTimeoutMilliseconds
-				"request_timeout_milliseconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The timeout in milliseconds for the HTTP request. Maximum value is 2000.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Runtime
-				"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The runtime environment for the function expression language.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Url
-				"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The URL endpoint for the HTTP request.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration for HTTP request functions.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"http_request_configuration": schemaAttribute7e4cb13938dbabfded92456c(),
 		// Property: SequentialExecutorConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -284,48 +424,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"sequential_executor_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FunctionList
-				"function_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: FunctionId
-							"function_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The identifier of the function to execute.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: RunCondition
-							"run_condition": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A conditional expression that determines whether this function should execute.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The list of functions to execute sequentially.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Output
-				"output":            // Pattern: ""
-				schema.MapAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A map of output key-value pairs that define the final output from sequential execution.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Runtime
-				"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The runtime environment for the function expression language.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TimeoutMilliseconds
-				"timeout_milliseconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The timeout in milliseconds for the entire sequential execution chain.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration for sequential executor functions.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sequential_executor_configuration": schemaAttribute08c4e67d5f632580d2c98380(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -351,22 +450,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags to assign to the function resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute2627ac8bc642862f312db413(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

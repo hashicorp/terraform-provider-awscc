@@ -14,6 +14,122 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute01ca21fb091f1eeb3dc7c3eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the application is enabled or disabled",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19c67a8af63805ef687876b0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "This determines how IAM Identity Center navigates the user to the target application",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute35d4f4764caae33983542025() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApplicationUrl
+			"application_url": schemaAttributef6e349c74d6ef2251dc142ff(),
+			// Property: Origin
+			"origin": schemaAttribute19c67a8af63805ef687876b0(),
+		}, /*END SCHEMA*/
+		Description: "A structure that describes the sign-in options for the access portal",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute377a4e12e46ec4cdb38392dd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the instance of IAM Identity Center under which the operation will run",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76a2ecbedccad87bd1a88296() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the identity store associated with the Identity Center instance",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7eceddffcc5edc782cad51c9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether this application is visible in the access portal",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85d48a74d9b52a61013327c7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description information for the Identity Center (SSO) Application",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d2b8fceb174a294a0bf6177() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name you want to assign to this Identity Center (SSO) Application",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6e74a6a3e9c7a8f868179f2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SignInOptions
+			"sign_in_options": schemaAttribute35d4f4764caae33983542025(),
+			// Property: Visibility
+			"visibility": schemaAttribute7eceddffcc5edc782cad51c9(),
+		}, /*END SCHEMA*/
+		Description: "A structure that describes the options for the portal associated with an application",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec611001c5178c27c453757fa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Application ARN that is returned upon creation of the Identity Center (SSO) Application",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3e3330c1bc917d69b2bbda7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee11e40c4cb6ca3b726f2a277() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributed3e3330c1bc917d69b2bbda7(),
+				// Property: Value
+				"value": schemaAttributed3e3330c1bc917d69b2bbda7(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec952eb405a4a4647b8ffa6a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the application provider under which the operation will run",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6e349c74d6ef2251dc142ff() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL that accepts authentication requests for an application, this is a required parameter if the Origin parameter is APPLICATION",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sso_application", applicationDataSource)
 }
@@ -32,10 +148,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$",
 		//	  "type": "string"
 		//	}
-		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Application ARN that is returned upon creation of the Identity Center (SSO) Application",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"application_arn": schemaAttributec611001c5178c27c453757fa(),
 		// Property: ApplicationProviderArn
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +159,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso::aws:applicationProvider/[a-zA-Z0-9-/]+$",
 		//	  "type": "string"
 		//	}
-		"application_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the application provider under which the operation will run",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"application_provider_arn": schemaAttributeec952eb405a4a4647b8ffa6a(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +169,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description information for the Identity Center (SSO) Application",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute85d48a74d9b52a61013327c7(),
 		// Property: IdentityStoreArn
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +180,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[a-z]{1,5}){0,3}:identitystore::\\d{12}:identitystore/d-[0-9a-f]{10}$",
 		//	  "type": "string"
 		//	}
-		"identity_store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the identity store associated with the Identity Center instance",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"identity_store_arn": schemaAttribute76a2ecbedccad87bd1a88296(),
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -87,10 +191,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the instance of IAM Identity Center under which the operation will run",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_arn": schemaAttribute377a4e12e46ec4cdb38392dd(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -101,10 +202,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\w+=,.@-]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name you want to assign to this Identity Center (SSO) Application",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute9d2b8fceb174a294a0bf6177(),
 		// Property: PortalOptions
 		// CloudFormation resource type schema:
 		//
@@ -148,34 +246,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"portal_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SignInOptions
-				"sign_in_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ApplicationUrl
-						"application_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The URL that accepts authentication requests for an application, this is a required parameter if the Origin parameter is APPLICATION",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Origin
-						"origin": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "This determines how IAM Identity Center navigates the user to the target application",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A structure that describes the sign-in options for the access portal",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Visibility
-				"visibility": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether this application is visible in the access portal",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A structure that describes the options for the portal associated with an application",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"portal_options": schemaAttributeb6e74a6a3e9c7a8f868179f2(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -187,10 +258,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether the application is enabled or disabled",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute01ca21fb091f1eeb3dc7c3eb(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -223,21 +291,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributee11e40c4cb6ca3b726f2a277(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,41 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute5321b89c4f88e39655eb1da0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SQL Server high availability status of the EC2 instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87b1dcb839f28d2ba2d51c7d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the EC2 instance to enable for SQL Server high availability standby detection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb49a7ba54251ae1f7e9d3a54() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the AWS Secrets Manager secret containing SQL Server access credentials to the EC2 instance. If not specified, AWS Systems Manager agent will use default local user credentials.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6870d8b0fb8a0eeb649d703() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp when the EC2 instance's SQL Server high availability status was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1b4bada137201299999592d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SQL Server license type of the EC2 instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_sql_ha_standby_detected_instance", sqlHaStandbyDetectedInstanceDataSource)
 }
@@ -35,10 +70,7 @@ func sqlHaStandbyDetectedInstanceDataSource(ctx context.Context) (datasource.Dat
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"ha_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The SQL Server high availability status of the EC2 instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ha_status": schemaAttribute5321b89c4f88e39655eb1da0(),
 		// Property: InstanceId
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +79,7 @@ func sqlHaStandbyDetectedInstanceDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^i-[0-9a-f]{8,17}$",
 		//	  "type": "string"
 		//	}
-		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the EC2 instance to enable for SQL Server high availability standby detection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_id": schemaAttribute87b1dcb839f28d2ba2d51c7d(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -58,10 +87,7 @@ func sqlHaStandbyDetectedInstanceDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "The timestamp when the EC2 instance's SQL Server high availability status was last updated.",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp when the EC2 instance's SQL Server high availability status was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttributeb6870d8b0fb8a0eeb649d703(),
 		// Property: SqlServerCredentials
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +96,7 @@ func sqlHaStandbyDetectedInstanceDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"sql_server_credentials": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the AWS Secrets Manager secret containing SQL Server access credentials to the EC2 instance. If not specified, AWS Systems Manager agent will use default local user credentials.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sql_server_credentials": schemaAttributeb49a7ba54251ae1f7e9d3a54(),
 		// Property: SqlServerLicenseUsage
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +108,7 @@ func sqlHaStandbyDetectedInstanceDataSource(ctx context.Context) (datasource.Dat
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"sql_server_license_usage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The SQL Server license type of the EC2 instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sql_server_license_usage": schemaAttributef1b4bada137201299999592d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,98 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0a112c22765f6c0463ca997e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The instance port where you're creating your load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33f6947ff01fcb5d0a7808f2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute381fc21ee126e512d6f0dd97() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The names of the instances attached to the load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute669200a1599f15ff8c0cb56e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IP address type for the load balancer. The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6. The default value is dualstack.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6af485036cd6e0038f75e1f8() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute6fde13f9696834d1ceecdeeb(),
+				// Property: Value
+				"value": schemaAttribute33f6947ff01fcb5d0a7808f2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e500115d22598a3df1d9900() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Configuration option to adjust session stickiness cookie duration parameter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6fde13f9696834d1ceecdeeb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90aea1434c2de51ceca2848f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of your load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ca84283a6558260fc71d79d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The path you provided to perform the load balancer health check. If you didn't specify a health check path, Lightsail uses the root path of your website (e.g., \"/\").",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e77d69f5405ef3083ac1d80() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3e128e3d748e240e4655186() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Configuration option to enable session stickiness.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedffa19f9a180e3999a615cd5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the TLS policy to apply to the load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_lightsail_load_balancer", loadBalancerDataSource)
 }
@@ -35,11 +127,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"attached_instances": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The names of the instances attached to the load balancer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"attached_instances": schemaAttribute381fc21ee126e512d6f0dd97(),
 		// Property: HealthCheckPath
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +135,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The path you provided to perform the load balancer health check. If you didn't specify a health check path, Lightsail uses the root path of your website (e.g., \"/\").",
 		//	  "type": "string"
 		//	}
-		"health_check_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The path you provided to perform the load balancer health check. If you didn't specify a health check path, Lightsail uses the root path of your website (e.g., \"/\").",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"health_check_path": schemaAttribute9ca84283a6558260fc71d79d(),
 		// Property: InstancePort
 		// CloudFormation resource type schema:
 		//
@@ -58,10 +143,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The instance port where you're creating your load balancer.",
 		//	  "type": "integer"
 		//	}
-		"instance_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The instance port where you're creating your load balancer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_port": schemaAttribute0a112c22765f6c0463ca997e(),
 		// Property: IpAddressType
 		// CloudFormation resource type schema:
 		//
@@ -69,19 +151,14 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The IP address type for the load balancer. The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6. The default value is dualstack.",
 		//	  "type": "string"
 		//	}
-		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IP address type for the load balancer. The possible values are ipv4 for IPv4 only, and dualstack for IPv4 and IPv6. The default value is dualstack.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ip_address_type": schemaAttribute669200a1599f15ff8c0cb56e(),
 		// Property: LoadBalancerArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"load_balancer_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"load_balancer_arn": schemaAttribute9e77d69f5405ef3083ac1d80(),
 		// Property: LoadBalancerName
 		// CloudFormation resource type schema:
 		//
@@ -90,10 +167,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "\\w[\\w\\-]*\\w",
 		//	  "type": "string"
 		//	}
-		"load_balancer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of your load balancer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"load_balancer_name": schemaAttribute90aea1434c2de51ceca2848f(),
 		// Property: SessionStickinessEnabled
 		// CloudFormation resource type schema:
 		//
@@ -101,10 +175,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Configuration option to enable session stickiness.",
 		//	  "type": "boolean"
 		//	}
-		"session_stickiness_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Configuration option to enable session stickiness.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"session_stickiness_enabled": schemaAttributec3e128e3d748e240e4655186(),
 		// Property: SessionStickinessLBCookieDurationSeconds
 		// CloudFormation resource type schema:
 		//
@@ -112,10 +183,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Configuration option to adjust session stickiness cookie duration parameter.",
 		//	  "type": "string"
 		//	}
-		"session_stickiness_lb_cookie_duration_seconds": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Configuration option to adjust session stickiness cookie duration parameter.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"session_stickiness_lb_cookie_duration_seconds": schemaAttribute6e500115d22598a3df1d9900(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -147,24 +215,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6af485036cd6e0038f75e1f8(),
 		// Property: TlsPolicyName
 		// CloudFormation resource type schema:
 		//
@@ -172,10 +223,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The name of the TLS policy to apply to the load balancer.",
 		//	  "type": "string"
 		//	}
-		"tls_policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the TLS policy to apply to the load balancer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tls_policy_name": schemaAttributedffa19f9a180e3999a615cd5(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

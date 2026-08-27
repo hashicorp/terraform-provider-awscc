@@ -16,6 +16,135 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute23ff461235dc99211a1ef09c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Cedar
+			"cedar": schemaAttributee755193d4c57fd74e93e2cda(),
+			// Property: Policy
+			"policy": schemaAttribute3b0104fcf7475de9335811db(),
+		}, /*END SCHEMA*/
+		Description: "The definition structure for policies. Encapsulates different policy formats.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b6601b4b6272cfdf6f50e7e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the policy was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2deac8cbf556059675090c9c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the policy engine which contains this policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a530b0a271fe9568690855b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The customer-assigned immutable name for the policy. Must be unique within the policy engine.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b0104fcf7475de9335811db() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Statement
+			"statement": schemaAttribute46fa0224ad66f46812526c93(),
+		}, /*END SCHEMA*/
+		Description: "A policy statement within the AgentCore Policy system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute46fa0224ad66f46812526c93() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The policy statement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49881290bd263ab93fa4370c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Cedar policy statement that defines the authorization logic.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49caeae6dcee82904ed39844() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Additional information about the policy status.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute74d32de45f50a3812fb25190() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the policy was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d5515488fcf786507b36092() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A human-readable description of the policy's purpose and functionality.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b1a98e06bce5bdab0a66f55() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current status of the policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93610fcabfbb64eae8b6e6a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8dc7616f2b7d6ab517f8a49() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The validation mode for the policy. Determines how Cedar analyzer validation results are handled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee755193d4c57fd74e93e2cda() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Statement
+			"statement": schemaAttribute49881290bd263ab93fa4370c(),
+		}, /*END SCHEMA*/
+		Description: "A Cedar policy statement within the AgentCore Policy system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8b72737fd69ddd5b75ba7f4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether the policy contributes to the enforce decision returned to Gateway. LOG_ONLY policies are still evaluated but their decisions are observed only, allowing customers to validate a policy against real traffic before promoting it.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc906081a780d416eca5c248() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier for the policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_policy", policyDataSource)
 }
@@ -32,11 +161,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the policy was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute2b6601b4b6272cfdf6f50e7e(),
 		// Property: Definition
 		// CloudFormation resource type schema:
 		//
@@ -91,36 +216,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Cedar
-				"cedar": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Statement
-						"statement": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Cedar policy statement that defines the authorization logic.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A Cedar policy statement within the AgentCore Policy system.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Policy
-				"policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Statement
-						"statement": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The policy statement.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A policy statement within the AgentCore Policy system.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The definition structure for policies. Encapsulates different policy formats.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"definition": schemaAttribute23ff461235dc99211a1ef09c(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -130,10 +226,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A human-readable description of the policy's purpose and functionality.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute7d5515488fcf786507b36092(),
 		// Property: EnforcementMode
 		// CloudFormation resource type schema:
 		//
@@ -146,10 +239,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"enforcement_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether the policy contributes to the enforce decision returned to Gateway. LOG_ONLY policies are still evaluated but their decisions are observed only, allowing customers to validate a policy against real traffic before promoting it.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enforcement_mode": schemaAttributee8b72737fd69ddd5b75ba7f4(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -160,10 +250,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z][A-Za-z0-9_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The customer-assigned immutable name for the policy. Must be unique within the policy engine.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute3a530b0a271fe9568690855b(),
 		// Property: PolicyArn
 		// CloudFormation resource type schema:
 		//
@@ -174,10 +261,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z]{0,7}:bedrock-agentcore:[a-z0-9-]{9,15}:[0-9]{12}:policy-engine/[a-zA-Z][a-zA-Z0-9-_]{0,47}-[a-zA-Z0-9_]{10}/policy/[a-zA-Z][a-zA-Z0-9-_]{0,47}-[a-zA-Z0-9_]{10}$",
 		//	  "type": "string"
 		//	}
-		"policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the policy.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_arn": schemaAttribute93610fcabfbb64eae8b6e6a5(),
 		// Property: PolicyEngineId
 		// CloudFormation resource type schema:
 		//
@@ -188,10 +272,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z][A-Za-z0-9_]*-[a-z0-9_]{10}$",
 		//	  "type": "string"
 		//	}
-		"policy_engine_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the policy engine which contains this policy.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_engine_id": schemaAttribute2deac8cbf556059675090c9c(),
 		// Property: PolicyId
 		// CloudFormation resource type schema:
 		//
@@ -202,10 +283,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z][A-Za-z0-9_]*-[a-z0-9_]{10}$",
 		//	  "type": "string"
 		//	}
-		"policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier for the policy.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_id": schemaAttributefc906081a780d416eca5c248(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -222,10 +300,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current status of the policy.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute8b1a98e06bce5bdab0a66f55(),
 		// Property: StatusReasons
 		// CloudFormation resource type schema:
 		//
@@ -237,11 +312,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"status_reasons": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Additional information about the policy status.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status_reasons": schemaAttribute49caeae6dcee82904ed39844(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -250,11 +321,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the policy was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute74d32de45f50a3812fb25190(),
 		// Property: ValidationMode
 		// CloudFormation resource type schema:
 		//
@@ -266,10 +333,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"validation_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The validation mode for the policy. Determines how Cedar analyzer validation results are handled.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"validation_mode": schemaAttributeb8dc7616f2b7d6ab517f8a49(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,97 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute14424f774891bf1b0f05b9c8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: frequency
+			"frequency": schemaAttribute61563aeece118e334e1aafe5(),
+			// Property: frequencyExpression
+			"frequency_expression": schemaAttribute61563aeece118e334e1aafe5(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ec4aaa988d2bfe1a3196432() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Code Security Scan Configuration name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61563aeece118e334e1aafe5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebef8701eaae20ba33e528b52() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: continuousIntegrationScanConfiguration
+			"continuous_integration_scan_configuration": schemaAttributed9fe3faa1004e4421e1037ce(),
+			// Property: periodicScanConfiguration
+			"periodic_scan_configuration": schemaAttribute14424f774891bf1b0f05b9c8(),
+			// Property: ruleSetCategories
+			"rule_set_categories": schemaAttributef1b4cea6a0a379987a4f713a(),
+		}, /*END SCHEMA*/
+		Description: "Code Security Scan Configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec026f33762860ff96bc3f467() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: projectSelectionScope
+			"project_selection_scope": schemaAttribute61563aeece118e334e1aafe5(),
+		}, /*END SCHEMA*/
+		Description: "Scope Settings",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8d198761962c8d9633069fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Configuration Level",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed9fe3faa1004e4421e1037ce() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: supportedEvents
+			"supported_events": schemaAttributef1b4cea6a0a379987a4f713a(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedcc2ed9cf8f41002f2ed7f10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Code Security Scan Configuration ARN",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee49f5665af4d1ed98d1db206() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1b4cea6a0a379987a4f713a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_inspectorv2_code_security_scan_configuration", codeSecurityScanConfigurationDataSource)
 }
@@ -31,10 +122,7 @@ func codeSecurityScanConfigurationDataSource(ctx context.Context) (datasource.Da
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*)?:inspector2:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:owner/(\\d{12}|o-[a-z0-9]{10,32})/codesecurity-configuration/[a-f0-9-]{36}$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Code Security Scan Configuration ARN",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributedcc2ed9cf8f41002f2ed7f10(),
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -101,42 +189,7 @@ func codeSecurityScanConfigurationDataSource(ctx context.Context) (datasource.Da
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: continuousIntegrationScanConfiguration
-				"continuous_integration_scan_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: supportedEvents
-						"supported_events": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: periodicScanConfiguration
-				"periodic_scan_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: frequency
-						"frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: frequencyExpression
-						"frequency_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ruleSetCategories
-				"rule_set_categories": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Code Security Scan Configuration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"configuration": schemaAttributebef8701eaae20ba33e528b52(),
 		// Property: Level
 		// CloudFormation resource type schema:
 		//
@@ -148,10 +201,7 @@ func codeSecurityScanConfigurationDataSource(ctx context.Context) (datasource.Da
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"level": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Configuration Level",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"level": schemaAttributec8d198761962c8d9633069fb(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -162,10 +212,7 @@ func codeSecurityScanConfigurationDataSource(ctx context.Context) (datasource.Da
 		//	  "pattern": "^[a-zA-Z0-9-_$:.]*$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Code Security Scan Configuration name",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute4ec4aaa988d2bfe1a3196432(),
 		// Property: ScopeSettings
 		// CloudFormation resource type schema:
 		//
@@ -182,16 +229,7 @@ func codeSecurityScanConfigurationDataSource(ctx context.Context) (datasource.Da
 		//	  },
 		//	  "type": "object"
 		//	}
-		"scope_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: projectSelectionScope
-				"project_selection_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Scope Settings",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scope_settings": schemaAttributec026f33762860ff96bc3f467(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -205,11 +243,7 @@ func codeSecurityScanConfigurationDataSource(ctx context.Context) (datasource.Da
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributee49f5665af4d1ed98d1db206(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

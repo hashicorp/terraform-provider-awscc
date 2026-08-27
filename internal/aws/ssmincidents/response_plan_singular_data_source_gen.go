@@ -15,6 +15,328 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0288d4921ed3a46a92d55e16() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the response plan.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute078c7363a7a6b0962a9fa846() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The display name of the response plan.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c9b3c783743d21c33be3265() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Chatbot SNS topic.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1521f957b96153eb2c0cffea() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SsmAutomation
+				"ssm_automation": schemaAttribute2715ff73a75e8b15300f5e7b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of actions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17b5ff2bb57de4fb13f45f41() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the document to use when starting the SSM automation document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute190f167ce3f49c4bfc302169() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The impact value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2715ff73a75e8b15300f5e7b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DocumentName
+			"document_name": schemaAttribute4269d6b70e88afe38d68b2c2(),
+			// Property: DocumentVersion
+			"document_version": schemaAttribute17b5ff2bb57de4fb13f45f41(),
+			// Property: DynamicParameters
+			"dynamic_parameters": schemaAttributeb2c05712515089dc52455b79(),
+			// Property: Parameters
+			"parameters": schemaAttribute9bfc870f9845622a59220b2a(),
+			// Property: RoleArn
+			"role_arn": schemaAttribute5c46cab2cd503c071d0b0b12(),
+			// Property: TargetAccount
+			"target_account": schemaAttribute807b06acd5c06f5ccc82d3e9(),
+		}, /*END SCHEMA*/
+		Description: "The configuration to use when starting the SSM automation document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30a6f29634102d6d8f9f5512() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PagerDutyConfiguration
+				"pager_duty_configuration": schemaAttributeb76e44414830173b46209d04(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of integrations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute36d9208af4723ea52534ef64() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SnsTopicArn
+				"sns_topic_arn": schemaAttribute0c9b3c783743d21c33be3265(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of notification targets.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute377b196ce018436c1e94807c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the pagerDuty configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute39d64d81b0876212e9e1f980() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4269d6b70e88afe38d68b2c2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The document name to use when starting the SSM automation document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ca38caca5a136cdfefe59f1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ServiceId
+			"service_id": schemaAttribute856ede9a0fd27bccd9899aa5(),
+		}, /*END SCHEMA*/
+		Description: "The pagerDuty incident configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4e71481f77ae2489e4c6a21e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS secrets manager secretId storing the pagerDuty token.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute551b91617fccbba1ab603f33() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The summary string.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b495ae1d86484d1114a7e7e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The deduplication string.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c46cab2cd503c071d0b0b12() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The role ARN to use when starting the SSM automation document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66ec07fe65b6638e0d30a7a2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the response plan.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67fcfd6857ea267f6ae15479() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute39d64d81b0876212e9e1f980(),
+				// Property: Value
+				"value": schemaAttribute39d64d81b0876212e9e1f980(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags to apply to the response plan.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute688ff2844a1027b50154cae5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DedupeString
+			"dedupe_string": schemaAttribute5b495ae1d86484d1114a7e7e(),
+			// Property: Impact
+			"impact": schemaAttribute190f167ce3f49c4bfc302169(),
+			// Property: IncidentTags
+			"incident_tags": schemaAttributee3b090e264b4b01b04ad1569(),
+			// Property: NotificationTargets
+			"notification_targets": schemaAttribute36d9208af4723ea52534ef64(),
+			// Property: Summary
+			"summary": schemaAttribute551b91617fccbba1ab603f33(),
+			// Property: Title
+			"title": schemaAttributefbc8428059a80cd027cffe72(),
+		}, /*END SCHEMA*/
+		Description: "The incident template configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77e36a8ca9728de06e27fd0f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The variable types used as dynamic parameter value when starting the SSM automation document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute807b06acd5c06f5ccc82d3e9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The account type to use when starting the SSM automation document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute81e680076294569e99b85bd8() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of engagements to use.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute856ede9a0fd27bccd9899aa5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The pagerDuty serviceId.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9bfc870f9845622a59220b2a() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute39d64d81b0876212e9e1f980(),
+				// Property: Values
+				"values": schemaAttributea6e941c26a146ab9bb12d87c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The parameters to set when starting the SSM automation document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea6e941c26a146ab9bb12d87c() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2c05712515089dc52455b79() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute39d64d81b0876212e9e1f980(),
+				// Property: Value
+				"value": schemaAttributeb35b0181f9a2b6c1c55237ff(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The parameters with dynamic values to set when starting the SSM automation document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb35b0181f9a2b6c1c55237ff() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Variable
+			"variable": schemaAttribute77e36a8ca9728de06e27fd0f(),
+		}, /*END SCHEMA*/
+		Description: "Value of the dynamic parameter to set when starting the SSM automation document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb76e44414830173b46209d04() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttribute377b196ce018436c1e94807c(),
+			// Property: PagerDutyIncidentConfiguration
+			"pager_duty_incident_configuration": schemaAttribute4ca38caca5a136cdfefe59f1(),
+			// Property: SecretId
+			"secret_id": schemaAttribute4e71481f77ae2489e4c6a21e(),
+		}, /*END SCHEMA*/
+		Description: "The pagerDuty configuration to use when starting the incident.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3b090e264b4b01b04ad1569() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute39d64d81b0876212e9e1f980(),
+				// Property: Value
+				"value": schemaAttribute39d64d81b0876212e9e1f980(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags that get applied to incidents created by the StartIncident API action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef51675b8fa66210458de5972() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ChatbotSns
+			"chatbot_sns": schemaAttributea6e941c26a146ab9bb12d87c(),
+		}, /*END SCHEMA*/
+		Description: "The chat channel configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefbc8428059a80cd027cffe72() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The title string.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ssmincidents_response_plan", responsePlanDataSource)
 }
@@ -151,84 +473,7 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: SsmAutomation
-					"ssm_automation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DocumentName
-							"document_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The document name to use when starting the SSM automation document.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: DocumentVersion
-							"document_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The version of the document to use when starting the SSM automation document.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: DynamicParameters
-							"dynamic_parameters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Key
-										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Value
-										"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Variable
-												"variable": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The variable types used as dynamic parameter value when starting the SSM automation document.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "Value of the dynamic parameter to set when starting the SSM automation document.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "The parameters with dynamic values to set when starting the SSM automation document.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Parameters
-							"parameters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Key
-										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Values
-										"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "The parameters to set when starting the SSM automation document.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: RoleArn
-							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The role ARN to use when starting the SSM automation document.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TargetAccount
-							"target_account": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The account type to use when starting the SSM automation document.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The configuration to use when starting the SSM automation document.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of actions.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"actions": schemaAttribute1521f957b96153eb2c0cffea(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -238,10 +483,7 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:aws(-(cn|us-gov))?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the response plan.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute66ec07fe65b6638e0d30a7a2(),
 		// Property: ChatChannel
 		// CloudFormation resource type schema:
 		//
@@ -264,17 +506,7 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"chat_channel": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ChatbotSns
-				"chatbot_sns": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The chat channel configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"chat_channel": schemaAttributef51675b8fa66210458de5972(),
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -284,10 +516,7 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The display name of the response plan.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"display_name": schemaAttribute078c7363a7a6b0962a9fa846(),
 		// Property: Engagements
 		// CloudFormation resource type schema:
 		//
@@ -305,11 +534,7 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"engagements": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of engagements to use.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"engagements": schemaAttribute81e680076294569e99b85bd8(),
 		// Property: IncidentTemplate
 		// CloudFormation resource type schema:
 		//
@@ -397,63 +622,7 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"incident_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DedupeString
-				"dedupe_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The deduplication string.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Impact
-				"impact": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The impact value.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IncidentTags
-				"incident_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Key
-							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Tags that get applied to incidents created by the StartIncident API action.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NotificationTargets
-				"notification_targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: SnsTopicArn
-							"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The ARN of the Chatbot SNS topic.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The list of notification targets.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Summary
-				"summary": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The summary string.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Title
-				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The title string.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The incident template configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"incident_template": schemaAttribute688ff2844a1027b50154cae5(),
 		// Property: Integrations
 		// CloudFormation resource type schema:
 		//
@@ -518,43 +687,7 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"integrations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: PagerDutyConfiguration
-					"pager_duty_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the pagerDuty configuration.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: PagerDutyIncidentConfiguration
-							"pager_duty_incident_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: ServiceId
-									"service_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The pagerDuty serviceId.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The pagerDuty incident configuration.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SecretId
-							"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The AWS secrets manager secretId storing the pagerDuty token.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The pagerDuty configuration to use when starting the incident.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of integrations.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"integrations": schemaAttribute30a6f29634102d6d8f9f5512(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -565,10 +698,7 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z0-9_-]*$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the response plan.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute0288d4921ed3a46a92d55e16(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -602,22 +732,7 @@ func responsePlanDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags to apply to the response plan.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute67fcfd6857ea267f6ae15479(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

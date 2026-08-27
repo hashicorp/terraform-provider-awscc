@@ -15,6 +15,63 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute157e3fd984ec1cc5307c7b30() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Password
+			"password": schemaAttributef70dbc8849c18e7ade25ff25(),
+			// Property: Username
+			"username": schemaAttributef70dbc8849c18e7ade25ff25(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2079c711fb474a5c58d3be48() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9f9caaef991d53f3300c3ca() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef70dbc8849c18e7ade25ff25() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa4f6ca3df72ae155b175251() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ServerHostname
+			"server_hostname": schemaAttributef70dbc8849c18e7ade25ff25(),
+			// Property: ServerPort
+			"server_port": schemaAttribute2079c711fb474a5c58d3be48(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd3c65e518dd94599ca704fa() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributef70dbc8849c18e7ade25ff25(),
+				// Property: Value
+				"value": schemaAttributef70dbc8849c18e7ade25ff25(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_datasync_storage_system", storageSystemDataSource)
 }
@@ -33,55 +90,42 @@ func storageSystemDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"agent_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_arns": schemaAttributea9f9caaef991d53f3300c3ca(),
 		// Property: CloudWatchLogGroupArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"cloudwatch_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"cloudwatch_log_group_arn": schemaAttributef70dbc8849c18e7ade25ff25(),
 		// Property: ConnectivityStatus
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"connectivity_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"connectivity_status": schemaAttributef70dbc8849c18e7ade25ff25(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"storage_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"storage_system_id": schemaAttributef70dbc8849c18e7ade25ff25(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributef70dbc8849c18e7ade25ff25(),
 		// Property: SecretsManagerArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"secrets_manager_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"secrets_manager_arn": schemaAttributef70dbc8849c18e7ade25ff25(),
 		// Property: ServerConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -100,19 +144,7 @@ func storageSystemDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"server_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ServerHostname
-				"server_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServerPort
-				"server_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"server_configuration": schemaAttributefa4f6ca3df72ae155b175251(),
 		// Property: ServerCredentials
 		// CloudFormation resource type schema:
 		//
@@ -132,37 +164,21 @@ func storageSystemDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"server_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Password
-				"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Username
-				"username": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"server_credentials": schemaAttribute157e3fd984ec1cc5307c7b30(),
 		// Property: StorageSystemArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"storage_system_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"storage_system_arn": schemaAttributef70dbc8849c18e7ade25ff25(),
 		// Property: SystemType
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"system_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"system_type": schemaAttributef70dbc8849c18e7ade25ff25(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -186,21 +202,7 @@ func storageSystemDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributefd3c65e518dd94599ca704fa(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

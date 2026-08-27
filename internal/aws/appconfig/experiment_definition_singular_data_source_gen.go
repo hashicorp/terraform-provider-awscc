@@ -15,6 +15,260 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute015d5128f681ded14557db47() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "Traffic weight percentage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute02142949e76c6c3b70a79df5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key of the existing flag in the configuration profile to experiment on.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0746cdce2ebc2146d0676482() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BooleanValue
+				"boolean_value": schemaAttributebefa73f88bff7bb80253c313(),
+				// Property: NumberArray
+				"number_array": schemaAttributeaa20b5f5bb7eaeafecec46ef(),
+				// Property: NumberValue
+				"number_value": schemaAttribute752bb4f20f81d19bf46fca52(),
+				// Property: StringArray
+				"string_array": schemaAttribute1093192c4d8d5f9cbf7cf382(),
+				// Property: StringValue
+				"string_value": schemaAttribute68b114dc84e8d309125ac949(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Map of attribute name to attribute value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1093192c4d8d5f9cbf7cf382() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "An array of string values.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20867f7fa84b2e546dda1f36() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Current status.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2534a3cb37f254592eddf89a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AttributeValues
+			"attribute_values": schemaAttribute0746cdce2ebc2146d0676482(),
+			// Property: Description
+			"description": schemaAttribute7ff6337351f95191e0050dd2(),
+			// Property: Enabled
+			"enabled": schemaAttributee1618c65b61aeeaeedecc31e(),
+			// Property: Key
+			"key": schemaAttributef52d8d7f8d402c12f3e603df(),
+			// Property: Weight
+			"weight": schemaAttribute015d5128f681ded14557db47(),
+		}, /*END SCHEMA*/
+		Description: "The control (baseline) variant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute255707115e244cd6f6a036e0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The environment ID, name, or ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28e89af83b7d867ddcf2567e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The application ID, name, or ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a372182dcc6eea7aa5cb6c9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Criteria for launching the experiment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2cbcb4823a16373856608a93() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Human-readable description of the audience.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4cff9f0bc93b74897f6e8eaa() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AttributeValues
+				"attribute_values": schemaAttribute0746cdce2ebc2146d0676482(),
+				// Property: Description
+				"description": schemaAttribute7ff6337351f95191e0050dd2(),
+				// Property: Enabled
+				"enabled": schemaAttributee1618c65b61aeeaeedecc31e(),
+				// Property: Key
+				"key": schemaAttributef52d8d7f8d402c12f3e603df(),
+				// Property: Weight
+				"weight": schemaAttribute015d5128f681ded14557db47(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Treatment variants (1-5).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53d5e69e1b762fe7cdcd72ba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The experiment definition ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5de1fd4cd7afb12913ae78c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The configuration profile ID, name, or ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute68b114dc84e8d309125ac949() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute752bb4f20f81d19bf46fca52() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "A numeric value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ff6337351f95191e0050dd2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8acbda9a6b27a0ee13b6f2da() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The resolved application ID (read-only, assigned by service).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute923d35807be2f18d0cb05f89() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c99869d6a4c0b62ce9b7148() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The hypothesis of the experiment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea01a233f7834e176bdb37cf2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Rule expression defining the experiment audience.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa20b5f5bb7eaeafecec46ef() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.Float64Type,
+		Description: "An array of numeric values.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebefa73f88bff7bb80253c313() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A boolean value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6016fb7f8860fbdd27049cf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeccf59fd8a966c1379888f69f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ISO-8601 creation timestamp.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed87763222a5dfb96e17ff692() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ISO-8601 last update timestamp.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1618c65b61aeeaeedecc31e() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether the flag is enabled for this variant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef52d8d7f8d402c12f3e603df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The treatment key (read-only, auto-generated by service).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef59bfa96eae41f1f5ceadee4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name for the experiment definition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8b65aa1b3938718945f0812() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute923d35807be2f18d0cb05f89(),
+				// Property: Value
+				"value": schemaAttributec6016fb7f8860fbdd27049cf(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to associate with the experiment definition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_appconfig_experiment_definition", experimentDefinitionDataSource)
 }
@@ -31,10 +285,7 @@ func experimentDefinitionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "[a-z0-9]{4,7}",
 		//	  "type": "string"
 		//	}
-		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The resolved application ID (read-only, assigned by service).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"application_id": schemaAttribute8acbda9a6b27a0ee13b6f2da(),
 		// Property: ApplicationIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +295,7 @@ func experimentDefinitionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"application_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The application ID, name, or ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"application_identifier": schemaAttribute28e89af83b7d867ddcf2567e(),
 		// Property: AudienceDescription
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +304,7 @@ func experimentDefinitionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"audience_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Human-readable description of the audience.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"audience_description": schemaAttribute2cbcb4823a16373856608a93(),
 		// Property: AudienceRule
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +313,7 @@ func experimentDefinitionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "maxLength": 16384,
 		//	  "type": "string"
 		//	}
-		"audience_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Rule expression defining the experiment audience.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"audience_rule": schemaAttributea01a233f7834e176bdb37cf2(),
 		// Property: ConfigurationProfileIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -81,10 +323,7 @@ func experimentDefinitionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"configuration_profile_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The configuration profile ID, name, or ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"configuration_profile_identifier": schemaAttribute5de1fd4cd7afb12913ae78c4(),
 		// Property: Control
 		// CloudFormation resource type schema:
 		//
@@ -155,68 +394,7 @@ func experimentDefinitionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"control": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AttributeValues
-				"attribute_values":        // Pattern: ""
-				schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: BooleanValue
-							"boolean_value": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "A boolean value.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: NumberArray
-							"number_array": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.Float64Type,
-								Description: "An array of numeric values.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: NumberValue
-							"number_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "A numeric value.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: StringArray
-							"string_array": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "An array of string values.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: StringValue
-							"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A string value.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Map of attribute name to attribute value.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Description
-				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Enabled
-				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Whether the flag is enabled for this variant.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Key
-				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The treatment key (read-only, auto-generated by service).",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Weight
-				"weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "Traffic weight percentage.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The control (baseline) variant.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"control": schemaAttribute2534a3cb37f254592eddf89a(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -224,10 +402,7 @@ func experimentDefinitionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "ISO-8601 creation timestamp.",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ISO-8601 creation timestamp.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributeccf59fd8a966c1379888f69f(),
 		// Property: EnvironmentIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -237,10 +412,7 @@ func experimentDefinitionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"environment_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The environment ID, name, or ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"environment_identifier": schemaAttribute255707115e244cd6f6a036e0(),
 		// Property: FlagKey
 		// CloudFormation resource type schema:
 		//
@@ -250,10 +422,7 @@ func experimentDefinitionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"flag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The key of the existing flag in the configuration profile to experiment on.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"flag_key": schemaAttribute02142949e76c6c3b70a79df5(),
 		// Property: Hypothesis
 		// CloudFormation resource type schema:
 		//
@@ -262,10 +431,7 @@ func experimentDefinitionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"hypothesis": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The hypothesis of the experiment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"hypothesis": schemaAttribute9c99869d6a4c0b62ce9b7148(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -274,10 +440,7 @@ func experimentDefinitionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "[a-z0-9]{4,7}",
 		//	  "type": "string"
 		//	}
-		"experiment_definition_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The experiment definition ID.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"experiment_definition_id": schemaAttribute53d5e69e1b762fe7cdcd72ba(),
 		// Property: LaunchCriteria
 		// CloudFormation resource type schema:
 		//
@@ -286,10 +449,7 @@ func experimentDefinitionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"launch_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Criteria for launching the experiment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"launch_criteria": schemaAttribute2a372182dcc6eea7aa5cb6c9(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -299,10 +459,7 @@ func experimentDefinitionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the experiment definition.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributef59bfa96eae41f1f5ceadee4(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -315,10 +472,7 @@ func experimentDefinitionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Current status.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute20867f7fa84b2e546dda1f36(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -350,24 +504,7 @@ func experimentDefinitionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to associate with the experiment definition.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributef8b65aa1b3938718945f0812(),
 		// Property: Treatments
 		// CloudFormation resource type schema:
 		//
@@ -444,70 +581,7 @@ func experimentDefinitionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"treatments": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AttributeValues
-					"attribute_values":        // Pattern: ""
-					schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BooleanValue
-								"boolean_value": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "A boolean value.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: NumberArray
-								"number_array": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.Float64Type,
-									Description: "An array of numeric values.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: NumberValue
-								"number_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Description: "A numeric value.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: StringArray
-								"string_array": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "An array of string values.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: StringValue
-								"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A string value.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "Map of attribute name to attribute value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Description
-					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Enabled
-					"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "Whether the flag is enabled for this variant.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The treatment key (read-only, auto-generated by service).",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Weight
-					"weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "Traffic weight percentage.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Treatment variants (1-5).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"treatments": schemaAttribute4cff9f0bc93b74897f6e8eaa(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -515,10 +589,7 @@ func experimentDefinitionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "ISO-8601 last update timestamp.",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ISO-8601 last update timestamp.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttributed87763222a5dfb96e17ff692(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

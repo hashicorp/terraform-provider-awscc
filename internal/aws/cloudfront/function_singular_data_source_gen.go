@@ -14,6 +14,130 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute011a65b166eb2d410f38043f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2eac79d5db44daa087649f2b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the function. The ARN uniquely identifies the function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5749a21a06e95139970de18b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e468b1e4e2e1737cc335a8e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Comment
+			"comment": schemaAttribute804ecf94b8bc8a14d0e00885(),
+			// Property: KeyValueStoreAssociations
+			"key_value_store_associations": schemaAttributece366719a954b2c70c6e14ef(),
+			// Property: Runtime
+			"runtime": schemaAttributea23bb790c458346d07fca5e0(),
+		}, /*END SCHEMA*/
+		Description: "Contains configuration information about a CloudFront function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute804ecf94b8bc8a14d0e00885() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A comment to describe the function. The comment cannot be longer than 128 characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c95b0242f0c94463e5da9a7() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute011a65b166eb2d410f38043f(),
+				// Property: Value
+				"value": schemaAttribute5749a21a06e95139970de18b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A complex type that contains zero or more ``Tag`` elements.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea23bb790c458346d07fca5e0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The function's runtime environment version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3de64e89104a02418222371() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributece366719a954b2c70c6e14ef() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KeyValueStoreARN
+				"key_value_store_arn": schemaAttributef640397655c1dd7f28932e25(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The configuration for the key value store associations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf6932770d28c74cf5559681() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FunctionARN
+			"function_arn": schemaAttribute2eac79d5db44daa087649f2b(),
+		}, /*END SCHEMA*/
+		Description: "Contains metadata about a CloudFront function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee34d391b8f2269aa6c388f93() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name to identify the function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef125c2631f0196bb6aa3c572() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef63542d5840b30f43a3d30d6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The function code. For more information about writing a CloudFront function, see [Writing function code for CloudFront Functions](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html) in the *Amazon CloudFront Developer Guide*.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef640397655c1dd7f28932e25() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the key value store association.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudfront_function", functionDataSource)
 }
@@ -29,10 +153,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.",
 		//	  "type": "boolean"
 		//	}
-		"auto_publish": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A flag that determines whether to automatically publish the function to the ``LIVE`` stage when it?s created. To automatically publish to the ``LIVE`` stage, set this property to ``true``.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"auto_publish": schemaAttributef125c2631f0196bb6aa3c572(),
 		// Property: FunctionARN
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +161,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"function_arn": schemaAttributec3de64e89104a02418222371(),
 		// Property: FunctionCode
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +169,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The function code. For more information about writing a CloudFront function, see [Writing function code for CloudFront Functions](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html) in the *Amazon CloudFront Developer Guide*.",
 		//	  "type": "string"
 		//	}
-		"function_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The function code. For more information about writing a CloudFront function, see [Writing function code for CloudFront Functions](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html) in the *Amazon CloudFront Developer Guide*.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"function_code": schemaAttributef63542d5840b30f43a3d30d6(),
 		// Property: FunctionConfig
 		// CloudFormation resource type schema:
 		//
@@ -96,36 +211,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"function_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Comment
-				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A comment to describe the function. The comment cannot be longer than 128 characters.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: KeyValueStoreAssociations
-				"key_value_store_associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: KeyValueStoreARN
-							"key_value_store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Amazon Resource Name (ARN) of the key value store association.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The configuration for the key value store associations.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Runtime
-				"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The function's runtime environment version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Contains configuration information about a CloudFront function.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"function_config": schemaAttribute6e468b1e4e2e1737cc335a8e(),
 		// Property: FunctionMetadata
 		// CloudFormation resource type schema:
 		//
@@ -140,17 +226,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"function_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FunctionARN
-				"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the function. The ARN uniquely identifies the function.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Contains metadata about a CloudFront function.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"function_metadata": schemaAttributecf6932770d28c74cf5559681(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -158,10 +234,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A name to identify the function.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name to identify the function.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributee34d391b8f2269aa6c388f93(),
 		// Property: Stage
 		// CloudFormation resource type schema:
 		//
@@ -169,10 +242,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"stage": schemaAttributec3de64e89104a02418222371(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -206,24 +276,7 @@ func functionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A complex type that contains zero or more ``Tag`` elements.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute9c95b0242f0c94463e5da9a7(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

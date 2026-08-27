@@ -14,6 +14,33 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0375241fea1edd4cb1c21710() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name or the Id of the Application.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute12853fb7d2983d288ed4e400() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the CFN Resource for now it's enum CFN_STACK.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26437a9f2211d6c85a33d476() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name or the Id of the Resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea36fbb8d609545416f97d384() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_servicecatalogappregistry_resource_association", resourceAssociationDataSource)
 }
@@ -32,10 +59,7 @@ func resourceAssociationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "\\w+|[a-z0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"application": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name or the Id of the Application.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"application": schemaAttribute0375241fea1edd4cb1c21710(),
 		// Property: ApplicationArn
 		// CloudFormation resource type schema:
 		//
@@ -43,9 +67,7 @@ func resourceAssociationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+",
 		//	  "type": "string"
 		//	}
-		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"application_arn": schemaAttributea36fbb8d609545416f97d384(),
 		// Property: Resource
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +76,7 @@ func resourceAssociationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "\\w+|arn:aws[-a-z]*:cloudformation:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:stack/[a-zA-Z][-A-Za-z0-9]{0,127}/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}",
 		//	  "type": "string"
 		//	}
-		"resource": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name or the Id of the Resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource": schemaAttribute26437a9f2211d6c85a33d476(),
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -65,9 +84,7 @@ func resourceAssociationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "arn:aws[-a-z]*:cloudformation:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:stack/[a-zA-Z][-A-Za-z0-9]{0,127}/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"resource_arn": schemaAttributea36fbb8d609545416f97d384(),
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -78,10 +95,7 @@ func resourceAssociationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the CFN Resource for now it's enum CFN_STACK.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_type": schemaAttribute12853fb7d2983d288ed4e400(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

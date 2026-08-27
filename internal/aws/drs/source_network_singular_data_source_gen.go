@@ -14,6 +14,62 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute162857822b0d04aa91476349() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The region containing the VPC to protect.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute56b7cf146cae207a7828bfae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Source Network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67f0667bac16bbddf7d3112a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6884a885720325cde9d77bd5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Source Network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0c36cfecaa8f08a2c82d823() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute67f0667bac16bbddf7d3112a(),
+				// Property: Value
+				"value": schemaAttribute67f0667bac16bbddf7d3112a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A set of tags associated with the Source Network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac53602b5cb02b8c60c70b8c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The account ID containing the VPC to protect.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0acdc61436e4d45735f0cf6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The VPC ID to protect.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_drs_source_network", sourceNetworkDataSource)
 }
@@ -32,10 +88,7 @@ func sourceNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Source Network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute6884a885720325cde9d77bd5(),
 		// Property: OriginAccountID
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +99,7 @@ func sourceNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "[0-9]{12,}",
 		//	  "type": "string"
 		//	}
-		"origin_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The account ID containing the VPC to protect.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"origin_account_id": schemaAttributeac53602b5cb02b8c60c70b8c(),
 		// Property: OriginRegion
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +109,7 @@ func sourceNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^(us(-gov)?|ap|ca|cn|eu|eusc|sa|af|me|il)-([a-z]{2}-)?(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9]$",
 		//	  "type": "string"
 		//	}
-		"origin_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The region containing the VPC to protect.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"origin_region": schemaAttribute162857822b0d04aa91476349(),
 		// Property: SourceNetworkID
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +120,7 @@ func sourceNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^sn-[0-9a-zA-Z]{17}$",
 		//	  "type": "string"
 		//	}
-		"source_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Source Network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_network_id": schemaAttribute56b7cf146cae207a7828bfae(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -105,22 +149,7 @@ func sourceNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A set of tags associated with the Source Network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributea0c36cfecaa8f08a2c82d823(),
 		// Property: VpcID
 		// CloudFormation resource type schema:
 		//
@@ -131,10 +160,7 @@ func sourceNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^vpc-[0-9a-fA-F]{8,}$",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The VPC ID to protect.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttributee0acdc61436e4d45735f0cf6(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

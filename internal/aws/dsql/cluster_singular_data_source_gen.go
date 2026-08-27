@@ -15,6 +15,174 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1add6d39957ec0c41b82b0b4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1bbb068a2fd5de8fa16b525d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3dc3bedab516b8e8b7153d78() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The DSQL cluster endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute464ac4f88220dfb571f1d27f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The VPC endpoint service name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ce5b18337a5bbe29dc944d0() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether deletion protection is enabled in this cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4d308ffe3cab922389501979() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6db03e90a0fedca45e245d10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of encryption that protects data in the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute71496e2a754ac4c6749df81f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version number of the cluster's resource based policy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73b164779740419d37ab8a23() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Clusters
+			"clusters": schemaAttribute8bebfe1da0789dc4d1f30a56(),
+			// Property: WitnessRegion
+			"witness_region": schemaAttributeee753dca9deb8d58b3dd6284(),
+		}, /*END SCHEMA*/
+		Description: "The Multi-region properties associated to this cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute747744750cefe5d8ad2562e9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The DSQL cluster VPC endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7554d35fb4a86c8257cfdb8c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributebb2e7fd187d74a2f1aa82b8a(),
+				// Property: Value
+				"value": schemaAttribute1add6d39957ec0c41b82b0b4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78ea5e578f3258697527deb3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of encryption for the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8468bf3e0af0567873d80864() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the created cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8bebfe1da0789dc4d1f30a56() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae2124bb1891448a9518c20e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time of when the cluster was created in ISO-8601 format.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb92c38feb794aacf5340aeec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The KMS key that encrypts data on the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb2e7fd187d74a2f1aa82b8a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebde75d0ef1397957ba020353() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the KMS key that encrypts data in the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebed0a1da112a905e9d1f0e95() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IAM policy applied to the cluster resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8c97062a5b2080f46620140() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EncryptionStatus
+			"encryption_status": schemaAttribute78ea5e578f3258697527deb3(),
+			// Property: EncryptionType
+			"encryption_type": schemaAttribute6db03e90a0fedca45e245d10(),
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttributebde75d0ef1397957ba020353(),
+		}, /*END SCHEMA*/
+		Description: "The encryption configuration details for the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee753dca9deb8d58b3dd6284() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The witness region in a multi-region cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_dsql_cluster", clusterDataSource)
 }
@@ -30,10 +198,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time of when the cluster was created in ISO-8601 format.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time of when the cluster was created in ISO-8601 format.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttributeae2124bb1891448a9518c20e(),
 		// Property: DeletionProtectionEnabled
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +206,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Whether deletion protection is enabled in this cluster.",
 		//	  "type": "boolean"
 		//	}
-		"deletion_protection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether deletion protection is enabled in this cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"deletion_protection_enabled": schemaAttribute4ce5b18337a5bbe29dc944d0(),
 		// Property: EncryptionDetails
 		// CloudFormation resource type schema:
 		//
@@ -67,27 +229,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"encryption_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EncryptionStatus
-				"encryption_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The status of encryption for the cluster.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EncryptionType
-				"encryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of encryption that protects data in the cluster.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: KmsKeyArn
-				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the KMS key that encrypts data in the cluster.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The encryption configuration details for the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"encryption_details": schemaAttributed8c97062a5b2080f46620140(),
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -95,10 +237,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The DSQL cluster endpoint.",
 		//	  "type": "string"
 		//	}
-		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The DSQL cluster endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint": schemaAttribute3dc3bedab516b8e8b7153d78(),
 		// Property: Identifier
 		// CloudFormation resource type schema:
 		//
@@ -106,10 +245,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the created cluster.",
 		//	  "type": "string"
 		//	}
-		"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the created cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"identifier": schemaAttribute8468bf3e0af0567873d80864(),
 		// Property: KmsEncryptionKey
 		// CloudFormation resource type schema:
 		//
@@ -117,10 +253,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The KMS key that encrypts data on the cluster.",
 		//	  "type": "string"
 		//	}
-		"kms_encryption_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The KMS key that encrypts data on the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_encryption_key": schemaAttributeb92c38feb794aacf5340aeec(),
 		// Property: MultiRegionProperties
 		// CloudFormation resource type schema:
 		//
@@ -144,22 +277,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"multi_region_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Clusters
-				"clusters": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: WitnessRegion
-				"witness_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The witness region in a multi-region cluster.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The Multi-region properties associated to this cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"multi_region_properties": schemaAttribute73b164779740419d37ab8a23(),
 		// Property: PolicyDocument
 		// CloudFormation resource type schema:
 		//
@@ -167,10 +285,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The IAM policy applied to the cluster resource.",
 		//	  "type": "string"
 		//	}
-		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IAM policy applied to the cluster resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_document": schemaAttributebed0a1da112a905e9d1f0e95(),
 		// Property: PolicyVersion
 		// CloudFormation resource type schema:
 		//
@@ -178,10 +293,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version number of the cluster's resource based policy",
 		//	  "type": "string"
 		//	}
-		"policy_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version number of the cluster's resource based policy",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_version": schemaAttribute71496e2a754ac4c6749df81f(),
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -189,10 +301,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) for the cluster.",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_arn": schemaAttribute1bbb068a2fd5de8fa16b525d(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -200,10 +309,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The status of the cluster.",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute4d308ffe3cab922389501979(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -235,23 +341,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute7554d35fb4a86c8257cfdb8c(),
 		// Property: VpcEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -259,10 +349,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The DSQL cluster VPC endpoint.",
 		//	  "type": "string"
 		//	}
-		"vpc_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The DSQL cluster VPC endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_endpoint": schemaAttribute747744750cefe5d8ad2562e9(),
 		// Property: VpcEndpointServiceName
 		// CloudFormation resource type schema:
 		//
@@ -270,10 +357,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The VPC endpoint service name.",
 		//	  "type": "string"
 		//	}
-		"vpc_endpoint_service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The VPC endpoint service name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_endpoint_service_name": schemaAttribute464ac4f88220dfb571f1d27f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

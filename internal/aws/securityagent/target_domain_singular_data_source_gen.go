@@ -15,6 +15,164 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute006b96ab5860f1c253dad756() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Token used to verify domain ownership",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c0cd0e702ebf10eb3ff8167() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Current verification status of the registered target domain",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d008eca484d074910b080d1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DnsTxt
+			"dns_txt": schemaAttribute10f97c1fe4afdddf0484f3c4(),
+			// Property: HttpRoute
+			"http_route": schemaAttribute231208dbebeab756f5a62f09(),
+			// Property: Method
+			"method": schemaAttribute3184fb182aad034e0ea3931d(),
+		}, /*END SCHEMA*/
+		Description: "Verification details to verify registered target domain",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10f97c1fe4afdddf0484f3c4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DnsRecordName
+			"dns_record_name": schemaAttributefc59ab75322c12ed7e8a5c29(),
+			// Property: DnsRecordType
+			"dns_record_type": schemaAttributec3c0f2629a7874bd74f48eb8(),
+			// Property: Token
+			"token": schemaAttribute006b96ab5860f1c253dad756(),
+		}, /*END SCHEMA*/
+		Description: "Represents DNS TXT verification details",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a35a9c54e74856e23569fc1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute231208dbebeab756f5a62f09() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RoutePath
+			"route_path": schemaAttribute323d5c2f32db3552eca36064(),
+			// Property: Token
+			"token": schemaAttribute006b96ab5860f1c253dad756(),
+		}, /*END SCHEMA*/
+		Description: "Represents HTTP route verification details",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3184fb182aad034e0ea3931d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Type of domain ownership verification method",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute323d5c2f32db3552eca36064() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Route path where verification token should be placed",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54339de0661e4b8e6f945e43() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "Timestamp when the target domain was last successfully verified",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute734dc5f8d631b0021d39caa1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique identifier of the target domain",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84ef25fc0b60fe5f1cf984c1() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeb4c0085dca551e82c9fb1160(),
+				// Property: Value
+				"value": schemaAttribute1a35a9c54e74856e23569fc1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags for the target domain",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4c0085dca551e82c9fb1160() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba2f6dde7d6d4668ea88a250() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "Timestamp when the target domain was registered",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3c0f2629a7874bd74f48eb8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Type of record to be added in DNS for target domain",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed16911662b687de2a657ba0b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Verification method for the target domain",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0e6c6a4f476f93cd870251d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Reason for the current target domain verification status",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefad5d1b3470937468e559a1a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Domain name of the target domain",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc59ab75322c12ed7e8a5c29() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Record name to be added in DNS for target domain",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_securityagent_target_domain", targetDomainDataSource)
 }
@@ -31,11 +189,7 @@ func targetDomainDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "Timestamp when the target domain was registered",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributeba2f6dde7d6d4668ea88a250(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -68,24 +222,7 @@ func targetDomainDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags for the target domain",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute84ef25fc0b60fe5f1cf984c1(),
 		// Property: TargetDomainId
 		// CloudFormation resource type schema:
 		//
@@ -93,10 +230,7 @@ func targetDomainDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Unique identifier of the target domain",
 		//	  "type": "string"
 		//	}
-		"target_domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique identifier of the target domain",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_domain_id": schemaAttribute734dc5f8d631b0021d39caa1(),
 		// Property: TargetDomainName
 		// CloudFormation resource type schema:
 		//
@@ -104,10 +238,7 @@ func targetDomainDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Domain name of the target domain",
 		//	  "type": "string"
 		//	}
-		"target_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Domain name of the target domain",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_domain_name": schemaAttributefad5d1b3470937468e559a1a(),
 		// Property: VerificationDetails
 		// CloudFormation resource type schema:
 		//
@@ -164,56 +295,7 @@ func targetDomainDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"verification_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DnsTxt
-				"dns_txt": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DnsRecordName
-						"dns_record_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Record name to be added in DNS for target domain",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DnsRecordType
-						"dns_record_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Type of record to be added in DNS for target domain",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Token
-						"token": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Token used to verify domain ownership",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Represents DNS TXT verification details",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: HttpRoute
-				"http_route": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: RoutePath
-						"route_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Route path where verification token should be placed",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Token
-						"token": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Token used to verify domain ownership",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Represents HTTP route verification details",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Method
-				"method": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Type of domain ownership verification method",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Verification details to verify registered target domain",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"verification_details": schemaAttribute0d008eca484d074910b080d1(),
 		// Property: VerificationMethod
 		// CloudFormation resource type schema:
 		//
@@ -226,10 +308,7 @@ func targetDomainDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"verification_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Verification method for the target domain",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"verification_method": schemaAttributed16911662b687de2a657ba0b(),
 		// Property: VerificationStatus
 		// CloudFormation resource type schema:
 		//
@@ -243,10 +322,7 @@ func targetDomainDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"verification_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Current verification status of the registered target domain",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"verification_status": schemaAttribute0c0cd0e702ebf10eb3ff8167(),
 		// Property: VerificationStatusReason
 		// CloudFormation resource type schema:
 		//
@@ -254,10 +330,7 @@ func targetDomainDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Reason for the current target domain verification status",
 		//	  "type": "string"
 		//	}
-		"verification_status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Reason for the current target domain verification status",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"verification_status_reason": schemaAttributee0e6c6a4f476f93cd870251d(),
 		// Property: VerifiedAt
 		// CloudFormation resource type schema:
 		//
@@ -266,11 +339,7 @@ func targetDomainDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"verified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "Timestamp when the target domain was last successfully verified",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"verified_at": schemaAttribute54339de0661e4b8e6f945e43(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

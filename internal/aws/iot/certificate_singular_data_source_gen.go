@@ -14,6 +14,12 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributef96ce94ac9a364e6b5bc956b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iot_certificate", certificateDataSource)
 }
@@ -28,9 +34,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributef96ce94ac9a364e6b5bc956b(),
 		// Property: CACertificatePem
 		// CloudFormation resource type schema:
 		//
@@ -39,9 +43,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"ca_certificate_pem": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"ca_certificate_pem": schemaAttributef96ce94ac9a364e6b5bc956b(),
 		// Property: CertificateMode
 		// CloudFormation resource type schema:
 		//
@@ -52,9 +54,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"certificate_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"certificate_mode": schemaAttributef96ce94ac9a364e6b5bc956b(),
 		// Property: CertificatePem
 		// CloudFormation resource type schema:
 		//
@@ -63,27 +63,21 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"certificate_pem": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"certificate_pem": schemaAttributef96ce94ac9a364e6b5bc956b(),
 		// Property: CertificateSigningRequest
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"certificate_signing_request": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"certificate_signing_request": schemaAttributef96ce94ac9a364e6b5bc956b(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"certificate_id": schemaAttributef96ce94ac9a364e6b5bc956b(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -97,9 +91,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributef96ce94ac9a364e6b5bc956b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

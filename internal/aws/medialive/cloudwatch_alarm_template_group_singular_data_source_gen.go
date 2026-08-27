@@ -16,6 +16,57 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute3e7805ac407fd650c1d91997() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A cloudwatch alarm template group's ARN (Amazon Resource Name)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6120322886c303d66969f07e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A resource's optional description.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute68d832d3f5f7e0dc70b29b74() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute713c1fcdbea09609987156aa() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Represents the tags associated with a resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9430a6a552924d7ea63d588a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A resource's name. Names must be unique within the scope of a resource type in a specific region.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec245f598ff21ea4bd6ddb3e8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc53895ab97497a408e4e1b9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_medialive_cloudwatch_alarm_template_group", cloudWatchAlarmTemplateGroupDataSource)
 }
@@ -32,10 +83,7 @@ func cloudWatchAlarmTemplateGroupDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^arn:.+:medialive:.+:cloudwatch-alarm-template-group:.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A cloudwatch alarm template group's ARN (Amazon Resource Name)",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute3e7805ac407fd650c1d91997(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +91,7 @@ func cloudWatchAlarmTemplateGroupDataSource(ctx context.Context) (datasource.Dat
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributec245f598ff21ea4bd6ddb3e8(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +101,7 @@ func cloudWatchAlarmTemplateGroupDataSource(ctx context.Context) (datasource.Dat
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A resource's optional description.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute6120322886c303d66969f07e(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -70,19 +112,14 @@ func cloudWatchAlarmTemplateGroupDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^(aws-)?[0-9]{7}$",
 		//	  "type": "string"
 		//	}
-		"cloudwatch_alarm_template_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A cloudwatch alarm template group's id. AWS provided template groups have ids that start with `aws-`",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cloudwatch_alarm_template_group_id": schemaAttribute68d832d3f5f7e0dc70b29b74(),
 		// Property: Identifier
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"identifier": schemaAttributecc53895ab97497a408e4e1b9(),
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
 		//
@@ -90,10 +127,7 @@ func cloudWatchAlarmTemplateGroupDataSource(ctx context.Context) (datasource.Dat
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"modified_at": schemaAttributec245f598ff21ea4bd6ddb3e8(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -104,10 +138,7 @@ func cloudWatchAlarmTemplateGroupDataSource(ctx context.Context) (datasource.Dat
 		//	  "pattern": "^[^\\s]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A resource's name. Names must be unique within the scope of a resource type in a specific region.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute9430a6a552924d7ea63d588a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -121,12 +152,7 @@ func cloudWatchAlarmTemplateGroupDataSource(ctx context.Context) (datasource.Dat
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Represents the tags associated with a resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute713c1fcdbea09609987156aa(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

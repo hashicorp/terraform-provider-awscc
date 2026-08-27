@@ -14,6 +14,47 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute5057b6f222f7cd557e52d002() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the specified AWS Identity Center.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73cf3eec6c14b8fbea204836() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the specified Access Grants instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8893703d63b88e89368a2659() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the specified access grants instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda767e2858c1587967498589() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef4018c70abbeb664beff9e44() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeda767e2858c1587967498589(),
+				// Property: Value
+				"value": schemaAttributeda767e2858c1587967498589(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_s3_access_grants_instance", accessGrantsInstanceDataSource)
 }
@@ -29,10 +70,7 @@ func accessGrantsInstanceDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Amazon Resource Name (ARN) of the specified Access Grants instance.",
 		//	  "type": "string"
 		//	}
-		"access_grants_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the specified Access Grants instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"access_grants_instance_arn": schemaAttribute73cf3eec6c14b8fbea204836(),
 		// Property: AccessGrantsInstanceId
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +78,7 @@ func accessGrantsInstanceDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "A unique identifier for the specified access grants instance.",
 		//	  "type": "string"
 		//	}
-		"access_grants_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for the specified access grants instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"access_grants_instance_id": schemaAttribute8893703d63b88e89368a2659(),
 		// Property: IdentityCenterArn
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +86,7 @@ func accessGrantsInstanceDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Amazon Resource Name (ARN) of the specified AWS Identity Center.",
 		//	  "type": "string"
 		//	}
-		"identity_center_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the specified AWS Identity Center.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"identity_center_arn": schemaAttribute5057b6f222f7cd557e52d002(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -79,21 +111,7 @@ func accessGrantsInstanceDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributef4018c70abbeb664beff9e44(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

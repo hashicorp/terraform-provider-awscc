@@ -14,6 +14,92 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0e1518a23198f811be66fd9b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a12ad4fecc2593cbb92229c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ed1357eb00ab3017d33a09e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3794a91046d2bf0c77539b20() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IP address range, in CIDR notation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4db29d538a5ebc8ef33dfb75() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute593e9a43fe8a0a8599abe158() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the IP access control group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e5d267382420d3ee87bd967() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IpRule
+				"ip_rule": schemaAttribute3794a91046d2bf0c77539b20(),
+				// Property: RuleDesc
+				"rule_desc": schemaAttribute2ed1357eb00ab3017d33a09e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The rules for the IP access control group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute895f457e717f2348905af343() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributed1ef3375675249d2ff534cfd(),
+				// Property: Value
+				"value": schemaAttribute0e1518a23198f811be66fd9b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags for the IP access control group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1ef3375675249d2ff534cfd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed416654885625190915cef16() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the IP access control group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_workspaces_workspace_ip_group", workspaceIpGroupDataSource)
 }
@@ -29,10 +115,7 @@ func workspaceIpGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The Amazon Resource Name (ARN) of the IP access control group.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the IP access control group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute593e9a43fe8a0a8599abe158(),
 		// Property: GroupDesc
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +123,7 @@ func workspaceIpGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The description of the group.",
 		//	  "type": "string"
 		//	}
-		"group_desc": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"group_desc": schemaAttribute4db29d538a5ebc8ef33dfb75(),
 		// Property: GroupId
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +132,7 @@ func workspaceIpGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^wsipg-[0-9a-z]{8,63}$",
 		//	  "type": "string"
 		//	}
-		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the IP access control group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"group_id": schemaAttributed416654885625190915cef16(),
 		// Property: GroupName
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +140,7 @@ func workspaceIpGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The name of the group.",
 		//	  "type": "string"
 		//	}
-		"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"group_name": schemaAttribute2a12ad4fecc2593cbb92229c(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -93,24 +167,7 @@ func workspaceIpGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags for the IP access control group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute895f457e717f2348905af343(),
 		// Property: UserRules
 		// CloudFormation resource type schema:
 		//
@@ -136,24 +193,7 @@ func workspaceIpGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"user_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: IpRule
-					"ip_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The IP address range, in CIDR notation.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: RuleDesc
-					"rule_desc": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The description of the rule.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The rules for the IP access control group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"user_rules": schemaAttribute7e5d267382420d3ee87bd967(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

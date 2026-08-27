@@ -14,6 +14,41 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute02deb030edc66f7fe4c90dba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The view content hash to be checked.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a86a6ed985f2e7c788f0863() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the created view version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4fb58b0e8c4d7a616275f2f0() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The version of the view.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6efbfdb9feb3a4e9eccd90fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the view for which a version is being created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5691518210ab566c96fc9cf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description for the view version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_view_version", viewVersionDataSource)
 }
@@ -29,10 +64,7 @@ func viewVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version of the view.",
 		//	  "type": "integer"
 		//	}
-		"version": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The version of the view.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttribute4fb58b0e8c4d7a616275f2f0(),
 		// Property: VersionDescription
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +75,7 @@ func viewVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([\\p{L}\\p{N}_.:\\/=+\\-@,()']+[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@,()']*)$",
 		//	  "type": "string"
 		//	}
-		"version_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description for the view version.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version_description": schemaAttributed5691518210ab566c96fc9cf(),
 		// Property: ViewArn
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +86,7 @@ func viewVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/view/[-:a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"view_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the view for which a version is being created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"view_arn": schemaAttribute6efbfdb9feb3a4e9eccd90fb(),
 		// Property: ViewContentSha256
 		// CloudFormation resource type schema:
 		//
@@ -71,10 +97,7 @@ func viewVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]{64}$",
 		//	  "type": "string"
 		//	}
-		"view_content_sha_256": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The view content hash to be checked.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"view_content_sha_256": schemaAttribute02deb030edc66f7fe4c90dba(),
 		// Property: ViewVersionArn
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +108,7 @@ func viewVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/view/[-:a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"view_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the created view version.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"view_version_arn": schemaAttribute4a86a6ed985f2e7c788f0863(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

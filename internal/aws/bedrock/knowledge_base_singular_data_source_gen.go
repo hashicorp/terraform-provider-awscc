@@ -15,6 +15,1108 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0009e3c68c5832854b756480() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the collection within MongoDB Atlas.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute042b0ca3caae64f83900f37d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Redshift query engine type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute071457c4e4de3f3866755488() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The data type for the vectors when using a model to convert text into vector embeddings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute09c4b7caa9eda1f8208e45e6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the knowledge base.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0bc79c8c035e4c45a9c2687e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ExecutionTimeoutSeconds
+			"execution_timeout_seconds": schemaAttribute48f52cc7024614d8d50249b3(),
+			// Property: GenerationContext
+			"generation_context": schemaAttribute4c36b50ccc4751b7c4df743b(),
+		}, /*END SCHEMA*/
+		Description: "Configurations for generating Redshift engine queries",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d25a859d9a4d25ea43cef78() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the secret that you created in AWS Secrets Manager that is linked to your Amazon Mongo database.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0fe5e7ac3815729ce0ac0790() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of reasons that the API operation on the knowledge base failed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute185cb578d87df3cacaafadff() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SegmentationConfiguration
+				"segmentation_configuration": schemaAttribute293c5f5e12f7431998b1c35c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of video configurations for multi modal ingestion.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1b26bd97f9893da75d30023d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Description
+				"description": schemaAttribute255b73e2e4c9c0413ae6ba4c(),
+				// Property: Inclusion
+				"inclusion": schemaAttribute8ede55d275e294d6013cec78(),
+				// Property: Name
+				"name": schemaAttribute8b3a90280feefba7da814550(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of Redshift query generation columns",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1b870b68b0fc8bdc5db3eb5f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomMetadataField
+			"custom_metadata_field": schemaAttribute3f42d0d50b277460e1269358(),
+			// Property: MetadataField
+			"metadata_field": schemaAttribute93ee21dbbae85a789a1e09bd(),
+			// Property: PrimaryKeyField
+			"primary_key_field": schemaAttributecfc5484da9fd90d71cfde31b(),
+			// Property: TextField
+			"text_field": schemaAttributec1d15d866145613add2cbcba(),
+			// Property: VectorField
+			"vector_field": schemaAttribute2f0dc4a19214aaa03cf4a739(),
+		}, /*END SCHEMA*/
+		Description: "Contains the names of the fields to which to map information about the vector store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e7f29d3735f93eab5ddaa6b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Serverless Redshift auth type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute255b73e2e4c9c0413ae6ba4c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Description for the attached entity",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2867cb26f3ffa80daf315df1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EmbeddingModelArn
+			"embedding_model_arn": schemaAttribute4b67809bf13f823378ffa972(),
+			// Property: EmbeddingModelConfiguration
+			"embedding_model_configuration": schemaAttribute43efe63a664aaacadd72120d(),
+			// Property: SupplementalDataStorageConfiguration
+			"supplemental_data_storage_configuration": schemaAttribute856bb4459bb11351c59117bb(),
+		}, /*END SCHEMA*/
+		Description: "Contains details about the model used to create vector embeddings for the knowledge base.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute293c5f5e12f7431998b1c35c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FixedLengthDuration
+			"fixed_length_duration": schemaAttributecae999b83cb823dfcba18fff(),
+		}, /*END SCHEMA*/
+		Description: "Configure the video segmentation configuration for multi modal ingestion.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d4967ced453d38e0cb69ee7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the knowledge base.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ea78fb4b0884881b1e8c2b0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of table names in AWS Data Catalog. Must follow two part notation",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f0dc4a19214aaa03cf4a739() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3056cbbbdff25cd38ab52c2f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The dimensions details for the vector configuration used on the Bedrock embeddings model.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30bb2f54baeace95200a8f97() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DomainArn
+			"domain_arn": schemaAttribute92636161a1f2d521f289c254(),
+			// Property: DomainEndpoint
+			"domain_endpoint": schemaAttributeb3a205caa9b5431e84012565(),
+			// Property: FieldMapping
+			"field_mapping": schemaAttribute50fb259ccfe5c6538fb27e90(),
+			// Property: VectorIndexName
+			"vector_index_name": schemaAttribute877011bd34ab74516e2205bb(),
+		}, /*END SCHEMA*/
+		Description: "Contains the storage configuration of the knowledge base in Amazon OpenSearch Service.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31273999bfd499397610936c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CollectionArn
+			"collection_arn": schemaAttribute849b08653e0c3651fe92c125(),
+			// Property: FieldMapping
+			"field_mapping": schemaAttribute7208bcfd66f9761dc6023574(),
+			// Property: VectorIndexName
+			"vector_index_name": schemaAttribute877011bd34ab74516e2205bb(),
+		}, /*END SCHEMA*/
+		Description: "Contains the storage configuration of the knowledge base in Amazon OpenSearch Service.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31771f1ef3231f753b40f449() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MongoDbAtlasConfiguration
+			"mongo_db_atlas_configuration": schemaAttributef994e63f3e5401855ef22477(),
+			// Property: NeptuneAnalyticsConfiguration
+			"neptune_analytics_configuration": schemaAttributeb8266eff34d3b4c0d2ba5263(),
+			// Property: OpensearchManagedClusterConfiguration
+			"opensearch_managed_cluster_configuration": schemaAttribute30bb2f54baeace95200a8f97(),
+			// Property: OpensearchServerlessConfiguration
+			"opensearch_serverless_configuration": schemaAttribute31273999bfd499397610936c(),
+			// Property: PineconeConfiguration
+			"pinecone_configuration": schemaAttribute520d3b23ddc4d8d345afe369(),
+			// Property: RdsConfiguration
+			"rds_configuration": schemaAttribute7a4a388c3ff9fd3e36a0459d(),
+			// Property: S3VectorsConfiguration
+			"s3_vectors_configuration": schemaAttributeb59480e6d984792c1b887b8d(),
+			// Property: Type
+			"type": schemaAttributee0b75ea84244c8d103809537(),
+		}, /*END SCHEMA*/
+		Description: "The vector store service in which the knowledge base is stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34fa8f6866f24712d21011ef() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KendraIndexArn
+			"kendra_index_arn": schemaAttributed7912f19a9f3a062a29458d4(),
+		}, /*END SCHEMA*/
+		Description: "Configurations for a Kendra knowledge base",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38860270e8f0049b2b350061() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the vector index used for the knowledge base. This name identifies the vector index within the Amazon Bedrock service.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f42d0d50b277460e1269358() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the field in which Amazon Bedrock stores custom metadata about the vector store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41fa79216b08aa71378532f0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "SQL query engine type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43a22e064f3354aecfbe0727() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MetadataField
+			"metadata_field": schemaAttribute93ee21dbbae85a789a1e09bd(),
+			// Property: TextField
+			"text_field": schemaAttributec1d15d866145613add2cbcba(),
+			// Property: VectorField
+			"vector_field": schemaAttribute2f0dc4a19214aaa03cf4a739(),
+		}, /*END SCHEMA*/
+		Description: "Contains the names of the fields to which to map information about the vector store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43df545b7d13c2bec1c2686d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the S3 bucket where vector embeddings are stored. This bucket contains the vector data used by the knowledge base.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43efe63a664aaacadd72120d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BedrockEmbeddingModelConfiguration
+			"bedrock_embedding_model_configuration": schemaAttribute8ea3f4e4ee7a5d10e92e6d56(),
+		}, /*END SCHEMA*/
+		Description: "The embeddings model configuration details for the vector model used in Knowledge Base.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute460c3fa1182f7215f2008728() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Type
+			"type": schemaAttribute1e7f29d3735f93eab5ddaa6b(),
+			// Property: UsernamePasswordSecretArn
+			"username_password_secret_arn": schemaAttributeafdc343bfb4119fe89fd1541(),
+		}, /*END SCHEMA*/
+		Description: "Configurations for Redshift query engine serverless auth setup",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48f52cc7024614d8d50249b3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Max query execution timeout",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49def66c4b2aebf0b89b4769() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of your Amazon RDS database.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b67809bf13f823378ffa972() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the model used to create vector embeddings for the knowledge base.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c36b50ccc4751b7c4df743b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CuratedQueries
+			"curated_queries": schemaAttributedddcff0d5f1e44f8dd5054c3(),
+			// Property: Tables
+			"tables": schemaAttribute83843e6c221372e7f63338b1(),
+		}, /*END SCHEMA*/
+		Description: "Context used to improve query generation",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ee06ea43c2d5bc4c8e447ba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The endpoint URL for your index management page.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute50fb259ccfe5c6538fb27e90() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MetadataField
+			"metadata_field": schemaAttribute93ee21dbbae85a789a1e09bd(),
+			// Property: TextField
+			"text_field": schemaAttributec1d15d866145613add2cbcba(),
+			// Property: VectorField
+			"vector_field": schemaAttribute2f0dc4a19214aaa03cf4a739(),
+		}, /*END SCHEMA*/
+		Description: "A mapping of Bedrock Knowledge Base fields to OpenSearch Managed Cluster field names",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute520d3b23ddc4d8d345afe369() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConnectionString
+			"connection_string": schemaAttribute4ee06ea43c2d5bc4c8e447ba(),
+			// Property: CredentialsSecretArn
+			"credentials_secret_arn": schemaAttributecdee0818855a9b586a9dc3ba(),
+			// Property: FieldMapping
+			"field_mapping": schemaAttribute80287b604218f957fc37c490(),
+			// Property: Namespace
+			"namespace": schemaAttribute83596eab83a4e94c50c3e017(),
+		}, /*END SCHEMA*/
+		Description: "Contains the storage configuration of the knowledge base in Pinecone.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute534db55df7e1a98ef26ffb73() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The location's URI",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58ba928a2345f1f37f1ecdf2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FixedLengthDuration
+			"fixed_length_duration": schemaAttributecae999b83cb823dfcba18fff(),
+		}, /*END SCHEMA*/
+		Description: "Configure the audio segmentation configuration for multi modal ingestion.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a2ec076abf6e92bc54a189c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the vector store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60b2c42c651a44428ec4dd66() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time at which the knowledge base was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60e5f6eadaab8db287d37743() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM role with permissions to invoke API operations on the knowledge base. The ARN must begin with AmazonBedrockExecutionRoleForKnowledgeBase_",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6505662b6910866b8041bc37() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Description of the Resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65f21fc597b9358e5b9203dc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DatabaseUser
+			"database_user": schemaAttribute83bd4beda48e28921978f34e(),
+			// Property: Type
+			"type": schemaAttributef297536d54b378e3da8782d3(),
+			// Property: UsernamePasswordSecretArn
+			"username_password_secret_arn": schemaAttributeafdc343bfb4119fe89fd1541(),
+		}, /*END SCHEMA*/
+		Description: "Configurations for Redshift query engine provisioned auth setup",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a8f9aa4b36b6d919fc71f8d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Question for the curated query",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute708808b0c0ff5d8215f6d8c0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: URI
+			"uri": schemaAttribute534db55df7e1a98ef26ffb73(),
+		}, /*END SCHEMA*/
+		Description: "An Amazon S3 location.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7208bcfd66f9761dc6023574() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MetadataField
+			"metadata_field": schemaAttribute93ee21dbbae85a789a1e09bd(),
+			// Property: TextField
+			"text_field": schemaAttributec1d15d866145613add2cbcba(),
+			// Property: VectorField
+			"vector_field": schemaAttribute2f0dc4a19214aaa03cf4a739(),
+		}, /*END SCHEMA*/
+		Description: "A mapping of Bedrock Knowledge Base fields to OpenSearch Serverless field names",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7549b7677a160fb6d4dc4f75() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the secret that you created in AWS Secrets Manager that is linked to your Amazon RDS database.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77ca0c77cbd1085c74e7ce59() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TableNames
+			"table_names": schemaAttribute2ea78fb4b0884881b1e8c2b0(),
+		}, /*END SCHEMA*/
+		Description: "Configurations for Redshift query engine AWS Data Catalog backed storage",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79e8c516f813022ca8247d8b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthConfiguration
+			"auth_configuration": schemaAttribute460c3fa1182f7215f2008728(),
+			// Property: WorkgroupArn
+			"workgroup_arn": schemaAttributec92cd80253f44bcbd7ed1a84(),
+		}, /*END SCHEMA*/
+		Description: "Configurations for serverless Redshift query engine",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a4a388c3ff9fd3e36a0459d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CredentialsSecretArn
+			"credentials_secret_arn": schemaAttribute7549b7677a160fb6d4dc4f75(),
+			// Property: DatabaseName
+			"database_name": schemaAttribute49def66c4b2aebf0b89b4769(),
+			// Property: FieldMapping
+			"field_mapping": schemaAttribute1b870b68b0fc8bdc5db3eb5f(),
+			// Property: ResourceArn
+			"resource_arn": schemaAttribute5a2ec076abf6e92bc54a189c(),
+			// Property: TableName
+			"table_name": schemaAttributee547beae0e00038367680f6c(),
+		}, /*END SCHEMA*/
+		Description: "Contains details about the storage configuration of the knowledge base in Amazon RDS. For more information, see Create a vector index in Amazon RDS.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bd51ea2781a49c7a4f80c5a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "MongoDB Atlas endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80287b604218f957fc37c490() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MetadataField
+			"metadata_field": schemaAttribute93ee21dbbae85a789a1e09bd(),
+			// Property: TextField
+			"text_field": schemaAttributec1d15d866145613add2cbcba(),
+		}, /*END SCHEMA*/
+		Description: "Contains the names of the fields to which to map information about the vector store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80f32d38441291d759495ac0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of a MongoDB Atlas text index.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83596eab83a4e94c50c3e017() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The namespace to be used to write new data to your database.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83843e6c221372e7f63338b1() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Columns
+				"columns": schemaAttribute1b26bd97f9893da75d30023d(),
+				// Property: Description
+				"description": schemaAttribute255b73e2e4c9c0413ae6ba4c(),
+				// Property: Inclusion
+				"inclusion": schemaAttribute8ede55d275e294d6013cec78(),
+				// Property: Name
+				"name": schemaAttributef7d386409b5ad57ac8965dd6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of tables used for Redshift query generation context",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83bd4beda48e28921978f34e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Redshift database user",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute849b08653e0c3651fe92c125() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the OpenSearch Service vector store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute856bb4459bb11351c59117bb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SupplementalDataStorageLocations
+			"supplemental_data_storage_locations": schemaAttributef5b03907f85c4ab6dc1ef21b(),
+		}, /*END SCHEMA*/
+		Description: "Configurations for supplemental data storage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute859e26b7cdb719f6d5c28aa6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MetadataField
+			"metadata_field": schemaAttribute93ee21dbbae85a789a1e09bd(),
+			// Property: TextField
+			"text_field": schemaAttributec1d15d866145613add2cbcba(),
+		}, /*END SCHEMA*/
+		Description: "A mapping of Bedrock Knowledge Base fields to Neptune Analytics fields.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85ba2cf5690ff55d80b77bef() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EmbeddingModelArn
+			"embedding_model_arn": schemaAttribute4b67809bf13f823378ffa972(),
+			// Property: EmbeddingModelConfiguration
+			"embedding_model_configuration": schemaAttribute43efe63a664aaacadd72120d(),
+			// Property: EmbeddingModelType
+			"embedding_model_type": schemaAttributea6d6f5dcf94e03c6f0ff58c4(),
+			// Property: ServerSideEncryptionConfiguration
+			"server_side_encryption_configuration": schemaAttributedf153ed2d4edcad5c09f039a(),
+		}, /*END SCHEMA*/
+		Description: "Contains details about the model used to create vector embeddings for a managed knowledge base.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute877011bd34ab74516e2205bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the vector store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b3a90280feefba7da814550() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Query generation column name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ea3f4e4ee7a5d10e92e6d56() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Audio
+			"audio": schemaAttribute8edafe07d3e60ae982582b0d(),
+			// Property: Dimensions
+			"dimensions": schemaAttribute3056cbbbdff25cd38ab52c2f(),
+			// Property: EmbeddingDataType
+			"embedding_data_type": schemaAttribute071457c4e4de3f3866755488(),
+			// Property: Video
+			"video": schemaAttribute185cb578d87df3cacaafadff(),
+		}, /*END SCHEMA*/
+		Description: "The vector configuration details for the Bedrock embeddings model.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8edafe07d3e60ae982582b0d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SegmentationConfiguration
+				"segmentation_configuration": schemaAttribute58ba928a2345f1f37f1ecdf2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of audio configurations for multi modal ingestion.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ede55d275e294d6013cec78() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Include or Exclude status for an entity",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91514d593302fe4adb5643f5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "MongoDB Atlas endpoint service name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92636161a1f2d521f289c254() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the OpenSearch domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9327bf7069d589bbae586a86() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Redshift cluster identifier",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93ee21dbbae85a789a1e09bd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the field in which Amazon Bedrock stores metadata about the vector store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9662f60f728abfaad14b8926() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time at which the knowledge base was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e7924892bde04c2ea6addf5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN for Neptune Analytics graph database.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea11b224b349c867c0d699393() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DatabaseName
+			"database_name": schemaAttributebbbf1537c6494e94cdbfa903(),
+		}, /*END SCHEMA*/
+		Description: "Configurations for Redshift query engine Redshift backed storage",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea6d6f5dcf94e03c6f0ff58c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of embedding model to use for the managed knowledge base.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeafdc343bfb4119fe89fd1541() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Arn of a SecretsManager Secret",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3a205caa9b5431e84012565() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The endpoint URL the OpenSearch domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb59480e6d984792c1b887b8d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IndexArn
+			"index_arn": schemaAttributec18f4e0ed0a15290250a4fc2(),
+			// Property: IndexName
+			"index_name": schemaAttribute38860270e8f0049b2b350061(),
+			// Property: VectorBucketArn
+			"vector_bucket_arn": schemaAttribute43df545b7d13c2bec1c2686d(),
+		}, /*END SCHEMA*/
+		Description: "Contains the storage configuration of the knowledge base for S3 vectors.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8266eff34d3b4c0d2ba5263() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FieldMapping
+			"field_mapping": schemaAttribute859e26b7cdb719f6d5c28aa6(),
+			// Property: GraphArn
+			"graph_arn": schemaAttribute9e7924892bde04c2ea6addf5(),
+		}, /*END SCHEMA*/
+		Description: "Contains the configurations to use Neptune Analytics as Vector Store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb5e708466161f2159a3936a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the knowledge base.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebbbf1537c6494e94cdbfa903() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Redshift database name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebdb56ad906a6b124e9b5721b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ProvisionedConfiguration
+			"provisioned_configuration": schemaAttributed0aab09502aef363997ad698(),
+			// Property: ServerlessConfiguration
+			"serverless_configuration": schemaAttribute79e8c516f813022ca8247d8b(),
+			// Property: Type
+			"type": schemaAttribute042b0ca3caae64f83900f37d(),
+		}, /*END SCHEMA*/
+		Description: "Configurations for Redshift query engine",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebfe22360905bb15aab32a95c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: QueryEngineConfiguration
+			"query_engine_configuration": schemaAttributebdb56ad906a6b124e9b5721b(),
+			// Property: QueryGenerationConfiguration
+			"query_generation_configuration": schemaAttribute0bc79c8c035e4c45a9c2687e(),
+			// Property: StorageConfigurations
+			"storage_configurations": schemaAttributef2d34ca7fddd199f3ec9d29a(),
+		}, /*END SCHEMA*/
+		Description: "Configurations for a Redshift knowledge base",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec18f4e0ed0a15290250a4fc2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the vector index used for the knowledge base. This ARN identifies the specific vector index resource within Amazon Bedrock.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec1d15d866145613add2cbcba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec78c8052219526b3461dfbd7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of a MongoDB Atlas index.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8493a8f346876bee3e917a0() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A map of tag keys and values",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec92cd80253f44bcbd7ed1a84() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Workgroup arn",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecae999b83cb823dfcba18fff() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Duration in seconds to segment the multi modal media",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd101991e826766f367819a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of a knowledge base.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecdee0818855a9b586a9dc3ba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the secret that you created in AWS Secrets Manager that is linked to your Pinecone API key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributececeac167fd4eafaf94f3298() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RedshiftConfiguration
+			"redshift_configuration": schemaAttributebfe22360905bb15aab32a95c(),
+			// Property: Type
+			"type": schemaAttribute41fa79216b08aa71378532f0(),
+		}, /*END SCHEMA*/
+		Description: "Configurations for a SQL knowledge base",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecfc5484da9fd90d71cfde31b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the field in which Amazon Bedrock stores the ID for each entry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed0aab09502aef363997ad698() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthConfiguration
+			"auth_configuration": schemaAttribute65f21fc597b9358e5b9203dc(),
+			// Property: ClusterIdentifier
+			"cluster_identifier": schemaAttribute9327bf7069d589bbae586a86(),
+		}, /*END SCHEMA*/
+		Description: "Configurations for provisioned Redshift query engine",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1451aad37171d369aebd6da() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of a knowledge base.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed55e4f966f7eaa8000f96733() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the database within MongoDB Atlas.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed7912f19a9f3a062a29458d4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Arn of a Kendra index",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedddcff0d5f1e44f8dd5054c3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NaturalLanguage
+				"natural_language": schemaAttribute6a8f9aa4b36b6d919fc71f8d(),
+				// Property: Sql
+				"sql": schemaAttributedf9d70468d349088e1f334cb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of example queries and results",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf153ed2d4edcad5c09f039a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttributef81179ccca98e8db3cc22867(),
+		}, /*END SCHEMA*/
+		Description: "Contains details about the server-side encryption for the managed knowledge base.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf9d70468d349088e1f334cb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Answer for the curated query",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0b75ea84244c8d103809537() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The storage type of a knowledge base.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee11c88fccd28a59d90ebd4ac() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KendraKnowledgeBaseConfiguration
+			"kendra_knowledge_base_configuration": schemaAttribute34fa8f6866f24712d21011ef(),
+			// Property: ManagedKnowledgeBaseConfiguration
+			"managed_knowledge_base_configuration": schemaAttribute85ba2cf5690ff55d80b77bef(),
+			// Property: SqlKnowledgeBaseConfiguration
+			"sql_knowledge_base_configuration": schemaAttributececeac167fd4eafaf94f3298(),
+			// Property: Type
+			"type": schemaAttributed1451aad37171d369aebd6da(),
+			// Property: VectorKnowledgeBaseConfiguration
+			"vector_knowledge_base_configuration": schemaAttribute2867cb26f3ffa80daf315df1(),
+		}, /*END SCHEMA*/
+		Description: "Contains details about the embeddings model used for the knowledge base.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee387bf99791da3647eb7cf71() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Redshift query engine storage type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee547beae0e00038367680f6c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the table in the database.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1ea19c5072d9b50f98bf7af() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Supplemental data storage location type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef297536d54b378e3da8782d3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Provisioned Redshift auth type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2d34ca7fddd199f3ec9d29a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AwsDataCatalogConfiguration
+				"aws_data_catalog_configuration": schemaAttribute77ca0c77cbd1085c74e7ce59(),
+				// Property: RedshiftConfiguration
+				"redshift_configuration": schemaAttributea11b224b349c867c0d699393(),
+				// Property: Type
+				"type": schemaAttributee387bf99791da3647eb7cf71(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of configurations for available Redshift query engine storage types",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef5b03907f85c4ab6dc1ef21b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Location
+				"s3_location": schemaAttribute708808b0c0ff5d8215f6d8c0(),
+				// Property: SupplementalDataStorageLocationType
+				"supplemental_data_storage_location_type": schemaAttributef1ea19c5072d9b50f98bf7af(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of supplemental data storage locations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7d386409b5ad57ac8965dd6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Query generation table name. Must follow three-part notation",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef81179ccca98e8db3cc22867() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the AWS KMS key used to encrypt the managed knowledge base.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef994e63f3e5401855ef22477() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CollectionName
+			"collection_name": schemaAttribute0009e3c68c5832854b756480(),
+			// Property: CredentialsSecretArn
+			"credentials_secret_arn": schemaAttribute0d25a859d9a4d25ea43cef78(),
+			// Property: DatabaseName
+			"database_name": schemaAttributed55e4f966f7eaa8000f96733(),
+			// Property: Endpoint
+			"endpoint": schemaAttribute7bd51ea2781a49c7a4f80c5a(),
+			// Property: EndpointServiceName
+			"endpoint_service_name": schemaAttribute91514d593302fe4adb5643f5(),
+			// Property: FieldMapping
+			"field_mapping": schemaAttribute43a22e064f3354aecfbe0727(),
+			// Property: TextIndexName
+			"text_index_name": schemaAttribute80f32d38441291d759495ac0(),
+			// Property: VectorIndexName
+			"vector_index_name": schemaAttributec78c8052219526b3461dfbd7(),
+		}, /*END SCHEMA*/
+		Description: "Contains the storage configuration of the knowledge base in MongoDb Atlas Cloud.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrock_knowledge_base", knowledgeBaseDataSource)
 }
@@ -30,10 +1132,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The time at which the knowledge base was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time at which the knowledge base was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute60b2c42c651a44428ec4dd66(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +1142,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description of the Resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute6505662b6910866b8041bc37(),
 		// Property: FailureReasons
 		// CloudFormation resource type schema:
 		//
@@ -61,11 +1157,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxItems": 2048,
 		//	  "type": "array"
 		//	}
-		"failure_reasons": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of reasons that the API operation on the knowledge base failed.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"failure_reasons": schemaAttribute0fe5e7ac3815729ce0ac0790(),
 		// Property: KnowledgeBaseArn
 		// CloudFormation resource type schema:
 		//
@@ -76,10 +1168,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^arn:aws(|-cn|-us-gov):bedrock:[a-zA-Z0-9-]*:[0-9]{12}:knowledge-base/[0-9a-zA-Z]+$",
 		//	  "type": "string"
 		//	}
-		"knowledge_base_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the knowledge base.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"knowledge_base_arn": schemaAttribute2d4967ced453d38e0cb69ee7(),
 		// Property: KnowledgeBaseConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -721,454 +1810,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"knowledge_base_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KendraKnowledgeBaseConfiguration
-				"kendra_knowledge_base_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: KendraIndexArn
-						"kendra_index_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Arn of a Kendra index",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configurations for a Kendra knowledge base",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ManagedKnowledgeBaseConfiguration
-				"managed_knowledge_base_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: EmbeddingModelArn
-						"embedding_model_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the model used to create vector embeddings for the knowledge base.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: EmbeddingModelConfiguration
-						"embedding_model_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BedrockEmbeddingModelConfiguration
-								"bedrock_embedding_model_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Audio
-										"audio": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: SegmentationConfiguration
-													"segmentation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: FixedLengthDuration
-															"fixed_length_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																Description: "Duration in seconds to segment the multi modal media",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "Configure the audio segmentation configuration for multi modal ingestion.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Description: "List of audio configurations for multi modal ingestion.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Dimensions
-										"dimensions": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The dimensions details for the vector configuration used on the Bedrock embeddings model.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: EmbeddingDataType
-										"embedding_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The data type for the vectors when using a model to convert text into vector embeddings.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Video
-										"video": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: SegmentationConfiguration
-													"segmentation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: FixedLengthDuration
-															"fixed_length_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																Description: "Duration in seconds to segment the multi modal media",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "Configure the video segmentation configuration for multi modal ingestion.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Description: "List of video configurations for multi modal ingestion.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The vector configuration details for the Bedrock embeddings model.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The embeddings model configuration details for the vector model used in Knowledge Base.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: EmbeddingModelType
-						"embedding_model_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The type of embedding model to use for the managed knowledge base.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ServerSideEncryptionConfiguration
-						"server_side_encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: KmsKeyArn
-								"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the AWS KMS key used to encrypt the managed knowledge base.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Contains details about the server-side encryption for the managed knowledge base.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Contains details about the model used to create vector embeddings for a managed knowledge base.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SqlKnowledgeBaseConfiguration
-				"sql_knowledge_base_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: RedshiftConfiguration
-						"redshift_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: QueryEngineConfiguration
-								"query_engine_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ProvisionedConfiguration
-										"provisioned_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: AuthConfiguration
-												"auth_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DatabaseUser
-														"database_user": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Redshift database user",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Type
-														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Provisioned Redshift auth type",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: UsernamePasswordSecretArn
-														"username_password_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Arn of a SecretsManager Secret",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Configurations for Redshift query engine provisioned auth setup",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: ClusterIdentifier
-												"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Redshift cluster identifier",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "Configurations for provisioned Redshift query engine",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ServerlessConfiguration
-										"serverless_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: AuthConfiguration
-												"auth_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Type
-														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Serverless Redshift auth type",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: UsernamePasswordSecretArn
-														"username_password_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Arn of a SecretsManager Secret",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Configurations for Redshift query engine serverless auth setup",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: WorkgroupArn
-												"workgroup_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Workgroup arn",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "Configurations for serverless Redshift query engine",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Type
-										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Redshift query engine type",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Configurations for Redshift query engine",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: QueryGenerationConfiguration
-								"query_generation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ExecutionTimeoutSeconds
-										"execution_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "Max query execution timeout",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: GenerationContext
-										"generation_context": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: CuratedQueries
-												"curated_queries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: NaturalLanguage
-															"natural_language": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "Question for the curated query",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Sql
-															"sql": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "Answer for the curated query",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "List of example queries and results",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Tables
-												"tables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Columns
-															"columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																		// Property: Description
-																		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			Description: "Description for the attached entity",
-																			Computed:    true,
-																		}, /*END ATTRIBUTE*/
-																		// Property: Inclusion
-																		"inclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			Description: "Include or Exclude status for an entity",
-																			Computed:    true,
-																		}, /*END ATTRIBUTE*/
-																		// Property: Name
-																		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			Description: "Query generation column name",
-																			Computed:    true,
-																		}, /*END ATTRIBUTE*/
-																	}, /*END SCHEMA*/
-																}, /*END NESTED OBJECT*/
-																Description: "List of Redshift query generation columns",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Description
-															"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "Description for the attached entity",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Inclusion
-															"inclusion": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "Include or Exclude status for an entity",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Name
-															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "Query generation table name. Must follow three-part notation",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "List of tables used for Redshift query generation context",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "Context used to improve query generation",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Configurations for generating Redshift engine queries",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: StorageConfigurations
-								"storage_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: AwsDataCatalogConfiguration
-											"aws_data_catalog_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: TableNames
-													"table_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-														ElementType: types.StringType,
-														Description: "List of table names in AWS Data Catalog. Must follow two part notation",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Configurations for Redshift query engine AWS Data Catalog backed storage",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: RedshiftConfiguration
-											"redshift_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: DatabaseName
-													"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "Redshift database name",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Configurations for Redshift query engine Redshift backed storage",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Type
-											"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Redshift query engine storage type",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "List of configurations for available Redshift query engine storage types",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Configurations for a Redshift knowledge base",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Type
-						"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "SQL query engine type",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configurations for a SQL knowledge base",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Type
-				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of a knowledge base.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VectorKnowledgeBaseConfiguration
-				"vector_knowledge_base_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: EmbeddingModelArn
-						"embedding_model_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the model used to create vector embeddings for the knowledge base.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: EmbeddingModelConfiguration
-						"embedding_model_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BedrockEmbeddingModelConfiguration
-								"bedrock_embedding_model_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Audio
-										"audio": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: SegmentationConfiguration
-													"segmentation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: FixedLengthDuration
-															"fixed_length_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																Description: "Duration in seconds to segment the multi modal media",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "Configure the audio segmentation configuration for multi modal ingestion.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Description: "List of audio configurations for multi modal ingestion.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Dimensions
-										"dimensions": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The dimensions details for the vector configuration used on the Bedrock embeddings model.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: EmbeddingDataType
-										"embedding_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The data type for the vectors when using a model to convert text into vector embeddings.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Video
-										"video": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: SegmentationConfiguration
-													"segmentation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: FixedLengthDuration
-															"fixed_length_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																Description: "Duration in seconds to segment the multi modal media",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "Configure the video segmentation configuration for multi modal ingestion.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Description: "List of video configurations for multi modal ingestion.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The vector configuration details for the Bedrock embeddings model.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The embeddings model configuration details for the vector model used in Knowledge Base.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SupplementalDataStorageConfiguration
-						"supplemental_data_storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: SupplementalDataStorageLocations
-								"supplemental_data_storage_locations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: S3Location
-											"s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: URI
-													"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The location's URI",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "An Amazon S3 location.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: SupplementalDataStorageLocationType
-											"supplemental_data_storage_location_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Supplemental data storage location type.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "List of supplemental data storage locations.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Configurations for supplemental data storage.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Contains details about the model used to create vector embeddings for the knowledge base.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Contains details about the embeddings model used for the knowledge base.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"knowledge_base_configuration": schemaAttributee11c88fccd28a59d90ebd4ac(),
 		// Property: KnowledgeBaseId
 		// CloudFormation resource type schema:
 		//
@@ -1177,10 +1819,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[0-9a-zA-Z]{10}$",
 		//	  "type": "string"
 		//	}
-		"knowledge_base_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the knowledge base.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"knowledge_base_id": schemaAttributebb5e708466161f2159a3936a(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1189,10 +1828,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^([0-9a-zA-Z][_-]?){1,100}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the knowledge base.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute09c4b7caa9eda1f8208e45e6(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -1202,10 +1838,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the IAM role with permissions to invoke API operations on the knowledge base. The ARN must begin with AmazonBedrockExecutionRoleForKnowledgeBase_",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute60e5f6eadaab8db287d37743(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -1222,10 +1855,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of a knowledge base.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributecd101991e826766f367819a0(),
 		// Property: StorageConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1697,313 +2327,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MongoDbAtlasConfiguration
-				"mongo_db_atlas_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CollectionName
-						"collection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Name of the collection within MongoDB Atlas.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: CredentialsSecretArn
-						"credentials_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the secret that you created in AWS Secrets Manager that is linked to your Amazon Mongo database.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DatabaseName
-						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Name of the database within MongoDB Atlas.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Endpoint
-						"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MongoDB Atlas endpoint.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: EndpointServiceName
-						"endpoint_service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "MongoDB Atlas endpoint service name.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: FieldMapping
-						"field_mapping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: MetadataField
-								"metadata_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the field in which Amazon Bedrock stores metadata about the vector store.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TextField
-								"text_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: VectorField
-								"vector_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Contains the names of the fields to which to map information about the vector store.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TextIndexName
-						"text_index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Name of a MongoDB Atlas text index.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: VectorIndexName
-						"vector_index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Name of a MongoDB Atlas index.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Contains the storage configuration of the knowledge base in MongoDb Atlas Cloud.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NeptuneAnalyticsConfiguration
-				"neptune_analytics_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: FieldMapping
-						"field_mapping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: MetadataField
-								"metadata_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the field in which Amazon Bedrock stores metadata about the vector store.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TextField
-								"text_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "A mapping of Bedrock Knowledge Base fields to Neptune Analytics fields.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: GraphArn
-						"graph_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "ARN for Neptune Analytics graph database.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Contains the configurations to use Neptune Analytics as Vector Store.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: OpensearchManagedClusterConfiguration
-				"opensearch_managed_cluster_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DomainArn
-						"domain_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) of the OpenSearch domain.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DomainEndpoint
-						"domain_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The endpoint URL the OpenSearch domain.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: FieldMapping
-						"field_mapping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: MetadataField
-								"metadata_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the field in which Amazon Bedrock stores metadata about the vector store.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TextField
-								"text_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: VectorField
-								"vector_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "A mapping of Bedrock Knowledge Base fields to OpenSearch Managed Cluster field names",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: VectorIndexName
-						"vector_index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the vector store.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Contains the storage configuration of the knowledge base in Amazon OpenSearch Service.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: OpensearchServerlessConfiguration
-				"opensearch_serverless_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CollectionArn
-						"collection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the OpenSearch Service vector store.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: FieldMapping
-						"field_mapping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: MetadataField
-								"metadata_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the field in which Amazon Bedrock stores metadata about the vector store.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TextField
-								"text_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: VectorField
-								"vector_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "A mapping of Bedrock Knowledge Base fields to OpenSearch Serverless field names",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: VectorIndexName
-						"vector_index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the vector store.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Contains the storage configuration of the knowledge base in Amazon OpenSearch Service.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PineconeConfiguration
-				"pinecone_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ConnectionString
-						"connection_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The endpoint URL for your index management page.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: CredentialsSecretArn
-						"credentials_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the secret that you created in AWS Secrets Manager that is linked to your Pinecone API key.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: FieldMapping
-						"field_mapping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: MetadataField
-								"metadata_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the field in which Amazon Bedrock stores metadata about the vector store.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TextField
-								"text_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Contains the names of the fields to which to map information about the vector store.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Namespace
-						"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The namespace to be used to write new data to your database.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Contains the storage configuration of the knowledge base in Pinecone.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RdsConfiguration
-				"rds_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CredentialsSecretArn
-						"credentials_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the secret that you created in AWS Secrets Manager that is linked to your Amazon RDS database.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DatabaseName
-						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of your Amazon RDS database.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: FieldMapping
-						"field_mapping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: CustomMetadataField
-								"custom_metadata_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the field in which Amazon Bedrock stores custom metadata about the vector store.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: MetadataField
-								"metadata_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the field in which Amazon Bedrock stores metadata about the vector store.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: PrimaryKeyField
-								"primary_key_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the field in which Amazon Bedrock stores the ID for each entry.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TextField
-								"text_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the field in which Amazon Bedrock stores the raw text from your data. The text is split according to the chunking strategy you choose.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: VectorField
-								"vector_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the field in which Amazon Bedrock stores the vector embeddings for your data sources.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Contains the names of the fields to which to map information about the vector store.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ResourceArn
-						"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the vector store.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TableName
-						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the table in the database.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Contains details about the storage configuration of the knowledge base in Amazon RDS. For more information, see Create a vector index in Amazon RDS.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: S3VectorsConfiguration
-				"s3_vectors_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: IndexArn
-						"index_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) of the vector index used for the knowledge base. This ARN identifies the specific vector index resource within Amazon Bedrock.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: IndexName
-						"index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the vector index used for the knowledge base. This name identifies the vector index within the Amazon Bedrock service.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: VectorBucketArn
-						"vector_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) of the S3 bucket where vector embeddings are stored. This bucket contains the vector data used by the knowledge base.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Contains the storage configuration of the knowledge base for S3 vectors.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Type
-				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The storage type of a knowledge base.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The vector store service in which the knowledge base is stored.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"storage_configuration": schemaAttribute31771f1ef3231f753b40f449(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -2021,12 +2345,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A map of tag keys and values",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributec8493a8f346876bee3e917a0(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -2034,10 +2353,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The time at which the knowledge base was last updated.",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time at which the knowledge base was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute9662f60f728abfaad14b8926(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

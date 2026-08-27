@@ -14,6 +14,77 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute004e3f60fcb6ffeaa8a37148() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the traffic distribution group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute417fbbce67dc69010e5019ff() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the traffic distribution group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9683703b001c0829675d97f8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the traffic distribution group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute974322a84e90fa6fcb00579e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the traffic distribution group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ef2587a1d8fb4a709b86c19() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea521f5b307b60d6ec826eccd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb9654ab7efa54ea5a586820() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "If this is the default traffic distribution group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee3f4eec9ca7fb3543184be9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the Amazon Connect instance that has been replicated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd66bab42092aa59ccc10cfc() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributea521f5b307b60d6ec826eccd(),
+				// Property: Value
+				"value": schemaAttribute9ef2587a1d8fb4a709b86c19(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more tags.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_traffic_distribution_group", trafficDistributionGroupDataSource)
 }
@@ -32,10 +103,7 @@ func trafficDistributionGroupDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "(^[\\S].*[\\S]$)|(^[\\S]$)",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description for the traffic distribution group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute974322a84e90fa6fcb00579e(),
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +114,7 @@ func trafficDistributionGroupDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^arn:(aws|aws-us-gov):connect:[a-z]{2}-[a-z]+-[0-9]{1}:[0-9]{1,20}:instance/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the Amazon Connect instance that has been replicated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_arn": schemaAttributeee3f4eec9ca7fb3543184be9(),
 		// Property: IsDefault
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +122,7 @@ func trafficDistributionGroupDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "If this is the default traffic distribution group.",
 		//	  "type": "boolean"
 		//	}
-		"is_default": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "If this is the default traffic distribution group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"is_default": schemaAttributedb9654ab7efa54ea5a586820(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -71,10 +133,7 @@ func trafficDistributionGroupDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "(^[\\S].*[\\S]$)|(^[\\S]$)",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the traffic distribution group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute417fbbce67dc69010e5019ff(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -90,10 +149,7 @@ func trafficDistributionGroupDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the traffic distribution group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute004e3f60fcb6ffeaa8a37148(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -127,24 +183,7 @@ func trafficDistributionGroupDataSource(ctx context.Context) (datasource.DataSou
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "One or more tags.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributefd66bab42092aa59ccc10cfc(),
 		// Property: TrafficDistributionGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -153,10 +192,7 @@ func trafficDistributionGroupDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^arn:(aws|aws-us-gov):connect:[a-z]{2}-[a-z]+-[0-9]{1}:[0-9]{1,20}:traffic-distribution-group/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"traffic_distribution_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the traffic distribution group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"traffic_distribution_group_arn": schemaAttribute9683703b001c0829675d97f8(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

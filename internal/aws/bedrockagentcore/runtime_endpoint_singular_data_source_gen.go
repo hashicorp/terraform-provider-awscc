@@ -16,6 +16,109 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0714326a799f44b3acf8ae0c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Agent Runtime",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1751c0aecb25e9e48ffdfbc9() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A map of tag keys and values",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ef667fa26e928163585fe5e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The reason for failure if the endpoint is in a failed state",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4189e7ab7e2a40811fb61ec0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the AgentCore Runtime endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4dfbad373b807c2617392526() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the AgentCore Runtime endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e478c32d3454ae17438827b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the Agent Runtime Endpoint was last updated",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62d48dfcf02eb7b5ac7b051f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the AgentCore Runtime.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73a418a28fba5222be7d6f9d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Live version of the Agent Runtime",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a7e685da391950fd4133234() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Agent Runtime Endpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8848c9acf8d467a77a3f49ce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the parent Agent Runtime (required for creation)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute947dbcebde3b6ff2428c4859() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the AgentCore Runtime to use for the endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9bf2646dc5c705ff4e7d2d2a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the Agent Runtime Endpoint was created",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec03e36d6ceffea451e507683() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the Agent Runtime Endpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef95caee463a3ce5ac05db383() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The target version of the AgentCore Runtime for the endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_runtime_endpoint", runtimeEndpointDataSource)
 }
@@ -32,10 +135,7 @@ func runtimeEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:runtime/[a-zA-Z][a-zA-Z0-9_]{0,99}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"agent_runtime_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Agent Runtime",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_runtime_arn": schemaAttribute0714326a799f44b3acf8ae0c(),
 		// Property: AgentRuntimeEndpointArn
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +144,7 @@ func runtimeEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:(aws(?:-cn|-us-gov|-iso(?:-[bef])?)?):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:runtime/[a-zA-Z0-9_-]+/runtime-endpoint/[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"agent_runtime_endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the AgentCore Runtime.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_runtime_endpoint_arn": schemaAttribute62d48dfcf02eb7b5ac7b051f(),
 		// Property: AgentRuntimeId
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +153,7 @@ func runtimeEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,99}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"agent_runtime_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the parent Agent Runtime (required for creation)",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_runtime_id": schemaAttribute8848c9acf8d467a77a3f49ce(),
 		// Property: AgentRuntimeVersion
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +162,7 @@ func runtimeEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^([1-9][0-9]{0,4})$",
 		//	  "type": "string"
 		//	}
-		"agent_runtime_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of the AgentCore Runtime to use for the endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_runtime_version": schemaAttribute947dbcebde3b6ff2428c4859(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -80,11 +171,7 @@ func runtimeEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the Agent Runtime Endpoint was created",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute9bf2646dc5c705ff4e7d2d2a(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -94,10 +181,7 @@ func runtimeEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the AgentCore Runtime endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute4dfbad373b807c2617392526(),
 		// Property: FailureReason
 		// CloudFormation resource type schema:
 		//
@@ -105,10 +189,7 @@ func runtimeEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The reason for failure if the endpoint is in a failed state",
 		//	  "type": "string"
 		//	}
-		"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The reason for failure if the endpoint is in a failed state",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"failure_reason": schemaAttribute2ef667fa26e928163585fe5e(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -117,10 +198,7 @@ func runtimeEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"runtime_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the AgentCore Runtime endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"runtime_endpoint_id": schemaAttribute4189e7ab7e2a40811fb61ec0(),
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -129,11 +207,7 @@ func runtimeEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the Agent Runtime Endpoint was last updated",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_at": schemaAttribute5e478c32d3454ae17438827b(),
 		// Property: LiveVersion
 		// CloudFormation resource type schema:
 		//
@@ -142,10 +216,7 @@ func runtimeEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^([1-9][0-9]{0,4})$",
 		//	  "type": "string"
 		//	}
-		"live_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Live version of the Agent Runtime",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"live_version": schemaAttribute73a418a28fba5222be7d6f9d(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -156,10 +227,7 @@ func runtimeEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Agent Runtime Endpoint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute7a7e685da391950fd4133234(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -175,10 +243,7 @@ func runtimeEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the Agent Runtime Endpoint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributec03e36d6ceffea451e507683(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -196,12 +261,7 @@ func runtimeEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A map of tag keys and values",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute1751c0aecb25e9e48ffdfbc9(),
 		// Property: TargetVersion
 		// CloudFormation resource type schema:
 		//
@@ -210,10 +270,7 @@ func runtimeEndpointDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^([1-9][0-9]{0,4})$",
 		//	  "type": "string"
 		//	}
-		"target_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The target version of the AgentCore Runtime for the endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_version": schemaAttributef95caee463a3ce5ac05db383(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

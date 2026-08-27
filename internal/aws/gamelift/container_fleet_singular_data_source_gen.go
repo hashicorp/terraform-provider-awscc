@@ -15,6 +15,539 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute026678accb89b97a1635ec61() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c2ca4cf7bc07a984b882282() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum value allowed for the fleet's instance count for a location.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute143835c519dfb1402afe24ae() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of desired game server container groups per instance, a number between 1-5000.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ca7444b08ed2ad4521a4092() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "A starting value for a range of allowed port numbers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1de059030b05728eedb9b01e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A human-readable description of a fleet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20f29b8dd7bb0ea69b6169a1() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Amount of adjustment to make, based on the scaling adjustment type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2661b9b5764705407194d640() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of scaling policy to create. For a target-based policy, set the parameter MetricName to 'PercentAvailableGameSessions' and specify a TargetConfiguration. For a rule-based policy set the following parameters: MetricName, ComparisonOperator, Threshold, EvaluationPeriods, ScalingAdjustmentType, and ScalingAdjustment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d06fdb1789fada38aff8e43() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The name of an Amazon CloudWatch metric group. A metric group aggregates the metrics for all fleets in the group. Specify a string containing the metric group name. You can use an existing name or use a new name to create a new metric group. Currently, this parameter can have only one string.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ed6671d9e537c9ee5b33b96() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "Desired value to use with a target-based scaling policy. The value must be relevant for whatever metric the scaling policy is using. For example, in a policy using the metric PercentAvailableGameSessions, the target value should be the preferred size of the fleet's buffer (the percent of capacity that should be idle and ready for new game sessions).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute316f96dee67df7491745ed5b() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Length of time, in minutes, that Amazon GameLift Servers will wait before scaling in your MinSize and DesiredInstances to 0 after a period with no game session activity.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34a3301597da44b7045385d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of adjustment to make to a fleet's instance count.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3aeda807c18f277f528e962e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum value that is allowed for the fleet's instance count for a location.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ccff91dd5d6349339ebd8c1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Configures the service that provides logs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ed7dfabdda004b9f8a5414f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift supports the following EC2 instance types. See Amazon EC2 Instance Types for detailed descriptions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute401e75ae76b5bfc82ac762e8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Location
+				"location": schemaAttribute85e443920a267965ee179152(),
+				// Property: LocationCapacity
+				"location_capacity": schemaAttributed43efcd3c86d1aea8518cc8f(),
+				// Property: PlayerGatewayStatus
+				"player_gateway_status": schemaAttributecc51d09465b8b563741a10e4(),
+				// Property: StoppedActions
+				"stopped_actions": schemaAttributef27d0442330f939fbe1362bd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4cd7936a6156fd9966cf3028() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ImpairmentStrategy
+			"impairment_strategy": schemaAttributee77a27ae55197d709d8cca37(),
+			// Property: MinimumHealthyPercentage
+			"minimum_healthy_percentage": schemaAttributebc3d28dae74da2b728ac4522(),
+			// Property: ProtectionStrategy
+			"protection_strategy": schemaAttribute8e3b05b0d1c0dee9ada21210(),
+		}, /*END SCHEMA*/
+		Description: "Provides details about how to drain old tasks and replace them with new updated tasks.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5215c4ccef05d4f56c479a7c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of game sessions that an individual can create during the policy period.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b0ba9a59519269b1daaee21() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ComparisonOperator
+				"comparison_operator": schemaAttributef212323e9035639982258ad8(),
+				// Property: EvaluationPeriods
+				"evaluation_periods": schemaAttribute9fec57d2e1f51a3c52804892(),
+				// Property: MetricName
+				"metric_name": schemaAttribute8bd7fefb294cdb6b52c3a746(),
+				// Property: Name
+				"name": schemaAttributec452043dc0e8a816db354182(),
+				// Property: PolicyType
+				"policy_type": schemaAttribute2661b9b5764705407194d640(),
+				// Property: ScalingAdjustment
+				"scaling_adjustment": schemaAttribute20f29b8dd7bb0ea69b6169a1(),
+				// Property: ScalingAdjustmentType
+				"scaling_adjustment_type": schemaAttribute34a3301597da44b7045385d0(),
+				// Property: TargetConfiguration
+				"target_configuration": schemaAttributebc372d06a841e8844b0465aa(),
+				// Property: Threshold
+				"threshold": schemaAttributea90aabcc858337080908ff41(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of rules that control how a fleet is scaled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6eceb3f945a2954b6b1423ee() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FromPort
+			"from_port": schemaAttribute1ca7444b08ed2ad4521a4092(),
+			// Property: ToPort
+			"to_port": schemaAttribute82ed12dd1be8c133f1694ef3(),
+		}, /*END SCHEMA*/
+		Description: "Defines the range of ports on the instance that allow inbound traffic to connect with containers in a fleet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute799ba72398b8db127a3113d1() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of game server container groups per instance, a number between 1-5000.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c674c27df3391228702e848() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether to use On-Demand instances or Spot instances for this fleet. If empty, the default is ON_DEMAND. Both categories of instances use identical hardware and configurations based on the instance type selected for this fleet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e80eb16d35b587bb002f470() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: NewGameSessionsPerCreator
+			"new_game_sessions_per_creator": schemaAttribute5215c4ccef05d4f56c479a7c(),
+			// Property: PolicyPeriodInMinutes
+			"policy_period_in_minutes": schemaAttributeef727d89550bfd92c271295c(),
+		}, /*END SCHEMA*/
+		Description: "A policy that limits the number of game sessions an individual player can create over a span of time for this fleet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82ed12dd1be8c133f1694ef3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "An ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than FromPort.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85e443920a267965ee179152() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8bd7fefb294cdb6b52c3a746() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment. This is required for RuleBased and TargetBased policies.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e3b05b0d1c0dee9ada21210() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The protection strategy for deployment on the container fleet; defaults to WITH_PROTECTION.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a501b0b5f32c0e9db15f485() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "If log destination is CLOUDWATCH, logs are sent to the specified log group in Amazon CloudWatch.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b08c0de60ad384b42439f69() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FromPort
+				"from_port": schemaAttribute1ca7444b08ed2ad4521a4092(),
+				// Property: IpRange
+				"ip_range": schemaAttributea23b66dee81b82b014aeb98c(),
+				// Property: Protocol
+				"protocol": schemaAttributeb2661106178c776af4735e1a(),
+				// Property: ToPort
+				"to_port": schemaAttribute82ed12dd1be8c133f1694ef3(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A range of IP addresses and port settings that allow inbound traffic to connect to server processes on an Amazon GameLift server.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c41f094584a45d667af9965() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Defaults to MinSize if not defined. The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits. If any auto-scaling policy is defined for the container fleet, the desired instance will only be applied once during fleet creation and will be ignored in updates to avoid conflicts with auto-scaling. During updates with any auto-scaling policy defined, if current desired instance is lower than the new MinSize, it will be increased to the new MinSize; if current desired instance is larger than the new MaxSize, it will be decreased to the new MaxSize.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f9ecf3c615d66bb92185631() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift container fleet resource and uniquely identifies it across all AWS Regions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fb138b9e4bef5add58dd54a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogDestination
+			"log_destination": schemaAttribute3ccff91dd5d6349339ebd8c1(),
+			// Property: LogGroupArn
+			"log_group_arn": schemaAttribute9a501b0b5f32c0e9db15f485(),
+			// Property: S3BucketName
+			"s3_bucket_name": schemaAttributed7f408e4ed3d48d36bfe5799(),
+		}, /*END SCHEMA*/
+		Description: "A policy the location and provider of logs from the fleet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fec57d2e1f51a3c52804892() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Length of time (in minutes) the metric must be at or beyond the threshold before a scaling event is triggered.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea23b66dee81b82b014aeb98c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A range of allowed IP addresses. This value must be expressed in CIDR notation. Example: \"000.000.000.000/[subnet mask]\" or optionally the shortened version \"0.0.0.0/[subnet mask]\".",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea90aabcc858337080908ff41() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "Metric value used to trigger a scaling event.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9a83a08b761469c882f228b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the container group definition that will be created per game server. You must specify GAME_SERVER container group. You have the option to also specify one PER_INSTANCE container group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2661106178c776af4735e1a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The network communication protocol used by the fleet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5d36d405b712d22d0398a75() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The player gateway mode for the container fleet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6c9c35b9dc9347bf25b872e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc372d06a841e8844b0465aa() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TargetValue
+			"target_value": schemaAttribute2ed6671d9e537c9ee5b33b96(),
+		}, /*END SCHEMA*/
+		Description: "An object that contains settings for a target-based scaling policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc3d28dae74da2b728ac4522() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum percentage of healthy required; defaults to 75.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf8ec3dad647c8a3f5541c20() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LatestDeploymentId
+			"latest_deployment_id": schemaAttributeed3158b4b83e5d01c8456d06(),
+		}, /*END SCHEMA*/
+		Description: "Provides information about the last deployment ID and its status.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebff031af1ada0bdadfe514ef() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the game server container group definition. This field will be empty if GameServerContainerGroupDefinitionName is not specified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec1d551d6d029bd37d8cc3b95() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A game session protection policy to apply to all game sessions hosted on instances in this fleet. When protected, active game sessions cannot be terminated during a scale-down event. If this parameter is not set, instances in this fleet default to no protection. You can change a fleet's protection policy to affect future game sessions on the fleet. You can also set protection for individual game sessions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec452043dc0e8a816db354182() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A descriptive label that is associated with a fleet's scaling policy. Policy names do not need to be unique.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6bd68098b50578d8e54ae64() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current status of the container fleet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc51d09465b8b563741a10e4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The player gateway status for the location.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed43efcd3c86d1aea8518cc8f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DesiredEC2Instances
+			"desired_ec2_instances": schemaAttribute9c41f094584a45d667af9965(),
+			// Property: ManagedCapacityConfiguration
+			"managed_capacity_configuration": schemaAttributeebb5362100c2dcfd2daae75b(),
+			// Property: MaxSize
+			"max_size": schemaAttribute3aeda807c18f277f528e962e(),
+			// Property: MinSize
+			"min_size": schemaAttribute0c2ca4cf7bc07a984b882282(),
+		}, /*END SCHEMA*/
+		Description: "Current resource capacity settings in a specified fleet or location. The location value might refer to a fleet's remote location or its home Region.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6ac2cc3c3848e7a86dc129f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The strategy Amazon GameLift Servers will use to automatically scale your capacity to and from zero in response to game session activity. Game session activity refers to any active running sessions or game session requests. When set to SCALE_TO_AND_FROM_ZERO, MinSize must not be specified and will be managed automatically. When set to MANUAL, MinSize is required.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed7f408e4ed3d48d36bfe5799() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the S3 bucket to pull logs from if S3 is the LogDestination",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc0f1f49f230f887b6866088() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeb6c9c35b9dc9347bf25b872e(),
+				// Property: Value
+				"value": schemaAttribute026678accb89b97a1635ec61(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee368d4694e3c7e089c3e7ba1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example \"1469498468.057\").",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee77a27ae55197d709d8cca37() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The strategy to apply in case of impairment; defaults to MAINTAIN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9499a608753fed0afe16bd5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for an AWS IAM role that manages access to your AWS services. Create a role or look up a role's ARN from the IAM dashboard in the AWS Management Console.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeebb5362100c2dcfd2daae75b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ScaleInAfterInactivityMinutes
+			"scale_in_after_inactivity_minutes": schemaAttribute316f96dee67df7491745ed5b(),
+			// Property: ZeroCapacityStrategy
+			"zero_capacity_strategy": schemaAttributed6ac2cc3c3848e7a86dc129f(),
+		}, /*END SCHEMA*/
+		Description: "Configuration options for Amazon GameLift Servers-managed capacity behavior.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed3158b4b83e5d01c8456d06() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the last deployment on the container fleet. This field will be empty if the container fleet does not have a ContainerGroupDefinition attached.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee65f85acb282d360d2cec90() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the container group definition that will be created per instance. This field is optional if you specify GameServerContainerGroupDefinitionName.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef727d89550bfd92c271295c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The time span used in evaluating the resource creation limit policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef212323e9035639982258ad8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Comparison operator to use when measuring a metric against the threshold value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef27d0442330f939fbe1362bd() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of fleet actions that have been suspended in the fleet location.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef78c0d996ba4dc21c69d1e35() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the per instance container group definition. This field will be empty if PerInstanceContainerGroupDefinitionName is not specified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeffb06fa3131c4def5b5d0656() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique fleet ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_gamelift_container_fleet", containerFleetDataSource)
 }
@@ -34,10 +567,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"billing_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether to use On-Demand instances or Spot instances for this fleet. If empty, the default is ON_DEMAND. Both categories of instances use identical hardware and configurations based on the instance type selected for this fleet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"billing_type": schemaAttribute7c674c27df3391228702e848(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +575,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example \"1469498468.057\").",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example \"1469498468.057\").",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttributee368d4694e3c7e089c3e7ba1(),
 		// Property: DeploymentConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -81,27 +608,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"deployment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ImpairmentStrategy
-				"impairment_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The strategy to apply in case of impairment; defaults to MAINTAIN.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MinimumHealthyPercentage
-				"minimum_healthy_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The minimum percentage of healthy required; defaults to 75.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProtectionStrategy
-				"protection_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The protection strategy for deployment on the container fleet; defaults to WITH_PROTECTION.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Provides details about how to drain old tasks and replace them with new updated tasks.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"deployment_configuration": schemaAttribute4cd7936a6156fd9966cf3028(),
 		// Property: DeploymentDetails
 		// CloudFormation resource type schema:
 		//
@@ -118,17 +625,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"deployment_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LatestDeploymentId
-				"latest_deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID of the last deployment on the container fleet. This field will be empty if the container fleet does not have a ContainerGroupDefinition attached.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Provides information about the last deployment ID and its status.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"deployment_details": schemaAttributebf8ec3dad647c8a3f5541c20(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -138,10 +635,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A human-readable description of a fleet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute1de059030b05728eedb9b01e(),
 		// Property: FleetArn
 		// CloudFormation resource type schema:
 		//
@@ -152,10 +646,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:.*:[a-z]*fleet\\/[a-z]*fleet-[a-zA-Z0-9\\-]+$",
 		//	  "type": "string"
 		//	}
-		"fleet_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift container fleet resource and uniquely identifies it across all AWS Regions.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"fleet_arn": schemaAttribute9f9ecf3c615d66bb92185631(),
 		// Property: FleetId
 		// CloudFormation resource type schema:
 		//
@@ -166,10 +657,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-z]*fleet-[a-zA-Z0-9\\-]+",
 		//	  "type": "string"
 		//	}
-		"fleet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique fleet ID",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"fleet_id": schemaAttributeffb06fa3131c4def5b5d0656(),
 		// Property: FleetRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -180,10 +668,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws(-.*)?:[a-z-]+:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
 		//	  "type": "string"
 		//	}
-		"fleet_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for an AWS IAM role that manages access to your AWS services. Create a role or look up a role's ARN from the IAM dashboard in the AWS Management Console.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"fleet_role_arn": schemaAttributee9499a608753fed0afe16bd5(),
 		// Property: GameServerContainerGroupDefinitionArn
 		// CloudFormation resource type schema:
 		//
@@ -193,10 +678,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:.*:containergroupdefinition\\/[a-zA-Z0-9\\-]+(:[0-9]+)?$|^$",
 		//	  "type": "string"
 		//	}
-		"game_server_container_group_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the game server container group definition. This field will be empty if GameServerContainerGroupDefinitionName is not specified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"game_server_container_group_definition_arn": schemaAttributebff031af1ada0bdadfe514ef(),
 		// Property: GameServerContainerGroupDefinitionName
 		// CloudFormation resource type schema:
 		//
@@ -207,10 +689,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9\\-]+$|^arn:.*:containergroupdefinition\\/[a-zA-Z0-9\\-]+(:[0-9]+)?$",
 		//	  "type": "string"
 		//	}
-		"game_server_container_group_definition_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the container group definition that will be created per game server. You must specify GAME_SERVER container group. You have the option to also specify one PER_INSTANCE container group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"game_server_container_group_definition_name": schemaAttributea9a83a08b761469c882f228b(),
 		// Property: GameServerContainerGroupsPerInstance
 		// CloudFormation resource type schema:
 		//
@@ -220,10 +699,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"game_server_container_groups_per_instance": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of desired game server container groups per instance, a number between 1-5000.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"game_server_container_groups_per_instance": schemaAttribute143835c519dfb1402afe24ae(),
 		// Property: GameSessionCreationLimitPolicy
 		// CloudFormation resource type schema:
 		//
@@ -244,22 +720,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"game_session_creation_limit_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: NewGameSessionsPerCreator
-				"new_game_sessions_per_creator": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum number of game sessions that an individual can create during the policy period.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PolicyPeriodInMinutes
-				"policy_period_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The time span used in evaluating the resource creation limit policy.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A policy that limits the number of game sessions an individual player can create over a span of time for this fleet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"game_session_creation_limit_policy": schemaAttribute7e80eb16d35b587bb002f470(),
 		// Property: InstanceConnectionPortRange
 		// CloudFormation resource type schema:
 		//
@@ -286,22 +747,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"instance_connection_port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FromPort
-				"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "A starting value for a range of allowed port numbers.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ToPort
-				"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "An ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than FromPort.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Defines the range of ports on the instance that allow inbound traffic to connect with containers in a fleet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_connection_port_range": schemaAttribute6eceb3f945a2954b6b1423ee(),
 		// Property: InstanceInboundPermissions
 		// CloudFormation resource type schema:
 		//
@@ -349,34 +795,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"instance_inbound_permissions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: FromPort
-					"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "A starting value for a range of allowed port numbers.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: IpRange
-					"ip_range": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A range of allowed IP addresses. This value must be expressed in CIDR notation. Example: \"000.000.000.000/[subnet mask]\" or optionally the shortened version \"0.0.0.0/[subnet mask]\".",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Protocol
-					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The network communication protocol used by the fleet.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ToPort
-					"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "An ending value for a range of allowed port numbers. Port numbers are end-inclusive. This value must be higher than FromPort.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A range of IP addresses and port settings that allow inbound traffic to connect to server processes on an Amazon GameLift server.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_inbound_permissions": schemaAttribute9b08c0de60ad384b42439f69(),
 		// Property: InstanceType
 		// CloudFormation resource type schema:
 		//
@@ -386,10 +805,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of an EC2 instance type that is supported in Amazon GameLift. A fleet instance type determines the computing resources of each instance in the fleet, including CPU, memory, storage, and networking capacity. Amazon GameLift supports the following EC2 instance types. See Amazon EC2 Instance Types for detailed descriptions.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_type": schemaAttribute3ed7dfabdda004b9f8a5414f(),
 		// Property: Locations
 		// CloudFormation resource type schema:
 		//
@@ -483,67 +899,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxItems": 100,
 		//	  "type": "array"
 		//	}
-		"locations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Location
-					"location": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: LocationCapacity
-					"location_capacity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DesiredEC2Instances
-							"desired_ec2_instances": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "Defaults to MinSize if not defined. The number of EC2 instances you want to maintain in the specified fleet location. This value must fall between the minimum and maximum size limits. If any auto-scaling policy is defined for the container fleet, the desired instance will only be applied once during fleet creation and will be ignored in updates to avoid conflicts with auto-scaling. During updates with any auto-scaling policy defined, if current desired instance is lower than the new MinSize, it will be increased to the new MinSize; if current desired instance is larger than the new MaxSize, it will be decreased to the new MaxSize.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ManagedCapacityConfiguration
-							"managed_capacity_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: ScaleInAfterInactivityMinutes
-									"scale_in_after_inactivity_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "Length of time, in minutes, that Amazon GameLift Servers will wait before scaling in your MinSize and DesiredInstances to 0 after a period with no game session activity.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ZeroCapacityStrategy
-									"zero_capacity_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The strategy Amazon GameLift Servers will use to automatically scale your capacity to and from zero in response to game session activity. Game session activity refers to any active running sessions or game session requests. When set to SCALE_TO_AND_FROM_ZERO, MinSize must not be specified and will be managed automatically. When set to MANUAL, MinSize is required.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Configuration options for Amazon GameLift Servers-managed capacity behavior.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: MaxSize
-							"max_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The maximum value that is allowed for the fleet's instance count for a location.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: MinSize
-							"min_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The minimum value allowed for the fleet's instance count for a location.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Current resource capacity settings in a specified fleet or location. The location value might refer to a fleet's remote location or its home Region.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PlayerGatewayStatus
-					"player_gateway_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The player gateway status for the location.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: StoppedActions
-					"stopped_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "A list of fleet actions that have been suspended in the fleet location.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"locations": schemaAttribute401e75ae76b5bfc82ac762e8(),
 		// Property: LogConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -576,27 +932,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"log_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LogDestination
-				"log_destination": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Configures the service that provides logs.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LogGroupArn
-				"log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "If log destination is CLOUDWATCH, logs are sent to the specified log group in Amazon CloudWatch.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: S3BucketName
-				"s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the S3 bucket to pull logs from if S3 is the LogDestination",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A policy the location and provider of logs from the fleet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"log_configuration": schemaAttribute9fb138b9e4bef5add58dd54a(),
 		// Property: MaximumGameServerContainerGroupsPerInstance
 		// CloudFormation resource type schema:
 		//
@@ -606,10 +942,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"maximum_game_server_container_groups_per_instance": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum number of game server container groups per instance, a number between 1-5000.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"maximum_game_server_container_groups_per_instance": schemaAttribute799ba72398b8db127a3113d1(),
 		// Property: MetricGroups
 		// CloudFormation resource type schema:
 		//
@@ -622,11 +955,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxItems": 1,
 		//	  "type": "array"
 		//	}
-		"metric_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The name of an Amazon CloudWatch metric group. A metric group aggregates the metrics for all fleets in the group. Specify a string containing the metric group name. You can use an existing name or use a new name to create a new metric group. Currently, this parameter can have only one string.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"metric_groups": schemaAttribute2d06fdb1789fada38aff8e43(),
 		// Property: NewGameSessionProtectionPolicy
 		// CloudFormation resource type schema:
 		//
@@ -638,10 +967,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"new_game_session_protection_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A game session protection policy to apply to all game sessions hosted on instances in this fleet. When protected, active game sessions cannot be terminated during a scale-down event. If this parameter is not set, instances in this fleet default to no protection. You can change a fleet's protection policy to affect future game sessions on the fleet. You can also set protection for individual game sessions.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"new_game_session_protection_policy": schemaAttributec1d551d6d029bd37d8cc3b95(),
 		// Property: PerInstanceContainerGroupDefinitionArn
 		// CloudFormation resource type schema:
 		//
@@ -651,10 +977,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:.*:containergroupdefinition\\/[a-zA-Z0-9\\-]+(:[0-9]+)?$|^$",
 		//	  "type": "string"
 		//	}
-		"per_instance_container_group_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the per instance container group definition. This field will be empty if PerInstanceContainerGroupDefinitionName is not specified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"per_instance_container_group_definition_arn": schemaAttributef78c0d996ba4dc21c69d1e35(),
 		// Property: PerInstanceContainerGroupDefinitionName
 		// CloudFormation resource type schema:
 		//
@@ -665,10 +988,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9\\-]+$|^arn:.*:containergroupdefinition\\/[a-zA-Z0-9\\-]+(:[0-9]+)?$",
 		//	  "type": "string"
 		//	}
-		"per_instance_container_group_definition_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the container group definition that will be created per instance. This field is optional if you specify GameServerContainerGroupDefinitionName.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"per_instance_container_group_definition_name": schemaAttributeee65f85acb282d360d2cec90(),
 		// Property: PlayerGatewayMode
 		// CloudFormation resource type schema:
 		//
@@ -681,10 +1001,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"player_gateway_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The player gateway mode for the container fleet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"player_gateway_mode": schemaAttributeb5d36d405b712d22d0398a75(),
 		// Property: ScalingPolicies
 		// CloudFormation resource type schema:
 		//
@@ -711,7 +1028,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "type": "integer"
 		//	      },
 		//	      "MetricName": {
-		//	        "description": "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment.",
+		//	        "description": "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment. This is required for RuleBased and TargetBased policies.",
 		//	        "enum": [
 		//	          "ActivatingGameSessions",
 		//	          "ActiveGameSessions",
@@ -738,7 +1055,8 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "description": "The type of scaling policy to create. For a target-based policy, set the parameter MetricName to 'PercentAvailableGameSessions' and specify a TargetConfiguration. For a rule-based policy set the following parameters: MetricName, ComparisonOperator, Threshold, EvaluationPeriods, ScalingAdjustmentType, and ScalingAdjustment.",
 		//	        "enum": [
 		//	          "RuleBased",
-		//	          "TargetBased"
+		//	          "TargetBased",
+		//	          "ManagedScaling"
 		//	        ],
 		//	        "type": "string"
 		//	      },
@@ -775,7 +1093,6 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "MetricName",
 		//	      "Name"
 		//	    ],
 		//	    "type": "object"
@@ -783,66 +1100,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"scaling_policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ComparisonOperator
-					"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Comparison operator to use when measuring a metric against the threshold value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: EvaluationPeriods
-					"evaluation_periods": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "Length of time (in minutes) the metric must be at or beyond the threshold before a scaling event is triggered.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: MetricName
-					"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A descriptive label that is associated with a fleet's scaling policy. Policy names do not need to be unique.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PolicyType
-					"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of scaling policy to create. For a target-based policy, set the parameter MetricName to 'PercentAvailableGameSessions' and specify a TargetConfiguration. For a rule-based policy set the following parameters: MetricName, ComparisonOperator, Threshold, EvaluationPeriods, ScalingAdjustmentType, and ScalingAdjustment.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ScalingAdjustment
-					"scaling_adjustment": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "Amount of adjustment to make, based on the scaling adjustment type.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ScalingAdjustmentType
-					"scaling_adjustment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of adjustment to make to a fleet's instance count.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: TargetConfiguration
-					"target_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: TargetValue
-							"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "Desired value to use with a target-based scaling policy. The value must be relevant for whatever metric the scaling policy is using. For example, in a policy using the metric PercentAvailableGameSessions, the target value should be the preferred size of the fleet's buffer (the percent of capacity that should be idle and ready for new game sessions).",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "An object that contains settings for a target-based scaling policy.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Threshold
-					"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "Metric value used to trigger a scaling event.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of rules that control how a fleet is scaled.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scaling_policies": schemaAttribute6b0ba9a59519269b1daaee21(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -860,10 +1118,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current status of the container fleet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributec6bd68098b50578d8e54ae64(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -897,24 +1152,7 @@ func containerFleetDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributedc0f1f49f230f887b6866088(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

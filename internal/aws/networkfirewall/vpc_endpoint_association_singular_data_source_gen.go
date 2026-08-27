@@ -14,6 +14,66 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute06729ca98f0a28412141edd7() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute89a370375a477a2166ea7ba6(),
+				// Property: Value
+				"value": schemaAttribute89a370375a477a2166ea7ba6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c524297870f6242dc2e9543() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A SubnetId.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6773e7829c7042b7563299bc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IPAddressType
+			"ip_address_type": schemaAttribute6c889ec609387914ed926d6b(),
+			// Property: SubnetId
+			"subnet_id": schemaAttribute4c524297870f6242dc2e9543(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c889ec609387914ed926d6b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A IPAddressType",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89a370375a477a2166ea7ba6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8cba206a53c518a15f9d6153() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An endpoint Id.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc943be01e814320a41f32d4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A resource ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_networkfirewall_vpc_endpoint_association", vpcEndpointAssociationDataSource)
 }
@@ -30,9 +90,7 @@ func vpcEndpointAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^.*$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute89a370375a477a2166ea7ba6(),
 		// Property: EndpointId
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +98,7 @@ func vpcEndpointAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "An endpoint Id.",
 		//	  "type": "string"
 		//	}
-		"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An endpoint Id.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_id": schemaAttribute8cba206a53c518a15f9d6153(),
 		// Property: FirewallArn
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +109,7 @@ func vpcEndpointAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^(arn:aws.*)$",
 		//	  "type": "string"
 		//	}
-		"firewall_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A resource ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"firewall_arn": schemaAttributefc943be01e814320a41f32d4(),
 		// Property: SubnetMapping
 		// CloudFormation resource type schema:
 		//
@@ -78,21 +130,7 @@ func vpcEndpointAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"subnet_mapping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IPAddressType
-				"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A IPAddressType",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SubnetId
-				"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A SubnetId.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"subnet_mapping": schemaAttribute6773e7829c7042b7563299bc(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -123,21 +161,7 @@ func vpcEndpointAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute06729ca98f0a28412141edd7(),
 		// Property: VpcEndpointAssociationArn
 		// CloudFormation resource type schema:
 		//
@@ -148,10 +172,7 @@ func vpcEndpointAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^(arn:aws.*)$",
 		//	  "type": "string"
 		//	}
-		"vpc_endpoint_association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A resource ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_endpoint_association_arn": schemaAttributefc943be01e814320a41f32d4(),
 		// Property: VpcEndpointAssociationId
 		// CloudFormation resource type schema:
 		//
@@ -161,9 +182,7 @@ func vpcEndpointAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$",
 		//	  "type": "string"
 		//	}
-		"vpc_endpoint_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"vpc_endpoint_association_id": schemaAttribute89a370375a477a2166ea7ba6(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -173,9 +192,7 @@ func vpcEndpointAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^vpc-[0-9a-f]+$",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttribute89a370375a477a2166ea7ba6(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

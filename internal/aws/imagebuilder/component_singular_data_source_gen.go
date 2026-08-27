@@ -15,6 +15,146 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute06bbed32574b4455a42cab8a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The platform of the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20d41c488ddc1f63f6cc565b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The KMS key identifier used to encrypt the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d246365cb84480e6166aff3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3da925fc35a3a558732f1655() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The latest version ARN of the created component, with the same patch version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute400af5288a6c93ec2be14ffa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The latest version ARN of the created component, with the same major version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute418fc08df81978e64205bc6d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute472e9ca2f6c54eb741787184() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The tags associated with the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ea969f23db67485a4f43ed6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The latest version ARN of the created component, with the same minor version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a32f78fbf7e6f53284dc32c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6117b36376178e2e15523e21() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttributea2223696dac3e45a250c3d2f(),
+			// Property: Major
+			"major": schemaAttribute400af5288a6c93ec2be14ffa(),
+			// Property: Minor
+			"minor": schemaAttribute4ea969f23db67485a4f43ed6(),
+			// Property: Patch
+			"patch": schemaAttribute3da925fc35a3a558732f1655(),
+		}, /*END SCHEMA*/
+		Description: "The latest version references of the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute74e3d16835ef88514c265504() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The data of the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7988b66afa7ef33183ff00ae() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The operating system (OS) version supported by the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ace701395e4561dcbfbdcc5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The change description of the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82485a1303b6e4d02145d00d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8686865b6abb4cb1b4885152() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The encryption status of the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute901447bc8d3f3c8f3e0b4672() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The uri of the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96fdf9d5b7d822f1e0450f54() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the component denotes whether the component is used to build the image or only to test it. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea2223696dac3e45a250c3d2f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The latest version ARN of the created component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_imagebuilder_component", componentDataSource)
 }
@@ -31,10 +171,7 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:component/.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute3d246365cb84480e6166aff3(),
 		// Property: ChangeDescription
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +179,7 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The change description of the component.",
 		//	  "type": "string"
 		//	}
-		"change_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The change description of the component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"change_description": schemaAttribute7ace701395e4561dcbfbdcc5(),
 		// Property: Data
 		// CloudFormation resource type schema:
 		//
@@ -55,10 +189,7 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"data": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The data of the component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data": schemaAttribute74e3d16835ef88514c265504(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -66,10 +197,7 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of the component.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute5a32f78fbf7e6f53284dc32c(),
 		// Property: Encrypted
 		// CloudFormation resource type schema:
 		//
@@ -77,10 +205,7 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The encryption status of the component.",
 		//	  "type": "boolean"
 		//	}
-		"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "The encryption status of the component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"encrypted": schemaAttribute8686865b6abb4cb1b4885152(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -88,10 +213,7 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The KMS key identifier used to encrypt the component.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The KMS key identifier used to encrypt the component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttribute20d41c488ddc1f63f6cc565b(),
 		// Property: LatestVersion
 		// CloudFormation resource type schema:
 		//
@@ -118,32 +240,7 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"latest_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The latest version ARN of the created component.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Major
-				"major": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The latest version ARN of the created component, with the same major version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Minor
-				"minor": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The latest version ARN of the created component, with the same minor version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Patch
-				"patch": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The latest version ARN of the created component, with the same patch version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The latest version references of the component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"latest_version": schemaAttribute6117b36376178e2e15523e21(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -151,10 +248,7 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the component.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute82485a1303b6e4d02145d00d(),
 		// Property: Platform
 		// CloudFormation resource type schema:
 		//
@@ -167,10 +261,7 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"platform": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The platform of the component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"platform": schemaAttribute06bbed32574b4455a42cab8a(),
 		// Property: SupportedOsVersions
 		// CloudFormation resource type schema:
 		//
@@ -182,11 +273,7 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"supported_os_versions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The operating system (OS) version supported by the component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"supported_os_versions": schemaAttribute7988b66afa7ef33183ff00ae(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -200,12 +287,7 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The tags associated with the component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute472e9ca2f6c54eb741787184(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -217,10 +299,7 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the component denotes whether the component is used to build the image or only to test it. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute96fdf9d5b7d822f1e0450f54(),
 		// Property: Uri
 		// CloudFormation resource type schema:
 		//
@@ -228,10 +307,7 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The uri of the component.",
 		//	  "type": "string"
 		//	}
-		"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The uri of the component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"uri": schemaAttribute901447bc8d3f3c8f3e0b4672(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -239,10 +315,7 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version of the component.",
 		//	  "type": "string"
 		//	}
-		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of the component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttribute418fc08df81978e64205bc6d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

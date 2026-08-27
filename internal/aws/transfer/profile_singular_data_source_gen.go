@@ -15,6 +15,71 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute35ca82e15712ce1d29c10fa9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name assigned to the tag that you create.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37fb08325fb419533c606271() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "AS2 identifier agreed with a trading partner.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute581af25a37d9d9c2088f3051() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the profile",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d14dd681cc37cca9b720f61() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Contains one or more values that you assigned to the key name you create.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed672bb077a365312bf67b227() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute35ca82e15712ce1d29c10fa9(),
+				// Property: Value
+				"value": schemaAttribute7d14dd681cc37cca9b720f61(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb7a8b1333a6d32bd6e8040b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Enum specifying whether the profile is local or associated with a trading partner.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdc86ceb3df1b646e650883d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of the certificate IDs associated with this profile to be used for encryption and signing of AS2 messages.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff058b2e4f23089753ed0308() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the unique Amazon Resource Name (ARN) for the profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_transfer_profile", profileDataSource)
 }
@@ -33,10 +98,7 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:.*",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the unique Amazon Resource Name (ARN) for the profile.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeff058b2e4f23089753ed0308(),
 		// Property: As2Id
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +109,7 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"as_2_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "AS2 identifier agreed with a trading partner.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"as_2_id": schemaAttribute37fb08325fb419533c606271(),
 		// Property: CertificateIds
 		// CloudFormation resource type schema:
 		//
@@ -66,11 +125,7 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"certificate_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "List of the certificate IDs associated with this profile to be used for encryption and signing of AS2 messages.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate_ids": schemaAttributefdc86ceb3df1b646e650883d(),
 		// Property: ProfileId
 		// CloudFormation resource type schema:
 		//
@@ -81,10 +136,7 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^p-([0-9a-f]{17})$",
 		//	  "type": "string"
 		//	}
-		"profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for the profile",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"profile_id": schemaAttribute581af25a37d9d9c2088f3051(),
 		// Property: ProfileType
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +148,7 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"profile_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Enum specifying whether the profile is local or associated with a trading partner.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"profile_type": schemaAttributedb7a8b1333a6d32bd6e8040b(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -133,24 +182,7 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name assigned to the tag that you create.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Contains one or more values that you assigned to the key name you create.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributed672bb077a365312bf67b227(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

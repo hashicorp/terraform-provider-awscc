@@ -14,6 +14,210 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0aa6c6b901cd2656024016eb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeleteFileThreshold
+			"delete_file_threshold": schemaAttribute3f56ca6df53808565e7bd449(),
+			// Property: MinInputFiles
+			"min_input_files": schemaAttribute7649ba4d558adbcffcfc8245(),
+			// Property: Strategy
+			"strategy": schemaAttribute24f3dae5f9ae1ee3d432b418(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for an Iceberg compaction optimizer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute126390355291e7f0fc784732() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24f3dae5f9ae1ee3d432b418() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The compaction strategy to use. Valid values are binpack, sort, and z-order.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute254170a13c07fe9419cf4001() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the database. For Hive compatibility, this is folded to lowercase when it is stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f56ca6df53808565e7bd449() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum number of deletes in a data file to make it eligible for compaction.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute435724d3c0204a41930baca9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The table name. For Hive compatibility, this must be entirely lowercase.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute531a6257e7278dbef4e31386() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The catalog ID of the table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6065b41cb30ea33147b4bbf6() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The specific number of days you want to keep the orphan files.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72511b1034e1d0bb8d9829cd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A role passed by the caller which gives the service permission to update the resources associated with the optimizer on the caller's behalf.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7649ba4d558adbcffcfc8245() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum number of input files before compaction is triggered.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77b756657a8a8a309ebcc537() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IcebergConfiguration
+			"iceberg_configuration": schemaAttributee6c87cb2dd7b11b08cec9213(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for a snapshot retention optimizer for Apache Iceberg tables.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bdf20418cf2387ded80adb5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CompactionConfiguration
+			"compaction_configuration": schemaAttributed8f579de1ff5bc3a81b5d4c4(),
+			// Property: Enabled
+			"enabled": schemaAttributed19bca3e541347193a3a32f3(),
+			// Property: OrphanFileDeletionConfiguration
+			"orphan_file_deletion_configuration": schemaAttributeb7e3d8336cd2fdac1024462a(),
+			// Property: RetentionConfiguration
+			"retention_configuration": schemaAttribute77b756657a8a8a309ebcc537(),
+			// Property: RoleArn
+			"role_arn": schemaAttribute72511b1034e1d0bb8d9829cd(),
+			// Property: VpcConfiguration
+			"vpc_configuration": schemaAttribute9589d4c2ddd80c07e3b09957(),
+		}, /*END SCHEMA*/
+		Description: "Specifies configuration details of a table optimizer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9589d4c2ddd80c07e3b09957() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GlueConnectionName
+			"glue_connection_name": schemaAttributef0cf200a197c555fe473f93a(),
+		}, /*END SCHEMA*/
+		Description: "An object that describes the VPC configuration for a table optimizer. This configuration is necessary to perform optimization on tables that are in a customer VPC.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb7e3d8336cd2fdac1024462a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IcebergConfiguration
+			"iceberg_configuration": schemaAttributec167440e043f9fdf1f873784(),
+		}, /*END SCHEMA*/
+		Description: "OrphanFileDeletionConfiguration is a property that can be included within the TableOptimizer resource. It controls the automatic deletion of orphaned files - files that are not tracked by the table metadata, and older than the configured age limit.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec167440e043f9fdf1f873784() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Location
+			"location": schemaAttributee164495ee35f27532afcf31b(),
+			// Property: OrphanFileRetentionPeriodInDays
+			"orphan_file_retention_period_in_days": schemaAttribute6065b41cb30ea33147b4bbf6(),
+		}, /*END SCHEMA*/
+		Description: "The IcebergConfiguration property helps optimize your Iceberg tables in AWS Glue by allowing you to specify format-specific settings that control how data is stored, compressed, and managed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed18cd697236a523f6a751a3e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of table optimizer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed19bca3e541347193a3a32f3() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether the table optimization is enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8f579de1ff5bc3a81b5d4c4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IcebergConfiguration
+			"iceberg_configuration": schemaAttribute0aa6c6b901cd2656024016eb(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for a compaction optimizer. This configuration defines how data files in your table will be compacted to improve query performance and reduce storage costs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee164495ee35f27532afcf31b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies a directory in which to look for orphan files (defaults to the table's location). You may choose a sub-directory rather than the top-level table location.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6c87cb2dd7b11b08cec9213() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CleanExpiredFiles
+			"clean_expired_files": schemaAttributefe467eb8ddfd650d0009d667(),
+			// Property: NumberOfSnapshotsToRetain
+			"number_of_snapshots_to_retain": schemaAttribute126390355291e7f0fc784732(),
+			// Property: SnapshotRetentionPeriodInDays
+			"snapshot_retention_period_in_days": schemaAttribute126390355291e7f0fc784732(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for an Iceberg snapshot retention optimizer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0cf200a197c555fe473f93a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the AWS Glue connection used for the VPC for the table optimizer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefe467eb8ddfd650d0009d667() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_table_optimizer", tableOptimizerDataSource)
 }
@@ -29,10 +233,7 @@ func tableOptimizerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The catalog ID of the table",
 		//	  "type": "string"
 		//	}
-		"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The catalog ID of the table",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"catalog_id": schemaAttribute531a6257e7278dbef4e31386(),
 		// Property: DatabaseName
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +241,7 @@ func tableOptimizerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The name of the database. For Hive compatibility, this is folded to lowercase when it is stored.",
 		//	  "type": "string"
 		//	}
-		"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the database. For Hive compatibility, this is folded to lowercase when it is stored.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"database_name": schemaAttribute254170a13c07fe9419cf4001(),
 		// Property: TableName
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +249,7 @@ func tableOptimizerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The table name. For Hive compatibility, this must be entirely lowercase.",
 		//	  "type": "string"
 		//	}
-		"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The table name. For Hive compatibility, this must be entirely lowercase.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"table_name": schemaAttribute435724d3c0204a41930baca9(),
 		// Property: TableOptimizerConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -159,113 +354,7 @@ func tableOptimizerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"table_optimizer_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CompactionConfiguration
-				"compaction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: IcebergConfiguration
-						"iceberg_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DeleteFileThreshold
-								"delete_file_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The minimum number of deletes in a data file to make it eligible for compaction.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: MinInputFiles
-								"min_input_files": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The minimum number of input files before compaction is triggered.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Strategy
-								"strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The compaction strategy to use. Valid values are binpack, sort, and z-order.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The configuration for an Iceberg compaction optimizer.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration for a compaction optimizer. This configuration defines how data files in your table will be compacted to improve query performance and reduce storage costs.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Enabled
-				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Whether the table optimization is enabled.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: OrphanFileDeletionConfiguration
-				"orphan_file_deletion_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: IcebergConfiguration
-						"iceberg_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Location
-								"location": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies a directory in which to look for orphan files (defaults to the table's location). You may choose a sub-directory rather than the top-level table location.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: OrphanFileRetentionPeriodInDays
-								"orphan_file_retention_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The specific number of days you want to keep the orphan files.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The IcebergConfiguration property helps optimize your Iceberg tables in AWS Glue by allowing you to specify format-specific settings that control how data is stored, compressed, and managed.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "OrphanFileDeletionConfiguration is a property that can be included within the TableOptimizer resource. It controls the automatic deletion of orphaned files - files that are not tracked by the table metadata, and older than the configured age limit.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RetentionConfiguration
-				"retention_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: IcebergConfiguration
-						"iceberg_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: CleanExpiredFiles
-								"clean_expired_files": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: NumberOfSnapshotsToRetain
-								"number_of_snapshots_to_retain": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: SnapshotRetentionPeriodInDays
-								"snapshot_retention_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The configuration for an Iceberg snapshot retention optimizer.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration for a snapshot retention optimizer for Apache Iceberg tables.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RoleArn
-				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A role passed by the caller which gives the service permission to update the resources associated with the optimizer on the caller's behalf.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VpcConfiguration
-				"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: GlueConnectionName
-						"glue_connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the AWS Glue connection used for the VPC for the table optimizer.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "An object that describes the VPC configuration for a table optimizer. This configuration is necessary to perform optimization on tables that are in a customer VPC.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies configuration details of a table optimizer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"table_optimizer_configuration": schemaAttribute7bdf20418cf2387ded80adb5(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -273,10 +362,7 @@ func tableOptimizerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The type of table optimizer.",
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of table optimizer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttributed18cd697236a523f6a751a3e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

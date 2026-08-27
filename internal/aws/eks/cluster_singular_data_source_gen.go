@@ -15,6 +15,758 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute02f52ad293b096269f31cd7c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute03ab49c18557a1f9b33e5597() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RemoteNodeNetworks
+			"remote_node_networks": schemaAttribute54e4d4bf20b584e9d390ca53(),
+			// Property: RemotePodNetworks
+			"remote_pod_networks": schemaAttribute72c59cedc419bbe497db6510(),
+		}, /*END SCHEMA*/
+		Description: "Configuration fields for specifying on-premises node and pod CIDRs that are external to the VPC passed during cluster creation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute058baeb402f8abc6ebaf5564() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute3a5a69ef25681faff934cdff(),
+				// Property: Value
+				"value": schemaAttribute3b072639fc1c646962cb176d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute07c7dcfd19490eeacbd0843d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The CIDR block to assign Kubernetes service IP addresses from.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c7f57d16074f072373694e5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ElasticLoadBalancing
+			"elastic_load_balancing": schemaAttribute3ff8c5e5c489aa43d7d6729d(),
+			// Property: IpFamily
+			"ip_family": schemaAttributeb3a142b5a9da109bc57c3b32(),
+			// Property: ServiceIpv4Cidr
+			"service_ipv_4_cidr": schemaAttribute91556dd80266131c4c091e6b(),
+			// Property: ServiceIpv6Cidr
+			"service_ipv_6_cidr": schemaAttribute07c7dcfd19490eeacbd0843d(),
+		}, /*END SCHEMA*/
+		Description: "The Kubernetes network configuration for the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute11ad57de5095e6e6189cdf7a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Enabled
+			"enabled": schemaAttributedc5cb3a4651c8829d5540496(),
+		}, /*END SCHEMA*/
+		Description: "The current zonal shift configuration to use for the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1577f7a37f453fa6d55c2b6b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control plane to data plane communication.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1834510c801021ddb6f75c22() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The EC2 instance type for etcd instances of your local Amazon EKS cluster on AWS Outposts. This instance type applies to all etcd instances and cannot be changed after cluster creation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute193ce2076153c621721c071e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClusterLogging
+			"cluster_logging": schemaAttributedf52f75aee982c467e0cbfd6(),
+		}, /*END SCHEMA*/
+		Description: "Enable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs based on log types. By default, cluster control plane logs aren't exported to CloudWatch Logs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1c3381140d6c39142fc6947d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Specifies the list of remote pod CIDRs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d8e37a972198f99f6ad86e2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxPort
+			"max_port": schemaAttributedf9e21e16be37993ae4442d2(),
+			// Property: MinPort
+			"min_port": schemaAttribute2d66ae65704a6efbc61c09b7(),
+		}, /*END SCHEMA*/
+		Description: "The port range for Kubernetes NodePort services.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1dad299b73ddee71162f6ed5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HorizontalPodAutoscalerControllerConfig
+			"horizontal_pod_autoscaler_controller_config": schemaAttributebb15652cdb9cb3cd960e5e42(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for the Kubernetes controller manager on an Amazon EKS cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute244ef306ea2f6827e629ff2e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TimeoutMinutes
+			"timeout_minutes": schemaAttributebcbd34da0c349011285878e3(),
+		}, /*END SCHEMA*/
+		Description: "The rollback configuration to use for the cluster version rollback.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute274e40b1a2f04db85287ee75() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Enabled
+			"enabled": schemaAttributed33e1415a2e0632cff5ec6aa(),
+			// Property: NodePools
+			"node_pools": schemaAttribute7cb76a4d3f43c6a8d76ef1b0(),
+			// Property: NodeRoleArn
+			"node_role_arn": schemaAttribute928834a3a089d1c7472193f5(),
+		}, /*END SCHEMA*/
+		Description: "Todo: add description",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute285e48f921b41f0ff57bc290() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the resource (for example, cpu or memory).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute286f1ccdf80735c453489f7e() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Specifies the resources to be encrypted. The only supported value is \"secrets\".",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d66ae65704a6efbc61c09b7() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum port number in the range.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute372621447f83e8cbe1742816() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Optional parameter to specify the placement group spread level for etcd instances. If not provided, EKS will deploy etcd instances without a placement group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a5a69ef25681faff934cdff() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b072639fc1c646962cb176d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3fb243a873e34ec722feac1e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The scoring strategy type (LeastAllocated or MostAllocated).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ff8c5e5c489aa43d7d6729d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Enabled
+			"enabled": schemaAttributed33e1415a2e0632cff5ec6aa(),
+		}, /*END SCHEMA*/
+		Description: "Todo: add description",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40e5692c10f75c04c9e07644() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute285e48f921b41f0ff57bc290(),
+				// Property: Weight
+				"weight": schemaAttributeb02f074919ec7e39ec42c57a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The resource weights used for scoring nodes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4158d7030ddcc045b93f0e40() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BlockStorage
+			"block_storage": schemaAttribute3ff8c5e5c489aa43d7d6729d(),
+		}, /*END SCHEMA*/
+		Description: "Todo: add description",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42516b1d48bc9876cbbde4ef() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ScoringStrategy
+			"scoring_strategy": schemaAttributecaaa595e5fb462e32413b7c1(),
+		}, /*END SCHEMA*/
+		Description: "The NodeResourcesFit plugin configuration for the Kubernetes scheduler.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b1e0bad3cc28fc6b160bb72() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specify the support type for your cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c1513e8d84e2aca2d51de9c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Optional parameter to specify the placement group spread level for control plane instances. If not provided, EKS will deploy control plane instances without a placement group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4db5e1c849d520458592a044() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5151f919e6d342037397ee65() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name (ARN) or alias of the customer master key (CMK).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5161a60f7ebf159d1f4670a1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The EC2 instance type for the Kubernetes control plane instances of your local Amazon EKS cluster on AWS Outposts. This instance type applies to all control plane instances and cannot be changed after cluster creation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54d2af21553ad77fb41c9de9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54e4d4bf20b584e9d390ca53() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Cidrs
+				"cidrs": schemaAttributef3f6a4fccea2b03b18fd53b2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Network configuration of nodes run on-premises with EKS Hybrid Nodes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58d399d044b4576d3fd890fd() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b7d3822bbbe7f8b22f29463() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique ID given to your cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d8891c5283aaafada6f4c66() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is 0.0.0.0/0. If you've disabled private endpoint access and you have nodes or AWS Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66d76f5116192f83a2561b75() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Type
+				"type": schemaAttributeb172cc0393b87055e40a9f3a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Enable control plane logs for your cluster, all log types will be disabled if the array is empty",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72acf295e0906bddc05d7b2b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SupportType
+			"support_type": schemaAttribute4b1e0bad3cc28fc6b160bb72(),
+		}, /*END SCHEMA*/
+		Description: "An object representing the Upgrade Policy to use for the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72c59cedc419bbe497db6510() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Cidrs
+				"cidrs": schemaAttribute1c3381140d6c39142fc6947d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Network configuration of pods run on-premises with EKS Hybrid Nodes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77047a7dc7ca2b77fa6c76ff() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Set this value to true to enable deletion protection for the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7cb76a4d3f43c6a8d76ef1b0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Todo: add description",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82e2dabbc1a4f6cc56c5d73c() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Set this value to true to enable private access for your cluster's Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster's VPC use the private VPC endpoint. The default value for this parameter is false, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or AWS Fargate pods in the cluster, then ensure that publicAccessCidrs includes the necessary CIDR blocks for communication with the nodes or Fargate pods.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute854d9a1ab61015681d25df29() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The interval between each sync of the horizontal pod autoscaler (e.g., 15s, 1m).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute885b0778e1c04b5e0cb18334() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ec0f75c78b06e33f584454c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The duration that Kubernetes events are retained (e.g., 30m, 1h).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute910a99b3361c13f17630fbe0() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Set this value to false to disable public access to your cluster's Kubernetes API server endpoint. If you disable public access, your cluster's Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is true, which enables public access for your Kubernetes API server.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91556dd80266131c4c091e6b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute928834a3a089d1c7472193f5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Todo: add description",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9638732bc2b5ef0151ee2ac4() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Set this value to false to avoid creating a default cluster admin Access Entry using the IAM principal used to create the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute98b9b682da96aeaf62609019() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EventTtl
+			"event_ttl": schemaAttribute8ec0f75c78b06e33f584454c(),
+			// Property: ServiceNodePortRange
+			"service_node_port_range": schemaAttribute1d8e37a972198f99f6ad86e2(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for the Kubernetes API server on an Amazon EKS cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c08bf86a9f0aa7a1782ddd8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ControlPlaneInstanceType
+			"control_plane_instance_type": schemaAttribute5161a60f7ebf159d1f4670a1(),
+			// Property: ControlPlanePlacement
+			"control_plane_placement": schemaAttributef7c6c3771b764e9df725b62e(),
+			// Property: EtcdInstanceType
+			"etcd_instance_type": schemaAttribute1834510c801021ddb6f75c22(),
+			// Property: EtcdPlacement
+			"etcd_placement": schemaAttributeca04d1a6f82b51fcc4e771f0(),
+			// Property: OutpostArns
+			"outpost_arns": schemaAttributedc203c41234dba61e90563e4(),
+		}, /*END SCHEMA*/
+		Description: "An object representing the Outpost configuration to use for AWS EKS outpost cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea43023d368c0ef147699bab2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique name to give to your cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea743ab0c23193134b3f8bed0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specify the authentication mode that should be used to create your cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea85ee2d0dc51f9a132231302() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KeyArn
+			"key_arn": schemaAttribute02f52ad293b096269f31cd7c(),
+		}, /*END SCHEMA*/
+		Description: "The encryption provider for the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea999c894204b0fe431e0c713() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ControlPlaneEgressMode
+			"control_plane_egress_mode": schemaAttributed469858c5e0d773cbd3f6563(),
+			// Property: EndpointPrivateAccess
+			"endpoint_private_access": schemaAttribute82e2dabbc1a4f6cc56c5d73c(),
+			// Property: EndpointPublicAccess
+			"endpoint_public_access": schemaAttribute910a99b3361c13f17630fbe0(),
+			// Property: PublicAccessCidrs
+			"public_access_cidrs": schemaAttribute5d8891c5283aaafada6f4c66(),
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttributef656cf408724a5f3bebdc93c(),
+			// Property: SubnetIds
+			"subnet_ids": schemaAttribute58d399d044b4576d3fd890fd(),
+		}, /*END SCHEMA*/
+		Description: "An object representing the VPC configuration to use for an Amazon EKS cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab5041403bf7603f5fed20c9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The certificate-authority-data for your cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb02f074919ec7e39ec42c57a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The weight assigned to the resource for scoring. Must be between 1 and 100.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb172cc0393b87055e40a9f3a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "name of the log type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3010dc2ee2ef2c0a34e052d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthenticationMode
+			"authentication_mode": schemaAttributea743ab0c23193134b3f8bed0(),
+			// Property: BootstrapClusterCreatorAdminPermissions
+			"bootstrap_cluster_creator_admin_permissions": schemaAttribute9638732bc2b5ef0151ee2ac4(),
+		}, /*END SCHEMA*/
+		Description: "An object representing the Access Config to use for the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3a142b5a9da109bc57c3b32() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Ipv4 or Ipv6. You can only specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of the Amazon VPC CNI add-on",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb51328659cf8ecff0c43c647() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Force cluster version update",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb7b7c787aec54764f1d8c1d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the cluster, such as arn:aws:eks:us-west-2:666666666666:cluster/prod.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb15652cdb9cb3cd960e5e42() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HorizontalPodAutoscalerSyncPeriod
+			"horizontal_pod_autoscaler_sync_period": schemaAttribute854d9a1ab61015681d25df29(),
+		}, /*END SCHEMA*/
+		Description: "The horizontal pod autoscaler controller configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb623a6ebf6cd7ca59a96f64() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The issuer URL for the cluster's OIDC identity provider, such as https://oidc.eks.us-west-2.amazonaws.com/id/EXAMPLED539D4633E53DE1B716D3041E. If you need to remove https:// from this output value, you can include the following code in your template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebcbd34da0c349011285878e3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The timeout in minutes for the version rollback operation. If not specified, defaults to 720 minutes (12 hours).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe30cdd85195cabac34f426a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: NodeResourcesFit
+			"node_resources_fit": schemaAttribute42516b1d48bc9876cbbde4ef(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for the Kubernetes scheduler on an Amazon EKS cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec72b097e90210f3723811ec2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Tier
+			"tier": schemaAttributef9533ad1777c72ad065c0204(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for provisioned control plane scaling.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca04d1a6f82b51fcc4e771f0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SpreadLevel
+			"spread_level": schemaAttribute372621447f83e8cbe1742816(),
+		}, /*END SCHEMA*/
+		Description: "An object representing the placement configuration for the etcd instances of your local Amazon EKS cluster on an AWS Outpost.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecaaa595e5fb462e32413b7c1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Resources
+			"resources": schemaAttribute40e5692c10f75c04c9e07644(),
+			// Property: Type
+			"type": schemaAttribute3fb243a873e34ec722feac1e(),
+		}, /*END SCHEMA*/
+		Description: "The scoring strategy configuration for the NodeResourcesFit scheduler plugin.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed33e1415a2e0632cff5ec6aa() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Todo: add description",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed469858c5e0d773cbd3f6563() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specify the egress mode for the cluster control plane. If you set this to CUSTOMER_ROUTED, the control plane routes traffic through your VPC subnets instead of using AWS managed networking.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5aaf90d37b5b6b995fc771b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The endpoint for your Kubernetes API server, such as https://5E1D0CEXAMPLEA591B746AFC5AB30262.yl4.us-west-2.eks.amazonaws.com.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc203c41234dba61e90563e4() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. Only a single Outpost ARN is supported.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc5cb3a4651c8829d5540496() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Set this value to true to enable zonal shift for the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd30faee85b1dd961b9cc2e3() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Set this value to false to avoid creating the default networking add-ons when the cluster is created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf52f75aee982c467e0cbfd6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnabledTypes
+			"enabled_types": schemaAttribute66d76f5116192f83a2561b75(),
+		}, /*END SCHEMA*/
+		Description: "The cluster control plane logging configuration for your cluster. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf9e21e16be37993ae4442d2() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum port number in the range.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3f6a4fccea2b03b18fd53b2() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Specifies the list of remote node CIDRs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef656cf408724a5f3bebdc93c() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you don't specify a security group, the default security group for your VPC is used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef774c526293699a57d34e54a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Provider
+				"provider": schemaAttributea85ee2d0dc51f9a132231302(),
+				// Property: Resources
+				"resources": schemaAttribute286f1ccdf80735c453489f7e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7c6c3771b764e9df725b62e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GroupName
+			"group_name": schemaAttribute54d2af21553ad77fb41c9de9(),
+			// Property: SpreadLevel
+			"spread_level": schemaAttribute4c1513e8d84e2aca2d51de9c(),
+		}, /*END SCHEMA*/
+		Description: "An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on an AWS Outpost.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9533ad1777c72ad065c0204() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The scaling tier for the provisioned control plane.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_eks_cluster", clusterDataSource)
 }
@@ -46,22 +798,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"access_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AuthenticationMode
-				"authentication_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specify the authentication mode that should be used to create your cluster.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: BootstrapClusterCreatorAdminPermissions
-				"bootstrap_cluster_creator_admin_permissions": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Set this value to false to avoid creating a default cluster admin Access Entry using the IAM principal used to create the cluster.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object representing the Access Config to use for the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"access_config": schemaAttributeb3010dc2ee2ef2c0a34e052d(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -69,10 +806,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the cluster, such as arn:aws:eks:us-west-2:666666666666:cluster/prod.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the cluster, such as arn:aws:eks:us-west-2:666666666666:cluster/prod.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeb7b7c787aec54764f1d8c1d2(),
 		// Property: BootstrapSelfManagedAddons
 		// CloudFormation resource type schema:
 		//
@@ -80,10 +814,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Set this value to false to avoid creating the default networking add-ons when the cluster is created.",
 		//	  "type": "boolean"
 		//	}
-		"bootstrap_self_managed_addons": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Set this value to false to avoid creating the default networking add-ons when the cluster is created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bootstrap_self_managed_addons": schemaAttributedd30faee85b1dd961b9cc2e3(),
 		// Property: CertificateAuthorityData
 		// CloudFormation resource type schema:
 		//
@@ -91,10 +822,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The certificate-authority-data for your cluster.",
 		//	  "type": "string"
 		//	}
-		"certificate_authority_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The certificate-authority-data for your cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate_authority_data": schemaAttributeab5041403bf7603f5fed20c9(),
 		// Property: ClusterSecurityGroupId
 		// CloudFormation resource type schema:
 		//
@@ -102,10 +830,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control plane to data plane communication.",
 		//	  "type": "string"
 		//	}
-		"cluster_security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The cluster security group that was created by Amazon EKS for the cluster. Managed node groups use this security group for control plane to data plane communication.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cluster_security_group_id": schemaAttribute1577f7a37f453fa6d55c2b6b(),
 		// Property: ComputeConfig
 		// CloudFormation resource type schema:
 		//
@@ -132,28 +857,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"compute_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Enabled
-				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Todo: add description",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NodePools
-				"node_pools": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Todo: add description",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NodeRoleArn
-				"node_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Todo: add description",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Todo: add description",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"compute_config": schemaAttribute274e40b1a2f04db85287ee75(),
 		// Property: ControlPlaneScalingConfig
 		// CloudFormation resource type schema:
 		//
@@ -176,17 +880,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"control_plane_scaling_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Tier
-				"tier": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The scaling tier for the provisioned control plane.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration for provisioned control plane scaling.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"control_plane_scaling_config": schemaAttributec72b097e90210f3723811ec2(),
 		// Property: DeletionProtection
 		// CloudFormation resource type schema:
 		//
@@ -194,10 +888,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Set this value to true to enable deletion protection for the cluster.",
 		//	  "type": "boolean"
 		//	}
-		"deletion_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Set this value to true to enable deletion protection for the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"deletion_protection": schemaAttribute77047a7dc7ca2b77fa6c76ff(),
 		// Property: EncryptionConfig
 		// CloudFormation resource type schema:
 		//
@@ -231,31 +922,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"encryption_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Provider
-					"provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: KeyArn
-							"key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The encryption provider for the cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Resources
-					"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "Specifies the resources to be encrypted. The only supported value is \"secrets\".",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"encryption_config": schemaAttributef774c526293699a57d34e54a(),
 		// Property: EncryptionConfigKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -263,10 +930,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Amazon Resource Name (ARN) or alias of the customer master key (CMK).",
 		//	  "type": "string"
 		//	}
-		"encryption_config_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name (ARN) or alias of the customer master key (CMK).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"encryption_config_key_arn": schemaAttribute5151f919e6d342037397ee65(),
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -274,10 +938,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The endpoint for your Kubernetes API server, such as https://5E1D0CEXAMPLEA591B746AFC5AB30262.yl4.us-west-2.eks.amazonaws.com.",
 		//	  "type": "string"
 		//	}
-		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The endpoint for your Kubernetes API server, such as https://5E1D0CEXAMPLEA591B746AFC5AB30262.yl4.us-west-2.eks.amazonaws.com.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint": schemaAttributed5aaf90d37b5b6b995fc771b(),
 		// Property: Force
 		// CloudFormation resource type schema:
 		//
@@ -286,10 +947,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Force cluster version update",
 		//	  "type": "boolean"
 		//	}
-		"force": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Force cluster version update",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"force": schemaAttributeb51328659cf8ecff0c43c647(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -297,10 +955,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique ID given to your cluster.",
 		//	  "type": "string"
 		//	}
-		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique ID given to your cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cluster_id": schemaAttribute5b7d3822bbbe7f8b22f29463(),
 		// Property: KubeApiServerConfig
 		// CloudFormation resource type schema:
 		//
@@ -330,34 +985,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"kube_api_server_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EventTtl
-				"event_ttl": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The duration that Kubernetes events are retained (e.g., 30m, 1h).",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServiceNodePortRange
-				"service_node_port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: MaxPort
-						"max_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The maximum port number in the range.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MinPort
-						"min_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The minimum port number in the range.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The port range for Kubernetes NodePort services.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration for the Kubernetes API server on an Amazon EKS cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kube_api_server_config": schemaAttribute98b9b682da96aeaf62609019(),
 		// Property: KubeControllerManagerConfig
 		// CloudFormation resource type schema:
 		//
@@ -379,24 +1007,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"kube_controller_manager_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: HorizontalPodAutoscalerControllerConfig
-				"horizontal_pod_autoscaler_controller_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: HorizontalPodAutoscalerSyncPeriod
-						"horizontal_pod_autoscaler_sync_period": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The interval between each sync of the horizontal pod autoscaler (e.g., 15s, 1m).",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The horizontal pod autoscaler controller configuration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration for the Kubernetes controller manager on an Amazon EKS cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kube_controller_manager_config": schemaAttribute1dad299b73ddee71162f6ed5(),
 		// Property: KubeSchedulerConfig
 		// CloudFormation resource type schema:
 		//
@@ -444,50 +1055,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"kube_scheduler_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: NodeResourcesFit
-				"node_resources_fit": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ScoringStrategy
-						"scoring_strategy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Resources
-								"resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Name
-											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The name of the resource (for example, cpu or memory).",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Weight
-											"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Description: "The weight assigned to the resource for scoring. Must be between 1 and 100.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "The resource weights used for scoring nodes.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Type
-								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The scoring strategy type (LeastAllocated or MostAllocated).",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The scoring strategy configuration for the NodeResourcesFit scheduler plugin.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The NodeResourcesFit plugin configuration for the Kubernetes scheduler.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration for the Kubernetes scheduler on an Amazon EKS cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kube_scheduler_config": schemaAttributebe30cdd85195cabac34f426a(),
 		// Property: KubernetesNetworkConfig
 		// CloudFormation resource type schema:
 		//
@@ -525,39 +1093,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"kubernetes_network_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ElasticLoadBalancing
-				"elastic_load_balancing": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Enabled
-						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Todo: add description",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Todo: add description",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IpFamily
-				"ip_family": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Ipv4 or Ipv6. You can only specify ipv6 for 1.21 and later clusters that use version 1.10.1 or later of the Amazon VPC CNI add-on",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServiceIpv4Cidr
-				"service_ipv_4_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The CIDR block to assign Kubernetes service IP addresses from. If you don't specify a block, Kubernetes assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you specify a block that does not overlap with resources in other networks that are peered or connected to your VPC. ",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServiceIpv6Cidr
-				"service_ipv_6_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The CIDR block to assign Kubernetes service IP addresses from.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The Kubernetes network configuration for the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kubernetes_network_config": schemaAttribute0c7f57d16074f072373694e5(),
 		// Property: Logging
 		// CloudFormation resource type schema:
 		//
@@ -598,33 +1134,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"logging": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ClusterLogging
-				"cluster_logging": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: EnabledTypes
-						"enabled_types": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Type
-									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "name of the log type",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "Enable control plane logs for your cluster, all log types will be disabled if the array is empty",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The cluster control plane logging configuration for your cluster. ",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Enable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs based on log types. By default, cluster control plane logs aren't exported to CloudWatch Logs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"logging": schemaAttribute193ce2076153c621721c071e(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -635,10 +1145,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique name to give to your cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributea43023d368c0ef147699bab2(),
 		// Property: OpenIdConnectIssuerUrl
 		// CloudFormation resource type schema:
 		//
@@ -646,10 +1153,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The issuer URL for the cluster's OIDC identity provider, such as https://oidc.eks.us-west-2.amazonaws.com/id/EXAMPLED539D4633E53DE1B716D3041E. If you need to remove https:// from this output value, you can include the following code in your template.",
 		//	  "type": "string"
 		//	}
-		"open_id_connect_issuer_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The issuer URL for the cluster's OIDC identity provider, such as https://oidc.eks.us-west-2.amazonaws.com/id/EXAMPLED539D4633E53DE1B716D3041E. If you need to remove https:// from this output value, you can include the following code in your template.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"open_id_connect_issuer_url": schemaAttributebb623a6ebf6cd7ca59a96f64(),
 		// Property: OutpostConfig
 		// CloudFormation resource type schema:
 		//
@@ -707,57 +1211,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"outpost_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ControlPlaneInstanceType
-				"control_plane_instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The EC2 instance type for the Kubernetes control plane instances of your local Amazon EKS cluster on AWS Outposts. This instance type applies to all control plane instances and cannot be changed after cluster creation.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ControlPlanePlacement
-				"control_plane_placement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: GroupName
-						"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SpreadLevel
-						"spread_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Optional parameter to specify the placement group spread level for control plane instances. If not provided, EKS will deploy control plane instances without a placement group.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on an AWS Outpost.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EtcdInstanceType
-				"etcd_instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The EC2 instance type for etcd instances of your local Amazon EKS cluster on AWS Outposts. This instance type applies to all etcd instances and cannot be changed after cluster creation.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EtcdPlacement
-				"etcd_placement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: SpreadLevel
-						"spread_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Optional parameter to specify the placement group spread level for etcd instances. If not provided, EKS will deploy etcd instances without a placement group.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "An object representing the placement configuration for the etcd instances of your local Amazon EKS cluster on an AWS Outpost.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: OutpostArns
-				"outpost_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. Only a single Outpost ARN is supported.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object representing the Outpost configuration to use for AWS EKS outpost cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"outpost_config": schemaAttribute9c08bf86a9f0aa7a1782ddd8(),
 		// Property: RemoteNetworkConfig
 		// CloudFormation resource type schema:
 		//
@@ -816,42 +1270,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"remote_network_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RemoteNodeNetworks
-				"remote_node_networks": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Cidrs
-							"cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "Specifies the list of remote node CIDRs.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Network configuration of nodes run on-premises with EKS Hybrid Nodes.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RemotePodNetworks
-				"remote_pod_networks": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Cidrs
-							"cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "Specifies the list of remote pod CIDRs.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Network configuration of pods run on-premises with EKS Hybrid Nodes.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration fields for specifying on-premises node and pod CIDRs that are external to the VPC passed during cluster creation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"remote_network_config": schemaAttribute03ab49c18557a1f9b33e5597(),
 		// Property: ResourcesVpcConfig
 		// CloudFormation resource type schema:
 		//
@@ -904,45 +1323,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"resources_vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ControlPlaneEgressMode
-				"control_plane_egress_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specify the egress mode for the cluster control plane. If you set this to CUSTOMER_ROUTED, the control plane routes traffic through your VPC subnets instead of using AWS managed networking.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EndpointPrivateAccess
-				"endpoint_private_access": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Set this value to true to enable private access for your cluster's Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster's VPC use the private VPC endpoint. The default value for this parameter is false, which disables private access for your Kubernetes API server. If you disable private access and you have nodes or AWS Fargate pods in the cluster, then ensure that publicAccessCidrs includes the necessary CIDR blocks for communication with the nodes or Fargate pods.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EndpointPublicAccess
-				"endpoint_public_access": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Set this value to false to disable public access to your cluster's Kubernetes API server endpoint. If you disable public access, your cluster's Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is true, which enables public access for your Kubernetes API server.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PublicAccessCidrs
-				"public_access_cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The CIDR blocks that are allowed access to your cluster's public Kubernetes API server endpoint. Communication to the endpoint from addresses outside of the CIDR blocks that you specify is denied. The default value is 0.0.0.0/0. If you've disabled private endpoint access and you have nodes or AWS Fargate pods in the cluster, then ensure that you specify the necessary CIDR blocks.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecurityGroupIds
-				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you don't specify a security group, the default security group for your VPC is used.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SubnetIds
-				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your nodes and the Kubernetes control plane.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object representing the VPC configuration to use for an Amazon EKS cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resources_vpc_config": schemaAttributea999c894204b0fe431e0c713(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -950,10 +1331,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf.",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the IAM role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute885b0778e1c04b5e0cb18334(),
 		// Property: RollbackConfig
 		// CloudFormation resource type schema:
 		//
@@ -970,17 +1348,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"rollback_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: TimeoutMinutes
-				"timeout_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The timeout in minutes for the version rollback operation. If not specified, defaults to 720 minutes (12 hours).",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The rollback configuration to use for the cluster version rollback.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rollback_config": schemaAttribute244ef306ea2f6827e629ff2e(),
 		// Property: StorageConfig
 		// CloudFormation resource type schema:
 		//
@@ -1002,24 +1370,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"storage_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BlockStorage
-				"block_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Enabled
-						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Todo: add description",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Todo: add description",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Todo: add description",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"storage_config": schemaAttribute4158d7030ddcc045b93f0e40(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1052,24 +1403,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute058baeb402f8abc6ebaf5564(),
 		// Property: UpgradePolicy
 		// CloudFormation resource type schema:
 		//
@@ -1088,17 +1422,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"upgrade_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SupportType
-				"support_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specify the support type for your cluster.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object representing the Upgrade Policy to use for the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"upgrade_policy": schemaAttribute72acf295e0906bddc05d7b2b(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -1107,10 +1431,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "1\\.\\d\\d",
 		//	  "type": "string"
 		//	}
-		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The desired Kubernetes version for your cluster. If you don't specify a value here, the latest version available in Amazon EKS is used.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttribute4db5e1c849d520458592a044(),
 		// Property: ZonalShiftConfig
 		// CloudFormation resource type schema:
 		//
@@ -1125,17 +1446,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"zonal_shift_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Enabled
-				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Set this value to true to enable zonal shift for the cluster.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The current zonal shift configuration to use for the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"zonal_shift_config": schemaAttribute11ad57de5095e6e6189cdf7a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

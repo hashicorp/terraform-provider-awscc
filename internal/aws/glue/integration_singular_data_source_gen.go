@@ -15,6 +15,139 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute018bb0570adc48846846d8ff() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the frequency at which CDC (Change Data Capture) pulls or incremental loads should occur.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17938e0af237325edb2087c3() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A collection of key-value pairs that specify additional properties for the integration source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19641f5026d8e96e0e90ff23() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Glue data warehouse to use as the target for replication",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2722eebba751d07b0534d4db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the integration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ad24fbef0992f0d3ae9f846() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "An optional set of non-secret key value pairs that contains additional contextual information about the data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f36dfa45c0424329770b18d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute71e25624bcf8c4a5a5969515() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContinuousSync
+			"continuous_sync": schemaAttributecac058ebe71c61c828b02bbb(),
+			// Property: RefreshInterval
+			"refresh_interval": schemaAttribute018bb0570adc48846846d8ff(),
+			// Property: SourceProperties
+			"source_properties": schemaAttribute17938e0af237325edb2087c3(),
+		}, /*END SCHEMA*/
+		Description: "The configuration settings for the integration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89fa456d315442145c64015a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the integration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead137318442a60295ad3761d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecac058ebe71c61c828b02bbb() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables continuous synchronization for on-demand data extractions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecda47c978aaea40f0c2b024e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An KMS key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, the default AWS owned KMS key is used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6b3270302abea649bbb439c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedff8eef35c2ce8091048576a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the database to use as the source for replication",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1b91bc2add2963528565c1e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time (UTC) when the integration was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee7e02d54997e086961e363be() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the integration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefadf753da307896e586063c4() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributed6b3270302abea649bbb439c(),
+				// Property: Value
+				"value": schemaAttributead137318442a60295ad3761d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_integration", integrationDataSource)
 }
@@ -38,12 +171,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"additional_encryption_context": // Pattern: ""
-		schema.MapAttribute{             /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "An optional set of non-secret key value pairs that contains additional contextual information about the data.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"additional_encryption_context": schemaAttribute4ad24fbef0992f0d3ae9f846(),
 		// Property: CreateTime
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +179,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time (UTC) when the integration was created.",
 		//	  "type": "string"
 		//	}
-		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time (UTC) when the integration was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"create_time": schemaAttributee1b91bc2add2963528565c1e(),
 		// Property: DataFilter
 		// CloudFormation resource type schema:
 		//
@@ -62,9 +187,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"data_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"data_filter": schemaAttribute6f36dfa45c0424329770b18d(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -72,9 +195,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute6f36dfa45c0424329770b18d(),
 		// Property: IntegrationArn
 		// CloudFormation resource type schema:
 		//
@@ -83,10 +204,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws:.*:.*:[0-9]+:.*",
 		//	  "type": "string"
 		//	}
-		"integration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the integration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"integration_arn": schemaAttributee7e02d54997e086961e363be(),
 		// Property: IntegrationConfig
 		// CloudFormation resource type schema:
 		//
@@ -116,29 +234,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"integration_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ContinuousSync
-				"continuous_sync": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Enables continuous synchronization for on-demand data extractions.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RefreshInterval
-				"refresh_interval": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the frequency at which CDC (Change Data Capture) pulls or incremental loads should occur.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourceProperties
-				"source_properties": // Pattern: ""
-				schema.MapAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A collection of key-value pairs that specify additional properties for the integration source.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration settings for the integration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"integration_config": schemaAttribute71e25624bcf8c4a5a5969515(),
 		// Property: IntegrationName
 		// CloudFormation resource type schema:
 		//
@@ -148,10 +244,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"integration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the integration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"integration_name": schemaAttribute2722eebba751d07b0534d4db(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -159,10 +252,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "An KMS key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, the default AWS owned KMS key is used.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An KMS key identifier for the key to use to encrypt the integration. If you don't specify an encryption key, the default AWS owned KMS key is used.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttributecda47c978aaea40f0c2b024e(),
 		// Property: SourceArn
 		// CloudFormation resource type schema:
 		//
@@ -172,10 +262,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws:.*:.*:[0-9]+:.*",
 		//	  "type": "string"
 		//	}
-		"source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the database to use as the source for replication",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_arn": schemaAttributedff8eef35c2ce8091048576a(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -183,10 +270,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The status of the integration.",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the integration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute89fa456d315442145c64015a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -219,24 +303,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributefadf753da307896e586063c4(),
 		// Property: TargetArn
 		// CloudFormation resource type schema:
 		//
@@ -246,10 +313,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws:.*:.*:[0-9]+:.*",
 		//	  "type": "string"
 		//	}
-		"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Glue data warehouse to use as the target for replication",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_arn": schemaAttribute19641f5026d8e96e0e90ff23(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

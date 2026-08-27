@@ -14,6 +14,77 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute04b462bb138230d18ba6f030() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the custom tape pool.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e634e29419d1d9bcb81fb29() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Tape retention lock time in days (up to 36,500 days / 100 years).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute545b78b3d4c3fa77b0c389d6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e863e98e5ea86072448883b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Tape retention lock type. Governance mode allows authorized removal; compliance mode prevents all removal.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca20a6c65c42c0f6695870c8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9cb6fb27bd5e1282fef8eb9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The storage class associated with the custom pool (S3 Glacier or S3 Glacier Deep Archive).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed71564aa63fe601278d7f26() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the custom tape pool.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef46ef8df19e40d028178c978() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeca20a6c65c42c0f6695870c8(),
+				// Property: Value
+				"value": schemaAttribute545b78b3d4c3fa77b0c389d6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of up to 50 tags for the tape pool.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff28ae5efd749e95eaf98ab0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the custom tape pool, extracted from the ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_storagegateway_tape_pool", tapePoolDataSource)
 }
@@ -31,10 +102,7 @@ func tapePoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 50,
 		//	  "type": "string"
 		//	}
-		"pool_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the custom tape pool.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"pool_arn": schemaAttribute04b462bb138230d18ba6f030(),
 		// Property: PoolId
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +110,7 @@ func tapePoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique identifier of the custom tape pool, extracted from the ARN.",
 		//	  "type": "string"
 		//	}
-		"pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the custom tape pool, extracted from the ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"pool_id": schemaAttributeff28ae5efd749e95eaf98ab0(),
 		// Property: PoolName
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +121,7 @@ func tapePoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[ -\\.0-\\[\\]-~]*[!-\\.0-\\[\\]-~][ -\\.0-\\[\\]-~]*$",
 		//	  "type": "string"
 		//	}
-		"pool_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the custom tape pool.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"pool_name": schemaAttributeed71564aa63fe601278d7f26(),
 		// Property: RetentionLockTimeInDays
 		// CloudFormation resource type schema:
 		//
@@ -69,10 +131,7 @@ func tapePoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"retention_lock_time_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Tape retention lock time in days (up to 36,500 days / 100 years).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"retention_lock_time_in_days": schemaAttribute2e634e29419d1d9bcb81fb29(),
 		// Property: RetentionLockType
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +144,7 @@ func tapePoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"retention_lock_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Tape retention lock type. Governance mode allows authorized removal; compliance mode prevents all removal.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"retention_lock_type": schemaAttribute6e863e98e5ea86072448883b(),
 		// Property: StorageClass
 		// CloudFormation resource type schema:
 		//
@@ -100,10 +156,7 @@ func tapePoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The storage class associated with the custom pool (S3 Glacier or S3 Glacier Deep Archive).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"storage_class": schemaAttributee9cb6fb27bd5e1282fef8eb9(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -136,24 +189,7 @@ func tapePoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of up to 50 tags for the tape pool.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributef46ef8df19e40d028178c978(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

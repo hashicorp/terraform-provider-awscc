@@ -14,6 +14,67 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1b1cadf2ca1f5f81e35109e2() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute977d835d101f8664daf00792(),
+				// Property: Value
+				"value": schemaAttributeca988cb29e9a4b6e6d0accad(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs that contain metadata for the asset model.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d038fbbdf8004155b3095a7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Storage Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute221488cb25c2b59d16bfabcd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Location (S3 bucket name) where recorded videos will be stored. Note that the StorageConfiguration and S3 bucket must be in the same region as the Composition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37e50f7a0480b6f933717765() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketName
+			"bucket_name": schemaAttribute221488cb25c2b59d16bfabcd(),
+		}, /*END SCHEMA*/
+		Description: "A complex type that describes an S3 location where recorded videos will be stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53836ee9b23eab6b1aeba6c8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Storage Configuration Name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute977d835d101f8664daf00792() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca988cb29e9a4b6e6d0accad() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ivs_storage_configuration", storageConfigurationDataSource)
 }
@@ -32,10 +93,7 @@ func storageConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^arn:aws[-a-z]*:ivs:[a-z0-9-]+:[0-9]+:storage-configuration/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Storage Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute1d038fbbdf8004155b3095a7(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +104,7 @@ func storageConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^[a-zA-Z0-9-_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Storage Configuration Name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute53836ee9b23eab6b1aeba6c8(),
 		// Property: S3
 		// CloudFormation resource type schema:
 		//
@@ -70,17 +125,7 @@ func storageConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BucketName
-				"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Location (S3 bucket name) where recorded videos will be stored. Note that the StorageConfiguration and S3 bucket must be in the same region as the Composition.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A complex type that describes an S3 location where recorded videos will be stored.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"s3": schemaAttribute37e50f7a0480b6f933717765(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -113,24 +158,7 @@ func storageConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs that contain metadata for the asset model.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute1b1cadf2ca1f5f81e35109e2(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

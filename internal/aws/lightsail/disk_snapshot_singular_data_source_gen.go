@@ -15,6 +15,140 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute219c8105a3018c81085eb014() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute8fb7d0c7870789577e411e61(),
+				// Property: Value
+				"value": schemaAttributee23382cee6d1abf2aa619804(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute270ea1b940a51507b3707ade() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the disk snapshot.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2762130e206c75c0881262d0() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The size of the disk snapshot in GB.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ab407ad2f0cf671875d6c83() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Region where the disk snapshot was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c88febeb657d749645bbe05() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the source disk from which the snapshot was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4076145a402c2716b418a316() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the source disk from which the disk snapshot was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45f4a89626c5df2e9618ddc9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Availability Zone where the disk snapshot was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute596272f94cb545dd4ca8e94b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the disk snapshot was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6744b97a391a7b8f3b4f703e() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean value indicating whether the snapshot was created from an automatic snapshot.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78b9fee01435dc7d5a7fe20c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8fb7d0c7870789577e411e61() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91209e6475d90717e0962d98() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the disk snapshot operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute981e96611050ca6e3d573340() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The progress of the disk snapshot creation operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee23382cee6d1abf2aa619804() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeff679588cfaf80831330ce8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AvailabilityZone
+			"availability_zone": schemaAttribute45f4a89626c5df2e9618ddc9(),
+			// Property: RegionName
+			"region_name": schemaAttribute2ab407ad2f0cf671875d6c83(),
+		}, /*END SCHEMA*/
+		Description: "The AWS Region and Availability Zone where the disk snapshot was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2c82dc0a37231f1e6c91e24() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the disk snapshot (e.g., my-disk-snapshot).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb0ba2ccfcc94803b26d701f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Lightsail resource type (DiskSnapshot).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_lightsail_disk_snapshot", diskSnapshotDataSource)
 }
@@ -31,11 +165,7 @@ func diskSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the disk snapshot was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute596272f94cb545dd4ca8e94b(),
 		// Property: DiskName
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +176,7 @@ func diskSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^\\w[\\w\\-]*\\w$",
 		//	  "type": "string"
 		//	}
-		"disk_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the source disk from which the snapshot was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"disk_name": schemaAttribute2c88febeb657d749645bbe05(),
 		// Property: DiskSnapshotArn
 		// CloudFormation resource type schema:
 		//
@@ -58,10 +185,7 @@ func diskSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"disk_snapshot_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the disk snapshot.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"disk_snapshot_arn": schemaAttribute270ea1b940a51507b3707ade(),
 		// Property: DiskSnapshotName
 		// CloudFormation resource type schema:
 		//
@@ -72,10 +196,7 @@ func diskSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^\\w[\\w\\-]*\\w$",
 		//	  "type": "string"
 		//	}
-		"disk_snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the disk snapshot (e.g., my-disk-snapshot).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"disk_snapshot_name": schemaAttributef2c82dc0a37231f1e6c91e24(),
 		// Property: FromDiskName
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +205,7 @@ func diskSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^\\w[\\w\\-]*\\w$",
 		//	  "type": "string"
 		//	}
-		"from_disk_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the source disk from which the disk snapshot was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"from_disk_name": schemaAttribute4076145a402c2716b418a316(),
 		// Property: IsFromAutoSnapshot
 		// CloudFormation resource type schema:
 		//
@@ -95,10 +213,7 @@ func diskSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "A Boolean value indicating whether the snapshot was created from an automatic snapshot.",
 		//	  "type": "boolean"
 		//	}
-		"is_from_auto_snapshot": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A Boolean value indicating whether the snapshot was created from an automatic snapshot.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"is_from_auto_snapshot": schemaAttribute6744b97a391a7b8f3b4f703e(),
 		// Property: Location
 		// CloudFormation resource type schema:
 		//
@@ -117,22 +232,7 @@ func diskSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AvailabilityZone
-				"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Availability Zone where the disk snapshot was created.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RegionName
-				"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The AWS Region where the disk snapshot was created.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The AWS Region and Availability Zone where the disk snapshot was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"location": schemaAttributeeff679588cfaf80831330ce8(),
 		// Property: Progress
 		// CloudFormation resource type schema:
 		//
@@ -140,10 +240,7 @@ func diskSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The progress of the disk snapshot creation operation.",
 		//	  "type": "string"
 		//	}
-		"progress": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The progress of the disk snapshot creation operation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"progress": schemaAttribute981e96611050ca6e3d573340(),
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -154,10 +251,7 @@ func diskSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Lightsail resource type (DiskSnapshot).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_type": schemaAttributefb0ba2ccfcc94803b26d701f(),
 		// Property: SizeInGb
 		// CloudFormation resource type schema:
 		//
@@ -166,10 +260,7 @@ func diskSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The size of the disk snapshot in GB.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"size_in_gb": schemaAttribute2762130e206c75c0881262d0(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -183,10 +274,7 @@ func diskSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the disk snapshot operation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttribute91209e6475d90717e0962d98(),
 		// Property: SupportCode
 		// CloudFormation resource type schema:
 		//
@@ -194,10 +282,7 @@ func diskSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail.",
 		//	  "type": "string"
 		//	}
-		"support_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The support code. Include this code in your email to support when you have questions about an instance or another resource in Lightsail.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"support_code": schemaAttribute78b9fee01435dc7d5a7fe20c(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -230,24 +315,7 @@ func diskSnapshotDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute219c8105a3018c81085eb014(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

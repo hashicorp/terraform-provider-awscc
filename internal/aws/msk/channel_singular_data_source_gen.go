@@ -15,6 +15,566 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute045a8d15f3e93d322e3d6dd7() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether schema evolution is enabled",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute06ece9018b48c2839ebb8f63() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Firehose delivery stream for log delivery",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute07cbc451385daa828e6de03d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The S3 prefix for log delivery",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute094c4fad3fdebbda563efc2e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Data freshness in seconds",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0ad56f002bd58ab85f07e476() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GsrArn
+			"gsr_arn": schemaAttribute40fac5e8dbbaeedb51427072(),
+		}, /*END SCHEMA*/
+		Description: "Record schema configuration for a topic",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0fa26f5bb5e1ace298274817() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatchLogs
+			"cloudwatch_logs": schemaAttributea7db74b390d58b520670da55(),
+			// Property: Firehose
+			"firehose": schemaAttribute59c6b7113fb0247ae2f168ed(),
+			// Property: S3
+			"s3": schemaAttributee2d20af33e102df575781738(),
+		}, /*END SCHEMA*/
+		Description: "Log configuration details for Channel",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1368fb5cd2fb565bc1cd7ac9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnableSchemaEvolution
+			"enable_schema_evolution": schemaAttribute045a8d15f3e93d322e3d6dd7(),
+		}, /*END SCHEMA*/
+		Description: "Schema evolution configuration of the destination",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute216004965b4234debd75a020() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the S3 bucket",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28568968b9783b22a21498bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Message for channel state",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2961d67dedb5148af1532062() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Code
+			"code": schemaAttribute79a88831db2f8518a2d3cda8(),
+			// Property: Message
+			"message": schemaAttribute28568968b9783b22a21498bc(),
+		}, /*END SCHEMA*/
+		Description: "Includes information about the channel state",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2dda1beaae78d955bda713a6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The CloudWatch log group for log delivery",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute355fc1b1399ed25a1d8d4017() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Compression codec for Iceberg table data files. Defaults to ZSTD.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3778757f92422eb9a9de7b84() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of an IAM role used by MSK to access the table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute391136ff4c15de7c4da58313() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Template for S3 key for output objects, used for partitioning",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e61335590d31afe08b13d8e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Optional 12-digit AWS account ID expected to own the S3 bucket",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f3dcfc944f6a094379a6583() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Optional prefix for output objects",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40fac5e8dbbaeedb51427072() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of Glue Schema Registry resource used for table schema",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41a24206eeeecd482a5fb65c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnableTableCreation
+			"enable_table_creation": schemaAttribute9aeb95a66a124479f5b90702(),
+		}, /*END SCHEMA*/
+		Description: "Table creation configuration of the destination",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute47462455f8ea71e07a6229f0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The destination database name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a14b2ae9be1c021aa19e5f0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the KMS key for encryption",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a41c5620aaa9327339e00df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the channel",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c54f68781ffabb4dc23a898() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the cluster",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53a1b14c152e8e10c84ba8c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The error output prefix",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute59c6b7113fb0247ae2f168ed() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeliveryStream
+			"delivery_stream": schemaAttribute06ece9018b48c2839ebb8f63(),
+			// Property: Enabled
+			"enabled": schemaAttribute847a47f434b0ecec34c7438f(),
+		}, /*END SCHEMA*/
+		Description: "Firehose log destination details",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5dd3380e6300751a549ccf9d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The warehouse location",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5fe5779f1e6e7dd62f1076e0() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether CloudWatch Logs logging is enabled",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60b4fa7df369cd5ec680382c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SourceName
+				"source_name": schemaAttributefc8987e1d11e889e59389d6a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Source list",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d634e4486fadb0bda41a309() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RecordConverter
+				"record_converter": schemaAttributea60034dd5022966ec6f5851a(),
+				// Property: RecordSchema
+				"record_schema": schemaAttribute0ad56f002bd58ab85f07e476(),
+				// Property: TopicArn
+				"topic_arn": schemaAttributeda052e05961de45bbb4bef78(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Topic configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79a88831db2f8518a2d3cda8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Code for channel state",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute819320f377983486042f6b3f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataFreshnessInSeconds
+			"data_freshness_in_seconds": schemaAttribute094c4fad3fdebbda563efc2e(),
+			// Property: DeadLetterQueueS3
+			"dead_letter_queue_s3": schemaAttributeec0719f328ab6b8fbc2b888b(),
+			// Property: ServiceExecutionRoleArn
+			"service_execution_role_arn": schemaAttribute90484155a574e0d6f20c01d1(),
+			// Property: Storage
+			"storage": schemaAttributea7290fc0b0e28fd8b5cb66e8(),
+		}, /*END SCHEMA*/
+		Description: "S3 destination configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute847a47f434b0ecec34c7438f() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether Firehose logging is enabled",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b6530fdfaa585d50fdb61a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Value converter for topic data",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ea8180198f66796bf1561a1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttribute4a14b2ae9be1c021aa19e5f0(),
+		}, /*END SCHEMA*/
+		Description: "Encryption configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90484155a574e0d6f20c01d1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of an IAM role used by MSK to access S3",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute98c2cb3c98bc2b7329f3d1dd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the S3 bucket for log delivery",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9aeb95a66a124479f5b90702() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether table creation is enabled",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ca49a5e23003a675da8f41a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AppendOnly
+			"append_only": schemaAttributea81d0906be9c86826036b3b8(),
+			// Property: Catalog
+			"catalog": schemaAttributeebaf1b8627a5ad21a255ecb3(),
+			// Property: CompressionType
+			"compression_type": schemaAttribute355fc1b1399ed25a1d8d4017(),
+			// Property: DataFreshnessInSeconds
+			"data_freshness_in_seconds": schemaAttribute094c4fad3fdebbda563efc2e(),
+			// Property: DeadLetterQueueS3
+			"dead_letter_queue_s3": schemaAttributeec0719f328ab6b8fbc2b888b(),
+			// Property: DestinationTableList
+			"destination_table_list": schemaAttributeca06b06f4e914cf943eb0b84(),
+			// Property: SchemaEvolution
+			"schema_evolution": schemaAttribute1368fb5cd2fb565bc1cd7ac9(),
+			// Property: ServiceExecutionRoleArn
+			"service_execution_role_arn": schemaAttribute3778757f92422eb9a9de7b84(),
+			// Property: TableCreation
+			"table_creation": schemaAttribute41a24206eeeecd482a5fb65c(),
+		}, /*END SCHEMA*/
+		Description: "Iceberg destination configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4709d52df711351a3208247() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the S3 bucket",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea60034dd5022966ec6f5851a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ValueConverter
+			"value_converter": schemaAttribute8b6530fdfaa585d50fdb61a5(),
+		}, /*END SCHEMA*/
+		Description: "Record converter configuration for a topic",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7290fc0b0e28fd8b5cb66e8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketArn
+			"bucket_arn": schemaAttribute216004965b4234debd75a020(),
+			// Property: CompressionType
+			"compression_type": schemaAttributeb3fa957e50050804a4a389db(),
+			// Property: ExpectedBucketOwner
+			"expected_bucket_owner": schemaAttribute3e61335590d31afe08b13d8e(),
+			// Property: OutputKeyTemplate
+			"output_key_template": schemaAttribute391136ff4c15de7c4da58313(),
+			// Property: OutputPrefix
+			"output_prefix": schemaAttribute3f3dcfc944f6a094379a6583(),
+			// Property: StorageClass
+			"storage_class": schemaAttributef8df6a3f8b72455f213ceb03(),
+		}, /*END SCHEMA*/
+		Description: "S3 storage configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7db74b390d58b520670da55() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Enabled
+			"enabled": schemaAttribute5fe5779f1e6e7dd62f1076e0(),
+			// Property: LogGroup
+			"log_group": schemaAttribute2dda1beaae78d955bda713a6(),
+		}, /*END SCHEMA*/
+		Description: "CloudWatch Logs log destination details",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea81d0906be9c86826036b3b8() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Append only mode",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3fa957e50050804a4a389db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "S3 compression type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba3d95d404bbb4e4a5a65635() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Partition strategy for MSK channel",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebab3f782ad1e4f4cdab9f30e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The destination table name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4c6dfa664cd3c4315162083() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether S3 logging is enabled",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca06b06f4e914cf943eb0b84() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DestinationDatabaseName
+				"destination_database_name": schemaAttribute47462455f8ea71e07a6229f0(),
+				// Property: DestinationTableName
+				"destination_table_name": schemaAttributebab3f782ad1e4f4cdab9f30e(),
+				// Property: PartitionSpec
+				"partition_spec": schemaAttributefd9f416103f2735b1312d0c3(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of destination tables",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed367acea255ccc0a54c78c9e() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Tags attached to the channel",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda052e05961de45bbb4bef78() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) that uniquely identifies the topic",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda78eca6a0b0aa089622cd72() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Status of a channel resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2d20af33e102df575781738() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Bucket
+			"bucket": schemaAttribute98c2cb3c98bc2b7329f3d1dd(),
+			// Property: Enabled
+			"enabled": schemaAttributec4c6dfa664cd3c4315162083(),
+			// Property: Prefix
+			"prefix": schemaAttribute07cbc451385daa828e6de03d(),
+		}, /*END SCHEMA*/
+		Description: "S3 log destination details",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee445ebc99b8b6606fb032f02() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) that uniquely identifies the channel",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6b076fcbf96ce97909fe3a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the catalog",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeebaf1b8627a5ad21a255ecb3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CatalogArn
+			"catalog_arn": schemaAttributee6b076fcbf96ce97909fe3a0(),
+			// Property: WarehouseLocation
+			"warehouse_location": schemaAttribute5dd3380e6300751a549ccf9d(),
+		}, /*END SCHEMA*/
+		Description: "Catalog configuration of the destination",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec0719f328ab6b8fbc2b888b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketArn
+			"bucket_arn": schemaAttributea4709d52df711351a3208247(),
+			// Property: ErrorOutputPrefix
+			"error_output_prefix": schemaAttribute53a1b14c152e8e10c84ba8c4(),
+			// Property: ExpectedBucketOwner
+			"expected_bucket_owner": schemaAttributeecbc8afb8de092b3dc33ec11(),
+		}, /*END SCHEMA*/
+		Description: "Dead letter queue S3 configuration of the destination",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeecbc8afb8de092b3dc33ec11() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Optional 12-digit AWS account ID expected to own the dead-letter S3 bucket",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8df6a3f8b72455f213ceb03() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "S3 storage class",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc8987e1d11e889e59389d6a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Source name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd9f416103f2735b1312d0c3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PartitionStrategy
+			"partition_strategy": schemaAttributeba3d95d404bbb4e4a5a65635(),
+			// Property: SourceList
+			"source_list": schemaAttribute60b4fa7df369cd5ec680382c(),
+		}, /*END SCHEMA*/
+		Description: "Partition specification",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_msk_channel", channelDataSource)
 }
@@ -30,10 +590,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) that uniquely identifies the channel",
 		//	  "type": "string"
 		//	}
-		"channel_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) that uniquely identifies the channel",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"channel_arn": schemaAttributee445ebc99b8b6606fb032f02(),
 		// Property: ChannelName
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +601,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9._-]+$",
 		//	  "type": "string"
 		//	}
-		"channel_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of the channel",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"channel_name": schemaAttribute4a41c5620aaa9327339e00df(),
 		// Property: ClusterArn
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +610,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the cluster",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cluster_arn": schemaAttribute4c54f68781ffabb4dc23a898(),
 		// Property: EncryptionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -78,17 +629,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KmsKeyArn
-				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the KMS key for encryption",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Encryption configuration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"encryption_configuration": schemaAttribute8ea8180198f66796bf1561a1(),
 		// Property: IcebergDestinationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -258,140 +799,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"iceberg_destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AppendOnly
-				"append_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Append only mode",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Catalog
-				"catalog": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CatalogArn
-						"catalog_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the catalog",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: WarehouseLocation
-						"warehouse_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The warehouse location",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Catalog configuration of the destination",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CompressionType
-				"compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Compression codec for Iceberg table data files. Defaults to ZSTD.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DataFreshnessInSeconds
-				"data_freshness_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Data freshness in seconds",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DeadLetterQueueS3
-				"dead_letter_queue_s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BucketArn
-						"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the S3 bucket",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ErrorOutputPrefix
-						"error_output_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The error output prefix",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ExpectedBucketOwner
-						"expected_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Optional 12-digit AWS account ID expected to own the dead-letter S3 bucket",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Dead letter queue S3 configuration of the destination",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DestinationTableList
-				"destination_table_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DestinationDatabaseName
-							"destination_database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The destination database name",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: DestinationTableName
-							"destination_table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The destination table name",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: PartitionSpec
-							"partition_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: PartitionStrategy
-									"partition_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Partition strategy for MSK channel",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: SourceList
-									"source_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: SourceName
-												"source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Source name",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "Source list",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Partition specification",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "List of destination tables",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SchemaEvolution
-				"schema_evolution": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: EnableSchemaEvolution
-						"enable_schema_evolution": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Whether schema evolution is enabled",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Schema evolution configuration of the destination",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServiceExecutionRoleArn
-				"service_execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of an IAM role used by MSK to access the table",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TableCreation
-				"table_creation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: EnableTableCreation
-						"enable_table_creation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Whether table creation is enabled",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Table creation configuration of the destination",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Iceberg destination configuration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"iceberg_destination_configuration": schemaAttribute9ca49a5e23003a675da8f41a(),
 		// Property: LoggingInfo
 		// CloudFormation resource type schema:
 		//
@@ -460,68 +868,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"logging_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CloudWatchLogs
-				"cloudwatch_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Enabled
-						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Whether CloudWatch Logs logging is enabled",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: LogGroup
-						"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The CloudWatch log group for log delivery",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "CloudWatch Logs log destination details",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Firehose
-				"firehose": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DeliveryStream
-						"delivery_stream": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Firehose delivery stream for log delivery",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Enabled
-						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Whether Firehose logging is enabled",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Firehose log destination details",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: S3
-				"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Bucket
-						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the S3 bucket for log delivery",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Enabled
-						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Whether S3 logging is enabled",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Prefix
-						"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The S3 prefix for log delivery",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "S3 log destination details",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Log configuration details for Channel",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"logging_info": schemaAttribute0fa26f5bb5e1ace298274817(),
 		// Property: S3DestinationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -619,81 +966,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"s3_destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DataFreshnessInSeconds
-				"data_freshness_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Data freshness in seconds",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DeadLetterQueueS3
-				"dead_letter_queue_s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BucketArn
-						"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the S3 bucket",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ErrorOutputPrefix
-						"error_output_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The error output prefix",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ExpectedBucketOwner
-						"expected_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Optional 12-digit AWS account ID expected to own the dead-letter S3 bucket",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Dead letter queue S3 configuration of the destination",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServiceExecutionRoleArn
-				"service_execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of an IAM role used by MSK to access S3",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Storage
-				"storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BucketArn
-						"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "ARN of the S3 bucket",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: CompressionType
-						"compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "S3 compression type",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ExpectedBucketOwner
-						"expected_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Optional 12-digit AWS account ID expected to own the S3 bucket",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: OutputKeyTemplate
-						"output_key_template": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Template for S3 key for output objects, used for partitioning",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: OutputPrefix
-						"output_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Optional prefix for output objects",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: StorageClass
-						"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "S3 storage class",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "S3 storage configuration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "S3 destination configuration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"s3_destination_configuration": schemaAttribute819320f377983486042f6b3f(),
 		// Property: StateInfo
 		// CloudFormation resource type schema:
 		//
@@ -712,22 +985,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"state_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Code
-				"code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Code for channel state",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Message
-				"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Message for channel state",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Includes information about the channel state",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state_info": schemaAttribute2961d67dedb5148af1532062(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -744,10 +1002,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Status of a channel resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributeda78eca6a0b0aa089622cd72(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -761,12 +1016,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Tags attached to the channel",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributed367acea255ccc0a54c78c9e(),
 		// Property: TopicConfigurationList
 		// CloudFormation resource type schema:
 		//
@@ -826,43 +1076,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"topic_configuration_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: RecordConverter
-					"record_converter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ValueConverter
-							"value_converter": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Value converter for topic data",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Record converter configuration for a topic",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: RecordSchema
-					"record_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: GsrArn
-							"gsr_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "ARN of Glue Schema Registry resource used for table schema",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Record schema configuration for a topic",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: TopicArn
-					"topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Amazon Resource Name (ARN) that uniquely identifies the topic",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Topic configuration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"topic_configuration_list": schemaAttribute6d634e4486fadb0bda41a309(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,284 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0e48c4e9157c375c26036803() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CriteriaList
+			"criteria_list": schemaAttribute64010cac77d9ccf74264812d(),
+		}, /*END SCHEMA*/
+		Description: "The criteria that determine when and how a job abort takes place.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28d12914ba63ca6ecdbf6418() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of job execution failures that can initiate a job abort.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f802db128436621f3c85c17() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum percentage of job execution failures that must occur to initiate the job abort.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute345bee885f2e78ba7d3ff4dc() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of things that will be notified of a pending job, per minute. This parameter allows you to create a staged rollout.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34eb4f55cc9493e91ffb46d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag's value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d65aff658ebada3722d0c04() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute592832351c03ed798e7b621d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: NumberOfNotifiedThings
+			"number_of_notified_things": schemaAttributebfd949c066326449e0432a0d(),
+			// Property: NumberOfSucceededThings
+			"number_of_succeeded_things": schemaAttributebfd949c066326449e0432a0d(),
+		}, /*END SCHEMA*/
+		Description: "The criteria to initiate the increase in rate of rollout for a job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6210b1f4041ec8959e311dae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An S3 link to the job document to use in the template. Required if you don't specify a value for document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64010cac77d9ccf74264812d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Action
+				"action": schemaAttributefa44f7a01f8fbd9ca9f88122(),
+				// Property: FailureType
+				"failure_type": schemaAttribute28d12914ba63ca6ecdbf6418(),
+				// Property: MinNumberOfExecutedThings
+				"min_number_of_executed_things": schemaAttributec25e08ec288f36d0c66334dc(),
+				// Property: ThresholdPercentage
+				"threshold_percentage": schemaAttribute2f802db128436621f3c85c17(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute644fac81a97e6922f8057a1f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "How number (in seconds) pre-signed URLs are valid.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d6b7fe5fa598ea96e6ead54() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the amount of time, in minutes, this device has to finish execution of this job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7131bedc89553622e68d7fc4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7198c3b34886df0326189e87() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BaseRatePerMinute
+			"base_rate_per_minute": schemaAttributec799aea0d233c386bd850570(),
+			// Property: IncrementFactor
+			"increment_factor": schemaAttributeac9b7da309beaa8783b0f3da(),
+			// Property: RateIncreaseCriteria
+			"rate_increase_criteria": schemaAttribute592832351c03ed798e7b621d(),
+		}, /*END SCHEMA*/
+		Description: "The rate of increase for a job rollout. This parameter allows you to define an exponential rate for a job rollout.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c82e2e9da22b79b6428d657() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The job document. Required if you don't specify a value for documentSource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95149a817605ffd7a109c5dc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea6ed47920d24c0f36b2f523b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FailureType
+				"failure_type": schemaAttribute7131bedc89553622e68d7fc4(),
+				// Property: NumberOfRetries
+				"number_of_retries": schemaAttributebfd949c066326449e0432a0d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea92abc2373e2b5460d2c1965() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributecb33fddec7577548b21add0e(),
+				// Property: Value
+				"value": schemaAttribute34eb4f55cc9493e91ffb46d0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Metadata that can be used to manage the JobTemplate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab436b788d2f82803543fc21() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InProgressTimeoutInMinutes
+			"in_progress_timeout_in_minutes": schemaAttribute6d6b7fe5fa598ea96e6ead54(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the amount of time each device has to finish its execution of the job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac9b7da309beaa8783b0f3da() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The exponential factor to increase the rate of rollout for a job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb24d18989bd1e9e9975b9d05() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ExpiresInSec
+			"expires_in_sec": schemaAttribute644fac81a97e6922f8057a1f(),
+			// Property: RoleArn
+			"role_arn": schemaAttribute95149a817605ffd7a109c5dc(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for pre-signed S3 URLs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebfd949c066326449e0432a0d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec25e08ec288f36d0c66334dc() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum number of things which must receive job execution notifications before the job can be aborted.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec470c5b8e5fae97b492ab9bd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RetryCriteriaList
+			"retry_criteria_list": schemaAttributea6ed47920d24c0f36b2f523b(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6464f03546f17694be0d0bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the Job Template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec799aea0d233c386bd850570() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum number of things that will be notified of a pending job, per minute at the start of job rollout. This parameter allows you to define the initial rate of rollout.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb33fddec7577548b21add0e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag's key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6696d2e00738b3e77879dfa() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DurationInMinutes
+				"duration_in_minutes": schemaAttributebfd949c066326449e0432a0d(),
+				// Property: StartTime
+				"start_time": schemaAttribute7131bedc89553622e68d7fc4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeddc3e6f6266cce37b907387f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ExponentialRolloutRate
+			"exponential_rollout_rate": schemaAttribute7198c3b34886df0326189e87(),
+			// Property: MaximumPerMinute
+			"maximum_per_minute": schemaAttribute345bee885f2e78ba7d3ff4dc(),
+		}, /*END SCHEMA*/
+		Description: "Allows you to create a staged rollout of a job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa44f7a01f8fbd9ca9f88122() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of job action to take to initiate the job abort.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefda307be286780519c4280a1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Optional for copying a JobTemplate from a pre-existing Job configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iot_job_template", jobTemplateDataSource)
 }
@@ -81,49 +359,14 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"abort_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CriteriaList
-				"criteria_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Action
-							"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The type of job action to take to initiate the job abort.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: FailureType
-							"failure_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The type of job execution failures that can initiate a job abort.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: MinNumberOfExecutedThings
-							"min_number_of_executed_things": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The minimum number of things which must receive job execution notifications before the job can be aborted.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ThresholdPercentage
-							"threshold_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The minimum percentage of job execution failures that must occur to initiate the job abort.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The criteria that determine when and how a job abort takes place.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"abort_config": schemaAttribute0e48c4e9157c375c26036803(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute7131bedc89553622e68d7fc4(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -133,10 +376,7 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[^\\p{C}]+",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the Job Template.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributec6464f03546f17694be0d0bb(),
 		// Property: DestinationPackageVersions
 		// CloudFormation resource type schema:
 		//
@@ -150,10 +390,7 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"destination_package_versions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"destination_package_versions": schemaAttribute3d65aff658ebada3722d0c04(),
 		// Property: Document
 		// CloudFormation resource type schema:
 		//
@@ -162,10 +399,7 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 32768,
 		//	  "type": "string"
 		//	}
-		"document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The job document. Required if you don't specify a value for documentSource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"document": schemaAttribute8c82e2e9da22b79b6428d657(),
 		// Property: DocumentSource
 		// CloudFormation resource type schema:
 		//
@@ -175,10 +409,7 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"document_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An S3 link to the job document to use in the template. Required if you don't specify a value for document.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"document_source": schemaAttribute6210b1f4041ec8959e311dae(),
 		// Property: JobArn
 		// CloudFormation resource type schema:
 		//
@@ -186,10 +417,7 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Optional for copying a JobTemplate from a pre-existing Job configuration.",
 		//	  "type": "string"
 		//	}
-		"job_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Optional for copying a JobTemplate from a pre-existing Job configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"job_arn": schemaAttributefda307be286780519c4280a1(),
 		// Property: JobExecutionsRetryConfig
 		// CloudFormation resource type schema:
 		//
@@ -225,27 +453,7 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"job_executions_retry_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RetryCriteriaList
-				"retry_criteria_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: FailureType
-							"failure_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: NumberOfRetries
-							"number_of_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"job_executions_retry_config": schemaAttributec470c5b8e5fae97b492ab9bd(),
 		// Property: JobExecutionsRolloutConfig
 		// CloudFormation resource type schema:
 		//
@@ -299,49 +507,7 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"job_executions_rollout_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ExponentialRolloutRate
-				"exponential_rollout_rate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BaseRatePerMinute
-						"base_rate_per_minute": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The minimum number of things that will be notified of a pending job, per minute at the start of job rollout. This parameter allows you to define the initial rate of rollout.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: IncrementFactor
-						"increment_factor": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "The exponential factor to increase the rate of rollout for a job.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RateIncreaseCriteria
-						"rate_increase_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: NumberOfNotifiedThings
-								"number_of_notified_things": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: NumberOfSucceededThings
-								"number_of_succeeded_things": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The criteria to initiate the increase in rate of rollout for a job.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The rate of increase for a job rollout. This parameter allows you to define an exponential rate for a job rollout.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaximumPerMinute
-				"maximum_per_minute": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum number of things that will be notified of a pending job, per minute. This parameter allows you to create a staged rollout.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Allows you to create a staged rollout of a job.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"job_executions_rollout_config": schemaAttributeddc3e6f6266cce37b907387f(),
 		// Property: JobTemplateId
 		// CloudFormation resource type schema:
 		//
@@ -351,9 +517,7 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9_-]+",
 		//	  "type": "string"
 		//	}
-		"job_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"job_template_id": schemaAttribute7131bedc89553622e68d7fc4(),
 		// Property: MaintenanceWindows
 		// CloudFormation resource type schema:
 		//
@@ -378,21 +542,7 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"maintenance_windows": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DurationInMinutes
-					"duration_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: StartTime
-					"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"maintenance_windows": schemaAttributed6696d2e00738b3e77879dfa(),
 		// Property: PresignedUrlConfig
 		// CloudFormation resource type schema:
 		//
@@ -418,22 +568,7 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"presigned_url_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ExpiresInSec
-				"expires_in_sec": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "How number (in seconds) pre-signed URLs are valid.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RoleArn
-				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration for pre-signed S3 URLs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"presigned_url_config": schemaAttributeb24d18989bd1e9e9975b9d05(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -467,24 +602,7 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag's key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag's value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Metadata that can be used to manage the JobTemplate.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributea92abc2373e2b5460d2c1965(),
 		// Property: TimeoutConfig
 		// CloudFormation resource type schema:
 		//
@@ -504,17 +622,7 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"timeout_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: InProgressTimeoutInMinutes
-				"in_progress_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the amount of time, in minutes, this device has to finish execution of this job.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies the amount of time each device has to finish its execution of the job.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"timeout_config": schemaAttributeab436b788d2f82803543fc21(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

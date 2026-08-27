@@ -15,6 +15,177 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute026f993bc388c9fb0276a9c5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A set of custom game session properties, formatted as a single string value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute041bd13fefc9a368600ab12b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether this matchmaking configuration is being used with Amazon GameLift hosting or as a standalone matchmaking solution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f89cb703a9cc2e419662411() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The game property value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute369ba6571db4a802a8afd078() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute46a0d75a4b28425fdf435cf6() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A flag that indicates whether a match that was created with this configuration must be accepted by the matched players",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64c8532c79c7bcdf64f40fba() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee5a15dc04c5535050338983d(),
+				// Property: Value
+				"value": schemaAttribute2f89cb703a9cc2e419662411(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A set of custom properties for a game session, formatted as key:value pairs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7231154242ab325410dadaa5() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift game session queue resource and uniquely identifies it.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7876dab2ce32f56e5e5b194c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of player slots in a match to keep open for future players.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78cd9e8515d0145504115dcc() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute369ba6571db4a802a8afd078(),
+				// Property: Value
+				"value": schemaAttributeac27819d32c620c29a5faddf(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7992c22371379dc73ae66ee6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An SNS topic ARN that is set up to receive matchmaking notifications.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute88860fecade9b242f4a7719b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the matchmaking rule set to use with this configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fd32e7d0abc5dfe20155b1a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift matchmaking configuration resource and uniquely identifies it.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea41ddf600efe1787f11d59fc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) associated with the GameLift matchmaking rule set resource that this configuration uses.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa94d237e1474f8cd1a13d3d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum duration, in seconds, that a matchmaking ticket can remain in process before timing out.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac27819d32c620c29a5faddf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac79ce845f5733dfb4cf9ee2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The method used to backfill game sessions created with this matchmaking configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeafdf353a47ed0c87192a00c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A time stamp indicating when this data object was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed72a46385da575789d9f1cde() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A descriptive label that is associated with matchmaking configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5a15dc04c5535050338983d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The game property identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee60de6491411d2d275ccd240() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the matchmaking configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0a8f827f65a701ed566aee4() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The length of time (in seconds) to wait for players to accept a proposed match, if acceptance is required.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb16f78b500058d460953a1d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Information to attach to all events related to the matchmaking configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_gamelift_matchmaking_configuration", matchmakingConfigurationDataSource)
 }
@@ -30,10 +201,7 @@ func matchmakingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "A flag that indicates whether a match that was created with this configuration must be accepted by the matched players",
 		//	  "type": "boolean"
 		//	}
-		"acceptance_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A flag that indicates whether a match that was created with this configuration must be accepted by the matched players",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"acceptance_required": schemaAttribute46a0d75a4b28425fdf435cf6(),
 		// Property: AcceptanceTimeoutSeconds
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +211,7 @@ func matchmakingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"acceptance_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The length of time (in seconds) to wait for players to accept a proposed match, if acceptance is required.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"acceptance_timeout_seconds": schemaAttributef0a8f827f65a701ed566aee4(),
 		// Property: AdditionalPlayerCount
 		// CloudFormation resource type schema:
 		//
@@ -55,10 +220,7 @@ func matchmakingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"additional_player_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of player slots in a match to keep open for future players.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"additional_player_count": schemaAttribute7876dab2ce32f56e5e5b194c(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -67,10 +229,7 @@ func matchmakingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^arn:.*:matchmakingconfiguration\\/[a-zA-Z0-9-\\.]*",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift matchmaking configuration resource and uniquely identifies it.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute9fd32e7d0abc5dfe20155b1a(),
 		// Property: BackfillMode
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +241,7 @@ func matchmakingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"backfill_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The method used to backfill game sessions created with this matchmaking configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"backfill_mode": schemaAttributeac79ce845f5733dfb4cf9ee2(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -93,10 +249,7 @@ func matchmakingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "A time stamp indicating when this data object was created.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A time stamp indicating when this data object was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttributeafdf353a47ed0c87192a00c4(),
 		// Property: CustomEventData
 		// CloudFormation resource type schema:
 		//
@@ -106,10 +259,7 @@ func matchmakingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"custom_event_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Information to attach to all events related to the matchmaking configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"custom_event_data": schemaAttributefb16f78b500058d460953a1d(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -119,10 +269,7 @@ func matchmakingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A descriptive label that is associated with matchmaking configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributed72a46385da575789d9f1cde(),
 		// Property: FlexMatchMode
 		// CloudFormation resource type schema:
 		//
@@ -134,10 +281,7 @@ func matchmakingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"flex_match_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether this matchmaking configuration is being used with Amazon GameLift hosting or as a standalone matchmaking solution.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"flex_match_mode": schemaAttribute041bd13fefc9a368600ab12b(),
 		// Property: GameProperties
 		// CloudFormation resource type schema:
 		//
@@ -169,24 +313,7 @@ func matchmakingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"game_properties": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The game property identifier.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The game property value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A set of custom properties for a game session, formatted as key:value pairs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"game_properties": schemaAttribute64c8532c79c7bcdf64f40fba(),
 		// Property: GameSessionData
 		// CloudFormation resource type schema:
 		//
@@ -196,10 +323,7 @@ func matchmakingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"game_session_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A set of custom game session properties, formatted as a single string value.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"game_session_data": schemaAttribute026f993bc388c9fb0276a9c5(),
 		// Property: GameSessionQueueArns
 		// CloudFormation resource type schema:
 		//
@@ -214,11 +338,7 @@ func matchmakingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  },
 		//	  "type": "array"
 		//	}
-		"game_session_queue_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift game session queue resource and uniquely identifies it.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"game_session_queue_arns": schemaAttribute7231154242ab325410dadaa5(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -228,10 +348,7 @@ func matchmakingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "[a-zA-Z0-9-\\.]*",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for the matchmaking configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributee60de6491411d2d275ccd240(),
 		// Property: NotificationTarget
 		// CloudFormation resource type schema:
 		//
@@ -242,10 +359,7 @@ func matchmakingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "[a-zA-Z0-9:_/-]*(.fifo)?",
 		//	  "type": "string"
 		//	}
-		"notification_target": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An SNS topic ARN that is set up to receive matchmaking notifications.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"notification_target": schemaAttribute7992c22371379dc73ae66ee6(),
 		// Property: RequestTimeoutSeconds
 		// CloudFormation resource type schema:
 		//
@@ -255,10 +369,7 @@ func matchmakingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"request_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum duration, in seconds, that a matchmaking ticket can remain in process before timing out.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"request_timeout_seconds": schemaAttributeaa94d237e1474f8cd1a13d3d(),
 		// Property: RuleSetArn
 		// CloudFormation resource type schema:
 		//
@@ -267,10 +378,7 @@ func matchmakingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^arn:.*:matchmakingruleset\\/[a-zA-Z0-9-\\.]*",
 		//	  "type": "string"
 		//	}
-		"rule_set_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) associated with the GameLift matchmaking rule set resource that this configuration uses.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rule_set_arn": schemaAttributea41ddf600efe1787f11d59fc(),
 		// Property: RuleSetName
 		// CloudFormation resource type schema:
 		//
@@ -280,10 +388,7 @@ func matchmakingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "[a-zA-Z0-9-\\.]*",
 		//	  "type": "string"
 		//	}
-		"rule_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for the matchmaking rule set to use with this configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rule_set_name": schemaAttribute88860fecade9b242f4a7719b(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -317,24 +422,7 @@ func matchmakingConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute78cd9e8515d0145504115dcc(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

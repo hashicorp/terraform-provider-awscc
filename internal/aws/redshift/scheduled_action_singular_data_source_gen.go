@@ -15,6 +15,144 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute12a975230ca35b0ca0bb3bb0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClusterIdentifier
+			"cluster_identifier": schemaAttributef2903d10f03b3a1896448ad7(),
+		}, /*END SCHEMA*/
+		Description: "Describes a resume cluster operation. For example, a scheduled action to run the `ResumeCluster` API operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute175284facde11a3edd8c126b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of the scheduled action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2368a517451c9b114586ee05() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2afff94324af9ad0b5e56be0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of times when the scheduled action will run.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute50b397632eb182b02d893052() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The schedule in `at( )` or `cron( )` format.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute546d08d4d5f01e18507e2d9d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute558969213594f3ca5178793b() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "If true, the schedule is enabled. If false, the scheduled action does not trigger.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a97dd0d86cc7dfde93a1f63() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClusterIdentifier
+			"cluster_identifier": schemaAttributef2903d10f03b3a1896448ad7(),
+		}, /*END SCHEMA*/
+		Description: "Describes a pause cluster operation. For example, a scheduled action to run the `PauseCluster` API operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute983aa93e367aea6f933ab733() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the scheduled action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7f7f5e6b805c9306d6fecc0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Classic
+			"classic": schemaAttributed5ff0cc39cb95d843ed63cc0(),
+			// Property: ClusterIdentifier
+			"cluster_identifier": schemaAttributef2903d10f03b3a1896448ad7(),
+			// Property: ClusterType
+			"cluster_type": schemaAttributef2903d10f03b3a1896448ad7(),
+			// Property: NodeType
+			"node_type": schemaAttributef2903d10f03b3a1896448ad7(),
+			// Property: NumberOfNodes
+			"number_of_nodes": schemaAttribute546d08d4d5f01e18507e2d9d(),
+		}, /*END SCHEMA*/
+		Description: "Describes a resize cluster operation. For example, a scheduled action to run the `ResizeCluster` API operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5ff0cc39cb95d843ed63cc0() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea8f7ca25f8d112e7e49393f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PauseCluster
+			"pause_cluster": schemaAttribute5a97dd0d86cc7dfde93a1f63(),
+			// Property: ResizeCluster
+			"resize_cluster": schemaAttributec7f7f5e6b805c9306d6fecc0(),
+			// Property: ResumeCluster
+			"resume_cluster": schemaAttribute12a975230ca35b0ca0bb3bb0(),
+		}, /*END SCHEMA*/
+		Description: "A JSON format string of the Amazon Redshift API operation with input parameters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed543efd19dba7b0d75196e2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the scheduled action. The name must be unique within an account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2903d10f03b3a1896448ad7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefab158028073005f55bde4cc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IAM role to assume to run the target action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefe0b48e12bfb48c0912beeac() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_redshift_scheduled_action", scheduledActionDataSource)
 }
@@ -30,10 +168,7 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "If true, the schedule is enabled. If false, the scheduled action does not trigger.",
 		//	  "type": "boolean"
 		//	}
-		"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "If true, the schedule is enabled. If false, the scheduled action does not trigger.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enable": schemaAttribute558969213594f3ca5178793b(),
 		// Property: EndTime
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +176,7 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger.",
 		//	  "type": "string"
 		//	}
-		"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"end_time": schemaAttributefe0b48e12bfb48c0912beeac(),
 		// Property: IamRole
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +184,7 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The IAM role to assume to run the target action.",
 		//	  "type": "string"
 		//	}
-		"iam_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IAM role to assume to run the target action.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"iam_role": schemaAttributefab158028073005f55bde4cc(),
 		// Property: NextInvocations
 		// CloudFormation resource type schema:
 		//
@@ -67,11 +196,7 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "array"
 		//	}
-		"next_invocations": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "List of times when the scheduled action will run.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"next_invocations": schemaAttribute2afff94324af9ad0b5e56be0(),
 		// Property: Schedule
 		// CloudFormation resource type schema:
 		//
@@ -79,10 +204,7 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The schedule in `at( )` or `cron( )` format.",
 		//	  "type": "string"
 		//	}
-		"schedule": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The schedule in `at( )` or `cron( )` format.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schedule": schemaAttribute50b397632eb182b02d893052(),
 		// Property: ScheduledActionDescription
 		// CloudFormation resource type schema:
 		//
@@ -90,10 +212,7 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The description of the scheduled action.",
 		//	  "type": "string"
 		//	}
-		"scheduled_action_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the scheduled action.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scheduled_action_description": schemaAttribute983aa93e367aea6f933ab733(),
 		// Property: ScheduledActionName
 		// CloudFormation resource type schema:
 		//
@@ -101,10 +220,7 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The name of the scheduled action. The name must be unique within an account.",
 		//	  "type": "string"
 		//	}
-		"scheduled_action_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the scheduled action. The name must be unique within an account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scheduled_action_name": schemaAttributeed543efd19dba7b0d75196e2(),
 		// Property: StartTime
 		// CloudFormation resource type schema:
 		//
@@ -112,10 +228,7 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger.",
 		//	  "type": "string"
 		//	}
-		"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"start_time": schemaAttribute2368a517451c9b114586ee05(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -127,10 +240,7 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The state of the scheduled action.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttribute175284facde11a3edd8c126b(),
 		// Property: TargetAction
 		// CloudFormation resource type schema:
 		//
@@ -191,61 +301,7 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"target_action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PauseCluster
-				"pause_cluster": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ClusterIdentifier
-						"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Describes a pause cluster operation. For example, a scheduled action to run the `PauseCluster` API operation.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResizeCluster
-				"resize_cluster": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Classic
-						"classic": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ClusterIdentifier
-						"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ClusterType
-						"cluster_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: NodeType
-						"node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: NumberOfNodes
-						"number_of_nodes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Describes a resize cluster operation. For example, a scheduled action to run the `ResizeCluster` API operation.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResumeCluster
-				"resume_cluster": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ClusterIdentifier
-						"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Describes a resume cluster operation. For example, a scheduled action to run the `ResumeCluster` API operation.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A JSON format string of the Amazon Redshift API operation with input parameters.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_action": schemaAttributeea8f7ca25f8d112e7e49393f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

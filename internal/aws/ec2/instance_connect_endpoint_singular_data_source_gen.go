@@ -15,6 +15,180 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute16bb77d7708859d98abe699a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Availability Zone of the EC2 Instance Connect Endpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ac7d3d0091fa784a30efb9c() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether your client's IP address is preserved as the source when you connect to a resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25839eb0051b00a71d18e592() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The ID of the elastic network interface that Amazon EC2 automatically created when creating the EC2 Instance Connect Endpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25999db6c967063d0f742206() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27fd897a2a2e4c784eae5a87() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The DNS name of the EC2 Instance Connect Endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2cb6c57bc1200ec8d5d62d5d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Availability Zone of the EC2 Instance Connect Endpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e61612e80a1e9353fa3aa9c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the EC2 Instance Connect Endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a996afe9cb698d2d09edfff() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The security groups associated with the endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6eabc3822921203669b8c868() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Dualstack
+			"dualstack": schemaAttribute93fac799dea2d6feab07a007(),
+			// Property: Ipv4
+			"ipv_4": schemaAttributeb3ec79244d0f7e3309cded23(),
+		}, /*END SCHEMA*/
+		Description: "The public DNS names of the endpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bc92dc7fbcbac4eeb703eaa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date and time that the EC2 Instance Connect Endpoint was created",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82c9037caf4febb85b5af7bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The client token of the instance connect endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93fac799dea2d6feab07a007() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DnsName
+			"dns_name": schemaAttribute27fd897a2a2e4c784eae5a87(),
+			// Property: FipsDnsName
+			"fips_dns_name": schemaAttributeef99a93102cada6c0eef1454(),
+		}, /*END SCHEMA*/
+		Description: "The dualstack DNS name of the EC2 Instance Connect Endpoint. A dualstack DNS name supports connections from both IPv4 and IPv6 clients.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea16863e85f33d24bc4a2bf05() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute25999db6c967063d0f742206(),
+				// Property: Value
+				"value": schemaAttribute25999db6c967063d0f742206(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags assigned to the EC2 Instance Connect Endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea75e05cb62a0b3b13412b9ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the subnet in which the EC2 Instance Connect Endpoint was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb271ebbda8684933dc6b0260() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The message for the current state of the EC2 Instance Connect Endpoint. Can include a failure message",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3ec79244d0f7e3309cded23() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DnsName
+			"dns_name": schemaAttribute27fd897a2a2e4c784eae5a87(),
+			// Property: FipsDnsName
+			"fips_dns_name": schemaAttributeef99a93102cada6c0eef1454(),
+		}, /*END SCHEMA*/
+		Description: "The IPv4-only DNS name of the EC2 Instance Connect Endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4403736baf2b85567c5e2c0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the EC2 Instance Connect Endpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed20a7e5687a0c0192a36a879() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the AWS account that created the EC2 Instance Connect Endpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedbceb57c4d2e5db6f62d12c0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current state of the EC2 Instance Connect Endpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8d4dc18707f2a0315fafa9d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the VPC in which the EC2 Instance Connect Endpoint was created",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef99a93102cada6c0eef1454() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Federal Information Processing Standards (FIPS) compliant DNS name of the EC2 Instance Connect Endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_instance_connect_endpoint", instanceConnectEndpointDataSource)
 }
@@ -30,10 +204,7 @@ func instanceConnectEndpointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The Availability Zone of the EC2 Instance Connect Endpoint",
 		//	  "type": "string"
 		//	}
-		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Availability Zone of the EC2 Instance Connect Endpoint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"availability_zone": schemaAttribute16bb77d7708859d98abe699a(),
 		// Property: AvailabilityZoneId
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +212,7 @@ func instanceConnectEndpointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The ID of the Availability Zone of the EC2 Instance Connect Endpoint",
 		//	  "type": "string"
 		//	}
-		"availability_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Availability Zone of the EC2 Instance Connect Endpoint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"availability_zone_id": schemaAttribute2cb6c57bc1200ec8d5d62d5d(),
 		// Property: ClientToken
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +220,7 @@ func instanceConnectEndpointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The client token of the instance connect endpoint.",
 		//	  "type": "string"
 		//	}
-		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The client token of the instance connect endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"client_token": schemaAttribute82c9037caf4febb85b5af7bb(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +228,7 @@ func instanceConnectEndpointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The date and time that the EC2 Instance Connect Endpoint was created",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date and time that the EC2 Instance Connect Endpoint was created",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute7bc92dc7fbcbac4eeb703eaa(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +236,7 @@ func instanceConnectEndpointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The ID of the EC2 Instance Connect Endpoint.",
 		//	  "type": "string"
 		//	}
-		"instance_connect_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the EC2 Instance Connect Endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_connect_endpoint_id": schemaAttribute2e61612e80a1e9353fa3aa9c(),
 		// Property: InstanceConnectEndpointArn
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +244,7 @@ func instanceConnectEndpointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The Amazon Resource Name (ARN) of the EC2 Instance Connect Endpoint",
 		//	  "type": "string"
 		//	}
-		"instance_connect_endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the EC2 Instance Connect Endpoint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_connect_endpoint_arn": schemaAttributeb4403736baf2b85567c5e2c0(),
 		// Property: NetworkInterfaceIds
 		// CloudFormation resource type schema:
 		//
@@ -100,11 +256,7 @@ func instanceConnectEndpointDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "array"
 		//	}
-		"network_interface_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The ID of the elastic network interface that Amazon EC2 automatically created when creating the EC2 Instance Connect Endpoint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_interface_ids": schemaAttribute25839eb0051b00a71d18e592(),
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -112,10 +264,7 @@ func instanceConnectEndpointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The ID of the AWS account that created the EC2 Instance Connect Endpoint",
 		//	  "type": "string"
 		//	}
-		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the AWS account that created the EC2 Instance Connect Endpoint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"owner_id": schemaAttributed20a7e5687a0c0192a36a879(),
 		// Property: PreserveClientIp
 		// CloudFormation resource type schema:
 		//
@@ -123,10 +272,7 @@ func instanceConnectEndpointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "Indicates whether your client's IP address is preserved as the source when you connect to a resource.",
 		//	  "type": "boolean"
 		//	}
-		"preserve_client_ip": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether your client's IP address is preserved as the source when you connect to a resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"preserve_client_ip": schemaAttribute1ac7d3d0091fa784a30efb9c(),
 		// Property: PublicDnsNames
 		// CloudFormation resource type schema:
 		//
@@ -167,46 +313,7 @@ func instanceConnectEndpointDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "object"
 		//	}
-		"public_dns_names": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Dualstack
-				"dualstack": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DnsName
-						"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The DNS name of the EC2 Instance Connect Endpoint.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: FipsDnsName
-						"fips_dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Federal Information Processing Standards (FIPS) compliant DNS name of the EC2 Instance Connect Endpoint.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The dualstack DNS name of the EC2 Instance Connect Endpoint. A dualstack DNS name supports connections from both IPv4 and IPv6 clients.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Ipv4
-				"ipv_4": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DnsName
-						"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The DNS name of the EC2 Instance Connect Endpoint.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: FipsDnsName
-						"fips_dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Federal Information Processing Standards (FIPS) compliant DNS name of the EC2 Instance Connect Endpoint.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The IPv4-only DNS name of the EC2 Instance Connect Endpoint.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The public DNS names of the endpoint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"public_dns_names": schemaAttribute6eabc3822921203669b8c868(),
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -220,11 +327,7 @@ func instanceConnectEndpointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The security groups associated with the endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_ids": schemaAttribute6a996afe9cb698d2d09edfff(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -243,10 +346,7 @@ func instanceConnectEndpointDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current state of the EC2 Instance Connect Endpoint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributedbceb57c4d2e5db6f62d12c0(),
 		// Property: StateMessage
 		// CloudFormation resource type schema:
 		//
@@ -254,10 +354,7 @@ func instanceConnectEndpointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The message for the current state of the EC2 Instance Connect Endpoint. Can include a failure message",
 		//	  "type": "string"
 		//	}
-		"state_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The message for the current state of the EC2 Instance Connect Endpoint. Can include a failure message",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state_message": schemaAttributeb271ebbda8684933dc6b0260(),
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -265,10 +362,7 @@ func instanceConnectEndpointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The ID of the subnet in which the EC2 Instance Connect Endpoint was created.",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the subnet in which the EC2 Instance Connect Endpoint was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_id": schemaAttributea75e05cb62a0b3b13412b9ae(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -295,22 +389,7 @@ func instanceConnectEndpointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags assigned to the EC2 Instance Connect Endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributea16863e85f33d24bc4a2bf05(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -318,10 +397,7 @@ func instanceConnectEndpointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The ID of the VPC in which the EC2 Instance Connect Endpoint was created",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the VPC in which the EC2 Instance Connect Endpoint was created",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttributee8d4dc18707f2a0315fafa9d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

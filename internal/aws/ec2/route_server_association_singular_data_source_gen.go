@@ -14,6 +14,20 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1198630e3c39af02bd35a0aa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Route Server ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0546c12feb77507ac9fcf41() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "VPC ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_route_server_association", routeServerAssociationDataSource)
 }
@@ -29,10 +43,7 @@ func routeServerAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "Route Server ID",
 		//	  "type": "string"
 		//	}
-		"route_server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Route Server ID",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"route_server_id": schemaAttribute1198630e3c39af02bd35a0aa(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +51,7 @@ func routeServerAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "VPC ID",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC ID",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttributea0546c12feb77507ac9fcf41(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

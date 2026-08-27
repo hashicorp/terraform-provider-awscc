@@ -15,6 +15,195 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute04ef5fd32b79854038c307cb() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MetricNames
+				"metric_names": schemaAttribute071b11a763eeae6378dd1dad(),
+				// Property: Namespace
+				"namespace": schemaAttributea84a2d3e629247dbf6d79b55(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Define which metrics will be streamed. Metrics matched by multiple instances of MetricStreamFilter are joined with an OR operation by default. If both IncludeFilters and ExcludeFilters are omitted, all metrics in the account will be streamed. IncludeFilters and ExcludeFilters are mutually exclusive. Default to null.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute071b11a763eeae6378dd1dad() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute085a6941dc8360e4c8ca728e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AdditionalStatistics
+				"additional_statistics": schemaAttribute0d508f01d7263c613a9d859c(),
+				// Property: IncludeMetrics
+				"include_metrics": schemaAttributeeb16f618d14c4433c02e7768(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use this parameter to have the metric stream also send additional statistics in the stream. This array can have up to 100 members.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d508f01d7263c613a9d859c() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The additional statistics to stream for the metrics listed in IncludeMetrics.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1681bcba7e6041477b36a4e9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name of the metric stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a539adba0508f616dbe1646() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributef51a598dfcd80e89fcae6865(),
+				// Property: Value
+				"value": schemaAttribute96019ab9cbd1737f36087281(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A set of tags to assign to the delivery stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c33946a4d1e43860e791c0a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date of the last update of the metric stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58703ddd22f19b9ad70b2220() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "If you are creating a metric stream in a monitoring account, specify true to include metrics from source accounts that are linked to this monitoring account, in the metric stream. The default is false.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e7f5ddee24da76ef1bcb5c5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Kinesis Firehose where to stream the data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute668a6a290f22d0e5415c8cd2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the role that provides access to the Kinesis Firehose.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute728c08686ea83deda9e43c46() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Displays the state of the Metric Stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute81107ee9ebd07dec0625eb73() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MetricNames
+				"metric_names": schemaAttribute071b11a763eeae6378dd1dad(),
+				// Property: Namespace
+				"namespace": schemaAttributea84a2d3e629247dbf6d79b55(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Define which metrics will be not streamed. Metrics matched by multiple instances of MetricStreamFilter are joined with an OR operation by default. If both IncludeFilters and ExcludeFilters are omitted, all metrics in the account will be streamed. IncludeFilters and ExcludeFilters are mutually exclusive. Default to null.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute874a9f5c49488887ef2248a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the metric.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96019ab9cbd1737f36087281() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "String which you can use to describe or define the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4f01821e154cc5cf24924df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the metric stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea84a2d3e629247dbf6d79b55() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Only metrics with Namespace matching this value will be streamed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae4e83e8faffbd1f7259dbf8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The namespace of the metric.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec80d189a4ce1a8b45647d38e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The output format of the data streamed to the Kinesis Firehose.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3bb1608d0170a9bf733ac3e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date of creation of the metric stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb16f618d14c4433c02e7768() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MetricName
+				"metric_name": schemaAttribute874a9f5c49488887ef2248a5(),
+				// Property: Namespace
+				"namespace": schemaAttributeae4e83e8faffbd1f7259dbf8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array that defines the metrics that are to have additional statistics streamed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef51a598dfcd80e89fcae6865() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudwatch_metric_stream", metricStreamDataSource)
 }
@@ -32,10 +221,7 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name of the metric stream.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute1681bcba7e6041477b36a4e9(),
 		// Property: CreationDate
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +233,7 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The date of creation of the metric stream.",
 		//	  "type": "string"
 		//	}
-		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date of creation of the metric stream.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_date": schemaAttributee3bb1608d0170a9bf733ac3e(),
 		// Property: ExcludeFilters
 		// CloudFormation resource type schema:
 		//
@@ -86,25 +269,7 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"exclude_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: MetricNames
-					"metric_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Namespace
-					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Only metrics with Namespace matching this value will be streamed.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Define which metrics will be not streamed. Metrics matched by multiple instances of MetricStreamFilter are joined with an OR operation by default. If both IncludeFilters and ExcludeFilters are omitted, all metrics in the account will be streamed. IncludeFilters and ExcludeFilters are mutually exclusive. Default to null.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"exclude_filters": schemaAttribute81107ee9ebd07dec0625eb73(),
 		// Property: FirehoseArn
 		// CloudFormation resource type schema:
 		//
@@ -114,10 +279,7 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"firehose_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Kinesis Firehose where to stream the data.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"firehose_arn": schemaAttribute5e7f5ddee24da76ef1bcb5c5(),
 		// Property: IncludeFilters
 		// CloudFormation resource type schema:
 		//
@@ -153,25 +315,7 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"include_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: MetricNames
-					"metric_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Namespace
-					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Only metrics with Namespace matching this value will be streamed.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Define which metrics will be streamed. Metrics matched by multiple instances of MetricStreamFilter are joined with an OR operation by default. If both IncludeFilters and ExcludeFilters are omitted, all metrics in the account will be streamed. IncludeFilters and ExcludeFilters are mutually exclusive. Default to null.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"include_filters": schemaAttribute04ef5fd32b79854038c307cb(),
 		// Property: IncludeLinkedAccountsMetrics
 		// CloudFormation resource type schema:
 		//
@@ -179,10 +323,7 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "If you are creating a metric stream in a monitoring account, specify true to include metrics from source accounts that are linked to this monitoring account, in the metric stream. The default is false.",
 		//	  "type": "boolean"
 		//	}
-		"include_linked_accounts_metrics": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "If you are creating a metric stream in a monitoring account, specify true to include metrics from source accounts that are linked to this monitoring account, in the metric stream. The default is false.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"include_linked_accounts_metrics": schemaAttribute58703ddd22f19b9ad70b2220(),
 		// Property: LastUpdateDate
 		// CloudFormation resource type schema:
 		//
@@ -194,10 +335,7 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The date of the last update of the metric stream.",
 		//	  "type": "string"
 		//	}
-		"last_update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date of the last update of the metric stream.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_update_date": schemaAttribute4c33946a4d1e43860e791c0a(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -207,10 +345,7 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of the metric stream.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributea4f01821e154cc5cf24924df(),
 		// Property: OutputFormat
 		// CloudFormation resource type schema:
 		//
@@ -220,10 +355,7 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The output format of the data streamed to the Kinesis Firehose.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"output_format": schemaAttributec80d189a4ce1a8b45647d38e(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -233,10 +365,7 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the role that provides access to the Kinesis Firehose.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute668a6a290f22d0e5415c8cd2(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -246,10 +375,7 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Displays the state of the Metric Stream.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttribute728c08686ea83deda9e43c46(),
 		// Property: StatisticsConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -308,39 +434,7 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"statistics_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AdditionalStatistics
-					"additional_statistics": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The additional statistics to stream for the metrics listed in IncludeMetrics.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: IncludeMetrics
-					"include_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: MetricName
-								"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the metric.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Namespace
-								"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The namespace of the metric.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "An array that defines the metrics that are to have additional statistics streamed.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use this parameter to have the metric stream also send additional statistics in the stream. This array can have up to 100 members.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"statistics_configurations": schemaAttribute085a6941dc8360e4c8ca728e(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -373,24 +467,7 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A unique identifier for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "String which you can use to describe or define the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A set of tags to assign to the delivery stream.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute3a539adba0508f616dbe1646(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

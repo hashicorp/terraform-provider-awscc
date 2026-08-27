@@ -14,6 +14,48 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2041798116ce4e5e30e6f2df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the local gateway route table.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26356d25ab85bfad1eec5030() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the virtual interface group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c322ec1ff2575d60ea8673f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea57094b991b260fdcacd305d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The CIDR block used for destination matches.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb98d84f00abb7fc35a6a2393() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The route type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef683b64c2a8e098b9ab30e56() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of the route.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_local_gateway_route", localGatewayRouteDataSource)
 }
@@ -29,10 +71,7 @@ func localGatewayRouteDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The CIDR block used for destination matches.",
 		//	  "type": "string"
 		//	}
-		"destination_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The CIDR block used for destination matches.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"destination_cidr_block": schemaAttributea57094b991b260fdcacd305d(),
 		// Property: LocalGatewayRouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +79,7 @@ func localGatewayRouteDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The ID of the local gateway route table.",
 		//	  "type": "string"
 		//	}
-		"local_gateway_route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the local gateway route table.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"local_gateway_route_table_id": schemaAttribute2041798116ce4e5e30e6f2df(),
 		// Property: LocalGatewayVirtualInterfaceGroupId
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +87,7 @@ func localGatewayRouteDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The ID of the virtual interface group.",
 		//	  "type": "string"
 		//	}
-		"local_gateway_virtual_interface_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the virtual interface group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"local_gateway_virtual_interface_group_id": schemaAttribute26356d25ab85bfad1eec5030(),
 		// Property: NetworkInterfaceId
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +95,7 @@ func localGatewayRouteDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The ID of the network interface.",
 		//	  "type": "string"
 		//	}
-		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the network interface.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_interface_id": schemaAttribute6c322ec1ff2575d60ea8673f(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +103,7 @@ func localGatewayRouteDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The state of the route.",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The state of the route.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributef683b64c2a8e098b9ab30e56(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +111,7 @@ func localGatewayRouteDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The route type.",
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The route type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttributeb98d84f00abb7fc35a6a2393(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

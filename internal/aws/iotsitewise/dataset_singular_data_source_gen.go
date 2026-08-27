@@ -14,6 +14,122 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute12c2904b1c4068557f922f58() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The knowledgeBaseArn details for the Kendra dataset source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1eeeb4e89a4bf8dd5f42c9ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description about the dataset, and its functionality.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24e12114b0726c5cfbf8933d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of data source for the dataset.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27a5384178e4da161c8f58a9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SourceDetail
+			"source_detail": schemaAttributeb6acaf1b767520f845e2cd07(),
+			// Property: SourceFormat
+			"source_format": schemaAttributeddd8c97516c5d02b30c078aa(),
+			// Property: SourceType
+			"source_type": schemaAttribute24e12114b0726c5cfbf8933d(),
+		}, /*END SCHEMA*/
+		Description: "The data source for the dataset.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute50a085d3f172d2aa177a9097() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The roleARN details for the Kendra dataset source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5dfb16ab7e829aa75e8a1ee8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the dataset.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ce1a129692c23c7b3cd23de() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KnowledgeBaseArn
+			"knowledge_base_arn": schemaAttribute12c2904b1c4068557f922f58(),
+			// Property: RoleArn
+			"role_arn": schemaAttribute50a085d3f172d2aa177a9097(),
+		}, /*END SCHEMA*/
+		Description: "Contains details about the Kendra dataset source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8520330d091daee21f4999d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the dataset.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95e6bb7e7f09b26a4b32356b() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributedc8386549c27168ecb04b4f2(),
+				// Property: Value
+				"value": schemaAttributedc8386549c27168ecb04b4f2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6acaf1b767520f845e2cd07() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Kendra
+			"kendra": schemaAttribute6ce1a129692c23c7b3cd23de(),
+		}, /*END SCHEMA*/
+		Description: "The details of the dataset source associated with the dataset.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecacaabbe8024c00455dc87e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the dataset.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc8386549c27168ecb04b4f2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeddd8c97516c5d02b30c078aa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The format of the dataset source associated with the dataset.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iotsitewise_dataset", datasetDataSource)
 }
@@ -29,10 +145,7 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the dataset.",
 		//	  "type": "string"
 		//	}
-		"dataset_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the dataset.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dataset_arn": schemaAttribute8520330d091daee21f4999d0(),
 		// Property: DatasetDescription
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +153,7 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description about the dataset, and its functionality.",
 		//	  "type": "string"
 		//	}
-		"dataset_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description about the dataset, and its functionality.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dataset_description": schemaAttribute1eeeb4e89a4bf8dd5f42c9ae(),
 		// Property: DatasetId
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +164,7 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"dataset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the dataset.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dataset_id": schemaAttributecacaabbe8024c00455dc87e1(),
 		// Property: DatasetName
 		// CloudFormation resource type schema:
 		//
@@ -65,10 +172,7 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the dataset.",
 		//	  "type": "string"
 		//	}
-		"dataset_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the dataset.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dataset_name": schemaAttribute5dfb16ab7e829aa75e8a1ee8(),
 		// Property: DatasetSource
 		// CloudFormation resource type schema:
 		//
@@ -123,46 +227,7 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"dataset_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SourceDetail
-				"source_detail": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Kendra
-						"kendra": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: KnowledgeBaseArn
-								"knowledge_base_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The knowledgeBaseArn details for the Kendra dataset source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: RoleArn
-								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The roleARN details for the Kendra dataset source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Contains details about the Kendra dataset source.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The details of the dataset source associated with the dataset.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourceFormat
-				"source_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The format of the dataset source associated with the dataset.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourceType
-				"source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of data source for the dataset.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The data source for the dataset.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dataset_source": schemaAttribute27a5384178e4da161c8f58a9(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -188,22 +253,7 @@ func datasetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute95e6bb7e7f09b26a4b32356b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

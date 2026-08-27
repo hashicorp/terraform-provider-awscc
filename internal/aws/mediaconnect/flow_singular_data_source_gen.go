@@ -15,6 +15,876 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute02e6c9dc313b2e796f5454c1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: State
+			"state": schemaAttributec13bef1da991e394bbc217b4(),
+			// Property: ThresholdSeconds
+			"threshold_seconds": schemaAttribute9423379a3f61bfb1ba64085b(),
+		}, /*END SCHEMA*/
+		Description: "Configures settings for the SilentAudio metric.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute05a29c0da690904d33f4478b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EncodingName
+				"encoding_name": schemaAttribute92c8fe4ba9d4813105fc310a(),
+				// Property: InputConfigurations
+				"input_configurations": schemaAttribute2688363f2df3668816e69dbb(),
+				// Property: MediaStreamName
+				"media_stream_name": schemaAttributefcaac0ae001ba989d8bdd33f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The media stream that is associated with the source, and the parameters for that association.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d0cfd47b5e651248fd59e33() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The format used for the representation of color.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0df644e70716ffe11d4e9976() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of thumbnail monitoring.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute179ab24177340dea396ad49a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IP address from which video will be sent to output destinations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute186b4302d3ee62ae797f0841() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18f10d5bd8e607342f6fa9bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The frame rate for the video stream, in frames/second. For example: 60000/1001.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute200136df7014713c9b9ba6c8() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The port that the flow will be listening on for incoming content.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute209410d9cb39ecff1e89c5d4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ChannelOrder
+			"channel_order": schemaAttribute703c201c1093c721363caf35(),
+			// Property: Colorimetry
+			"colorimetry": schemaAttribute0d0cfd47b5e651248fd59e33(),
+			// Property: ExactFramerate
+			"exact_framerate": schemaAttribute18f10d5bd8e607342f6fa9bc(),
+			// Property: Par
+			"par": schemaAttributeff3ed40e94305c29e6298110(),
+			// Property: Range
+			"range": schemaAttribute83b9beec05a4a065cafb5e88(),
+			// Property: ScanMode
+			"scan_mode": schemaAttribute6c301e1caaa18651e55b1f67(),
+			// Property: Tcs
+			"tcs": schemaAttributea42d6e530339cf8db53f3168(),
+		}, /*END SCHEMA*/
+		Description: "A set of parameters that define the media stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2688363f2df3668816e69dbb() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InputPort
+				"input_port": schemaAttributee6f35bd9f497470d0c54c529(),
+				// Property: Interface
+				"interface": schemaAttributec5fcf7d16a8dfab009f778c3(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The media streams that you want to associate with the source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26b62d28f75557d18ac684d2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SilentAudio
+				"silent_audio": schemaAttribute02e6c9dc313b2e796f5454c1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Contains the settings for audio stream metrics monitoring.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2789f913ab0f7aca64d51bce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the flow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28c606c03ce143da45de99ab() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: VpcInterfaceName
+			"vpc_interface_name": schemaAttribute2d5104f93b4a1b38a5c9b5a4(),
+		}, /*END SCHEMA*/
+		Description: "The name of the VPC interface attachment to use for this bridge source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b1b0e3436f575bdc5deaa78() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Source IP or domain name for SRT-caller protocol.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d5104f93b4a1b38a5c9b5a4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the VPC interface to use for this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute338fe3bdd1a6fe225e630424() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Security Group IDs to be used on ENI.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3444dc6a664ffcf7048cae76() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute352173190f90ec6f278922ad() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The protocol that is used by the source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute36a52bd59160ae06a6546007() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the media stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37f4ccc1bdcab13255019b80() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3aef20e0ed430a6d4d8938f8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IP address that the flow communicates with to initiate connection with the sender for fujitsu-qos protocol.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3dbea9882e27ff98d796ab0a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42690d1291579cb9bfc0fe8e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the bridge feeding this flow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4530312c9f2fff353f94d1d1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Subnet must be in the AZ of the Flow",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute515ffbe935f816b9359337dd() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum latency in milliseconds.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57f797b3bcecf020017d8272() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a55158ff4fc0c660d066096() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the number of consecutive seconds of black frames that triggers an event or alert.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b25aaf8051e6a7d2cdb9ec0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c47d5576fe33a4e5c5db231() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The format type number (sometimes referred to as RTP payload type) of the media stream. MediaConnect assigns this value to the media stream. For ST 2110 JPEG XS outputs, you need to provide this value to the receiver.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ffaddcba164f0372c5d5fcf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description that can help you quickly identify what your media stream is used for.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6329e16512f1547ccdac3af0() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute664c5eb7fc9b6e27eb2d499f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: State
+			"state": schemaAttributeb74a66c45ca1a7b4b6104fc6(),
+			// Property: ThresholdSeconds
+			"threshold_seconds": schemaAttributee7cda1e70b4aa0f97663d756(),
+		}, /*END SCHEMA*/
+		Description: "Configures settings for the FrozenFrames metric.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c301e1caaa18651e55b1f67() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of compression that was used to smooth the video's appearance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e2f6a2d583ba38a0efd141e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f461b5afef301eeebcc21b6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The resolution of the video.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute703c201c1093c721363caf35() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The format of the audio channel.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76f0142470a9ac0347c31b65() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ded545e389e57970b463033() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether content quality analysis is enabled or disabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f93f321c60e035431ab3b3d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Attributes
+				"attributes": schemaAttributefb4ed5cddb3d44a54c781b72(),
+				// Property: ClockRate
+				"clock_rate": schemaAttributefc9dc870876118748d729fc5(),
+				// Property: Description
+				"description": schemaAttribute5ffaddcba164f0372c5d5fcf(),
+				// Property: Fmt
+				"fmt": schemaAttribute5c47d5576fe33a4e5c5db231(),
+				// Property: MediaStreamId
+				"media_stream_id": schemaAttribute36a52bd59160ae06a6546007(),
+				// Property: MediaStreamName
+				"media_stream_name": schemaAttributefcaac0ae001ba989d8bdd33f(),
+				// Property: MediaStreamType
+				"media_stream_type": schemaAttributee1c28ed858215bb668f37cbe(),
+				// Property: VideoFormat
+				"video_format": schemaAttribute6f461b5afef301eeebcc21b6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The media streams associated with the flow. You can associate any of these media streams with sources and outputs on the flow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83b9beec05a4a065cafb5e88() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The encoding range of the video.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83f522daa5d2e2f5eed8c001() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Decryption
+			"decryption": schemaAttributeafa0d5e982bc35bf13f4ce78(),
+			// Property: Description
+			"description": schemaAttributea495ba08f80e7dae9cc7d9b5(),
+			// Property: EntitlementArn
+			"entitlement_arn": schemaAttribute3444dc6a664ffcf7048cae76(),
+			// Property: GatewayBridgeSource
+			"gateway_bridge_source": schemaAttributebfe90a728b68eb28a09bf1b5(),
+			// Property: IngestIp
+			"ingest_ip": schemaAttribute8b8287495d8c4d7ff87588c2(),
+			// Property: IngestPort
+			"ingest_port": schemaAttribute200136df7014713c9b9ba6c8(),
+			// Property: MaxBitrate
+			"max_bitrate": schemaAttribute91d3ffd1591d8a01cb8272d6(),
+			// Property: MaxLatency
+			"max_latency": schemaAttribute6e2f6a2d583ba38a0efd141e(),
+			// Property: MaxSyncBuffer
+			"max_sync_buffer": schemaAttribute8dad543495e8c6803feddb1c(),
+			// Property: MediaStreamSourceConfigurations
+			"media_stream_source_configurations": schemaAttribute05a29c0da690904d33f4478b(),
+			// Property: MinLatency
+			"min_latency": schemaAttribute515ffbe935f816b9359337dd(),
+			// Property: Name
+			"name": schemaAttribute76f0142470a9ac0347c31b65(),
+			// Property: Protocol
+			"protocol": schemaAttribute352173190f90ec6f278922ad(),
+			// Property: SenderControlPort
+			"sender_control_port": schemaAttribute6329e16512f1547ccdac3af0(),
+			// Property: SenderIpAddress
+			"sender_ip_address": schemaAttribute3aef20e0ed430a6d4d8938f8(),
+			// Property: SourceArn
+			"source_arn": schemaAttributecbde6afff62809ddfa824620(),
+			// Property: SourceIngestPort
+			"source_ingest_port": schemaAttributea03a023f69d69862718f80ee(),
+			// Property: SourceListenerAddress
+			"source_listener_address": schemaAttribute2b1b0e3436f575bdc5deaa78(),
+			// Property: SourceListenerPort
+			"source_listener_port": schemaAttributecb3c9337237ae546d87aeb2f(),
+			// Property: StreamId
+			"stream_id": schemaAttributef576b97b0b255ab619dc3875(),
+			// Property: VpcInterfaceName
+			"vpc_interface_name": schemaAttributec8c68cfe3e33566571c15c67(),
+			// Property: WhitelistCidr
+			"whitelist_cidr": schemaAttributee1831ba676869310794409ce(),
+		}, /*END SCHEMA*/
+		Description: "The source of the flow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b8287495d8c4d7ff87588c2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IP address that the flow will be listening on for incoming content.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c9ba11cd8bd54130e7f4d77() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the BlackFrames metric is enabled or disabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8dad543495e8c6803feddb1c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The size of the buffer (in milliseconds) to use to sync incoming source data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91d3ffd1591d8a01cb8272d6() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91f50f1dc403c4798610b0e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92c8fe4ba9d4813105fc310a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92fea45492ad3ef90f9be6ac() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.(ReadOnly)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9423379a3f61bfb1ba64085b() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the number of consecutive seconds of silence that triggers an event or alert.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95dffceb9b945389196fc005() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Immutable and has to be a unique against other VpcInterfaces in this Flow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9701d33f99b0d2f075c9d202() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c4ae6633a44fbea3f00c015() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f93152740a7f9bafe5a4701() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea03a023f69d69862718f80ee() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The port that the flow will be listening on for incoming content.(ReadOnly)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea12745c62e32dcb452fd98ce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Role Arn MediaConnect can assume to create ENIs in customer's account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3362428c73c93ee6e04b1e8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The audio language, in a format that is recognized by the receiver.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea42d6e530339cf8db53f3168() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The transfer characteristic system (TCS) that is used in the video.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea495ba08f80e7dae9cc7d9b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab25d497ab4b999a1fe8d722() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FailoverMode
+			"failover_mode": schemaAttribute9c4ae6633a44fbea3f00c015(),
+			// Property: RecoveryWindow
+			"recovery_window": schemaAttributef5dcc6a5980c4cd902d31ebf(),
+			// Property: SourcePriority
+			"source_priority": schemaAttributeb36b18914d3d611dd9862c13(),
+			// Property: State
+			"state": schemaAttribute5b25aaf8051e6a7d2cdb9ec0(),
+		}, /*END SCHEMA*/
+		Description: "The source failover config of the flow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac7d767679d8f6d3aa1c780d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaeca5843887c041e142ffe87() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the VPC interface that you want to use for the media stream associated with the output.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeafa0d5e982bc35bf13f4ce78() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Algorithm
+			"algorithm": schemaAttributeb25c50e1c32a0e9dc66f4d8b(),
+			// Property: ConstantInitializationVector
+			"constant_initialization_vector": schemaAttribute91f50f1dc403c4798610b0e1(),
+			// Property: DeviceId
+			"device_id": schemaAttribute186b4302d3ee62ae797f0841(),
+			// Property: KeyType
+			"key_type": schemaAttribute3dbea9882e27ff98d796ab0a(),
+			// Property: Region
+			"region": schemaAttributecb2a790e21acf7a0fb369bba(),
+			// Property: ResourceId
+			"resource_id": schemaAttribute57f797b3bcecf020017d8272(),
+			// Property: RoleArn
+			"role_arn": schemaAttributef27d624fa6154a64bbf53a0a(),
+			// Property: SecretArn
+			"secret_arn": schemaAttributefbffc689c68c56b146b9af45(),
+			// Property: Url
+			"url": schemaAttribute9f93152740a7f9bafe5a4701(),
+		}, /*END SCHEMA*/
+		Description: "The type of decryption that is used on the content ingested from this source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb25c50e1c32a0e9dc66f4d8b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb36b18914d3d611dd9862c13() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PrimarySource
+			"primary_source": schemaAttributeca54ca7cab933ba5aef682fb(),
+		}, /*END SCHEMA*/
+		Description: "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4b6e1745438c859b2ff77b9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AudioMonitoringSettings
+			"audio_monitoring_settings": schemaAttribute26b62d28f75557d18ac684d2(),
+			// Property: ContentQualityAnalysisState
+			"content_quality_analysis_state": schemaAttribute7ded545e389e57970b463033(),
+			// Property: ThumbnailState
+			"thumbnail_state": schemaAttribute0df644e70716ffe11d4e9976(),
+			// Property: VideoMonitoringSettings
+			"video_monitoring_settings": schemaAttributecf5aee691b187b3d1eda1368(),
+		}, /*END SCHEMA*/
+		Description: "The source monitoring config of the flow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb74a66c45ca1a7b4b6104fc6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the FrozenFrames metric is enabled or disabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebfe90a728b68eb28a09bf1b5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BridgeArn
+			"bridge_arn": schemaAttribute42690d1291579cb9bfc0fe8e(),
+			// Property: VpcInterfaceAttachment
+			"vpc_interface_attachment": schemaAttribute28c606c03ce143da45de99ab(),
+		}, /*END SCHEMA*/
+		Description: "The source configuration for cloud flows receiving a stream from a bridge.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec13bef1da991e394bbc217b4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the SilentAudio metric is enabled or disabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5fcf7d16a8dfab009f778c3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttributeaeca5843887c041e142ffe87(),
+		}, /*END SCHEMA*/
+		Description: "The VPC interface where the media stream comes in from.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8c68cfe3e33566571c15c67() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the VPC Interface this Source is configured with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca54ca7cab933ba5aef682fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the source you choose as the primary source for this flow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb2a790e21acf7a0fb369bba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb3c9337237ae546d87aeb2f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Source port for SRT-caller protocol.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecbde6afff62809ddfa824620() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf5aee691b187b3d1eda1368() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BlackFrames
+				"black_frames": schemaAttributef1a4c9ac6dcfc3cdc1af2dac(),
+				// Property: FrozenFrames
+				"frozen_frames": schemaAttribute664c5eb7fc9b6e27eb2d499f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Contains the settings for video stream metrics monitoring.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf9b074840776fd2469945a7() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "IDs of the network interfaces created in customer's account by MediaConnect.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1831ba676869310794409ce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1c28ed858215bb668f37cbe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of media stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee20c73e94e1e032074d58629() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee41241c34b69369325bcc8b2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaintenanceDay
+			"maintenance_day": schemaAttributeac7d767679d8f6d3aa1c780d(),
+			// Property: MaintenanceStartHour
+			"maintenance_start_hour": schemaAttribute37f4ccc1bdcab13255019b80(),
+		}, /*END SCHEMA*/
+		Description: "The maintenance settings you want to use for the flow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6d5dfa62a157d708a8d5601() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of network adapter that you want MediaConnect to use on this interface. If you don't set this value, it defaults to ENA.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6f35bd9f497470d0c54c529() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The port that the flow listens on for an incoming media stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee7cda1e70b4aa0f97663d756() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the number of consecutive seconds of a static image that triggers an event or alert.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1a4c9ac6dcfc3cdc1af2dac() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: State
+			"state": schemaAttribute8c9ba11cd8bd54130e7f4d77(),
+			// Property: ThresholdSeconds
+			"threshold_seconds": schemaAttribute5a55158ff4fc0c660d066096(),
+		}, /*END SCHEMA*/
+		Description: "Configures settings for the BlackFrames metric.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef27d624fa6154a64bbf53a0a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef576b97b0b255ab619dc3875() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef5dcc6a5980c4cd902d31ebf() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Search window time to look for dash-7 packets",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9e040f2cd9230e13963dc73() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute95dffceb9b945389196fc005(),
+				// Property: NetworkInterfaceIds
+				"network_interface_ids": schemaAttributedf9b074840776fd2469945a7(),
+				// Property: NetworkInterfaceType
+				"network_interface_type": schemaAttributee6d5dfa62a157d708a8d5601(),
+				// Property: RoleArn
+				"role_arn": schemaAttributea12745c62e32dcb452fd98ce(),
+				// Property: SecurityGroupIds
+				"security_group_ids": schemaAttribute338fe3bdd1a6fe225e630424(),
+				// Property: SubnetId
+				"subnet_id": schemaAttribute4530312c9f2fff353f94d1d1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The VPC interfaces that you added to this flow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb4ed5cddb3d44a54c781b72() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Fmtp
+			"fmtp": schemaAttribute209410d9cb39ecff1e89c5d4(),
+			// Property: Lang
+			"lang": schemaAttributea3362428c73c93ee6e04b1e8(),
+		}, /*END SCHEMA*/
+		Description: "Attributes that are related to the media stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefbffc689c68c56b146b9af45() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc9dc870876118748d729fc5() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The sample rate for the stream. This value in measured in kHz.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefcaac0ae001ba989d8bdd33f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name that helps you distinguish one media stream from another.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff3ed40e94305c29e6298110() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The pixel aspect ratio (PAR) of the video.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_mediaconnect_flow", flowDataSource)
 }
@@ -30,10 +900,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.",
 		//	  "type": "string"
 		//	}
-		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"availability_zone": schemaAttributee20c73e94e1e032074d58629(),
 		// Property: EgressIp
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +908,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The IP address from which video will be sent to output destinations.",
 		//	  "type": "string"
 		//	}
-		"egress_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IP address from which video will be sent to output destinations.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"egress_ip": schemaAttribute179ab24177340dea396ad49a(),
 		// Property: FlowArn
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +916,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
 		//	  "type": "string"
 		//	}
-		"flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"flow_arn": schemaAttribute9701d33f99b0d2f075c9d202(),
 		// Property: FlowAvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +924,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.(ReadOnly)",
 		//	  "type": "string"
 		//	}
-		"flow_availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.(ReadOnly)",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"flow_availability_zone": schemaAttribute92fea45492ad3ef90f9be6ac(),
 		// Property: Maintenance
 		// CloudFormation resource type schema:
 		//
@@ -98,22 +956,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"maintenance": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaintenanceDay
-				"maintenance_day": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaintenanceStartHour
-				"maintenance_start_hour": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The maintenance settings you want to use for the flow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"maintenance": schemaAttributee41241c34b69369325bcc8b2(),
 		// Property: MediaStreams
 		// CloudFormation resource type schema:
 		//
@@ -249,103 +1092,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"media_streams": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Attributes
-					"attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Fmtp
-							"fmtp": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: ChannelOrder
-									"channel_order": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The format of the audio channel.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Colorimetry
-									"colorimetry": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The format used for the representation of color.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ExactFramerate
-									"exact_framerate": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The frame rate for the video stream, in frames/second. For example: 60000/1001.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Par
-									"par": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The pixel aspect ratio (PAR) of the video.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Range
-									"range": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The encoding range of the video.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ScanMode
-									"scan_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The type of compression that was used to smooth the video's appearance.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Tcs
-									"tcs": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The transfer characteristic system (TCS) that is used in the video.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "A set of parameters that define the media stream.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Lang
-							"lang": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The audio language, in a format that is recognized by the receiver.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Attributes that are related to the media stream.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ClockRate
-					"clock_rate": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The sample rate for the stream. This value in measured in kHz.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Description
-					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A description that can help you quickly identify what your media stream is used for.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Fmt
-					"fmt": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The format type number (sometimes referred to as RTP payload type) of the media stream. MediaConnect assigns this value to the media stream. For ST 2110 JPEG XS outputs, you need to provide this value to the receiver.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: MediaStreamId
-					"media_stream_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "A unique identifier for the media stream.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: MediaStreamName
-					"media_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A name that helps you distinguish one media stream from another.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: MediaStreamType
-					"media_stream_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of media stream.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: VideoFormat
-					"video_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The resolution of the video.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The media streams associated with the flow. You can associate any of these media streams with sources and outputs on the flow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"media_streams": schemaAttribute7f93f321c60e035431ab3b3d(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -353,10 +1100,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the flow.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the flow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute2789f913ab0f7aca64d51bce(),
 		// Property: Source
 		// CloudFormation resource type schema:
 		//
@@ -598,228 +1342,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Decryption
-				"decryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Algorithm
-						"algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ConstantInitializationVector
-						"constant_initialization_vector": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DeviceId
-						"device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: KeyType
-						"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Region
-						"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ResourceId
-						"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RoleArn
-						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SecretArn
-						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Url
-						"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The type of decryption that is used on the content ingested from this source.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Description
-				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EntitlementArn
-				"entitlement_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: GatewayBridgeSource
-				"gateway_bridge_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BridgeArn
-						"bridge_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the bridge feeding this flow.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: VpcInterfaceAttachment
-						"vpc_interface_attachment": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: VpcInterfaceName
-								"vpc_interface_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the VPC interface to use for this resource.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The name of the VPC interface attachment to use for this bridge source.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The source configuration for cloud flows receiving a stream from a bridge.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IngestIp
-				"ingest_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The IP address that the flow will be listening on for incoming content.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IngestPort
-				"ingest_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The port that the flow will be listening on for incoming content.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaxBitrate
-				"max_bitrate": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaxLatency
-				"max_latency": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaxSyncBuffer
-				"max_sync_buffer": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The size of the buffer (in milliseconds) to use to sync incoming source data.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MediaStreamSourceConfigurations
-				"media_stream_source_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: EncodingName
-							"encoding_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: InputConfigurations
-							"input_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: InputPort
-										"input_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The port that the flow listens on for an incoming media stream.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Interface
-										"interface": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Name
-												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The name of the VPC interface that you want to use for the media stream associated with the output.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "The VPC interface where the media stream comes in from.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "The media streams that you want to associate with the source.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: MediaStreamName
-							"media_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A name that helps you distinguish one media stream from another.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The media stream that is associated with the source, and the parameters for that association.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MinLatency
-				"min_latency": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The minimum latency in milliseconds.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the source.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Protocol
-				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The protocol that is used by the source.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SenderControlPort
-				"sender_control_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SenderIpAddress
-				"sender_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The IP address that the flow communicates with to initiate connection with the sender for fujitsu-qos protocol.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourceArn
-				"source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the source.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourceIngestPort
-				"source_ingest_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The port that the flow will be listening on for incoming content.(ReadOnly)",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourceListenerAddress
-				"source_listener_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Source IP or domain name for SRT-caller protocol.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourceListenerPort
-				"source_listener_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Source port for SRT-caller protocol.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StreamId
-				"stream_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VpcInterfaceName
-				"vpc_interface_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the VPC Interface this Source is configured with.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: WhitelistCidr
-				"whitelist_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The source of the flow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source": schemaAttribute83f522daa5d2e2f5eed8c001(),
 		// Property: SourceFailoverConfig
 		// CloudFormation resource type schema:
 		//
@@ -863,38 +1386,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"source_failover_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FailoverMode
-				"failover_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RecoveryWindow
-				"recovery_window": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Search window time to look for dash-7 packets",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourcePriority
-				"source_priority": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: PrimarySource
-						"primary_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the source you choose as the primary source for this flow.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: State
-				"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The source failover config of the flow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_failover_config": schemaAttributeab25d497ab4b999a1fe8d722(),
 		// Property: SourceMonitoringConfig
 		// CloudFormation resource type schema:
 		//
@@ -1000,91 +1492,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"source_monitoring_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AudioMonitoringSettings
-				"audio_monitoring_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: SilentAudio
-							"silent_audio": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: State
-									"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Indicates whether the SilentAudio metric is enabled or disabled.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ThresholdSeconds
-									"threshold_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "Specifies the number of consecutive seconds of silence that triggers an event or alert.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Configures settings for the SilentAudio metric.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Contains the settings for audio stream metrics monitoring.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ContentQualityAnalysisState
-				"content_quality_analysis_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether content quality analysis is enabled or disabled.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ThumbnailState
-				"thumbnail_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The state of thumbnail monitoring.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VideoMonitoringSettings
-				"video_monitoring_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: BlackFrames
-							"black_frames": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: State
-									"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Indicates whether the BlackFrames metric is enabled or disabled.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ThresholdSeconds
-									"threshold_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "Specifies the number of consecutive seconds of black frames that triggers an event or alert.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Configures settings for the BlackFrames metric.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: FrozenFrames
-							"frozen_frames": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: State
-									"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Indicates whether the FrozenFrames metric is enabled or disabled.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ThresholdSeconds
-									"threshold_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "Specifies the number of consecutive seconds of a static image that triggers an event or alert.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Configures settings for the FrozenFrames metric.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Contains the settings for video stream metrics monitoring.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The source monitoring config of the flow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_monitoring_config": schemaAttributeb4b6e1745438c859b2ff77b9(),
 		// Property: VpcInterfaces
 		// CloudFormation resource type schema:
 		//
@@ -1139,46 +1547,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"vpc_interfaces": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Immutable and has to be a unique against other VpcInterfaces in this Flow.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: NetworkInterfaceIds
-					"network_interface_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "IDs of the network interfaces created in customer's account by MediaConnect.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: NetworkInterfaceType
-					"network_interface_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of network adapter that you want MediaConnect to use on this interface. If you don't set this value, it defaults to ENA.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: RoleArn
-					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Role Arn MediaConnect can assume to create ENIs in customer's account.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SecurityGroupIds
-					"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "Security Group IDs to be used on ENI.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SubnetId
-					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Subnet must be in the AZ of the Flow",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The VPC interfaces that you added to this flow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_interfaces": schemaAttributef9e040f2cd9230e13963dc73(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

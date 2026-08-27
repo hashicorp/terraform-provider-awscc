@@ -14,6 +14,500 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute5194baeb074c9037401fb36f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed2138bf4f1ac2baf8d5984f6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>Tag key.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedad7ec0587fd1d6b47f387a4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>Tag value.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec1b97aad59b21fd2c68c166() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributed2138bf4f1ac2baf8d5984f6(),
+				// Property: Value
+				"value": schemaAttributedad7ec0587fd1d6b47f387a4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef4fd34ca9896393b5212447() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccessAppsNativeDataStore
+			"access_apps_native_data_store": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: Action
+			"action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: AddOrRunAnomalyDetectionForAnalyses
+			"add_or_run_anomaly_detection_for_analyses": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: AmazonBedrockARSAction
+			"amazon_bedrock_ars_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: AmazonBedrockFSAction
+			"amazon_bedrock_fs_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: AmazonBedrockKRSAction
+			"amazon_bedrock_krs_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: AmazonSThreeAction
+			"amazon_s_three_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: Analysis
+			"analysis": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ApproveFlowShareRequests
+			"approve_flow_share_requests": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: Apps
+			"apps": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: AsanaAction
+			"asana_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: Automate
+			"automate": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: BambooHRAction
+			"bamboo_hr_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: BoxAgentAction
+			"box_agent_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: BuildCalculatedFieldWithQ
+			"build_calculated_field_with_q": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CanvaAgentAction
+			"canva_agent_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ChatAgent
+			"chat_agent": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ComprehendAction
+			"comprehend_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ComprehendMedicalAction
+			"comprehend_medical_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ConfluenceAction
+			"confluence_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateAmazonBedrockARSAction
+			"create_and_update_amazon_bedrock_ars_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateAmazonBedrockFSAction
+			"create_and_update_amazon_bedrock_fs_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateAmazonBedrockKRSAction
+			"create_and_update_amazon_bedrock_krs_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateAmazonSThreeAction
+			"create_and_update_amazon_s_three_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateApps
+			"create_and_update_apps": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateAsanaAction
+			"create_and_update_asana_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateBambooHRAction
+			"create_and_update_bamboo_hr_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateBoxAgentAction
+			"create_and_update_box_agent_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateCanvaAgentAction
+			"create_and_update_canva_agent_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateComprehendAction
+			"create_and_update_comprehend_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateComprehendMedicalAction
+			"create_and_update_comprehend_medical_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateConfluenceAction
+			"create_and_update_confluence_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateDashboardEmailReports
+			"create_and_update_dashboard_email_reports": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateDataSources
+			"create_and_update_data_sources": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateDatasets
+			"create_and_update_datasets": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateFactSetAction
+			"create_and_update_fact_set_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateGenericHTTPAction
+			"create_and_update_generic_http_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateGithubAction
+			"create_and_update_github_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateGoogleCalendarAction
+			"create_and_update_google_calendar_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateHubspotAction
+			"create_and_update_hubspot_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateHuggingFaceAction
+			"create_and_update_hugging_face_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateIntercomAction
+			"create_and_update_intercom_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateJiraAction
+			"create_and_update_jira_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateKnowledgeBases
+			"create_and_update_knowledge_bases": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateLinearAction
+			"create_and_update_linear_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateMCPAction
+			"create_and_update_mcp_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateMSExchangeAction
+			"create_and_update_ms_exchange_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateMSTeamsAction
+			"create_and_update_ms_teams_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateMondayAction
+			"create_and_update_monday_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateNewRelicAction
+			"create_and_update_new_relic_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateNotionAction
+			"create_and_update_notion_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateOneDriveAction
+			"create_and_update_one_drive_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateOpenAPIAction
+			"create_and_update_open_api_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdatePagerDutyAction
+			"create_and_update_pager_duty_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateSAPBillOfMaterialAction
+			"create_and_update_sap_bill_of_material_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateSAPBusinessPartnerAction
+			"create_and_update_sap_business_partner_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateSAPMaterialStockAction
+			"create_and_update_sap_material_stock_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateSAPPhysicalInventoryAction
+			"create_and_update_sap_physical_inventory_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateSAPProductMasterDataAction
+			"create_and_update_sap_product_master_data_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateSalesforceAction
+			"create_and_update_salesforce_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateSandPGMIAction
+			"create_and_update_sand_pgmi_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateSandPGlobalEnergyAction
+			"create_and_update_sand_p_global_energy_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateServiceNowAction
+			"create_and_update_service_now_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateSharePointAction
+			"create_and_update_share_point_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateSlackAction
+			"create_and_update_slack_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateSmartsheetAction
+			"create_and_update_smartsheet_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateTextractAction
+			"create_and_update_textract_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateThemes
+			"create_and_update_themes": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateThresholdAlerts
+			"create_and_update_threshold_alerts": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateAndUpdateZendeskAction
+			"create_and_update_zendesk_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateChatAgents
+			"create_chat_agents": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateDashboardExecutiveSummaryWithQ
+			"create_dashboard_executive_summary_with_q": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateSPICEDataset
+			"create_spice_dataset": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateSharedFolders
+			"create_shared_folders": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: CreateSpaces
+			"create_spaces": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: Dashboard
+			"dashboard": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: EditVisualWithQ
+			"edit_visual_with_q": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ExportToCsv
+			"export_to_csv": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ExportToCsvInScheduledReports
+			"export_to_csv_in_scheduled_reports": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ExportToExcel
+			"export_to_excel": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ExportToExcelInScheduledReports
+			"export_to_excel_in_scheduled_reports": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ExportToPdf
+			"export_to_pdf": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ExportToPdfInScheduledReports
+			"export_to_pdf_in_scheduled_reports": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: Extension
+			"extension": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: FactSetAction
+			"fact_set_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: Flow
+			"flow": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: GenericHTTPAction
+			"generic_http_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: GithubAction
+			"github_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: GoogleCalendarAction
+			"google_calendar_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: HubspotAction
+			"hubspot_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: HuggingFaceAction
+			"hugging_face_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: IncludeContentInScheduledReportsEmail
+			"include_content_in_scheduled_reports_email": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: IntercomAction
+			"intercom_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: InvokeAppsAIInference
+			"invoke_apps_ai_inference": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: JiraAction
+			"jira_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: KnowledgeBase
+			"knowledge_base": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: LinearAction
+			"linear_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: MCPAction
+			"mcp_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: MSExchangeAction
+			"ms_exchange_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: MSTeamsAction
+			"ms_teams_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ManageSharedFolders
+			"manage_shared_folders": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: MondayAction
+			"monday_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: NewRelicAction
+			"new_relic_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: NotionAction
+			"notion_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: OneDriveAction
+			"one_drive_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: OpenAPIAction
+			"open_api_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: PagerDutyAction
+			"pager_duty_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: PerformFlowUiTask
+			"perform_flow_ui_task": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: PrintReports
+			"print_reports": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: PublishWithoutApproval
+			"publish_without_approval": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: RenameSharedFolders
+			"rename_shared_folders": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: Research
+			"research": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: SAPBillOfMaterialAction
+			"sap_bill_of_material_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: SAPBusinessPartnerAction
+			"sap_business_partner_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: SAPMaterialStockAction
+			"sap_material_stock_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: SAPPhysicalInventoryAction
+			"sap_physical_inventory_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: SAPProductMasterDataAction
+			"sap_product_master_data_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: SalesforceAction
+			"salesforce_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: SandPGMIAction
+			"sand_pgmi_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: SandPGlobalEnergyAction
+			"sand_p_global_energy_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ServiceNowAction
+			"service_now_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareAmazonBedrockARSAction
+			"share_amazon_bedrock_ars_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareAmazonBedrockFSAction
+			"share_amazon_bedrock_fs_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareAmazonBedrockKRSAction
+			"share_amazon_bedrock_krs_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareAmazonSThreeAction
+			"share_amazon_s_three_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareAnalyses
+			"share_analyses": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareApps
+			"share_apps": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareAsanaAction
+			"share_asana_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareBambooHRAction
+			"share_bamboo_hr_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareBoxAgentAction
+			"share_box_agent_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareCanvaAgentAction
+			"share_canva_agent_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareChatAgents
+			"share_chat_agents": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareComprehendAction
+			"share_comprehend_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareComprehendMedicalAction
+			"share_comprehend_medical_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareConfluenceAction
+			"share_confluence_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareDashboards
+			"share_dashboards": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareDataSources
+			"share_data_sources": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareDatasets
+			"share_datasets": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareFactSetAction
+			"share_fact_set_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareGenericHTTPAction
+			"share_generic_http_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareGithubAction
+			"share_github_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareGoogleCalendarAction
+			"share_google_calendar_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareHubspotAction
+			"share_hubspot_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareHuggingFaceAction
+			"share_hugging_face_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareIntercomAction
+			"share_intercom_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareJiraAction
+			"share_jira_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareKnowledgeBases
+			"share_knowledge_bases": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareLinearAction
+			"share_linear_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareMCPAction
+			"share_mcp_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareMSExchangeAction
+			"share_ms_exchange_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareMSTeamsAction
+			"share_ms_teams_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareMondayAction
+			"share_monday_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareNewRelicAction
+			"share_new_relic_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareNotionAction
+			"share_notion_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareOneDriveAction
+			"share_one_drive_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareOpenAPIAction
+			"share_open_api_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: SharePagerDutyAction
+			"share_pager_duty_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: SharePointAction
+			"share_point_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareSAPBillOfMaterialAction
+			"share_sap_bill_of_material_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareSAPBusinessPartnerAction
+			"share_sap_business_partner_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareSAPMaterialStockAction
+			"share_sap_material_stock_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareSAPPhysicalInventoryAction
+			"share_sap_physical_inventory_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareSAPProductMasterDataAction
+			"share_sap_product_master_data_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareSalesforceAction
+			"share_salesforce_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareSandPGMIAction
+			"share_sand_pgmi_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareSandPGlobalEnergyAction
+			"share_sand_p_global_energy_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareServiceNowAction
+			"share_service_now_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareSharePointAction
+			"share_share_point_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareSlackAction
+			"share_slack_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareSmartsheetAction
+			"share_smartsheet_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareSpaces
+			"share_spaces": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareTextractAction
+			"share_textract_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ShareZendeskAction
+			"share_zendesk_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: SlackAction
+			"slack_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: SmartsheetAction
+			"smartsheet_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: Space
+			"space": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: SubscribeDashboardEmailReports
+			"subscribe_dashboard_email_reports": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: TextractAction
+			"textract_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: Topic
+			"topic": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseAgentWebSearch
+			"use_agent_web_search": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseAmazonBedrockARSAction
+			"use_amazon_bedrock_ars_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseAmazonBedrockFSAction
+			"use_amazon_bedrock_fs_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseAmazonBedrockKRSAction
+			"use_amazon_bedrock_krs_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseAmazonSThreeAction
+			"use_amazon_s_three_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseAsanaAction
+			"use_asana_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseBambooHRAction
+			"use_bamboo_hr_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseBedrockModels
+			"use_bedrock_models": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseBoxAgentAction
+			"use_box_agent_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseCanvaAgentAction
+			"use_canva_agent_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseComprehendAction
+			"use_comprehend_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseComprehendMedicalAction
+			"use_comprehend_medical_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseConfluenceAction
+			"use_confluence_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseFactSetAction
+			"use_fact_set_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseGenericHTTPAction
+			"use_generic_http_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseGithubAction
+			"use_github_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseGoogleCalendarAction
+			"use_google_calendar_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseHubspotAction
+			"use_hubspot_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseHuggingFaceAction
+			"use_hugging_face_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseIntercomAction
+			"use_intercom_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseJiraAction
+			"use_jira_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseLinearAction
+			"use_linear_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseMCPAction
+			"use_mcp_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseMSExchangeAction
+			"use_ms_exchange_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseMSTeamsAction
+			"use_ms_teams_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseMondayAction
+			"use_monday_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseNewRelicAction
+			"use_new_relic_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseNotionAction
+			"use_notion_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseOneDriveAction
+			"use_one_drive_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseOpenAPIAction
+			"use_open_api_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UsePagerDutyAction
+			"use_pager_duty_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseSAPBillOfMaterialAction
+			"use_sap_bill_of_material_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseSAPBusinessPartnerAction
+			"use_sap_business_partner_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseSAPMaterialStockAction
+			"use_sap_material_stock_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseSAPPhysicalInventoryAction
+			"use_sap_physical_inventory_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseSAPProductMasterDataAction
+			"use_sap_product_master_data_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseSalesforceAction
+			"use_salesforce_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseSandPGMIAction
+			"use_sand_pgmi_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseSandPGlobalEnergyAction
+			"use_sand_p_global_energy_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseServiceNowAction
+			"use_service_now_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseSharePointAction
+			"use_share_point_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseSlackAction
+			"use_slack_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseSmartsheetAction
+			"use_smartsheet_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseTextractAction
+			"use_textract_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: UseZendeskAction
+			"use_zendesk_action": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ViewAccountSPICECapacity
+			"view_account_spice_capacity": schemaAttribute5194baeb074c9037401fb36f(),
+			// Property: ZendeskAction
+			"zendesk_action": schemaAttribute5194baeb074c9037401fb36f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_quicksight_custom_permissions", customPermissionsDataSource)
 }
@@ -28,9 +522,7 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute5194baeb074c9037401fb36f(),
 		// Property: AwsAccountId
 		// CloudFormation resource type schema:
 		//
@@ -40,9 +532,7 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"aws_account_id": schemaAttribute5194baeb074c9037401fb36f(),
 		// Property: Capabilities
 		// CloudFormation resource type schema:
 		//
@@ -1408,915 +1898,7 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  },
 		//	  "type": "object"
 		//	}
-		"capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AccessAppsNativeDataStore
-				"access_apps_native_data_store": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Action
-				"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: AddOrRunAnomalyDetectionForAnalyses
-				"add_or_run_anomaly_detection_for_analyses": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: AmazonBedrockARSAction
-				"amazon_bedrock_ars_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: AmazonBedrockFSAction
-				"amazon_bedrock_fs_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: AmazonBedrockKRSAction
-				"amazon_bedrock_krs_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: AmazonSThreeAction
-				"amazon_s_three_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Analysis
-				"analysis": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ApproveFlowShareRequests
-				"approve_flow_share_requests": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Apps
-				"apps": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: AsanaAction
-				"asana_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Automate
-				"automate": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: BambooHRAction
-				"bamboo_hr_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: BoxAgentAction
-				"box_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: BuildCalculatedFieldWithQ
-				"build_calculated_field_with_q": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CanvaAgentAction
-				"canva_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ChatAgent
-				"chat_agent": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ComprehendAction
-				"comprehend_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ComprehendMedicalAction
-				"comprehend_medical_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ConfluenceAction
-				"confluence_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateAmazonBedrockARSAction
-				"create_and_update_amazon_bedrock_ars_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateAmazonBedrockFSAction
-				"create_and_update_amazon_bedrock_fs_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateAmazonBedrockKRSAction
-				"create_and_update_amazon_bedrock_krs_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateAmazonSThreeAction
-				"create_and_update_amazon_s_three_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateApps
-				"create_and_update_apps": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateAsanaAction
-				"create_and_update_asana_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateBambooHRAction
-				"create_and_update_bamboo_hr_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateBoxAgentAction
-				"create_and_update_box_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateCanvaAgentAction
-				"create_and_update_canva_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateComprehendAction
-				"create_and_update_comprehend_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateComprehendMedicalAction
-				"create_and_update_comprehend_medical_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateConfluenceAction
-				"create_and_update_confluence_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateDashboardEmailReports
-				"create_and_update_dashboard_email_reports": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateDataSources
-				"create_and_update_data_sources": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateDatasets
-				"create_and_update_datasets": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateFactSetAction
-				"create_and_update_fact_set_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateGenericHTTPAction
-				"create_and_update_generic_http_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateGithubAction
-				"create_and_update_github_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateGoogleCalendarAction
-				"create_and_update_google_calendar_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateHubspotAction
-				"create_and_update_hubspot_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateHuggingFaceAction
-				"create_and_update_hugging_face_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateIntercomAction
-				"create_and_update_intercom_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateJiraAction
-				"create_and_update_jira_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateKnowledgeBases
-				"create_and_update_knowledge_bases": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateLinearAction
-				"create_and_update_linear_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateMCPAction
-				"create_and_update_mcp_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateMSExchangeAction
-				"create_and_update_ms_exchange_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateMSTeamsAction
-				"create_and_update_ms_teams_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateMondayAction
-				"create_and_update_monday_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateNewRelicAction
-				"create_and_update_new_relic_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateNotionAction
-				"create_and_update_notion_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateOneDriveAction
-				"create_and_update_one_drive_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateOpenAPIAction
-				"create_and_update_open_api_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdatePagerDutyAction
-				"create_and_update_pager_duty_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateSAPBillOfMaterialAction
-				"create_and_update_sap_bill_of_material_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateSAPBusinessPartnerAction
-				"create_and_update_sap_business_partner_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateSAPMaterialStockAction
-				"create_and_update_sap_material_stock_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateSAPPhysicalInventoryAction
-				"create_and_update_sap_physical_inventory_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateSAPProductMasterDataAction
-				"create_and_update_sap_product_master_data_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateSalesforceAction
-				"create_and_update_salesforce_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateSandPGMIAction
-				"create_and_update_sand_pgmi_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateSandPGlobalEnergyAction
-				"create_and_update_sand_p_global_energy_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateServiceNowAction
-				"create_and_update_service_now_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateSharePointAction
-				"create_and_update_share_point_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateSlackAction
-				"create_and_update_slack_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateSmartsheetAction
-				"create_and_update_smartsheet_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateTextractAction
-				"create_and_update_textract_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateThemes
-				"create_and_update_themes": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateThresholdAlerts
-				"create_and_update_threshold_alerts": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateAndUpdateZendeskAction
-				"create_and_update_zendesk_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateChatAgents
-				"create_chat_agents": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateDashboardExecutiveSummaryWithQ
-				"create_dashboard_executive_summary_with_q": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateSPICEDataset
-				"create_spice_dataset": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateSharedFolders
-				"create_shared_folders": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreateSpaces
-				"create_spaces": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Dashboard
-				"dashboard": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: EditVisualWithQ
-				"edit_visual_with_q": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ExportToCsv
-				"export_to_csv": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ExportToCsvInScheduledReports
-				"export_to_csv_in_scheduled_reports": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ExportToExcel
-				"export_to_excel": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ExportToExcelInScheduledReports
-				"export_to_excel_in_scheduled_reports": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ExportToPdf
-				"export_to_pdf": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ExportToPdfInScheduledReports
-				"export_to_pdf_in_scheduled_reports": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Extension
-				"extension": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: FactSetAction
-				"fact_set_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Flow
-				"flow": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: GenericHTTPAction
-				"generic_http_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: GithubAction
-				"github_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: GoogleCalendarAction
-				"google_calendar_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: HubspotAction
-				"hubspot_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: HuggingFaceAction
-				"hugging_face_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: IncludeContentInScheduledReportsEmail
-				"include_content_in_scheduled_reports_email": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: IntercomAction
-				"intercom_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: InvokeAppsAIInference
-				"invoke_apps_ai_inference": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: JiraAction
-				"jira_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: KnowledgeBase
-				"knowledge_base": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: LinearAction
-				"linear_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MCPAction
-				"mcp_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MSExchangeAction
-				"ms_exchange_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MSTeamsAction
-				"ms_teams_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ManageSharedFolders
-				"manage_shared_folders": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MondayAction
-				"monday_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: NewRelicAction
-				"new_relic_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: NotionAction
-				"notion_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: OneDriveAction
-				"one_drive_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: OpenAPIAction
-				"open_api_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PagerDutyAction
-				"pager_duty_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PerformFlowUiTask
-				"perform_flow_ui_task": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PrintReports
-				"print_reports": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PublishWithoutApproval
-				"publish_without_approval": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: RenameSharedFolders
-				"rename_shared_folders": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Research
-				"research": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SAPBillOfMaterialAction
-				"sap_bill_of_material_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SAPBusinessPartnerAction
-				"sap_business_partner_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SAPMaterialStockAction
-				"sap_material_stock_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SAPPhysicalInventoryAction
-				"sap_physical_inventory_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SAPProductMasterDataAction
-				"sap_product_master_data_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SalesforceAction
-				"salesforce_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SandPGMIAction
-				"sand_pgmi_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SandPGlobalEnergyAction
-				"sand_p_global_energy_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServiceNowAction
-				"service_now_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareAmazonBedrockARSAction
-				"share_amazon_bedrock_ars_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareAmazonBedrockFSAction
-				"share_amazon_bedrock_fs_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareAmazonBedrockKRSAction
-				"share_amazon_bedrock_krs_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareAmazonSThreeAction
-				"share_amazon_s_three_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareAnalyses
-				"share_analyses": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareApps
-				"share_apps": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareAsanaAction
-				"share_asana_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareBambooHRAction
-				"share_bamboo_hr_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareBoxAgentAction
-				"share_box_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareCanvaAgentAction
-				"share_canva_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareChatAgents
-				"share_chat_agents": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareComprehendAction
-				"share_comprehend_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareComprehendMedicalAction
-				"share_comprehend_medical_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareConfluenceAction
-				"share_confluence_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareDashboards
-				"share_dashboards": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareDataSources
-				"share_data_sources": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareDatasets
-				"share_datasets": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareFactSetAction
-				"share_fact_set_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareGenericHTTPAction
-				"share_generic_http_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareGithubAction
-				"share_github_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareGoogleCalendarAction
-				"share_google_calendar_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareHubspotAction
-				"share_hubspot_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareHuggingFaceAction
-				"share_hugging_face_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareIntercomAction
-				"share_intercom_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareJiraAction
-				"share_jira_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareKnowledgeBases
-				"share_knowledge_bases": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareLinearAction
-				"share_linear_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareMCPAction
-				"share_mcp_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareMSExchangeAction
-				"share_ms_exchange_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareMSTeamsAction
-				"share_ms_teams_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareMondayAction
-				"share_monday_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareNewRelicAction
-				"share_new_relic_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareNotionAction
-				"share_notion_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareOneDriveAction
-				"share_one_drive_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareOpenAPIAction
-				"share_open_api_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SharePagerDutyAction
-				"share_pager_duty_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SharePointAction
-				"share_point_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareSAPBillOfMaterialAction
-				"share_sap_bill_of_material_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareSAPBusinessPartnerAction
-				"share_sap_business_partner_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareSAPMaterialStockAction
-				"share_sap_material_stock_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareSAPPhysicalInventoryAction
-				"share_sap_physical_inventory_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareSAPProductMasterDataAction
-				"share_sap_product_master_data_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareSalesforceAction
-				"share_salesforce_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareSandPGMIAction
-				"share_sand_pgmi_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareSandPGlobalEnergyAction
-				"share_sand_p_global_energy_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareServiceNowAction
-				"share_service_now_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareSharePointAction
-				"share_share_point_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareSlackAction
-				"share_slack_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareSmartsheetAction
-				"share_smartsheet_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareSpaces
-				"share_spaces": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareTextractAction
-				"share_textract_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ShareZendeskAction
-				"share_zendesk_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SlackAction
-				"slack_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SmartsheetAction
-				"smartsheet_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Space
-				"space": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SubscribeDashboardEmailReports
-				"subscribe_dashboard_email_reports": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: TextractAction
-				"textract_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Topic
-				"topic": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseAgentWebSearch
-				"use_agent_web_search": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseAmazonBedrockARSAction
-				"use_amazon_bedrock_ars_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseAmazonBedrockFSAction
-				"use_amazon_bedrock_fs_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseAmazonBedrockKRSAction
-				"use_amazon_bedrock_krs_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseAmazonSThreeAction
-				"use_amazon_s_three_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseAsanaAction
-				"use_asana_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseBambooHRAction
-				"use_bamboo_hr_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseBedrockModels
-				"use_bedrock_models": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseBoxAgentAction
-				"use_box_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseCanvaAgentAction
-				"use_canva_agent_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseComprehendAction
-				"use_comprehend_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseComprehendMedicalAction
-				"use_comprehend_medical_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseConfluenceAction
-				"use_confluence_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseFactSetAction
-				"use_fact_set_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseGenericHTTPAction
-				"use_generic_http_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseGithubAction
-				"use_github_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseGoogleCalendarAction
-				"use_google_calendar_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseHubspotAction
-				"use_hubspot_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseHuggingFaceAction
-				"use_hugging_face_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseIntercomAction
-				"use_intercom_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseJiraAction
-				"use_jira_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseLinearAction
-				"use_linear_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseMCPAction
-				"use_mcp_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseMSExchangeAction
-				"use_ms_exchange_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseMSTeamsAction
-				"use_ms_teams_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseMondayAction
-				"use_monday_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseNewRelicAction
-				"use_new_relic_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseNotionAction
-				"use_notion_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseOneDriveAction
-				"use_one_drive_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseOpenAPIAction
-				"use_open_api_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UsePagerDutyAction
-				"use_pager_duty_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseSAPBillOfMaterialAction
-				"use_sap_bill_of_material_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseSAPBusinessPartnerAction
-				"use_sap_business_partner_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseSAPMaterialStockAction
-				"use_sap_material_stock_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseSAPPhysicalInventoryAction
-				"use_sap_physical_inventory_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseSAPProductMasterDataAction
-				"use_sap_product_master_data_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseSalesforceAction
-				"use_salesforce_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseSandPGMIAction
-				"use_sand_pgmi_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseSandPGlobalEnergyAction
-				"use_sand_p_global_energy_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseServiceNowAction
-				"use_service_now_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseSharePointAction
-				"use_share_point_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseSlackAction
-				"use_slack_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseSmartsheetAction
-				"use_smartsheet_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseTextractAction
-				"use_textract_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UseZendeskAction
-				"use_zendesk_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ViewAccountSPICECapacity
-				"view_account_spice_capacity": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ZendeskAction
-				"zendesk_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"capabilities": schemaAttributeef4fd34ca9896393b5212447(),
 		// Property: CustomPermissionsName
 		// CloudFormation resource type schema:
 		//
@@ -2326,9 +1908,7 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^[a-zA-Z0-9+=,.@_-]+$",
 		//	  "type": "string"
 		//	}
-		"custom_permissions_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"custom_permissions_name": schemaAttribute5194baeb074c9037401fb36f(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -2360,23 +1940,7 @@ func customPermissionsDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>Tag key.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>Tag value.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeec1b97aad59b21fd2c68c166(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

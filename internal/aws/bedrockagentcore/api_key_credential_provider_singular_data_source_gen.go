@@ -15,6 +15,123 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute031594a578bc9480c621e19c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the credential provider was last updated",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute21d441bcad9d76410efe3c28() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2cb92d01cb9cb4f30cde6d38() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The API key to use for authentication",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute310678c2afaa71ce76d2ced1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: JsonKey
+			"json_key": schemaAttributebff313e18b8e17de6f945d80(),
+			// Property: SecretId
+			"secret_id": schemaAttribute3807c8cff5cb43278a4a5064(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for a customer-provided secret containing the API key",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3807c8cff5cb43278a4a5064() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID or ARN of the secret in AWS Secrets Manager",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77fcd327129592ea73872281() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the API key credential provider",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f3d326ca191f312c414adf5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The JSON key within the secret that contains the API key value",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90640a92a36f294dfd7fc043() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the API key credential provider",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9935f62da8f38ad564ae84eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the credential provider was created",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c5acfeeed6346128792b4ed() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecretArn
+			"secret_arn": schemaAttributeff8ba6c7f831637b85709ef6(),
+		}, /*END SCHEMA*/
+		Description: "The ARN of the API key secret in AWS Secrets Manager",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebff313e18b8e17de6f945d80() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The JSON key within the secret that contains the credential value",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec679d325397af2c9c985e25a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute21d441bcad9d76410efe3c28(),
+				// Property: Value
+				"value": schemaAttribute21d441bcad9d76410efe3c28(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to assign to the API key credential provider",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea21e7e40c200f529028a5bf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source of the API key secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff8ba6c7f831637b85709ef6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the secret in AWS Secrets Manager",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_api_key_credential_provider", apiKeyCredentialProviderDataSource)
 }
@@ -32,10 +149,7 @@ func apiKeyCredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"api_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API key to use for authentication",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"api_key": schemaAttribute2cb92d01cb9cb4f30cde6d38(),
 		// Property: ApiKeySecretArn
 		// CloudFormation resource type schema:
 		//
@@ -54,17 +168,7 @@ func apiKeyCredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"api_key_secret_arn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SecretArn
-				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the secret in AWS Secrets Manager",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The ARN of the API key secret in AWS Secrets Manager",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"api_key_secret_arn": schemaAttribute9c5acfeeed6346128792b4ed(),
 		// Property: ApiKeySecretConfig
 		// CloudFormation resource type schema:
 		//
@@ -91,22 +195,7 @@ func apiKeyCredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"api_key_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: JsonKey
-				"json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The JSON key within the secret that contains the credential value",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecretId
-				"secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID or ARN of the secret in AWS Secrets Manager",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration for a customer-provided secret containing the API key",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"api_key_secret_config": schemaAttribute310678c2afaa71ce76d2ced1(),
 		// Property: ApiKeySecretJsonKey
 		// CloudFormation resource type schema:
 		//
@@ -116,10 +205,7 @@ func apiKeyCredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"api_key_secret_json_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The JSON key within the secret that contains the API key value",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"api_key_secret_json_key": schemaAttribute8f3d326ca191f312c414adf5(),
 		// Property: ApiKeySecretSource
 		// CloudFormation resource type schema:
 		//
@@ -131,10 +217,7 @@ func apiKeyCredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"api_key_secret_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The source of the API key secret. Use MANAGED for service-managed secrets or EXTERNAL for customer-provided secrets.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"api_key_secret_source": schemaAttributeea21e7e40c200f529028a5bf(),
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -143,11 +226,7 @@ func apiKeyCredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the credential provider was created",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttribute9935f62da8f38ad564ae84eb(),
 		// Property: CredentialProviderArn
 		// CloudFormation resource type schema:
 		//
@@ -156,10 +235,7 @@ func apiKeyCredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^arn:(aws|aws-us-gov):bedrock-agentcore:[A-Za-z0-9-]{1,64}:[0-9]{12}:token-vault/[a-zA-Z0-9-.]+/apikeycredentialprovider/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"credential_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the API key credential provider",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"credential_provider_arn": schemaAttribute77fcd327129592ea73872281(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -168,11 +244,7 @@ func apiKeyCredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the credential provider was last updated",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttribute031594a578bc9480c621e19c(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -183,10 +255,7 @@ func apiKeyCredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^[a-zA-Z0-9\\-_]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the API key credential provider",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute90640a92a36f294dfd7fc043(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -218,22 +287,7 @@ func apiKeyCredentialProviderDataSource(ctx context.Context) (datasource.DataSou
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to assign to the API key credential provider",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributec679d325397af2c9c985e25a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

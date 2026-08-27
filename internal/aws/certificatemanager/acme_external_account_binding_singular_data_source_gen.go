@@ -14,6 +14,83 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute17d9ee6bd196370ef839ae20() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The expiration value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2397d9b6e094b5fccd1003f9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IAM role ARN for cross-account access.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute272fdf35c9cafc8b51435f1d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the external account binding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4536fd3bfb9847b243a090ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute991bdefbbb1fec75a4d918eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the ACME endpoint this binding is associated with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb70de615b29d486420543e7f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec3cb71e54c3f46630ff24756(),
+				// Property: Value
+				"value": schemaAttribute4536fd3bfb9847b243a090ae(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags associated with the external account binding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3cb71e54c3f46630ff24756() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee50cbabd3c7b844c35b492e3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Type
+			"type": schemaAttributef23992c91dd5ee5b3700aada(),
+			// Property: Value
+			"value": schemaAttribute17d9ee6bd196370ef839ae20(),
+		}, /*END SCHEMA*/
+		Description: "The expiration configuration for the external account binding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef23992c91dd5ee5b3700aada() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time unit for the expiration value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_certificatemanager_acme_external_account_binding", acmeExternalAccountBindingDataSource)
 }
@@ -29,10 +106,7 @@ func acmeExternalAccountBindingDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The ARN of the ACME endpoint this binding is associated with.",
 		//	  "type": "string"
 		//	}
-		"acme_endpoint_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the ACME endpoint this binding is associated with.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"acme_endpoint_arn": schemaAttribute991bdefbbb1fec75a4d918eb(),
 		// Property: AcmeExternalAccountBindingArn
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +114,7 @@ func acmeExternalAccountBindingDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The Amazon Resource Name (ARN) of the external account binding.",
 		//	  "type": "string"
 		//	}
-		"acme_external_account_binding_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the external account binding.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"acme_external_account_binding_arn": schemaAttribute272fdf35c9cafc8b51435f1d(),
 		// Property: Expiration
 		// CloudFormation resource type schema:
 		//
@@ -66,22 +137,7 @@ func acmeExternalAccountBindingDataSource(ctx context.Context) (datasource.DataS
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"expiration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Type
-				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The time unit for the expiration value.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Value
-				"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The expiration value.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The expiration configuration for the external account binding.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"expiration": schemaAttributee50cbabd3c7b844c35b492e3(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -89,10 +145,7 @@ func acmeExternalAccountBindingDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The IAM role ARN for cross-account access.",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IAM role ARN for cross-account access.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute2397d9b6e094b5fccd1003f9(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -124,24 +177,7 @@ func acmeExternalAccountBindingDataSource(ctx context.Context) (datasource.DataS
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags associated with the external account binding.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeb70de615b29d486420543e7f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

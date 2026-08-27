@@ -15,6 +15,21 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributef39d545bb7c4fad0807448a6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "A policy document containing permissions to add to the specified resource. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef805a35d004d560b0a80cff4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the AWS Kinesis resource to which the policy applies.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_kinesis_resource_policy", resourcePolicyDataSource)
 }
@@ -37,10 +52,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "arn:aws.*:kinesis:.*:\\d{12}:stream/\\S+",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the AWS Kinesis resource to which the policy applies.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_arn": schemaAttributef805a35d004d560b0a80cff4(),
 		// Property: ResourcePolicy
 		// CloudFormation resource type schema:
 		//
@@ -48,11 +60,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "A policy document containing permissions to add to the specified resource. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
 		//	  "type": "object"
 		//	}
-		"resource_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "A policy document containing permissions to add to the specified resource. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_policy": schemaAttributef39d545bb7c4fad0807448a6(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

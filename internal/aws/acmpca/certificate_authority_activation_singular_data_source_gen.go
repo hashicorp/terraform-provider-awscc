@@ -14,6 +14,41 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute00062d1dafb53f7f48389466() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the Certificate Authority.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17ae4cc62de85bc2ca59600c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Arn of the Certificate Authority.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80b087c0232952e296d19ce4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The complete certificate chain, including the Certificate Authority certificate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f3fdc3c1239f89b624e85bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Certificate Authority certificate that will be installed in the Certificate Authority.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea5a1cc71753da9a479e83198() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Certificate chain for the Certificate Authority certificate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_acmpca_certificate_authority_activation", certificateAuthorityActivationDataSource)
 }
@@ -29,10 +64,7 @@ func certificateAuthorityActivationDataSource(ctx context.Context) (datasource.D
 		//	  "description": "Certificate Authority certificate that will be installed in the Certificate Authority.",
 		//	  "type": "string"
 		//	}
-		"certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Certificate Authority certificate that will be installed in the Certificate Authority.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate": schemaAttribute8f3fdc3c1239f89b624e85bc(),
 		// Property: CertificateAuthorityArn
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +72,7 @@ func certificateAuthorityActivationDataSource(ctx context.Context) (datasource.D
 		//	  "description": "Arn of the Certificate Authority.",
 		//	  "type": "string"
 		//	}
-		"certificate_authority_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Arn of the Certificate Authority.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate_authority_arn": schemaAttribute17ae4cc62de85bc2ca59600c(),
 		// Property: CertificateChain
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +80,7 @@ func certificateAuthorityActivationDataSource(ctx context.Context) (datasource.D
 		//	  "description": "Certificate chain for the Certificate Authority certificate.",
 		//	  "type": "string"
 		//	}
-		"certificate_chain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Certificate chain for the Certificate Authority certificate.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate_chain": schemaAttributea5a1cc71753da9a479e83198(),
 		// Property: CompleteCertificateChain
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +88,7 @@ func certificateAuthorityActivationDataSource(ctx context.Context) (datasource.D
 		//	  "description": "The complete certificate chain, including the Certificate Authority certificate.",
 		//	  "type": "string"
 		//	}
-		"complete_certificate_chain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The complete certificate chain, including the Certificate Authority certificate.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"complete_certificate_chain": schemaAttribute80b087c0232952e296d19ce4(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +96,7 @@ func certificateAuthorityActivationDataSource(ctx context.Context) (datasource.D
 		//	  "description": "The status of the Certificate Authority.",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the Certificate Authority.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute00062d1dafb53f7f48389466(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

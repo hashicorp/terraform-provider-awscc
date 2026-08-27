@@ -15,6 +15,144 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute16480f26d3b60a2a3e2edec7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RevokedStatusAction
+			"revoked_status_action": schemaAttribute931f41a5837a0268c2ecc2fd(),
+			// Property: UnknownStatusAction
+			"unknown_status_action": schemaAttribute931f41a5837a0268c2ecc2fd(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4762d75598942379ac19fbd8() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute931f41a5837a0268c2ecc2fd(),
+				// Property: Value
+				"value": schemaAttribute931f41a5837a0268c2ecc2fd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ac8dd9926442083f2857cee() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A resource ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute59d9ed0beb6d28607756f56d() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ResourceArn
+				"resource_arn": schemaAttribute4ac8dd9926442083f2857cee(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b57fae68f7cec268ae5f3f7() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CertificateAuthorityArn
+				"certificate_authority_arn": schemaAttribute4ac8dd9926442083f2857cee(),
+				// Property: CheckCertificateRevocationStatus
+				"check_certificate_revocation_status": schemaAttribute16480f26d3b60a2a3e2edec7(),
+				// Property: Scopes
+				"scopes": schemaAttributebd047d75621baa15762faf63(),
+				// Property: ServerCertificates
+				"server_certificates": schemaAttribute59d9ed0beb6d28607756f56d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8950c69310ea50055f80bba0() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute931f41a5837a0268c2ecc2fd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea83a37aba819a1690da9ed6f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ServerCertificateConfigurations
+			"server_certificate_configurations": schemaAttribute5b57fae68f7cec268ae5f3f7(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd047d75621baa15762faf63() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DestinationPorts
+				"destination_ports": schemaAttributecac0410d21a814c32c1c4396(),
+				// Property: Destinations
+				"destinations": schemaAttributef2bf36f11afe8c89cc74bf0b(),
+				// Property: Protocols
+				"protocols": schemaAttributefe5b6d09dad29b687a0739ae(),
+				// Property: SourcePorts
+				"source_ports": schemaAttributecac0410d21a814c32c1c4396(),
+				// Property: Sources
+				"sources": schemaAttributef2bf36f11afe8c89cc74bf0b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecac0410d21a814c32c1c4396() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FromPort
+				"from_port": schemaAttribute8950c69310ea50055f80bba0(),
+				// Property: ToPort
+				"to_port": schemaAttribute8950c69310ea50055f80bba0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2bf36f11afe8c89cc74bf0b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AddressDefinition
+				"address_definition": schemaAttribute931f41a5837a0268c2ecc2fd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefe5b6d09dad29b687a0739ae() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.Int64Type,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_networkfirewall_tls_inspection_configuration", tLSInspectionConfigurationDataSource)
 }
@@ -32,9 +170,7 @@ func tLSInspectionConfigurationDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "^.*$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute931f41a5837a0268c2ecc2fd(),
 		// Property: TLSInspectionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -213,120 +349,7 @@ func tLSInspectionConfigurationDataSource(ctx context.Context) (datasource.DataS
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tls_inspection_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ServerCertificateConfigurations
-				"server_certificate_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: CertificateAuthorityArn
-							"certificate_authority_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A resource ARN.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: CheckCertificateRevocationStatus
-							"check_certificate_revocation_status": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: RevokedStatusAction
-									"revoked_status_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: UnknownStatusAction
-									"unknown_status_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Scopes
-							"scopes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: DestinationPorts
-										"destination_ports": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: FromPort
-													"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: ToPort
-													"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Destinations
-										"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: AddressDefinition
-													"address_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Protocols
-										"protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.Int64Type,
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: SourcePorts
-										"source_ports": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: FromPort
-													"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: ToPort
-													"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Sources
-										"sources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: AddressDefinition
-													"address_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ServerCertificates
-							"server_certificates": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ResourceArn
-										"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "A resource ARN.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tls_inspection_configuration": schemaAttributea83a37aba819a1690da9ed6f(),
 		// Property: TLSInspectionConfigurationArn
 		// CloudFormation resource type schema:
 		//
@@ -337,10 +360,7 @@ func tLSInspectionConfigurationDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "^(arn:aws.*)$",
 		//	  "type": "string"
 		//	}
-		"tls_inspection_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A resource ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tls_inspection_configuration_arn": schemaAttribute4ac8dd9926442083f2857cee(),
 		// Property: TLSInspectionConfigurationId
 		// CloudFormation resource type schema:
 		//
@@ -350,9 +370,7 @@ func tLSInspectionConfigurationDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$",
 		//	  "type": "string"
 		//	}
-		"tls_inspection_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tls_inspection_configuration_id": schemaAttribute931f41a5837a0268c2ecc2fd(),
 		// Property: TLSInspectionConfigurationName
 		// CloudFormation resource type schema:
 		//
@@ -362,9 +380,7 @@ func tLSInspectionConfigurationDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "^[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"tls_inspection_configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tls_inspection_configuration_name": schemaAttribute931f41a5837a0268c2ecc2fd(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -395,21 +411,7 @@ func tLSInspectionConfigurationDataSource(ctx context.Context) (datasource.DataS
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute4762d75598942379ac19fbd8(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

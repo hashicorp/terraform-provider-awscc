@@ -14,6 +14,91 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0ca9689d90b521ecee4815c5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB cluster is accessed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute22c9b9625a12b8f1af150da2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute246068edc88d933b5a69f299() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the global cluster has deletion protection enabled. The global cluster can't be deleted when deletion protection is enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute32cf6e8e35de7fd7e3edfaa2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ea5fdf74d2da572a7cc7299() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The cluster identifier of the global cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5705a666a303f21e90a69659() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) to use as the primary cluster of the global cluster. You may also choose to instead specify the DBClusterIdentifier. If you provide a value for this parameter, don't specify values for the following settings because Amazon DocumentDB uses the values from the specified source DB cluster: Engine, EngineVersion, StorageEncrypted",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute671f3661c5e54fcd4c03ad06() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The engine version to use for this global cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7227a485bbd789b74e6db9ee() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute22c9b9625a12b8f1af150da2(),
+				// Property: Value
+				"value": schemaAttribute32cf6e8e35de7fd7e3edfaa2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags to be assigned to the Amazon DocumentDB resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8bcc30524af9d368afda0386() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the global cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5190734734dfb341645e4de() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The database engine to use for this global cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee833b08485aa787bfbddae03() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the global cluster has storage encryption enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_docdb_global_cluster", globalClusterDataSource)
 }
@@ -29,10 +114,7 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Indicates whether the global cluster has deletion protection enabled. The global cluster can't be deleted when deletion protection is enabled.",
 		//	  "type": "boolean"
 		//	}
-		"deletion_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the global cluster has deletion protection enabled. The global cluster can't be deleted when deletion protection is enabled.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"deletion_protection": schemaAttribute246068edc88d933b5a69f299(),
 		// Property: Engine
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +126,7 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The database engine to use for this global cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"engine": schemaAttributeb5190734734dfb341645e4de(),
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -55,10 +134,7 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The engine version to use for this global cluster.",
 		//	  "type": "string"
 		//	}
-		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The engine version to use for this global cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"engine_version": schemaAttribute671f3661c5e54fcd4c03ad06(),
 		// Property: GlobalClusterArn
 		// CloudFormation resource type schema:
 		//
@@ -66,10 +142,7 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The Amazon Resource Name (ARN) for the global cluster.",
 		//	  "type": "string"
 		//	}
-		"global_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the global cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"global_cluster_arn": schemaAttribute8bcc30524af9d368afda0386(),
 		// Property: GlobalClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -80,10 +153,7 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
 		//	  "type": "string"
 		//	}
-		"global_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The cluster identifier of the global cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"global_cluster_identifier": schemaAttribute4ea5fdf74d2da572a7cc7299(),
 		// Property: GlobalClusterResourceId
 		// CloudFormation resource type schema:
 		//
@@ -91,10 +161,7 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The AWS Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB cluster is accessed.",
 		//	  "type": "string"
 		//	}
-		"global_cluster_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB cluster is accessed.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"global_cluster_resource_id": schemaAttribute0ca9689d90b521ecee4815c5(),
 		// Property: SourceDBClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -106,10 +173,7 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"source_db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) to use as the primary cluster of the global cluster. You may also choose to instead specify the DBClusterIdentifier. If you provide a value for this parameter, don't specify values for the following settings because Amazon DocumentDB uses the values from the specified source DB cluster: Engine, EngineVersion, StorageEncrypted",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_db_cluster_identifier": schemaAttribute5705a666a303f21e90a69659(),
 		// Property: StorageEncrypted
 		// CloudFormation resource type schema:
 		//
@@ -117,10 +181,7 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Indicates whether the global cluster has storage encryption enabled.",
 		//	  "type": "boolean"
 		//	}
-		"storage_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the global cluster has storage encryption enabled.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"storage_encrypted": schemaAttributee833b08485aa787bfbddae03(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -154,24 +215,7 @@ func globalClusterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags to be assigned to the Amazon DocumentDB resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute7227a485bbd789b74e6db9ee(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

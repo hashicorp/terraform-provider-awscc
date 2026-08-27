@@ -16,6 +16,116 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute056ed7c9b11ac38df7943a0e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a7ea67661fcfb70c1cd68f9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Key
+			"key": schemaAttribute056ed7c9b11ac38df7943a0e(),
+			// Property: Values
+			"values": schemaAttribute31922305de4d8f9e9eb4cb84(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24b2e1fab36b82d12c447666() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "An array of strings that define the billing view's source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31922305de4d8f9e9eb4cb84() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d7a30c7df53dc574370f48b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48ea863f319009dfd8bad926() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The time in ISO 8601 format, UTC time (YYYY-MM-DDTHH:MM:SSZ).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65fcb431bc2fd78ac974bc26() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87b15dfeaf7de86543c500a3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Dimensions
+			"dimensions": schemaAttribute1a7ea67661fcfb70c1cd68f9(),
+			// Property: Tags
+			"tags": schemaAttribute1a7ea67661fcfb70c1cd68f9(),
+			// Property: TimeRange
+			"time_range": schemaAttributea78bb5ec1e07c6dfaf7fee0c(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea78bb5ec1e07c6dfaf7fee0c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BeginDateInclusive
+			"begin_date_inclusive": schemaAttribute48ea863f319009dfd8bad926(),
+			// Property: EndDateInclusive
+			"end_date_inclusive": schemaAttribute48ea863f319009dfd8bad926(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec33f3fba84069af1da6ff41d() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The time when the billing view was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed0346ac3dd09c5d13798a16b() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The time when the billing view was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee48ae5a21badd0034804b0fd() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute65fcb431bc2fd78ac974bc26(),
+				// Property: Value
+				"value": schemaAttribute3d7a30c7df53dc574370f48b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs associated to the billing view being created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_billing_billing_view", billingViewDataSource)
 }
@@ -31,9 +141,7 @@ func billingViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws[a-z-]*:(billing)::[0-9]{12}:billingview/[a-zA-Z0-9/:_\\+=\\.\\-@]{0,75}[a-zA-Z0-9]",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute056ed7c9b11ac38df7943a0e(),
 		// Property: BillingViewType
 		// CloudFormation resource type schema:
 		//
@@ -45,9 +153,7 @@ func billingViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"billing_view_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"billing_view_type": schemaAttribute056ed7c9b11ac38df7943a0e(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -55,10 +161,7 @@ func billingViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time when the billing view was created.",
 		//	  "type": "number"
 		//	}
-		"created_at": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The time when the billing view was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributed0346ac3dd09c5d13798a16b(),
 		// Property: DataFilterExpression
 		// CloudFormation resource type schema:
 		//
@@ -127,59 +230,7 @@ func billingViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"data_filter_expression": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Dimensions
-				"dimensions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Key
-						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Values
-						"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Tags
-				"tags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Key
-						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Values
-						"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: TimeRange
-				"time_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BeginDateInclusive
-						"begin_date_inclusive": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType:  timetypes.RFC3339Type{},
-							Description: "The time in ISO 8601 format, UTC time (YYYY-MM-DDTHH:MM:SSZ).",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: EndDateInclusive
-						"end_date_inclusive": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType:  timetypes.RFC3339Type{},
-							Description: "The time in ISO 8601 format, UTC time (YYYY-MM-DDTHH:MM:SSZ).",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"data_filter_expression": schemaAttribute87b15dfeaf7de86543c500a3(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -187,9 +238,7 @@ func billingViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute056ed7c9b11ac38df7943a0e(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -199,9 +248,7 @@ func billingViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9_\\+=\\.\\-@]+",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute056ed7c9b11ac38df7943a0e(),
 		// Property: OwnerAccountId
 		// CloudFormation resource type schema:
 		//
@@ -209,9 +256,7 @@ func billingViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"owner_account_id": schemaAttribute056ed7c9b11ac38df7943a0e(),
 		// Property: SourceViews
 		// CloudFormation resource type schema:
 		//
@@ -225,11 +270,7 @@ func billingViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"source_views": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "An array of strings that define the billing view's source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_views": schemaAttribute24b2e1fab36b82d12c447666(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -263,24 +304,7 @@ func billingViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs associated to the billing view being created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributee48ae5a21badd0034804b0fd(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -288,10 +312,7 @@ func billingViewDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time when the billing view was last updated.",
 		//	  "type": "number"
 		//	}
-		"updated_at": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The time when the billing view was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttributec33f3fba84069af1da6ff41d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,49 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute18937dad9ee8d1e1f51a5dbf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45d384eaaa97bc8d7235f06d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute18937dad9ee8d1e1f51a5dbf(),
+				// Property: Value
+				"value": schemaAttribute18937dad9ee8d1e1f51a5dbf(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more tags to be assigned to the replication subnet group",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72a64c9cf0e1fbee6fecc0fb() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "One or more subnet IDs to be assigned to the replication subnet group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea1c1dafa53acb2d238fb4f8e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the replication subnet group. This value is stored as a lowercase string.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb7f95151cbccbb14408c6e6a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description for the subnet group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_dms_replication_subnet_group", replicationSubnetGroupDataSource)
 }
@@ -30,10 +73,7 @@ func replicationSubnetGroupDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The description for the subnet group.",
 		//	  "type": "string"
 		//	}
-		"replication_subnet_group_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description for the subnet group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"replication_subnet_group_description": schemaAttributeb7f95151cbccbb14408c6e6a(),
 		// Property: ReplicationSubnetGroupIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +81,7 @@ func replicationSubnetGroupDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The name for the replication subnet group. This value is stored as a lowercase string.",
 		//	  "type": "string"
 		//	}
-		"replication_subnet_group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the replication subnet group. This value is stored as a lowercase string.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"replication_subnet_group_identifier": schemaAttributea1c1dafa53acb2d238fb4f8e(),
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -56,11 +93,7 @@ func replicationSubnetGroupDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "One or more subnet IDs to be assigned to the replication subnet group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_ids": schemaAttribute72a64c9cf0e1fbee6fecc0fb(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -85,22 +118,7 @@ func replicationSubnetGroupDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "One or more tags to be assigned to the replication subnet group",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute45d384eaaa97bc8d7235f06d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

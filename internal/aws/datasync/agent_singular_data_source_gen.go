@@ -15,6 +15,86 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2e5f0a4051953f79f333a816() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributed1da6ce37c12d47c80bb27e5(),
+				// Property: Value
+				"value": schemaAttributecce24cc926dd0ccd1b7210d2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute672fc68646191e1db2931ef9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the VPC endpoint that the agent has access to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute797a693ff64cbf88643bb419() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The service endpoints that the agent will connect to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b9e928d7bc2dfd993eb9c0b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Activation key of the Agent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85172df4147c56385273cfd5() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The ARNs of the security group used to protect your data transfer task subnets.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecce24cc926dd0ccd1b7210d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for an AWS resource tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1da6ce37c12d47c80bb27e5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key for an AWS resource tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6d991301c0c09b4d7141b3f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The ARNs of the subnets in which DataSync will create elastic network interfaces for each data transfer task.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef6b48d8e9fbcfc6bd43f5c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The DataSync Agent ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeffb6f4fbe8f60f6f03e08b84() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name configured for the agent. Text reference used to identify the agent in the console.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_datasync_agent", agentDataSource)
 }
@@ -32,10 +112,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[A-Z0-9]{5}(-[A-Z0-9]{5}){4}",
 		//	  "type": "string"
 		//	}
-		"activation_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Activation key of the Agent.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"activation_key": schemaAttribute7b9e928d7bc2dfd993eb9c0b(),
 		// Property: AgentArn
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +122,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"agent_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The DataSync Agent ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_arn": schemaAttributeef6b48d8e9fbcfc6bd43f5c4(),
 		// Property: AgentName
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +133,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 		//	  "type": "string"
 		//	}
-		"agent_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name configured for the agent. Text reference used to identify the agent in the console.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_name": schemaAttributeffb6f4fbe8f60f6f03e08b84(),
 		// Property: EndpointType
 		// CloudFormation resource type schema:
 		//
@@ -75,10 +146,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The service endpoints that the agent will connect to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_type": schemaAttribute797a693ff64cbf88643bb419(),
 		// Property: SecurityGroupArns
 		// CloudFormation resource type schema:
 		//
@@ -92,11 +160,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"security_group_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The ARNs of the security group used to protect your data transfer task subnets.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_arns": schemaAttribute85172df4147c56385273cfd5(),
 		// Property: SubnetArns
 		// CloudFormation resource type schema:
 		//
@@ -110,11 +174,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"subnet_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The ARNs of the subnets in which DataSync will create elastic network interfaces for each data transfer task.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_arns": schemaAttributee6d991301c0c09b4d7141b3f(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -150,24 +210,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key for an AWS resource tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for an AWS resource tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute2e5f0a4051953f79f333a816(),
 		// Property: VpcEndpointId
 		// CloudFormation resource type schema:
 		//
@@ -176,10 +219,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^vpce-[0-9a-f]{17}$",
 		//	  "type": "string"
 		//	}
-		"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the VPC endpoint that the agent has access to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_endpoint_id": schemaAttribute672fc68646191e1db2931ef9(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

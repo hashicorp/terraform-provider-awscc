@@ -14,6 +14,27 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1ee8d69c453382321b305d10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Id of the UsagePlan resource representing the usage plan containing the UsagePlanKey resource representing a plan customer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedce81fd8f4c6c235841a2bd7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6f3eb41a8e625ebf9af340b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Id of the UsagePlanKey resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_apigateway_usage_plan_key", usagePlanKeyDataSource)
 }
@@ -29,10 +50,7 @@ func usagePlanKeyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"usage_plan_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"usage_plan_key_id": schemaAttributedce81fd8f4c6c235841a2bd7(),
 		// Property: KeyId
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +58,7 @@ func usagePlanKeyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The Id of the UsagePlanKey resource.",
 		//	  "type": "string"
 		//	}
-		"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Id of the UsagePlanKey resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"key_id": schemaAttributef6f3eb41a8e625ebf9af340b(),
 		// Property: KeyType
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +69,7 @@ func usagePlanKeyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"key_type": schemaAttributedce81fd8f4c6c235841a2bd7(),
 		// Property: UsagePlanId
 		// CloudFormation resource type schema:
 		//
@@ -65,10 +77,7 @@ func usagePlanKeyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The Id of the UsagePlan resource representing the usage plan containing the UsagePlanKey resource representing a plan customer.",
 		//	  "type": "string"
 		//	}
-		"usage_plan_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Id of the UsagePlan resource representing the usage plan containing the UsagePlanKey resource representing a plan customer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"usage_plan_id": schemaAttribute1ee8d69c453382321b305d10(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,90 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0368c058de3bb5c76841d02f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the schema registry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2706ae53be999154d9dc936a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source of the schema definition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2fe7bd337dc401f29c2aa269() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version number of the schema.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute471c2b03aeb1c312caaa3557() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of schema. Valid types include OpenApi3 and JSONSchemaDraft4.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4fe6e0f3daa1c27e04932cff() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51b5a8067a25df06a3a79f6a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The last modified time of the schema.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd25c8049f1eebc9af492db7() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute4fe6e0f3daa1c27e04932cff(),
+				// Property: Value
+				"value": schemaAttribute4fe6e0f3daa1c27e04932cff(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags associated with the resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5108214883abb2eb60feafa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the schema.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb91a3e4eaf791651a78ff23() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the schema.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8b4824d383daffad6174a79() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the schema.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb0ca2f4ae65024ac193fef6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date the schema version was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_eventschemas_schema", schemaDataSource)
 }
@@ -29,10 +113,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The source of the schema definition.",
 		//	  "type": "string"
 		//	}
-		"content": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The source of the schema definition.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"content": schemaAttribute2706ae53be999154d9dc936a(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +121,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description of the schema.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the schema.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributef8b4824d383daffad6174a79(),
 		// Property: LastModified
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +129,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The last modified time of the schema.",
 		//	  "type": "string"
 		//	}
-		"last_modified": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The last modified time of the schema.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified": schemaAttribute51b5a8067a25df06a3a79f6a(),
 		// Property: RegistryName
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +137,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the schema registry.",
 		//	  "type": "string"
 		//	}
-		"registry_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the schema registry.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"registry_name": schemaAttribute0368c058de3bb5c76841d02f(),
 		// Property: SchemaArn
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +145,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the schema.",
 		//	  "type": "string"
 		//	}
-		"schema_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the schema.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schema_arn": schemaAttributeeb91a3e4eaf791651a78ff23(),
 		// Property: SchemaName
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +153,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the schema.",
 		//	  "type": "string"
 		//	}
-		"schema_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the schema.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schema_name": schemaAttributee5108214883abb2eb60feafa(),
 		// Property: SchemaVersion
 		// CloudFormation resource type schema:
 		//
@@ -95,10 +161,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version number of the schema.",
 		//	  "type": "string"
 		//	}
-		"schema_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version number of the schema.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schema_version": schemaAttribute2fe7bd337dc401f29c2aa269(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -123,22 +186,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags associated with the resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributebd25c8049f1eebc9af492db7(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -146,10 +194,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of schema. Valid types include OpenApi3 and JSONSchemaDraft4.",
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of schema. Valid types include OpenApi3 and JSONSchemaDraft4.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute471c2b03aeb1c312caaa3557(),
 		// Property: VersionCreatedDate
 		// CloudFormation resource type schema:
 		//
@@ -157,10 +202,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The date the schema version was created.",
 		//	  "type": "string"
 		//	}
-		"version_created_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date the schema version was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version_created_date": schemaAttributefb0ca2f4ae65024ac193fef6(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

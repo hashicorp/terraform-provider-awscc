@@ -15,6 +15,128 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0c642218ad37b9ee7e576195() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the serverless cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute11d0e567ee993eb619afeec1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the AWS KMS key used to encrypt the snapshot. Provide the key ARN: the resource returns the key ARN on read, so supplying a bare key ID or alias for this createOnly property may be reported as drift by CloudFormation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3020d2a712bfcb9044be4560() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key for the tag. May not be null.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4664d4a193850f5b6d5f113d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of an existing serverless cache. The snapshot is created from this cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51f11b2425d8528c9e0b9c64() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute3020d2a712bfcb9044be4560(),
+				// Property: Value
+				"value": schemaAttribute8de9353c82f59db8a7077687(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags to be added to the serverless cache snapshot resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute597d8455061f331596c54c44() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The total size of the serverless cache snapshot, in bytes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5afcf38700cd96a33eba7895() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The date and time that the source serverless cache's metadata and cache data set was obtained for the snapshot.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute69ca1c5f3674839684f250c3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the serverless cache snapshot. Must be unique for the customer account. This value is stored as a lowercase string.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a4b1b6fb7b2e8df20006ceb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The engine version number that the serverless cache is configured with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute86db81c0f86df6f66f764f61() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The engine that the serverless cache is configured with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8de9353c82f59db8a7077687() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag's value. May be null.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96031196ac525456abddc0cd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of snapshot of the serverless cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute99498619ea088d1ffe4e927e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current status of the serverless cache snapshot.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf6403bd27f1b429c432482a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Engine
+			"engine": schemaAttribute86db81c0f86df6f66f764f61(),
+			// Property: MajorEngineVersion
+			"major_engine_version": schemaAttribute6a4b1b6fb7b2e8df20006ceb(),
+			// Property: ServerlessCacheName
+			"serverless_cache_name": schemaAttribute0c642218ad37b9ee7e576195(),
+		}, /*END SCHEMA*/
+		Description: "The configuration of the serverless cache, at the time the snapshot was taken.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8895ec12683bad71c756bdc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the serverless cache snapshot.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_elasticache_serverless_cache_snapshot", serverlessCacheSnapshotDataSource)
 }
@@ -31,10 +153,7 @@ func serverlessCacheSnapshotDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^arn:aws(-[a-z]+)*:elasticache:[a-z0-9-]+:[0-9]{12}:serverlesscachesnapshot:.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the serverless cache snapshot.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributec8895ec12683bad71c756bdc(),
 		// Property: BytesUsedForCache
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +161,7 @@ func serverlessCacheSnapshotDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The total size of the serverless cache snapshot, in bytes.",
 		//	  "type": "string"
 		//	}
-		"bytes_used_for_cache": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The total size of the serverless cache snapshot, in bytes.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bytes_used_for_cache": schemaAttribute597d8455061f331596c54c44(),
 		// Property: CreateTime
 		// CloudFormation resource type schema:
 		//
@@ -54,11 +170,7 @@ func serverlessCacheSnapshotDataSource(ctx context.Context) (datasource.DataSour
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The date and time that the source serverless cache's metadata and cache data set was obtained for the snapshot.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"create_time": schemaAttribute5afcf38700cd96a33eba7895(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -67,10 +179,7 @@ func serverlessCacheSnapshotDataSource(ctx context.Context) (datasource.DataSour
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the AWS KMS key used to encrypt the snapshot. Provide the key ARN: the resource returns the key ARN on read, so supplying a bare key ID or alias for this createOnly property may be reported as drift by CloudFormation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttribute11d0e567ee993eb619afeec1(),
 		// Property: ServerlessCacheConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -93,27 +202,7 @@ func serverlessCacheSnapshotDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "object"
 		//	}
-		"serverless_cache_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Engine
-				"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The engine that the serverless cache is configured with.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MajorEngineVersion
-				"major_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The engine version number that the serverless cache is configured with.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServerlessCacheName
-				"serverless_cache_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The identifier of the serverless cache.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration of the serverless cache, at the time the snapshot was taken.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"serverless_cache_configuration": schemaAttributebf6403bd27f1b429c432482a(),
 		// Property: ServerlessCacheName
 		// CloudFormation resource type schema:
 		//
@@ -124,10 +213,7 @@ func serverlessCacheSnapshotDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
 		//	  "type": "string"
 		//	}
-		"serverless_cache_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of an existing serverless cache. The snapshot is created from this cache.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"serverless_cache_name": schemaAttribute4664d4a193850f5b6d5f113d(),
 		// Property: ServerlessCacheSnapshotName
 		// CloudFormation resource type schema:
 		//
@@ -138,10 +224,7 @@ func serverlessCacheSnapshotDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
 		//	  "type": "string"
 		//	}
-		"serverless_cache_snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the serverless cache snapshot. Must be unique for the customer account. This value is stored as a lowercase string.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"serverless_cache_snapshot_name": schemaAttribute69ca1c5f3674839684f250c3(),
 		// Property: SnapshotType
 		// CloudFormation resource type schema:
 		//
@@ -149,10 +232,7 @@ func serverlessCacheSnapshotDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The type of snapshot of the serverless cache.",
 		//	  "type": "string"
 		//	}
-		"snapshot_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of snapshot of the serverless cache.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"snapshot_type": schemaAttribute96031196ac525456abddc0cd(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -160,10 +240,7 @@ func serverlessCacheSnapshotDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The current status of the serverless cache snapshot.",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current status of the serverless cache snapshot.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute99498619ea088d1ffe4e927e(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -195,24 +272,7 @@ func serverlessCacheSnapshotDataSource(ctx context.Context) (datasource.DataSour
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key for the tag. May not be null.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag's value. May be null.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags to be added to the serverless cache snapshot resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute51f11b2425d8528c9e0b9c64(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

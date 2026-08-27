@@ -15,6 +15,43 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute24f20d2f7c252a8166989731() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the VPC Endpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea50824498526044ab599b524() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the VPC in which the endpoint will be used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac8ab745444214d31254d4f4() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The ID of one or more subnets in which to create an endpoint network interface",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedae6902740b24c8ba5823168() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the VPC Endpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef32d18401efc149f39b4573d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The ID of one or more security groups to associate with the endpoint network interface",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_opensearchserverless_vpc_endpoint", vpcEndpointDataSource)
 }
@@ -33,10 +70,7 @@ func vpcEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^vpce-[0-9a-z]*$",
 		//	  "type": "string"
 		//	}
-		"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the VPC Endpoint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_endpoint_id": schemaAttribute24f20d2f7c252a8166989731(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +81,7 @@ func vpcEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z][a-z0-9-]{2,31}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the VPC Endpoint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributedae6902740b24c8ba5823168(),
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -67,11 +98,7 @@ func vpcEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The ID of one or more security groups to associate with the endpoint network interface",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_ids": schemaAttributef32d18401efc149f39b4573d(),
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -88,11 +115,7 @@ func vpcEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The ID of one or more subnets in which to create an endpoint network interface",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_ids": schemaAttributeac8ab745444214d31254d4f4(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -103,10 +126,7 @@ func vpcEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^vpc-[0-9a-z]*$",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the VPC in which the endpoint will be used.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttributea50824498526044ab599b524(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

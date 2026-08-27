@@ -16,6 +16,150 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0f294d3640d9e8d2512236f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the router network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute21ffb0e3b234270ddcd22c46() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of router inputs associated with the network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c9eddb2ccdb873065a960d6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the router network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42214002324341b23984a6d3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Cidr
+				"cidr": schemaAttributed5974f68e2e7c897df2832d1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of allowed CIDR blocks for the public router network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4bbfb3906b09199cb73cd8da() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttributecd7c19a60d1cca84648ed38f(),
+			// Property: SubnetId
+			"subnet_id": schemaAttributef7eedce42d5dd4527797e856(),
+		}, /*END SCHEMA*/
+		Description: "The configuration settings for a router network interface within a VPC, including the security group IDs and subnet ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62b748075f43adf04974a131() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of router outputs associated with the network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ab15f9c374290edfbe29521() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Region for the router network interface. Defaults to the current region if not specified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ebc22168b1aec9f80ad224a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the router network interface was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca89dc057c51ff56ff1fc1ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd7c19a60d1cca84648ed38f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The IDs of the security groups to associate with the router network interface within the VPC.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed2a6cc427c3c0e0cff2bf232() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AllowRules
+			"allow_rules": schemaAttribute42214002324341b23984a6d3(),
+		}, /*END SCHEMA*/
+		Description: "The configuration settings for a public router network interface, including the list of allowed CIDR blocks.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5974f68e2e7c897df2832d1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The CIDR block that is allowed to access the public router network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee570241b1d5a350008cf6d17() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the router network interface was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6f6ca918d38c3cd4e79a30f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Public
+			"public": schemaAttributed2a6cc427c3c0e0cff2bf232(),
+			// Property: Vpc
+			"vpc": schemaAttribute4bbfb3906b09199cb73cd8da(),
+		}, /*END SCHEMA*/
+		Description: "The configuration settings for a router network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee396b22eaa1ba2e1b1d540a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeca89dc057c51ff56ff1fc1ae(),
+				// Property: Value
+				"value": schemaAttributeca89dc057c51ff56ff1fc1ae(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Key-value pairs that can be used to tag and organize this router network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7eedce42d5dd4527797e856() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the subnet within the VPC to associate the router network interface with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_mediaconnect_router_network_interface", routerNetworkInterfaceDataSource)
 }
@@ -31,9 +175,7 @@ func routerNetworkInterfaceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*):mediaconnect:[a-z0-9-]+:[0-9]{12}:routerNetworkInterface:[a-z0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeca89dc057c51ff56ff1fc1ae(),
 		// Property: AssociatedInputCount
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +183,7 @@ func routerNetworkInterfaceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The number of router inputs associated with the network interface.",
 		//	  "type": "integer"
 		//	}
-		"associated_input_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of router inputs associated with the network interface.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"associated_input_count": schemaAttribute21ffb0e3b234270ddcd22c46(),
 		// Property: AssociatedOutputCount
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +191,7 @@ func routerNetworkInterfaceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The number of router outputs associated with the network interface.",
 		//	  "type": "integer"
 		//	}
-		"associated_output_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of router outputs associated with the network interface.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"associated_output_count": schemaAttribute62b748075f43adf04974a131(),
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -119,51 +255,7 @@ func routerNetworkInterfaceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "object"
 		//	}
-		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Public
-				"public": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AllowRules
-						"allow_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Cidr
-									"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The CIDR block that is allowed to access the public router network interface.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "The list of allowed CIDR blocks for the public router network interface.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration settings for a public router network interface, including the list of allowed CIDR blocks.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Vpc
-				"vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: SecurityGroupIds
-						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The IDs of the security groups to associate with the router network interface within the VPC.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SubnetId
-						"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ID of the subnet within the VPC to associate the router network interface with.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration settings for a router network interface within a VPC, including the security group IDs and subnet ID.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration settings for a router network interface.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"configuration": schemaAttributee6f6ca918d38c3cd4e79a30f(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -172,11 +264,7 @@ func routerNetworkInterfaceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the router network interface was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributee570241b1d5a350008cf6d17(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -184,10 +272,7 @@ func routerNetworkInterfaceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The unique identifier of the router network interface.",
 		//	  "type": "string"
 		//	}
-		"router_network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the router network interface.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"router_network_interface_id": schemaAttribute0f294d3640d9e8d2512236f3(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -197,10 +282,7 @@ func routerNetworkInterfaceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the router network interface.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute3c9eddb2ccdb873065a960d6(),
 		// Property: NetworkInterfaceType
 		// CloudFormation resource type schema:
 		//
@@ -211,9 +293,7 @@ func routerNetworkInterfaceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"network_interface_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"network_interface_type": schemaAttributeca89dc057c51ff56ff1fc1ae(),
 		// Property: RegionName
 		// CloudFormation resource type schema:
 		//
@@ -221,10 +301,7 @@ func routerNetworkInterfaceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The AWS Region for the router network interface. Defaults to the current region if not specified.",
 		//	  "type": "string"
 		//	}
-		"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS Region for the router network interface. Defaults to the current region if not specified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"region_name": schemaAttribute6ab15f9c374290edfbe29521(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -239,9 +316,7 @@ func routerNetworkInterfaceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributeca89dc057c51ff56ff1fc1ae(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -266,22 +341,7 @@ func routerNetworkInterfaceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Key-value pairs that can be used to tag and organize this router network interface.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeee396b22eaa1ba2e1b1d540a(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -290,11 +350,7 @@ func routerNetworkInterfaceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the router network interface was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute7ebc22168b1aec9f80ad224a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

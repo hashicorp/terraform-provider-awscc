@@ -15,6 +15,78 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1960aedae870322678861feb() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of parent User-Defined Types that directly reference the User-Defined Type in their fields.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1afd35827c8f1e38e3914dd3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the Keyspace which contains the User-Defined Type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e8e05c5711510fa3503dca0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the User-Defined Type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute607b61210651b163cc249ac7() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "Timestamp of the last time the User-Defined Type's meta data was modified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4f76971ffdef56f1462a8b9() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FieldName
+				"field_name": schemaAttributeba42bf20f1c762128744a23b(),
+				// Property: FieldType
+				"field_type": schemaAttributeba42bf20f1c762128744a23b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Field definitions of the User-Defined Type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba42bf20f1c762128744a23b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebee67b55f367d0935dd40d50() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the Keyspace which contains the User-Defined Type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8e396a25806d01db00fdeb4() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of Tables that directly reference the User-Defined Type in their columns.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeff9833dd8f0cb473b9d99a6() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Maximum nesting depth of the User-Defined Type across the field types.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cassandra_type", typeDataSource)
 }
@@ -35,11 +107,7 @@ func typeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"direct_parent_types": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "List of parent User-Defined Types that directly reference the User-Defined Type in their fields.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"direct_parent_types": schemaAttribute1960aedae870322678861feb(),
 		// Property: DirectReferringTables
 		// CloudFormation resource type schema:
 		//
@@ -52,11 +120,7 @@ func typeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"direct_referring_tables": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "List of Tables that directly reference the User-Defined Type in their columns.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"direct_referring_tables": schemaAttributec8e396a25806d01db00fdeb4(),
 		// Property: Fields
 		// CloudFormation resource type schema:
 		//
@@ -82,22 +146,7 @@ func typeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"fields": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: FieldName
-					"field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: FieldType
-					"field_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Field definitions of the User-Defined Type",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"fields": schemaAttributeb4f76971ffdef56f1462a8b9(),
 		// Property: KeyspaceArn
 		// CloudFormation resource type schema:
 		//
@@ -105,10 +154,7 @@ func typeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "ARN of the Keyspace which contains the User-Defined Type.",
 		//	  "type": "string"
 		//	}
-		"keyspace_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ARN of the Keyspace which contains the User-Defined Type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"keyspace_arn": schemaAttribute1afd35827c8f1e38e3914dd3(),
 		// Property: KeyspaceName
 		// CloudFormation resource type schema:
 		//
@@ -116,10 +162,7 @@ func typeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Name of the Keyspace which contains the User-Defined Type.",
 		//	  "type": "string"
 		//	}
-		"keyspace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of the Keyspace which contains the User-Defined Type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"keyspace_name": schemaAttributebee67b55f367d0935dd40d50(),
 		// Property: LastModifiedTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -127,10 +170,7 @@ func typeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Timestamp of the last time the User-Defined Type's meta data was modified.",
 		//	  "type": "number"
 		//	}
-		"last_modified_timestamp": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "Timestamp of the last time the User-Defined Type's meta data was modified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_timestamp": schemaAttribute607b61210651b163cc249ac7(),
 		// Property: MaxNestingDepth
 		// CloudFormation resource type schema:
 		//
@@ -138,10 +178,7 @@ func typeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Maximum nesting depth of the User-Defined Type across the field types.",
 		//	  "type": "integer"
 		//	}
-		"max_nesting_depth": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Maximum nesting depth of the User-Defined Type across the field types.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"max_nesting_depth": schemaAttributeeff9833dd8f0cb473b9d99a6(),
 		// Property: TypeName
 		// CloudFormation resource type schema:
 		//
@@ -149,10 +186,7 @@ func typeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Name of the User-Defined Type.",
 		//	  "type": "string"
 		//	}
-		"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of the User-Defined Type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type_name": schemaAttribute2e8e05c5711510fa3503dca0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

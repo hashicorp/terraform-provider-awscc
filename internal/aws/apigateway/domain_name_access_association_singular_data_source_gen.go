@@ -14,6 +14,55 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute3509155fdf71e06313782e3b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The amazon resource name (ARN) of the domain name resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73a0d1d9aad82e34717fb10c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source type of the domain name access association resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute859f03e64faad783c1c3a296() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source of the domain name access association resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed68bee3eabb491db748ad888() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee11f2b004568abf6203125c4(),
+				// Property: Value
+				"value": schemaAttributee11f2b004568abf6203125c4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of arbitrary tags (key-value pairs) to associate with the domainname access association.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedbbe0c5551d0c04444d7cd04() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The amazon resource name (ARN) of the domain name access association resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee11f2b004568abf6203125c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_apigateway_domain_name_access_association", domainNameAccessAssociationDataSource)
 }
@@ -29,10 +78,7 @@ func domainNameAccessAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The source of the domain name access association resource.",
 		//	  "type": "string"
 		//	}
-		"access_association_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The source of the domain name access association resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"access_association_source": schemaAttribute859f03e64faad783c1c3a296(),
 		// Property: AccessAssociationSourceType
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +89,7 @@ func domainNameAccessAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"access_association_source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The source type of the domain name access association resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"access_association_source_type": schemaAttribute73a0d1d9aad82e34717fb10c(),
 		// Property: DomainNameAccessAssociationArn
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +97,7 @@ func domainNameAccessAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The amazon resource name (ARN) of the domain name access association resource.",
 		//	  "type": "string"
 		//	}
-		"domain_name_access_association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The amazon resource name (ARN) of the domain name access association resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_name_access_association_arn": schemaAttributedbbe0c5551d0c04444d7cd04(),
 		// Property: DomainNameArn
 		// CloudFormation resource type schema:
 		//
@@ -65,10 +105,7 @@ func domainNameAccessAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The amazon resource name (ARN) of the domain name resource.",
 		//	  "type": "string"
 		//	}
-		"domain_name_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The amazon resource name (ARN) of the domain name resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_name_arn": schemaAttribute3509155fdf71e06313782e3b(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -93,22 +130,7 @@ func domainNameAccessAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of arbitrary tags (key-value pairs) to associate with the domainname access association.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributed68bee3eabb491db748ad888(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

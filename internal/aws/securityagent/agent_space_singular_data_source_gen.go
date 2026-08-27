@@ -16,6 +16,495 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute03217b88f6e851ff632e6dea() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables creation of merge requests with automated fixes",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute05ef15539f1840af45724f5b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Read-only human-readable title of the containing space, populated from service-side metadata",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute089b8cd1adf283bb75a80e2a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Confluence space key containing the document",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a2f513eec39a37a2fde0098() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttributec79b19b3d867ef2be54d47c0(),
+			// Property: PageId
+			"page_id": schemaAttribute93119fc5bc8153673e83de79(),
+			// Property: SpaceKey
+			"space_key": schemaAttribute089b8cd1adf283bb75a80e2a(),
+			// Property: SpaceTitle
+			"space_title": schemaAttribute05ef15539f1840af45724f5b(),
+			// Property: Title
+			"title": schemaAttributeb0c15b8cc414f60c192f0af4(),
+		}, /*END SCHEMA*/
+		Description: "Confluence document details",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c0ba5500cbc65e85c1b7af1() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables creation of new Confluence documents in the same space",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0edb90e953d259dfb19eaf42() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables read access to the document content",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1c31470dbc62d43ec9a29e94() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LeaveComments
+			"leave_comments": schemaAttribute63ba5aae07ef0ae2551e1a38(),
+			// Property: RemediateCode
+			"remediate_code": schemaAttribute03217b88f6e851ff632e6dea(),
+		}, /*END SCHEMA*/
+		Description: "GitLab repository capabilities",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute276c6f320e608d6d710c39a0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "CloudWatch log group ARNs",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2df87556ef973ce2702daae7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttribute84d37b1831a40b9a242a013c(),
+			// Property: Owner
+			"owner": schemaAttribute5b77894d475fa8357f5fe7b8(),
+		}, /*END SCHEMA*/
+		Description: "GitHub repository details",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33635da3e901b74f5c58717b() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "SecretsManager secret ARNs used to store tester credentials for pentests",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3beaf476dc09c50301036f0f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "IAM role ARNs",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d410344528d7532facefc84() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Bitbucket workspace slug owning the repository",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e526adc4d09f5f293618d5a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of target domain identifiers registered with the agent space",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e60f4b45e939f3e5488b07e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecurityGroupArns
+				"security_group_arns": schemaAttributec06e18e09c92037ba2ed9094(),
+				// Property: SubnetArns
+				"subnet_arns": schemaAttribute84ff0667679db4300999559a(),
+				// Property: VpcArn
+				"vpc_arn": schemaAttribute70d74fbac8562c871edc0eb6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "VPC configurations",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4134db069fca9ccc408b0212() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b87196f7b3a8bc7e95bb5c0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttribute964ca5c7f9bb214d60b95f72(),
+			// Property: Workspace
+			"workspace": schemaAttribute3d410344528d7532facefc84(),
+		}, /*END SCHEMA*/
+		Description: "Bitbucket repository details",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute554c77caea81665daf5d5ddb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique identifier of the agent space",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute581681412b0add10a2223751() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IamRoles
+			"iam_roles": schemaAttribute3beaf476dc09c50301036f0f(),
+			// Property: LambdaFunctionArns
+			"lambda_function_arns": schemaAttribute9fafcc9885c9dbe6a3dfa7ad(),
+			// Property: LogGroups
+			"log_groups": schemaAttribute276c6f320e608d6d710c39a0(),
+			// Property: S3Buckets
+			"s3_buckets": schemaAttributeb0759a51d01ffe06eb73ab8b(),
+			// Property: SecretArns
+			"secret_arns": schemaAttribute33635da3e901b74f5c58717b(),
+			// Property: Vpcs
+			"vpcs": schemaAttribute3e60f4b45e939f3e5488b07e(),
+		}, /*END SCHEMA*/
+		Description: "AWS resource configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b77894d475fa8357f5fe7b8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "GitHub repository owner (user or organization)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5dae692cf4f04f7307fcb900() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables updates to the document",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62f1a95d7d9b297198244931() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "GitLab project name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63ba5aae07ef0ae2551e1a38() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables Code Review in the repository",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6797f5c9baadbbe768d68efd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttribute62f1a95d7d9b297198244931(),
+			// Property: Namespace
+			"namespace": schemaAttributebd5cc18b0106251ab00ffcbe(),
+		}, /*END SCHEMA*/
+		Description: "GitLab repository details",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e6bf9f0be7aefb37fba2e77() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Integration
+				"integration": schemaAttribute9d24bfff7db56df3e23d7a20(),
+				// Property: ProviderResources
+				"provider_resources": schemaAttribute75ad86fbc4266b277739225f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Integrated Resources configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70d74fbac8562c871edc0eb6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the customer VPC",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute727e3c79fcce9312ae5694fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "Timestamp when the agent space was last updated",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute75ad86fbc4266b277739225f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BitbucketCapabilities
+				"bitbucket_capabilities": schemaAttribute97320516287348a13d8bbab5(),
+				// Property: BitbucketRepository
+				"bitbucket_repository": schemaAttribute4b87196f7b3a8bc7e95bb5c0(),
+				// Property: ConfluenceCapabilities
+				"confluence_capabilities": schemaAttributeecaddc7cddcf75776dd27a25(),
+				// Property: ConfluenceDocument
+				"confluence_document": schemaAttribute0a2f513eec39a37a2fde0098(),
+				// Property: GitHubCapabilities
+				"git_hub_capabilities": schemaAttributea53b136b6316ed3f49ad45e7(),
+				// Property: GitHubRepository
+				"git_hub_repository": schemaAttribute2df87556ef973ce2702daae7(),
+				// Property: GitLabCapabilities
+				"git_lab_capabilities": schemaAttribute1c31470dbc62d43ec9a29e94(),
+				// Property: GitLabRepository
+				"git_lab_repository": schemaAttribute6797f5c9baadbbe768d68efd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of selected Resources from the Integration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f3b9c63c93f90544e00ea4b() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether Controls are utilized for code review analysis",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84d37b1831a40b9a242a013c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "GitHub repository name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84ff0667679db4300999559a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of subnet ARNs in the customer VPC",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93119fc5bc8153673e83de79() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Confluence page identifier",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute964ca5c7f9bb214d60b95f72() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Bitbucket repository name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute97320516287348a13d8bbab5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LeaveComments
+			"leave_comments": schemaAttribute63ba5aae07ef0ae2551e1a38(),
+			// Property: RemediateCode
+			"remediate_code": schemaAttributeafb2054a8a4f01ffbefc0707(),
+		}, /*END SCHEMA*/
+		Description: "Bitbucket repository capabilities",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c7034e55fbdac444e0b6e0c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "Timestamp when the agent space was created",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d24bfff7db56df3e23d7a20() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique identifier of the Provider Integration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fafcc9885c9dbe6a3dfa7ad() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Lambda function ARNs used to retrieve tester credentials for pentests",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea33442a067eb62bd891031a7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the agent space",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea53b136b6316ed3f49ad45e7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LeaveComments
+			"leave_comments": schemaAttribute63ba5aae07ef0ae2551e1a38(),
+			// Property: RemediateCode
+			"remediate_code": schemaAttributeafb2054a8a4f01ffbefc0707(),
+		}, /*END SCHEMA*/
+		Description: "GitHub repository capabilities",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9703184276983774cbae168() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute4134db069fca9ccc408b0212(),
+				// Property: Value
+				"value": schemaAttributedd07048013474bd2c7f4bf83(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags for the agent space",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac5a4d017c92d2da85761347() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Description of the agent space",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeafb2054a8a4f01ffbefc0707() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables creation of pull requests with automated fixes",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0759a51d01ffe06eb73ab8b() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "S3 bucket ARNs",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0c15b8cc414f60c192f0af4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Read-only human-readable title of the page, populated from service-side metadata",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3969ae502e8c6b00cfadcf3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ControlsScanning
+			"controls_scanning": schemaAttribute7f3b9c63c93f90544e00ea4b(),
+			// Property: GeneralPurposeScanning
+			"general_purpose_scanning": schemaAttributecef431d4739529e933f72433(),
+		}, /*END SCHEMA*/
+		Description: "Details of code review settings",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb919a54e027a9fd85988e07() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Identifier of the KMS key used to encrypt data. Can be a key ID, key ARN, alias name, or alias ARN. If not specified, an AWS managed key is used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd5cc18b0106251ab00ffcbe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "GitLab project namespace (user, group, or subgroup path)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec06e18e09c92037ba2ed9094() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of security group ARNs in the customer VPC",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec79b19b3d867ef2be54d47c0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Customer-supplied logical name for the Confluence document",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecef431d4739529e933f72433() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether general purpose analysis is performed for code review",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd07048013474bd2c7f4bf83() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeecaddc7cddcf75776dd27a25() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CreateDocument
+			"create_document": schemaAttribute0c0ba5500cbc65e85c1b7af1(),
+			// Property: FetchDocument
+			"fetch_document": schemaAttribute0edb90e953d259dfb19eaf42(),
+			// Property: UpdateDocument
+			"update_document": schemaAttribute5dae692cf4f04f7307fcb900(),
+		}, /*END SCHEMA*/
+		Description: "Confluence document capabilities",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_securityagent_agent_space", agentSpaceDataSource)
 }
@@ -31,10 +520,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Unique identifier of the agent space",
 		//	  "type": "string"
 		//	}
-		"agent_space_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique identifier of the agent space",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_space_id": schemaAttribute554c77caea81665daf5d5ddb(),
 		// Property: AwsResources
 		// CloudFormation resource type schema:
 		//
@@ -117,68 +603,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"aws_resources": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IamRoles
-				"iam_roles": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "IAM role ARNs",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LambdaFunctionArns
-				"lambda_function_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Lambda function ARNs used to retrieve tester credentials for pentests",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LogGroups
-				"log_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "CloudWatch log group ARNs",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: S3Buckets
-				"s3_buckets": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "S3 bucket ARNs",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecretArns
-				"secret_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "SecretsManager secret ARNs used to store tester credentials for pentests",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Vpcs
-				"vpcs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: SecurityGroupArns
-							"security_group_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "List of security group ARNs in the customer VPC",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SubnetArns
-							"subnet_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "List of subnet ARNs in the customer VPC",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: VpcArn
-							"vpc_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "ARN of the customer VPC",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "VPC configurations",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "AWS resource configuration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"aws_resources": schemaAttribute581681412b0add10a2223751(),
 		// Property: CodeReviewSettings
 		// CloudFormation resource type schema:
 		//
@@ -201,22 +626,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"code_review_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ControlsScanning
-				"controls_scanning": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Whether Controls are utilized for code review analysis",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: GeneralPurposeScanning
-				"general_purpose_scanning": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Whether general purpose analysis is performed for code review",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Details of code review settings",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"code_review_settings": schemaAttributeb3969ae502e8c6b00cfadcf3(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -225,11 +635,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "Timestamp when the agent space was created",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute9c7034e55fbdac444e0b6e0c(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -237,10 +643,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Description of the agent space",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description of the agent space",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeac5a4d017c92d2da85761347(),
 		// Property: IntegratedResources
 		// CloudFormation resource type schema:
 		//
@@ -483,184 +886,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"integrated_resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Integration
-					"integration": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Unique identifier of the Provider Integration",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ProviderResources
-					"provider_resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BitbucketCapabilities
-								"bitbucket_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: LeaveComments
-										"leave_comments": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Description: "Enables Code Review in the repository",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: RemediateCode
-										"remediate_code": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Description: "Enables creation of pull requests with automated fixes",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Bitbucket repository capabilities",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: BitbucketRepository
-								"bitbucket_repository": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Name
-										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Bitbucket repository name",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Workspace
-										"workspace": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Bitbucket workspace slug owning the repository",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Bitbucket repository details",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ConfluenceCapabilities
-								"confluence_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: CreateDocument
-										"create_document": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Description: "Enables creation of new Confluence documents in the same space",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: FetchDocument
-										"fetch_document": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Description: "Enables read access to the document content",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: UpdateDocument
-										"update_document": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Description: "Enables updates to the document",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Confluence document capabilities",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ConfluenceDocument
-								"confluence_document": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Name
-										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Customer-supplied logical name for the Confluence document",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: PageId
-										"page_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Confluence page identifier",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: SpaceKey
-										"space_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Confluence space key containing the document",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: SpaceTitle
-										"space_title": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Read-only human-readable title of the containing space, populated from service-side metadata",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Title
-										"title": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Read-only human-readable title of the page, populated from service-side metadata",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Confluence document details",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: GitHubCapabilities
-								"git_hub_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: LeaveComments
-										"leave_comments": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Description: "Enables Code Review in the repository",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: RemediateCode
-										"remediate_code": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Description: "Enables creation of pull requests with automated fixes",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "GitHub repository capabilities",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: GitHubRepository
-								"git_hub_repository": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Name
-										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "GitHub repository name",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Owner
-										"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "GitHub repository owner (user or organization)",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "GitHub repository details",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: GitLabCapabilities
-								"git_lab_capabilities": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: LeaveComments
-										"leave_comments": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Description: "Enables Code Review in the repository",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: RemediateCode
-										"remediate_code": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Description: "Enables creation of merge requests with automated fixes",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "GitLab repository capabilities",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: GitLabRepository
-								"git_lab_repository": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Name
-										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "GitLab project name",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Namespace
-										"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "GitLab project namespace (user, group, or subgroup path)",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "GitLab repository details",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "List of selected Resources from the Integration",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Integrated Resources configuration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"integrated_resources": schemaAttribute6e6bf9f0be7aefb37fba2e77(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -670,10 +896,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Identifier of the KMS key used to encrypt data. Can be a key ID, key ARN, alias name, or alias ARN. If not specified, an AWS managed key is used.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttributebb919a54e027a9fd85988e07(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -681,10 +904,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Name of the agent space",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of the agent space",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributea33442a067eb62bd891031a7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -717,24 +937,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags for the agent space",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributea9703184276983774cbae168(),
 		// Property: TargetDomainIds
 		// CloudFormation resource type schema:
 		//
@@ -746,11 +949,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"target_domain_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "List of target domain identifiers registered with the agent space",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_domain_ids": schemaAttribute3e526adc4d09f5f293618d5a(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -759,11 +958,7 @@ func agentSpaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "Timestamp when the agent space was last updated",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute727e3c79fcce9312ae5694fb(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

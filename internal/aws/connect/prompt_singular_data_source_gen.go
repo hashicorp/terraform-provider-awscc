@@ -14,6 +14,70 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute18ca6feb3276d73ec03856c1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the prompt.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute190b2ec261930e063c4ee04a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f487468e40ab6da06ec669d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the Amazon Connect instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48170399ca2e4ddd12c87c53() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the prompt.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute790f521002c13d3eb0d66636() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "S3 URI of the customer's audio file for creating prompts resource..",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a256148fb20182a6a3197d1() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributed6a49b68594764bb2da7004a(),
+				// Property: Value
+				"value": schemaAttribute190b2ec261930e063c4ee04a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb1e164878630304b81fb816e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the prompt.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6a49b68594764bb2da7004a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_prompt", promptDataSource)
 }
@@ -31,10 +95,7 @@ func promptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the prompt.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeb1e164878630304b81fb816e(),
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +104,7 @@ func promptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the Amazon Connect instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_arn": schemaAttribute2f487468e40ab6da06ec669d(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +114,7 @@ func promptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the prompt.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute18ca6feb3276d73ec03856c1(),
 		// Property: PromptArn
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +123,7 @@ func promptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/prompt/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"prompt_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the prompt.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"prompt_arn": schemaAttribute48170399ca2e4ddd12c87c53(),
 		// Property: S3Uri
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +134,7 @@ func promptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "s3://\\S+/.+|https://\\S+\\.s3(\\.\\S+)?\\.amazonaws\\.com/\\S+",
 		//	  "type": "string"
 		//	}
-		"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "S3 URI of the customer's audio file for creating prompts resource..",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"s3_uri": schemaAttribute790f521002c13d3eb0d66636(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -118,24 +167,7 @@ func promptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute8a256148fb20182a6a3197d1(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

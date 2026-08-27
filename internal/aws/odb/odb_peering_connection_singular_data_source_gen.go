@@ -15,6 +15,108 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute238e42d588f37aee082d86d0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The additional CIDR blocks for the ODB peering connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b50607378d36f0ab3239b1a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the ODB network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ecb5f272af79392ebbdad66() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the peer network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53a9e9867b37ccf299f15359() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the peer network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c96d5586b6bf2c6e66bf09b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the ODB network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute662e52da48b79eb95afdf3a6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute665a4fc9b490204fdf75c2ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the ODB peering connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0cbc34dfcd4d02191fc1627() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute662e52da48b79eb95afdf3a6(),
+				// Property: Value
+				"value": schemaAttributeea9512eee9e7eaaad51a8cf6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to assign to the Odb peering connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed955ae234e663110966d7a33() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the ODB peering connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee782db55f4984ae667f28ab6() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The CIDR blocks for the ODB peering connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea9512eee9e7eaaad51a8cf6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef67db587f4c195e0e1eba304() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The unique identifier of the VPC route table for which a route to the ODB network is automatically created during peering connection establishment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa7b507e909e738442b303d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the ODB peering connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_odb_odb_peering_connection", odbPeeringConnectionDataSource)
 }
@@ -35,11 +137,7 @@ func odbPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"additional_peer_network_cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The additional CIDR blocks for the ODB peering connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"additional_peer_network_cidrs": schemaAttribute238e42d588f37aee082d86d0(),
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -50,10 +148,7 @@ func odbPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the ODB peering connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"display_name": schemaAttribute665a4fc9b490204fdf75c2ca(),
 		// Property: OdbNetworkArn
 		// CloudFormation resource type schema:
 		//
@@ -61,10 +156,7 @@ func odbPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Amazon Resource Name (ARN) of the ODB network.",
 		//	  "type": "string"
 		//	}
-		"odb_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the ODB network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"odb_network_arn": schemaAttribute2b50607378d36f0ab3239b1a(),
 		// Property: OdbNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -75,10 +167,7 @@ func odbPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^(arn:(?:aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[a-z0-9-]+:[a-z0-9-]*:[0-9]+:[a-z0-9-]+/[a-zA-Z0-9_~.-]{6,64}|[a-zA-Z0-9_~.-]{6,64})$",
 		//	  "type": "string"
 		//	}
-		"odb_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the ODB network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"odb_network_id": schemaAttribute5c96d5586b6bf2c6e66bf09b(),
 		// Property: OdbPeeringConnectionArn
 		// CloudFormation resource type schema:
 		//
@@ -86,10 +175,7 @@ func odbPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Amazon Resource Name (ARN) of the ODB peering connection.",
 		//	  "type": "string"
 		//	}
-		"odb_peering_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the ODB peering connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"odb_peering_connection_arn": schemaAttributefa7b507e909e738442b303d0(),
 		// Property: OdbPeeringConnectionId
 		// CloudFormation resource type schema:
 		//
@@ -97,10 +183,7 @@ func odbPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The unique identifier of the ODB peering connection.",
 		//	  "type": "string"
 		//	}
-		"odb_peering_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the ODB peering connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"odb_peering_connection_id": schemaAttributed955ae234e663110966d7a33(),
 		// Property: PeerNetworkArn
 		// CloudFormation resource type schema:
 		//
@@ -108,10 +191,7 @@ func odbPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The Amazon Resource Name (ARN) of the peer network.",
 		//	  "type": "string"
 		//	}
-		"peer_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the peer network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"peer_network_arn": schemaAttribute53a9e9867b37ccf299f15359(),
 		// Property: PeerNetworkCidrs
 		// CloudFormation resource type schema:
 		//
@@ -124,11 +204,7 @@ func odbPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"peer_network_cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The CIDR blocks for the ODB peering connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"peer_network_cidrs": schemaAttributee782db55f4984ae667f28ab6(),
 		// Property: PeerNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -139,10 +215,7 @@ func odbPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^(arn:(?:aws|aws-cn|aws-us-gov|aws-iso-{0,1}[a-z]{0,1}):[a-z0-9-]+:[a-z0-9-]*:[0-9]+:[a-z0-9-]+/[a-zA-Z0-9_~.-]{6,64}|[a-zA-Z0-9_~.-]{6,64})$",
 		//	  "type": "string"
 		//	}
-		"peer_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the peer network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"peer_network_id": schemaAttribute4ecb5f272af79392ebbdad66(),
 		// Property: PeerNetworkRouteTableIds
 		// CloudFormation resource type schema:
 		//
@@ -155,11 +228,7 @@ func odbPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"peer_network_route_table_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The unique identifier of the VPC route table for which a route to the ODB network is automatically created during peering connection establishment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"peer_network_route_table_ids": schemaAttributef67db587f4c195e0e1eba304(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -191,24 +260,7 @@ func odbPeeringConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to assign to the Odb peering connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributea0cbc34dfcd4d02191fc1627(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

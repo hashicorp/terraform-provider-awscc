@@ -15,6 +15,50 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute38c548a6e0e7241dccb2bf86() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a175eb912f0aea21ca71eba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name to identify the key group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec044bd9bf3644fa9b47fa2c7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A comment to describe the key group. The comment cannot be longer than 128 characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2dc0c575c8f6752a013d2c4() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of the identifiers of the public keys in the key group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdf738099fe7893e28be1a9a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Comment
+			"comment": schemaAttributec044bd9bf3644fa9b47fa2c7(),
+			// Property: Items
+			"items": schemaAttributef2dc0c575c8f6752a013d2c4(),
+			// Property: Name
+			"name": schemaAttribute3a175eb912f0aea21ca71eba(),
+		}, /*END SCHEMA*/
+		Description: "The key group configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudfront_key_group", keyGroupDataSource)
 }
@@ -30,10 +74,7 @@ func keyGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"key_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"key_group_id": schemaAttribute38c548a6e0e7241dccb2bf86(),
 		// Property: KeyGroupConfig
 		// CloudFormation resource type schema:
 		//
@@ -64,28 +105,7 @@ func keyGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"key_group_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Comment
-				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A comment to describe the key group. The comment cannot be longer than 128 characters.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Items
-				"items": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of the identifiers of the public keys in the key group.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A name to identify the key group.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The key group configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"key_group_config": schemaAttributefdf738099fe7893e28be1a9a(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -93,10 +113,7 @@ func keyGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttribute38c548a6e0e7241dccb2bf86(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

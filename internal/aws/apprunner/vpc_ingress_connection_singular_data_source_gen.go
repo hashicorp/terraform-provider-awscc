@@ -14,6 +14,88 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0f42c102860db5d9e04c1b55() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the VpcIngressConnection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26cdaed4f8cb913abe22b141() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributed452f6d10ee1eec711169f9a(),
+				// Property: Value
+				"value": schemaAttributed452f6d10ee1eec711169f9a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49dddd6390638dc09bdfa39d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Domain name associated with the VPC Ingress Connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a4da76366b08f6a842bde2b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The customer-provided Vpc Ingress Connection name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a6975c219d1b48ab965df0d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the service.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute823f05f16a163437d07af6b4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: VpcEndpointId
+			"vpc_endpoint_id": schemaAttributed88b9fc83ffc7089b57389d6(),
+			// Property: VpcId
+			"vpc_id": schemaAttributec9e5e4a07d6a90d2dd7c1c2e(),
+		}, /*END SCHEMA*/
+		Description: "The configuration of customer?s VPC and related VPC endpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9e5e4a07d6a90d2dd7c1c2e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the VPC that the VPC endpoint is used in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed452f6d10ee1eec711169f9a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed88b9fc83ffc7089b57389d6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the VPC endpoint that your App Runner service connects to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefe396da30f653be9853d47b6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current status of the VpcIngressConnection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_apprunner_vpc_ingress_connection", vpcIngressConnectionDataSource)
 }
@@ -32,10 +114,7 @@ func vpcIngressConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "[A-Za-z0-9*.-]{1,255}",
 		//	  "type": "string"
 		//	}
-		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Domain name associated with the VPC Ingress Connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_name": schemaAttribute49dddd6390638dc09bdfa39d(),
 		// Property: IngressVpcConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -58,22 +137,7 @@ func vpcIngressConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"ingress_vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: VpcEndpointId
-				"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID of the VPC endpoint that your App Runner service connects to.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VpcId
-				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID of the VPC that the VPC endpoint is used in.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration of customer?s VPC and related VPC endpoint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ingress_vpc_configuration": schemaAttribute823f05f16a163437d07af6b4(),
 		// Property: ServiceArn
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +148,7 @@ func vpcIngressConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"service_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the service.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"service_arn": schemaAttribute5a6975c219d1b48ab965df0d(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -105,10 +166,7 @@ func vpcIngressConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current status of the VpcIngressConnection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributefe396da30f653be9853d47b6(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -127,21 +185,7 @@ func vpcIngressConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute26cdaed4f8cb913abe22b141(),
 		// Property: VpcIngressConnectionArn
 		// CloudFormation resource type schema:
 		//
@@ -152,10 +196,7 @@ func vpcIngressConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"vpc_ingress_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the VpcIngressConnection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_ingress_connection_arn": schemaAttribute0f42c102860db5d9e04c1b55(),
 		// Property: VpcIngressConnectionName
 		// CloudFormation resource type schema:
 		//
@@ -166,10 +207,7 @@ func vpcIngressConnectionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "[A-Za-z0-9][A-Za-z0-9\\-_]{3,39}",
 		//	  "type": "string"
 		//	}
-		"vpc_ingress_connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The customer-provided Vpc Ingress Connection name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_ingress_connection_name": schemaAttribute4a4da76366b08f6a842bde2b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

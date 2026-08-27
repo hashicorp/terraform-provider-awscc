@@ -14,6 +14,229 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute12ce434f51e2a2ae7e4596f7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the domain for which the recommender will be created",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1fa0e12ffa242b7053befca1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The reason for update failure",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute349de4090a671cd472010b09() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EventType
+				"event_type": schemaAttribute55c690681a528988dd0dd177(),
+				// Property: EventValueThreshold
+				"event_value_threshold": schemaAttributee29e61fe9a86e881b9cd49e8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of event parameters with their value thresholds",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c76ddc733493fc4e936757c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the recommender",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute55c690681a528988dd0dd177() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of event",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6050ad0d1b5793300fcf53ce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The reason for recommender failure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c4e6e28985ed1e344a2cefc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EventParametersList
+			"event_parameters_list": schemaAttribute349de4090a671cd472010b09(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for events used in the recommender",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e17dbe3ec92a3c9dd59a1c0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp of when the recommender was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute716c5cbe17a9319db6a8addf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EventsConfig
+			"events_config": schemaAttribute6c4e6e28985ed1e344a2cefc(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for the recommender",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79d343c0e125b44508c86190() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the recommender.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84edfe20aeb4770c012809b8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp of when the recommender was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b5b75676f7b18ea4c8b4e40() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the recommender",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute99aebecc6dd3a06f86a9ba8e() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe0638fb1cd04fdaed7008a7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: coverage
+			"coverage": schemaAttribute99aebecc6dd3a06f86a9ba8e(),
+			// Property: freshness
+			"freshness": schemaAttribute99aebecc6dd3a06f86a9ba8e(),
+			// Property: hit
+			"hit": schemaAttribute99aebecc6dd3a06f86a9ba8e(),
+			// Property: popularity
+			"popularity": schemaAttribute99aebecc6dd3a06f86a9ba8e(),
+			// Property: recall
+			"recall": schemaAttribute99aebecc6dd3a06f86a9ba8e(),
+			// Property: similarity
+			"similarity": schemaAttribute99aebecc6dd3a06f86a9ba8e(),
+		}, /*END SCHEMA*/
+		Description: "Training metrics by type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecee70b6a52e874fb49501cb8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the recommender.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed65c3fab732657d82f6224d3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp of when the update was created",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed97848a7478bfad6bc9e1e05() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Timestamp of the training metrics",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee29e61fe9a86e881b9cd49e8() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The threshold of the event type. Only events with a value greater or equal to this threshold will be considered for solution creation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee37ada7f55a65bc0e55d82a4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CreationDateTime
+			"creation_date_time": schemaAttributed65c3fab732657d82f6224d3(),
+			// Property: FailureReason
+			"failure_reason": schemaAttribute1fa0e12ffa242b7053befca1(),
+			// Property: LastUpdatedDateTime
+			"last_updated_date_time": schemaAttributef427245f355715b7fb1edea5(),
+			// Property: RecommenderConfig
+			"recommender_config": schemaAttribute716c5cbe17a9319db6a8addf(),
+			// Property: Status
+			"status": schemaAttribute8b5b75676f7b18ea4c8b4e40(),
+		}, /*END SCHEMA*/
+		Description: "Information about the latest recommender update",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb2061e76bc974950c2e4050() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributefec59519332538e30101ba91(),
+				// Property: Value
+				"value": schemaAttributefec59519332538e30101ba91(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags used to organize, track, or control access for this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef04e834fcd3fd5d22b9d96b9() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Metrics
+				"metrics": schemaAttributebe0638fb1cd04fdaed7008a7(),
+				// Property: Time
+				"time": schemaAttributed97848a7478bfad6bc9e1e05(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef427245f355715b7fb1edea5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp of when the update was last modified",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef671e9d1a11eb0b5cfa0f143() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the recommender recipe.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefec59519332538e30101ba91() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_customerprofiles_recommender", recommenderDataSource)
 }
@@ -29,10 +252,7 @@ func recommenderDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp of when the recommender was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp of when the recommender was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute84edfe20aeb4770c012809b8(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +262,7 @@ func recommenderDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the recommender.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute79d343c0e125b44508c86190(),
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +273,7 @@ func recommenderDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the domain for which the recommender will be created",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_name": schemaAttribute12ce434f51e2a2ae7e4596f7(),
 		// Property: FailureReason
 		// CloudFormation resource type schema:
 		//
@@ -67,10 +281,7 @@ func recommenderDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The reason for recommender failure.",
 		//	  "type": "string"
 		//	}
-		"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The reason for recommender failure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"failure_reason": schemaAttribute6050ad0d1b5793300fcf53ce(),
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -78,10 +289,7 @@ func recommenderDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp of when the recommender was last updated.",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp of when the recommender was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_at": schemaAttribute6e17dbe3ec92a3c9dd59a1c0(),
 		// Property: LatestRecommenderUpdate
 		// CloudFormation resource type schema:
 		//
@@ -161,65 +369,7 @@ func recommenderDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"latest_recommender_update": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CreationDateTime
-				"creation_date_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The timestamp of when the update was created",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FailureReason
-				"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The reason for update failure",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LastUpdatedDateTime
-				"last_updated_date_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The timestamp of when the update was last modified",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RecommenderConfig
-				"recommender_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: EventsConfig
-						"events_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: EventParametersList
-								"event_parameters_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: EventType
-											"event_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The type of event",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: EventValueThreshold
-											"event_value_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
-												Description: "The threshold of the event type. Only events with a value greater or equal to this threshold will be considered for solution creation.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "List of event parameters with their value thresholds",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Configuration for events used in the recommender",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration for the recommender",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Status
-				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The status of the recommender",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Information about the latest recommender update",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"latest_recommender_update": schemaAttributee37ada7f55a65bc0e55d82a4(),
 		// Property: RecommenderArn
 		// CloudFormation resource type schema:
 		//
@@ -230,10 +380,7 @@ func recommenderDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:([a-z\\d-]+):profile:.*:.*:.+$",
 		//	  "type": "string"
 		//	}
-		"recommender_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the recommender.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"recommender_arn": schemaAttributecee70b6a52e874fb49501cb8(),
 		// Property: RecommenderConfig
 		// CloudFormation resource type schema:
 		//
@@ -280,38 +427,7 @@ func recommenderDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"recommender_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EventsConfig
-				"events_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: EventParametersList
-						"event_parameters_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: EventType
-									"event_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The type of event",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: EventValueThreshold
-									"event_value_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "The threshold of the event type. Only events with a value greater or equal to this threshold will be considered for solution creation.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "List of event parameters with their value thresholds",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration for events used in the recommender",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration for the recommender",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"recommender_config": schemaAttribute716c5cbe17a9319db6a8addf(),
 		// Property: RecommenderName
 		// CloudFormation resource type schema:
 		//
@@ -322,10 +438,7 @@ func recommenderDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"recommender_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the recommender",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"recommender_name": schemaAttribute3c76ddc733493fc4e936757c(),
 		// Property: RecommenderRecipeName
 		// CloudFormation resource type schema:
 		//
@@ -335,10 +448,7 @@ func recommenderDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"recommender_recipe_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the recommender recipe.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"recommender_recipe_name": schemaAttributef671e9d1a11eb0b5cfa0f143(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -356,10 +466,7 @@ func recommenderDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the recommender",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute8b5b75676f7b18ea4c8b4e40(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -390,22 +497,7 @@ func recommenderDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags used to organize, track, or control access for this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeeb2061e76bc974950c2e4050(),
 		// Property: TrainingMetrics
 		// CloudFormation resource type schema:
 		//
@@ -448,49 +540,7 @@ func recommenderDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 5,
 		//	  "type": "array"
 		//	}
-		"training_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Metrics
-					"metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: coverage
-							"coverage": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: freshness
-							"freshness": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: hit
-							"hit": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: popularity
-							"popularity": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: recall
-							"recall": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: similarity
-							"similarity": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Training metrics by type",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Time
-					"time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Timestamp of the training metrics",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"training_metrics": schemaAttributef04e834fcd3fd5d22b9d96b9(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

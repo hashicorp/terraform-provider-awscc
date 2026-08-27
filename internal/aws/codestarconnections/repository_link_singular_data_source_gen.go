@@ -14,6 +14,84 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute09113d98b403a81341bb79b3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, , ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute148eb8e6ea9380b62d13198b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A UUID that uniquely identifies the RepositoryLink.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4641e12836ef76c2d2fb94ec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the CodeStarConnection. The ARN is used as the connection reference when the connection is shared between AWS services.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c8a8c853fb4f46662fd3664() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The repository for which the link is being created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute939ac93e8eba16fae1025398() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique Amazon Resource Name (ARN) to designate the repository link.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96a17532d4670a3183c4a59b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute09113d98b403a81341bb79b3(),
+				// Property: Value
+				"value": schemaAttributef2c37003e7f36418f91dc152(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Specifies the tags applied to a RepositoryLink.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb379c2cf763396a2b9b01844() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "the ID of the entity that owns the repository.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb56c92f8ab5e362803eae865() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the external provider where your third-party code repository is configured.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb809564e2d41a7250066da0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the KMS key that the customer can optionally specify to use to encrypt RepositoryLink properties. If not specified, a default key will be used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2c37003e7f36418f91dc152() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, , ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_codestarconnections_repository_link", repositoryLinkDataSource)
 }
@@ -30,10 +108,7 @@ func repositoryLinkDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):.+:.+:[0-9]{12}:.+",
 		//	  "type": "string"
 		//	}
-		"connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the CodeStarConnection. The ARN is used as the connection reference when the connection is shared between AWS services.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_arn": schemaAttribute4641e12836ef76c2d2fb94ec(),
 		// Property: EncryptionKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +117,7 @@ func repositoryLinkDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):.+:.+:[0-9]{12}:.+",
 		//	  "type": "string"
 		//	}
-		"encryption_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the KMS key that the customer can optionally specify to use to encrypt RepositoryLink properties. If not specified, a default key will be used.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"encryption_key_arn": schemaAttributedb809564e2d41a7250066da0(),
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +126,7 @@ func repositoryLinkDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[a-za-z0-9_\\.-]+",
 		//	  "type": "string"
 		//	}
-		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "the ID of the entity that owns the repository.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"owner_id": schemaAttributeb379c2cf763396a2b9b01844(),
 		// Property: ProviderType
 		// CloudFormation resource type schema:
 		//
@@ -72,10 +141,7 @@ func repositoryLinkDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the external provider where your third-party code repository is configured.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"provider_type": schemaAttributeb56c92f8ab5e362803eae865(),
 		// Property: RepositoryLinkArn
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +150,7 @@ func repositoryLinkDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):.+:.+:[0-9]{12}:.+",
 		//	  "type": "string"
 		//	}
-		"repository_link_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique Amazon Resource Name (ARN) to designate the repository link.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"repository_link_arn": schemaAttribute939ac93e8eba16fae1025398(),
 		// Property: RepositoryLinkId
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +159,7 @@ func repositoryLinkDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
 		//	  "type": "string"
 		//	}
-		"repository_link_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A UUID that uniquely identifies the RepositoryLink.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"repository_link_id": schemaAttribute148eb8e6ea9380b62d13198b(),
 		// Property: RepositoryName
 		// CloudFormation resource type schema:
 		//
@@ -108,10 +168,7 @@ func repositoryLinkDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[a-za-z0-9_\\.-]+",
 		//	  "type": "string"
 		//	}
-		"repository_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The repository for which the link is being created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"repository_name": schemaAttribute8c8a8c853fb4f46662fd3664(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -143,24 +200,7 @@ func repositoryLinkDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, , ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, , ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Specifies the tags applied to a RepositoryLink.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute96a17532d4670a3183c4a59b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

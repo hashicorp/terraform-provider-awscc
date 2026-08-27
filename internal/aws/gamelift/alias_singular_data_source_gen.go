@@ -14,6 +14,99 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0953c14c9371c602f5862aa1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17933dc1b49eeb33f3ff33f6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A descriptive label that is associated with an alias. Alias names do not need to be unique.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d2e9ac2c9ecc3701dd2e1d7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FleetId
+			"fleet_id": schemaAttribute0953c14c9371c602f5862aa1(),
+			// Property: Message
+			"message": schemaAttribute65c5c4740c8824edc2809539(),
+			// Property: Type
+			"type": schemaAttribute3f8c95ec2cbcb6f1bbe44cde(),
+		}, /*END SCHEMA*/
+		Description: "A routing configuration that specifies where traffic is directed for this alias, such as to a fleet or to a message.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute325546e9872c2d087a55e70a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f8c95ec2cbcb6f1bbe44cde() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65c5c4740c8824edc2809539() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a7dab377f9c709f398a449a() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributed6faa020869b77610a37f37c(),
+				// Property: Value
+				"value": schemaAttribute325546e9872c2d087a55e70a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90fe1e38ba9ca0ea664748cb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique alias ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0764f25bdedd8c7ff875a6d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A human-readable description of the alias.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3b9365dca19bf3d9ea6b2f0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift Alias resource and uniquely identifies it. ARNs are unique across all Regions. In a GameLift Alias ARN, the resource ID matches the AliasId value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6faa020869b77610a37f37c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_gamelift_alias", aliasDataSource)
 }
@@ -30,10 +123,7 @@ func aliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.*:alias\\/alias-\\S+",
 		//	  "type": "string"
 		//	}
-		"alias_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift Alias resource and uniquely identifies it. ARNs are unique across all Regions. In a GameLift Alias ARN, the resource ID matches the AliasId value.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"alias_arn": schemaAttributec3b9365dca19bf3d9ea6b2f0(),
 		// Property: AliasId
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +131,7 @@ func aliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Unique alias ID",
 		//	  "type": "string"
 		//	}
-		"alias_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique alias ID",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"alias_id": schemaAttribute90fe1e38ba9ca0ea664748cb(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +141,7 @@ func aliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A human-readable description of the alias.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeb0764f25bdedd8c7ff875a6d(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +152,7 @@ func aliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A descriptive label that is associated with an alias. Alias names do not need to be unique.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute17933dc1b49eeb33f3ff33f6(),
 		// Property: RoutingStrategy
 		// CloudFormation resource type schema:
 		//
@@ -114,27 +195,7 @@ func aliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"routing_strategy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FleetId
-				"fleet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Message
-				"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Type
-				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A routing configuration that specifies where traffic is directed for this alias, such as to a fleet or to a message.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"routing_strategy": schemaAttribute2d2e9ac2c9ecc3701dd2e1d7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -168,24 +229,7 @@ func aliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6a7dab377f9c709f398a449a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

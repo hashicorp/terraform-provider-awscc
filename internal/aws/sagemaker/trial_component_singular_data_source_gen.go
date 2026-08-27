@@ -15,6 +15,230 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0c711c67874ad256325648d4() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NumberValue
+				"number_value": schemaAttribute252b829380565fcfb85a6d9c(),
+				// Property: StringValue
+				"string_value": schemaAttributef306a3c7feb963fc4154da7a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The hyperparameters for the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0e55609ebb6990af4413fedd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CommitId
+			"commit_id": schemaAttribute49c1edd38a6f1e30e17d8ac4(),
+			// Property: GeneratedBy
+			"generated_by": schemaAttributef5504141d136f5ff2628b475(),
+			// Property: ProjectId
+			"project_id": schemaAttribute6aa01b05208c11941dd953c4(),
+			// Property: Repository
+			"repository": schemaAttribute8c6e60586d33f129105e0203(),
+		}, /*END SCHEMA*/
+		Description: "Metadata properties of the tracking entity, trial, or trial component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1313c9f0ec3b2ab69766d4ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the trial component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15cf21927ea459a53ea46e6f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The location of the artifact.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1c2b51029bbae6555cb65427() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MediaType
+				"media_type": schemaAttribute7a1a45313b2c63e584453a3d(),
+				// Property: Value
+				"value": schemaAttribute15cf21927ea459a53ea46e6f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The output artifacts for the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d9c5f742320bf48bb27933a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "When the trial component was last modified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute252b829380565fcfb85a6d9c() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The numeric value of a numeric hyperparameter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49c1edd38a6f1e30e17d8ac4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The commit ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5875cf8ee43517b73e9eeb4a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "When the trial component was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6337bfd29c43f27a19392b46() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeac10f0385a57d2ac57dc9247(),
+				// Property: Value
+				"value": schemaAttribute9e723c760d2d9ef0e6d8da05(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags to associate with the trial component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6aa01b05208c11941dd953c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The project ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute713d7796f52fa410c3e07a7d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the component as displayed. If DisplayName isn't specified, TrialComponentName is displayed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a1a45313b2c63e584453a3d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The media type of the artifact.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c6e60586d33f129105e0203() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The repository.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e723c760d2d9ef0e6d8da05() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e962954a9d489b2fba97b74() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the lineage group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac10f0385a57d2ac57dc9247() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeadecd25b706744f5ad45f274() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "If the component failed, a message describing why.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3151e5a2273b1f75717a9e9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the trial component. Must be unique in your AWS account and is not case-sensitive.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6c7a62a9be279c7ae669d63() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the trial component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9a2d2a11c491de2044a9524() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Message
+			"message": schemaAttributeadecd25b706744f5ad45f274(),
+			// Property: PrimaryStatus
+			"primary_status": schemaAttributee6c7a62a9be279c7ae669d63(),
+		}, /*END SCHEMA*/
+		Description: "The status of the trial component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef239f7dbefb67233ccbd8543() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MediaType
+				"media_type": schemaAttribute7a1a45313b2c63e584453a3d(),
+				// Property: Value
+				"value": schemaAttribute15cf21927ea459a53ea46e6f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The input artifacts for the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef306a3c7feb963fc4154da7a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The string value of a categorical hyperparameter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef5504141d136f5ff2628b475() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The entity this entity was generated by.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_trial_component", trialComponentDataSource)
 }
@@ -31,11 +255,7 @@ func trialComponentDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "When the trial component was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute5875cf8ee43517b73e9eeb4a(),
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +266,7 @@ func trialComponentDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,119}$",
 		//	  "type": "string"
 		//	}
-		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the component as displayed. If DisplayName isn't specified, TrialComponentName is displayed.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"display_name": schemaAttribute713d7796f52fa410c3e07a7d(),
 		// Property: InputArtifacts
 		// CloudFormation resource type schema:
 		//
@@ -81,25 +298,7 @@ func trialComponentDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"input_artifacts":         // Pattern: ""
-		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: MediaType
-					"media_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The media type of the artifact.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The location of the artifact.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The input artifacts for the component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"input_artifacts": schemaAttributef239f7dbefb67233ccbd8543(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -108,11 +307,7 @@ func trialComponentDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "When the trial component was last modified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttribute1d9c5f742320bf48bb27933a(),
 		// Property: LineageGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -121,10 +316,7 @@ func trialComponentDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"lineage_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the lineage group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"lineage_group_arn": schemaAttribute9e962954a9d489b2fba97b74(),
 		// Property: MetadataProperties
 		// CloudFormation resource type schema:
 		//
@@ -155,32 +347,7 @@ func trialComponentDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"metadata_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CommitId
-				"commit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The commit ID.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: GeneratedBy
-				"generated_by": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The entity this entity was generated by.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProjectId
-				"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The project ID.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Repository
-				"repository": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The repository.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Metadata properties of the tracking entity, trial, or trial component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"metadata_properties": schemaAttribute0e55609ebb6990af4413fedd(),
 		// Property: OutputArtifacts
 		// CloudFormation resource type schema:
 		//
@@ -212,25 +379,7 @@ func trialComponentDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"output_artifacts":        // Pattern: ""
-		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: MediaType
-					"media_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The media type of the artifact.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The location of the artifact.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The output artifacts for the component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"output_artifacts": schemaAttribute1c2b51029bbae6555cb65427(),
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -257,25 +406,7 @@ func trialComponentDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"parameters":              // Pattern: ""
-		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: NumberValue
-					"number_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "The numeric value of a numeric hyperparameter.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: StringValue
-					"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The string value of a categorical hyperparameter.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The hyperparameters for the component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parameters": schemaAttribute0c711c67874ad256325648d4(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -302,22 +433,7 @@ func trialComponentDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"status": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Message
-				"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "If the component failed, a message describing why.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PrimaryStatus
-				"primary_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The status of the trial component.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The status of the trial component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributee9a2d2a11c491de2044a9524(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -350,24 +466,7 @@ func trialComponentDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags to associate with the trial component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6337bfd29c43f27a19392b46(),
 		// Property: TrialComponentArn
 		// CloudFormation resource type schema:
 		//
@@ -377,10 +476,7 @@ func trialComponentDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:experiment-trial-component/",
 		//	  "type": "string"
 		//	}
-		"trial_component_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the trial component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"trial_component_arn": schemaAttribute1313c9f0ec3b2ab69766d4ca(),
 		// Property: TrialComponentName
 		// CloudFormation resource type schema:
 		//
@@ -391,10 +487,7 @@ func trialComponentDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,119}$",
 		//	  "type": "string"
 		//	}
-		"trial_component_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the trial component. Must be unique in your AWS account and is not case-sensitive.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"trial_component_name": schemaAttributeb3151e5a2273b1f75717a9e9(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,122 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1673d6bd1fc8751b0f3c92d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the configuration template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1c24eb138cc3d05b79ae5c73() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of an environment whose settings you want to use to create the configuration template. You must specify EnvironmentId if you don't specify PlatformArn, SolutionStackName, or SourceConfiguration. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33aa9da4093231f810e99f0d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the application associated with the configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute628308f02be0bfea42e81679() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the custom platform. For more information, see [Custom Platforms](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html) in the AWS Elastic Beanstalk Developer Guide. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83678cca0bd01b505ec847db() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Namespace
+				"namespace": schemaAttributede5a596acf38a05f43b6797f(),
+				// Property: OptionName
+				"option_name": schemaAttributedb45abfe225fabd33dcf0c5d(),
+				// Property: ResourceName
+				"resource_name": schemaAttributed85b3992b8ab078608a4c219(),
+				// Property: Value
+				"value": schemaAttributea5555c3c7122f96efa54ab08(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Option values for the Elastic Beanstalk configuration, such as the instance type. If specified, these values override the values obtained from the solution stack or the source configuration template. For a complete list of Elastic Beanstalk configuration options, see [Option Values](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html) in the AWS Elastic Beanstalk Developer Guide. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea5555c3c7122f96efa54ab08() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current value for the configuration option.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa944c110f7dc7742df5c812() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An optional description for this configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaec1a3d4a11c14249231b448() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of an Elastic Beanstalk solution stack (platform version) that this configuration uses. For example, 64bit Amazon Linux 2013.09 running Tomcat 7 Java 7. A solution stack specifies the operating system, runtime, and application server for a configuration template. It also determines the set of configuration options as well as the possible and default values. For more information, see [Supported Platforms](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html) in the AWS Elastic Beanstalk Developer Guide.\n\n You must specify SolutionStackName if you don't specify PlatformArn, EnvironmentId, or SourceConfiguration.\n\n Use the ListAvailableSolutionStacks API to obtain a list of available solution stacks. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5c9d6861cfdce4c001e01e5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Elastic Beanstalk application to associate with this configuration template. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb81d1b25168def30e7414d01() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApplicationName
+			"application_name": schemaAttribute33aa9da4093231f810e99f0d(),
+			// Property: TemplateName
+			"template_name": schemaAttribute1673d6bd1fc8751b0f3c92d0(),
+		}, /*END SCHEMA*/
+		Description: "An Elastic Beanstalk configuration template to base this one on. If specified, Elastic Beanstalk uses the configuration values from the specified configuration template to create a new configuration.\n\nValues specified in OptionSettings override any values obtained from the SourceConfiguration.\n\nYou must specify SourceConfiguration if you don't specify PlatformArn, EnvironmentId, or SolutionStackName.\n\nConstraint: If both solution stack name and source configuration are specified, the solution stack of the source configuration template must match the specified solution stack name. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebec0be852911837eeecc688b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the configuration template",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed85b3992b8ab078608a4c219() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique resource name for the option setting. Use it for a time–based scaling configuration option. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb45abfe225fabd33dcf0c5d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the configuration option.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede5a596acf38a05f43b6797f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique namespace that identifies the option's associated AWS resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_elasticbeanstalk_configuration_template", configurationTemplateDataSource)
 }
@@ -29,10 +145,7 @@ func configurationTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The name of the Elastic Beanstalk application to associate with this configuration template. ",
 		//	  "type": "string"
 		//	}
-		"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Elastic Beanstalk application to associate with this configuration template. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"application_name": schemaAttributeb5c9d6861cfdce4c001e01e5(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +153,7 @@ func configurationTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "An optional description for this configuration.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An optional description for this configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeaa944c110f7dc7742df5c812(),
 		// Property: EnvironmentId
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +161,7 @@ func configurationTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The ID of an environment whose settings you want to use to create the configuration template. You must specify EnvironmentId if you don't specify PlatformArn, SolutionStackName, or SourceConfiguration. ",
 		//	  "type": "string"
 		//	}
-		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of an environment whose settings you want to use to create the configuration template. You must specify EnvironmentId if you don't specify PlatformArn, SolutionStackName, or SourceConfiguration. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"environment_id": schemaAttribute1c24eb138cc3d05b79ae5c73(),
 		// Property: OptionSettings
 		// CloudFormation resource type schema:
 		//
@@ -91,34 +198,7 @@ func configurationTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"option_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Namespace
-					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A unique namespace that identifies the option's associated AWS resource.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: OptionName
-					"option_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the configuration option.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ResourceName
-					"resource_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A unique resource name for the option setting. Use it for a time–based scaling configuration option. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The current value for the configuration option.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Option values for the Elastic Beanstalk configuration, such as the instance type. If specified, these values override the values obtained from the solution stack or the source configuration template. For a complete list of Elastic Beanstalk configuration options, see [Option Values](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html) in the AWS Elastic Beanstalk Developer Guide. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"option_settings": schemaAttribute83678cca0bd01b505ec847db(),
 		// Property: PlatformArn
 		// CloudFormation resource type schema:
 		//
@@ -126,10 +206,7 @@ func configurationTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The Amazon Resource Name (ARN) of the custom platform. For more information, see [Custom Platforms](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html) in the AWS Elastic Beanstalk Developer Guide. ",
 		//	  "type": "string"
 		//	}
-		"platform_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the custom platform. For more information, see [Custom Platforms](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html) in the AWS Elastic Beanstalk Developer Guide. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"platform_arn": schemaAttribute628308f02be0bfea42e81679(),
 		// Property: SolutionStackName
 		// CloudFormation resource type schema:
 		//
@@ -137,10 +214,7 @@ func configurationTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The name of an Elastic Beanstalk solution stack (platform version) that this configuration uses. For example, 64bit Amazon Linux 2013.09 running Tomcat 7 Java 7. A solution stack specifies the operating system, runtime, and application server for a configuration template. It also determines the set of configuration options as well as the possible and default values. For more information, see [Supported Platforms](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html) in the AWS Elastic Beanstalk Developer Guide.\n\n You must specify SolutionStackName if you don't specify PlatformArn, EnvironmentId, or SourceConfiguration.\n\n Use the ListAvailableSolutionStacks API to obtain a list of available solution stacks. ",
 		//	  "type": "string"
 		//	}
-		"solution_stack_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of an Elastic Beanstalk solution stack (platform version) that this configuration uses. For example, 64bit Amazon Linux 2013.09 running Tomcat 7 Java 7. A solution stack specifies the operating system, runtime, and application server for a configuration template. It also determines the set of configuration options as well as the possible and default values. For more information, see [Supported Platforms](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html) in the AWS Elastic Beanstalk Developer Guide.\n\n You must specify SolutionStackName if you don't specify PlatformArn, EnvironmentId, or SourceConfiguration.\n\n Use the ListAvailableSolutionStacks API to obtain a list of available solution stacks. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"solution_stack_name": schemaAttributeaec1a3d4a11c14249231b448(),
 		// Property: SourceConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -163,22 +237,7 @@ func configurationTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ApplicationName
-				"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the application associated with the configuration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TemplateName
-				"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the configuration template.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An Elastic Beanstalk configuration template to base this one on. If specified, Elastic Beanstalk uses the configuration values from the specified configuration template to create a new configuration.\n\nValues specified in OptionSettings override any values obtained from the SourceConfiguration.\n\nYou must specify SourceConfiguration if you don't specify PlatformArn, EnvironmentId, or SolutionStackName.\n\nConstraint: If both solution stack name and source configuration are specified, the solution stack of the source configuration template must match the specified solution stack name. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_configuration": schemaAttributeb81d1b25168def30e7414d01(),
 		// Property: TemplateName
 		// CloudFormation resource type schema:
 		//
@@ -186,10 +245,7 @@ func configurationTemplateDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The name of the configuration template",
 		//	  "type": "string"
 		//	}
-		"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the configuration template",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"template_name": schemaAttributebec0be852911837eeecc688b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

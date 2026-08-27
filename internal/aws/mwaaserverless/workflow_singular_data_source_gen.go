@@ -16,6 +16,105 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute00a6cfe37d84d389b2c5213f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Bucket
+			"bucket": schemaAttributef24109cea96776ce3c7532f3(),
+			// Property: ObjectKey
+			"object_key": schemaAttributef24109cea96776ce3c7532f3(),
+			// Property: VersionId
+			"version_id": schemaAttributef24109cea96776ce3c7532f3(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a03d3a137b5053992ff65a1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogGroupName
+			"log_group_name": schemaAttributef24109cea96776ce3c7532f3(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b428ace56fca24b9098e6c1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CronExpression
+			"cron_expression": schemaAttributef24109cea96776ce3c7532f3(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute71313ef1b21d10a6fd2d5b30() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A map of key-value pairs to be applied as tags",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84a83c321ba80bb4e6f4e76d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Location
+			"s3_location": schemaAttribute00a6cfe37d84d389b2c5213f(),
+		}, /*END SCHEMA*/
+		Description: "The location of code artifacts in Amazon S3 for the workflow. Modeled as a single-member container so it stays extensible to future artifact types (e.g. OCI images).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba2b0e59304f0658d61276b9() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3e2b2fa42a95c9e9f34138d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttributeba2b0e59304f0658d61276b9(),
+			// Property: SubnetIds
+			"subnet_ids": schemaAttributeba2b0e59304f0658d61276b9(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed9261f279a456df5e7a019eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd84f4becdc4dd226791bc23() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KmsKeyId
+			"kms_key_id": schemaAttributef24109cea96776ce3c7532f3(),
+			// Property: Type
+			"type": schemaAttributef24109cea96776ce3c7532f3(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef24109cea96776ce3c7532f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_mwaaserverless_workflow", workflowDataSource)
 }
@@ -24,6 +123,50 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::MWAAServerless::Workflow resource.
 func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Code
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The location of code artifacts in Amazon S3 for the workflow. Modeled as a single-member container so it stays extensible to future artifact types (e.g. OCI images).",
+		//	  "properties": {
+		//	    "S3Location": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Bucket": {
+		//	          "maxLength": 63,
+		//	          "minLength": 3,
+		//	          "type": "string"
+		//	        },
+		//	        "ObjectKey": {
+		//	          "maxLength": 1024,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "VersionId": {
+		//	          "maxLength": 1024,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Bucket",
+		//	        "ObjectKey"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"code": schemaAttribute84a83c321ba80bb4e6f4e76d(),
+		// Property: CodeSnapshottedAt
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"code_snapshotted_at": schemaAttributed9261f279a456df5e7a019eb(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -31,10 +174,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributed9261f279a456df5e7a019eb(),
 		// Property: DefinitionS3Location
 		// CloudFormation resource type schema:
 		//
@@ -59,23 +199,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"definition_s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Bucket
-				"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ObjectKey
-				"object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: VersionId
-				"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"definition_s3_location": schemaAttribute00a6cfe37d84d389b2c5213f(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -85,9 +209,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^.+$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributef24109cea96776ce3c7532f3(),
 		// Property: EncryptionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -110,19 +232,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KmsKeyId
-				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Type
-				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"encryption_configuration": schemaAttributedd84f4becdc4dd226791bc23(),
 		// Property: LoggingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -139,15 +249,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LogGroupName
-				"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"logging_configuration": schemaAttribute2a03d3a137b5053992ff65a1(),
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
 		//
@@ -155,10 +257,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"modified_at": schemaAttributed9261f279a456df5e7a019eb(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -168,9 +267,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9\\.\\-_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributef24109cea96776ce3c7532f3(),
 		// Property: NetworkConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -192,21 +289,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SecurityGroupIds
-				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SubnetIds
-				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"network_configuration": schemaAttributed3e2b2fa42a95c9e9f34138d(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -216,9 +299,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(?:-(?:cn|us-gov|iso|iso-b|iso-e|iso-f))?:iam::[0-9]{12}:role(/[a-zA-Z0-9+=,.@_-]{1,512})*?/[a-zA-Z0-9+=,.@_-]{1,64}$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttributef24109cea96776ce3c7532f3(),
 		// Property: ScheduleConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -231,15 +312,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"schedule_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CronExpression
-				"cron_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"schedule_configuration": schemaAttribute5b428ace56fca24b9098e6c1(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -256,12 +329,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A map of key-value pairs to be applied as tags",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute71313ef1b21d10a6fd2d5b30(),
 		// Property: TriggerMode
 		// CloudFormation resource type schema:
 		//
@@ -270,9 +338,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"trigger_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"trigger_mode": schemaAttributef24109cea96776ce3c7532f3(),
 		// Property: WorkflowArn
 		// CloudFormation resource type schema:
 		//
@@ -282,9 +348,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(?:-(?:cn|us-gov|iso|iso-b|iso-e|iso-f))?:airflow-serverless:([a-z]{2}-[a-z]+-[0-9]{1}):([0-9]{12}):workflow/([a-zA-Z0-9][a-zA-Z0-9\\.\\-_]{0,254}-[a-zA-z0-9]{10})$",
 		//	  "type": "string"
 		//	}
-		"workflow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"workflow_arn": schemaAttributef24109cea96776ce3c7532f3(),
 		// Property: WorkflowStatus
 		// CloudFormation resource type schema:
 		//
@@ -295,9 +359,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"workflow_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"workflow_status": schemaAttributef24109cea96776ce3c7532f3(),
 		// Property: WorkflowVersion
 		// CloudFormation resource type schema:
 		//
@@ -307,9 +369,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9]{32}$",
 		//	  "type": "string"
 		//	}
-		"workflow_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"workflow_version": schemaAttributef24109cea96776ce3c7532f3(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -328,6 +388,8 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"bucket":                   "Bucket",
+		"code":                     "Code",
+		"code_snapshotted_at":      "CodeSnapshottedAt",
 		"created_at":               "CreatedAt",
 		"cron_expression":          "CronExpression",
 		"definition_s3_location":   "DefinitionS3Location",
@@ -341,6 +403,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"network_configuration":    "NetworkConfiguration",
 		"object_key":               "ObjectKey",
 		"role_arn":                 "RoleArn",
+		"s3_location":              "S3Location",
 		"schedule_configuration":   "ScheduleConfiguration",
 		"security_group_ids":       "SecurityGroupIds",
 		"subnet_ids":               "SubnetIds",

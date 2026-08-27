@@ -14,6 +14,148 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute13004f6445a07089969d389f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BaseUrl
+				"base_url": schemaAttribute29be741e2ca573d26ed9dbfe(),
+				// Property: Name
+				"name": schemaAttribute2b57e4725a165bf7306479a8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>A list of the segment delivery configurations associated with this resource.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute29be741e2ca573d26ed9dbfe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The base URL of the host or path of the segment delivery server that you're using to serve segments. This is typically a content delivery network (CDN). The URL can be absolute or relative. To use an absolute URL include the protocol, such as <code>https://example.com/some/path</code>. To use a relative URL specify the relative path, such as <code>/some/path*</code>.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a72a9d6a82a050cb6ff49d0() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute3fd96f93078dfdb7ffa46f5a(),
+				// Property: Value
+				"value": schemaAttribute3fd96f93078dfdb7ffa46f5a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags to assign to the source location.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b57e4725a165bf7306479a8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>A unique identifier used to distinguish between multiple segment delivery configurations in a source location.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e69246c6f79f35adf6c66d7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BaseUrl
+			"base_url": schemaAttribute7b3879bc90fb63d14a0c3fa8(),
+		}, /*END SCHEMA*/
+		Description: "<p>The HTTP configuration for the source location.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3fd96f93078dfdb7ffa46f5a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute590be20cbb51e87a20226637() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The name of the HTTP header used to supply the access token in requests to the source location.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b3879bc90fb63d14a0c3fa8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The base URL for the source location host server. This string must include the protocol, such as <b>https://</b>.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b30ebe3655dd855ab76c434() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccessType
+			"access_type": schemaAttribute3fd96f93078dfdb7ffa46f5a(),
+			// Property: SecretsManagerAccessTokenConfiguration
+			"secrets_manager_access_token_configuration": schemaAttributeb1740a280daf7f184b5be441(),
+		}, /*END SCHEMA*/
+		Description: "<p>Access configuration parameters.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f5c2322de3d614a879d7fa1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the access token.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4ffbc3af5339e3d7ec90398() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BaseUrl
+			"base_url": schemaAttributec957263e626dc0d095fb4a9c(),
+		}, /*END SCHEMA*/
+		Description: "<p>The optional configuration for a server that serves segments. Use this if you want the segment delivery server to be different from the source location server. For example, you can configure your source location server to be an origination server, such as MediaPackage, and the segment delivery server to be a content delivery network (CDN), such as CloudFront. If you don't specify a segment delivery server, then the source location server is used.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb1740a280daf7f184b5be441() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HeaderName
+			"header_name": schemaAttribute590be20cbb51e87a20226637(),
+			// Property: SecretArn
+			"secret_arn": schemaAttribute9f5c2322de3d614a879d7fa1(),
+			// Property: SecretStringKey
+			"secret_string_key": schemaAttributee295e9182f50641bf4d2b15c(),
+		}, /*END SCHEMA*/
+		Description: "<p>AWS Secrets Manager access token configuration parameters. For information about Secrets Manager access token authentication, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-access-configuration-access-token.html\">Working with AWS Secrets Manager access token authentication</a>.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec957263e626dc0d095fb4a9c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The hostname of the server that will be used to serve segments. This string must include the protocol, such as <b>https://</b>.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee295e9182f50641bf4d2b15c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The AWS Secrets Manager <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html#SecretsManager-CreateSecret-request-SecretString.html\">SecretString</a> key associated with the access token. MediaTailor uses the key to look up SecretString key and value pair containing the access token.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4c88a519c807656b978bed5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The ARN of the source location.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_mediatailor_source_location", sourceLocationDataSource)
 }
@@ -59,38 +201,7 @@ func sourceLocationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"access_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AccessType
-				"access_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecretsManagerAccessTokenConfiguration
-				"secrets_manager_access_token_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: HeaderName
-						"header_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The name of the HTTP header used to supply the access token in requests to the source location.</p>",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SecretArn
-						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the access token.</p>",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SecretStringKey
-						"secret_string_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The AWS Secrets Manager <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html#SecretsManager-CreateSecret-request-SecretString.html\">SecretString</a> key associated with the access token. MediaTailor uses the key to look up SecretString key and value pair containing the access token.</p>",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "<p>AWS Secrets Manager access token configuration parameters. For information about Secrets Manager access token authentication, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-access-configuration-access-token.html\">Working with AWS Secrets Manager access token authentication</a>.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "<p>Access configuration parameters.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"access_configuration": schemaAttribute8b30ebe3655dd855ab76c434(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -98,10 +209,7 @@ func sourceLocationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "\u003cp\u003eThe ARN of the source location.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The ARN of the source location.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributee4c88a519c807656b978bed5(),
 		// Property: DefaultSegmentDeliveryConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -116,17 +224,7 @@ func sourceLocationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"default_segment_delivery_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BaseUrl
-				"base_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>The hostname of the server that will be used to serve segments. This string must include the protocol, such as <b>https://</b>.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "<p>The optional configuration for a server that serves segments. Use this if you want the segment delivery server to be different from the source location server. For example, you can configure your source location server to be an origination server, such as MediaPackage, and the segment delivery server to be a content delivery network (CDN), such as CloudFront. If you don't specify a segment delivery server, then the source location server is used.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_segment_delivery_configuration": schemaAttributea4ffbc3af5339e3d7ec90398(),
 		// Property: HttpConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -144,17 +242,7 @@ func sourceLocationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"http_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BaseUrl
-				"base_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>The base URL for the source location host server. This string must include the protocol, such as <b>https://</b>.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "<p>The HTTP configuration for the source location.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"http_configuration": schemaAttribute2e69246c6f79f35adf6c66d7(),
 		// Property: SegmentDeliveryConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -178,33 +266,14 @@ func sourceLocationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"segment_delivery_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: BaseUrl
-					"base_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>The base URL of the host or path of the segment delivery server that you're using to serve segments. This is typically a content delivery network (CDN). The URL can be absolute or relative. To use an absolute URL include the protocol, such as <code>https://example.com/some/path</code>. To use a relative URL specify the relative path, such as <code>/some/path*</code>.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>A unique identifier used to distinguish between multiple segment delivery configurations in a source location.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "<p>A list of the segment delivery configurations associated with this resource.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"segment_delivery_configurations": schemaAttribute13004f6445a07089969d389f(),
 		// Property: SourceLocationName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"source_location_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"source_location_name": schemaAttribute3fd96f93078dfdb7ffa46f5a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -230,22 +299,7 @@ func sourceLocationDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags to assign to the source location.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute2a72a9d6a82a050cb6ff49d0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

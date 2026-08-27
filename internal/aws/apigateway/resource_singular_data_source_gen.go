@@ -14,6 +14,13 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute28c6fd2b5cd4e4ef5508ae05() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_apigateway_resource", resourceDataSource)
 }
@@ -29,10 +36,7 @@ func resourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"parent_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parent_id": schemaAttribute28c6fd2b5cd4e4ef5508ae05(),
 		// Property: PathPart
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +44,7 @@ func resourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"path_part": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"path_part": schemaAttribute28c6fd2b5cd4e4ef5508ae05(),
 		// Property: ResourceId
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +52,7 @@ func resourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_id": schemaAttribute28c6fd2b5cd4e4ef5508ae05(),
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +60,7 @@ func resourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rest_api_id": schemaAttribute28c6fd2b5cd4e4ef5508ae05(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

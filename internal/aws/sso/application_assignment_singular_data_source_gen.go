@@ -14,6 +14,27 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2309c7c1d2a209229368db12() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The entity type for which the assignment will be created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute50d0573b67466d380bd2cb1a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the application.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute693d867ae318e8e94bdd8249() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An identifier for an object in IAM Identity Center, such as a user or group",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sso_application_assignment", applicationAssignmentDataSource)
 }
@@ -32,10 +53,7 @@ func applicationAssignmentDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "arn:aws(-[a-z]{1,5}){0,3}:sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}",
 		//	  "type": "string"
 		//	}
-		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the application.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"application_arn": schemaAttribute50d0573b67466d380bd2cb1a(),
 		// Property: PrincipalId
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +64,7 @@ func applicationAssignmentDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"principal_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An identifier for an object in IAM Identity Center, such as a user or group",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"principal_id": schemaAttribute693d867ae318e8e94bdd8249(),
 		// Property: PrincipalType
 		// CloudFormation resource type schema:
 		//
@@ -61,10 +76,7 @@ func applicationAssignmentDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"principal_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The entity type for which the assignment will be created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"principal_type": schemaAttribute2309c7c1d2a209229368db12(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

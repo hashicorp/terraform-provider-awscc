@@ -15,6 +15,71 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2fdbd5cea0339ef7fb85b117() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the domain unit.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f3f6d8702fe7216d61a0dc0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp at which the domain unit was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6471904e0ab1d1044ac9b800() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp at which the domain unit was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4fac5521963176ee2704a04() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the domain unit that you want to get.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec99327276f5e44d8649e897b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the domain unit.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb8bf5220b702e2710e64392() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the domain where the domain unit was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed34e6a04bf2bba11d24a1f52() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the parent domain unit.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc506245383f7c3664034f07() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the domain where you want to create a domain unit.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5069bbb11c84c0682cf43a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the domain unit.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_datazone_domain_unit", domainUnitDataSource)
 }
@@ -31,11 +96,7 @@ func domainUnitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp at which the domain unit was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute6471904e0ab1d1044ac9b800(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +106,7 @@ func domainUnitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the domain unit.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributee5069bbb11c84c0682cf43a0(),
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +115,7 @@ func domainUnitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the domain where the domain unit was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_id": schemaAttributecb8bf5220b702e2710e64392(),
 		// Property: DomainIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -69,10 +124,7 @@ func domainUnitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the domain where you want to create a domain unit.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_identifier": schemaAttributedc506245383f7c3664034f07(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -83,10 +135,7 @@ func domainUnitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"domain_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the domain unit.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_unit_id": schemaAttributec99327276f5e44d8649e897b(),
 		// Property: Identifier
 		// CloudFormation resource type schema:
 		//
@@ -97,10 +146,7 @@ func domainUnitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the domain unit that you want to get.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"identifier": schemaAttributeb4fac5521963176ee2704a04(),
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -109,11 +155,7 @@ func domainUnitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp at which the domain unit was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_at": schemaAttribute5f3f6d8702fe7216d61a0dc0(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -124,10 +166,7 @@ func domainUnitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\w -]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the domain unit.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute2fdbd5cea0339ef7fb85b117(),
 		// Property: ParentDomainUnitId
 		// CloudFormation resource type schema:
 		//
@@ -138,10 +177,7 @@ func domainUnitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"parent_domain_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the parent domain unit.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parent_domain_unit_id": schemaAttributed34e6a04bf2bba11d24a1f52(),
 		// Property: ParentDomainUnitIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -152,10 +188,7 @@ func domainUnitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"parent_domain_unit_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the parent domain unit.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parent_domain_unit_identifier": schemaAttributed34e6a04bf2bba11d24a1f52(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

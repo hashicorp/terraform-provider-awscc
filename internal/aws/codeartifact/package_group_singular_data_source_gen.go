@@ -15,6 +15,155 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0d55621c062a5aec0a33812d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20c63c8fa0699f49c9f52fbb() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute292ecb405e141c5b063a2ee5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the package group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ede0a3f6fb7ff6d852447ed() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Repositories
+			"repositories": schemaAttribute20c63c8fa0699f49c9f52fbb(),
+			// Property: RestrictionMode
+			"restriction_mode": schemaAttribute91bd76e2268ee4278f8d107d(),
+		}, /*END SCHEMA*/
+		Description: "The internal upstream restriction determines if new package versions can be ingested or retained from upstream repositories.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41af0dcc7a75a0af5ad2d3a5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ExternalUpstream
+			"external_upstream": schemaAttributebf2468fbc116a029e97e60fa(),
+			// Property: InternalUpstream
+			"internal_upstream": schemaAttribute3ede0a3f6fb7ff6d852447ed(),
+			// Property: Publish
+			"publish": schemaAttribute9c14fe8508f35772447efaeb(),
+		}, /*END SCHEMA*/
+		Description: "The origin configuration that is applied to the package group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c4320421775f8f4f5e4b7db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The contact info of the package group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute55e138a89348c63315770362() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The text description of the package group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73a5dbb0b94839888f72e52f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Restrictions
+			"restrictions": schemaAttribute41af0dcc7a75a0af5ad2d3a5(),
+		}, /*END SCHEMA*/
+		Description: "The package origin configuration of the package group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78903819ffa80a2676870135() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributed026b1b029a5e5e8105252a6(),
+				// Property: Value
+				"value": schemaAttribute0d55621c062a5aec0a33812d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to the package group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a6a5469e0893e17bb1c97e7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The package group pattern that is used to gather packages.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91bd76e2268ee4278f8d107d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c14fe8508f35772447efaeb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Repositories
+			"repositories": schemaAttribute20c63c8fa0699f49c9f52fbb(),
+			// Property: RestrictionMode
+			"restriction_mode": schemaAttribute91bd76e2268ee4278f8d107d(),
+		}, /*END SCHEMA*/
+		Description: "The publish restriction determines if new package versions can be published.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebcd3f91f466aac8d0c77b8f5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the domain that contains the package group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf2468fbc116a029e97e60fa() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Repositories
+			"repositories": schemaAttribute20c63c8fa0699f49c9f52fbb(),
+			// Property: RestrictionMode
+			"restriction_mode": schemaAttribute91bd76e2268ee4278f8d107d(),
+		}, /*END SCHEMA*/
+		Description: "The external upstream restriction determines if new package versions can be ingested or retained from external connections.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed026b1b029a5e5e8105252a6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1abf2b228a0fc8d89f4a9ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The 12-digit account ID of the AWS account that owns the domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_codeartifact_package_group", packageGroupDataSource)
 }
@@ -32,10 +181,7 @@ func packageGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the package group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute292ecb405e141c5b063a2ee5(),
 		// Property: ContactInfo
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +190,7 @@ func packageGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
-		"contact_info": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The contact info of the package group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"contact_info": schemaAttribute4c4320421775f8f4f5e4b7db(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +199,7 @@ func packageGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The text description of the package group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute55e138a89348c63315770362(),
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +210,7 @@ func packageGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^([a-z][a-z0-9\\-]{0,48}[a-z0-9])$",
 		//	  "type": "string"
 		//	}
-		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the domain that contains the package group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_name": schemaAttributebcd3f91f466aac8d0c77b8f5(),
 		// Property: DomainOwner
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +219,7 @@ func packageGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "[0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"domain_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The 12-digit account ID of the AWS account that owns the domain.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_owner": schemaAttributee1abf2b228a0fc8d89f4a9ca(),
 		// Property: OriginConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -181,67 +315,7 @@ func packageGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"origin_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Restrictions
-				"restrictions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ExternalUpstream
-						"external_upstream": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Repositories
-								"repositories": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: RestrictionMode
-								"restriction_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The external upstream restriction determines if new package versions can be ingested or retained from external connections.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: InternalUpstream
-						"internal_upstream": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Repositories
-								"repositories": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: RestrictionMode
-								"restriction_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The internal upstream restriction determines if new package versions can be ingested or retained from upstream repositories.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Publish
-						"publish": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Repositories
-								"repositories": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: RestrictionMode
-								"restriction_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The publish restriction determines if new package versions can be published.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The origin configuration that is applied to the package group.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The package origin configuration of the package group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"origin_configuration": schemaAttribute73a5dbb0b94839888f72e52f(),
 		// Property: Pattern
 		// CloudFormation resource type schema:
 		//
@@ -251,10 +325,7 @@ func packageGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
-		"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The package group pattern that is used to gather packages.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"pattern": schemaAttribute8a6a5469e0893e17bb1c97e7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -285,24 +356,7 @@ func packageGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to the package group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute78903819ffa80a2676870135(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,68 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute10988e5a448883508859b86b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the RegexPatternSet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1faac719bd63a0f468ad45c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Use CLOUDFRONT for CloudFront RegexPatternSet, use REGIONAL for Application Load Balancer and API Gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a9d86d739674267bad93cdf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Description of the entity.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute508d12d62cbd8fe2d79dcbd2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Id of the RegexPatternSet",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8bc4bb89957b9777a2b32d2d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributecf5105c654ee7093c5ad242d(),
+				// Property: Value
+				"value": schemaAttributecf5105c654ee7093c5ad242d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf5105c654ee7093c5ad242d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc99407b08287686c36fc377() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefec3c7bf06df80dd3a687501() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the WAF entity.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_wafv2_regex_pattern_set", regexPatternSetDataSource)
 }
@@ -30,10 +92,7 @@ func regexPatternSetDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "ARN of the WAF entity.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ARN of the WAF entity.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributefec3c7bf06df80dd3a687501(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +101,7 @@ func regexPatternSetDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-zA-Z0-9=:#@/\\-,.][a-zA-Z0-9+=:#@/\\-,.\\s]+[a-zA-Z0-9+=:#@/\\-,.]{1,256}$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description of the entity.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute3a9d86d739674267bad93cdf(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +110,7 @@ func regexPatternSetDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"regex_pattern_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Id of the RegexPatternSet",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"regex_pattern_set_id": schemaAttribute508d12d62cbd8fe2d79dcbd2(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -66,10 +119,7 @@ func regexPatternSetDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[0-9A-Za-z_-]{1,128}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of the RegexPatternSet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute10988e5a448883508859b86b(),
 		// Property: RegularExpressionList
 		// CloudFormation resource type schema:
 		//
@@ -79,10 +129,7 @@ func regexPatternSetDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "array"
 		//	}
-		"regular_expression_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"regular_expression_list": schemaAttributefc99407b08287686c36fc377(),
 		// Property: Scope
 		// CloudFormation resource type schema:
 		//
@@ -94,10 +141,7 @@ func regexPatternSetDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Use CLOUDFRONT for CloudFront RegexPatternSet, use REGIONAL for Application Load Balancer and API Gateway.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scope": schemaAttribute1faac719bd63a0f468ad45c4(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -121,21 +165,7 @@ func regexPatternSetDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute8bc4bb89957b9777a2b32d2d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

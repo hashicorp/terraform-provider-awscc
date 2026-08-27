@@ -15,6 +15,127 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0b1c88d83986c4bbf60d0d51() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The sso instance arn that the permission set is owned.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c6a01a1b6cda1a783146809() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute63c438f3722aefbfb1940cab(),
+				// Property: Path
+				"path": schemaAttribute63c438f3722aefbfb1940cab(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0cfa49fc2a47a13c74af779c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The permission set description.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3fca0206fcad62185986a9d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The inline policy to put in permission set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute46f20ede7cb9b9a05dce797a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttribute63c438f3722aefbfb1940cab(),
+			// Property: Path
+			"path": schemaAttribute63c438f3722aefbfb1940cab(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute610ef2f1136386096ca2893f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The managed policy to attach.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63c438f3722aefbfb1940cab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a8cafe73e93434d163a65a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name you want to assign to this permission set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6fee26929f7257d725760e81() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute63c438f3722aefbfb1940cab(),
+				// Property: Value
+				"value": schemaAttribute63c438f3722aefbfb1940cab(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a98c3ccaaffd6d7320fedc5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomerManagedPolicyReference
+			"customer_managed_policy_reference": schemaAttribute46f20ede7cb9b9a05dce797a(),
+			// Property: ManagedPolicyArn
+			"managed_policy_arn": schemaAttribute610ef2f1136386096ca2893f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9668dcd3bcb4890e635e7455() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The length of time that a user can be signed in to an AWS account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea5a9c0cc8d3b1bc35bf5d896() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The permission set that the policy will be attached to",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb66e18a47522c8c35e87a28a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebfe97d8de070c1b572b73a3a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The relay state URL that redirect links to any service in the AWS Management Console.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sso_permission_set", permissionSetDataSource)
 }
@@ -53,21 +174,7 @@ func permissionSetDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxItems": 25,
 		//	  "type": "array"
 		//	}
-		"customer_managed_policy_references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Path
-					"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"customer_managed_policy_references": schemaAttribute0c6a01a1b6cda1a783146809(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -78,10 +185,7 @@ func permissionSetDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The permission set description.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute0cfa49fc2a47a13c74af779c(),
 		// Property: InlinePolicy
 		// CloudFormation resource type schema:
 		//
@@ -89,10 +193,7 @@ func permissionSetDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The inline policy to put in permission set.",
 		//	  "type": "string"
 		//	}
-		"inline_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The inline policy to put in permission set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"inline_policy": schemaAttribute3fca0206fcad62185986a9d0(),
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -103,10 +204,7 @@ func permissionSetDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The sso instance arn that the permission set is owned.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_arn": schemaAttribute0b1c88d83986c4bbf60d0d51(),
 		// Property: ManagedPolicies
 		// CloudFormation resource type schema:
 		//
@@ -122,10 +220,7 @@ func permissionSetDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxItems": 25,
 		//	  "type": "array"
 		//	}
-		"managed_policies": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"managed_policies": schemaAttributeb66e18a47522c8c35e87a28a(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -136,10 +231,7 @@ func permissionSetDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "[\\w+=,.@-]+",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name you want to assign to this permission set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute6a8cafe73e93434d163a65a0(),
 		// Property: PermissionSetArn
 		// CloudFormation resource type schema:
 		//
@@ -150,10 +242,7 @@ func permissionSetDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "arn:aws(-[a-z]{1,5}){0,3}:sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
 		//	  "type": "string"
 		//	}
-		"permission_set_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The permission set that the policy will be attached to",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"permission_set_arn": schemaAttributea5a9c0cc8d3b1bc35bf5d896(),
 		// Property: PermissionsBoundary
 		// CloudFormation resource type schema:
 		//
@@ -190,30 +279,7 @@ func permissionSetDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"permissions_boundary": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomerManagedPolicyReference
-				"customer_managed_policy_reference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Name
-						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Path
-						"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ManagedPolicyArn
-				"managed_policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The managed policy to attach.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"permissions_boundary": schemaAttribute8a98c3ccaaffd6d7320fedc5(),
 		// Property: RelayStateType
 		// CloudFormation resource type schema:
 		//
@@ -224,10 +290,7 @@ func permissionSetDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "[a-zA-Z0-9\u0026amp;$@#\\/%?=~\\-_'\u0026quot;|!:,.;*+\\[\\]\\ \\(\\)\\{\\}]+",
 		//	  "type": "string"
 		//	}
-		"relay_state_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The relay state URL that redirect links to any service in the AWS Management Console.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"relay_state_type": schemaAttributebfe97d8de070c1b572b73a3a(),
 		// Property: SessionDuration
 		// CloudFormation resource type schema:
 		//
@@ -238,10 +301,7 @@ func permissionSetDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"session_duration": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The length of time that a user can be signed in to an AWS account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"session_duration": schemaAttribute9668dcd3bcb4890e635e7455(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -273,21 +333,7 @@ func permissionSetDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6fee26929f7257d725760e81(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

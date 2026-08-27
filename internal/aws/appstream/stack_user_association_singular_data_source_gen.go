@@ -14,6 +14,34 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0c3770ba0df449575d8febd1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the user who is associated with the stack.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0e8209ce511f80ea121e6881() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether a welcome email is sent to a user after the user is created in the user pool.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b7d09339979b302b40ffa63() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the stack that is associated with the user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef57ec4cc1a799c531b02b7d9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The authentication type for the user who is associated with the stack. You must specify USERPOOL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_appstream_stack_user_association", stackUserAssociationDataSource)
 }
@@ -29,10 +57,7 @@ func stackUserAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The authentication type for the user who is associated with the stack. You must specify USERPOOL.",
 		//	  "type": "string"
 		//	}
-		"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The authentication type for the user who is associated with the stack. You must specify USERPOOL.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"authentication_type": schemaAttributef57ec4cc1a799c531b02b7d9(),
 		// Property: SendEmailNotification
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +65,7 @@ func stackUserAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "Specifies whether a welcome email is sent to a user after the user is created in the user pool.",
 		//	  "type": "boolean"
 		//	}
-		"send_email_notification": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether a welcome email is sent to a user after the user is created in the user pool.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"send_email_notification": schemaAttribute0e8209ce511f80ea121e6881(),
 		// Property: StackName
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +73,7 @@ func stackUserAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The name of the stack that is associated with the user.",
 		//	  "type": "string"
 		//	}
-		"stack_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the stack that is associated with the user.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"stack_name": schemaAttribute7b7d09339979b302b40ffa63(),
 		// Property: UserName
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +81,7 @@ func stackUserAssociationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The name of the user who is associated with the stack.",
 		//	  "type": "string"
 		//	}
-		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the user who is associated with the stack.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"user_name": schemaAttribute0c3770ba0df449575d8febd1(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

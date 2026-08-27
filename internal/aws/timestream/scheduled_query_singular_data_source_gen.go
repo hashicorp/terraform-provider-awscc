@@ -14,6 +14,397 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute059a472e67fefe20b3bddcaa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Value type of the measure value column to be read from the query result.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0e772afbf1e8ce3ae38564e1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TimestreamConfiguration
+			"timestream_configuration": schemaAttribute4c3d46201c24700f2ee6c5eb(),
+		}, /*END SCHEMA*/
+		Description: "Configuration of target store where scheduled query results are written to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute119d602f8d82ce17835f62ad() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TopicArn
+			"topic_arn": schemaAttribute95b4d9a4687f6a4794331132(),
+		}, /*END SCHEMA*/
+		Description: "SNS configuration for notification upon scheduled query execution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute137ee8a380fdce604b77d1f9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of Timestream table that the query result will be written to. The table should be within the same database that is provided in Timestream configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute138b52c15d06dfd5cc9e7c0c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DimensionValueType
+				"dimension_value_type": schemaAttribute9c5ca49c365bc92121618fef(),
+				// Property: Name
+				"name": schemaAttribute9ac1e9f3d2fc77466dcf07fe(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "This is to allow mapping column(s) from the query result to the dimension in the destination table.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute14f90434cfcb53bccd6c3d66() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MeasureName
+				"measure_name": schemaAttribute5a0e56e3e2b67bf274fd6acc(),
+				// Property: MeasureValueType
+				"measure_value_type": schemaAttribute6be9f4dbf3bde19255732da8(),
+				// Property: MultiMeasureAttributeMappings
+				"multi_measure_attribute_mappings": schemaAttribute37d7779e116624fb88a37f8c(),
+				// Property: SourceColumn
+				"source_column": schemaAttribute5ba9605e0030954647011a1c(),
+				// Property: TargetMeasureName
+				"target_measure_name": schemaAttributedfb795c2766f15af22ffb61a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Specifies how to map measures to multi-measure records.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c5199975b4dff4c8b2b5112() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Configuration of target store where scheduled query results are written to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ef1eabc0d91a40e8c660853() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MultiMeasureAttributeMappings
+			"multi_measure_attribute_mappings": schemaAttribute37d7779e116624fb88a37f8c(),
+			// Property: TargetMultiMeasureName
+			"target_multi_measure_name": schemaAttributeb59caa713446ae2d5baadacb(),
+		}, /*END SCHEMA*/
+		Description: "Only one of MixedMeasureMappings or MultiMeasureMappings is to be provided. MultiMeasureMappings can be used to ingest data as multi measures in the derived table.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute32026ce4e0371f982792406d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The query string to run. Parameter names can be specified in the query string @ character followed by an identifier. The named Parameter @scheduled_runtime is reserved and can be used in the query to get the time at which the query is scheduled to run. The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of @scheduled_runtime paramater for each query run. For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the @scheduled_runtime parameter is initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute36ea9c69be58faf609fb77dc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Prefix for error report keys.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37d7779e116624fb88a37f8c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MeasureValueType
+				"measure_value_type": schemaAttribute059a472e67fefe20b3bddcaa(),
+				// Property: SourceColumn
+				"source_column": schemaAttributeb9d87495760181a583bb9c09(),
+				// Property: TargetMultiMeasureAttributeName
+				"target_multi_measure_attribute_name": schemaAttribute987920d232d960bc49201bd0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute382093f2484d42ce7e40ca77() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SnsConfiguration
+			"sns_configuration": schemaAttribute119d602f8d82ce17835f62ad(),
+		}, /*END SCHEMA*/
+		Description: "Notification configuration for the scheduled query. A notification is sent by Timestream when a query run finishes, when the state is updated or when you delete it.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40cc473541115e9eecaaa5b1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS key is not specified, the scheduled query resource will be encrypted with a Timestream owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix the name with alias/. If ErrorReportConfiguration uses SSE_KMS as encryption type, the same KmsKeyId is used to encrypt the error report at rest.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42aae9e0174e6f13458daea4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the scheduled query. Scheduled query names must be unique within each Region.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c3d46201c24700f2ee6c5eb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DatabaseName
+			"database_name": schemaAttributeaab68357c8b02ac23237aa58(),
+			// Property: DimensionMappings
+			"dimension_mappings": schemaAttribute138b52c15d06dfd5cc9e7c0c(),
+			// Property: MeasureNameColumn
+			"measure_name_column": schemaAttributeff923c04f364954260e99433(),
+			// Property: MixedMeasureMappings
+			"mixed_measure_mappings": schemaAttribute14f90434cfcb53bccd6c3d66(),
+			// Property: MultiMeasureMappings
+			"multi_measure_mappings": schemaAttribute2ef1eabc0d91a40e8c660853(),
+			// Property: TableName
+			"table_name": schemaAttribute137ee8a380fdce604b77d1f9(),
+			// Property: TimeColumn
+			"time_column": schemaAttribute4f48b9a28b72ececa4861034(),
+		}, /*END SCHEMA*/
+		Description: "Configuration needed to write data into the Timestream database and table.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f48b9a28b72ececa4861034() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Column from query result that should be used as the time column in destination table. Column type for this should be TIMESTAMP.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a0e56e3e2b67bf274fd6acc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Refers to the value of the measure name in a result row. This field is required if MeasureNameColumn is provided.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ba9605e0030954647011a1c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "This field refers to the source column from which the measure value is to be read for result materialization.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6be9f4dbf3bde19255732da8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Type of the value that is to be read from SourceColumn. If the mapping is for MULTI, use MeasureValueType.MULTI.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute776aba01d8c89148204d832c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ScheduleExpression
+			"schedule_expression": schemaAttribute9f958553830a7a61a4f9664c(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for when the scheduled query is executed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ddba4c950cef9b0a1c4010c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80e2b43428fd1817542f86df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN for the IAM role that Timestream will assume when running the scheduled query.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute918d3a38f55c7bbbcd766dd7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the S3 bucket under which error reports will be created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95b4d9a4687f6a4794331132() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "SNS topic ARN that the scheduled query status notifications will be sent to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute976d3eb5ffc0d5664a853c85() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute987920d232d960bc49201bd0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Custom name to be used for attribute name in derived table. If not provided, source column name would be used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ac1e9f3d2fc77466dcf07fe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Column name from query result.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c5ca49c365bc92121618fef() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Type for the dimension.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f958553830a7a61a4f9664c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An expression that denotes when to trigger the scheduled query run. This can be a cron expression or a rate expression.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaab68357c8b02ac23237aa58() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of Timestream database to which the query result will be written.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf7f5efed7bd8cbaac19ec95() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb404506904a93ad5f73b52bb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketName
+			"bucket_name": schemaAttribute918d3a38f55c7bbbcd766dd7(),
+			// Property: EncryptionOption
+			"encryption_option": schemaAttributed1821e1fbd084792314cd725(),
+			// Property: ObjectKeyPrefix
+			"object_key_prefix": schemaAttribute36ea9c69be58faf609fb77dc(),
+		}, /*END SCHEMA*/
+		Description: "Details on S3 location for error reports that result from running a query.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb59caa713446ae2d5baadacb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the target multi-measure in the derived table. Required if MeasureNameColumn is not provided. If MeasureNameColumn is provided then the value from that column will be used as the multi-measure name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9d87495760181a583bb9c09() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Source measure value column in the query result where the attribute value is to be read.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf291bdd9c952cb3abca64bd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Configuration for when the scheduled query is executed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1821e1fbd084792314cd725() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Encryption at rest options for the error reports. If no encryption option is specified, Timestream will choose SSE_S3 as default.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedbd56a5c02e4e2007050d21a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute976d3eb5ffc0d5664a853c85(),
+				// Property: Value
+				"value": schemaAttributeaf7f5efed7bd8cbaac19ec95(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs to label the scheduled query.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede58232b7d4d56b5136bbc24() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name of the scheduled query that is generated upon creation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedfb795c2766f15af22ffb61a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Target measure name to be used. If not provided, the target measure name by default would be MeasureName if provided, or SourceColumn otherwise.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb179988811a125333a8c840() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Using a ClientToken makes the call to CreateScheduledQuery idempotent, in other words, making the same request repeatedly will produce the same result. Making multiple identical CreateScheduledQuery requests has the same effect as making a single request. If CreateScheduledQuery is called without a ClientToken, the Query SDK generates a ClientToken on your behalf. After 8 hours, any request with the same ClientToken is treated as a new request.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec8a78e9f26a3391831bfff1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Configuration
+			"s3_configuration": schemaAttributeb404506904a93ad5f73b52bb(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef172b075da2a0a0ad6b0d87a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Notification configuration for the scheduled query. A notification is sent by Timestream when a query run finishes, when the state is updated or when you delete it.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff923c04f364954260e99433() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the measure name column from the query result.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_timestream_scheduled_query", scheduledQueryDataSource)
 }
@@ -31,10 +422,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name of the scheduled query that is generated upon creation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributede58232b7d4d56b5136bbc24(),
 		// Property: ClientToken
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +432,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 32,
 		//	  "type": "string"
 		//	}
-		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Using a ClientToken makes the call to CreateScheduledQuery idempotent, in other words, making the same request repeatedly will produce the same result. Making multiple identical CreateScheduledQuery requests has the same effect as making a single request. If CreateScheduledQuery is called without a ClientToken, the Query SDK generates a ClientToken on your behalf. After 8 hours, any request with the same ClientToken is treated as a new request.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"client_token": schemaAttributeeb179988811a125333a8c840(),
 		// Property: ErrorReportConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -93,34 +478,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"error_report_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: S3Configuration
-				"s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BucketName
-						"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Name of the S3 bucket under which error reports will be created.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: EncryptionOption
-						"encryption_option": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Encryption at rest options for the error reports. If no encryption option is specified, Timestream will choose SSE_S3 as default.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ObjectKeyPrefix
-						"object_key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Prefix for error report keys.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Details on S3 location for error reports that result from running a query.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"error_report_configuration": schemaAttributeec8a78e9f26a3391831bfff1(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -130,10 +488,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS key is not specified, the scheduled query resource will be encrypted with a Timestream owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix the name with alias/. If ErrorReportConfiguration uses SSE_KMS as encryption type, the same KmsKeyId is used to encrypt the error report at rest.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttribute40cc473541115e9eecaaa5b1(),
 		// Property: NotificationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -163,24 +518,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"notification_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SnsConfiguration
-				"sns_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: TopicArn
-						"topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "SNS topic ARN that the scheduled query status notifications will be sent to.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "SNS configuration for notification upon scheduled query execution.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Notification configuration for the scheduled query. A notification is sent by Timestream when a query run finishes, when the state is updated or when you delete it.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"notification_configuration": schemaAttribute382093f2484d42ce7e40ca77(),
 		// Property: QueryString
 		// CloudFormation resource type schema:
 		//
@@ -190,10 +528,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The query string to run. Parameter names can be specified in the query string @ character followed by an identifier. The named Parameter @scheduled_runtime is reserved and can be used in the query to get the time at which the query is scheduled to run. The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of @scheduled_runtime paramater for each query run. For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the @scheduled_runtime parameter is initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"query_string": schemaAttribute32026ce4e0371f982792406d(),
 		// Property: SQErrorReportConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -201,10 +536,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results.",
 		//	  "type": "string"
 		//	}
-		"sq_error_report_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Configuration for error reporting. Error reports will be generated when a problem is encountered when writing the query results.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sq_error_report_configuration": schemaAttribute7ddba4c950cef9b0a1c4010c(),
 		// Property: SQKmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -212,10 +544,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS key is not specified, the scheduled query resource will be encrypted with a Timestream owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix the name with alias/. If ErrorReportConfiguration uses SSE_KMS as encryption type, the same KmsKeyId is used to encrypt the error report at rest.",
 		//	  "type": "string"
 		//	}
-		"sq_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon KMS key used to encrypt the scheduled query resource, at-rest. If the Amazon KMS key is not specified, the scheduled query resource will be encrypted with a Timestream owned Amazon KMS key. To specify a KMS key, use the key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix the name with alias/. If ErrorReportConfiguration uses SSE_KMS as encryption type, the same KmsKeyId is used to encrypt the error report at rest.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sq_kms_key_id": schemaAttribute40cc473541115e9eecaaa5b1(),
 		// Property: SQName
 		// CloudFormation resource type schema:
 		//
@@ -223,10 +552,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The name of the scheduled query. Scheduled query names must be unique within each Region.",
 		//	  "type": "string"
 		//	}
-		"sq_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the scheduled query. Scheduled query names must be unique within each Region.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sq_name": schemaAttribute42aae9e0174e6f13458daea4(),
 		// Property: SQNotificationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -234,10 +560,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Notification configuration for the scheduled query. A notification is sent by Timestream when a query run finishes, when the state is updated or when you delete it.",
 		//	  "type": "string"
 		//	}
-		"sq_notification_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Notification configuration for the scheduled query. A notification is sent by Timestream when a query run finishes, when the state is updated or when you delete it.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sq_notification_configuration": schemaAttributef172b075da2a0a0ad6b0d87a(),
 		// Property: SQQueryString
 		// CloudFormation resource type schema:
 		//
@@ -245,10 +568,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The query string to run. Parameter names can be specified in the query string @ character followed by an identifier. The named Parameter @scheduled_runtime is reserved and can be used in the query to get the time at which the query is scheduled to run. The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of @scheduled_runtime paramater for each query run. For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the @scheduled_runtime parameter is initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.",
 		//	  "type": "string"
 		//	}
-		"sq_query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The query string to run. Parameter names can be specified in the query string @ character followed by an identifier. The named Parameter @scheduled_runtime is reserved and can be used in the query to get the time at which the query is scheduled to run. The timestamp calculated according to the ScheduleConfiguration parameter, will be the value of @scheduled_runtime paramater for each query run. For example, consider an instance of a scheduled query executing on 2021-12-01 00:00:00. For this instance, the @scheduled_runtime parameter is initialized to the timestamp 2021-12-01 00:00:00 when invoking the query.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sq_query_string": schemaAttribute32026ce4e0371f982792406d(),
 		// Property: SQScheduleConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -256,10 +576,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Configuration for when the scheduled query is executed.",
 		//	  "type": "string"
 		//	}
-		"sq_schedule_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Configuration for when the scheduled query is executed.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sq_schedule_configuration": schemaAttributecf291bdd9c952cb3abca64bd(),
 		// Property: SQScheduledQueryExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -267,10 +584,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The ARN for the IAM role that Timestream will assume when running the scheduled query.",
 		//	  "type": "string"
 		//	}
-		"sq_scheduled_query_execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN for the IAM role that Timestream will assume when running the scheduled query.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sq_scheduled_query_execution_role_arn": schemaAttribute80e2b43428fd1817542f86df(),
 		// Property: SQTargetConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -278,10 +592,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Configuration of target store where scheduled query results are written to.",
 		//	  "type": "string"
 		//	}
-		"sq_target_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Configuration of target store where scheduled query results are written to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sq_target_configuration": schemaAttribute2c5199975b4dff4c8b2b5112(),
 		// Property: ScheduleConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -301,17 +612,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"schedule_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ScheduleExpression
-				"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "An expression that denotes when to trigger the scheduled query run. This can be a cron expression or a rate expression.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration for when the scheduled query is executed.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schedule_configuration": schemaAttribute776aba01d8c89148204d832c(),
 		// Property: ScheduledQueryExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -321,10 +622,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"scheduled_query_execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN for the IAM role that Timestream will assume when running the scheduled query.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scheduled_query_execution_role_arn": schemaAttribute80e2b43428fd1817542f86df(),
 		// Property: ScheduledQueryName
 		// CloudFormation resource type schema:
 		//
@@ -335,10 +633,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[a-zA-Z0-9_.-]+",
 		//	  "type": "string"
 		//	}
-		"scheduled_query_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the scheduled query. Scheduled query names must be unique within each Region.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scheduled_query_name": schemaAttribute42aae9e0174e6f13458daea4(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -371,24 +666,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxItems": 200,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs to label the scheduled query.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributedbd56a5c02e4e2007050d21a(),
 		// Property: TargetConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -583,147 +861,7 @@ func scheduledQueryDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"target_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: TimestreamConfiguration
-				"timestream_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DatabaseName
-						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Name of Timestream database to which the query result will be written.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DimensionMappings
-						"dimension_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DimensionValueType
-									"dimension_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Type for the dimension.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Name
-									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Column name from query result.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "This is to allow mapping column(s) from the query result to the dimension in the destination table.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MeasureNameColumn
-						"measure_name_column": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Name of the measure name column from the query result.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MixedMeasureMappings
-						"mixed_measure_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: MeasureName
-									"measure_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Refers to the value of the measure name in a result row. This field is required if MeasureNameColumn is provided.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: MeasureValueType
-									"measure_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Type of the value that is to be read from SourceColumn. If the mapping is for MULTI, use MeasureValueType.MULTI.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: MultiMeasureAttributeMappings
-									"multi_measure_attribute_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: MeasureValueType
-												"measure_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Value type of the measure value column to be read from the query result.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: SourceColumn
-												"source_column": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Source measure value column in the query result where the attribute value is to be read.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: TargetMultiMeasureAttributeName
-												"target_multi_measure_attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Custom name to be used for attribute name in derived table. If not provided, source column name would be used.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: SourceColumn
-									"source_column": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "This field refers to the source column from which the measure value is to be read for result materialization.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: TargetMeasureName
-									"target_measure_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Target measure name to be used. If not provided, the target measure name by default would be MeasureName if provided, or SourceColumn otherwise.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "Specifies how to map measures to multi-measure records.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MultiMeasureMappings
-						"multi_measure_mappings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: MultiMeasureAttributeMappings
-								"multi_measure_attribute_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: MeasureValueType
-											"measure_value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Value type of the measure value column to be read from the query result.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: SourceColumn
-											"source_column": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Source measure value column in the query result where the attribute value is to be read.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: TargetMultiMeasureAttributeName
-											"target_multi_measure_attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Custom name to be used for attribute name in derived table. If not provided, source column name would be used.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "Required. Attribute mappings to be used for mapping query results to ingest data for multi-measure attributes.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TargetMultiMeasureName
-								"target_multi_measure_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Name of the target multi-measure in the derived table. Required if MeasureNameColumn is not provided. If MeasureNameColumn is provided then the value from that column will be used as the multi-measure name.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Only one of MixedMeasureMappings or MultiMeasureMappings is to be provided. MultiMeasureMappings can be used to ingest data as multi measures in the derived table.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TableName
-						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Name of Timestream table that the query result will be written to. The table should be within the same database that is provided in Timestream configuration.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TimeColumn
-						"time_column": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Column from query result that should be used as the time column in destination table. Column type for this should be TIMESTAMP.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration needed to write data into the Timestream database and table.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration of target store where scheduled query results are written to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_configuration": schemaAttribute0e772afbf1e8ce3ae38564e1(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

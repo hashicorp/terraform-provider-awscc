@@ -16,6 +16,193 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute06c03efd48a89c2afa04aaae() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DestinationKmsKeyId
+				"destination_kms_key_id": schemaAttribute578bbbf8bc83c5c1bcec654f(),
+				// Property: DestinationRegion
+				"destination_region": schemaAttribute578bbbf8bc83c5c1bcec654f(),
+				// Property: SnapshotRetentionPeriod
+				"snapshot_retention_period": schemaAttribute6c9d888a4c6390556d28d0f5(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The snapshot copy configurations for the namespace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute289b58bfde1966c8494d5c2f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the namespace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ecc19d3ab87f5f75d2ee7bd() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "If true, Amazon Redshift uses AWS Secrets Manager to manage the namespace's admin credentials. You can't use adminUserPassword if manageAdminPassword is true. If manageAdminPassword is false or not set, Amazon Redshift uses adminUserPassword for the admin user account's password.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ff268d5a964f0e17b4a1045() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31b5e4ab8431ff7b524d753f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of days to retain automated snapshot in the destination region after they are copied from the source region. If the value is -1, the manual snapshot is retained indefinitely. The value must be either -1 or an integer between 1 and 3,653.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3563c0f3d4b7aa6a94ce88d7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AdminPasswordSecretArn
+			"admin_password_secret_arn": schemaAttribute578bbbf8bc83c5c1bcec654f(),
+			// Property: AdminPasswordSecretKmsKeyId
+			"admin_password_secret_kms_key_id": schemaAttribute578bbbf8bc83c5c1bcec654f(),
+			// Property: AdminUsername
+			"admin_username": schemaAttribute578bbbf8bc83c5c1bcec654f(),
+			// Property: CreationDate
+			"creation_date": schemaAttribute578bbbf8bc83c5c1bcec654f(),
+			// Property: DbName
+			"db_name": schemaAttribute578bbbf8bc83c5c1bcec654f(),
+			// Property: DefaultIamRoleArn
+			"default_iam_role_arn": schemaAttribute578bbbf8bc83c5c1bcec654f(),
+			// Property: IamRoles
+			"iam_roles": schemaAttribute2ff268d5a964f0e17b4a1045(),
+			// Property: KmsKeyId
+			"kms_key_id": schemaAttribute578bbbf8bc83c5c1bcec654f(),
+			// Property: LogExports
+			"log_exports": schemaAttribute2ff268d5a964f0e17b4a1045(),
+			// Property: NamespaceArn
+			"namespace_arn": schemaAttribute578bbbf8bc83c5c1bcec654f(),
+			// Property: NamespaceId
+			"namespace_id": schemaAttribute578bbbf8bc83c5c1bcec654f(),
+			// Property: NamespaceName
+			"namespace_name": schemaAttribute578bbbf8bc83c5c1bcec654f(),
+			// Property: Status
+			"status": schemaAttribute578bbbf8bc83c5c1bcec654f(),
+		}, /*END SCHEMA*/
+		Description: "Definition of Namespace resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute578bbbf8bc83c5c1bcec654f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57a3bfe95035abff2ffd31ca() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of AWS Identity and Access Management (IAM) roles that can be used by the namespace to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. The Default role limit for each request is 10.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c135e160c98deb0de16d0b4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the namespace the source snapshot was created from. Please specify the name if needed before deleting namespace",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5eec9994649532944fb7f411() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the AWS Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. You can only use this parameter if manageAdminPassword is true.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b3d03a94e22587741e12187() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the namespace. You use this identifier to refer to the namespace for any subsequent namespace operations such as deleting or modifying. All alphabetical characters must be lower case. Namespace name should be unique for all namespaces within an AWS account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c9d888a4c6390556d28d0f5() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6cc2cf05c4b1999bd99aabdb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN for the Redshift application that integrates with IAM Identity Center.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91a9330125b389aad7cb2697() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The database name associated for the namespace that is being created. Only alphanumeric characters and underscores are allowed. It should start with an alphabet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9af549ffff3f0fbeceabdddd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The password associated with the admin user for the namespace that is being created. Password must be at least 8 characters in length, should be any printable ASCII character. Must contain at least one lowercase letter, one uppercase letter and one decimal digit. You can't use adminUserPassword if manageAdminPassword is true.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaff287b46c2de612977d5944() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The collection of log types to be exported provided by the customer. Should only be one of the three supported log types: userlog, useractivitylog and connectionlog",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb907d91545b9a50c05382349() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The resource policy document that will be attached to the namespace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0103e02e760a12c5f5056eb() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute578bbbf8bc83c5c1bcec654f(),
+				// Property: Value
+				"value": schemaAttribute578bbbf8bc83c5c1bcec654f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of tags for the namespace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef4ee9b97f9d69283d58daf59() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The default IAM role ARN for the namespace that is being created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef92577fa7a830e1074775fc1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user name associated with the admin user for the namespace that is being created. Only alphanumeric characters and underscores are allowed. It should start with an alphabet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_redshiftserverless_namespace", namespaceDataSource)
 }
@@ -31,10 +218,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the AWS Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. You can only use this parameter if manageAdminPassword is true.",
 		//	  "type": "string"
 		//	}
-		"admin_password_secret_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the AWS Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret. You can only use this parameter if manageAdminPassword is true.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"admin_password_secret_kms_key_id": schemaAttribute5eec9994649532944fb7f411(),
 		// Property: AdminUserPassword
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +229,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"admin_user_password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The password associated with the admin user for the namespace that is being created. Password must be at least 8 characters in length, should be any printable ASCII character. Must contain at least one lowercase letter, one uppercase letter and one decimal digit. You can't use adminUserPassword if manageAdminPassword is true.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"admin_user_password": schemaAttribute9af549ffff3f0fbeceabdddd(),
 		// Property: AdminUsername
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +238,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z][a-zA-Z_0-9+.@-]*",
 		//	  "type": "string"
 		//	}
-		"admin_username": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The user name associated with the admin user for the namespace that is being created. Only alphanumeric characters and underscores are allowed. It should start with an alphabet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"admin_username": schemaAttributef92577fa7a830e1074775fc1(),
 		// Property: DbName
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +248,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z][a-zA-Z_0-9+.@-]*",
 		//	  "type": "string"
 		//	}
-		"db_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The database name associated for the namespace that is being created. Only alphanumeric characters and underscores are allowed. It should start with an alphabet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"db_name": schemaAttribute91a9330125b389aad7cb2697(),
 		// Property: DefaultIamRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -81,10 +256,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The default IAM role ARN for the namespace that is being created.",
 		//	  "type": "string"
 		//	}
-		"default_iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The default IAM role ARN for the namespace that is being created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_iam_role_arn": schemaAttributef4ee9b97f9d69283d58daf59(),
 		// Property: FinalSnapshotName
 		// CloudFormation resource type schema:
 		//
@@ -94,10 +266,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-z][a-z0-9]*(-[a-z0-9]+)*",
 		//	  "type": "string"
 		//	}
-		"final_snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the namespace the source snapshot was created from. Please specify the name if needed before deleting namespace",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"final_snapshot_name": schemaAttribute5c135e160c98deb0de16d0b4(),
 		// Property: FinalSnapshotRetentionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -105,10 +274,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of days to retain automated snapshot in the destination region after they are copied from the source region. If the value is -1, the manual snapshot is retained indefinitely. The value must be either -1 or an integer between 1 and 3,653.",
 		//	  "type": "integer"
 		//	}
-		"final_snapshot_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of days to retain automated snapshot in the destination region after they are copied from the source region. If the value is -1, the manual snapshot is retained indefinitely. The value must be either -1 or an integer between 1 and 3,653.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"final_snapshot_retention_period": schemaAttribute31b5e4ab8431ff7b524d753f(),
 		// Property: IamRoles
 		// CloudFormation resource type schema:
 		//
@@ -122,11 +288,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"iam_roles": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of AWS Identity and Access Management (IAM) roles that can be used by the namespace to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. The Default role limit for each request is 10.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"iam_roles": schemaAttribute57a3bfe95035abff2ffd31ca(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -134,10 +296,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the namespace.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the namespace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttribute289b58bfde1966c8494d5c2f(),
 		// Property: LogExports
 		// CloudFormation resource type schema:
 		//
@@ -156,11 +315,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"log_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The collection of log types to be exported provided by the customer. Should only be one of the three supported log types: userlog, useractivitylog and connectionlog",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"log_exports": schemaAttributeaff287b46c2de612977d5944(),
 		// Property: ManageAdminPassword
 		// CloudFormation resource type schema:
 		//
@@ -168,10 +323,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "If true, Amazon Redshift uses AWS Secrets Manager to manage the namespace's admin credentials. You can't use adminUserPassword if manageAdminPassword is true. If manageAdminPassword is false or not set, Amazon Redshift uses adminUserPassword for the admin user account's password.",
 		//	  "type": "boolean"
 		//	}
-		"manage_admin_password": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "If true, Amazon Redshift uses AWS Secrets Manager to manage the namespace's admin credentials. You can't use adminUserPassword if manageAdminPassword is true. If manageAdminPassword is false or not set, Amazon Redshift uses adminUserPassword for the admin user account's password.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"manage_admin_password": schemaAttribute2ecc19d3ab87f5f75d2ee7bd(),
 		// Property: Namespace
 		// CloudFormation resource type schema:
 		//
@@ -247,66 +399,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"namespace": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AdminPasswordSecretArn
-				"admin_password_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: AdminPasswordSecretKmsKeyId
-				"admin_password_secret_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: AdminUsername
-				"admin_username": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreationDate
-				"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: DbName
-				"db_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: DefaultIamRoleArn
-				"default_iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: IamRoles
-				"iam_roles": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: KmsKeyId
-				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: LogExports
-				"log_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NamespaceArn
-				"namespace_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: NamespaceId
-				"namespace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: NamespaceName
-				"namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Status
-				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Definition of Namespace resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"namespace": schemaAttribute3563c0f3d4b7aa6a94ce88d7(),
 		// Property: NamespaceName
 		// CloudFormation resource type schema:
 		//
@@ -317,10 +410,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for the namespace. You use this identifier to refer to the namespace for any subsequent namespace operations such as deleting or modifying. All alphabetical characters must be lower case. Namespace name should be unique for all namespaces within an AWS account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"namespace_name": schemaAttribute6b3d03a94e22587741e12187(),
 		// Property: NamespaceResourcePolicy
 		// CloudFormation resource type schema:
 		//
@@ -328,11 +418,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The resource policy document that will be attached to the namespace.",
 		//	  "type": "object"
 		//	}
-		"namespace_resource_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "The resource policy document that will be attached to the namespace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"namespace_resource_policy": schemaAttributeb907d91545b9a50c05382349(),
 		// Property: RedshiftIdcApplicationArn
 		// CloudFormation resource type schema:
 		//
@@ -340,10 +426,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN for the Redshift application that integrates with IAM Identity Center.",
 		//	  "type": "string"
 		//	}
-		"redshift_idc_application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN for the Redshift application that integrates with IAM Identity Center.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"redshift_idc_application_arn": schemaAttribute6cc2cf05c4b1999bd99aabdb(),
 		// Property: SnapshotCopyConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -372,26 +455,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"snapshot_copy_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DestinationKmsKeyId
-					"destination_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: DestinationRegion
-					"destination_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SnapshotRetentionPeriod
-					"snapshot_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The snapshot copy configurations for the namespace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"snapshot_copy_configurations": schemaAttribute06c03efd48a89c2afa04aaae(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -422,22 +486,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of tags for the namespace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributee0103e02e760a12c5f5056eb(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

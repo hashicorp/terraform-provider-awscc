@@ -15,6 +15,78 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1c7fe4298b36b9dd89979133() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the cluster the node is on.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4860b090e69b929b490872c5() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of nodes added to the channel placement group",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute524f5c98d1f28ebaa7eebcbd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54214d5f1df08b462fb8a5b6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique internal identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e44ae5f703e6cd78b77155b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute524f5c98d1f28ebaa7eebcbd(),
+				// Property: Value
+				"value": schemaAttribute524f5c98d1f28ebaa7eebcbd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A collection of key-value pairs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7302aae9cb01cc01bd50b6c6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current state of the ChannelPlacementGroupState",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78913b185de4dd0597535e32() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the channel placement group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea931485f0517700ffd7f91f8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the channel placement group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2b14b777b6631db9754b185() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of channel IDs added to the channel placement group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_medialive_channel_placement_group", channelPlacementGroupDataSource)
 }
@@ -30,10 +102,7 @@ func channelPlacementGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The ARN of the channel placement group.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the channel placement group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute78913b185de4dd0597535e32(),
 		// Property: Channels
 		// CloudFormation resource type schema:
 		//
@@ -45,11 +114,7 @@ func channelPlacementGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"channels": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "List of channel IDs added to the channel placement group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"channels": schemaAttributec2b14b777b6631db9754b185(),
 		// Property: ClusterId
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +122,7 @@ func channelPlacementGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The ID of the cluster the node is on.",
 		//	  "type": "string"
 		//	}
-		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the cluster the node is on.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cluster_id": schemaAttribute1c7fe4298b36b9dd89979133(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +130,7 @@ func channelPlacementGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "Unique internal identifier.",
 		//	  "type": "string"
 		//	}
-		"channel_placement_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique internal identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"channel_placement_group_id": schemaAttribute54214d5f1df08b462fb8a5b6(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -79,10 +138,7 @@ func channelPlacementGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The name of the channel placement group.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the channel placement group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributea931485f0517700ffd7f91f8(),
 		// Property: Nodes
 		// CloudFormation resource type schema:
 		//
@@ -94,11 +150,7 @@ func channelPlacementGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"nodes": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "List of nodes added to the channel placement group",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"nodes": schemaAttribute4860b090e69b929b490872c5(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -114,10 +166,7 @@ func channelPlacementGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current state of the ChannelPlacementGroupState",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttribute7302aae9cb01cc01bd50b6c6(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -139,22 +188,7 @@ func channelPlacementGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A collection of key-value pairs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute5e44ae5f703e6cd78b77155b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

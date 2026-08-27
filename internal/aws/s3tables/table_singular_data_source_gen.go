@@ -16,6 +16,468 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute050e1c564048c0baa387bdf6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Null value ordering (nulls-first or nulls-last)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute08f931240c4961b06488c4d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version token of the table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0e2ffd3b96d1bfb9c7e093f0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Format of the table.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10e8135c2e156703853d8848() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The sort order ID (defaults to 1 if not specified, 0 is reserved for unsorted)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1357db8de6a930d9966c702b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The namespace that the table belongs to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute164d63c116e82be3b603bada() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier for the field",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2110d5092555f45ea5ada363() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The source column ID to partition on",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2583afa15d4eea372333bbb7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the specified table.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2626bea66b3ecaeec8008c8d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxSnapshotAgeHours
+			"max_snapshot_age_hours": schemaAttributef47835f88bdad981ef4415dd(),
+			// Property: MinSnapshotsToKeep
+			"min_snapshots_to_keep": schemaAttributef8f4096fbc9086c70990461e(),
+			// Property: Status
+			"status": schemaAttribute50b96fddf957923dafcb8284(),
+		}, /*END SCHEMA*/
+		Description: "Contains details about the snapshot management settings for an Iceberg table. A snapshot is expired when it exceeds MinSnapshotsToKeep and MaxSnapshotAgeHours.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27f7e75b5430c59e0e911146() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the field",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28c22469b30522b2b7eb0ac6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The sort transform function",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b034926bd5bd70ab545d6d0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Id
+				"id": schemaAttribute164d63c116e82be3b603bada(),
+				// Property: Name
+				"name": schemaAttribute27f7e75b5430c59e0e911146(),
+				// Property: Required
+				"required": schemaAttributecb29738707fce754fbb8897c(),
+				// Property: Type
+				"type": schemaAttribute7b77e7233ec2eeac7c429868(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Contains details about the schema for an Iceberg table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34071936c32427936bc9a0e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Sort direction (asc or desc)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48e2e3c0c719ea2415ec5520() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the specified table bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute508cccf1992589c91abb1eb2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the Compaction maintenance action is enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute50b96fddf957923dafcb8284() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the SnapshotManagement maintenance action is enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51454582484b9c3f434b41ad() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Fields
+			"fields": schemaAttribute9a985e59a097ab2336bc44af(),
+			// Property: OrderId
+			"order_id": schemaAttribute10e8135c2e156703853d8848(),
+		}, /*END SCHEMA*/
+		Description: "Sort order specification for an Iceberg table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54faa1ccee210383de48bd26() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IdentifierFieldIds
+			"identifier_field_ids": schemaAttribute87ad9a6fc1cc737ae3a619a7(),
+			// Property: SchemaId
+			"schema_id": schemaAttributeff7295320b669f3991473e60(),
+			// Property: SchemaV2FieldList
+			"schema_v2_field_list": schemaAttribute8d5e443b2c865ec84ddecd83(),
+			// Property: SchemaV2FieldType
+			"schema_v2_field_type": schemaAttributefc9d2cbfc48a1a7f55b843fa(),
+		}, /*END SCHEMA*/
+		Description: "Schema definition that supports Apache Iceberg nested types (struct, list, map) and primitive types. Mutually exclusive with IcebergSchema.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5dd5508c7f754ae0e1200322() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Optional documentation for the field",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66d76b9757efb0c25b628276() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: StorageClass
+			"storage_class": schemaAttribute9b957ccaaa584d79bade8c36(),
+		}, /*END SCHEMA*/
+		Description: "Specifies storage class settings for the table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e8dbefcab84323ee8d08787() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Tag value must be between 0 to 256 characters in length. Tag value can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7acac34e4f3792a9710668e4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SchemaFieldList
+			"schema_field_list": schemaAttribute2b034926bd5bd70ab545d6d0(),
+		}, /*END SCHEMA*/
+		Description: "Schema definition for flat tables with primitive types only. Mutually exclusive with IcebergSchemaV2.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b77e7233ec2eeac7c429868() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The field type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e8e9915d3541791d129bc88() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates that you don't want to specify a schema for the table. This property is mutually exclusive to 'IcebergMetadata', and its only possible value is 'Yes'.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87ad9a6fc1cc737ae3a619a7() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.Int64Type,
+		Description: "A list of field IDs that are used as the identifier fields for the table. Identifier fields uniquely identify a row in the table.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d5e443b2c865ec84ddecd83() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Doc
+				"doc": schemaAttribute5dd5508c7f754ae0e1200322(),
+				// Property: Id
+				"id": schemaAttribute164d63c116e82be3b603bada(),
+				// Property: Name
+				"name": schemaAttribute27f7e75b5430c59e0e911146(),
+				// Property: Required
+				"required": schemaAttributecb29738707fce754fbb8897c(),
+				// Property: Type
+				"type": schemaAttribute9b553fa4b9b60f0736acec6e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The schema fields for the table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93358df75cdaa3c23213712f() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Iceberg table properties (e.g., format-version, write.parquet.compression-codec)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a985e59a097ab2336bc44af() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Direction
+				"direction": schemaAttribute34071936c32427936bc9a0e1(),
+				// Property: NullOrder
+				"null_order": schemaAttribute050e1c564048c0baa387bdf6(),
+				// Property: SourceId
+				"source_id": schemaAttributea2a5f189277dbae2bec858df(),
+				// Property: Transform
+				"transform": schemaAttribute28c22469b30522b2b7eb0ac6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of sort fields",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b553fa4b9b60f0736acec6e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The field type. For primitive types, use a string (e.g., 'int', 'string', 'long'). For nested types, use an object (e.g., {'type': 'struct', 'fields': [...]} for struct, {'type': 'list', 'element-id': N, 'element': 'type'} for list, {'type': 'map', 'key-id': N, 'key': 'type', 'value-id': N, 'value': 'type'} for map).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b957ccaaa584d79bade8c36() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The storage class for the table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c481ea1d6b7c8f05f28803c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Fields
+			"fields": schemaAttributefcb40f8e4f4260fd467a2107(),
+			// Property: SpecId
+			"spec_id": schemaAttributee0910ce9ac8ef3f93b825443(),
+		}, /*END SCHEMA*/
+		Description: "Partition specification for an Iceberg table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea2a5f189277dbae2bec858df() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The source column ID to sort on",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2ba8d1880bd96c22a76b546() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The target file size for the table in MB.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb29738707fce754fbb8897c() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean value that specifies whether values are required for each row in this field",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf4818dd609fd59506ffd3d9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Status
+			"status": schemaAttribute508cccf1992589c91abb1eb2(),
+			// Property: TargetFileSizeMB
+			"target_file_size_mb": schemaAttributeb2ba8d1880bd96c22a76b546(),
+		}, /*END SCHEMA*/
+		Description: "Settings governing the Compaction maintenance action. Contains details about the compaction settings for an Iceberg table.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed48ec3388efa04de02a80314() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IcebergPartitionSpec
+			"iceberg_partition_spec": schemaAttribute9c481ea1d6b7c8f05f28803c(),
+			// Property: IcebergSchema
+			"iceberg_schema": schemaAttribute7acac34e4f3792a9710668e4(),
+			// Property: IcebergSchemaV2
+			"iceberg_schema_v2": schemaAttribute54faa1ccee210383de48bd26(),
+			// Property: IcebergSortOrder
+			"iceberg_sort_order": schemaAttribute51454582484b9c3f434b41ad(),
+			// Property: TableProperties
+			"table_properties": schemaAttribute93358df75cdaa3c23213712f(),
+		}, /*END SCHEMA*/
+		Description: "Contains details about the metadata for an Iceberg table. Specify either IcebergSchema (for simple flat schemas with primitive types only) or IcebergSchemaV2 (for schemas with nested types like struct, list, map), but not both.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6f6b26a4d0da5ce50f6e810() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the partition field",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda3860cddce14310c22ec87e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Tag key must be between 1 to 128 characters in length. Tag key cannot start with 'aws:' and can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc89b68c3c339359541d35ba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The partition transform function (identity, bucket[N], truncate[N], year, month, day, hour)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee057033bc570846531bef689() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The partition field ID (auto-assigned starting from 1000 if not specified)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0910ce9ac8ef3f93b825443() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The partition spec ID (defaults to 0 if not specified)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee092c1b9e5aa4720154d27cd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The warehouse location of the table.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0ea340315d2255a3f395bc4() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeda3860cddce14310c22ec87e(),
+				// Property: Value
+				"value": schemaAttribute6e8dbefcab84323ee8d08787(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "User tags (key-value pairs) to associate with the table.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee70475dbe191e358f1ac2a38() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the table.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef47835f88bdad981ef4415dd() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum age of a snapshot before it can be expired.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8f4096fbc9086c70990461e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum number of snapshots to keep.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc9d2cbfc48a1a7f55b843fa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the top-level schema, which is always 'struct'",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefcb40f8e4f4260fd467a2107() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FieldId
+				"field_id": schemaAttributee057033bc570846531bef689(),
+				// Property: Name
+				"name": schemaAttributed6f6b26a4d0da5ce50f6e810(),
+				// Property: SourceId
+				"source_id": schemaAttribute2110d5092555f45ea5ada363(),
+				// Property: Transform
+				"transform": schemaAttributedc89b68c3c339359541d35ba(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of partition fields",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff7295320b669f3991473e60() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "An optional unique identifier for the schema",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_s3tables_table", tableDataSource)
 }
@@ -47,22 +509,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"compaction": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Status
-				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether the Compaction maintenance action is enabled.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TargetFileSizeMB
-				"target_file_size_mb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The target file size for the table in MB.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Settings governing the Compaction maintenance action. Contains details about the compaction settings for an Iceberg table.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"compaction": schemaAttributecf4818dd609fd59506ffd3d9(),
 		// Property: IcebergMetadata
 		// CloudFormation resource type schema:
 		//
@@ -296,195 +743,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"iceberg_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IcebergPartitionSpec
-				"iceberg_partition_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Fields
-						"fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: FieldId
-									"field_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The partition field ID (auto-assigned starting from 1000 if not specified)",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Name
-									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the partition field",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: SourceId
-									"source_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The source column ID to partition on",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Transform
-									"transform": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The partition transform function (identity, bucket[N], truncate[N], year, month, day, hour)",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "List of partition fields",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SpecId
-						"spec_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The partition spec ID (defaults to 0 if not specified)",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Partition specification for an Iceberg table",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IcebergSchema
-				"iceberg_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: SchemaFieldList
-						"schema_field_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Id
-									"id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The unique identifier for the field",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Name
-									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the field",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Required
-									"required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Description: "A Boolean value that specifies whether values are required for each row in this field",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Type
-									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The field type",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "Contains details about the schema for an Iceberg table",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Schema definition for flat tables with primitive types only. Mutually exclusive with IcebergSchemaV2.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IcebergSchemaV2
-				"iceberg_schema_v2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: IdentifierFieldIds
-						"identifier_field_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.Int64Type,
-							Description: "A list of field IDs that are used as the identifier fields for the table. Identifier fields uniquely identify a row in the table.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SchemaId
-						"schema_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "An optional unique identifier for the schema",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SchemaV2FieldList
-						"schema_v2_field_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Doc
-									"doc": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Optional documentation for the field",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Id
-									"id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The unique identifier for the field",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Name
-									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the field",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Required
-									"required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Description: "A Boolean value that specifies whether values are required for each row in this field",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Type
-									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										CustomType:  jsontypes.NormalizedType{},
-										Description: "The field type. For primitive types, use a string (e.g., 'int', 'string', 'long'). For nested types, use an object (e.g., {'type': 'struct', 'fields': [...]} for struct, {'type': 'list', 'element-id': N, 'element': 'type'} for list, {'type': 'map', 'key-id': N, 'key': 'type', 'value-id': N, 'value': 'type'} for map).",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "The schema fields for the table",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SchemaV2FieldType
-						"schema_v2_field_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The type of the top-level schema, which is always 'struct'",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Schema definition that supports Apache Iceberg nested types (struct, list, map) and primitive types. Mutually exclusive with IcebergSchema.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IcebergSortOrder
-				"iceberg_sort_order": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Fields
-						"fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Direction
-									"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Sort direction (asc or desc)",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: NullOrder
-									"null_order": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Null value ordering (nulls-first or nulls-last)",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: SourceId
-									"source_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The source column ID to sort on",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Transform
-									"transform": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The sort transform function",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "List of sort fields",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: OrderId
-						"order_id": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The sort order ID (defaults to 1 if not specified, 0 is reserved for unsorted)",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Sort order specification for an Iceberg table",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TableProperties
-				"table_properties":  // Pattern: ""
-				schema.MapAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Iceberg table properties (e.g., format-version, write.parquet.compression-codec)",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Contains details about the metadata for an Iceberg table. Specify either IcebergSchema (for simple flat schemas with primitive types only) or IcebergSchemaV2 (for schemas with nested types like struct, list, map), but not both.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"iceberg_metadata": schemaAttributed48ec3388efa04de02a80314(),
 		// Property: Namespace
 		// CloudFormation resource type schema:
 		//
@@ -492,10 +751,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The namespace that the table belongs to.",
 		//	  "type": "string"
 		//	}
-		"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The namespace that the table belongs to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"namespace": schemaAttribute1357db8de6a930d9966c702b(),
 		// Property: OpenTableFormat
 		// CloudFormation resource type schema:
 		//
@@ -506,10 +762,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"open_table_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Format of the table.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"open_table_format": schemaAttribute0e2ffd3b96d1bfb9c7e093f0(),
 		// Property: SnapshotManagement
 		// CloudFormation resource type schema:
 		//
@@ -538,27 +791,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"snapshot_management": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaxSnapshotAgeHours
-				"max_snapshot_age_hours": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum age of a snapshot before it can be expired.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MinSnapshotsToKeep
-				"min_snapshots_to_keep": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The minimum number of snapshots to keep.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Status
-				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether the SnapshotManagement maintenance action is enabled.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Contains details about the snapshot management settings for an Iceberg table. A snapshot is expired when it exceeds MinSnapshotsToKeep and MaxSnapshotAgeHours.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"snapshot_management": schemaAttribute2626bea66b3ecaeec8008c8d(),
 		// Property: StorageClassConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -577,17 +810,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"storage_class_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: StorageClass
-				"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The storage class for the table",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies storage class settings for the table",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"storage_class_configuration": schemaAttribute66d76b9757efb0c25b628276(),
 		// Property: TableARN
 		// CloudFormation resource type schema:
 		//
@@ -598,10 +821,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"table_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the specified table.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"table_arn": schemaAttribute2583afa15d4eea372333bbb7(),
 		// Property: TableBucketARN
 		// CloudFormation resource type schema:
 		//
@@ -612,10 +832,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"table_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the specified table bucket.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"table_bucket_arn": schemaAttribute48e2e3c0c719ea2415ec5520(),
 		// Property: TableName
 		// CloudFormation resource type schema:
 		//
@@ -623,10 +840,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name for the table.",
 		//	  "type": "string"
 		//	}
-		"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the table.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"table_name": schemaAttributee70475dbe191e358f1ac2a38(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -657,24 +871,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Tag key must be between 1 to 128 characters in length. Tag key cannot start with 'aws:' and can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Tag value must be between 0 to 256 characters in length. Tag value can only contain alphanumeric characters, spaces, _, ., /, =, +, -, and @.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "User tags (key-value pairs) to associate with the table.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributee0ea340315d2255a3f395bc4(),
 		// Property: VersionToken
 		// CloudFormation resource type schema:
 		//
@@ -682,10 +879,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version token of the table",
 		//	  "type": "string"
 		//	}
-		"version_token": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version token of the table",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version_token": schemaAttribute08f931240c4961b06488c4d2(),
 		// Property: WarehouseLocation
 		// CloudFormation resource type schema:
 		//
@@ -693,10 +887,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The warehouse location of the table.",
 		//	  "type": "string"
 		//	}
-		"warehouse_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The warehouse location of the table.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"warehouse_location": schemaAttributee092c1b9e5aa4720154d27cd(),
 		// Property: WithoutMetadata
 		// CloudFormation resource type schema:
 		//
@@ -707,10 +898,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"without_metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates that you don't want to specify a schema for the table. This property is mutually exclusive to 'IcebergMetadata', and its only possible value is 'Yes'.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"without_metadata": schemaAttribute7e8e9915d3541791d129bc88(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,475 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute067f0b9f7a7d26c2b116f76f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The port on which the load balancer is listening. On EC2-VPC, you can specify any port from the range 1-65535. On EC2-Classic, you can specify any port from the following list: 25, 80, 443, 465, 587, 1024-65535.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute072a88642951c984477c5867() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HealthyThreshold
+			"healthy_threshold": schemaAttributeef4e962888929eaa2fb6e6bf(),
+			// Property: Interval
+			"interval": schemaAttributee25f2b9c4a33b365bacdc51d(),
+			// Property: Target
+			"target": schemaAttributeae87f890701964cba6b3896c(),
+			// Property: Timeout
+			"timeout": schemaAttribute9fd00f47148b16ac7167f7cc(),
+			// Property: UnhealthyThreshold
+			"unhealthy_threshold": schemaAttributec7cd6aedcd5088d17df7f381(),
+		}, /*END SCHEMA*/
+		Description: "The health check settings to use when evaluating the health of your EC2 instances.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0ac680b2690ff3ab4809a3ab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the security group that you can use as part of your inbound rules for your load balancer's back-end instances.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d45224f9d80581b0db14f52() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GroupName
+			"group_name": schemaAttribute0ac680b2690ff3ab4809a3ab(),
+			// Property: OwnerAlias
+			"owner_alias": schemaAttribute9f6d62977a24dab672730f50(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute140107e2fc38b223d3f555cf() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "If enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute22432ac093680535cb914738() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether connection draining is enabled for the load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2513ed20f99066fa7bac78d2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EmitInterval
+			"emit_interval": schemaAttribute9e64d013fcd4c954be9ac78c(),
+			// Property: Enabled
+			"enabled": schemaAttribute6aa17bf9e3fbb7d9bd0b03e7(),
+			// Property: S3BucketName
+			"s3_bucket_name": schemaAttribute480b11b0ee040c2bec760fc8(),
+			// Property: S3BucketPrefix
+			"s3_bucket_prefix": schemaAttributea14534187ced17c2e38cc4ae(),
+		}, /*END SCHEMA*/
+		Description: "Information about where and how access logs are stored for the load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2804adac76b7f98e29986909() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute6547c6b1f3134b58dfadb62d(),
+				// Property: Value
+				"value": schemaAttribute6547c6b1f3134b58dfadb62d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The policy attributes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3192b8be056d7ef45944369e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e59dd4b2361cc17bb313a45() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the load balancer. This name must be unique within your set of load balancers for the region.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f8be165ced2ba4fd285276c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The load balancer transport protocol to use for routing: HTTP, HTTPS, TCP, or SSL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute480b11b0ee040c2bec760fc8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Amazon S3 bucket where the access logs are stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f040574474bcfd4b285fd37() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The IDs of the instances for the load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58d66720323ba5023a609c47() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CookieName
+				"cookie_name": schemaAttribute7b78ed81f78bb01b9447f0c3(),
+				// Property: PolicyName
+				"policy_name": schemaAttributef455dcc9cc3b52da7e49fe4c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Information about a policy for application-controlled session stickiness.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63fdd2f24dcdfb838f345c14() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Attributes
+				"attributes": schemaAttribute2804adac76b7f98e29986909(),
+				// Property: InstancePorts
+				"instance_ports": schemaAttributecf01a96549ca4aa3c163e505(),
+				// Property: LoadBalancerPorts
+				"load_balancer_ports": schemaAttributed183c97f3319cdb1dbd5e0bd(),
+				// Property: PolicyName
+				"policy_name": schemaAttribute756cc6b4705aaf2f8c3779b0(),
+				// Property: PolicyType
+				"policy_type": schemaAttribute789822664425d19f1af8e447(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The policies defined for your Classic Load Balancer. Specify only back-end server policies.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6547c6b1f3134b58dfadb62d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6aa17bf9e3fbb7d9bd0b03e7() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether access logs are enabled for the load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b36266dff4bbf73acd0fe3f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The DNS name for the load balancer",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73c3be96619bb8a76c34ee06() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Enabled
+			"enabled": schemaAttribute22432ac093680535cb914738(),
+			// Property: Timeout
+			"timeout": schemaAttribute9f289954ca1124fed035dcba(),
+		}, /*END SCHEMA*/
+		Description: "If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute756cc6b4705aaf2f8c3779b0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute789822664425d19f1af8e447() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the policy type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b78ed81f78bb01b9447f0c3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the application cookie used for stickiness.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80b001c896515508ff0d4f6e() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The security groups for the load balancer. Valid only for load balancers in a VPC.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute831daa905b2f37ca5c901f4e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the server certificate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute851a902f2b1946d91ab07580() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of load balancer. Valid only for load balancers in a VPC.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8cd93443e053ed93eb522f41() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The IDs of the subnets for the load balancer. You can specify at most one subnet per Availability Zone.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9756384dac2cddcffbae7f0d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The port on which the instance is listening.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e64d013fcd4c954be9ac78c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The interval for publishing the access logs. You can specify an interval of either 5 minutes or 60 minutes.\n\nDefault: 60 minutes",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f289954ca1124fed035dcba() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum time, in seconds, to keep the existing connections open before deregistering the instances.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f6d62977a24dab672730f50() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The owner of the source security group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fd00f47148b16ac7167f7cc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The amount of time, in seconds, during which no response means a failed health check.\n\nThis value must be less than the `Interval` value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea14534187ced17c2e38cc4ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The logical hierarchy you created for your Amazon S3 bucket, for example `my-bucket-prefix/prod`. If the prefix is not provided, the log is placed at the root level of the bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8eb23e4d017e153d36489a7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the policy. This name must be unique within the set of policies for this load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae87f890701964cba6b3896c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The instance being checked.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd0e377e03f0792c9c087522() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InstancePort
+				"instance_port": schemaAttribute9756384dac2cddcffbae7f0d(),
+				// Property: InstanceProtocol
+				"instance_protocol": schemaAttributeff5ae01ccdbe2f52a3197b94(),
+				// Property: LoadBalancerPort
+				"load_balancer_port": schemaAttribute067f0b9f7a7d26c2b116f76f(),
+				// Property: PolicyNames
+				"policy_names": schemaAttributed894c98ebd6b59ba065d538c(),
+				// Property: Protocol
+				"protocol": schemaAttribute3f8be165ced2ba4fd285276c(),
+				// Property: SSLCertificateId
+				"ssl_certificate_id": schemaAttribute831daa905b2f37ca5c901f4e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The Listeners for the load balancer. You can specify at most one listener per port.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec18909c203772928cee198f0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Route 53 hosted zone name that is associated with the load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec43ea620c0d27234c2a92189() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The Availability Zones for a load balancer in a default VPC. For a load balancer in a nondefault VPC, specify Subnets instead.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7cd6aedcd5088d17df7f381() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The number of consecutive health check failures required before moving the instance to the `Unhealthy` state.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8ce711f95d74b17ed417d45() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Route 53 hosted zone that is associated with the load balancer. Internal-facing load balancers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecdf4bf658687e1d9658854ef() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The time, in seconds, that the connection is allowed to be idle (no data has been sent over the connection) before it is closed by the load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf01a96549ca4aa3c163e505() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The instance ports for the policy. Required only for some policy types.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed183c97f3319cdb1dbd5e0bd() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The load balancer ports for the policy. Required only for some policy types.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4ce2db527754669f4ffad9e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IdleTimeout
+			"idle_timeout": schemaAttributecdf4bf658687e1d9658854ef(),
+		}, /*END SCHEMA*/
+		Description: "If enabled, the load balancer allows the connections to remain idle (no data is sent over the connection) for the specified duration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed894c98ebd6b59ba065d538c() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The names of the policies to associate with the listener.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedad9aca5d2fe632e058ad23e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CookieExpirationPeriod
+				"cookie_expiration_period": schemaAttributefc4d1da241367ca18faaa202(),
+				// Property: PolicyName
+				"policy_name": schemaAttributea8eb23e4d017e153d36489a7(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Information about a policy for duration-based session stickiness.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee25f2b9c4a33b365bacdc51d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The approximate interval, in seconds, between health checks of an individual instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef4e962888929eaa2fb6e6bf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The number of consecutive health checks successes required before moving the instance to the `Healthy` state.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1013e4edcb7fd141c3f2780() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with `aws:`. You can use any of the following characters: the set of Unicode letters, digits, whitespace, `_`, `.`, `/`, `=`, `+`, and `-`.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef455dcc9cc3b52da7e49fe4c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The mnemonic name for the policy being created. The name must be unique within a set of policies for this load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc4d1da241367ca18faaa202() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time period, in seconds, after which the cookie should be considered stale. If this parameter is not specified, the stickiness session lasts for the duration of the browser session.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefead169bbd17bc2859a4cb32() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributef1013e4edcb7fd141c3f2780(),
+				// Property: Value
+				"value": schemaAttribute3192b8be056d7ef45944369e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags associated with a load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff5ae01ccdbe2f52a3197b94() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The protocol to use for routing traffic to instances: HTTP, HTTPS, TCP, or SSL.\n\nIf the front-end protocol is TCP or SSL, the back-end protocol must be TCP or SSL. If the front-end protocol is HTTP or HTTPS, the back-end protocol must be HTTP or HTTPS.\n\nIf there is another listener with the same `InstancePort` whose `InstanceProtocol` is secure, (HTTPS or SSL), the listener's `InstanceProtocol` must also be secure.\n\nIf there is another listener with the same `InstancePort` whose `InstanceProtocol` is HTTP or TCP, the listener's `InstanceProtocol` must be HTTP or TCP.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_elasticloadbalancing_load_balancer", loadBalancerDataSource)
 }
@@ -53,32 +522,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"access_logging_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EmitInterval
-				"emit_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The interval for publishing the access logs. You can specify an interval of either 5 minutes or 60 minutes.\n\nDefault: 60 minutes",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Enabled
-				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether access logs are enabled for the load balancer.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: S3BucketName
-				"s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the Amazon S3 bucket where the access logs are stored.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: S3BucketPrefix
-				"s3_bucket_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The logical hierarchy you created for your Amazon S3 bucket, for example `my-bucket-prefix/prod`. If the prefix is not provided, the log is placed at the root level of the bucket.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Information about where and how access logs are stored for the load balancer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"access_logging_policy": schemaAttribute2513ed20f99066fa7bac78d2(),
 		// Property: AppCookieStickinessPolicy
 		// CloudFormation resource type schema:
 		//
@@ -106,24 +550,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"app_cookie_stickiness_policy": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: CookieName
-					"cookie_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the application cookie used for stickiness.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PolicyName
-					"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The mnemonic name for the policy being created. The name must be unique within a set of policies for this load balancer.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Information about a policy for application-controlled session stickiness.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"app_cookie_stickiness_policy": schemaAttribute58d66720323ba5023a609c47(),
 		// Property: AvailabilityZones
 		// CloudFormation resource type schema:
 		//
@@ -135,11 +562,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"availability_zones": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The Availability Zones for a load balancer in a default VPC. For a load balancer in a nondefault VPC, specify Subnets instead.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"availability_zones": schemaAttributec43ea620c0d27234c2a92189(),
 		// Property: CanonicalHostedZoneName
 		// CloudFormation resource type schema:
 		//
@@ -147,10 +570,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The name of the Route 53 hosted zone that is associated with the load balancer. Internal-facing load balancers.",
 		//	  "type": "string"
 		//	}
-		"canonical_hosted_zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Route 53 hosted zone that is associated with the load balancer. Internal-facing load balancers.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"canonical_hosted_zone_name": schemaAttributec8ce711f95d74b17ed417d45(),
 		// Property: CanonicalHostedZoneNameID
 		// CloudFormation resource type schema:
 		//
@@ -158,10 +578,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The ID of the Route 53 hosted zone name that is associated with the load balancer.",
 		//	  "type": "string"
 		//	}
-		"canonical_hosted_zone_name_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Route 53 hosted zone name that is associated with the load balancer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"canonical_hosted_zone_name_id": schemaAttributec18909c203772928cee198f0(),
 		// Property: ConnectionDrainingPolicy
 		// CloudFormation resource type schema:
 		//
@@ -183,22 +600,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"connection_draining_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Enabled
-				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether connection draining is enabled for the load balancer.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Timeout
-				"timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum time, in seconds, to keep the existing connections open before deregistering the instances.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_draining_policy": schemaAttribute73c3be96619bb8a76c34ee06(),
 		// Property: ConnectionSettings
 		// CloudFormation resource type schema:
 		//
@@ -216,17 +618,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"connection_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IdleTimeout
-				"idle_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The time, in seconds, that the connection is allowed to be idle (no data has been sent over the connection) before it is closed by the load balancer.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "If enabled, the load balancer allows the connections to remain idle (no data is sent over the connection) for the specified duration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_settings": schemaAttributed4ce2db527754669f4ffad9e(),
 		// Property: CrossZone
 		// CloudFormation resource type schema:
 		//
@@ -234,10 +626,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "If enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones.",
 		//	  "type": "boolean"
 		//	}
-		"cross_zone": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "If enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cross_zone": schemaAttribute140107e2fc38b223d3f555cf(),
 		// Property: DNSName
 		// CloudFormation resource type schema:
 		//
@@ -245,10 +634,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The DNS name for the load balancer",
 		//	  "type": "string"
 		//	}
-		"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The DNS name for the load balancer",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dns_name": schemaAttribute6b36266dff4bbf73acd0fe3f(),
 		// Property: HealthCheck
 		// CloudFormation resource type schema:
 		//
@@ -286,37 +672,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"health_check": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: HealthyThreshold
-				"healthy_threshold": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The number of consecutive health checks successes required before moving the instance to the `Healthy` state.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Interval
-				"interval": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The approximate interval, in seconds, between health checks of an individual instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Target
-				"target": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The instance being checked.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Timeout
-				"timeout": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The amount of time, in seconds, during which no response means a failed health check.\n\nThis value must be less than the `Interval` value.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: UnhealthyThreshold
-				"unhealthy_threshold": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The number of consecutive health check failures required before moving the instance to the `Unhealthy` state.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The health check settings to use when evaluating the health of your EC2 instances.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"health_check": schemaAttribute072a88642951c984477c5867(),
 		// Property: Instances
 		// CloudFormation resource type schema:
 		//
@@ -328,11 +684,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"instances": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The IDs of the instances for the load balancer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instances": schemaAttribute4f040574474bcfd4b285fd37(),
 		// Property: LBCookieStickinessPolicy
 		// CloudFormation resource type schema:
 		//
@@ -356,24 +708,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"lb_cookie_stickiness_policy": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: CookieExpirationPeriod
-					"cookie_expiration_period": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The time period, in seconds, after which the cookie should be considered stale. If this parameter is not specified, the stickiness session lasts for the duration of the browser session.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PolicyName
-					"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the policy. This name must be unique within the set of policies for this load balancer.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Information about a policy for duration-based session stickiness.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"lb_cookie_stickiness_policy": schemaAttributedad9aca5d2fe632e058ad23e(),
 		// Property: Listeners
 		// CloudFormation resource type schema:
 		//
@@ -421,45 +756,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"listeners": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: InstancePort
-					"instance_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The port on which the instance is listening.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: InstanceProtocol
-					"instance_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The protocol to use for routing traffic to instances: HTTP, HTTPS, TCP, or SSL.\n\nIf the front-end protocol is TCP or SSL, the back-end protocol must be TCP or SSL. If the front-end protocol is HTTP or HTTPS, the back-end protocol must be HTTP or HTTPS.\n\nIf there is another listener with the same `InstancePort` whose `InstanceProtocol` is secure, (HTTPS or SSL), the listener's `InstanceProtocol` must also be secure.\n\nIf there is another listener with the same `InstancePort` whose `InstanceProtocol` is HTTP or TCP, the listener's `InstanceProtocol` must be HTTP or TCP.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: LoadBalancerPort
-					"load_balancer_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The port on which the load balancer is listening. On EC2-VPC, you can specify any port from the range 1-65535. On EC2-Classic, you can specify any port from the following list: 25, 80, 443, 465, 587, 1024-65535.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PolicyNames
-					"policy_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The names of the policies to associate with the listener.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Protocol
-					"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The load balancer transport protocol to use for routing: HTTP, HTTPS, TCP, or SSL.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SSLCertificateId
-					"ssl_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Amazon Resource Name (ARN) of the server certificate.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The Listeners for the load balancer. You can specify at most one listener per port.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"listeners": schemaAttributebd0e377e03f0792c9c087522(),
 		// Property: LoadBalancerName
 		// CloudFormation resource type schema:
 		//
@@ -467,10 +764,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The name of the load balancer. This name must be unique within your set of load balancers for the region.",
 		//	  "type": "string"
 		//	}
-		"load_balancer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the load balancer. This name must be unique within your set of load balancers for the region.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"load_balancer_name": schemaAttribute3e59dd4b2361cc17bb313a45(),
 		// Property: Policies
 		// CloudFormation resource type schema:
 		//
@@ -531,53 +825,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Attributes
-					"attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Name
-								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Value
-								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "The policy attributes.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: InstancePorts
-					"instance_ports": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The instance ports for the policy. Required only for some policy types.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: LoadBalancerPorts
-					"load_balancer_ports": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The load balancer ports for the policy. Required only for some policy types.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PolicyName
-					"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the policy.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PolicyType
-					"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the policy type.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The policies defined for your Classic Load Balancer. Specify only back-end server policies.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policies": schemaAttribute63fdd2f24dcdfb838f345c14(),
 		// Property: Scheme
 		// CloudFormation resource type schema:
 		//
@@ -585,10 +833,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The type of load balancer. Valid only for load balancers in a VPC.",
 		//	  "type": "string"
 		//	}
-		"scheme": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of load balancer. Valid only for load balancers in a VPC.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scheme": schemaAttribute851a902f2b1946d91ab07580(),
 		// Property: SecurityGroups
 		// CloudFormation resource type schema:
 		//
@@ -600,11 +845,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The security groups for the load balancer. Valid only for load balancers in a VPC.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_groups": schemaAttribute80b001c896515508ff0d4f6e(),
 		// Property: SourceSecurityGroup
 		// CloudFormation resource type schema:
 		//
@@ -622,21 +863,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"source_security_group": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: GroupName
-				"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the security group that you can use as part of your inbound rules for your load balancer's back-end instances.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: OwnerAlias
-				"owner_alias": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The owner of the source security group.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"source_security_group": schemaAttribute0d45224f9d80581b0db14f52(),
 		// Property: Subnets
 		// CloudFormation resource type schema:
 		//
@@ -648,11 +875,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The IDs of the subnets for the load balancer. You can specify at most one subnet per Availability Zone.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnets": schemaAttribute8cd93443e053ed93eb522f41(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -679,24 +902,7 @@ func loadBalancerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with `aws:`. You can use any of the following characters: the set of Unicode letters, digits, whitespace, `_`, `.`, `/`, `=`, `+`, and `-`.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags associated with a load balancer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributefead169bbd17bc2859a4cb32(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

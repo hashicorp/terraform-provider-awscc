@@ -14,6 +14,69 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute12d18f645467272fff80b5d1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A friendly name for the dashboard.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d5ffbef32d93f9d3a44b28d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the dashboard.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4115f2a9f36deded1a58aacb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the dashboard.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute752ddb63211aaa2142a5a534() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bfae3d7474a9603b2d7493e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute752ddb63211aaa2142a5a534(),
+				// Property: Value
+				"value": schemaAttribute752ddb63211aaa2142a5a534(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs that contain metadata for the dashboard.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9b38cfe58acb6e35841a3e8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the dashboard.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0f043680b9c193554b6ef7c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the project in which to create the dashboard.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb0194dbc11527085bae9b35() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The dashboard definition specified in a JSON literal.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iotsitewise_dashboard", dashboardDataSource)
 }
@@ -29,10 +92,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the dashboard.",
 		//	  "type": "string"
 		//	}
-		"dashboard_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the dashboard.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dashboard_arn": schemaAttributea9b38cfe58acb6e35841a3e8(),
 		// Property: DashboardDefinition
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +100,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The dashboard definition specified in a JSON literal.",
 		//	  "type": "string"
 		//	}
-		"dashboard_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The dashboard definition specified in a JSON literal.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dashboard_definition": schemaAttributefb0194dbc11527085bae9b35(),
 		// Property: DashboardDescription
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +108,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description for the dashboard.",
 		//	  "type": "string"
 		//	}
-		"dashboard_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description for the dashboard.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dashboard_description": schemaAttribute1d5ffbef32d93f9d3a44b28d(),
 		// Property: DashboardId
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +116,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the dashboard.",
 		//	  "type": "string"
 		//	}
-		"dashboard_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the dashboard.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dashboard_id": schemaAttribute4115f2a9f36deded1a58aacb(),
 		// Property: DashboardName
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +124,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A friendly name for the dashboard.",
 		//	  "type": "string"
 		//	}
-		"dashboard_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A friendly name for the dashboard.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dashboard_name": schemaAttribute12d18f645467272fff80b5d1(),
 		// Property: ProjectId
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +132,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the project in which to create the dashboard.",
 		//	  "type": "string"
 		//	}
-		"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the project in which to create the dashboard.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"project_id": schemaAttributef0f043680b9c193554b6ef7c(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -114,22 +159,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs that contain metadata for the dashboard.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute7bfae3d7474a9603b2d7493e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

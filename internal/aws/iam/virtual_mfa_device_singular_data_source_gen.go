@@ -15,6 +15,47 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute037135c9640b7b20477fb63e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute838af712ecc3980b469c97d4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributebd8d52246c766d3a12bde4fe(),
+				// Property: Value
+				"value": schemaAttribute86e17d6e7d4071ed2ac278ad(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute86e17d6e7d4071ed2ac278ad() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd8d52246c766d3a12bde4fe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef92f9b92720be1a16a8e25aa() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iam_virtual_mfa_device", virtualMFADeviceDataSource)
 }
@@ -32,9 +73,7 @@ func virtualMFADeviceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"path": schemaAttribute037135c9640b7b20477fb63e(),
 		// Property: SerialNumber
 		// CloudFormation resource type schema:
 		//
@@ -44,9 +83,7 @@ func virtualMFADeviceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "[\\w+=/:,.@-]+",
 		//	  "type": "string"
 		//	}
-		"serial_number": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"serial_number": schemaAttribute037135c9640b7b20477fb63e(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -77,23 +114,7 @@ func virtualMFADeviceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute838af712ecc3980b469c97d4(),
 		// Property: Users
 		// CloudFormation resource type schema:
 		//
@@ -104,10 +125,7 @@ func virtualMFADeviceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"users": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"users": schemaAttributef92f9b92720be1a16a8e25aa(),
 		// Property: VirtualMfaDeviceName
 		// CloudFormation resource type schema:
 		//
@@ -117,9 +135,7 @@ func virtualMFADeviceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "[\\w+=,.@-]+",
 		//	  "type": "string"
 		//	}
-		"virtual_mfa_device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"virtual_mfa_device_name": schemaAttribute037135c9640b7b20477fb63e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

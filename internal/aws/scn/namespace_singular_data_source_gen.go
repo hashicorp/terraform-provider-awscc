@@ -15,6 +15,71 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute49c838f4d918da263fbe05af() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the namespace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c1e1f63499993a316501cf8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the namespace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute816ab34d96dadfeba6df2240() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the namespace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c1558a9b2979466caf18eab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The creation time of the namespace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4f171e7e50f67d3c1925c82() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The last modified time of the namespace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3b665439ef7ce26f13e777f() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec658c2ba0ea7c21645cafc20(),
+				// Property: Value
+				"value": schemaAttributec658c2ba0ea7c21645cafc20(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags for the namespace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec658c2ba0ea7c21645cafc20() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed77597a9bb7dd49434f56392() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Web Services Supply Chain instance identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_scn_namespace", namespaceDataSource)
 }
@@ -33,10 +98,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws:scn(?::([a-z0-9-]+):([0-9]+):instance)?/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})[-_./A-Za-z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the namespace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute7c1e1f63499993a316501cf8(),
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -45,11 +107,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The creation time of the namespace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttribute8c1558a9b2979466caf18eab(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +117,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the namespace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute49c838f4d918da263fbe05af(),
 		// Property: InstanceId
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +128,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Web Services Supply Chain instance identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_id": schemaAttributed77597a9bb7dd49434f56392(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -85,11 +137,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The last modified time of the namespace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttributea4f171e7e50f67d3c1925c82(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -100,10 +148,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9_]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the namespace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute816ab34d96dadfeba6df2240(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -134,22 +179,7 @@ func namespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags for the namespace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributec3b665439ef7ce26f13e777f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,706 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute013f974e6e3a51ad55fcc5f2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The algorithm used to sign the JWT assertion.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute01ba6a68c546e867c237a160() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the replicator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0642e48f73e58ee2a8853928() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Secrets Manager secret.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0b9fb93bd0bf522ddf46f805() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The consumer group offset synchronization mode.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0eaacd12a65cd8dba2125bb9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApacheKafkaClusterId
+			"apache_kafka_cluster_id": schemaAttribute80b2c6095d9454ee79423875(),
+			// Property: BootstrapBrokerString
+			"bootstrap_broker_string": schemaAttributebebcdc5cfd62e1ad85895f1d(),
+		}, /*END SCHEMA*/
+		Description: "Details of an Apache Kafka cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f6b7d98911b12d6e474d694() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether log delivery to S3 is enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute108a8d22a08eb1bf03aca0f4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The algorithm used to sign the JWT client assertion.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1f5635958f96720adb33a7ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name of the source Kafka cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ffbaf0961a63eca3b894968() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The S3 prefix that is the destination for log delivery.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24ad22f6c7d8364a2c93f618() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Enabled
+			"enabled": schemaAttribute89723f2a349935cadc0c394c(),
+			// Property: LogGroup
+			"log_group": schemaAttributeeeb4d74926606aeb458fbfdb(),
+		}, /*END SCHEMA*/
+		Description: "Details of the CloudWatch Logs destination for replicator logs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute257fcbaa29369db00176e3fa() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MskClusterArn
+			"msk_cluster_arn": schemaAttribute8c1af1f102263c842f8c6167(),
+		}, /*END SCHEMA*/
+		Description: "Details of an Amazon MSK cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26249b3d32a13dfd734b1fd5() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to periodically configure remote topic ACLs to match their corresponding upstream topics.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ac083aa08618a5c36b1255e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EncryptionType
+			"encryption_type": schemaAttribute53a5b58cc429d66144b2f56f(),
+			// Property: RootCaCertificate
+			"root_ca_certificate": schemaAttributea83a8233b9b20c66a7ba9619(),
+		}, /*END SCHEMA*/
+		Description: "Details of encryption in transit to the Apache Kafka cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c7b6bc9e396be94edb1b3bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The HTTPS URL of the OAuth token endpoint that vends OAuth Bearer tokens per RFC 6749.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f309f415e97f33883ad6915() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Secrets Manager ARN containing a custom CA certificate for the identity provider. Required only if the identity provider uses a private CA.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2fa25c6876929eb178086721() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Bucket
+			"bucket": schemaAttributebbb4c251a3e5adadd48e84f0(),
+			// Property: Enabled
+			"enabled": schemaAttribute0f6b7d98911b12d6e474d694(),
+			// Property: Prefix
+			"prefix": schemaAttribute1ffbaf0961a63eca3b894968(),
+		}, /*END SCHEMA*/
+		Description: "Details of the Amazon S3 destination for replicator logs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34aa8891dd380f4284911192() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name of the target Kafka cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute427dd57171166b596c2638d2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TokenRequestSecretArn
+			"token_request_secret_arn": schemaAttributeef001b4b38694623725638cc(),
+		}, /*END SCHEMA*/
+		Description: "Details for SASL/OAUTHBEARER using standard client_credentials grant. Mutually exclusive with iamJwtBearer and clientCredentialsAssertion.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53a5b58cc429d66144b2f56f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of encryption in transit to the Apache Kafka cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5653dcafc9e8ee56702d597e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttributee0f23f3c41fd83265ea18be5(),
+			// Property: SubnetIds
+			"subnet_ids": schemaAttribute5cfbb1028a0895e8c4c02193(),
+		}, /*END SCHEMA*/
+		Description: "Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b66908fca03c0e6c362e4a7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the target Kafka cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5cfbb1028a0895e8c4c02193() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6387175a102efdd96a30ce55() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClientCredentials
+			"client_credentials": schemaAttribute427dd57171166b596c2638d2(),
+			// Property: ClientCredentialsAssertion
+			"client_credentials_assertion": schemaAttributef8078f9fe28e9e7a13d452c2(),
+			// Property: IamJwtBearer
+			"iam_jwt_bearer": schemaAttribute89c7d439ecaff395a40a3605(),
+			// Property: Scope
+			"scope": schemaAttributef6290d1159009b39591660b2(),
+			// Property: TokenEndpointAuthenticationMethod
+			"token_endpoint_authentication_method": schemaAttributed6636e824586d6e9fffde8c5(),
+			// Property: TokenEndpointTlsCertificateArn
+			"token_endpoint_tls_certificate_arn": schemaAttribute2f309f415e97f33883ad6915(),
+			// Property: TokenEndpointUrl
+			"token_endpoint_url": schemaAttribute2c7b6bc9e396be94edb1b3bb(),
+		}, /*END SCHEMA*/
+		Description: "Details for client authentication using SASL/OAUTHBEARER.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e536ec2207e16dacebc83db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of replication starting position.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70f79c4dcca69dfe0b413e1f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of compression to use writing records to target Kafka cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute713ced3015962403d2abb99e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Firehose delivery stream that is the destination for log delivery.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72ddd96f78b25f97a17264d0() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to periodically check for new consumer groups.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73787fa02e59060f059d2255() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to periodically check for new topics and partitions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7651b9f553bc9cc549963f1c() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of regular expression patterns indicating the consumer groups to copy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7938da0ff4ac2a23c2421a63() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CopyAccessControlListsForTopics
+			"copy_access_control_lists_for_topics": schemaAttribute26249b3d32a13dfd734b1fd5(),
+			// Property: CopyTopicConfigurations
+			"copy_topic_configurations": schemaAttributebd2adb8088d1f65278c68538(),
+			// Property: DetectAndCopyNewTopics
+			"detect_and_copy_new_topics": schemaAttribute73787fa02e59060f059d2255(),
+			// Property: StartingPosition
+			"starting_position": schemaAttribute8840875046738a821618a345(),
+			// Property: TopicNameConfiguration
+			"topic_name_configuration": schemaAttribute92479b4365c6a8dc710a8b63(),
+			// Property: TopicsToExclude
+			"topics_to_exclude": schemaAttributebaf7578348d8337c198d3081(),
+			// Property: TopicsToReplicate
+			"topics_to_replicate": schemaAttributebf959ce690c2e7c24b57182b(),
+		}, /*END SCHEMA*/
+		Description: "Configuration relating to topic replication.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f538847f4f5d01963c561cc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name for the created replicator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80b2c6095d9454ee79423875() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Apache Kafka cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8791207f32a25e74e99960eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the source Kafka cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8840875046738a821618a345() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Type
+			"type": schemaAttribute6e536ec2207e16dacebc83db(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for specifying the position in the topics to start replicating from.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89723f2a349935cadc0c394c() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether log delivery to CloudWatch Logs is enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89c7d439ecaff395a40a3605() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Audience
+			"audience": schemaAttribute9e7a7fed92f624ebec3b2259(),
+			// Property: SigningAlgorithm
+			"signing_algorithm": schemaAttribute013f974e6e3a51ad55fcc5f2(),
+			// Property: TokenRequestSecretArn
+			"token_request_secret_arn": schemaAttributee8d7359062569e7be736c718(),
+		}, /*END SCHEMA*/
+		Description: "Details for SASL/OAUTHBEARER using JWT Bearer assertion grant (RFC 7523). Mutually exclusive with clientCredentials and clientCredentialsAssertion.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c1af1f102263c842f8c6167() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of an Amazon MSK cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92479b4365c6a8dc710a8b63() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Type
+			"type": schemaAttributec57810ee3cd988d4702707ac(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for specifying replicated topic names should be the same as their corresponding upstream topics or prefixed with source cluster alias.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e7a7fed92f624ebec3b2259() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The audience (aud claim) set in the STS JWT assertion.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f58dfa2fe365d4483fc2b88() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatchLogs
+			"cloudwatch_logs": schemaAttribute24ad22f6c7d8364a2c93f618(),
+			// Property: Firehose
+			"firehose": schemaAttributedc83799aacd74f25e8b3f838(),
+			// Property: S3
+			"s3": schemaAttribute2fa25c6876929eb178086721(),
+		}, /*END SCHEMA*/
+		Description: "The replicator logs configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fb24c47f45369357d7025e8() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of regular expression patterns indicating the consumer groups that should not be replicated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4339cb29259fa2212d0c8af() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecretArn
+			"secret_arn": schemaAttribute0642e48f73e58ee2a8853928(),
+		}, /*END SCHEMA*/
+		Description: "Details for mTLS client authentication.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea49a27a00415aee9f97ca17b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SASL/SCRAM authentication mechanism.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4e92c4493e2c020802aa75f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current version of the MSK replicator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea74cf4b2b5035892bcde66f7() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to periodically write the translated offsets to __consumer_offsets topic in target cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea83a8233b9b20c66a7ba9619() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The root CA certificate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9a4582056bdb6049d1617cb() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether log delivery to Firehose is enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb781e1009c5a90ace38cacb5() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConsumerGroupReplication
+				"consumer_group_replication": schemaAttributeb86f9170a5904198c4660954(),
+				// Property: SourceKafkaClusterArn
+				"source_kafka_cluster_arn": schemaAttribute1f5635958f96720adb33a7ae(),
+				// Property: SourceKafkaClusterId
+				"source_kafka_cluster_id": schemaAttribute8791207f32a25e74e99960eb(),
+				// Property: TargetCompressionType
+				"target_compression_type": schemaAttribute70f79c4dcca69dfe0b413e1f(),
+				// Property: TargetKafkaClusterArn
+				"target_kafka_cluster_arn": schemaAttribute34aa8891dd380f4284911192(),
+				// Property: TargetKafkaClusterId
+				"target_kafka_cluster_id": schemaAttribute5b66908fca03c0e6c362e4a7(),
+				// Property: TopicReplication
+				"topic_replication": schemaAttribute7938da0ff4ac2a23c2421a63(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of replication configurations, where each configuration targets a given source cluster to target cluster replication flow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb86f9170a5904198c4660954() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConsumerGroupOffsetSyncMode
+			"consumer_group_offset_sync_mode": schemaAttribute0b9fb93bd0bf522ddf46f805(),
+			// Property: ConsumerGroupsToExclude
+			"consumer_groups_to_exclude": schemaAttribute9fb24c47f45369357d7025e8(),
+			// Property: ConsumerGroupsToReplicate
+			"consumer_groups_to_replicate": schemaAttribute7651b9f553bc9cc549963f1c(),
+			// Property: DetectAndCopyNewConsumerGroups
+			"detect_and_copy_new_consumer_groups": schemaAttribute72ddd96f78b25f97a17264d0(),
+			// Property: SynchroniseConsumerGroupOffsets
+			"synchronise_consumer_group_offsets": schemaAttributea74cf4b2b5035892bcde66f7(),
+		}, /*END SCHEMA*/
+		Description: "Configuration relating to consumer group replication.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebaf7578348d8337c198d3081() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of regular expression patterns indicating the topics that should not be replicated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebbb4c251a3e5adadd48e84f0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The S3 bucket that is the destination for log delivery.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd2adb8088d1f65278c68538() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to periodically configure remote topics to match their corresponding upstream topics.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebebcdc5cfd62e1ad85895f1d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The bootstrap broker string of the Apache Kafka cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf959ce690c2e7c24b57182b() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of regular expression patterns indicating the topics to copy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec0d79aad530d8f39de9fa9c9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the IAM role used by the replicator to access external resources.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3e9157bf25ecb076bd298b9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A summary description of the replicator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec57810ee3cd988d4702707ac() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of replicated topic name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed28ab083bce038396b263279() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeffa4ca4566d85592953a4c32(),
+				// Property: Value
+				"value": schemaAttributeffa4ca4566d85592953a4c32(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A collection of tags associated with a resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed35c1c3e0cf3ef6db1a5b574() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ReplicatorLogDelivery
+			"replicator_log_delivery": schemaAttribute9f58dfa2fe365d4483fc2b88(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for log delivery for the replicator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6636e824586d6e9fffde8c5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "How client credentials are sent to the identity provider (POST, BASIC, or NONE).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed731e051049a85176c49ec64() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MTLS
+			"mtls": schemaAttributea4339cb29259fa2212d0c8af(),
+			// Property: SaslOAuthBearer
+			"sasl_o_auth_bearer": schemaAttribute6387175a102efdd96a30ce55(),
+			// Property: SaslScram
+			"sasl_scram": schemaAttributef7ddff2e66fe5df5dd7873b2(),
+		}, /*END SCHEMA*/
+		Description: "Details of the client authentication used by the Apache Kafka cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc83799aacd74f25e8b3f838() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeliveryStream
+			"delivery_stream": schemaAttribute713ced3015962403d2abb99e(),
+			// Property: Enabled
+			"enabled": schemaAttributea9a4582056bdb6049d1617cb(),
+		}, /*END SCHEMA*/
+		Description: "Details of the Kinesis Data Firehose delivery stream that is the destination for replicator logs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedfadf15385684c70509c8353() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The audience (aud claim) set in the STS JWT client assertion.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0f23f3c41fd83265ea18be5() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The AWS security groups to associate with the elastic network interfaces in order to specify what the replicator has access to. If a security group is not specified, the default security group associated with the VPC is used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee7f479121ae17bc6bd2809db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Optional Secrets Manager ARN for identity providers that require client_id as a form parameter alongside the JWT client assertion.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8d7359062569e7be736c718() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Optional Secrets Manager ARN for identity providers that require client authentication alongside the JWT Bearer assertion.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeda2deff1c9b3822fb980fe4() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AmazonMskCluster
+				"amazon_msk_cluster": schemaAttribute257fcbaa29369db00176e3fa(),
+				// Property: ApacheKafkaCluster
+				"apache_kafka_cluster": schemaAttribute0eaacd12a65cd8dba2125bb9(),
+				// Property: ClientAuthentication
+				"client_authentication": schemaAttributed731e051049a85176c49ec64(),
+				// Property: EncryptionInTransit
+				"encryption_in_transit": schemaAttribute2ac083aa08618a5c36b1255e(),
+				// Property: VpcConfig
+				"vpc_config": schemaAttribute5653dcafc9e8ee56702d597e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Specifies a list of Kafka clusters which are targets of the replicator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeeb4d74926606aeb458fbfdb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The CloudWatch log group that is the destination for log delivery.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef001b4b38694623725638cc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Secrets Manager ARN of the secret containing the client_id and client_secret used to obtain an OAuth Bearer token via the client_credentials grant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6290d1159009b39591660b2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "OAuth scope to request. Included in the token request if provided.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7ddff2e66fe5df5dd7873b2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Mechanism
+			"mechanism": schemaAttributea49a27a00415aee9f97ca17b(),
+			// Property: SecretArn
+			"secret_arn": schemaAttribute0642e48f73e58ee2a8853928(),
+		}, /*END SCHEMA*/
+		Description: "Details for SASL/SCRAM client authentication.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8078f9fe28e9e7a13d452c2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Audience
+			"audience": schemaAttributedfadf15385684c70509c8353(),
+			// Property: SigningAlgorithm
+			"signing_algorithm": schemaAttribute108a8d22a08eb1bf03aca0f4(),
+			// Property: TokenRequestSecretArn
+			"token_request_secret_arn": schemaAttributee7f479121ae17bc6bd2809db(),
+		}, /*END SCHEMA*/
+		Description: "Details for SASL/OAUTHBEARER using client credentials grant with JWT client assertion (RFC 7521/7523). Mutually exclusive with clientCredentials and iamJwtBearer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeffa4ca4566d85592953a4c32() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_msk_replicator", replicatorDataSource)
 }
@@ -30,10 +730,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The current version of the MSK replicator.",
 		//	  "type": "string"
 		//	}
-		"current_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current version of the MSK replicator.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"current_version": schemaAttributea4e92c4493e2c020802aa75f(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +739,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A summary description of the replicator.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributec3e9157bf25ecb076bd298b9(),
 		// Property: KafkaClusters
 		// CloudFormation resource type schema:
 		//
@@ -105,6 +799,106 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            },
 		//	            "required": [
 		//	              "SecretArn"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "SaslOAuthBearer": {
+		//	            "additionalProperties": false,
+		//	            "description": "Details for client authentication using SASL/OAUTHBEARER.",
+		//	            "properties": {
+		//	              "ClientCredentials": {
+		//	                "additionalProperties": false,
+		//	                "description": "Details for SASL/OAUTHBEARER using standard client_credentials grant. Mutually exclusive with iamJwtBearer and clientCredentialsAssertion.",
+		//	                "properties": {
+		//	                  "TokenRequestSecretArn": {
+		//	                    "description": "Secrets Manager ARN of the secret containing the client_id and client_secret used to obtain an OAuth Bearer token via the client_credentials grant.",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "TokenRequestSecretArn"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "ClientCredentialsAssertion": {
+		//	                "additionalProperties": false,
+		//	                "description": "Details for SASL/OAUTHBEARER using client credentials grant with JWT client assertion (RFC 7521/7523). Mutually exclusive with clientCredentials and iamJwtBearer.",
+		//	                "properties": {
+		//	                  "Audience": {
+		//	                    "description": "The audience (aud claim) set in the STS JWT client assertion.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "SigningAlgorithm": {
+		//	                    "description": "The algorithm used to sign the JWT client assertion.",
+		//	                    "enum": [
+		//	                      "RS256",
+		//	                      "ES384"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "TokenRequestSecretArn": {
+		//	                    "description": "Optional Secrets Manager ARN for identity providers that require client_id as a form parameter alongside the JWT client assertion.",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Audience",
+		//	                  "SigningAlgorithm"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "IamJwtBearer": {
+		//	                "additionalProperties": false,
+		//	                "description": "Details for SASL/OAUTHBEARER using JWT Bearer assertion grant (RFC 7523). Mutually exclusive with clientCredentials and clientCredentialsAssertion.",
+		//	                "properties": {
+		//	                  "Audience": {
+		//	                    "description": "The audience (aud claim) set in the STS JWT assertion.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "SigningAlgorithm": {
+		//	                    "description": "The algorithm used to sign the JWT assertion.",
+		//	                    "enum": [
+		//	                      "RS256",
+		//	                      "ES384"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "TokenRequestSecretArn": {
+		//	                    "description": "Optional Secrets Manager ARN for identity providers that require client authentication alongside the JWT Bearer assertion.",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Audience",
+		//	                  "SigningAlgorithm"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Scope": {
+		//	                "description": "OAuth scope to request. Included in the token request if provided.",
+		//	                "type": "string"
+		//	              },
+		//	              "TokenEndpointAuthenticationMethod": {
+		//	                "description": "How client credentials are sent to the identity provider (POST, BASIC, or NONE).",
+		//	                "enum": [
+		//	                  "POST",
+		//	                  "BASIC",
+		//	                  "NONE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "TokenEndpointTlsCertificateArn": {
+		//	                "description": "Secrets Manager ARN containing a custom CA certificate for the identity provider. Required only if the identity provider uses a private CA.",
+		//	                "type": "string"
+		//	              },
+		//	              "TokenEndpointUrl": {
+		//	                "description": "The HTTPS URL of the OAuth token endpoint that vends OAuth Bearer tokens per RFC 6749.",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "TokenEndpointUrl",
+		//	              "TokenEndpointAuthenticationMethod"
 		//	            ],
 		//	            "type": "object"
 		//	          },
@@ -195,115 +989,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"kafka_clusters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AmazonMskCluster
-					"amazon_msk_cluster": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: MskClusterArn
-							"msk_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The ARN of an Amazon MSK cluster.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Details of an Amazon MSK cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ApacheKafkaCluster
-					"apache_kafka_cluster": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ApacheKafkaClusterId
-							"apache_kafka_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The ID of the Apache Kafka cluster.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: BootstrapBrokerString
-							"bootstrap_broker_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The bootstrap broker string of the Apache Kafka cluster.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Details of an Apache Kafka cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ClientAuthentication
-					"client_authentication": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: MTLS
-							"mtls": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: SecretArn
-									"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The Amazon Resource Name (ARN) of the Secrets Manager secret.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Details for mTLS client authentication.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SaslScram
-							"sasl_scram": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Mechanism
-									"mechanism": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The SASL/SCRAM authentication mechanism.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: SecretArn
-									"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The Amazon Resource Name (ARN) of the Secrets Manager secret.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Details for SASL/SCRAM client authentication.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Details of the client authentication used by the Apache Kafka cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: EncryptionInTransit
-					"encryption_in_transit": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: EncryptionType
-							"encryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The type of encryption in transit to the Apache Kafka cluster.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: RootCaCertificate
-							"root_ca_certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The root CA certificate.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Details of encryption in transit to the Apache Kafka cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: VpcConfig
-					"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: SecurityGroupIds
-							"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "The AWS security groups to associate with the elastic network interfaces in order to specify what the replicator has access to. If a security group is not specified, the default security group associated with the VPC is used.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SubnetIds
-							"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Specifies a list of Kafka clusters which are targets of the replicator.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kafka_clusters": schemaAttributeeda2deff1c9b3822fb980fe4(),
 		// Property: LogDelivery
 		// CloudFormation resource type schema:
 		//
@@ -379,75 +1065,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"log_delivery": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ReplicatorLogDelivery
-				"replicator_log_delivery": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CloudWatchLogs
-						"cloudwatch_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Enabled
-								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "Whether log delivery to CloudWatch Logs is enabled.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: LogGroup
-								"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The CloudWatch log group that is the destination for log delivery.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Details of the CloudWatch Logs destination for replicator logs.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Firehose
-						"firehose": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DeliveryStream
-								"delivery_stream": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Firehose delivery stream that is the destination for log delivery.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Enabled
-								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "Whether log delivery to Firehose is enabled.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Details of the Kinesis Data Firehose delivery stream that is the destination for replicator logs.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: S3
-						"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Bucket
-								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The S3 bucket that is the destination for log delivery.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Enabled
-								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "Whether log delivery to S3 is enabled.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Prefix
-								"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The S3 prefix that is the destination for log delivery.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Details of the Amazon S3 destination for replicator logs.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The replicator logs configuration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration for log delivery for the replicator.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"log_delivery": schemaAttributed35c1c3e0cf3ef6db1a5b574(),
 		// Property: ReplicationInfoList
 		// CloudFormation resource type schema:
 		//
@@ -626,131 +1244,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"replication_info_list": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ConsumerGroupReplication
-					"consumer_group_replication": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ConsumerGroupOffsetSyncMode
-							"consumer_group_offset_sync_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The consumer group offset synchronization mode.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ConsumerGroupsToExclude
-							"consumer_groups_to_exclude": schema.SetAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "List of regular expression patterns indicating the consumer groups that should not be replicated.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ConsumerGroupsToReplicate
-							"consumer_groups_to_replicate": schema.SetAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "List of regular expression patterns indicating the consumer groups to copy.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: DetectAndCopyNewConsumerGroups
-							"detect_and_copy_new_consumer_groups": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "Whether to periodically check for new consumer groups.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SynchroniseConsumerGroupOffsets
-							"synchronise_consumer_group_offsets": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "Whether to periodically write the translated offsets to __consumer_offsets topic in target cluster.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Configuration relating to consumer group replication.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SourceKafkaClusterArn
-					"source_kafka_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Amazon Resource Name of the source Kafka cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SourceKafkaClusterId
-					"source_kafka_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of the source Kafka cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: TargetCompressionType
-					"target_compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of compression to use writing records to target Kafka cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: TargetKafkaClusterArn
-					"target_kafka_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Amazon Resource Name of the target Kafka cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: TargetKafkaClusterId
-					"target_kafka_cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of the target Kafka cluster.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: TopicReplication
-					"topic_replication": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: CopyAccessControlListsForTopics
-							"copy_access_control_lists_for_topics": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "Whether to periodically configure remote topic ACLs to match their corresponding upstream topics.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: CopyTopicConfigurations
-							"copy_topic_configurations": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "Whether to periodically configure remote topics to match their corresponding upstream topics.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: DetectAndCopyNewTopics
-							"detect_and_copy_new_topics": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "Whether to periodically check for new topics and partitions.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: StartingPosition
-							"starting_position": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Type
-									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The type of replication starting position.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Configuration for specifying the position in the topics to start replicating from.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TopicNameConfiguration
-							"topic_name_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Type
-									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The type of replicated topic name.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Configuration for specifying replicated topic names should be the same as their corresponding upstream topics or prefixed with source cluster alias.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TopicsToExclude
-							"topics_to_exclude": schema.SetAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "List of regular expression patterns indicating the topics that should not be replicated.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TopicsToReplicate
-							"topics_to_replicate": schema.SetAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "List of regular expression patterns indicating the topics to copy.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Configuration relating to topic replication.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of replication configurations, where each configuration targets a given source cluster to target cluster replication flow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"replication_info_list": schemaAttributeb781e1009c5a90ace38cacb5(),
 		// Property: ReplicatorArn
 		// CloudFormation resource type schema:
 		//
@@ -759,10 +1253,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):kafka:.*",
 		//	  "type": "string"
 		//	}
-		"replicator_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name for the created replicator.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"replicator_arn": schemaAttribute7f538847f4f5d01963c561cc(),
 		// Property: ReplicatorName
 		// CloudFormation resource type schema:
 		//
@@ -773,10 +1264,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9A-Za-z][0-9A-Za-z-]{0,}$",
 		//	  "type": "string"
 		//	}
-		"replicator_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the replicator.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"replicator_name": schemaAttribute01ba6a68c546e867c237a160(),
 		// Property: ServiceExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -785,10 +1273,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):iam:.*",
 		//	  "type": "string"
 		//	}
-		"service_execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the IAM role used by the replicator to access external resources.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"service_execution_role_arn": schemaAttributec0d79aad530d8f39de9fa9c9(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -817,22 +1302,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A collection of tags associated with a resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributed28ab083bce038396b263279(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -853,9 +1323,12 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"amazon_msk_cluster":                   "AmazonMskCluster",
 		"apache_kafka_cluster":                 "ApacheKafkaCluster",
 		"apache_kafka_cluster_id":              "ApacheKafkaClusterId",
+		"audience":                             "Audience",
 		"bootstrap_broker_string":              "BootstrapBrokerString",
 		"bucket":                               "Bucket",
 		"client_authentication":                "ClientAuthentication",
+		"client_credentials":                   "ClientCredentials",
+		"client_credentials_assertion":         "ClientCredentialsAssertion",
 		"cloudwatch_logs":                      "CloudWatchLogs",
 		"consumer_group_offset_sync_mode":      "ConsumerGroupOffsetSyncMode",
 		"consumer_group_replication":           "ConsumerGroupReplication",
@@ -872,6 +1345,7 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"encryption_in_transit":                "EncryptionInTransit",
 		"encryption_type":                      "EncryptionType",
 		"firehose":                             "Firehose",
+		"iam_jwt_bearer":                       "IamJwtBearer",
 		"kafka_clusters":                       "KafkaClusters",
 		"key":                                  "Key",
 		"log_delivery":                         "LogDelivery",
@@ -886,10 +1360,13 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"replicator_name":                      "ReplicatorName",
 		"root_ca_certificate":                  "RootCaCertificate",
 		"s3":                                   "S3",
+		"sasl_o_auth_bearer":                   "SaslOAuthBearer",
 		"sasl_scram":                           "SaslScram",
+		"scope":                                "Scope",
 		"secret_arn":                           "SecretArn",
 		"security_group_ids":                   "SecurityGroupIds",
 		"service_execution_role_arn":           "ServiceExecutionRoleArn",
+		"signing_algorithm":                    "SigningAlgorithm",
 		"source_kafka_cluster_arn":             "SourceKafkaClusterArn",
 		"source_kafka_cluster_id":              "SourceKafkaClusterId",
 		"starting_position":                    "StartingPosition",
@@ -899,6 +1376,10 @@ func replicatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"target_compression_type":              "TargetCompressionType",
 		"target_kafka_cluster_arn":             "TargetKafkaClusterArn",
 		"target_kafka_cluster_id":              "TargetKafkaClusterId",
+		"token_endpoint_authentication_method": "TokenEndpointAuthenticationMethod",
+		"token_endpoint_tls_certificate_arn":   "TokenEndpointTlsCertificateArn",
+		"token_endpoint_url":                   "TokenEndpointUrl",
+		"token_request_secret_arn":             "TokenRequestSecretArn",
 		"topic_name_configuration":             "TopicNameConfiguration",
 		"topic_replication":                    "TopicReplication",
 		"topics_to_exclude":                    "TopicsToExclude",

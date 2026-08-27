@@ -14,6 +14,34 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2a3d9102f35d14dcf2041249() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the link",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2fb7f8b18471414b09439184() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the customer gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a26e6a357cabb1f1127a5a7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the device",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9cf7b051055ab1051a12744a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the global network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_networkmanager_customer_gateway_association", customerGatewayAssociationDataSource)
 }
@@ -29,10 +57,7 @@ func customerGatewayAssociationDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The Amazon Resource Name (ARN) of the customer gateway.",
 		//	  "type": "string"
 		//	}
-		"customer_gateway_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the customer gateway.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"customer_gateway_arn": schemaAttribute2fb7f8b18471414b09439184(),
 		// Property: DeviceId
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +65,7 @@ func customerGatewayAssociationDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The ID of the device",
 		//	  "type": "string"
 		//	}
-		"device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the device",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"device_id": schemaAttribute9a26e6a357cabb1f1127a5a7(),
 		// Property: GlobalNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +73,7 @@ func customerGatewayAssociationDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The ID of the global network.",
 		//	  "type": "string"
 		//	}
-		"global_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the global network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"global_network_id": schemaAttribute9cf7b051055ab1051a12744a(),
 		// Property: LinkId
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +81,7 @@ func customerGatewayAssociationDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The ID of the link",
 		//	  "type": "string"
 		//	}
-		"link_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the link",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"link_id": schemaAttribute2a3d9102f35d14dcf2041249(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

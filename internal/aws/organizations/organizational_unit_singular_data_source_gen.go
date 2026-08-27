@@ -14,6 +14,70 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute515229a8aa7bb3d1e1d2a986() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributecfb5b7898b86b104c9877033(),
+				// Property: Value
+				"value": schemaAttribute5eab085256a5f964e77ee416(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags that you want to attach to the newly created OU.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute566c678afbfed667209753bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier (ID) of the parent root or OU that you want to create the new OU in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58cc34de2057e25907271de9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier (ID) associated with this OU.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5eab085256a5f964e77ee416() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8cac1d7254efbcc7de1a30c5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The friendly name of this OU.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9670b0877c57171a649cd8b3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The path in the organization where this OU exists.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae463d1dd15663df1c03727f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of this OU.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecfb5b7898b86b104c9877033() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key identifier, or name, of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_organizations_organizational_unit", organizationalUnitDataSource)
 }
@@ -30,10 +94,7 @@ func organizationalUnitDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:aws.*:organizations::\\d{12}:ou/o-[a-z0-9]{10,32}/ou-[0-9a-z]{4,32}-[0-9a-z]{8,32}",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of this OU.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeae463d1dd15663df1c03727f(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +104,7 @@ func organizationalUnitDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$",
 		//	  "type": "string"
 		//	}
-		"organizational_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier (ID) associated with this OU.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"organizational_unit_id": schemaAttribute58cc34de2057e25907271de9(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +115,7 @@ func organizationalUnitDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "[\\s\\S]*",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The friendly name of this OU.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute8cac1d7254efbcc7de1a30c5(),
 		// Property: ParentId
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +125,7 @@ func organizationalUnitDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^(r-[0-9a-z]{4,32})|(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$",
 		//	  "type": "string"
 		//	}
-		"parent_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier (ID) of the parent root or OU that you want to create the new OU in.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parent_id": schemaAttribute566c678afbfed667209753bb(),
 		// Property: Path
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +134,7 @@ func organizationalUnitDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^(o-[a-z0-9]{10,32}/r-[0-9a-z]{4,32}(/ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})*(/\\d{12})*)/",
 		//	  "type": "string"
 		//	}
-		"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The path in the organization where this OU exists.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"path": schemaAttribute9670b0877c57171a649cd8b3(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -118,24 +167,7 @@ func organizationalUnitDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key identifier, or name, of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags that you want to attach to the newly created OU.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute515229a8aa7bb3d1e1d2a986(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

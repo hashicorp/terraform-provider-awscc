@@ -15,6 +15,250 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0abad7a43abdc0a24d15c3ee() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The policy format version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1080f7bb9a4b2dc8491cfb5b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A natural language description of this type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20dcd7f8cb7ec6a6ae81b395() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the type value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute216da1f185939e3e20fb7525() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A natural language description of the type's value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute402919f27b18082f1ee6cad8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "Time this policy was last updated",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42e724a8d8fe145de870321d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SMT expression for this rule",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4542a16e10663925230a768a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique id within the PolicyDefinition",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b1a4ee9e21a8c0172a292a1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name from this variable.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e0547b600f497551cb9d65b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Description
+				"description": schemaAttribute216da1f185939e3e20fb7525(),
+				// Property: Value
+				"value": schemaAttribute20dcd7f8cb7ec6a6ae81b395(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of valid values for this type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63c90443e4adc9c723f308f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The hash for this version",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6fd652f65601a085d1f631cf() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Description
+				"description": schemaAttribute9c08fd5b5a68010a16113e7e(),
+				// Property: Name
+				"name": schemaAttribute5b1a4ee9e21a8c0172a292a1(),
+				// Property: Type
+				"type": schemaAttributef545931c385e9ba73cbe5e7e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The variables definition block of an AutomatedReasoningPolicyDefinition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76db92eb95089256654f775d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An alternate expression for this rule",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute778edebdccaaf24038eaa070() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeade2df8d765540c09b71fa7a(),
+				// Property: Value
+				"value": schemaAttributed9a2367807cf1c69af2c1d74(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a4b36132e5f981e99f8e756() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The id of the policy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e00c8bffbd9ac9d248bfa22() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether to force delete the automated reasoning policy even if it has active resources. When false , Amazon Bedrock validates if all artifacts have been deleted (e.g. policy version, test case, test result) for a policy before deletion. When true , Amazon Bedrock will delete the policy and all its artifacts without validation. Default is false",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c08fd5b5a68010a16113e7e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A natural language description of this variable.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeade2df8d765540c09b71fa7a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Tag Key",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb38417efffafa170d0159976() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "Time this policy was created",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebbe310158047cf81ec6084ed() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Rules
+			"rules": schemaAttributebfc0cfdd578a5ed525ad3477(),
+			// Property: Types
+			"types": schemaAttributef1825b4d39a024a274c678f1(),
+			// Property: Variables
+			"variables": schemaAttribute6fd652f65601a085d1f631cf(),
+			// Property: Version
+			"version": schemaAttribute0abad7a43abdc0a24d15c3ee(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebfc0cfdd578a5ed525ad3477() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AlternateExpression
+				"alternate_expression": schemaAttribute76db92eb95089256654f775d(),
+				// Property: Expression
+				"expression": schemaAttribute42e724a8d8fe145de870321d(),
+				// Property: Id
+				"id": schemaAttribute4542a16e10663925230a768a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The rules definition block of an AutomatedReasoningPolicyDefinition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed9a2367807cf1c69af2c1d74() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Tag Value",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb28ea230aa5c0fc3ff7afdf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0baafa9190299bf3ec3ca66() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Version of the policy that was created. This will always be `DRAFT`",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee577ba454cdc2861836fffb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name for this type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1825b4d39a024a274c678f1() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Description
+				"description": schemaAttribute1080f7bb9a4b2dc8491cfb5b(),
+				// Property: Name
+				"name": schemaAttributeee577ba454cdc2861836fffb(),
+				// Property: Values
+				"values": schemaAttribute5e0547b600f497551cb9d65b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The types definition block of an AutomatedReasoningPolicyDefinition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef49417774fe17cb0d6c0f2f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The KMS key with which the Policy's assets will be encrypted at rest.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef545931c385e9ba73cbe5e7e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A type for this variable.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrock_automated_reasoning_policy", automatedReasoningPolicyDataSource)
 }
@@ -31,11 +275,7 @@ func automatedReasoningPolicyDataSource(ctx context.Context) (datasource.DataSou
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "Time this policy was created",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributeb38417efffafa170d0159976(),
 		// Property: DefinitionHash
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +286,7 @@ func automatedReasoningPolicyDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^[0-9a-z]{128}$",
 		//	  "type": "string"
 		//	}
-		"definition_hash": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The hash for this version",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"definition_hash": schemaAttribute63c90443e4adc9c723f308f3(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -58,9 +295,7 @@ func automatedReasoningPolicyDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^[\\s\\S]+$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributedb28ea230aa5c0fc3ff7afdf(),
 		// Property: ForceDelete
 		// CloudFormation resource type schema:
 		//
@@ -69,10 +304,7 @@ func automatedReasoningPolicyDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "Specifies whether to force delete the automated reasoning policy even if it has active resources. When false , Amazon Bedrock validates if all artifacts have been deleted (e.g. policy version, test case, test result) for a policy before deletion. When true , Amazon Bedrock will delete the policy and all its artifacts without validation. Default is false",
 		//	  "type": "boolean"
 		//	}
-		"force_delete": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether to force delete the automated reasoning policy even if it has active resources. When false , Amazon Bedrock validates if all artifacts have been deleted (e.g. policy version, test case, test result) for a policy before deletion. When true , Amazon Bedrock will delete the policy and all its artifacts without validation. Default is false",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"force_delete": schemaAttribute8e00c8bffbd9ac9d248bfa22(),
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -83,10 +315,7 @@ func automatedReasoningPolicyDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The KMS key with which the Policy's assets will be encrypted at rest.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttributef49417774fe17cb0d6c0f2f3(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -97,10 +326,7 @@ func automatedReasoningPolicyDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^(arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:((key/[a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)))|([a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)$",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The KMS key with which the Policy's assets will be encrypted at rest.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttributef49417774fe17cb0d6c0f2f3(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -110,9 +336,7 @@ func automatedReasoningPolicyDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^[0-9a-zA-Z-_ ]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributedb28ea230aa5c0fc3ff7afdf(),
 		// Property: PolicyArn
 		// CloudFormation resource type schema:
 		//
@@ -122,9 +346,7 @@ func automatedReasoningPolicyDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:automated-reasoning-policy\\/[a-z0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"policy_arn": schemaAttributedb28ea230aa5c0fc3ff7afdf(),
 		// Property: PolicyDefinition
 		// CloudFormation resource type schema:
 		//
@@ -268,102 +490,7 @@ func automatedReasoningPolicyDataSource(ctx context.Context) (datasource.DataSou
 		//	  },
 		//	  "type": "object"
 		//	}
-		"policy_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Rules
-				"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AlternateExpression
-							"alternate_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "An alternate expression for this rule",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Expression
-							"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The SMT expression for this rule",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Id
-							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A unique id within the PolicyDefinition",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The rules definition block of an AutomatedReasoningPolicyDefinition.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Types
-				"types": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Description
-							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A natural language description of this type.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A name for this type.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Values
-							"values": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Description
-										"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "A natural language description of the type's value.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Value
-										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The value of the type value.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "A list of valid values for this type.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The types definition block of an AutomatedReasoningPolicyDefinition.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Variables
-				"variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Description
-							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A natural language description of this variable.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A name from this variable.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A type for this variable.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The variables definition block of an AutomatedReasoningPolicyDefinition.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Version
-				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The policy format version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"policy_definition": schemaAttributebbe310158047cf81ec6084ed(),
 		// Property: PolicyId
 		// CloudFormation resource type schema:
 		//
@@ -374,10 +501,7 @@ func automatedReasoningPolicyDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^[a-z0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The id of the policy",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_id": schemaAttribute7a4b36132e5f981e99f8e756(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -410,23 +534,7 @@ func automatedReasoningPolicyDataSource(ctx context.Context) (datasource.DataSou
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Tag Key",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Tag Value",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute778edebdccaaf24038eaa070(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -435,11 +543,7 @@ func automatedReasoningPolicyDataSource(ctx context.Context) (datasource.DataSou
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "Time this policy was last updated",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute402919f27b18082f1ee6cad8(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -448,10 +552,7 @@ func automatedReasoningPolicyDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "^(([1-9][0-9]{0,11})|(DRAFT))$",
 		//	  "type": "string"
 		//	}
-		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Version of the policy that was created. This will always be `DRAFT`",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttributee0baafa9190299bf3ec3ca66(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

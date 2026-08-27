@@ -15,6 +15,175 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0bd0f8db6b2c4eb0cb06c10c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogLevel
+			"log_level": schemaAttributebd3b15bf14fd9020b7f0f1b5(),
+			// Property: RoleArnForLogging
+			"role_arn_for_logging": schemaAttribute33bd86e5083b28dfbec12a28(),
+		}, /*END SCHEMA*/
+		Description: "Parameters to define a mitigation action that enables AWS IoT logging at a specified level of detail.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2940e2477e51fefdd675a888() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: OverrideDynamicGroups
+			"override_dynamic_groups": schemaAttributebaf643113b4919c62cf8ef60(),
+			// Property: ThingGroupNames
+			"thing_group_names": schemaAttributefad6e54f5f5cc8ebae4d3ca4(),
+		}, /*END SCHEMA*/
+		Description: "Parameters to define a mitigation action that moves devices associated with a certificate to one or more specified thing groups, typically for quarantine.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33bd86e5083b28dfbec12a28() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: " The ARN of the IAM role used for logging.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4534ea5d69574b4df3bd16f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag's key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58501e6799cc910ce3dd9836() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute59b26dd2c8c8b00ce2cb8a6d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AddThingsToThingGroupParams
+			"add_things_to_thing_group_params": schemaAttribute2940e2477e51fefdd675a888(),
+			// Property: EnableIoTLoggingParams
+			"enable_io_t_logging_params": schemaAttribute0bd0f8db6b2c4eb0cb06c10c(),
+			// Property: PublishFindingToSnsParams
+			"publish_finding_to_sns_params": schemaAttribute8938701de08d92f8a640dc16(),
+			// Property: ReplaceDefaultPolicyVersionParams
+			"replace_default_policy_version_params": schemaAttributea00bd0394810392d1d6969c7(),
+			// Property: UpdateCACertificateParams
+			"update_ca_certificate_params": schemaAttributeabcf7b0666f2128e0002dbcc(),
+			// Property: UpdateDeviceCertificateParams
+			"update_device_certificate_params": schemaAttribute8c5fa9ef2a0a20421a935a06(),
+		}, /*END SCHEMA*/
+		Description: "The set of parameters for this mitigation action. You can specify only one type of parameter (in other words, you can apply only one action for each defined mitigation action).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8938701de08d92f8a640dc16() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TopicArn
+			"topic_arn": schemaAttributecffd1f66294f7a3a8d8c1adf(),
+		}, /*END SCHEMA*/
+		Description: "Parameters, to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c5fa9ef2a0a20421a935a06() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Action
+			"action": schemaAttribute58501e6799cc910ce3dd9836(),
+		}, /*END SCHEMA*/
+		Description: "Parameters to define a mitigation action that changes the state of the device certificate to inactive.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93d7c4e9294acd657a158bcc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the mitigation action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ad1b8aa5c095b91b58b5959() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute4534ea5d69574b4df3bd16f3(),
+				// Property: Value
+				"value": schemaAttributef4a6c1858340dfd421647cf8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea00bd0394810392d1d6969c7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TemplateName
+			"template_name": schemaAttribute58501e6799cc910ce3dd9836(),
+		}, /*END SCHEMA*/
+		Description: "Parameters to define a mitigation action that adds a blank policy to restrict permissions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeabcf7b0666f2128e0002dbcc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Action
+			"action": schemaAttribute58501e6799cc910ce3dd9836(),
+		}, /*END SCHEMA*/
+		Description: "Parameters to define a mitigation action that changes the state of the CA certificate to inactive.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebaf643113b4919c62cf8ef60() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies if this mitigation action can move the things that triggered the mitigation action out of one or more dynamic thing groups.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd3b15bf14fd9020b7f0f1b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: " Specifies which types of information are logged.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecffd1f66294f7a3a8d8c1adf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the topic to which you want to publish the findings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef4a6c1858340dfd421647cf8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag's value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefad6e54f5f5cc8ebae4d3ca4() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of groups to which you want to add the things that triggered the mitigation action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iot_mitigation_action", mitigationActionDataSource)
 }
@@ -33,10 +202,7 @@ func mitigationActionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "[a-zA-Z0-9:_-]+",
 		//	  "type": "string"
 		//	}
-		"action_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for the mitigation action.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"action_name": schemaAttribute93d7c4e9294acd657a158bcc(),
 		// Property: ActionParams
 		// CloudFormation resource type schema:
 		//
@@ -169,119 +335,28 @@ func mitigationActionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"action_params": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AddThingsToThingGroupParams
-				"add_things_to_thing_group_params": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: OverrideDynamicGroups
-						"override_dynamic_groups": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies if this mitigation action can move the things that triggered the mitigation action out of one or more dynamic thing groups.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ThingGroupNames
-						"thing_group_names": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The list of groups to which you want to add the things that triggered the mitigation action.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Parameters to define a mitigation action that moves devices associated with a certificate to one or more specified thing groups, typically for quarantine.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EnableIoTLoggingParams
-				"enable_io_t_logging_params": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: LogLevel
-						"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: " Specifies which types of information are logged.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RoleArnForLogging
-						"role_arn_for_logging": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: " The ARN of the IAM role used for logging.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Parameters to define a mitigation action that enables AWS IoT logging at a specified level of detail.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PublishFindingToSnsParams
-				"publish_finding_to_sns_params": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: TopicArn
-						"topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the topic to which you want to publish the findings.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Parameters, to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ReplaceDefaultPolicyVersionParams
-				"replace_default_policy_version_params": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: TemplateName
-						"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Parameters to define a mitigation action that adds a blank policy to restrict permissions.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: UpdateCACertificateParams
-				"update_ca_certificate_params": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Action
-						"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Parameters to define a mitigation action that changes the state of the CA certificate to inactive.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: UpdateDeviceCertificateParams
-				"update_device_certificate_params": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Action
-						"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Parameters to define a mitigation action that changes the state of the device certificate to inactive.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The set of parameters for this mitigation action. You can specify only one type of parameter (in other words, you can apply only one action for each defined mitigation action).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"action_params": schemaAttribute59b26dd2c8c8b00ce2cb8a6d(),
 		// Property: MitigationActionArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"mitigation_action_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"mitigation_action_arn": schemaAttribute58501e6799cc910ce3dd9836(),
 		// Property: MitigationActionId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"mitigation_action_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"mitigation_action_id": schemaAttribute58501e6799cc910ce3dd9836(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute58501e6799cc910ce3dd9836(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -315,24 +390,7 @@ func mitigationActionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag's key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag's value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute9ad1b8aa5c095b91b58b5959(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,75 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute070c5a248d98c5ee47b0026c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c057dadeff93bd8476ebf92() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: OpenSearchResourceConfig
+			"open_search_resource_config": schemaAttribute2e9a9aeb72c2aa5b6009ebf1(),
+		}, /*END SCHEMA*/
+		Description: "OpenSearchResourceConfig for the given Integration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e9a9aeb72c2aa5b6009ebf1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApplicationARN
+			"application_arn": schemaAttribute070c5a248d98c5ee47b0026c(),
+			// Property: DashboardViewerPrincipals
+			"dashboard_viewer_principals": schemaAttributef6bcaff09bcc9a5ff318d549(),
+			// Property: DataSourceRoleArn
+			"data_source_role_arn": schemaAttribute070c5a248d98c5ee47b0026c(),
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttribute070c5a248d98c5ee47b0026c(),
+			// Property: RetentionDays
+			"retention_days": schemaAttribute86c688a8bcb02099f3dcfa58(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e9219d226865563c9849699() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Status of creation for the Integration and its resources",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72b15fedefdd393b1675d9e3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the Integration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute86c688a8bcb02099f3dcfa58() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee01fc0c9b19608cb1619b75c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "User provided identifier for integration, unique to the user account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6bcaff09bcc9a5ff318d549() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_logs_integration", integrationDataSource)
 }
@@ -33,10 +102,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[\\.\\-_/#A-Za-z0-9]+",
 		//	  "type": "string"
 		//	}
-		"integration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "User provided identifier for integration, unique to the user account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"integration_name": schemaAttributee01fc0c9b19608cb1619b75c(),
 		// Property: IntegrationStatus
 		// CloudFormation resource type schema:
 		//
@@ -49,10 +115,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"integration_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Status of creation for the Integration and its resources",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"integration_status": schemaAttribute3e9219d226865563c9849699(),
 		// Property: IntegrationType
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +126,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"integration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the Integration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"integration_type": schemaAttribute72b15fedefdd393b1675d9e3(),
 		// Property: ResourceConfig
 		// CloudFormation resource type schema:
 		//
@@ -119,39 +179,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"resource_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: OpenSearchResourceConfig
-				"open_search_resource_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ApplicationARN
-						"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: DashboardViewerPrincipals
-						"dashboard_viewer_principals": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DataSourceRoleArn
-						"data_source_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: KmsKeyArn
-						"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: RetentionDays
-						"retention_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "OpenSearchResourceConfig for the given Integration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_config": schemaAttribute0c057dadeff93bd8476ebf92(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

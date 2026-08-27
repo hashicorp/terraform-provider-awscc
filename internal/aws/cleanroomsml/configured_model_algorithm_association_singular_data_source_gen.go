@@ -15,6 +15,171 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0caf09189b6690d7133d45db() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomDataIdentifiers
+			"custom_data_identifiers": schemaAttribute2c1b1d2470572a638d070ba9(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15b82aceee0d19dd55f5ae42() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContainerLogs
+			"container_logs": schemaAttributef60d3995b47ab6cae399c1e3(),
+			// Property: ContainerMetrics
+			"container_metrics": schemaAttributeba2c03fecbbdfaeaa5735600(),
+			// Property: MaxArtifactSize
+			"max_artifact_size": schemaAttribute170cbdce19ef64011ddccbc2(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute170cbdce19ef64011ddccbc2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Unit
+			"unit": schemaAttribute60fc3ccf6f91d138dac7756e(),
+			// Property: Value
+			"value": schemaAttribute8f4168eab18d7261e198a785(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c1b1d2470572a638d070ba9() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31b98aa344a6c070e591afe8() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute60fc3ccf6f91d138dac7756e(),
+				// Property: Value
+				"value": schemaAttribute60fc3ccf6f91d138dac7756e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An arbitrary set of tags (key-value pairs) for this cleanrooms-ml configured model algorithm association.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a20a186fd8c0cf628c2c2fa() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomEntityConfig
+			"custom_entity_config": schemaAttribute0caf09189b6690d7133d45db(),
+			// Property: EntitiesToRedact
+			"entities_to_redact": schemaAttribute2c1b1d2470572a638d070ba9(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60fc3ccf6f91d138dac7756e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89d893c1aa77d9b941310b01() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f4168eab18d7261e198a785() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c95683bf5b52be61dafa59d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContainerLogs
+			"container_logs": schemaAttributef60d3995b47ab6cae399c1e3(),
+			// Property: MaxOutputSize
+			"max_output_size": schemaAttribute170cbdce19ef64011ddccbc2(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba2c03fecbbdfaeaa5735600() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: NoiseLevel
+			"noise_level": schemaAttribute60fc3ccf6f91d138dac7756e(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee502ac08a5fd35e3e96ca280() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Policies
+			"policies": schemaAttributef3a06323a0497ace302cac9b(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea2ab62c52f60c5f32e6d130() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FilesToExport
+			"files_to_export": schemaAttribute2c1b1d2470572a638d070ba9(),
+			// Property: MaxSize
+			"max_size": schemaAttribute170cbdce19ef64011ddccbc2(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3a06323a0497ace302cac9b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TrainedModelExports
+			"trained_model_exports": schemaAttributeea2ab62c52f60c5f32e6d130(),
+			// Property: TrainedModelInferenceJobs
+			"trained_model_inference_jobs": schemaAttribute9c95683bf5b52be61dafa59d(),
+			// Property: TrainedModels
+			"trained_models": schemaAttribute15b82aceee0d19dd55f5ae42(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef60d3995b47ab6cae399c1e3() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllowedAccountIds
+				"allowed_account_ids": schemaAttribute89d893c1aa77d9b941310b01(),
+				// Property: FilterPattern
+				"filter_pattern": schemaAttribute60fc3ccf6f91d138dac7756e(),
+				// Property: LogRedactionConfiguration
+				"log_redaction_configuration": schemaAttribute5a20a186fd8c0cf628c2c2fa(),
+				// Property: LogType
+				"log_type": schemaAttribute60fc3ccf6f91d138dac7756e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cleanroomsml_configured_model_algorithm_association", configuredModelAlgorithmAssociationDataSource)
 }
@@ -32,9 +197,7 @@ func configuredModelAlgorithmAssociationDataSource(ctx context.Context) (datasou
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"collaboration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"collaboration_identifier": schemaAttribute60fc3ccf6f91d138dac7756e(),
 		// Property: ConfiguredModelAlgorithmArn
 		// CloudFormation resource type schema:
 		//
@@ -44,9 +207,7 @@ func configuredModelAlgorithmAssociationDataSource(ctx context.Context) (datasou
 		//	  "pattern": "^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:[0-9]{12}:configured-model-algorithm/[-a-zA-Z0-9_/.]+$",
 		//	  "type": "string"
 		//	}
-		"configured_model_algorithm_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"configured_model_algorithm_arn": schemaAttribute60fc3ccf6f91d138dac7756e(),
 		// Property: ConfiguredModelAlgorithmAssociationArn
 		// CloudFormation resource type schema:
 		//
@@ -56,9 +217,7 @@ func configuredModelAlgorithmAssociationDataSource(ctx context.Context) (datasou
 		//	  "pattern": "^arn:aws[-a-z]*:cleanrooms-ml:[-a-z0-9]+:[0-9]{12}:membership/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/configured-model-algorithm-association/[-a-zA-Z0-9_/.]+$",
 		//	  "type": "string"
 		//	}
-		"configured_model_algorithm_association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"configured_model_algorithm_association_arn": schemaAttribute60fc3ccf6f91d138dac7756e(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -67,9 +226,7 @@ func configuredModelAlgorithmAssociationDataSource(ctx context.Context) (datasou
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute60fc3ccf6f91d138dac7756e(),
 		// Property: MembershipIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -79,9 +236,7 @@ func configuredModelAlgorithmAssociationDataSource(ctx context.Context) (datasou
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"membership_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"membership_identifier": schemaAttribute60fc3ccf6f91d138dac7756e(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -91,9 +246,7 @@ func configuredModelAlgorithmAssociationDataSource(ctx context.Context) (datasou
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute60fc3ccf6f91d138dac7756e(),
 		// Property: PrivacyConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -391,178 +544,7 @@ func configuredModelAlgorithmAssociationDataSource(ctx context.Context) (datasou
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"privacy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Policies
-				"policies": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: TrainedModelExports
-						"trained_model_exports": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: FilesToExport
-								"files_to_export": schema.SetAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: MaxSize
-								"max_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Unit
-										"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Value
-										"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: TrainedModelInferenceJobs
-						"trained_model_inference_jobs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContainerLogs
-								"container_logs": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: AllowedAccountIds
-											"allowed_account_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: FilterPattern
-											"filter_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: LogRedactionConfiguration
-											"log_redaction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: CustomEntityConfig
-													"custom_entity_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: CustomDataIdentifiers
-															"custom_data_identifiers": schema.SetAttribute{ /*START ATTRIBUTE*/
-																ElementType: types.StringType,
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: EntitiesToRedact
-													"entities_to_redact": schema.SetAttribute{ /*START ATTRIBUTE*/
-														ElementType: types.StringType,
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: LogType
-											"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: MaxOutputSize
-								"max_output_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Unit
-										"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Value
-										"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: TrainedModels
-						"trained_models": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContainerLogs
-								"container_logs": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: AllowedAccountIds
-											"allowed_account_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: FilterPattern
-											"filter_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: LogRedactionConfiguration
-											"log_redaction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: CustomEntityConfig
-													"custom_entity_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: CustomDataIdentifiers
-															"custom_data_identifiers": schema.SetAttribute{ /*START ATTRIBUTE*/
-																ElementType: types.StringType,
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: EntitiesToRedact
-													"entities_to_redact": schema.SetAttribute{ /*START ATTRIBUTE*/
-														ElementType: types.StringType,
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: LogType
-											"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContainerMetrics
-								"container_metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: NoiseLevel
-										"noise_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: MaxArtifactSize
-								"max_artifact_size": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Unit
-										"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Value
-										"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"privacy_configuration": schemaAttributee502ac08a5fd35e3e96ca280(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -592,22 +574,7 @@ func configuredModelAlgorithmAssociationDataSource(ctx context.Context) (datasou
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An arbitrary set of tags (key-value pairs) for this cleanrooms-ml configured model algorithm association.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute31b98aa344a6c070e591afe8(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

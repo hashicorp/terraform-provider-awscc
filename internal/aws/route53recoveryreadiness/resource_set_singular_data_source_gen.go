@@ -15,6 +15,194 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute18a9b24c2e7b23ba62cc93be() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DomainName
+			"domain_name": schemaAttributeccd897cf022cf795a4c0acfe(),
+			// Property: RecordSetId
+			"record_set_id": schemaAttributec98913f68640ccc738fcbd33(),
+		}, /*END SCHEMA*/
+		Description: "The Route 53 resource that a DNS target resource record points to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1b2b21fb4d7933db068aaf05() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute238ce510022398b8f9af230a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the resource set to create.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a0c90926bd2f83090ed4142() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DomainName
+			"domain_name": schemaAttribute58a3c197a55044568d122c7f(),
+			// Property: HostedZoneArn
+			"hosted_zone_arn": schemaAttributee0b170dcff635e5639e9f1ee(),
+			// Property: RecordSetId
+			"record_set_id": schemaAttributee7e0c6752ba382a66346b691(),
+			// Property: RecordType
+			"record_type": schemaAttribute39cb158ae97e2ca17d9d5dde(),
+			// Property: TargetResource
+			"target_resource": schemaAttributee5c0439e58d0b83c312d85d2(),
+		}, /*END SCHEMA*/
+		Description: "A component for DNS/routing control readiness checks.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2bd790649338f90ada51193c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute42e8dc392212999c812a5898(),
+				// Property: Value
+				"value": schemaAttribute42e8dc392212999c812a5898(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A tag to associate with the parameters for a resource set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute387a4f9b410b0124606cc17f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The resource type of the resources in the resource set. Enter one of the following values for resource type: \n\nAWS: :AutoScaling: :AutoScalingGroup, AWS: :CloudWatch: :Alarm, AWS: :EC2: :CustomerGateway, AWS: :DynamoDB: :Table, AWS: :EC2: :Volume, AWS: :ElasticLoadBalancing: :LoadBalancer, AWS: :ElasticLoadBalancingV2: :LoadBalancer, AWS: :MSK: :Cluster, AWS: :RDS: :DBCluster, AWS: :Route53: :HealthCheck, AWS: :SQS: :Queue, AWS: :SNS: :Topic, AWS: :SNS: :Subscription, AWS: :EC2: :VPC, AWS: :EC2: :VPNConnection, AWS: :EC2: :VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute39cb158ae97e2ca17d9d5dde() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of DNS record of the target resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42e8dc392212999c812a5898() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58a3c197a55044568d122c7f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The domain name that acts as an ingress point to a portion of the customer application.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b7355cffdb1ca37c58f0d16() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the resource set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaff9716d06a7853c1bd5a020() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttributed3faacb574ce0c5a798cbb11(),
+		}, /*END SCHEMA*/
+		Description: "The Network Load Balancer resource that a DNS target resource points to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0b530c28b8c29bf85878964() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ComponentId
+				"component_id": schemaAttributecb52f4db9d3c85142382d2bd(),
+				// Property: DnsTargetResource
+				"dns_target_resource": schemaAttribute2a0c90926bd2f83090ed4142(),
+				// Property: ReadinessScopes
+				"readiness_scopes": schemaAttribute1b2b21fb4d7933db068aaf05(),
+				// Property: ResourceArn
+				"resource_arn": schemaAttributedc98714466cd00fedd34aa54(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of resource objects in the resource set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec98913f68640ccc738fcbd33() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Resource Record set id.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb52f4db9d3c85142382d2bd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The component identifier of the resource, generated when DNS target resource is used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeccd897cf022cf795a4c0acfe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The DNS target domain name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3faacb574ce0c5a798cbb11() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A Network Load Balancer resource Amazon Resource Name (ARN).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc98714466cd00fedd34aa54() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the AWS resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0b170dcff635e5639e9f1ee() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The hosted zone Amazon Resource Name (ARN) that contains the DNS record with the provided name of the target resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5c0439e58d0b83c312d85d2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: NLBResource
+			"nlb_resource": schemaAttributeaff9716d06a7853c1bd5a020(),
+			// Property: R53Resource
+			"r53_resource": schemaAttribute18a9b24c2e7b23ba62cc93be(),
+		}, /*END SCHEMA*/
+		Description: "The target resource that the Route 53 record points to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee7e0c6752ba382a66346b691() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Route 53 record set ID that will uniquely identify a DNS record, given a name and a type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_route53recoveryreadiness_resource_set", resourceSetDataSource)
 }
@@ -32,10 +220,7 @@ func resourceSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resource_set_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the resource set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_set_arn": schemaAttribute7b7355cffdb1ca37c58f0d16(),
 		// Property: ResourceSetName
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +228,7 @@ func resourceSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the resource set to create.",
 		//	  "type": "string"
 		//	}
-		"resource_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the resource set to create.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_set_name": schemaAttribute238ce510022398b8f9af230a(),
 		// Property: ResourceSetType
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +236,7 @@ func resourceSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The resource type of the resources in the resource set. Enter one of the following values for resource type: \n\nAWS: :AutoScaling: :AutoScalingGroup, AWS: :CloudWatch: :Alarm, AWS: :EC2: :CustomerGateway, AWS: :DynamoDB: :Table, AWS: :EC2: :Volume, AWS: :ElasticLoadBalancing: :LoadBalancer, AWS: :ElasticLoadBalancingV2: :LoadBalancer, AWS: :MSK: :Cluster, AWS: :RDS: :DBCluster, AWS: :Route53: :HealthCheck, AWS: :SQS: :Queue, AWS: :SNS: :Topic, AWS: :SNS: :Subscription, AWS: :EC2: :VPC, AWS: :EC2: :VPNConnection, AWS: :EC2: :VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource",
 		//	  "type": "string"
 		//	}
-		"resource_set_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The resource type of the resources in the resource set. Enter one of the following values for resource type: \n\nAWS: :AutoScaling: :AutoScalingGroup, AWS: :CloudWatch: :Alarm, AWS: :EC2: :CustomerGateway, AWS: :DynamoDB: :Table, AWS: :EC2: :Volume, AWS: :ElasticLoadBalancing: :LoadBalancer, AWS: :ElasticLoadBalancingV2: :LoadBalancer, AWS: :MSK: :Cluster, AWS: :RDS: :DBCluster, AWS: :Route53: :HealthCheck, AWS: :SQS: :Queue, AWS: :SNS: :Topic, AWS: :SNS: :Subscription, AWS: :EC2: :VPC, AWS: :EC2: :VPNConnection, AWS: :EC2: :VPNGateway, AWS::Route53RecoveryReadiness::DNSTargetResource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_set_type": schemaAttribute387a4f9b410b0124606cc17f(),
 		// Property: Resources
 		// CloudFormation resource type schema:
 		//
@@ -160,93 +339,7 @@ func resourceSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ComponentId
-					"component_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The component identifier of the resource, generated when DNS target resource is used.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: DnsTargetResource
-					"dns_target_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DomainName
-							"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The domain name that acts as an ingress point to a portion of the customer application.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: HostedZoneArn
-							"hosted_zone_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The hosted zone Amazon Resource Name (ARN) that contains the DNS record with the provided name of the target resource.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: RecordSetId
-							"record_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Route 53 record set ID that will uniquely identify a DNS record, given a name and a type.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: RecordType
-							"record_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The type of DNS record of the target resource.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TargetResource
-							"target_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: NLBResource
-									"nlb_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Arn
-											"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "A Network Load Balancer resource Amazon Resource Name (ARN).",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "The Network Load Balancer resource that a DNS target resource points to.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: R53Resource
-									"r53_resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: DomainName
-											"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The DNS target domain name.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: RecordSetId
-											"record_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The Resource Record set id.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "The Route 53 resource that a DNS target resource record points to.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The target resource that the Route 53 record points to.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "A component for DNS/routing control readiness checks.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ReadinessScopes
-					"readiness_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "A list of recovery group Amazon Resource Names (ARNs) and cell ARNs that this resource is contained within.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ResourceArn
-					"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Amazon Resource Name (ARN) of the AWS resource.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of resource objects in the resource set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resources": schemaAttributeb0b530c28b8c29bf85878964(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -271,22 +364,7 @@ func resourceSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A tag to associate with the parameters for a resource set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute2bd790649338f90ada51193c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

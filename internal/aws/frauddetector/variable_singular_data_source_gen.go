@@ -14,6 +14,90 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1200242449af3b4dd93438c6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute259d5a5a784f646b689a6a94(),
+				// Property: Value
+				"value": schemaAttribute259d5a5a784f646b689a6a94(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags associated with this variable.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute259d5a5a784f646b689a6a94() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34b94ca73e8a545ab9b03244() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source of the data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a94fb02bfed7a6db58cd4d6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The variable type. For more information see https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76c69bc4ee32331d9ae58a0f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The data type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7dacfe6485162a898c872625() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time when the variable was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89d2042e4383e584055ca9c1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The default value for the variable when no value is received.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95c1994621a5a52176b8df5d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the variable.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4550e5f3f94d02027523d90() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the variable.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec889ec41a8862b7fc864f21a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time when the variable was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedcd805edaa576eb5fcc9d7f8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_frauddetector_variable", variableDataSource)
 }
@@ -29,10 +113,7 @@ func variableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the variable.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the variable.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeb4550e5f3f94d02027523d90(),
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +121,7 @@ func variableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time when the variable was created.",
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time when the variable was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttribute7dacfe6485162a898c872625(),
 		// Property: DataSource
 		// CloudFormation resource type schema:
 		//
@@ -55,10 +133,7 @@ func variableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The source of the data.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_source": schemaAttribute34b94ca73e8a545ab9b03244(),
 		// Property: DataType
 		// CloudFormation resource type schema:
 		//
@@ -72,10 +147,7 @@ func variableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The data type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_type": schemaAttribute76c69bc4ee32331d9ae58a0f(),
 		// Property: DefaultValue
 		// CloudFormation resource type schema:
 		//
@@ -83,10 +155,7 @@ func variableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The default value for the variable when no value is received.",
 		//	  "type": "string"
 		//	}
-		"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The default value for the variable when no value is received.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_value": schemaAttribute89d2042e4383e584055ca9c1(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +165,7 @@ func variableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributedcd805edaa576eb5fcc9d7f8(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -107,10 +173,7 @@ func variableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time when the variable was last updated.",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time when the variable was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttributec889ec41a8862b7fc864f21a(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -119,10 +182,7 @@ func variableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z_][a-z0-9_]{0,99}?$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the variable.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute95c1994621a5a52176b8df5d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -153,22 +213,7 @@ func variableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags associated with this variable.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute1200242449af3b4dd93438c6(),
 		// Property: VariableType
 		// CloudFormation resource type schema:
 		//
@@ -211,10 +256,7 @@ func variableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"variable_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The variable type. For more information see https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"variable_type": schemaAttribute6a94fb02bfed7a6db58cd4d6(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

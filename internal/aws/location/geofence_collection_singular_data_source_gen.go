@@ -14,6 +14,55 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute3f30504952d520b84a34e3f4() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee6cda7d3a577090bcd856640(),
+				// Property: Value
+				"value": schemaAttribute44926b91528434fd584a1b11(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44926b91528434fd584a1b11() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute921201d7ffacfab650ecf7b3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf145c4f2091b4e4966190b7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "This shape is deprecated since 2022-02-01: Deprecated. No longer allowed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6cda7d3a577090bcd856640() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea671ac7d76bbba9487c1910() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_location_geofence_collection", geofenceCollectionDataSource)
 }
@@ -30,9 +79,7 @@ func geofenceCollectionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute921201d7ffacfab650ecf7b3(),
 		// Property: CollectionArn
 		// CloudFormation resource type schema:
 		//
@@ -41,9 +88,7 @@ func geofenceCollectionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$",
 		//	  "type": "string"
 		//	}
-		"collection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"collection_arn": schemaAttribute921201d7ffacfab650ecf7b3(),
 		// Property: CollectionName
 		// CloudFormation resource type schema:
 		//
@@ -53,9 +98,7 @@ func geofenceCollectionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[-._\\w]+$",
 		//	  "type": "string"
 		//	}
-		"collection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"collection_name": schemaAttribute921201d7ffacfab650ecf7b3(),
 		// Property: CreateTime
 		// CloudFormation resource type schema:
 		//
@@ -64,10 +107,7 @@ func geofenceCollectionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 		//	  "type": "string"
 		//	}
-		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"create_time": schemaAttributeea671ac7d76bbba9487c1910(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -76,9 +116,7 @@ func geofenceCollectionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute921201d7ffacfab650ecf7b3(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -87,9 +125,7 @@ func geofenceCollectionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttribute921201d7ffacfab650ecf7b3(),
 		// Property: PricingPlan
 		// CloudFormation resource type schema:
 		//
@@ -99,9 +135,7 @@ func geofenceCollectionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"pricing_plan": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"pricing_plan": schemaAttribute921201d7ffacfab650ecf7b3(),
 		// Property: PricingPlanDataSource
 		// CloudFormation resource type schema:
 		//
@@ -109,10 +143,7 @@ func geofenceCollectionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "This shape is deprecated since 2022-02-01: Deprecated. No longer allowed.",
 		//	  "type": "string"
 		//	}
-		"pricing_plan_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "This shape is deprecated since 2022-02-01: Deprecated. No longer allowed.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"pricing_plan_data_source": schemaAttributedf145c4f2091b4e4966190b7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -149,24 +180,7 @@ func geofenceCollectionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute3f30504952d520b84a34e3f4(),
 		// Property: UpdateTime
 		// CloudFormation resource type schema:
 		//
@@ -175,10 +189,7 @@ func geofenceCollectionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 		//	  "type": "string"
 		//	}
-		"update_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"update_time": schemaAttributeea671ac7d76bbba9487c1910(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,166 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute243054d6eed7a8ee4fb43c0f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The prioritization order to use for fleet locations, when the PriorityOrder property includes LOCATION.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28c44198599d17adbc656a06() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37cff3b1f74a3596cade4578() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AllowedLocations
+			"allowed_locations": schemaAttributeb53f4a0f95643dd36873388d(),
+		}, /*END SCHEMA*/
+		Description: "A list of locations where a queue is allowed to place new game sessions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f3b09f2c029e61ec10cb132() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DestinationArn
+				"destination_arn": schemaAttribute725bea03ef2571436db967db(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of fleets and/or fleet aliases that can be used to fulfill game session placement requests in the queue.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute50db7fa6cca18b0f8f3d7e58() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A descriptive label that is associated with game session queue. Queue names must be unique within each Region.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c5b8bc959524292d12ea5a2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Information that is added to all events that are related to this game session queue.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute725bea03ef2571436db967db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73ba97c54c1ab4a5247c1e0a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The length of time, in seconds, that the policy is enforced while placing a new game session.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76e18c464788f4b14423fb59() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum latency value that is allowed for any player, in milliseconds. All policies must have a value set for this property.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f66be65455afa47f632acd9() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum time, in seconds, that a new game session placement request remains in the queue.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91a0ee0ca974f0af699ea351() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift game session queue resource and uniquely identifies it.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute98cb1dba597ea6da3f7632fc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LocationOrder
+			"location_order": schemaAttribute243054d6eed7a8ee4fb43c0f(),
+			// Property: PriorityOrder
+			"priority_order": schemaAttributec00b993c9cc5e3a0ea1c8bb1(),
+		}, /*END SCHEMA*/
+		Description: "Custom settings to use when prioritizing destinations and locations for game session placements.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf81c7b394ed21f89c2492c1() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributedc97027b333c7a358ac7d021(),
+				// Property: Value
+				"value": schemaAttribute28c44198599d17adbc656a06(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb53f4a0f95643dd36873388d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of locations to allow game session placement in, in the form of AWS Region codes such as us-west-2.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec00b993c9cc5e3a0ea1c8bb1() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The recommended sequence to use when prioritizing where to place new game sessions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc97027b333c7a358ac7d021() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0d17672fcbf404d32d99238() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An SNS topic ARN that is set up to receive game session placement notifications.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefe16baaaa3deff27a74b3788() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaximumIndividualPlayerLatencyMilliseconds
+				"maximum_individual_player_latency_milliseconds": schemaAttribute76e18c464788f4b14423fb59(),
+				// Property: PolicyDurationSeconds
+				"policy_duration_seconds": schemaAttribute73ba97c54c1ab4a5247c1e0a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A set of policies that act as a sliding cap on player latency.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_gamelift_game_session_queue", gameSessionQueueDataSource)
 }
@@ -33,10 +193,7 @@ func gameSessionQueueDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:.*:gamesessionqueue\\/[a-zA-Z0-9-]+",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift game session queue resource and uniquely identifies it.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute91a0ee0ca974f0af699ea351(),
 		// Property: CustomEventData
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +204,7 @@ func gameSessionQueueDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "[\\s\\S]*",
 		//	  "type": "string"
 		//	}
-		"custom_event_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Information that is added to all events that are related to this game session queue.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"custom_event_data": schemaAttribute5c5b8bc959524292d12ea5a2(),
 		// Property: Destinations
 		// CloudFormation resource type schema:
 		//
@@ -72,18 +226,7 @@ func gameSessionQueueDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DestinationArn
-					"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of fleets and/or fleet aliases that can be used to fulfill game session placement requests in the queue.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"destinations": schemaAttribute3f3b09f2c029e61ec10cb132(),
 		// Property: FilterConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -107,18 +250,7 @@ func gameSessionQueueDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"filter_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllowedLocations
-				"allowed_locations": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of locations to allow game session placement in, in the form of AWS Region codes such as us-west-2.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A list of locations where a queue is allowed to place new game sessions.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"filter_configuration": schemaAttribute37cff3b1f74a3596cade4578(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -129,10 +261,7 @@ func gameSessionQueueDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "[a-zA-Z0-9-]+",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A descriptive label that is associated with game session queue. Queue names must be unique within each Region.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute50db7fa6cca18b0f8f3d7e58(),
 		// Property: NotificationTarget
 		// CloudFormation resource type schema:
 		//
@@ -143,10 +272,7 @@ func gameSessionQueueDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "[a-zA-Z0-9:_-]*(\\.fifo)?",
 		//	  "type": "string"
 		//	}
-		"notification_target": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An SNS topic ARN that is set up to receive game session placement notifications.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"notification_target": schemaAttributef0d17672fcbf404d32d99238(),
 		// Property: PlayerLatencyPolicies
 		// CloudFormation resource type schema:
 		//
@@ -172,24 +298,7 @@ func gameSessionQueueDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"player_latency_policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: MaximumIndividualPlayerLatencyMilliseconds
-					"maximum_individual_player_latency_milliseconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The maximum latency value that is allowed for any player, in milliseconds. All policies must have a value set for this property.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PolicyDurationSeconds
-					"policy_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The length of time, in seconds, that the policy is enforced while placing a new game session.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A set of policies that act as a sliding cap on player latency.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"player_latency_policies": schemaAttributefe16baaaa3deff27a74b3788(),
 		// Property: PriorityConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -229,24 +338,7 @@ func gameSessionQueueDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"priority_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LocationOrder
-				"location_order": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The prioritization order to use for fleet locations, when the PriorityOrder property includes LOCATION.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PriorityOrder
-				"priority_order": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The recommended sequence to use when prioritizing where to place new game sessions.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Custom settings to use when prioritizing destinations and locations for game session placements.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"priority_configuration": schemaAttribute98cb1dba597ea6da3f7632fc(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -280,24 +372,7 @@ func gameSessionQueueDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeaf81c7b394ed21f89c2492c1(),
 		// Property: TimeoutInSeconds
 		// CloudFormation resource type schema:
 		//
@@ -306,10 +381,7 @@ func gameSessionQueueDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum time, in seconds, that a new game session placement request remains in the queue.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"timeout_in_seconds": schemaAttribute8f66be65455afa47f632acd9(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

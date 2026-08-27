@@ -15,6 +15,93 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute231fadf54a8e4189d04a8619() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute3f8415f919084c5f591ef6e8(),
+				// Property: Value
+				"value": schemaAttribute9c73de356b9bae2bbb7c8859(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags to apply to CodeSigningConfig resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f8415f919084c5f591ef6e8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4bbde2e16a89a0f8ed7b8400() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: UntrustedArtifactOnDeployment
+			"untrusted_artifact_on_deployment": schemaAttributedd9d33e1ecbed786904dc138(),
+		}, /*END SCHEMA*/
+		Description: "Policies to control how to act if a signature is invalid",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5105b3a59b9068318803e957() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of Signing profile version Arns",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f6079aa4b49a33bec61a9c9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SigningProfileVersionArns
+			"signing_profile_version_arns": schemaAttribute5105b3a59b9068318803e957(),
+		}, /*END SCHEMA*/
+		Description: "When the CodeSigningConfig is later on attached to a function, the function code will be expected to be signed by profiles from this list",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96815a84d37d9e8e92cc8cb0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the CodeSigningConfig",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c73de356b9bae2bbb7c8859() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4be22a664439716d46f4168() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique Arn for CodeSigningConfig resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd9d33e1ecbed786904dc138() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee769bacd2d448b6e3ba38a58() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for CodeSigningConfig resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_lambda_code_signing_config", codeSigningConfigDataSource)
 }
@@ -48,18 +135,7 @@ func codeSigningConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"allowed_publishers": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SigningProfileVersionArns
-				"signing_profile_version_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "List of Signing profile version Arns",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "When the CodeSigningConfig is later on attached to a function, the function code will be expected to be signed by profiles from this list",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"allowed_publishers": schemaAttribute8f6079aa4b49a33bec61a9c9(),
 		// Property: CodeSigningConfigArn
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +144,7 @@ func codeSigningConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "arn:(aws[a-zA-Z-]*)?:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:code-signing-config:csc-[a-z0-9]{17}",
 		//	  "type": "string"
 		//	}
-		"code_signing_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique Arn for CodeSigningConfig resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"code_signing_config_arn": schemaAttributeb4be22a664439716d46f4168(),
 		// Property: CodeSigningConfigId
 		// CloudFormation resource type schema:
 		//
@@ -80,10 +153,7 @@ func codeSigningConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "csc-[a-zA-Z0-9-_\\.]{17}",
 		//	  "type": "string"
 		//	}
-		"code_signing_config_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for CodeSigningConfig resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"code_signing_config_id": schemaAttributee769bacd2d448b6e3ba38a58(),
 		// Property: CodeSigningPolicies
 		// CloudFormation resource type schema:
 		//
@@ -106,17 +176,7 @@ func codeSigningConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"code_signing_policies": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: UntrustedArtifactOnDeployment
-				"untrusted_artifact_on_deployment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Policies to control how to act if a signature is invalid",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"code_signing_policies": schemaAttribute4bbde2e16a89a0f8ed7b8400(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -126,10 +186,7 @@ func codeSigningConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the CodeSigningConfig",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute96815a84d37d9e8e92cc8cb0(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -160,24 +217,7 @@ func codeSigningConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags to apply to CodeSigningConfig resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute231fadf54a8e4189d04a8619(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

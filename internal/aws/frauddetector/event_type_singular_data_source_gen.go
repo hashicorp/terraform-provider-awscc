@@ -14,6 +14,131 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0aff6fd338ab094b6aa96f5c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time when the event type was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19c1cbbb95af46cc76084747() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute317d76b57fe67853f461e25f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49ef2f8c8e3c35dd7f921bbc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the event type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b952e5f571d2618a6c8943e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Arn
+				"arn": schemaAttribute19c1cbbb95af46cc76084747(),
+				// Property: CreatedTime
+				"created_time": schemaAttribute0aff6fd338ab094b6aa96f5c(),
+				// Property: Description
+				"description": schemaAttribute317d76b57fe67853f461e25f(),
+				// Property: Inline
+				"inline": schemaAttributea6321c2468b836c1ce0f6db4(),
+				// Property: LastUpdatedTime
+				"last_updated_time": schemaAttribute7502c39fa7ae2c0a5c6e4b3b(),
+				// Property: Name
+				"name": schemaAttribute19c1cbbb95af46cc76084747(),
+				// Property: Tags
+				"tags": schemaAttributeef849a238774232199c35a1d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute50db4e89620e1f5d38e5b05a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the event type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute607d2a823ef284716ef85faf() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Arn
+				"arn": schemaAttribute19c1cbbb95af46cc76084747(),
+				// Property: CreatedTime
+				"created_time": schemaAttribute0aff6fd338ab094b6aa96f5c(),
+				// Property: DataSource
+				"data_source": schemaAttribute19c1cbbb95af46cc76084747(),
+				// Property: DataType
+				"data_type": schemaAttribute19c1cbbb95af46cc76084747(),
+				// Property: DefaultValue
+				"default_value": schemaAttribute19c1cbbb95af46cc76084747(),
+				// Property: Description
+				"description": schemaAttribute317d76b57fe67853f461e25f(),
+				// Property: Inline
+				"inline": schemaAttributea6321c2468b836c1ce0f6db4(),
+				// Property: LastUpdatedTime
+				"last_updated_time": schemaAttribute7502c39fa7ae2c0a5c6e4b3b(),
+				// Property: Name
+				"name": schemaAttribute19c1cbbb95af46cc76084747(),
+				// Property: Tags
+				"tags": schemaAttributeef849a238774232199c35a1d(),
+				// Property: VariableType
+				"variable_type": schemaAttribute19c1cbbb95af46cc76084747(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7502c39fa7ae2c0a5c6e4b3b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time when the event type was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea6321c2468b836c1ce0f6db4() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf9c7b49bea061831ad5bef6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the event type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef849a238774232199c35a1d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute19c1cbbb95af46cc76084747(),
+				// Property: Value
+				"value": schemaAttribute19c1cbbb95af46cc76084747(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags associated with this event type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_frauddetector_event_type", eventTypeDataSource)
 }
@@ -29,10 +154,7 @@ func eventTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the event type.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the event type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributedf9c7b49bea061831ad5bef6(),
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +162,7 @@ func eventTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time when the event type was created.",
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time when the event type was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttribute0aff6fd338ab094b6aa96f5c(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -53,10 +172,7 @@ func eventTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the event type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute50db4e89620e1f5d38e5b05a(),
 		// Property: EntityTypes
 		// CloudFormation resource type schema:
 		//
@@ -122,57 +238,7 @@ func eventTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"entity_types": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Arn
-					"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: CreatedTime
-					"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The time when the event type was created.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Description
-					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The description.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Inline
-					"inline": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: LastUpdatedTime
-					"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The time when the event type was last updated.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Tags
-					"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Key
-								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Value
-								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "Tags associated with this event type.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"entity_types": schemaAttribute4b952e5f571d2618a6c8943e(),
 		// Property: EventVariables
 		// CloudFormation resource type schema:
 		//
@@ -294,73 +360,7 @@ func eventTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"event_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Arn
-					"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: CreatedTime
-					"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The time when the event type was created.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: DataSource
-					"data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: DataType
-					"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: DefaultValue
-					"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Description
-					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The description.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Inline
-					"inline": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: LastUpdatedTime
-					"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The time when the event type was last updated.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Tags
-					"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Key
-								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Value
-								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "Tags associated with this event type.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: VariableType
-					"variable_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"event_variables": schemaAttribute607d2a823ef284716ef85faf(),
 		// Property: Labels
 		// CloudFormation resource type schema:
 		//
@@ -426,57 +426,7 @@ func eventTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"labels": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Arn
-					"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: CreatedTime
-					"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The time when the event type was created.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Description
-					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The description.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Inline
-					"inline": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: LastUpdatedTime
-					"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The time when the event type was last updated.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Tags
-					"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Key
-								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Value
-								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "Tags associated with this event type.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"labels": schemaAttribute4b952e5f571d2618a6c8943e(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -484,10 +434,7 @@ func eventTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time when the event type was last updated.",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time when the event type was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttribute7502c39fa7ae2c0a5c6e4b3b(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -498,10 +445,7 @@ func eventTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-z_-]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the event type",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute49ef2f8c8e3c35dd7f921bbc(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -532,22 +476,7 @@ func eventTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags associated with this event type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeef849a238774232199c35a1d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

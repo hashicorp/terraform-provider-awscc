@@ -15,6 +15,64 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute463e44ce58f4033a77cd0d3d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49a1f4f4919b743cb4cb90b8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name for the dataset group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85b58e74a87862fc8cc968cc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the dataset group to delete.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7299e8dcbdfa5591fb70e8f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The domain associated with the dataset group. When you add a dataset to a dataset group, this value and the value specified for the Domain parameter of the CreateDataset operation must match.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba4d0135a31ccaec73da9636() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "An array of Amazon Resource Names (ARNs) of the datasets that you want to include in the dataset group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9e2ed63baf86d841fa922c8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca0b311071d6d002a68a6e9a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec9e2ed63baf86d841fa922c8(),
+				// Property: Value
+				"value": schemaAttribute463e44ce58f4033a77cd0d3d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags of Application Insights application.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_forecast_dataset_group", datasetGroupDataSource)
 }
@@ -36,11 +94,7 @@ func datasetGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"dataset_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "An array of Amazon Resource Names (ARNs) of the datasets that you want to include in the dataset group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dataset_arns": schemaAttributeba4d0135a31ccaec73da9636(),
 		// Property: DatasetGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -50,10 +104,7 @@ func datasetGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_\\.\\/\\:]+$",
 		//	  "type": "string"
 		//	}
-		"dataset_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the dataset group to delete.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dataset_group_arn": schemaAttribute85b58e74a87862fc8cc968cc(),
 		// Property: DatasetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -64,10 +115,7 @@ func datasetGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]*",
 		//	  "type": "string"
 		//	}
-		"dataset_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the dataset group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dataset_group_name": schemaAttribute49a1f4f4919b743cb4cb90b8(),
 		// Property: Domain
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +132,7 @@ func datasetGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The domain associated with the dataset group. When you add a dataset to a dataset group, this value and the value specified for the Domain parameter of the CreateDataset operation must match.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain": schemaAttributea7299e8dcbdfa5591fb70e8f(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -121,24 +166,7 @@ func datasetGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags of Application Insights application.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeca0b311071d6d002a68a6e9a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

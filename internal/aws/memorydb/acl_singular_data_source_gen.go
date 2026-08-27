@@ -15,6 +15,64 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute4dce3f83b7539634515a70ea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the acl.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64492b422b49caa0010baf0b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6876e04d4482bcf49e4c1e47() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with 'aws:'. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ee34fc108a4aaf1ba14a402() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of users associated to this acl.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a7cec7e1644d5765ff0aca7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the acl.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8dac7b9c8db56b9b20a912e9() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute6876e04d4482bcf49e4c1e47(),
+				// Property: Value
+				"value": schemaAttribute64492b422b49caa0010baf0b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0c8e61c611847ad361ddee7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates acl status. Can be \"creating\", \"active\", \"modifying\", \"deleting\".",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_memorydb_acl", aCLDataSource)
 }
@@ -31,10 +89,7 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-z][a-z0-9\\\\-]*",
 		//	  "type": "string"
 		//	}
-		"acl_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the acl.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"acl_name": schemaAttribute4dce3f83b7539634515a70ea(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +97,7 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the acl.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the acl.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute8a7cec7e1644d5765ff0aca7(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -53,10 +105,7 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates acl status. Can be \"creating\", \"active\", \"modifying\", \"deleting\".",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates acl status. Can be \"creating\", \"active\", \"modifying\", \"deleting\".",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributea0c8e61c611847ad361ddee7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -91,24 +140,7 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with 'aws:'. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute8dac7b9c8db56b9b20a912e9(),
 		// Property: UserNames
 		// CloudFormation resource type schema:
 		//
@@ -122,11 +154,7 @@ func aCLDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"user_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "List of users associated to this acl.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"user_names": schemaAttribute6ee34fc108a4aaf1ba14a402(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

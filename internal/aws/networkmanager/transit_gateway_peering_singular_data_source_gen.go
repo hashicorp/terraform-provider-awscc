@@ -15,6 +15,120 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0f575a5abff93411f342b0ea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN (Amazon Resource Name) of the core network that you want to peer a transit gateway to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1265f1ed4a9aeb1fad2f246b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute22a01df6ead67ed4ea89bea7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b693c2db7f2cf6c39667551() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Id of the transit gateway peering",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82f205967bdcd59d972c73a9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The creation time of the transit gateway peering",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute895553a6243a3997db3cb4bb() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute22a01df6ead67ed4ea89bea7(),
+				// Property: Value
+				"value": schemaAttribute1265f1ed4a9aeb1fad2f246b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9769f999de61e8ccc70757d5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of the transit gateway peering",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead1014c3d96b5818f20f27ea() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Errors from the last modification of the transit gateway peering.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaea75b5ec0051b08c7e60599() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The location of the transit gateway peering",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb61343242ddfca7554b5d5aa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Peering type (TransitGatewayPeering)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb7a289fba9c96f2077a09d09() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Id of the core network that you want to peer a transit gateway to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd2301cc6b662e1b84200b4f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN (Amazon Resource Name) of the transit gateway that you will peer to a core network",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee78a2ad53f23dcc2187aacfb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the TransitGatewayPeeringAttachment",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8f9b91c7c548a827ebd5fcb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN (Amazon Resource Name) of the resource that you will peer to a core network",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefcc8b33595ccc87a6fd80ec1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Peering owner account Id",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_networkmanager_transit_gateway_peering", transitGatewayPeeringDataSource)
 }
@@ -30,10 +144,7 @@ func transitGatewayPeeringDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The ARN (Amazon Resource Name) of the core network that you want to peer a transit gateway to.",
 		//	  "type": "string"
 		//	}
-		"core_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN (Amazon Resource Name) of the core network that you want to peer a transit gateway to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"core_network_arn": schemaAttribute0f575a5abff93411f342b0ea(),
 		// Property: CoreNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +152,7 @@ func transitGatewayPeeringDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The Id of the core network that you want to peer a transit gateway to.",
 		//	  "type": "string"
 		//	}
-		"core_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Id of the core network that you want to peer a transit gateway to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"core_network_id": schemaAttributeb7a289fba9c96f2077a09d09(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +160,7 @@ func transitGatewayPeeringDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The creation time of the transit gateway peering",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The creation time of the transit gateway peering",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute82f205967bdcd59d972c73a9(),
 		// Property: EdgeLocation
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +168,7 @@ func transitGatewayPeeringDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The location of the transit gateway peering",
 		//	  "type": "string"
 		//	}
-		"edge_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The location of the transit gateway peering",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"edge_location": schemaAttributeaea75b5ec0051b08c7e60599(),
 		// Property: LastModificationErrors
 		// CloudFormation resource type schema:
 		//
@@ -77,11 +179,7 @@ func transitGatewayPeeringDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"last_modification_errors": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Errors from the last modification of the transit gateway peering.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modification_errors": schemaAttributead1014c3d96b5818f20f27ea(),
 		// Property: OwnerAccountId
 		// CloudFormation resource type schema:
 		//
@@ -89,10 +187,7 @@ func transitGatewayPeeringDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "Peering owner account Id",
 		//	  "type": "string"
 		//	}
-		"owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Peering owner account Id",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"owner_account_id": schemaAttributefcc8b33595ccc87a6fd80ec1(),
 		// Property: PeeringId
 		// CloudFormation resource type schema:
 		//
@@ -100,10 +195,7 @@ func transitGatewayPeeringDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The Id of the transit gateway peering",
 		//	  "type": "string"
 		//	}
-		"peering_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Id of the transit gateway peering",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"peering_id": schemaAttribute7b693c2db7f2cf6c39667551(),
 		// Property: PeeringType
 		// CloudFormation resource type schema:
 		//
@@ -111,10 +203,7 @@ func transitGatewayPeeringDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "Peering type (TransitGatewayPeering)",
 		//	  "type": "string"
 		//	}
-		"peering_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Peering type (TransitGatewayPeering)",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"peering_type": schemaAttributeb61343242ddfca7554b5d5aa(),
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -122,10 +211,7 @@ func transitGatewayPeeringDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The ARN (Amazon Resource Name) of the resource that you will peer to a core network",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN (Amazon Resource Name) of the resource that you will peer to a core network",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_arn": schemaAttributef8f9b91c7c548a827ebd5fcb(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -133,10 +219,7 @@ func transitGatewayPeeringDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The state of the transit gateway peering",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The state of the transit gateway peering",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttribute9769f999de61e8ccc70757d5(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -169,24 +252,7 @@ func transitGatewayPeeringDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute895553a6243a3997db3cb4bb(),
 		// Property: TransitGatewayArn
 		// CloudFormation resource type schema:
 		//
@@ -194,10 +260,7 @@ func transitGatewayPeeringDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The ARN (Amazon Resource Name) of the transit gateway that you will peer to a core network",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN (Amazon Resource Name) of the transit gateway that you will peer to a core network",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_arn": schemaAttributebd2301cc6b662e1b84200b4f(),
 		// Property: TransitGatewayPeeringAttachmentId
 		// CloudFormation resource type schema:
 		//
@@ -205,10 +268,7 @@ func transitGatewayPeeringDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The ID of the TransitGatewayPeeringAttachment",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_peering_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the TransitGatewayPeeringAttachment",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_peering_attachment_id": schemaAttributee78a2ad53f23dcc2187aacfb(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,41 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute3a1fb8d4087913617d3ea76f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute499c58c80f8d387c081c45ed() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AttributeId
+				"attribute_id": schemaAttribute3a1fb8d4087913617d3ea76f(),
+				// Property: AttributeValue
+				"attribute_value": schemaAttribute3a1fb8d4087913617d3ea76f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca490000d9ccb9c138ae27e4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PrimaryValues
+			"primary_values": schemaAttribute499c58c80f8d387c081c45ed(),
+			// Property: Values
+			"values": schemaAttribute499c58c80f8d387c081c45ed(),
+		}, /*END SCHEMA*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_data_table_record", dataTableRecordDataSource)
 }
@@ -31,10 +66,7 @@ func dataTableRecordDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"data_table_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_table_arn": schemaAttribute3a1fb8d4087913617d3ea76f(),
 		// Property: DataTableRecord
 		// CloudFormation resource type schema:
 		//
@@ -92,50 +124,7 @@ func dataTableRecordDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"data_table_record": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PrimaryValues
-				"primary_values": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AttributeId
-							"attribute_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: AttributeValue
-							"attribute_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Values
-				"values": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AttributeId
-							"attribute_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: AttributeValue
-							"attribute_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_table_record": schemaAttributeca490000d9ccb9c138ae27e4(),
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -146,10 +135,7 @@ func dataTableRecordDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_arn": schemaAttribute3a1fb8d4087913617d3ea76f(),
 		// Property: RecordId
 		// CloudFormation resource type schema:
 		//
@@ -159,10 +145,7 @@ func dataTableRecordDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"record_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"record_id": schemaAttribute3a1fb8d4087913617d3ea76f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

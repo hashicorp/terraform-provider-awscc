@@ -14,6 +14,36 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute70ac4dfbbc7a5aaf9b30751b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6b75218fd6528a6d2807d7e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KmsKeyId
+			"kms_key_id": schemaAttribute70ac4dfbbc7a5aaf9b30751b(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeccbbed56433672a7464b9e61() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute70ac4dfbbc7a5aaf9b30751b(),
+				// Property: Value
+				"value": schemaAttribute70ac4dfbbc7a5aaf9b30751b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_voiceid_domain", domainDataSource)
 }
@@ -31,9 +61,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-%@]*)$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute70ac4dfbbc7a5aaf9b30751b(),
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
@@ -43,9 +71,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]{22}$",
 		//	  "type": "string"
 		//	}
-		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"domain_id": schemaAttribute70ac4dfbbc7a5aaf9b30751b(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -55,9 +81,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute70ac4dfbbc7a5aaf9b30751b(),
 		// Property: ServerSideEncryptionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -75,15 +99,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"server_side_encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KmsKeyId
-				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"server_side_encryption_configuration": schemaAttributec6b75218fd6528a6d2807d7e(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -115,21 +131,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeccbbed56433672a7464b9e61(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,41 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute422e2d78ba0f1c6c4f5dd603() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxValue
+				"max_value": schemaAttribute54a13ad6d7049a2cfdfdf196(),
+				// Property: Unit
+				"unit": schemaAttributef63c1227e3aa8e8acd6eef26(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54a13ad6d7049a2cfdfdf196() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed975444f0e81b8baef41ae84() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef63c1227e3aa8e8acd6eef26() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_quicksight_limits_profile", limitsProfileDataSource)
 }
@@ -32,18 +67,14 @@ func limitsProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"account_id": schemaAttributef63c1227e3aa8e8acd6eef26(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributef63c1227e3aa8e8acd6eef26(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +82,7 @@ func limitsProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributed975444f0e81b8baef41ae84(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -63,9 +91,7 @@ func limitsProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributef63c1227e3aa8e8acd6eef26(),
 		// Property: ProfileId
 		// CloudFormation resource type schema:
 		//
@@ -75,9 +101,7 @@ func limitsProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^lp-[a-f0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"profile_id": schemaAttributef63c1227e3aa8e8acd6eef26(),
 		// Property: ProfileName
 		// CloudFormation resource type schema:
 		//
@@ -86,9 +110,7 @@ func limitsProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"profile_name": schemaAttributef63c1227e3aa8e8acd6eef26(),
 		// Property: ResourceLimits
 		// CloudFormation resource type schema:
 		//
@@ -121,22 +143,7 @@ func limitsProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"resource_limits":         // Pattern: ""
-		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: MaxValue
-					"max_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Unit
-					"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"resource_limits": schemaAttribute422e2d78ba0f1c6c4f5dd603(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -144,10 +151,7 @@ func limitsProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttributed975444f0e81b8baef41ae84(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

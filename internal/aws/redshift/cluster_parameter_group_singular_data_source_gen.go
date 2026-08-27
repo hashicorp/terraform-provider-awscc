@@ -14,6 +14,85 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute05fd8a8129dafb959abea9e5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e210cdc6bbbc71899959344() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the parameter group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41e2dc2132ed64f51356eef9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5347c56db970abad82f76165() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d016a2d0d1ea1b517c1f1a4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ParameterName
+				"parameter_name": schemaAttribute7a443d599b3774655c501d38(),
+				// Property: ParameterValue
+				"parameter_value": schemaAttributeb7905169d11784035a7c7786(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a443d599b3774655c501d38() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the parameter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf9892779db6e72d4e7ea17c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute05fd8a8129dafb959abea9e5(),
+				// Property: Value
+				"value": schemaAttribute41e2dc2132ed64f51356eef9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb7905169d11784035a7c7786() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the parameter. If `ParameterName` is `wlm_json_configuration`, then the maximum size of `ParameterValue` is 8000 characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef995445eb4a5e4ca25ee9af8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the cluster parameter group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_redshift_cluster_parameter_group", clusterParameterGroupDataSource)
 }
@@ -29,10 +108,7 @@ func clusterParameterGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "A description of the parameter group.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the parameter group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute1e210cdc6bbbc71899959344(),
 		// Property: ParameterGroupFamily
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +116,7 @@ func clusterParameterGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters.",
 		//	  "type": "string"
 		//	}
-		"parameter_group_family": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parameter_group_family": schemaAttribute5347c56db970abad82f76165(),
 		// Property: ParameterGroupName
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +125,7 @@ func clusterParameterGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
-		"parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the cluster parameter group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parameter_group_name": schemaAttributef995445eb4a5e4ca25ee9af8(),
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -82,24 +152,7 @@ func clusterParameterGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ParameterName
-					"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the parameter.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ParameterValue
-					"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value of the parameter. If `ParameterName` is `wlm_json_configuration`, then the maximum size of `ParameterValue` is 8000 characters.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parameters": schemaAttribute5d016a2d0d1ea1b517c1f1a4(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -131,24 +184,7 @@ func clusterParameterGroupDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeaf9892779db6e72d4e7ea17c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

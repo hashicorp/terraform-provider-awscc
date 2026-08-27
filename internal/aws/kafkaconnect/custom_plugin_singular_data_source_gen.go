@@ -14,6 +14,144 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0c3b0c2519ab41648d7c27f4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketArn
+			"bucket_arn": schemaAttribute6ed01c0b0befda3a71bb3adb(),
+			// Property: FileKey
+			"file_key": schemaAttribute43999c6393720e0df3bb9a36(),
+			// Property: ObjectVersion
+			"object_version": schemaAttribute3b59104e6d74f62698834b1a(),
+		}, /*END SCHEMA*/
+		Description: "The S3 bucket Amazon Resource Name (ARN), file key, and object version of the plugin file stored in Amazon S3.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25787766a8ccc0db2ee5321e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the custom plugin to use.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26c68619c231ef216176f85c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute2c925fc7ea0e9abc2a0ef49d(),
+				// Property: Value
+				"value": schemaAttribute4691a70a75f9ee008a79ef38(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b5d0b3990031ec51508c42a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The size in bytes of the custom plugin file. You can use it to validate the file.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c925fc7ea0e9abc2a0ef49d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b59104e6d74f62698834b1a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of an object in an S3 bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ef1d34f5087be348ca0c7c1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Location
+			"s3_location": schemaAttribute0c3b0c2519ab41648d7c27f4(),
+		}, /*END SCHEMA*/
+		Description: "Information about the location of a custom plugin.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43999c6393720e0df3bb9a36() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The file key for an object in an S3 bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4691a70a75f9ee008a79ef38() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b6d78d54a1695b34ebdce43() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FileMd5
+			"file_md_5": schemaAttribute723a8571307d4d9a1a9d4359(),
+			// Property: FileSize
+			"file_size": schemaAttribute2b5d0b3990031ec51508c42a(),
+		}, /*END SCHEMA*/
+		Description: "Details about the custom plugin file.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5eff16e0b36c738acc796f0f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The revision of the custom plugin.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ed01c0b0befda3a71bb3adb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of an S3 bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute723a8571307d4d9a1a9d4359() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The hex-encoded MD5 checksum of the custom plugin file. You can use it to validate the file.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute981e1da60899198eae195f1b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the custom plugin.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9dcda56d2d7ff447c1315f0f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the plugin file.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed89156aa059a077498d5b973() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A summary description of the custom plugin.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_kafkaconnect_custom_plugin", customPluginDataSource)
 }
@@ -33,10 +171,7 @@ func customPluginDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the plugin file.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"content_type": schemaAttribute9dcda56d2d7ff447c1315f0f(),
 		// Property: CustomPluginArn
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +180,7 @@ func customPluginDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
 		//	  "type": "string"
 		//	}
-		"custom_plugin_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the custom plugin to use.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"custom_plugin_arn": schemaAttribute25787766a8ccc0db2ee5321e(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +189,7 @@ func customPluginDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A summary description of the custom plugin.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributed89156aa059a077498d5b973(),
 		// Property: FileDescription
 		// CloudFormation resource type schema:
 		//
@@ -80,22 +209,7 @@ func customPluginDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"file_description": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FileMd5
-				"file_md_5": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The hex-encoded MD5 checksum of the custom plugin file. You can use it to validate the file.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FileSize
-				"file_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The size in bytes of the custom plugin file. You can use it to validate the file.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Details about the custom plugin file.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"file_description": schemaAttribute4b6d78d54a1695b34ebdce43(),
 		// Property: Location
 		// CloudFormation resource type schema:
 		//
@@ -132,34 +246,7 @@ func customPluginDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: S3Location
-				"s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BucketArn
-						"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) of an S3 bucket.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: FileKey
-						"file_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The file key for an object in an S3 bucket.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ObjectVersion
-						"object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The version of an object in an S3 bucket.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The S3 bucket Amazon Resource Name (ARN), file key, and object version of the plugin file stored in Amazon S3.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Information about the location of a custom plugin.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"location": schemaAttribute3ef1d34f5087be348ca0c7c1(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -169,10 +256,7 @@ func customPluginDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the custom plugin.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute981e1da60899198eae195f1b(),
 		// Property: Revision
 		// CloudFormation resource type schema:
 		//
@@ -181,10 +265,7 @@ func customPluginDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
-		"revision": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The revision of the custom plugin.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"revision": schemaAttribute5eff16e0b36c738acc796f0f(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -217,24 +298,7 @@ func customPluginDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute26c68619c231ef216176f85c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

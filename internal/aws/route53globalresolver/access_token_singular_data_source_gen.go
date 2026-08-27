@@ -14,6 +14,26 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute5d87ebbd607f46ca37c572e0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute9d886fc1602280518dd38fdb(),
+				// Property: Value
+				"value": schemaAttribute9d886fc1602280518dd38fdb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d886fc1602280518dd38fdb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_route53globalresolver_access_token", accessTokenDataSource)
 }
@@ -30,9 +50,7 @@ func accessTokenDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"access_token_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"access_token_id": schemaAttribute9d886fc1602280518dd38fdb(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -41,9 +59,7 @@ func accessTokenDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute9d886fc1602280518dd38fdb(),
 		// Property: ClientToken
 		// CloudFormation resource type schema:
 		//
@@ -52,18 +68,14 @@ func accessTokenDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"client_token": schemaAttribute9d886fc1602280518dd38fdb(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute9d886fc1602280518dd38fdb(),
 		// Property: DnsViewId
 		// CloudFormation resource type schema:
 		//
@@ -72,18 +84,14 @@ func accessTokenDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"dns_view_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"dns_view_id": schemaAttribute9d886fc1602280518dd38fdb(),
 		// Property: ExpiresAt
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"expires_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"expires_at": schemaAttribute9d886fc1602280518dd38fdb(),
 		// Property: GlobalResolverId
 		// CloudFormation resource type schema:
 		//
@@ -92,9 +100,7 @@ func accessTokenDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"global_resolver_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"global_resolver_id": schemaAttribute9d886fc1602280518dd38fdb(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -104,9 +110,7 @@ func accessTokenDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute9d886fc1602280518dd38fdb(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -118,9 +122,7 @@ func accessTokenDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute9d886fc1602280518dd38fdb(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -148,30 +150,14 @@ func accessTokenDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute5d87ebbd607f46ca37c572e0(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute9d886fc1602280518dd38fdb(),
 		// Property: Value
 		// CloudFormation resource type schema:
 		//
@@ -180,9 +166,7 @@ func accessTokenDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"value": schemaAttribute9d886fc1602280518dd38fdb(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

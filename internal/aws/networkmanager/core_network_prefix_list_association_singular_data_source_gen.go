@@ -14,6 +14,27 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute94d1069273be38d7f514cba7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the prefix list.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb14bc276d62a80b3bc42898() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The alias of the prefix list",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec482a08b3ca70d80d1e1b198() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the core network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_networkmanager_core_network_prefix_list_association", coreNetworkPrefixListAssociationDataSource)
 }
@@ -29,10 +50,7 @@ func coreNetworkPrefixListAssociationDataSource(ctx context.Context) (datasource
 		//	  "description": "The ID of the core network.",
 		//	  "type": "string"
 		//	}
-		"core_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the core network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"core_network_id": schemaAttributec482a08b3ca70d80d1e1b198(),
 		// Property: PrefixListAlias
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +58,7 @@ func coreNetworkPrefixListAssociationDataSource(ctx context.Context) (datasource
 		//	  "description": "The alias of the prefix list",
 		//	  "type": "string"
 		//	}
-		"prefix_list_alias": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The alias of the prefix list",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"prefix_list_alias": schemaAttributebb14bc276d62a80b3bc42898(),
 		// Property: PrefixListArn
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +67,7 @@ func coreNetworkPrefixListAssociationDataSource(ctx context.Context) (datasource
 		//	  "pattern": "^arn:[a-z0-9-]+:ec2:[a-z]+-[a-z]+-[0-9]:([0-9]{12}):prefix-list/pl-[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"prefix_list_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the prefix list.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"prefix_list_arn": schemaAttribute94d1069273be38d7f514cba7(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

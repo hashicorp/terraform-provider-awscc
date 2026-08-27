@@ -15,6 +15,346 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0df9d34b93be0786ab431fe6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributea32166483e10fbef43242715(),
+				// Property: Value
+				"value": schemaAttribute9f38205046de4da1724eca90(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to assign to the Exadata Infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute137034b68df0e6f6d89c272a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute155919c119ed3a21ceaacdc2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The software version of the storage servers on the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2101bfe7527a4fae723e9f8c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomActionTimeoutInMins
+			"custom_action_timeout_in_mins": schemaAttributea39a81af70453be196766d8e(),
+			// Property: DaysOfWeek
+			"days_of_week": schemaAttribute8645bda67ceb8c0cf0affbb6(),
+			// Property: HoursOfDay
+			"hours_of_day": schemaAttribute3dfa602513f974b73227deef(),
+			// Property: IsCustomActionTimeoutEnabled
+			"is_custom_action_timeout_enabled": schemaAttribute44b63819e7854bb25a45f678(),
+			// Property: LeadTimeInWeeks
+			"lead_time_in_weeks": schemaAttribute902ac458fff20d2683b683e5(),
+			// Property: Months
+			"months": schemaAttribute5f81a6816966f8c7ed8f051e(),
+			// Property: PatchingMode
+			"patching_mode": schemaAttribute4592be087e5e968e5d15e001(),
+			// Property: Preference
+			"preference": schemaAttribute9f09c34ac0f68bce34bf676e(),
+			// Property: WeeksOfMonth
+			"weeks_of_month": schemaAttributefbc5d4792df23942a2fc4630(),
+		}, /*END SCHEMA*/
+		Description: "The scheduling details for the maintenance window. Patching and system updates take place during the maintenance window.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2381d447211cd1ed8ce129cf() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The total amount of memory, in gigabytes (GB), that's available on the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2bb1177ed365767846d98772() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The total number of CPU cores that are allocated to the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute39f845ea8c795d535a91c33b() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The total number of CPU cores available on the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c5eb6dc4eb33022d28c0dc9() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of database servers for the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3dfa602513f974b73227deef() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.Int64Type,
+		Description: "The hours of the day when maintenance can be performed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4210b1f3c7386f58ccf3258a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The storage server model type of the Exadata infrastructure. For the list of valid model names, use the ListDbSystemShapes operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42e18919807cfbeb93d957a2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier for the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44b63819e7854bb25a45f678() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether custom action timeout is enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4592be087e5e968e5d15e001() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The patching mode for the maintenance window.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4e010cb7e180305ce02714f3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The total amount of local node storage, in gigabytes (GB), that's available on the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute56a872ccedcf33822f7da118() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AZ ID of the AZ where the Exadata infrastructure is located.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a1c55d8623c2ed3b23652bb() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of database server identifiers for the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f81a6816966f8c7ed8f051e() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The months when maintenance can be performed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ebcac647c1d85225d192b18() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The database server model type of the Exadata infrastructure. For the list of valid model names, use the ListDbSystemShapes operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ec83ae28cc46a408bd473bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The software version of the database servers (dom0) in the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82960e7993c2165643777b69() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the OCI resource anchor for the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8645bda67ceb8c0cf0affbb6() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The days of the week when maintenance can be performed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute902ac458fff20d2683b683e5() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The lead time in weeks before the maintenance window.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9208af7bed019a00801447df() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The size of the Exadata infrastructure's data disk group, in terabytes (TB).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96eb14ad2bbddf9db5707911() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The total amount of storage, in gigabytes (GB), on the the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute97950ca0957d0b77d36a94c5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The email address of the contact.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d008217d8500f4f3c8dde2a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount of available storage, in gigabytes (GB), for the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f09c34ac0f68bce34bf676e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The preference for the maintenance window scheduling.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f38205046de4da1724eca90() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea32166483e10fbef43242715() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea39a81af70453be196766d8e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The timeout duration for custom actions in minutes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea67b925cf79492aa38e15b43() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The size of the Exadata infrastructure's local node storage, in gigabytes (GB).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9b5d08585c64e52062d1580() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The model name of the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeacaef20b6016ec3adb051905() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The OCID of the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead29a863e8b345ea3a457801() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of storage servers that are activated for the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeafc893b4efb30bfd6847fb43() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user-friendly name for the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8f131ab8b27399dac18edf1() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount of memory, in gigabytes (GB), that's allocated on the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec094d66e8bfc6f33a8813509() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The total amount of data disk group storage, in terabytes (TB), that's available on the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed0d2c0c0e582ecfa8634ecab() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of storage servers requested for the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3cf60e801c9e770319c4e2a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee02e3282f6120591c48b585d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Email
+				"email": schemaAttribute97950ca0957d0b77d36a94c5(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The email addresses of contacts to receive notification from Oracle about maintenance updates for the Exadata infrastructure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee231b897aa7f04a1c660ece7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Availability Zone (AZ) where the Exadata infrastructure is located.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefbc5d4792df23942a2fc4630() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.Int64Type,
+		Description: "The weeks of the month when maintenance can be performed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff810627021ebe79a056e0ef() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The HTTPS link to the Exadata infrastructure in OCI.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_odb_cloud_exadata_infrastructure", cloudExadataInfrastructureDataSource)
 }
@@ -30,10 +370,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The number of storage servers requested for the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"activated_storage_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of storage servers requested for the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"activated_storage_count": schemaAttributed0d2c0c0e582ecfa8634ecab(),
 		// Property: AdditionalStorageCount
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +378,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The number of storage servers requested for the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"additional_storage_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of storage servers requested for the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"additional_storage_count": schemaAttributed0d2c0c0e582ecfa8634ecab(),
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +388,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Availability Zone (AZ) where the Exadata infrastructure is located.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"availability_zone": schemaAttributee231b897aa7f04a1c660ece7(),
 		// Property: AvailabilityZoneId
 		// CloudFormation resource type schema:
 		//
@@ -67,10 +398,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"availability_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AZ ID of the AZ where the Exadata infrastructure is located.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"availability_zone_id": schemaAttribute56a872ccedcf33822f7da118(),
 		// Property: AvailableStorageSizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -78,10 +406,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The amount of available storage, in gigabytes (GB), for the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"available_storage_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The amount of available storage, in gigabytes (GB), for the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"available_storage_size_in_g_bs": schemaAttribute9d008217d8500f4f3c8dde2a(),
 		// Property: CloudExadataInfrastructureArn
 		// CloudFormation resource type schema:
 		//
@@ -89,10 +414,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The Amazon Resource Name (ARN) for the Exadata infrastructure.",
 		//	  "type": "string"
 		//	}
-		"cloud_exadata_infrastructure_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cloud_exadata_infrastructure_arn": schemaAttributed3cf60e801c9e770319c4e2a(),
 		// Property: CloudExadataInfrastructureId
 		// CloudFormation resource type schema:
 		//
@@ -100,10 +422,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The unique identifier for the Exadata infrastructure.",
 		//	  "type": "string"
 		//	}
-		"cloud_exadata_infrastructure_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier for the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cloud_exadata_infrastructure_id": schemaAttribute42e18919807cfbeb93d957a2(),
 		// Property: ComputeCount
 		// CloudFormation resource type schema:
 		//
@@ -111,10 +430,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The number of database servers for the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"compute_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of database servers for the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"compute_count": schemaAttribute3c5eb6dc4eb33022d28c0dc9(),
 		// Property: ComputeModel
 		// CloudFormation resource type schema:
 		//
@@ -122,10 +438,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled.",
 		//	  "type": "string"
 		//	}
-		"compute_model": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"compute_model": schemaAttribute137034b68df0e6f6d89c272a(),
 		// Property: CpuCount
 		// CloudFormation resource type schema:
 		//
@@ -133,10 +446,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The total number of CPU cores that are allocated to the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"cpu_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The total number of CPU cores that are allocated to the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cpu_count": schemaAttribute2bb1177ed365767846d98772(),
 		// Property: CustomerContactsToSendToOCI
 		// CloudFormation resource type schema:
 		//
@@ -157,19 +467,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"customer_contacts_to_send_to_oci": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Email
-					"email": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The email address of the contact.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The email addresses of contacts to receive notification from Oracle about maintenance updates for the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"customer_contacts_to_send_to_oci": schemaAttributee02e3282f6120591c48b585d(),
 		// Property: DataStorageSizeInTBs
 		// CloudFormation resource type schema:
 		//
@@ -177,10 +475,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The size of the Exadata infrastructure's data disk group, in terabytes (TB).",
 		//	  "type": "number"
 		//	}
-		"data_storage_size_in_t_bs": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The size of the Exadata infrastructure's data disk group, in terabytes (TB).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_storage_size_in_t_bs": schemaAttribute9208af7bed019a00801447df(),
 		// Property: DatabaseServerType
 		// CloudFormation resource type schema:
 		//
@@ -191,10 +486,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "^[a-zA-Z0-9_\\/.=-]+$",
 		//	  "type": "string"
 		//	}
-		"database_server_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The database server model type of the Exadata infrastructure. For the list of valid model names, use the ListDbSystemShapes operation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"database_server_type": schemaAttribute6ebcac647c1d85225d192b18(),
 		// Property: DbNodeStorageSizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -202,10 +494,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The size of the Exadata infrastructure's local node storage, in gigabytes (GB).",
 		//	  "type": "integer"
 		//	}
-		"db_node_storage_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The size of the Exadata infrastructure's local node storage, in gigabytes (GB).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"db_node_storage_size_in_g_bs": schemaAttributea67b925cf79492aa38e15b43(),
 		// Property: DbServerIds
 		// CloudFormation resource type schema:
 		//
@@ -218,11 +507,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"db_server_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of database server identifiers for the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"db_server_ids": schemaAttribute5a1c55d8623c2ed3b23652bb(),
 		// Property: DbServerVersion
 		// CloudFormation resource type schema:
 		//
@@ -230,10 +515,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The software version of the database servers (dom0) in the Exadata infrastructure.",
 		//	  "type": "string"
 		//	}
-		"db_server_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The software version of the database servers (dom0) in the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"db_server_version": schemaAttribute7ec83ae28cc46a408bd473bc(),
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -244,10 +526,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The user-friendly name for the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"display_name": schemaAttributeafc893b4efb30bfd6847fb43(),
 		// Property: MaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -337,61 +616,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  },
 		//	  "type": "object"
 		//	}
-		"maintenance_window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomActionTimeoutInMins
-				"custom_action_timeout_in_mins": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The timeout duration for custom actions in minutes.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DaysOfWeek
-				"days_of_week": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The days of the week when maintenance can be performed.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: HoursOfDay
-				"hours_of_day": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.Int64Type,
-					Description: "The hours of the day when maintenance can be performed.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IsCustomActionTimeoutEnabled
-				"is_custom_action_timeout_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether custom action timeout is enabled.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LeadTimeInWeeks
-				"lead_time_in_weeks": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The lead time in weeks before the maintenance window.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Months
-				"months": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The months when maintenance can be performed.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PatchingMode
-				"patching_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The patching mode for the maintenance window.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Preference
-				"preference": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The preference for the maintenance window scheduling.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: WeeksOfMonth
-				"weeks_of_month": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.Int64Type,
-					Description: "The weeks of the month when maintenance can be performed.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The scheduling details for the maintenance window. Patching and system updates take place during the maintenance window.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"maintenance_window": schemaAttribute2101bfe7527a4fae723e9f8c(),
 		// Property: MaxCpuCount
 		// CloudFormation resource type schema:
 		//
@@ -399,10 +624,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The total number of CPU cores available on the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"max_cpu_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The total number of CPU cores available on the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"max_cpu_count": schemaAttribute39f845ea8c795d535a91c33b(),
 		// Property: MaxDataStorageInTBs
 		// CloudFormation resource type schema:
 		//
@@ -410,10 +632,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The total amount of data disk group storage, in terabytes (TB), that's available on the Exadata infrastructure.",
 		//	  "type": "number"
 		//	}
-		"max_data_storage_in_t_bs": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The total amount of data disk group storage, in terabytes (TB), that's available on the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"max_data_storage_in_t_bs": schemaAttributec094d66e8bfc6f33a8813509(),
 		// Property: MaxDbNodeStorageSizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -421,10 +640,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The total amount of local node storage, in gigabytes (GB), that's available on the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"max_db_node_storage_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The total amount of local node storage, in gigabytes (GB), that's available on the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"max_db_node_storage_size_in_g_bs": schemaAttribute4e010cb7e180305ce02714f3(),
 		// Property: MaxMemoryInGBs
 		// CloudFormation resource type schema:
 		//
@@ -432,10 +648,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The total amount of memory, in gigabytes (GB), that's available on the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"max_memory_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The total amount of memory, in gigabytes (GB), that's available on the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"max_memory_in_g_bs": schemaAttribute2381d447211cd1ed8ce129cf(),
 		// Property: MemorySizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -443,10 +656,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The amount of memory, in gigabytes (GB), that's allocated on the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"memory_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The amount of memory, in gigabytes (GB), that's allocated on the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"memory_size_in_g_bs": schemaAttributeb8f131ab8b27399dac18edf1(),
 		// Property: OciResourceAnchorName
 		// CloudFormation resource type schema:
 		//
@@ -454,10 +664,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The name of the OCI resource anchor for the Exadata infrastructure.",
 		//	  "type": "string"
 		//	}
-		"oci_resource_anchor_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the OCI resource anchor for the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"oci_resource_anchor_name": schemaAttribute82960e7993c2165643777b69(),
 		// Property: OciUrl
 		// CloudFormation resource type schema:
 		//
@@ -465,10 +672,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The HTTPS link to the Exadata infrastructure in OCI.",
 		//	  "type": "string"
 		//	}
-		"oci_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The HTTPS link to the Exadata infrastructure in OCI.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"oci_url": schemaAttributeff810627021ebe79a056e0ef(),
 		// Property: Ocid
 		// CloudFormation resource type schema:
 		//
@@ -476,10 +680,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The OCID of the Exadata infrastructure.",
 		//	  "type": "string"
 		//	}
-		"ocid": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The OCID of the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ocid": schemaAttributeacaef20b6016ec3adb051905(),
 		// Property: Shape
 		// CloudFormation resource type schema:
 		//
@@ -490,10 +691,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "^[a-zA-Z0-9_\\/.=-]+$",
 		//	  "type": "string"
 		//	}
-		"shape": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The model name of the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"shape": schemaAttributea9b5d08585c64e52062d1580(),
 		// Property: StorageCount
 		// CloudFormation resource type schema:
 		//
@@ -501,10 +699,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The number of storage servers that are activated for the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"storage_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of storage servers that are activated for the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"storage_count": schemaAttributead29a863e8b345ea3a457801(),
 		// Property: StorageServerType
 		// CloudFormation resource type schema:
 		//
@@ -515,10 +710,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "^[a-zA-Z0-9_\\/.=-]+$",
 		//	  "type": "string"
 		//	}
-		"storage_server_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The storage server model type of the Exadata infrastructure. For the list of valid model names, use the ListDbSystemShapes operation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"storage_server_type": schemaAttribute4210b1f3c7386f58ccf3258a(),
 		// Property: StorageServerVersion
 		// CloudFormation resource type schema:
 		//
@@ -526,10 +718,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The software version of the storage servers on the Exadata infrastructure.",
 		//	  "type": "string"
 		//	}
-		"storage_server_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The software version of the storage servers on the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"storage_server_version": schemaAttribute155919c119ed3a21ceaacdc2(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -561,24 +750,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that's 1 to 128 Unicode characters in length and can't be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, @, -, and \".",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that's 1 to 256 characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to assign to the Exadata Infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute0df9d34b93be0786ab431fe6(),
 		// Property: TotalStorageSizeInGBs
 		// CloudFormation resource type schema:
 		//
@@ -586,10 +758,7 @@ func cloudExadataInfrastructureDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The total amount of storage, in gigabytes (GB), on the the Exadata infrastructure.",
 		//	  "type": "integer"
 		//	}
-		"total_storage_size_in_g_bs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The total amount of storage, in gigabytes (GB), on the the Exadata infrastructure.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"total_storage_size_in_g_bs": schemaAttribute96eb14ad2bbddf9db5707911(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

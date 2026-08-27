@@ -16,6 +16,1018 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute006f25c14695c4fda4bf2dc6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BreakpointPercentileThreshold
+			"breakpoint_percentile_threshold": schemaAttributee129be54ca780cbe9dfc68dc(),
+			// Property: BufferSize
+			"buffer_size": schemaAttributedc8f2423cc42da41ef084da5(),
+			// Property: MaxTokens
+			"max_tokens": schemaAttribute3f6171ae22e4711b8ac1627b(),
+		}, /*END SCHEMA*/
+		Description: "Configurations for when you choose semantic chunking. If you set the chunkingStrategy as NONE, exclude this field.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute00d73560067a73fc826dfe12() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The supported object type or content type of the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0379f90df41d263e174676b7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of your Microsoft 365 tenant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute06114c9464606655695abf0e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The percentage of overlap between adjacent chunks of a data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute07313a5bb34cea734df4e49a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LambdaArn
+			"lambda_arn": schemaAttribute23fa4ba984bffecbb57cc7d7(),
+		}, /*END SCHEMA*/
+		Description: "A Lambda function that processes documents.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0921c575d103ac49be87fc5a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of tokens that a chunk can contain in this layer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a21a72e00ecbeef57dba448() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The details of the failure reasons related to the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d270f5a9c4db670b17aac04() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Enrichment Strategy method.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0dbd5253fd60074c396455ee() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Salesforce host URL or instance URL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0fb555dcfcce4d73aac3c369() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CrawlerConfiguration
+			"crawler_configuration": schemaAttribute1387c7db138f31ad2288f719(),
+			// Property: SourceConfiguration
+			"source_configuration": schemaAttribute8bb0075162e5e89a2b99906c(),
+		}, /*END SCHEMA*/
+		Description: "The configuration information to connect to Confluence as your data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute11fbb82ab1e1e0e76c43ec2c() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A set of regular expression filter patterns for a type of object.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute13009578ba02170819df928c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Rate of web URLs retrieved per minute.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute134cac744ba71e34be7287b6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ImageExtractionStatus
+			"image_extraction_status": schemaAttributee3b3062518f882b613c11239(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for image extraction.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1387c7db138f31ad2288f719() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FilterConfiguration
+			"filter_configuration": schemaAttribute69686a2ce41c39fa7f0d89ac(),
+		}, /*END SCHEMA*/
+		Description: "The configuration of the Confluence content. For example, configuring specific types of Confluence content.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17063b9950e37d6da6685c24() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of a data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18afdab1912f200d3842a539() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Threshold for deletion protection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a0c3032c40f9b8aed93774a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FilterConfiguration
+			"filter_configuration": schemaAttribute69686a2ce41c39fa7f0d89ac(),
+		}, /*END SCHEMA*/
+		Description: "The configuration of the SharePoint content. For example, configuring specific types of SharePoint content.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1aaf2b2713aea843d8bc759d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ChunkingConfiguration
+			"chunking_configuration": schemaAttribute8eb7f9fffff8319691164a75(),
+			// Property: ContextEnrichmentConfiguration
+			"context_enrichment_configuration": schemaAttribute94dd038213fdb0650f0c2a2d(),
+			// Property: CustomTransformationConfiguration
+			"custom_transformation_configuration": schemaAttributeaac61946a14b446d72ec943d(),
+			// Property: ParsingConfiguration
+			"parsing_configuration": schemaAttributeb3f024972c7bffd92f48c996(),
+		}, /*END SCHEMA*/
+		Description: "Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1bae385b1a0fa1370f64dd50() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AudioExtractionConfiguration
+			"audio_extraction_configuration": schemaAttribute680a0528d9b90d426995440d(),
+			// Property: ImageExtractionConfiguration
+			"image_extraction_configuration": schemaAttribute134cac744ba71e34be7287b6(),
+			// Property: VideoExtractionConfiguration
+			"video_extraction_configuration": schemaAttributeeb73c37b54877a1b8cc1e79e(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for media extraction settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e347c0ea84364e07c8715ac() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time at which the data source was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute215da4f31d4be75c42face65() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The location's URI",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute229267c4605449ce9c0def90() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CrawlerLimits
+			"crawler_limits": schemaAttributeb5f0b6b3177add573948c143(),
+			// Property: ExclusionFilters
+			"exclusion_filters": schemaAttribute11fbb82ab1e1e0e76c43ec2c(),
+			// Property: InclusionFilters
+			"inclusion_filters": schemaAttribute11fbb82ab1e1e0e76c43ec2c(),
+			// Property: Scope
+			"scope": schemaAttribute625ae12e10bc87da09f75f7c(),
+			// Property: UserAgent
+			"user_agent": schemaAttribute6e8ec8e57ee9fb7297da7238(),
+			// Property: UserAgentHeader
+			"user_agent_header": schemaAttribute5bef2519a58fbfe0486f58a0(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for the web crawler.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23fa4ba984bffecbb57cc7d7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The function's ARN identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2752d8f6c0b79744436eef57() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Url
+				"url": schemaAttribute721bb8d4542e82725928a91a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of web urls.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31a6f18a0f5d8e736dbffbe0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeletionProtectionStatus
+			"deletion_protection_status": schemaAttributee3b3062518f882b613c11239(),
+			// Property: DeletionProtectionThreshold
+			"deletion_protection_threshold": schemaAttribute18afdab1912f200d3842a539(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for deletion protection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute32f922036a3275487b9be69e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CrawlerConfiguration
+			"crawler_configuration": schemaAttribute9c6dafc7d239d1e82ed60060(),
+			// Property: SourceConfiguration
+			"source_configuration": schemaAttribute7082f1d3182d73729329f8ce(),
+		}, /*END SCHEMA*/
+		Description: "The configuration information to connect to Salesforce as your data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f6171ae22e4711b8ac1627b() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of tokens that a chunk can contain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45a4b2dd1b23110fe864fa4d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of tokens to include in a chunk.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4742db4f6440cb87c2486a7f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of tokens to repeat across chunks in the same layer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute559121cf1c90a842d50d0b77() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5866372b6dbff8448e35c747() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The supported authentication type to authenticate and connect to your SharePoint site/sites.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute595fa61a75cee209786a882f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Identifier for a resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a83faacc0ebbcc2a34dbd72() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Confluence host URL or instance URL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5bef2519a58fbfe0486f58a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The full user agent header, including UUID and suffix.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c3169aaedc083b01d9a5322() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the bucket that contains the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5dede58c79988234d33062ec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your SharePoint site/sites. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see SharePoint connection configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ff1af7f24243d82e6e93bf2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The supported authentication type to authenticate and connect to your Confluence instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute625ae12e10bc87da09f75f7c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The scope that a web crawl job will be restricted to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute631571722000d59f29cbb1cf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CrawlerConfiguration
+			"crawler_configuration": schemaAttribute229267c4605449ce9c0def90(),
+			// Property: SourceConfiguration
+			"source_configuration": schemaAttributea80796aa3d5b976578fc11eb(),
+		}, /*END SCHEMA*/
+		Description: "Configures a web data source location.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6397c8eec66897e2873649e9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The supported authentication type to authenticate and connect to your Salesforce instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute680a0528d9b90d426995440d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AudioExtractionStatus
+			"audio_extraction_status": schemaAttributee3b3062518f882b613c11239(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for audio extraction.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute681179a6daa8172db4516582() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time at which the knowledge base was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute69686a2ce41c39fa7f0d89ac() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PatternObjectFilter
+			"pattern_object_filter": schemaAttributedea5e5fb34c53260eb0ceb5d(),
+			// Property: Type
+			"type": schemaAttributeca8886421b4d78bbf3145763(),
+		}, /*END SCHEMA*/
+		Description: "The type of filtering that you want to apply to certain objects or content of the data source. For example, the PATTERN type is regular expression patterns you can apply to filter your content.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a26bc8751816bef31e05399() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Instructions for interpreting the contents of a document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b4a05bf43834289988fc0e0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TransformationLambdaConfiguration
+			"transformation_lambda_configuration": schemaAttribute07313a5bb34cea734df4e49a(),
+		}, /*END SCHEMA*/
+		Description: "A Lambda function that processes documents.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e8ec8e57ee9fb7297da7238() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The suffix that will be included in the user agent header.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7082f1d3182d73729329f8ce() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthType
+			"auth_type": schemaAttribute6397c8eec66897e2873649e9(),
+			// Property: CredentialsSecretArn
+			"credentials_secret_arn": schemaAttribute8ef1679813db879137209db7(),
+			// Property: HostUrl
+			"host_url": schemaAttribute0dbd5253fd60074c396455ee(),
+		}, /*END SCHEMA*/
+		Description: "The endpoint information to connect to your Salesforce data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute721bb8d4542e82725928a91a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A web url.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73ccb5a95eb1ab77f9a9b0f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "When the service applies the transformation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute75075236ea976850261b31f7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConnectorParameters
+			"connector_parameters": schemaAttributeca3124f0e6767dc2716e015b(),
+			// Property: DeletionProtectionConfiguration
+			"deletion_protection_configuration": schemaAttribute31a6f18a0f5d8e736dbffbe0(),
+			// Property: MediaExtractionConfiguration
+			"media_extraction_configuration": schemaAttribute1bae385b1a0fa1370f64dd50(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for managed knowledge base connector data sources.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79b89e1f60944335467ff149() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Knowledge base can split your source data into chunks. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. You have the following options for chunking your data. If you opt for NONE, then you may want to pre-process your files by splitting them up such that each file corresponds to a chunk.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8989a1dccc9e5dd2e6e080c4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Method
+			"method": schemaAttribute0d270f5a9c4db670b17aac04(),
+		}, /*END SCHEMA*/
+		Description: "Strategy to be used when using Bedrock Foundation Model for Context Enrichment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8bb0075162e5e89a2b99906c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthType
+			"auth_type": schemaAttribute5ff1af7f24243d82e6e93bf2(),
+			// Property: CredentialsSecretArn
+			"credentials_secret_arn": schemaAttribute559121cf1c90a842d50d0b77(),
+			// Property: HostType
+			"host_type": schemaAttributea815d35ddf1a45f501f27df0(),
+			// Property: HostUrl
+			"host_url": schemaAttribute5a83faacc0ebbcc2a34dbd72(),
+		}, /*END SCHEMA*/
+		Description: "The endpoint information to connect to your Confluence data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8eb7f9fffff8319691164a75() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ChunkingStrategy
+			"chunking_strategy": schemaAttribute79b89e1f60944335467ff149(),
+			// Property: FixedSizeChunkingConfiguration
+			"fixed_size_chunking_configuration": schemaAttribute9fcb1e69c14070df0fa20d14(),
+			// Property: HierarchicalChunkingConfiguration
+			"hierarchical_chunking_configuration": schemaAttribute9ce13b1fd03850976f7ce9a2(),
+			// Property: SemanticChunkingConfiguration
+			"semantic_chunking_configuration": schemaAttribute006f25c14695c4fda4bf2dc6(),
+		}, /*END SCHEMA*/
+		Description: "Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ef1679813db879137209db7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your Salesforce instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Salesforce connection configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute904ac016896d6370181d0d1a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ParsingPromptText
+			"parsing_prompt_text": schemaAttribute6a26bc8751816bef31e05399(),
+		}, /*END SCHEMA*/
+		Description: "Instructions for interpreting the contents of a document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93b516011177f46bab31ee77() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnrichmentStrategyConfiguration
+			"enrichment_strategy_configuration": schemaAttribute8989a1dccc9e5dd2e6e080c4(),
+			// Property: ModelArn
+			"model_arn": schemaAttributed1d1d323c34cd6ee9a1ffb86(),
+		}, /*END SCHEMA*/
+		Description: "Bedrock Foundation Model configuration to be used for Context Enrichment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94ccd7819fb5be20a086ec6c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The parsing strategy for the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94dd038213fdb0650f0c2a2d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BedrockFoundationModelConfiguration
+			"bedrock_foundation_model_configuration": schemaAttribute93b516011177f46bab31ee77(),
+			// Property: Type
+			"type": schemaAttributed69e344e1cda37e81b0df161(),
+		}, /*END SCHEMA*/
+		Description: "Additional Enrichment Configuration for example when using GraphRag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a6a2329f20fde6181824508() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Determine how will parsed content be stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c6dafc7d239d1e82ed60060() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FilterConfiguration
+			"filter_configuration": schemaAttribute69686a2ce41c39fa7f0d89ac(),
+		}, /*END SCHEMA*/
+		Description: "The configuration of filtering the Salesforce content. For example, configuring regular expression patterns to include or exclude certain content.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ce13b1fd03850976f7ce9a2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LevelConfigurations
+			"level_configurations": schemaAttributeb6f3f63ff37593e6215ee0eb(),
+			// Property: OverlapTokens
+			"overlap_tokens": schemaAttribute4742db4f6440cb87c2486a7f(),
+		}, /*END SCHEMA*/
+		Description: "Configurations for when you choose hierarchical chunking. If you set the chunkingStrategy as NONE, exclude this field.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d1c3e9bb19e2ebbf67e89f9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConfluenceConfiguration
+			"confluence_configuration": schemaAttribute0fb555dcfcce4d73aac3c369(),
+			// Property: ManagedKnowledgeBaseConnectorConfiguration
+			"managed_knowledge_base_connector_configuration": schemaAttribute75075236ea976850261b31f7(),
+			// Property: S3Configuration
+			"s3_configuration": schemaAttributef9d3d3672687dd0d378797a8(),
+			// Property: SalesforceConfiguration
+			"salesforce_configuration": schemaAttribute32f922036a3275487b9be69e(),
+			// Property: SharePointConfiguration
+			"share_point_configuration": schemaAttributea98bdc48c26ee0ac1a883bf0(),
+			// Property: Type
+			"type": schemaAttributed9759528b851894014488fe3(),
+			// Property: WebConfiguration
+			"web_configuration": schemaAttribute631571722000d59f29cbb1cf(),
+		}, /*END SCHEMA*/
+		Description: "Specifies a raw data source location to ingest.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f314eb4756fe81f9ab097a6() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Maximum number of pages the crawler can crawl.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fcb1e69c14070df0fa20d14() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxTokens
+			"max_tokens": schemaAttribute45a4b2dd1b23110fe864fa4d(),
+			// Property: OverlapPercentage
+			"overlap_percentage": schemaAttribute06114c9464606655695abf0e(),
+		}, /*END SCHEMA*/
+		Description: "Configurations for when you choose fixed-size chunking. If you set the chunkingStrategy as NONE, exclude this field.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ff4d79f0db987607ae3f950() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Location
+			"s3_location": schemaAttributefa399b229b1376feabb29202(),
+		}, /*END SCHEMA*/
+		Description: "A location for storing content from data sources temporarily as it is processed by custom components in the ingestion pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea12018a46743a92ce752574a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the AWS KMS key used to encrypt the resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea2d500b8c4ae8c86b0b6d5a3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: StepToApply
+				"step_to_apply": schemaAttribute73ccb5a95eb1ab77f9a9b0f3(),
+				// Property: TransformationFunction
+				"transformation_function": schemaAttribute6b4a05bf43834289988fc0e0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of Lambda functions that process documents.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea509f1e503880a649bad6a3a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The deletion policy for the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea80796aa3d5b976578fc11eb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: UrlConfiguration
+			"url_configuration": schemaAttributeb164e88b821a6a0fa97a3ba9(),
+		}, /*END SCHEMA*/
+		Description: "A web source configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea815d35ddf1a45f501f27df0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The supported host type, whether online/cloud or server/on-premises.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea98bdc48c26ee0ac1a883bf0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CrawlerConfiguration
+			"crawler_configuration": schemaAttribute1a0c3032c40f9b8aed93774a(),
+			// Property: SourceConfiguration
+			"source_configuration": schemaAttributedfbad2da3c5c572ace62d9c5(),
+		}, /*END SCHEMA*/
+		Description: "The configuration information to connect to SharePoint as your data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaac61946a14b446d72ec943d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IntermediateStorage
+			"intermediate_storage": schemaAttribute9ff4d79f0db987607ae3f950(),
+			// Property: Transformations
+			"transformations": schemaAttributea2d500b8c4ae8c86b0b6d5a3(),
+		}, /*END SCHEMA*/
+		Description: "Settings for customizing steps in the data source content ingestion pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb164e88b821a6a0fa97a3ba9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SeedUrls
+			"seed_urls": schemaAttribute2752d8f6c0b79744436eef57(),
+		}, /*END SCHEMA*/
+		Description: "A url configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb26ecb14b6663b13f48c51f0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of S3 prefixes that define the object containing the data sources.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2e3549c8f50110c71f52ae8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Description of the Resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb35b98d6bb00f2c670cfd40d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ModelArn
+			"model_arn": schemaAttributed1d1d323c34cd6ee9a1ffb86(),
+			// Property: ParsingModality
+			"parsing_modality": schemaAttribute9a6a2329f20fde6181824508(),
+			// Property: ParsingPrompt
+			"parsing_prompt": schemaAttribute904ac016896d6370181d0d1a(),
+		}, /*END SCHEMA*/
+		Description: "Settings for a foundation model used to parse documents for a data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3f024972c7bffd92f48c996() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BedrockDataAutomationConfiguration
+			"bedrock_data_automation_configuration": schemaAttributefd8b34639d7c09a717400916(),
+			// Property: BedrockFoundationModelConfiguration
+			"bedrock_foundation_model_configuration": schemaAttributeb35b98d6bb00f2c670cfd40d(),
+			// Property: ParsingStrategy
+			"parsing_strategy": schemaAttribute94ccd7819fb5be20a086ec6c(),
+		}, /*END SCHEMA*/
+		Description: "Settings for parsing document contents",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5f0b6b3177add573948c143() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxPages
+			"max_pages": schemaAttribute9f314eb4756fe81f9ab097a6(),
+			// Property: RateLimit
+			"rate_limit": schemaAttribute13009578ba02170819df928c(),
+		}, /*END SCHEMA*/
+		Description: "Limit settings for the web crawler.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6f3f63ff37593e6215ee0eb() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxTokens
+				"max_tokens": schemaAttribute0921c575d103ac49be87fc5a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Token settings for each layer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba4a29cf8a355646dedb75ef() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttributea12018a46743a92ce752574a(),
+		}, /*END SCHEMA*/
+		Description: "Contains details about the server-side encryption for the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8954b537bd98873aa6f3177() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The domain of your SharePoint instance or site URL/URLs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca3124f0e6767dc2716e015b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Connector-specific parameters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca8886421b4d78bbf3145763() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The crawl filter type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1d1d323c34cd6ee9a1ffb86() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The model's ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4db4d595fe33eeffc35ff58() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The account ID for the owner of the S3 bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed69e344e1cda37e81b0df161() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Enrichment type to be used for the vector database.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed9759528b851894014488fe3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the data source location.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc8f2423cc42da41ef084da5() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The buffer size.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedea5e5fb34c53260eb0ceb5d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Filters
+			"filters": schemaAttributee6b11a868c6362112cd27d22(),
+		}, /*END SCHEMA*/
+		Description: "The configuration of specific filters applied to your data source content. You can filter out or include certain content.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedfbad2da3c5c572ace62d9c5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthType
+			"auth_type": schemaAttribute5866372b6dbff8448e35c747(),
+			// Property: CredentialsSecretArn
+			"credentials_secret_arn": schemaAttribute5dede58c79988234d33062ec(),
+			// Property: Domain
+			"domain": schemaAttributec8954b537bd98873aa6f3177(),
+			// Property: HostType
+			"host_type": schemaAttributea815d35ddf1a45f501f27df0(),
+			// Property: SiteUrls
+			"site_urls": schemaAttributee1e1e35c36f3058f07e8c5ad(),
+			// Property: TenantId
+			"tenant_id": schemaAttribute0379f90df41d263e174676b7(),
+		}, /*END SCHEMA*/
+		Description: "The endpoint information to connect to your SharePoint data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee129be54ca780cbe9dfc68dc() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The dissimilarity threshold for splitting chunks.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1e1e35c36f3058f07e8c5ad() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of one or more SharePoint site URLs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3b3062518f882b613c11239() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether a feature is enabled or disabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6b11a868c6362112cd27d22() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExclusionFilters
+				"exclusion_filters": schemaAttribute11fbb82ab1e1e0e76c43ec2c(),
+				// Property: InclusionFilters
+				"inclusion_filters": schemaAttribute11fbb82ab1e1e0e76c43ec2c(),
+				// Property: ObjectType
+				"object_type": schemaAttribute00d73560067a73fc826dfe12(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Contains information",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8226502c9f24f81609ed146() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb73c37b54877a1b8cc1e79e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: VideoExtractionStatus
+			"video_extraction_status": schemaAttributee3b3062518f882b613c11239(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for video extraction.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeefa5da48364408b7a42a2c94() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the knowledge base to which to add the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9d3d3672687dd0d378797a8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketArn
+			"bucket_arn": schemaAttribute5c3169aaedc083b01d9a5322(),
+			// Property: BucketOwnerAccountId
+			"bucket_owner_account_id": schemaAttributed4db4d595fe33eeffc35ff58(),
+			// Property: InclusionPrefixes
+			"inclusion_prefixes": schemaAttributeb26ecb14b6663b13f48c51f0(),
+		}, /*END SCHEMA*/
+		Description: "The configuration information to connect to Amazon S3 as your data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa399b229b1376feabb29202() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: URI
+			"uri": schemaAttribute215da4f31d4be75c42face65(),
+		}, /*END SCHEMA*/
+		Description: "An Amazon S3 location.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd8b34639d7c09a717400916() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ParsingModality
+			"parsing_modality": schemaAttribute9a6a2329f20fde6181824508(),
+		}, /*END SCHEMA*/
+		Description: "Settings for a Bedrock Data Automation used to parse documents for a data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrock_data_source", dataSourceDataSource)
 }
@@ -31,10 +1043,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time at which the data source was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time at which the data source was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute1e347c0ea84364e07c8715ac(),
 		// Property: DataDeletionPolicy
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +1055,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"data_deletion_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The deletion policy for the data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_deletion_policy": schemaAttributea509f1e503880a649bad6a3a(),
 		// Property: DataSourceConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -730,463 +1736,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"data_source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConfluenceConfiguration
-				"confluence_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CrawlerConfiguration
-						"crawler_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: FilterConfiguration
-								"filter_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: PatternObjectFilter
-										"pattern_object_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Filters
-												"filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: ExclusionFilters
-															"exclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
-																ElementType: types.StringType,
-																Description: "A set of regular expression filter patterns for a type of object.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: InclusionFilters
-															"inclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
-																ElementType: types.StringType,
-																Description: "A set of regular expression filter patterns for a type of object.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: ObjectType
-															"object_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The supported object type or content type of the data source.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "Contains information",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "The configuration of specific filters applied to your data source content. You can filter out or include certain content.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Type
-										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The crawl filter type.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The type of filtering that you want to apply to certain objects or content of the data source. For example, the PATTERN type is regular expression patterns you can apply to filter your content.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The configuration of the Confluence content. For example, configuring specific types of Confluence content.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SourceConfiguration
-						"source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AuthType
-								"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The supported authentication type to authenticate and connect to your Confluence instance.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: CredentialsSecretArn
-								"credentials_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your Confluence instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Confluence connection configuration.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: HostType
-								"host_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The supported host type, whether online/cloud or server/on-premises.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: HostUrl
-								"host_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Confluence host URL or instance URL.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The endpoint information to connect to your Confluence data source.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration information to connect to Confluence as your data source.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ManagedKnowledgeBaseConnectorConfiguration
-				"managed_knowledge_base_connector_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ConnectorParameters
-						"connector_parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType:  jsontypes.NormalizedType{},
-							Description: "Connector-specific parameters.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DeletionProtectionConfiguration
-						"deletion_protection_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DeletionProtectionStatus
-								"deletion_protection_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Indicates whether a feature is enabled or disabled.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: DeletionProtectionThreshold
-								"deletion_protection_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Threshold for deletion protection.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Configuration for deletion protection.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MediaExtractionConfiguration
-						"media_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AudioExtractionConfiguration
-								"audio_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: AudioExtractionStatus
-										"audio_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Indicates whether a feature is enabled or disabled.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Configuration for audio extraction.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ImageExtractionConfiguration
-								"image_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ImageExtractionStatus
-										"image_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Indicates whether a feature is enabled or disabled.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Configuration for image extraction.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: VideoExtractionConfiguration
-								"video_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: VideoExtractionStatus
-										"video_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Indicates whether a feature is enabled or disabled.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Configuration for video extraction.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Configuration for media extraction settings.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration for managed knowledge base connector data sources.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: S3Configuration
-				"s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BucketArn
-						"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the bucket that contains the data source.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: BucketOwnerAccountId
-						"bucket_owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The account ID for the owner of the S3 bucket.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: InclusionPrefixes
-						"inclusion_prefixes": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "A list of S3 prefixes that define the object containing the data sources.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration information to connect to Amazon S3 as your data source.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SalesforceConfiguration
-				"salesforce_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CrawlerConfiguration
-						"crawler_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: FilterConfiguration
-								"filter_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: PatternObjectFilter
-										"pattern_object_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Filters
-												"filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: ExclusionFilters
-															"exclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
-																ElementType: types.StringType,
-																Description: "A set of regular expression filter patterns for a type of object.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: InclusionFilters
-															"inclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
-																ElementType: types.StringType,
-																Description: "A set of regular expression filter patterns for a type of object.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: ObjectType
-															"object_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The supported object type or content type of the data source.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "Contains information",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "The configuration of specific filters applied to your data source content. You can filter out or include certain content.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Type
-										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The crawl filter type.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The type of filtering that you want to apply to certain objects or content of the data source. For example, the PATTERN type is regular expression patterns you can apply to filter your content.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The configuration of filtering the Salesforce content. For example, configuring regular expression patterns to include or exclude certain content.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SourceConfiguration
-						"source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AuthType
-								"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The supported authentication type to authenticate and connect to your Salesforce instance.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: CredentialsSecretArn
-								"credentials_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your Salesforce instance URL. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see Salesforce connection configuration.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: HostUrl
-								"host_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Salesforce host URL or instance URL.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The endpoint information to connect to your Salesforce data source.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration information to connect to Salesforce as your data source.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SharePointConfiguration
-				"share_point_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CrawlerConfiguration
-						"crawler_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: FilterConfiguration
-								"filter_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: PatternObjectFilter
-										"pattern_object_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Filters
-												"filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: ExclusionFilters
-															"exclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
-																ElementType: types.StringType,
-																Description: "A set of regular expression filter patterns for a type of object.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: InclusionFilters
-															"inclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
-																ElementType: types.StringType,
-																Description: "A set of regular expression filter patterns for a type of object.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: ObjectType
-															"object_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The supported object type or content type of the data source.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "Contains information",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "The configuration of specific filters applied to your data source content. You can filter out or include certain content.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Type
-										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The crawl filter type.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The type of filtering that you want to apply to certain objects or content of the data source. For example, the PATTERN type is regular expression patterns you can apply to filter your content.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The configuration of the SharePoint content. For example, configuring specific types of SharePoint content.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SourceConfiguration
-						"source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AuthType
-								"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The supported authentication type to authenticate and connect to your SharePoint site/sites.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: CredentialsSecretArn
-								"credentials_secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon Resource Name of an AWS Secrets Manager secret that stores your authentication credentials for your SharePoint site/sites. For more information on the key-value pairs that must be included in your secret, depending on your authentication type, see SharePoint connection configuration.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Domain
-								"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The domain of your SharePoint instance or site URL/URLs.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: HostType
-								"host_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The supported host type, whether online/cloud or server/on-premises.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SiteUrls
-								"site_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "A list of one or more SharePoint site URLs.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TenantId
-								"tenant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The identifier of your Microsoft 365 tenant.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The endpoint information to connect to your SharePoint data source.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration information to connect to SharePoint as your data source.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Type
-				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of the data source location.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: WebConfiguration
-				"web_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CrawlerConfiguration
-						"crawler_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: CrawlerLimits
-								"crawler_limits": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: MaxPages
-										"max_pages": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "Maximum number of pages the crawler can crawl.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: RateLimit
-										"rate_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "Rate of web URLs retrieved per minute.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Limit settings for the web crawler.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ExclusionFilters
-								"exclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "A set of regular expression filter patterns for a type of object.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: InclusionFilters
-								"inclusion_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "A set of regular expression filter patterns for a type of object.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Scope
-								"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The scope that a web crawl job will be restricted to.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: UserAgent
-								"user_agent": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The suffix that will be included in the user agent header.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: UserAgentHeader
-								"user_agent_header": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The full user agent header, including UUID and suffix.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Configuration for the web crawler.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SourceConfiguration
-						"source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: UrlConfiguration
-								"url_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: SeedUrls
-										"seed_urls": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Url
-													"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "A web url.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Description: "A list of web urls.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "A url configuration.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "A web source configuration.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configures a web data source location.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies a raw data source location to ingest.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_source_configuration": schemaAttribute9d1c3e9bb19e2ebbf67e89f9(),
 		// Property: DataSourceId
 		// CloudFormation resource type schema:
 		//
@@ -1195,10 +1745,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-zA-Z]{10}$",
 		//	  "type": "string"
 		//	}
-		"data_source_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Identifier for a resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_source_id": schemaAttribute595fa61a75cee209786a882f(),
 		// Property: DataSourceStatus
 		// CloudFormation resource type schema:
 		//
@@ -1214,10 +1761,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"data_source_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of a data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_source_status": schemaAttribute17063b9950e37d6da6685c24(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -1227,10 +1771,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description of the Resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeb2e3549c8f50110c71f52ae8(),
 		// Property: FailureReasons
 		// CloudFormation resource type schema:
 		//
@@ -1245,11 +1786,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 2048,
 		//	  "type": "array"
 		//	}
-		"failure_reasons": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The details of the failure reasons related to the data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"failure_reasons": schemaAttribute0a21a72e00ecbeef57dba448(),
 		// Property: KnowledgeBaseId
 		// CloudFormation resource type schema:
 		//
@@ -1258,10 +1795,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-zA-Z]{10}$",
 		//	  "type": "string"
 		//	}
-		"knowledge_base_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the knowledge base to which to add the data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"knowledge_base_id": schemaAttributeefa5da48364408b7a42a2c94(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1270,10 +1804,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([0-9a-zA-Z][_-]?){1,100}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributee8226502c9f24f81609ed146(),
 		// Property: ServerSideEncryptionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1291,17 +1822,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"server_side_encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KmsKeyArn
-				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the AWS KMS key used to encrypt the resource.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Contains details about the server-side encryption for the data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"server_side_encryption_configuration": schemaAttributeba4a29cf8a355646dedb75ef(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -1309,10 +1830,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time at which the knowledge base was last updated.",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time at which the knowledge base was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute681179a6daa8172db4516582(),
 		// Property: VectorIngestionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1648,237 +2166,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"vector_ingestion_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ChunkingConfiguration
-				"chunking_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ChunkingStrategy
-						"chunking_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Knowledge base can split your source data into chunks. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried. You have the following options for chunking your data. If you opt for NONE, then you may want to pre-process your files by splitting them up such that each file corresponds to a chunk.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: FixedSizeChunkingConfiguration
-						"fixed_size_chunking_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: MaxTokens
-								"max_tokens": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The maximum number of tokens to include in a chunk.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: OverlapPercentage
-								"overlap_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The percentage of overlap between adjacent chunks of a data source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Configurations for when you choose fixed-size chunking. If you set the chunkingStrategy as NONE, exclude this field.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: HierarchicalChunkingConfiguration
-						"hierarchical_chunking_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: LevelConfigurations
-								"level_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: MaxTokens
-											"max_tokens": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Description: "The maximum number of tokens that a chunk can contain in this layer.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "Token settings for each layer.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: OverlapTokens
-								"overlap_tokens": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The number of tokens to repeat across chunks in the same layer.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Configurations for when you choose hierarchical chunking. If you set the chunkingStrategy as NONE, exclude this field.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SemanticChunkingConfiguration
-						"semantic_chunking_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BreakpointPercentileThreshold
-								"breakpoint_percentile_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The dissimilarity threshold for splitting chunks.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: BufferSize
-								"buffer_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The buffer size.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: MaxTokens
-								"max_tokens": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The maximum number of tokens that a chunk can contain.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Configurations for when you choose semantic chunking. If you set the chunkingStrategy as NONE, exclude this field.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ContextEnrichmentConfiguration
-				"context_enrichment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BedrockFoundationModelConfiguration
-						"bedrock_foundation_model_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: EnrichmentStrategyConfiguration
-								"enrichment_strategy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Method
-										"method": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Enrichment Strategy method.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Strategy to be used when using Bedrock Foundation Model for Context Enrichment.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ModelArn
-								"model_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The model's ARN.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Bedrock Foundation Model configuration to be used for Context Enrichment.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Type
-						"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Enrichment type to be used for the vector database.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Additional Enrichment Configuration for example when using GraphRag.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CustomTransformationConfiguration
-				"custom_transformation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: IntermediateStorage
-						"intermediate_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: S3Location
-								"s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: URI
-										"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The location's URI",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "An Amazon S3 location.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "A location for storing content from data sources temporarily as it is processed by custom components in the ingestion pipeline.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Transformations
-						"transformations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: StepToApply
-									"step_to_apply": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "When the service applies the transformation.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: TransformationFunction
-									"transformation_function": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: TransformationLambdaConfiguration
-											"transformation_lambda_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: LambdaArn
-													"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The function's ARN identifier.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "A Lambda function that processes documents.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "A Lambda function that processes documents.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "A list of Lambda functions that process documents.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Settings for customizing steps in the data source content ingestion pipeline.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ParsingConfiguration
-				"parsing_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BedrockDataAutomationConfiguration
-						"bedrock_data_automation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ParsingModality
-								"parsing_modality": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Determine how will parsed content be stored.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Settings for a Bedrock Data Automation used to parse documents for a data source.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: BedrockFoundationModelConfiguration
-						"bedrock_foundation_model_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ModelArn
-								"model_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The model's ARN.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ParsingModality
-								"parsing_modality": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Determine how will parsed content be stored.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ParsingPrompt
-								"parsing_prompt": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ParsingPromptText
-										"parsing_prompt_text": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Instructions for interpreting the contents of a document.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Instructions for interpreting the contents of a document.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Settings for a foundation model used to parse documents for a data source.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ParsingStrategy
-						"parsing_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The parsing strategy for the data source.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Settings for parsing document contents",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Details about how to chunk the documents in the data source. A chunk refers to an excerpt from a data source that is returned when the knowledge base that it belongs to is queried.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vector_ingestion_configuration": schemaAttribute1aaf2b2713aea843d8bc759d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -16,6 +16,135 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute14e76cbff594a19fe213a49b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d79887fd869d7baa9570533() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Connections
+				"connections": schemaAttributec25ecfc295f4fe7d63f63277(),
+				// Property: Dimensions
+				"dimensions": schemaAttribute77f2dbca6dcd14120c44baba(),
+				// Property: Requests
+				"requests": schemaAttributebf241c8037933cbaf5aff021(),
+				// Property: Tokens
+				"tokens": schemaAttribute85281614ae1cbcfa197247a9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Rule entries mapping dimension values to rate configurations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute401b6d65f1171fc286ff08c2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4fb7fb2a73eb04bed78c9357() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Limit identifier. Optional on Create (system-generates if not provided by customer).\nAlways present in responses.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61a0811e2369cfb318ad6be1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Status of a gateway limit",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute778d3f6544bfdf940dd53393() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77f2dbca6dcd14120c44baba() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Map of dimension name to dimension value for a rule entry",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85281614ae1cbcfa197247a9() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Period
+				"period": schemaAttribute8b2af98fd9e88f2b6b63710a(),
+				// Property: Rate
+				"rate": schemaAttribute778d3f6544bfdf940dd53393(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Token rate limits (TPM). Limited to 1 entry for now. — P1",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b2af98fd9e88f2b6b63710a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Time period for rate limiting",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf241c8037933cbaf5aff021() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Period
+				"period": schemaAttribute8b2af98fd9e88f2b6b63710a(),
+				// Property: Rate
+				"rate": schemaAttribute778d3f6544bfdf940dd53393(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Request rate limits (RPS or RPM). Limited to 1 entry for now.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec25ecfc295f4fe7d63f63277() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Period
+				"period": schemaAttribute8b2af98fd9e88f2b6b63710a(),
+				// Property: Rate
+				"rate": schemaAttribute778d3f6544bfdf940dd53393(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Connection rate limits (per second only). Limited to 1 entry for now. — P2",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed459cadb8cd39c1022661ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Optional human-readable description for this limit.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef5ab3108b58038bace2eaebb() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Ordered list of dimension names defining the scope of this limit.\nUnique per gateway — no two limits can share the same dimensionKeys.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_gateway_rate_limit", gatewayRateLimitDataSource)
 }
@@ -31,10 +160,7 @@ func gatewayRateLimitDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute14e76cbff594a19fe213a49b(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +170,7 @@ func gatewayRateLimitDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Optional human-readable description for this limit.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeed459cadb8cd39c1022661ca(),
 		// Property: DimensionKeys
 		// CloudFormation resource type schema:
 		//
@@ -64,11 +187,7 @@ func gatewayRateLimitDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"dimension_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Ordered list of dimension names defining the scope of this limit.\nUnique per gateway — no two limits can share the same dimensionKeys.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dimension_keys": schemaAttributef5ab3108b58038bace2eaebb(),
 		// Property: Entries
 		// CloudFormation resource type schema:
 		//
@@ -191,75 +310,7 @@ func gatewayRateLimitDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"entries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Connections
-					"connections": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Period
-								"period": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Time period for rate limiting",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Rate
-								"rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "Connection rate limits (per second only). Limited to 1 entry for now. — P2",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Dimensions
-					"dimensions":        // Pattern: ""
-					schema.MapAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "Map of dimension name to dimension value for a rule entry",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Requests
-					"requests": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Period
-								"period": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Time period for rate limiting",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Rate
-								"rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "Request rate limits (RPS or RPM). Limited to 1 entry for now.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Tokens
-					"tokens": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Period
-								"period": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Time period for rate limiting",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Rate
-								"rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "Token rate limits (TPM). Limited to 1 entry for now. — P1",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Rule entries mapping dimension values to rate configurations.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"entries": schemaAttribute2d79887fd869d7baa9570533(),
 		// Property: GatewayIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -267,9 +318,7 @@ func gatewayRateLimitDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^([0-9a-z][-]?){1,100}-[0-9a-z]{10}$",
 		//	  "type": "string"
 		//	}
-		"gateway_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"gateway_identifier": schemaAttribute401b6d65f1171fc286ff08c2(),
 		// Property: RateLimitId
 		// CloudFormation resource type schema:
 		//
@@ -280,10 +329,7 @@ func gatewayRateLimitDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_\\.]{0,62}[a-zA-Z0-9]$",
 		//	  "type": "string"
 		//	}
-		"rate_limit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Limit identifier. Optional on Create (system-generates if not provided by customer).\nAlways present in responses.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rate_limit_id": schemaAttribute4fb7fb2a73eb04bed78c9357(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -297,10 +343,7 @@ func gatewayRateLimitDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Status of a gateway limit",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute61a0811e2369cfb318ad6be1(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -308,10 +351,7 @@ func gatewayRateLimitDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute14e76cbff594a19fe213a49b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

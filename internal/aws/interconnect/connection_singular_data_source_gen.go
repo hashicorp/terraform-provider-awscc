@@ -14,6 +14,191 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute00c5833aa62002b105c362d5() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute8d8fd3773823a42b7f44d557(),
+				// Property: Value
+				"value": schemaAttribute8c4294c6f952096ded1ce8e4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute02075a0d29113a6225e164c1() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The billing tier for the connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute079d483c30f9fa009bd33ab5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the cloud service provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0e0929dcd4fb7b2db6f79d61() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The activation key for accepting a connection proposal from a partner CSP. Mutually exclusive with EnvironmentId.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute14f571ecc1e4177482a23e26() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The bandwidth of the connection (e.g., 50Mbps, 1Gbps). Required when creating a connection through AWS.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute36f15f2fb686d1acedf8b09b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS account ID of the connection owner.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3cafe09a8436a234745029f2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The shared identifier for the connection pairing.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3da9df58463c50c6bb9a7c53() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the environment for the connection. Required when creating a connection through AWS. Mutually exclusive with ActivationKey.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute427216fedeb7bccbdcaf944c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier for the connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute46c38f58c4e97ecf09e0a09d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of managed connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4bdef07f824805366b9839da() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute585c1245bca287c7c11e53f7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the remote account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77b0bf1687e8d0b9daba42bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Deprecated. Use RemoteAccount instead. The account ID of the remote owner. Required when creating a connection through AWS.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c4294c6f952096ded1ce8e4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d8fd3773823a42b7f44d557() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ea5972255abba06d0a91930() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8fee65cadca5aa26d8217a9c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Identifier
+			"identifier": schemaAttribute585c1245bca287c7c11e53f7(),
+		}, /*END SCHEMA*/
+		Description: "The remote account identifier for the connection. Required when creating a connection through AWS. Replaces RemoteOwnerAccount.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea6c6932a7c035a5ebb89c01f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the last mile provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec1f0435c333cab3eea848bc1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttributedca1c8c5fefcad428328a4d5(),
+			// Property: DirectConnectGateway
+			"direct_connect_gateway": schemaAttributee6ed2d9b0b6df8edd3cb82f7(),
+		}, /*END SCHEMA*/
+		Description: "The logical attachment point in your AWS network where the managed connection will be connected.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedca1c8c5fefcad428328a4d5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the resource to attach to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedebe0a85406a85988a18aeb4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudServiceProvider
+			"cloud_service_provider": schemaAttribute079d483c30f9fa009bd33ab5(),
+			// Property: LastMileProvider
+			"last_mile_provider": schemaAttributea6c6932a7c035a5ebb89c01f(),
+		}, /*END SCHEMA*/
+		Description: "The partner cloud service provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6ed2d9b0b6df8edd3cb82f7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Direct Connect Gateway to attach to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef49c51a3a2e4a98d48062973() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current state of the connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_interconnect_connection", connectionDataSource)
 }
@@ -29,10 +214,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The activation key for accepting a connection proposal from a partner CSP. Mutually exclusive with EnvironmentId.",
 		//	  "type": "string"
 		//	}
-		"activation_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The activation key for accepting a connection proposal from a partner CSP. Mutually exclusive with EnvironmentId.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"activation_key": schemaAttribute0e0929dcd4fb7b2db6f79d61(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +223,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-z-]*:interconnect:[^:]+:[0-9]{12}:connection/mcc-[a-z0-9]{8}$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute8ea5972255abba06d0a91930(),
 		// Property: AttachPoint
 		// CloudFormation resource type schema:
 		//
@@ -64,22 +243,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"attach_point": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the resource to attach to.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DirectConnectGateway
-				"direct_connect_gateway": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID of the Direct Connect Gateway to attach to.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The logical attachment point in your AWS network where the managed connection will be connected.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"attach_point": schemaAttributec1f0435c333cab3eea848bc1(),
 		// Property: Bandwidth
 		// CloudFormation resource type schema:
 		//
@@ -88,10 +252,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\d+[MG]bps$",
 		//	  "type": "string"
 		//	}
-		"bandwidth": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The bandwidth of the connection (e.g., 50Mbps, 1Gbps). Required when creating a connection through AWS.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bandwidth": schemaAttribute14f571ecc1e4177482a23e26(),
 		// Property: BillingTier
 		// CloudFormation resource type schema:
 		//
@@ -101,10 +262,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"billing_tier": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The billing tier for the connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"billing_tier": schemaAttribute02075a0d29113a6225e164c1(),
 		// Property: ConnectionId
 		// CloudFormation resource type schema:
 		//
@@ -113,10 +271,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^mcc-[a-z0-9]{8}$",
 		//	  "type": "string"
 		//	}
-		"connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier for the connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_id": schemaAttribute427216fedeb7bccbdcaf944c(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -126,10 +281,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[-a-zA-Z0-9_ ]+$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute4bdef07f824805366b9839da(),
 		// Property: EnvironmentId
 		// CloudFormation resource type schema:
 		//
@@ -139,10 +291,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the environment for the connection. Required when creating a connection through AWS. Mutually exclusive with ActivationKey.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"environment_id": schemaAttribute3da9df58463c50c6bb9a7c53(),
 		// Property: OwnerAccount
 		// CloudFormation resource type schema:
 		//
@@ -150,10 +299,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AWS account ID of the connection owner.",
 		//	  "type": "string"
 		//	}
-		"owner_account": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS account ID of the connection owner.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"owner_account": schemaAttribute36f15f2fb686d1acedf8b09b(),
 		// Property: Provider
 		// CloudFormation resource type schema:
 		//
@@ -174,22 +320,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"provider_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CloudServiceProvider
-				"cloud_service_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the cloud service provider.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LastMileProvider
-				"last_mile_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the last mile provider.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The partner cloud service provider.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"provider_name": schemaAttributedebe0a85406a85988a18aeb4(),
 		// Property: RemoteAccount
 		// CloudFormation resource type schema:
 		//
@@ -209,17 +340,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"remote_account": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Identifier
-				"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The identifier of the remote account.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The remote account identifier for the connection. Required when creating a connection through AWS. Replaces RemoteOwnerAccount.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"remote_account": schemaAttribute8fee65cadca5aa26d8217a9c(),
 		// Property: RemoteOwnerAccount
 		// CloudFormation resource type schema:
 		//
@@ -229,10 +350,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[-a-zA-Z0-9_@\\.]+$",
 		//	  "type": "string"
 		//	}
-		"remote_owner_account": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Deprecated. Use RemoteAccount instead. The account ID of the remote owner. Required when creating a connection through AWS.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"remote_owner_account": schemaAttribute77b0bf1687e8d0b9daba42bc(),
 		// Property: SharedId
 		// CloudFormation resource type schema:
 		//
@@ -241,10 +359,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
 		//	  "type": "string"
 		//	}
-		"shared_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The shared identifier for the connection pairing.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"shared_id": schemaAttribute3cafe09a8436a234745029f2(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -261,10 +376,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current state of the connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributef49c51a3a2e4a98d48062973(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -297,24 +409,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute00c5833aa62002b105c362d5(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -324,10 +419,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 5,
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of managed connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute46c38f58c4e97ecf09e0a09d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

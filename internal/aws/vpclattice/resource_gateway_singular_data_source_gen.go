@@ -15,6 +15,49 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute62bdd37f06fa8005b6095536() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The ID of one or more subnets in which to create an endpoint network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f4ce819c1f959f8f7e78beb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b3a7506b2f72c589d93fb26() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute7f4ce819c1f959f8f7e78beb(),
+				// Property: Value
+				"value": schemaAttribute7f4ce819c1f959f8f7e78beb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1a20cb5086d3cdcebdbc7ec() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The ID of one or more security groups to associate with the endpoint network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4b674cdef1ce4ee58be6095() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of IPv4 addresses to allocate per ENI for the resource gateway",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_vpclattice_resource_gateway", resourceGatewayDataSource)
 }
@@ -32,9 +75,7 @@ func resourceGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourcegateway/rgw-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute7f4ce819c1f959f8f7e78beb(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -44,9 +85,7 @@ func resourceGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^((rgw-[0-9a-z]{17})|(arn:[a-z0-9\\-]+:vpc-lattice:[a-zA-Z0-9\\-]+:\\d{12}:resourcegateway/rgw-[0-9a-z]{17}))$",
 		//	  "type": "string"
 		//	}
-		"resource_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"resource_gateway_id": schemaAttribute7f4ce819c1f959f8f7e78beb(),
 		// Property: IpAddressType
 		// CloudFormation resource type schema:
 		//
@@ -58,9 +97,7 @@ func resourceGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"ip_address_type": schemaAttribute7f4ce819c1f959f8f7e78beb(),
 		// Property: Ipv4AddressesPerEni
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +105,7 @@ func resourceGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The number of IPv4 addresses to allocate per ENI for the resource gateway",
 		//	  "type": "integer"
 		//	}
-		"ipv_4_addresses_per_eni": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of IPv4 addresses to allocate per ENI for the resource gateway",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_4_addresses_per_eni": schemaAttributed4b674cdef1ce4ee58be6095(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -81,9 +115,7 @@ func resourceGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute7f4ce819c1f959f8f7e78beb(),
 		// Property: ResourceConfigDnsResolution
 		// CloudFormation resource type schema:
 		//
@@ -94,9 +126,7 @@ func resourceGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"resource_config_dns_resolution": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"resource_config_dns_resolution": schemaAttribute7f4ce819c1f959f8f7e78beb(),
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -114,11 +144,7 @@ func resourceGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The ID of one or more security groups to associate with the endpoint network interface.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_ids": schemaAttributed1a20cb5086d3cdcebdbc7ec(),
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -135,11 +161,7 @@ func resourceGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The ID of one or more subnets in which to create an endpoint network interface.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_ids": schemaAttribute62bdd37f06fa8005b6095536(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -169,21 +191,7 @@ func resourceGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute9b3a7506b2f72c589d93fb26(),
 		// Property: VpcIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -192,9 +200,7 @@ func resourceGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 5,
 		//	  "type": "string"
 		//	}
-		"vpc_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"vpc_identifier": schemaAttribute7f4ce819c1f959f8f7e78beb(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

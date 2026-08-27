@@ -14,6 +14,70 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0d491c231f67f22e980be941() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3GlueDataCatalog
+			"s3_glue_data_catalog": schemaAttributefc084fe6513a3a8e2612e476(),
+		}, /*END SCHEMA*/
+		Description: "The type of data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute291e7c5a9a0ddabd65a4d86d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the OpenSearch Service domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2bee4163a539ac97c0393923() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51d1d91decda2f3131c0b7e7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c366b93d2e5d6492f9996d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM role that grants OpenSearch Service permission to access the Glue Data Catalog.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93b5a3e3e5a025c9af1bde9c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb3d28e790d1a5ec05c62ed7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc084fe6513a3a8e2612e476() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RoleArn
+			"role_arn": schemaAttribute5c366b93d2e5d6492f9996d8(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for an S3 Glue Data Catalog data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_opensearch_data_source", dataSourceDataSource)
 }
@@ -30,10 +94,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-z\\-]*:es:[a-z0-9\\-]*:[0-9]{12}:domain/.+/datasource/.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute2bee4163a539ac97c0393923(),
 		// Property: DataSourceType
 		// CloudFormation resource type schema:
 		//
@@ -61,24 +122,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"data_source_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: S3GlueDataCatalog
-				"s3_glue_data_catalog": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: RoleArn
-						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the IAM role that grants OpenSearch Service permission to access the Glue Data Catalog.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration for an S3 Glue Data Catalog data source.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The type of data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_source_type": schemaAttribute0d491c231f67f22e980be941(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -87,10 +131,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute93b5a3e3e5a025c9af1bde9c(),
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -101,10 +142,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z][a-z0-9\\-]+$",
 		//	  "type": "string"
 		//	}
-		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the OpenSearch Service domain.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_name": schemaAttribute291e7c5a9a0ddabd65a4d86d(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -115,10 +153,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z][a-z0-9_]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute51d1d91decda2f3131c0b7e7(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -130,10 +165,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributeeb3d28e790d1a5ec05c62ed7(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

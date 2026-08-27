@@ -16,6 +16,133 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute11c4487f9f2bc62a58112a81() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Day
+			"day": schemaAttribute9c9adf7e101064d11c949c66(),
+			// Property: StartTime
+			"start_time": schemaAttributea08dbcd4b59013805224791f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3de466f322022d72f75b5373() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57de8246e662fe3a6dc706b2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: StartTime
+			"start_time": schemaAttributea08dbcd4b59013805224791f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d52e3946fd844af059e8932() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.ListType{ElemType: types.StringType},
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute88a6eb3d7a60aba48a3792cf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the scan",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8967463108add46a6a1caa62() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: jsontypes.NormalizedType{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c94b27c88fc776a4c6b549f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "CIS Scan configuration unique identifier",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c9adf7e101064d11c949c66() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea08dbcd4b59013805224791f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TimeOfDay
+			"time_of_day": schemaAttribute9c9adf7e101064d11c949c66(),
+			// Property: TimeZone
+			"time_zone": schemaAttribute9c9adf7e101064d11c949c66(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea292db9814b2f358803456dc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccountIds
+			"account_ids": schemaAttribute3de466f322022d72f75b5373(),
+			// Property: TargetResourceTags
+			"target_resource_tags": schemaAttribute7d52e3946fd844af059e8932(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2b59e9d4b83e2e8a674e90a() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeefbddfe7e6d1e1a9e371e7c8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Daily
+			"daily": schemaAttribute57de8246e662fe3a6dc706b2(),
+			// Property: Monthly
+			"monthly": schemaAttribute11c4487f9f2bc62a58112a81(),
+			// Property: OneTime
+			"one_time": schemaAttribute8967463108add46a6a1caa62(),
+			// Property: Weekly
+			"weekly": schemaAttributeff2a1566c9faf4919e8344d1(),
+		}, /*END SCHEMA*/
+		Description: "Choose a Schedule cadence",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff2a1566c9faf4919e8344d1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Days
+			"days": schemaAttribute3de466f322022d72f75b5373(),
+			// Property: StartTime
+			"start_time": schemaAttributea08dbcd4b59013805224791f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_inspectorv2_cis_scan_configuration", cisScanConfigurationDataSource)
 }
@@ -31,10 +158,7 @@ func cisScanConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "CIS Scan configuration unique identifier",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CIS Scan configuration unique identifier",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute9c94b27c88fc776a4c6b549f(),
 		// Property: ScanName
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +167,7 @@ func cisScanConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"scan_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of the scan",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scan_name": schemaAttribute88a6eb3d7a60aba48a3792cf(),
 		// Property: Schedule
 		// CloudFormation resource type schema:
 		//
@@ -168,86 +289,7 @@ func cisScanConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	    }
 		//	  }
 		//	}
-		"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Daily
-				"daily": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: StartTime
-						"start_time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: TimeOfDay
-								"time_of_day": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: TimeZone
-								"time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Monthly
-				"monthly": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Day
-						"day": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: StartTime
-						"start_time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: TimeOfDay
-								"time_of_day": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: TimeZone
-								"time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: OneTime
-				"one_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType: jsontypes.NormalizedType{},
-					Computed:   true,
-				}, /*END ATTRIBUTE*/
-				// Property: Weekly
-				"weekly": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Days
-						"days": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: StartTime
-						"start_time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: TimeOfDay
-								"time_of_day": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: TimeZone
-								"time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Choose a Schedule cadence",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schedule": schemaAttributeefbddfe7e6d1e1a9e371e7c8(),
 		// Property: SecurityLevel
 		// CloudFormation resource type schema:
 		//
@@ -258,9 +300,7 @@ func cisScanConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"security_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"security_level": schemaAttribute9c9adf7e101064d11c949c66(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -274,11 +314,7 @@ func cisScanConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributee2b59e9d4b83e2e8a674e90a(),
 		// Property: Targets
 		// CloudFormation resource type schema:
 		//
@@ -315,22 +351,7 @@ func cisScanConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	    "TargetResourceTags"
 		//	  ]
 		//	}
-		"targets": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AccountIds
-				"account_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TargetResourceTags
-				"target_resource_tags": // Pattern: ""
-				schema.MapAttribute{    /*START ATTRIBUTE*/
-					ElementType: types.ListType{ElemType: types.StringType},
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"targets": schemaAttributea292db9814b2f358803456dc(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

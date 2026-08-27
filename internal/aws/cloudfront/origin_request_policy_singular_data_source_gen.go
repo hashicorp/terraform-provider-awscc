@@ -15,6 +15,130 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute24034db0a4ee18976175a286() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Determines whether cookies in viewer requests are included in requests that CloudFront sends to the origin. Valid values are:\n  +  ``none`` ? No cookies in viewer requests are included in requests that CloudFront sends to the origin. Even when this field is set to ``none``, any cookies that are listed in a ``CachePolicy``*are* included in origin requests.\n  +  ``whitelist`` ? Only the cookies in viewer requests that are listed in the ``CookieNames`` type are included in requests that CloudFront sends to the origin.\n  +  ``all`` ? All cookies in viewer requests are included in requests that CloudFront sends to the origin.\n  +  ``allExcept`` ? All cookies in viewer requests are included in requests that CloudFront sends to the origin, *except* for those listed in the ``CookieNames`` type, which are not included.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25727cc7f81d573a4d0e7249() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HeaderBehavior
+			"header_behavior": schemaAttributed832c88434533bca83547c61(),
+			// Property: Headers
+			"headers": schemaAttribute30321386a5b3edbf923dbfb3(),
+		}, /*END SCHEMA*/
+		Description: "The HTTP headers to include in origin requests. These can include headers from viewer requests and additional headers added by CloudFront.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30321386a5b3edbf923dbfb3() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Contains a list of HTTP header names.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute526c97b07c04702abc4836ed() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique name to identify the origin request policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6750df00dad10b4a9ec2b7a6() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Contains a list of query string names.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95be4ff1de7747f7dd8284a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Determines whether any URL query strings in viewer requests are included in requests that CloudFront sends to the origin. Valid values are:\n  +  ``none`` ? No query strings in viewer requests are included in requests that CloudFront sends to the origin. Even when this field is set to ``none``, any query strings that are listed in a ``CachePolicy``*are* included in origin requests.\n  +  ``whitelist`` ? Only the query strings in viewer requests that are listed in the ``QueryStringNames`` type are included in requests that CloudFront sends to the origin.\n  +  ``all`` ? All query strings in viewer requests are included in requests that CloudFront sends to the origin.\n  +  ``allExcept`` ? All query strings in viewer requests are included in requests that CloudFront sends to the origin, *except* for those listed in the ``QueryStringNames`` type, which are not included.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea18271bcd1f14674a2f6b775() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A comment to describe the origin request policy. The comment cannot be longer than 128 characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6ca417450fe52be9c8555fc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: QueryStringBehavior
+			"query_string_behavior": schemaAttribute95be4ff1de7747f7dd8284a0(),
+			// Property: QueryStrings
+			"query_strings": schemaAttribute6750df00dad10b4a9ec2b7a6(),
+		}, /*END SCHEMA*/
+		Description: "The URL query strings from viewer requests to include in origin requests.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec21aa43873046beedf5b1b36() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Contains a list of cookie names.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5fc057e4cc24fffd2f32571() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Comment
+			"comment": schemaAttributea18271bcd1f14674a2f6b775(),
+			// Property: CookiesConfig
+			"cookies_config": schemaAttributeeaae1b8204b2e50d3d0d8256(),
+			// Property: HeadersConfig
+			"headers_config": schemaAttribute25727cc7f81d573a4d0e7249(),
+			// Property: Name
+			"name": schemaAttribute526c97b07c04702abc4836ed(),
+			// Property: QueryStringsConfig
+			"query_strings_config": schemaAttributeb6ca417450fe52be9c8555fc(),
+		}, /*END SCHEMA*/
+		Description: "The origin request policy configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed832c88434533bca83547c61() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Determines whether any HTTP headers are included in requests that CloudFront sends to the origin. Valid values are:\n  +  ``none`` ? No HTTP headers in viewer requests are included in requests that CloudFront sends to the origin. Even when this field is set to ``none``, any headers that are listed in a ``CachePolicy``*are* included in origin requests.\n  +  ``whitelist`` ? Only the HTTP headers that are listed in the ``Headers`` type are included in requests that CloudFront sends to the origin.\n  +  ``allViewer`` ? All HTTP headers in viewer requests are included in requests that CloudFront sends to the origin.\n  +  ``allViewerAndWhitelistCloudFront`` ? All HTTP headers in viewer requests and the additional CloudFront headers that are listed in the ``Headers`` type are included in requests that CloudFront sends to the origin. The additional headers are added by CloudFront.\n  +  ``allExcept`` ? All HTTP headers in viewer requests are included in requests that CloudFront sends to the origin, *except* for those listed in the ``Headers`` type, which are not included.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeaae1b8204b2e50d3d0d8256() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CookieBehavior
+			"cookie_behavior": schemaAttribute24034db0a4ee18976175a286(),
+			// Property: Cookies
+			"cookies": schemaAttributec21aa43873046beedf5b1b36(),
+		}, /*END SCHEMA*/
+		Description: "The cookies from viewer requests to include in origin requests.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeedeae36837672e7ce40388bf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudfront_origin_request_policy", originRequestPolicyDataSource)
 }
@@ -30,10 +154,7 @@ func originRequestPolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"origin_request_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"origin_request_policy_id": schemaAttributeedeae36837672e7ce40388bf(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +162,7 @@ func originRequestPolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttributeedeae36837672e7ce40388bf(),
 		// Property: OriginRequestPolicyConfig
 		// CloudFormation resource type schema:
 		//
@@ -138,76 +256,7 @@ func originRequestPolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"origin_request_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Comment
-				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A comment to describe the origin request policy. The comment cannot be longer than 128 characters.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CookiesConfig
-				"cookies_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CookieBehavior
-						"cookie_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Determines whether cookies in viewer requests are included in requests that CloudFront sends to the origin. Valid values are:\n  +  ``none`` ? No cookies in viewer requests are included in requests that CloudFront sends to the origin. Even when this field is set to ``none``, any cookies that are listed in a ``CachePolicy``*are* included in origin requests.\n  +  ``whitelist`` ? Only the cookies in viewer requests that are listed in the ``CookieNames`` type are included in requests that CloudFront sends to the origin.\n  +  ``all`` ? All cookies in viewer requests are included in requests that CloudFront sends to the origin.\n  +  ``allExcept`` ? All cookies in viewer requests are included in requests that CloudFront sends to the origin, *except* for those listed in the ``CookieNames`` type, which are not included.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Cookies
-						"cookies": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "Contains a list of cookie names.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The cookies from viewer requests to include in origin requests.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: HeadersConfig
-				"headers_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: HeaderBehavior
-						"header_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Determines whether any HTTP headers are included in requests that CloudFront sends to the origin. Valid values are:\n  +  ``none`` ? No HTTP headers in viewer requests are included in requests that CloudFront sends to the origin. Even when this field is set to ``none``, any headers that are listed in a ``CachePolicy``*are* included in origin requests.\n  +  ``whitelist`` ? Only the HTTP headers that are listed in the ``Headers`` type are included in requests that CloudFront sends to the origin.\n  +  ``allViewer`` ? All HTTP headers in viewer requests are included in requests that CloudFront sends to the origin.\n  +  ``allViewerAndWhitelistCloudFront`` ? All HTTP headers in viewer requests and the additional CloudFront headers that are listed in the ``Headers`` type are included in requests that CloudFront sends to the origin. The additional headers are added by CloudFront.\n  +  ``allExcept`` ? All HTTP headers in viewer requests are included in requests that CloudFront sends to the origin, *except* for those listed in the ``Headers`` type, which are not included.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Headers
-						"headers": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "Contains a list of HTTP header names.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The HTTP headers to include in origin requests. These can include headers from viewer requests and additional headers added by CloudFront.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A unique name to identify the origin request policy.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: QueryStringsConfig
-				"query_strings_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: QueryStringBehavior
-						"query_string_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Determines whether any URL query strings in viewer requests are included in requests that CloudFront sends to the origin. Valid values are:\n  +  ``none`` ? No query strings in viewer requests are included in requests that CloudFront sends to the origin. Even when this field is set to ``none``, any query strings that are listed in a ``CachePolicy``*are* included in origin requests.\n  +  ``whitelist`` ? Only the query strings in viewer requests that are listed in the ``QueryStringNames`` type are included in requests that CloudFront sends to the origin.\n  +  ``all`` ? All query strings in viewer requests are included in requests that CloudFront sends to the origin.\n  +  ``allExcept`` ? All query strings in viewer requests are included in requests that CloudFront sends to the origin, *except* for those listed in the ``QueryStringNames`` type, which are not included.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: QueryStrings
-						"query_strings": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "Contains a list of query string names.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The URL query strings from viewer requests to include in origin requests.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The origin request policy configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"origin_request_policy_config": schemaAttributed5fc057e4cc24fffd2f32571(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,233 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0e0cb3513d9cf25a5ae35224() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The instance name of ServiceNow ITSM",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute113006247958029e60914304() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the connector",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute138e2d3102e1af8337f1e542() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ScopeType
+			"scope_type": schemaAttribute514465c356317c1ba3335f0b(),
+			// Property: ScopeValues
+			"scope_values": schemaAttribute87c10f08060860e95da5348e(),
+		}, /*END SCHEMA*/
+		Description: "The scope configuration for an Azure connector",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute22905d1d4f6ff4b9bd9ed932() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceName
+			"instance_name": schemaAttribute0e0cb3513d9cf25a5ae35224(),
+			// Property: SecretArn
+			"secret_arn": schemaAttributec3945e1e76b7c40b6c5b949e(),
+		}, /*END SCHEMA*/
+		Description: "The initial configuration settings required to establish an integration between Security Hub and ServiceNow ITSM",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28e40b2c2d4a2beb8420ec7e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the AWS Config connector used for the Azure integration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a1ee63c016da44734d64247() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Code
+				"code": schemaAttributed199883d292fb81fdbde4adb(),
+				// Property: Message
+				"message": schemaAttribute6cbd14c0f117a8746bf8cc9b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of health issues associated with the connector",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a676e08d04def6ef204fcd8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the connector",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b0a0db206485ea00b65f776() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the connector",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4273ed0b7305b750d3b3be23() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Azure
+			"azure": schemaAttribute77e29d8d310b37f537a661de(),
+			// Property: JiraCloud
+			"jira_cloud": schemaAttributee57dda8b6673ed2657f1d1c5(),
+			// Property: ServiceNow
+			"service_now": schemaAttribute22905d1d4f6ff4b9bd9ed932(),
+		}, /*END SCHEMA*/
+		Description: "The third-party provider configuration for the connector",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute514465c356317c1ba3335f0b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The scope type for the Azure connector",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute56772eab144a235ae41c1d83() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A key-value pair to associate with a resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6cbd14c0f117a8746bf8cc9b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The message describing the health issue",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77e29d8d310b37f537a661de() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AWSConfigConnectorArn
+			"aws_config_connector_arn": schemaAttribute28e40b2c2d4a2beb8420ec7e(),
+			// Property: AzureRegions
+			"azure_regions": schemaAttributefec197a227b856e2b3ef421c(),
+			// Property: ScopeConfiguration
+			"scope_configuration": schemaAttribute138e2d3102e1af8337f1e542(),
+		}, /*END SCHEMA*/
+		Description: "The configuration settings required to establish an integration between AWS Security Hub and Azure",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87c10f08060860e95da5348e() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of scope values for the Azure connector",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute891686008e1096324ba2ce4a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp formatted in ISO8601",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c1081f48fdfb8ad1b2ff382() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the connector",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3945e1e76b7c40b6c5b949e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the ServiceNow credentials",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec554beba189ab966b0a6b38d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The reason for the enablement status of the connector",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf6093755ec0c2aa875c5259() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of KMS key used for the connector",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed199883d292fb81fdbde4adb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The code identifying the type of health issue",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed2b2b34cbfa04626ad76163c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the connector",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed388942f2303058133b0526f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The message of the connector status change",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed7a44f91ca5b0a48ec50850d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The project key for a Jira Cloud instance",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee57dda8b6673ed2657f1d1c5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ProjectKey
+			"project_key": schemaAttributed7a44f91ca5b0a48ec50850d(),
+		}, /*END SCHEMA*/
+		Description: "The initial configuration settings required to establish an integration between Security Hub and Jira Cloud",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0c2e03684bfddbbba1db73b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The enablement status of the connector",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefec197a227b856e2b3ef421c() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of Azure regions to include in the connector scope",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_securityhub_connector_v2", connectorV2DataSource)
 }
@@ -31,10 +258,7 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws\\S*:securityhub:[a-z0-9-]+:[0-9]{12}:connectorv2/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the connector",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connector_arn": schemaAttributed2b2b34cbfa04626ad76163c(),
 		// Property: ConnectorId
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +267,7 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"connector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the connector",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connector_id": schemaAttribute2a676e08d04def6ef204fcd8(),
 		// Property: ConnectorStatus
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +275,7 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The status of the connector",
 		//	  "type": "string"
 		//	}
-		"connector_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the connector",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connector_status": schemaAttribute113006247958029e60914304(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -66,10 +284,7 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp formatted in ISO8601",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute891686008e1096324ba2ce4a(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -80,10 +295,7 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the connector",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute2b0a0db206485ea00b65f776(),
 		// Property: EnablementStatus
 		// CloudFormation resource type schema:
 		//
@@ -91,10 +303,7 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The enablement status of the connector",
 		//	  "type": "string"
 		//	}
-		"enablement_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The enablement status of the connector",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enablement_status": schemaAttributef0c2e03684bfddbbba1db73b(),
 		// Property: EnablementStatusReason
 		// CloudFormation resource type schema:
 		//
@@ -102,10 +311,7 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The reason for the enablement status of the connector",
 		//	  "type": "string"
 		//	}
-		"enablement_status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The reason for the enablement status of the connector",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enablement_status_reason": schemaAttributec554beba189ab966b0a6b38d(),
 		// Property: Issues
 		// CloudFormation resource type schema:
 		//
@@ -133,24 +339,7 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"issues": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Code
-					"code": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The code identifying the type of health issue",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Message
-					"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The message describing the health issue",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of health issues associated with the connector",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"issues": schemaAttribute2a1ee63c016da44734d64247(),
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -161,10 +350,7 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of KMS key used for the connector",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttributecf6093755ec0c2aa875c5259(),
 		// Property: LastCheckedAt
 		// CloudFormation resource type schema:
 		//
@@ -173,10 +359,7 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$",
 		//	  "type": "string"
 		//	}
-		"last_checked_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp formatted in ISO8601",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_checked_at": schemaAttribute891686008e1096324ba2ce4a(),
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -185,10 +368,7 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(\\d\\d\\d\\d)-([0][1-9]|[1][0-2])-([0][1-9]|[1-2](\\d)|[3][0-1])[T](?:([0-1](\\d)|[2][0-3]):[0-5](\\d):[0-5](\\d)|23:59:60)(?:\\.(\\d)+)?([Z]|[+-](\\d\\d)(:?(\\d\\d))?)$",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp formatted in ISO8601",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_at": schemaAttribute891686008e1096324ba2ce4a(),
 		// Property: Message
 		// CloudFormation resource type schema:
 		//
@@ -196,10 +376,7 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The message of the connector status change",
 		//	  "type": "string"
 		//	}
-		"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The message of the connector status change",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"message": schemaAttributed388942f2303058133b0526f(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -210,10 +387,7 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the connector",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute9c1081f48fdfb8ad1b2ff382(),
 		// Property: Provider
 		// CloudFormation resource type schema:
 		//
@@ -319,77 +493,7 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"provider_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Azure
-				"azure": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AWSConfigConnectorArn
-						"aws_config_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the AWS Config connector used for the Azure integration",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AzureRegions
-						"azure_regions": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The list of Azure regions to include in the connector scope",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ScopeConfiguration
-						"scope_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ScopeType
-								"scope_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The scope type for the Azure connector",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ScopeValues
-								"scope_values": schema.SetAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "The list of scope values for the Azure connector",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The scope configuration for an Azure connector",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration settings required to establish an integration between AWS Security Hub and Azure",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: JiraCloud
-				"jira_cloud": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ProjectKey
-						"project_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The project key for a Jira Cloud instance",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The initial configuration settings required to establish an integration between Security Hub and Jira Cloud",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServiceNow
-				"service_now": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: InstanceName
-						"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The instance name of ServiceNow ITSM",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SecretArn
-						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the ServiceNow credentials",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The initial configuration settings required to establish an integration between Security Hub and ServiceNow ITSM",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The third-party provider configuration for the connector",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"provider_name": schemaAttribute4273ed0b7305b750d3b3be23(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -406,12 +510,7 @@ func connectorV2DataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A key-value pair to associate with a resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute56772eab144a235ae41c1d83(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

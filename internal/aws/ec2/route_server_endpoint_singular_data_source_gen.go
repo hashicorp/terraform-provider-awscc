@@ -14,6 +14,84 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute04a48bc2a7e12d4a4f7cd723() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Subnet ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d7be6b044eb9729d6b61d82() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Route Server Endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24f70887e62e31a28e3ee408() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Route Server Endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49f28a02d79d59f0c6580106() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Elastic Network Interface ID owned by the Route Server Endpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5897f2e38695f48c737ebafd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "VPC ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ee118a7b97d1e6bb6c368bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Elastic Network Interface IP address owned by the Route Server Endpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65f340bea5a5db0e8c8c2f51() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributef1f867525d730329f1e05c57(),
+				// Property: Value
+				"value": schemaAttributeec65083c5f05ea92b5ae0a8d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb369932f53a136ca8cced868() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Route Server ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec65083c5f05ea92b5ae0a8d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1f867525d730329f1e05c57() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_route_server_endpoint", routeServerEndpointDataSource)
 }
@@ -29,10 +107,7 @@ func routeServerEndpointDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The Amazon Resource Name (ARN) of the Route Server Endpoint.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Route Server Endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute24f70887e62e31a28e3ee408(),
 		// Property: EniAddress
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +115,7 @@ func routeServerEndpointDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "Elastic Network Interface IP address owned by the Route Server Endpoint",
 		//	  "type": "string"
 		//	}
-		"eni_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Elastic Network Interface IP address owned by the Route Server Endpoint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"eni_address": schemaAttribute5ee118a7b97d1e6bb6c368bc(),
 		// Property: EniId
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +123,7 @@ func routeServerEndpointDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "Elastic Network Interface ID owned by the Route Server Endpoint",
 		//	  "type": "string"
 		//	}
-		"eni_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Elastic Network Interface ID owned by the Route Server Endpoint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"eni_id": schemaAttribute49f28a02d79d59f0c6580106(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +131,7 @@ func routeServerEndpointDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The ID of the Route Server Endpoint.",
 		//	  "type": "string"
 		//	}
-		"route_server_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Route Server Endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"route_server_endpoint_id": schemaAttribute0d7be6b044eb9729d6b61d82(),
 		// Property: RouteServerId
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +139,7 @@ func routeServerEndpointDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "Route Server ID",
 		//	  "type": "string"
 		//	}
-		"route_server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Route Server ID",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"route_server_id": schemaAttributeb369932f53a136ca8cced868(),
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +147,7 @@ func routeServerEndpointDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "Subnet ID",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Subnet ID",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_id": schemaAttribute04a48bc2a7e12d4a4f7cd723(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -120,24 +180,7 @@ func routeServerEndpointDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute65f340bea5a5db0e8c8c2f51(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -145,10 +188,7 @@ func routeServerEndpointDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "VPC ID",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "VPC ID",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttribute5897f2e38695f48c737ebafd(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

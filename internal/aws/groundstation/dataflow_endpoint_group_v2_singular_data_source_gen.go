@@ -14,6 +14,289 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute036f8b8132066ad19951298e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttribute4c1412a77bec044d64bbf4e0(),
+			// Property: PortRange
+			"port_range": schemaAttributece6a88207c2332e7f2305e4a(),
+		}, /*END SCHEMA*/
+		Description: "A socket address with a port range.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0666c6a5b36d7b37df866282() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Mtu
+			"mtu": schemaAttribute85bff319ec28e394009131fa(),
+			// Property: SocketAddress
+			"socket_address": schemaAttribute036f8b8132066ad19951298e(),
+		}, /*END SCHEMA*/
+		Description: "Socket address of an uplink or downlink agent endpoint with a port range and an optional mtu.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0b026c099f73315bdd405887() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of AgentEndpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute11c9d934a8eefcf1ed3bb826() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AgentConnectionDetails
+			"agent_connection_details": schemaAttribute90199c61a0f1610d28f156bf(),
+		}, /*END SCHEMA*/
+		Description: "Dataflow details for downlink",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15c6139cda4dcd2a9e1fae00() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "A minimum value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ba42e69c0d30f44e97234e2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Mtu
+			"mtu": schemaAttribute85bff319ec28e394009131fa(),
+			// Property: SocketAddress
+			"socket_address": schemaAttributee385d868a5fa0d4488a73c65(),
+		}, /*END SCHEMA*/
+		Description: "Socket address of an uplink or downlink agent endpoint with an optional mtu.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1c9a616103248c62b8781837() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AgentStatus
+			"agent_status": schemaAttribute0b026c099f73315bdd405887(),
+			// Property: AuditResults
+			"audit_results": schemaAttribute73d2650e6ec118c648dd59fa(),
+			// Property: DataflowDetails
+			"dataflow_details": schemaAttribute2fcc1c3c8224e05103ad9097(),
+			// Property: Name
+			"name": schemaAttribute85f34b1273db40bbc83123ce(),
+		}, /*END SCHEMA*/
+		Description: "Information about UplinkAwsGroundStationAgentEndpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24bf4ee80f022504b93f9b74() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DownlinkAwsGroundStationAgentEndpoint
+				"downlink_aws_ground_station_agent_endpoint": schemaAttribute8912771201d0513019811a72(),
+				// Property: UplinkAwsGroundStationAgentEndpoint
+				"uplink_aws_ground_station_agent_endpoint": schemaAttribute85be1f59ecf248c6049eb440(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute283d5e19a8caa3b9effee91a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "A maximum value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2fcc1c3c8224e05103ad9097() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AgentConnectionDetails
+			"agent_connection_details": schemaAttributecbf67438d73f43dadb5164a9(),
+		}, /*END SCHEMA*/
+		Description: "Dataflow details for uplink",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ac12dd804c944ca9f7a2e08() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a PREPASS state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the PREPASS state.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b3c8298f899c329356ffaea() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DownlinkAwsGroundStationAgentEndpoint
+				"downlink_aws_ground_station_agent_endpoint": schemaAttribute9541dd30710fc0151398b91d(),
+				// Property: UplinkAwsGroundStationAgentEndpoint
+				"uplink_aws_ground_station_agent_endpoint": schemaAttribute1c9a616103248c62b8781837(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c1412a77bec044d64bbf4e0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "IPv4 socket address.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73d2650e6ec118c648dd59fa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The results of the audit.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f681eb955e8a7197fdd1b15() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a POSTPASS state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the POSTPASS state.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85be1f59ecf248c6049eb440() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataflowDetails
+			"dataflow_details": schemaAttribute2fcc1c3c8224e05103ad9097(),
+			// Property: Name
+			"name": schemaAttribute85f34b1273db40bbc83123ce(),
+		}, /*END SCHEMA*/
+		Description: "Information about UplinkAwsGroundStationAgentEndpoint used for create",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85bff319ec28e394009131fa() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85f34b1273db40bbc83123ce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8912771201d0513019811a72() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataflowDetails
+			"dataflow_details": schemaAttribute11c9d934a8eefcf1ed3bb826(),
+			// Property: Name
+			"name": schemaAttribute85f34b1273db40bbc83123ce(),
+		}, /*END SCHEMA*/
+		Description: "Information about DownlinkAwsGroundStationAgentEndpoint used for create",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90199c61a0f1610d28f156bf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AgentIpAndPortAddress
+			"agent_ip_and_port_address": schemaAttribute0666c6a5b36d7b37df866282(),
+			// Property: EgressAddressAndPort
+			"egress_address_and_port": schemaAttribute1ba42e69c0d30f44e97234e2(),
+		}, /*END SCHEMA*/
+		Description: "Connection details for downlink, from ground station to agent, and customer to agent",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9541dd30710fc0151398b91d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AgentStatus
+			"agent_status": schemaAttribute0b026c099f73315bdd405887(),
+			// Property: AuditResults
+			"audit_results": schemaAttribute73d2650e6ec118c648dd59fa(),
+			// Property: DataflowDetails
+			"dataflow_details": schemaAttribute11c9d934a8eefcf1ed3bb826(),
+			// Property: Name
+			"name": schemaAttribute85f34b1273db40bbc83123ce(),
+		}, /*END SCHEMA*/
+		Description: "Information about DownlinkAwsGroundStationAgentEndpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc19e1b4b4cb6a336b479f7d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute85f34b1273db40bbc83123ce(),
+				// Property: Value
+				"value": schemaAttribute85f34b1273db40bbc83123ce(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecbf67438d73f43dadb5164a9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AgentIpAndPortAddress
+			"agent_ip_and_port_address": schemaAttribute0666c6a5b36d7b37df866282(),
+			// Property: IngressAddressAndPort
+			"ingress_address_and_port": schemaAttribute1ba42e69c0d30f44e97234e2(),
+		}, /*END SCHEMA*/
+		Description: "Connection details for uplink, from ground station to agent, and customer to agent",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributece6a88207c2332e7f2305e4a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Maximum
+			"maximum": schemaAttribute283d5e19a8caa3b9effee91a(),
+			// Property: Minimum
+			"minimum": schemaAttribute15c6139cda4dcd2a9e1fae00(),
+		}, /*END SCHEMA*/
+		Description: "Port range of a socket address.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee385d868a5fa0d4488a73c65() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttribute4c1412a77bec044d64bbf4e0(),
+			// Property: Port
+			"port": schemaAttributef6d9c1831701eae4aa913a04(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6d9c1831701eae4aa913a04() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Port of a socket address.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_groundstation_dataflow_endpoint_group_v2", dataflowEndpointGroupV2DataSource)
 }
@@ -29,9 +312,7 @@ func dataflowEndpointGroupV2DataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute85f34b1273db40bbc83123ce(),
 		// Property: ContactPostPassDurationSeconds
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +322,7 @@ func dataflowEndpointGroupV2DataSource(ctx context.Context) (datasource.DataSour
 		//	  "minimum": 30,
 		//	  "type": "integer"
 		//	}
-		"contact_post_pass_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a POSTPASS state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the POSTPASS state.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"contact_post_pass_duration_seconds": schemaAttribute7f681eb955e8a7197fdd1b15(),
 		// Property: ContactPrePassDurationSeconds
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +332,7 @@ func dataflowEndpointGroupV2DataSource(ctx context.Context) (datasource.DataSour
 		//	  "minimum": 30,
 		//	  "type": "integer"
 		//	}
-		"contact_pre_pass_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a PREPASS state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the PREPASS state.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"contact_pre_pass_duration_seconds": schemaAttribute3ac12dd804c944ca9f7a2e08(),
 		// Property: EndpointDetails
 		// CloudFormation resource type schema:
 		//
@@ -369,221 +644,7 @@ func dataflowEndpointGroupV2DataSource(ctx context.Context) (datasource.DataSour
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"endpoint_details": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DownlinkAwsGroundStationAgentEndpoint
-					"downlink_aws_ground_station_agent_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AgentStatus
-							"agent_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The status of AgentEndpoint.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: AuditResults
-							"audit_results": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The results of the audit.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: DataflowDetails
-							"dataflow_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AgentConnectionDetails
-									"agent_connection_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: AgentIpAndPortAddress
-											"agent_ip_and_port_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Mtu
-													"mtu": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Description: "Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: SocketAddress
-													"socket_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Name
-															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "IPv4 socket address.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: PortRange
-															"port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Maximum
-																	"maximum": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																		Description: "A maximum value.",
-																		Computed:    true,
-																	}, /*END ATTRIBUTE*/
-																	// Property: Minimum
-																	"minimum": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																		Description: "A minimum value.",
-																		Computed:    true,
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Port range of a socket address.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "A socket address with a port range.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Socket address of an uplink or downlink agent endpoint with a port range and an optional mtu.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: EgressAddressAndPort
-											"egress_address_and_port": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Mtu
-													"mtu": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Description: "Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: SocketAddress
-													"socket_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Name
-															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "IPv4 socket address.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Port
-															"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																Description: "Port of a socket address.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Socket address of an uplink or downlink agent endpoint with an optional mtu.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Connection details for downlink, from ground station to agent, and customer to agent",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Dataflow details for downlink",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Information about DownlinkAwsGroundStationAgentEndpoint",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: UplinkAwsGroundStationAgentEndpoint
-					"uplink_aws_ground_station_agent_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AgentStatus
-							"agent_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The status of AgentEndpoint.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: AuditResults
-							"audit_results": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The results of the audit.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: DataflowDetails
-							"dataflow_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AgentConnectionDetails
-									"agent_connection_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: AgentIpAndPortAddress
-											"agent_ip_and_port_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Mtu
-													"mtu": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Description: "Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: SocketAddress
-													"socket_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Name
-															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "IPv4 socket address.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: PortRange
-															"port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Maximum
-																	"maximum": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																		Description: "A maximum value.",
-																		Computed:    true,
-																	}, /*END ATTRIBUTE*/
-																	// Property: Minimum
-																	"minimum": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																		Description: "A minimum value.",
-																		Computed:    true,
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Port range of a socket address.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "A socket address with a port range.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Socket address of an uplink or downlink agent endpoint with a port range and an optional mtu.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: IngressAddressAndPort
-											"ingress_address_and_port": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Mtu
-													"mtu": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Description: "Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: SocketAddress
-													"socket_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Name
-															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "IPv4 socket address.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Port
-															"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																Description: "Port of a socket address.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Socket address of an uplink or downlink agent endpoint with an optional mtu.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Connection details for uplink, from ground station to agent, and customer to agent",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Dataflow details for uplink",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Information about UplinkAwsGroundStationAgentEndpoint",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_details": schemaAttribute4b3c8298f899c329356ffaea(),
 		// Property: Endpoints
 		// CloudFormation resource type schema:
 		//
@@ -859,210 +920,14 @@ func dataflowEndpointGroupV2DataSource(ctx context.Context) (datasource.DataSour
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"endpoints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DownlinkAwsGroundStationAgentEndpoint
-					"downlink_aws_ground_station_agent_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DataflowDetails
-							"dataflow_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AgentConnectionDetails
-									"agent_connection_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: AgentIpAndPortAddress
-											"agent_ip_and_port_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Mtu
-													"mtu": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Description: "Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: SocketAddress
-													"socket_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Name
-															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "IPv4 socket address.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: PortRange
-															"port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Maximum
-																	"maximum": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																		Description: "A maximum value.",
-																		Computed:    true,
-																	}, /*END ATTRIBUTE*/
-																	// Property: Minimum
-																	"minimum": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																		Description: "A minimum value.",
-																		Computed:    true,
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Port range of a socket address.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "A socket address with a port range.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Socket address of an uplink or downlink agent endpoint with a port range and an optional mtu.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: EgressAddressAndPort
-											"egress_address_and_port": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Mtu
-													"mtu": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Description: "Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: SocketAddress
-													"socket_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Name
-															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "IPv4 socket address.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Port
-															"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																Description: "Port of a socket address.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Socket address of an uplink or downlink agent endpoint with an optional mtu.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Connection details for downlink, from ground station to agent, and customer to agent",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Dataflow details for downlink",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Information about DownlinkAwsGroundStationAgentEndpoint used for create",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: UplinkAwsGroundStationAgentEndpoint
-					"uplink_aws_ground_station_agent_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DataflowDetails
-							"dataflow_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AgentConnectionDetails
-									"agent_connection_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: AgentIpAndPortAddress
-											"agent_ip_and_port_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Mtu
-													"mtu": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Description: "Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: SocketAddress
-													"socket_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Name
-															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "IPv4 socket address.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: PortRange
-															"port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: Maximum
-																	"maximum": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																		Description: "A maximum value.",
-																		Computed:    true,
-																	}, /*END ATTRIBUTE*/
-																	// Property: Minimum
-																	"minimum": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																		Description: "A minimum value.",
-																		Computed:    true,
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Port range of a socket address.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "A socket address with a port range.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Socket address of an uplink or downlink agent endpoint with a port range and an optional mtu.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: IngressAddressAndPort
-											"ingress_address_and_port": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Mtu
-													"mtu": schema.Int64Attribute{ /*START ATTRIBUTE*/
-														Description: "Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: SocketAddress
-													"socket_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Name
-															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "IPv4 socket address.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Port
-															"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																Description: "Port of a socket address.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Socket address of an uplink or downlink agent endpoint with an optional mtu.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Connection details for uplink, from ground station to agent, and customer to agent",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Dataflow details for uplink",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Information about UplinkAwsGroundStationAgentEndpoint used for create",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"endpoints": schemaAttribute24bf4ee80f022504b93f9b74(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"dataflow_endpoint_group_v2_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"dataflow_endpoint_group_v2_id": schemaAttribute85f34b1273db40bbc83123ce(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1087,21 +952,7 @@ func dataflowEndpointGroupV2DataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributebc19e1b4b4cb6a336b479f7d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,164 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2312ec337aee82df32370b76() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for an AWS resource tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute273ec8175cdbb61b84260be1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3309458b53abb682fe4bd361() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user who has the permissions to access files and folders in the FSx for Windows file system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3331fb05e925a0a6d1de8755() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The ARNs of the security groups that are to use to configure the FSx for Windows file system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e201ec8e5ac0015bc52721c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecretAccessRoleArn
+			"secret_access_role_arn": schemaAttributecca353e52e64870d4215eec2(),
+			// Property: SecretArn
+			"secret_arn": schemaAttribute4233219c388df11b1bc22186(),
+		}, /*END SCHEMA*/
+		Description: "Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4233219c388df11b1bc22186() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the ARN for a customer created AWS Secrets Manager secret.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48827cdbeacafd26e5e78755() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecretArn
+			"secret_arn": schemaAttribute4c533dbbe6cf470c8ad21a3f(),
+		}, /*END SCHEMA*/
+		Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c533dbbe6cf470c8ad21a3f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the ARN for an AWS Secrets Manager secret.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53378ab35735e08698b657e4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute74687fdf2579c3f6e17d65b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Windows domain that the FSx for Windows server belongs to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b51201b8f6acfa9ace209bb() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute97119706e13f2d775354b632(),
+				// Property: Value
+				"value": schemaAttribute2312ec337aee82df32370b76(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8de9492e916662727e0450b9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL of the FSx for Windows location that was described.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93c8f8dbcd4e0cfea4a6f96a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute97119706e13f2d775354b632() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key for an AWS resource tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e803da40c479f1e5bad702d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttribute53378ab35735e08698b657e4(),
+			// Property: SecretArn
+			"secret_arn": schemaAttribute273ec8175cdbb61b84260be1(),
+		}, /*END SCHEMA*/
+		Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb553a6b898558093227e9b9b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the FSx for Windows file system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf6f732813d3355874ec04de() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A subdirectory in the location's path.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecca353e52e64870d4215eec2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecef88f179b636726e43a7baa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The password of the user who has the permissions to access files and folders in the FSx for Windows file system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_datasync_location_fsx_windows", locationFSxWindowsDataSource)
 }
@@ -45,22 +203,7 @@ func locationFSxWindowsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"cmk_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KmsKeyArn
-				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the ARN for the customer-managed AWS KMS key used to encrypt the secret specified for SecretArn. DataSync provides this key to AWS Secrets Manager.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecretArn
-				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the ARN for an AWS Secrets Manager secret, managed by DataSync.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and a customer-managed AWS KMS key.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cmk_secret_config": schemaAttribute9e803da40c479f1e5bad702d(),
 		// Property: CustomSecretConfig
 		// CloudFormation resource type schema:
 		//
@@ -87,22 +230,7 @@ func locationFSxWindowsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"custom_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SecretAccessRoleArn
-				"secret_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the ARN for the AWS Identity and Access Management role that DataSync uses to access the secret specified for SecretArn.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecretArn
-				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the ARN for a customer created AWS Secrets Manager secret.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies configuration information for a customer-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location, and an IAM role that DataSync can assume and access the customer-managed secret.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"custom_secret_config": schemaAttribute3e201ec8e5ac0015bc52721c(),
 		// Property: Domain
 		// CloudFormation resource type schema:
 		//
@@ -112,10 +240,7 @@ func locationFSxWindowsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^([A-Za-z0-9]+[A-Za-z0-9-.]*)*[A-Za-z0-9-]*[A-Za-z0-9]$",
 		//	  "type": "string"
 		//	}
-		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Windows domain that the FSx for Windows server belongs to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain": schemaAttribute74687fdf2579c3f6e17d65b5(),
 		// Property: FsxFilesystemArn
 		// CloudFormation resource type schema:
 		//
@@ -125,10 +250,7 @@ func locationFSxWindowsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$",
 		//	  "type": "string"
 		//	}
-		"fsx_filesystem_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the FSx for Windows file system.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"fsx_filesystem_arn": schemaAttributeb553a6b898558093227e9b9b(),
 		// Property: LocationArn
 		// CloudFormation resource type schema:
 		//
@@ -138,10 +260,7 @@ func locationFSxWindowsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Amazon FSx for Windows file system location that is created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"location_arn": schemaAttribute93c8f8dbcd4e0cfea4a6f96a(),
 		// Property: LocationUri
 		// CloudFormation resource type schema:
 		//
@@ -151,10 +270,7 @@ func locationFSxWindowsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9./\\-]+$",
 		//	  "type": "string"
 		//	}
-		"location_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The URL of the FSx for Windows location that was described.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"location_uri": schemaAttribute8de9492e916662727e0450b9(),
 		// Property: ManagedSecretConfig
 		// CloudFormation resource type schema:
 		//
@@ -174,17 +290,7 @@ func locationFSxWindowsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"managed_secret_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SecretArn
-				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the ARN for an AWS Secrets Manager secret.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies configuration information for a DataSync-managed secret, such as an authentication token or set of credentials that DataSync uses to access a specific transfer location. DataSync uses the default AWS-managed KMS key to encrypt this secret in AWS Secrets Manager.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"managed_secret_config": schemaAttribute48827cdbeacafd26e5e78755(),
 		// Property: Password
 		// CloudFormation resource type schema:
 		//
@@ -194,10 +300,7 @@ func locationFSxWindowsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^.{0,104}$",
 		//	  "type": "string"
 		//	}
-		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The password of the user who has the permissions to access files and folders in the FSx for Windows file system.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"password": schemaAttributecef88f179b636726e43a7baa(),
 		// Property: SecurityGroupArns
 		// CloudFormation resource type schema:
 		//
@@ -211,11 +314,7 @@ func locationFSxWindowsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "array"
 		//	}
-		"security_group_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The ARNs of the security groups that are to use to configure the FSx for Windows file system.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_arns": schemaAttribute3331fb05e925a0a6d1de8755(),
 		// Property: Subdirectory
 		// CloudFormation resource type schema:
 		//
@@ -225,10 +324,7 @@ func locationFSxWindowsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
 		//	  "type": "string"
 		//	}
-		"subdirectory": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A subdirectory in the location's path.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subdirectory": schemaAttributebf6f732813d3355874ec04de(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -264,24 +360,7 @@ func locationFSxWindowsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key for an AWS resource tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for an AWS resource tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute8b51201b8f6acfa9ace209bb(),
 		// Property: User
 		// CloudFormation resource type schema:
 		//
@@ -291,10 +370,7 @@ func locationFSxWindowsDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[^\\x5B\\x5D\\\\/:;|=,+*?]{1,104}$",
 		//	  "type": "string"
 		//	}
-		"user": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The user who has the permissions to access files and folders in the FSx for Windows file system.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"user": schemaAttribute3309458b53abb682fe4bd361(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

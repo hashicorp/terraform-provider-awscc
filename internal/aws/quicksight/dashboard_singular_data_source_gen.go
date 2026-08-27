@@ -16,6 +16,482 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute085858036eb90ce487628a3a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "<p>The Amazon Resource Numbers (ARNs) for the datasets that are associated with this\n            version of the dashboard.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute11bfe02314306de2ed92e389() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e2b154bec1271ecadd85881() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>Message.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24ffc373be3c24e438c14662() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "<p>The IAM action to grant or revoke permissions on.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2cf0d5304e43ab40bf77b9ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The last time that this dataset was published.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3140827d9aaef2dbd7e3539f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The ARN of the theme associated with a version of the dashboard.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33571241c927a7d16a3e0ef2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute7c2512d2c852fa8d56a0980f(),
+				// Property: Values
+				"values": schemaAttribute50ac552c6b1b27043fd4713d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>Decimal parameters.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute336053d82452335e6fdf8282() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>Dataset placeholder.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a9e5e84328a3730fcd4625f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttributeab6f2cdb4d423318f50a1fc4(),
+				// Property: Values
+				"values": schemaAttribute9a4f11f9e7a80b7eed277b48(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>Integer parameters.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3befa9ceca6564d8015ec431() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>Source entity ARN.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e0f12bac7ed90b20697c504() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If\n            you add a value for this field, it overrides the value that is used in the source\n            entity. The theme ARN must exist in the same AWS account where you create the\n            dashboard.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f94a34362da2e6f02f47593() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AdHocFilteringOption
+			"ad_hoc_filtering_option": schemaAttribute662ebd2cc452633b479a7950(),
+			// Property: ExportToCSVOption
+			"export_to_csv_option": schemaAttributee557c0ccf04fbc887f29acce(),
+			// Property: SheetControlsOption
+			"sheet_controls_option": schemaAttributed50a9bafc131c8d544407176(),
+		}, /*END SCHEMA*/
+		Description: "<p>Dashboard publish options.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4af448bfc4f79b1eb4df0d71() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>Tag value.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute50ac552c6b1b27043fd4713d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.Float64Type,
+		Description: "<p>The values for the decimal parameter.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5114b2bc5f6415db235c4353() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The last time that this dataset was updated.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute619b3cc83196f5f59bfd49c3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttributeac7b45ef778c1ccbb6d5823e(),
+				// Property: Values
+				"values": schemaAttributec64ea664b393a800cc1fd1b9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>String parameters.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute662ebd2cc452633b479a7950() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AvailabilityStatus
+			"availability_status": schemaAttributee4e8aac292a8bf3193b1a278(),
+		}, /*END SCHEMA*/
+		Description: "<p>Ad hoc (one-time) filtering option.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute68b5436fa94e3b8835101277() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>Description.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b7c7a4f5aaaf622d911f43e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e72783fa3e850836e81eff8() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>Version number for this version of the dashboard.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute737bd1b2b961881f55baf502() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "<p>The time that this dataset was created.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7785721cbd366d3257ab02d5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SourceTemplate
+			"source_template": schemaAttribute8e463702b8aec2f1e6a26c2d(),
+		}, /*END SCHEMA*/
+		Description: "<p>Dashboard source entity.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c2512d2c852fa8d56a0980f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>A display name for the decimal parameter.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ff9ca6c0ee37294c64f21bd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttribute6b7c7a4f5aaaf622d911f43e(),
+			// Property: CreatedTime
+			"created_time": schemaAttributec95e2f7b6c56f367bd82de14(),
+			// Property: DataSetArns
+			"data_set_arns": schemaAttribute085858036eb90ce487628a3a(),
+			// Property: Description
+			"description": schemaAttribute68b5436fa94e3b8835101277(),
+			// Property: Errors
+			"errors": schemaAttributeca998158820c7c774d649edd(),
+			// Property: Sheets
+			"sheets": schemaAttributea05924ee56c17b422334d74f(),
+			// Property: SourceEntityArn
+			"source_entity_arn": schemaAttribute3befa9ceca6564d8015ec431(),
+			// Property: Status
+			"status": schemaAttributee4e8aac292a8bf3193b1a278(),
+			// Property: ThemeArn
+			"theme_arn": schemaAttribute3140827d9aaef2dbd7e3539f(),
+			// Property: VersionNumber
+			"version_number": schemaAttribute6e72783fa3e850836e81eff8(),
+		}, /*END SCHEMA*/
+		Description: "<p>Dashboard version.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80e41e74ac6d2d2b9885afd2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec12d4ac410afe8b8d4340b5c(),
+				// Property: Value
+				"value": schemaAttribute4af448bfc4f79b1eb4df0d71(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the\n            dashboard.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute86f8c84f92ff9266dec279c5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The display name of the dashboard.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute870156024e309fa43482a5fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>A display name for the date-time parameter.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e463702b8aec2f1e6a26c2d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttribute6b7c7a4f5aaaf622d911f43e(),
+			// Property: DataSetReferences
+			"data_set_references": schemaAttributed9715d08756ff5f3d3eff63b(),
+		}, /*END SCHEMA*/
+		Description: "<p>Dashboard source template.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a4f11f9e7a80b7eed277b48() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.Float64Type,
+		Description: "<p>The values for the integer parameter.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea05924ee56c17b422334d74f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute11bfe02314306de2ed92e389(),
+				// Property: SheetId
+				"sheet_id": schemaAttributed38d83dcaccb8fdb49f95bc5(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa57dd12b3ad14bce43eb717() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>Dataset Amazon Resource Name (ARN).</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab6f2cdb4d423318f50a1fc4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The name of the integer parameter.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac7b45ef778c1ccbb6d5823e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>A display name for a string parameter.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec12d4ac410afe8b8d4340b5c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>Tag key.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2a139de59761e5d434dd92d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DateTimeParameters
+			"date_time_parameters": schemaAttributee08f2da7b9b0edfbc5ed255b(),
+			// Property: DecimalParameters
+			"decimal_parameters": schemaAttribute33571241c927a7d16a3e0ef2(),
+			// Property: IntegerParameters
+			"integer_parameters": schemaAttribute3a9e5e84328a3730fcd4625f(),
+			// Property: StringParameters
+			"string_parameters": schemaAttribute619b3cc83196f5f59bfd49c3(),
+		}, /*END SCHEMA*/
+		Description: "<p>A list of QuickSight parameters and the list's override values.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec383cb5911b2e207336602e6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Actions
+				"actions": schemaAttribute24ffc373be3c24e438c14662(),
+				// Property: Principal
+				"principal": schemaAttributeedf676b9eb68c4c260cc260b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>A structure that contains the permissions of the dashboard. You can use this structure\n            for granting permissions by providing a list of IAM action information for each\n            principal ARN. </p>\n\n        <p>To specify no permissions, omit the permissions list.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec64ea664b393a800cc1fd1b9() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "<p>The values of a string parameter.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec95e2f7b6c56f367bd82de14() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The time that this dashboard version was created.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca998158820c7c774d649edd() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Message
+				"message": schemaAttribute1e2b154bec1271ecadd85881(),
+				// Property: Type
+				"type": schemaAttributee4e8aac292a8bf3193b1a278(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>Errors associated with this dashboard version.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed352b83d77e76b10c2b09265() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>A description for the first version of the dashboard being created.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed38d83dcaccb8fdb49f95bc5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The unique identifier associated with a sheet.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed50a9bafc131c8d544407176() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: VisibilityState
+			"visibility_state": schemaAttributee4e8aac292a8bf3193b1a278(),
+		}, /*END SCHEMA*/
+		Description: "<p>Sheet controls option.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed9715d08756ff5f3d3eff63b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DataSetArn
+				"data_set_arn": schemaAttributeaa57dd12b3ad14bce43eb717(),
+				// Property: DataSetPlaceholder
+				"data_set_placeholder": schemaAttribute336053d82452335e6fdf8282(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>Dataset references.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee08f2da7b9b0edfbc5ed255b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute870156024e309fa43482a5fb(),
+				// Property: Values
+				"values": schemaAttributef1e934546fd2316d3241c2e9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>Date-time parameters.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4e8aac292a8bf3193b1a278() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee557c0ccf04fbc887f29acce() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AvailabilityStatus
+			"availability_status": schemaAttributee4e8aac292a8bf3193b1a278(),
+		}, /*END SCHEMA*/
+		Description: "<p>Export to .csv option.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeedf676b9eb68c4c260cc260b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1e934546fd2316d3241c2e9() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "<p>The values for the date-time parameter.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_quicksight_dashboard", dashboardDataSource)
 }
@@ -31,10 +507,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute6b7c7a4f5aaaf622d911f43e(),
 		// Property: AwsAccountId
 		// CloudFormation resource type schema:
 		//
@@ -44,9 +517,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"aws_account_id": schemaAttributee4e8aac292a8bf3193b1a278(),
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -55,11 +526,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "<p>The time that this dataset was created.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttribute737bd1b2b961881f55baf502(),
 		// Property: DashboardId
 		// CloudFormation resource type schema:
 		//
@@ -69,9 +536,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[\\w\\-]+",
 		//	  "type": "string"
 		//	}
-		"dashboard_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"dashboard_id": schemaAttributee4e8aac292a8bf3193b1a278(),
 		// Property: DashboardPublishOptions
 		// CloudFormation resource type schema:
 		//
@@ -124,45 +589,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"dashboard_publish_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AdHocFilteringOption
-				"ad_hoc_filtering_option": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AvailabilityStatus
-						"availability_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "<p>Ad hoc (one-time) filtering option.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ExportToCSVOption
-				"export_to_csv_option": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AvailabilityStatus
-						"availability_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "<p>Export to .csv option.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SheetControlsOption
-				"sheet_controls_option": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: VisibilityState
-						"visibility_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "<p>Sheet controls option.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "<p>Dashboard publish options.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dashboard_publish_options": schemaAttribute3f94a34362da2e6f02f47593(),
 		// Property: LastPublishedTime
 		// CloudFormation resource type schema:
 		//
@@ -171,10 +598,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "string",
 		//	  "type": "string"
 		//	}
-		"last_published_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The last time that this dataset was published.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_published_time": schemaAttribute2cf0d5304e43ab40bf77b9ae(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -183,10 +607,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "string",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The last time that this dataset was updated.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttribute5114b2bc5f6415db235c4353(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -197,10 +618,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The display name of the dashboard.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute86f8c84f92ff9266dec279c5(),
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -327,92 +745,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DateTimeParameters
-				"date_time_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>A display name for the date-time parameter.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Values
-							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "<p>The values for the date-time parameter.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "<p>Date-time parameters.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DecimalParameters
-				"decimal_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>A display name for the decimal parameter.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Values
-							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.Float64Type,
-								Description: "<p>The values for the decimal parameter.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "<p>Decimal parameters.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IntegerParameters
-				"integer_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>The name of the integer parameter.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Values
-							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.Float64Type,
-								Description: "<p>The values for the integer parameter.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "<p>Integer parameters.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StringParameters
-				"string_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>A display name for a string parameter.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Values
-							"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "<p>The values of a string parameter.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "<p>String parameters.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "<p>A list of QuickSight parameters and the list's override values.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parameters": schemaAttributec2a139de59761e5d434dd92d(),
 		// Property: Permissions
 		// CloudFormation resource type schema:
 		//
@@ -448,25 +781,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"permissions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Actions
-					"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Principal
-					"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "<p>A structure that contains the permissions of the dashboard. You can use this structure\n            for granting permissions by providing a list of IAM action information for each\n            principal ARN. </p>\n\n        <p>To specify no permissions, omit the permissions list.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"permissions": schemaAttributec383cb5911b2e207336602e6(),
 		// Property: SourceEntity
 		// CloudFormation resource type schema:
 		//
@@ -517,43 +832,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"source_entity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SourceTemplate
-				"source_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Arn
-						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DataSetReferences
-						"data_set_references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DataSetArn
-									"data_set_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "<p>Dataset Amazon Resource Name (ARN).</p>",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: DataSetPlaceholder
-									"data_set_placeholder": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "<p>Dataset placeholder.</p>",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "<p>Dataset references.</p>",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "<p>Dashboard source template.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "<p>Dashboard source entity.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_entity": schemaAttribute7785721cbd366d3257ab02d5(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -586,24 +865,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>Tag key.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>Tag value.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the\n            dashboard.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute80e41e74ac6d2d2b9885afd2(),
 		// Property: ThemeArn
 		// CloudFormation resource type schema:
 		//
@@ -611,10 +873,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If\n            you add a value for this field, it overrides the value that is used in the source\n            entity. The theme ARN must exist in the same AWS account where you create the\n            dashboard.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
-		"theme_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If\n            you add a value for this field, it overrides the value that is used in the source\n            entity. The theme ARN must exist in the same AWS account where you create the\n            dashboard.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"theme_arn": schemaAttribute3e0f12bac7ed90b20697c504(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -731,89 +990,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreatedTime
-				"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>The time that this dashboard version was created.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DataSetArns
-				"data_set_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "<p>The Amazon Resource Numbers (ARNs) for the datasets that are associated with this\n            version of the dashboard.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Description
-				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>Description.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Errors
-				"errors": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Message
-							"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>Message.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "<p>Errors associated with this dashboard version.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Sheets
-				"sheets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SheetId
-							"sheet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "<p>The unique identifier associated with a sheet.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourceEntityArn
-				"source_entity_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>Source entity ARN.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Status
-				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ThemeArn
-				"theme_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>The ARN of the theme associated with a version of the dashboard.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VersionNumber
-				"version_number": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "<p>Version number for this version of the dashboard.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "<p>Dashboard version.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttribute7ff9ca6c0ee37294c64f21bd(),
 		// Property: VersionDescription
 		// CloudFormation resource type schema:
 		//
@@ -823,10 +1000,7 @@ func dashboardDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"version_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>A description for the first version of the dashboard being created.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version_description": schemaAttributed352b83d77e76b10c2b09265(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

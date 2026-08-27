@@ -17,6 +17,173 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute01837c8d61bec4cddc6e0fcc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: VideoExtractionStatus
+			"video_extraction_status": schemaAttributed6dddf756b1bf0e25b50f0bc(),
+			// Property: VideoExtractionType
+			"video_extraction_type": schemaAttributed6dddf756b1bf0e25b50f0bc(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute07567f0814db8749fa9185b8() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1678a4d1cfc1c90407119225() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Template
+			"template": schemaAttribute96aa7f531b4608bd7f5d7afe(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1949b3aa4ea8766e60d22b75() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "<p>The IAM action to grant or revoke permissions on.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute505e9140a56f50a28a0dea16() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>Tag value.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c57c07f06706533f3ce2433() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute8d73c86a97a78e263313a3b9(),
+				// Property: Value
+				"value": schemaAttribute505e9140a56f50a28a0dea16(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute640c445fd8ffcb6599a2f373() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IsACLEnabled
+			"is_acl_enabled": schemaAttribute07567f0814db8749fa9185b8(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c776bb3bdfddecad3028583() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Actions
+				"actions": schemaAttribute1949b3aa4ea8766e60d22b75(),
+				// Property: Principal
+				"principal": schemaAttributefa51497594ecd73bf59ed8bd(),
+				// Property: Resource
+				"resource": schemaAttributed6dddf756b1bf0e25b50f0bc(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8249ff568f64174c91b5f45b() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d73c86a97a78e263313a3b9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>Tag key.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96aa7f531b4608bd7f5d7afe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: jsontypes.NormalizedType{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb06ba0cd3757b41622c30e8a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AudioExtractionStatus
+			"audio_extraction_status": schemaAttributed6dddf756b1bf0e25b50f0bc(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb794c306f379041b12a25fa2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TemplateConfiguration
+			"template_configuration": schemaAttribute1678a4d1cfc1c90407119225(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebbf44789a3b8191e1874e339() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AudioExtractionConfiguration
+			"audio_extraction_configuration": schemaAttributeb06ba0cd3757b41622c30e8a(),
+			// Property: ImageExtractionConfiguration
+			"image_extraction_configuration": schemaAttributef522c3da8ca7f4ef8df72d6a(),
+			// Property: VideoExtractionConfiguration
+			"video_extraction_configuration": schemaAttribute01837c8d61bec4cddc6e0fcc(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6dddf756b1bf0e25b50f0bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee51d698bf4922146fa924805() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef522c3da8ca7f4ef8df72d6a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ImageExtractionStatus
+			"image_extraction_status": schemaAttributed6dddf756b1bf0e25b50f0bc(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa51497594ecd73bf59ed8bd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>The ARN of an Amazon Quick user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Quick user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_quicksight_knowledge_base", knowledgeBaseDataSource)
 }
@@ -37,15 +204,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"access_control_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IsACLEnabled
-				"is_acl_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"access_control_configuration": schemaAttribute640c445fd8ffcb6599a2f373(),
 		// Property: AwsAccountId
 		// CloudFormation resource type schema:
 		//
@@ -55,9 +214,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[0-9]*$",
 		//	  "type": "string"
 		//	}
-		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"aws_account_id": schemaAttributed6dddf756b1bf0e25b50f0bc(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -65,10 +222,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributee51d698bf4922146fa924805(),
 		// Property: DataSourceArn
 		// CloudFormation resource type schema:
 		//
@@ -78,9 +232,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"data_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"data_source_arn": schemaAttributed6dddf756b1bf0e25b50f0bc(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -89,27 +241,21 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^\\P{C}*$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributed6dddf756b1bf0e25b50f0bc(),
 		// Property: DocumentCount
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "number"
 		//	}
-		"document_count": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"document_count": schemaAttribute8249ff568f64174c91b5f45b(),
 		// Property: IsEmailNotificationOptedForIngestionFailures
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"is_email_notification_opted_for_ingestion_failures": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"is_email_notification_opted_for_ingestion_failures": schemaAttribute07567f0814db8749fa9185b8(),
 		// Property: KnowledgeBaseArn
 		// CloudFormation resource type schema:
 		//
@@ -119,9 +265,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"knowledge_base_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"knowledge_base_arn": schemaAttributed6dddf756b1bf0e25b50f0bc(),
 		// Property: KnowledgeBaseConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -138,22 +282,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"knowledge_base_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: TemplateConfiguration
-				"template_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Template
-						"template": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType: jsontypes.NormalizedType{},
-							Computed:   true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"knowledge_base_configuration": schemaAttributeb794c306f379041b12a25fa2(),
 		// Property: KnowledgeBaseId
 		// CloudFormation resource type schema:
 		//
@@ -163,18 +292,14 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[0-9a-zA-Z-_=.+]+$",
 		//	  "type": "string"
 		//	}
-		"knowledge_base_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"knowledge_base_id": schemaAttributed6dddf756b1bf0e25b50f0bc(),
 		// Property: KnowledgeBaseSizeBytes
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "number"
 		//	}
-		"knowledge_base_size_bytes": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"knowledge_base_size_bytes": schemaAttribute8249ff568f64174c91b5f45b(),
 		// Property: MediaExtractionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -239,45 +364,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"media_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AudioExtractionConfiguration
-				"audio_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AudioExtractionStatus
-						"audio_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ImageExtractionConfiguration
-				"image_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ImageExtractionStatus
-						"image_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: VideoExtractionConfiguration
-				"video_extraction_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: VideoExtractionStatus
-						"video_extraction_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: VideoExtractionType
-						"video_extraction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"media_extraction_configuration": schemaAttributebbf44789a3b8191e1874e339(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -286,9 +373,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[\\p{L}\\p{N}][\\p{L}\\p{N} _\\-\\.]*$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributed6dddf756b1bf0e25b50f0bc(),
 		// Property: Permissions
 		// CloudFormation resource type schema:
 		//
@@ -326,46 +411,21 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"permissions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Actions
-					"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Principal
-					"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>The ARN of an Amazon Quick user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Quick user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n               <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Resource
-					"resource": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"permissions": schemaAttribute6c776bb3bdfddecad3028583(),
 		// Property: PrimaryOwnerArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"primary_owner_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"primary_owner_arn": schemaAttributed6dddf756b1bf0e25b50f0bc(),
 		// Property: PrimaryOwnerUsername
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"primary_owner_username": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"primary_owner_username": schemaAttributed6dddf756b1bf0e25b50f0bc(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -379,9 +439,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributed6dddf756b1bf0e25b50f0bc(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -413,32 +471,14 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>Tag key.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>Tag value.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute5c57c07f06706533f3ce2433(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttributed6dddf756b1bf0e25b50f0bc(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -446,10 +486,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttributee51d698bf4922146fa924805(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

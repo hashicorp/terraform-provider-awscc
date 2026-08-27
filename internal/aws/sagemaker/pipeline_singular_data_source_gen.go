@@ -14,6 +14,134 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0b6d6bb97c28025525197320() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Bucket
+			"bucket": schemaAttribute1eeb9b0ffa44be52fdebf1e8(),
+			// Property: ETag
+			"e_tag": schemaAttribute9e7a11469f43af5ab8c4a9fa(),
+			// Property: Key
+			"key": schemaAttribute6cbf2e3a2d2f22285ecdcdc3(),
+			// Property: Version
+			"version": schemaAttribute872963ee81181ca120f612d7(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19d9a0738c22d4776f4b0112() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Maximum parallel execution steps",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1eeb9b0ffa44be52fdebf1e8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the S3 bucket where the PipelineDefinition file is stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3792f7c0740e53f2e1050537() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The display name of the Pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57cf973ac3a9249c99f7c705() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Role Arn",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6cbf2e3a2d2f22285ecdcdc3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The file name of the PipelineDefinition file (Amazon S3 object name).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6fb9f2dc84f2127c278613c9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the Pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a817538f5435841ab964dbe() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeccc0aa9aa4ea8d03eeca361e(),
+				// Property: Value
+				"value": schemaAttributeccc0aa9aa4ea8d03eeca361e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute872963ee81181ca120f612d7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "For versioning-enabled buckets, a specific version of the PipelineDefinition file.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8afdb993a2fdc0a4885ff565() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9760933ed58104fec4166fb6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PipelineDefinitionBody
+			"pipeline_definition_body": schemaAttributec9f28c4be201a1eeef4ae387(),
+			// Property: PipelineDefinitionS3Location
+			"pipeline_definition_s3_location": schemaAttribute0b6d6bb97c28025525197320(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e7a11469f43af5ab8c4a9fa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon S3 ETag (a file checksum) of the PipelineDefinition file. If you don't specify a value, SageMaker skips ETag validation of your PipelineDefinition file.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9f28c4be201a1eeef4ae387() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A specification that defines the pipeline in JSON format.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeccc0aa9aa4ea8d03eeca361e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed19718fd9c263ee134951015() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxParallelExecutionSteps
+			"max_parallel_execution_steps": schemaAttribute19d9a0738c22d4776f4b0112(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_pipeline", pipelineDataSource)
 }
@@ -39,16 +167,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"parallelism_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaxParallelExecutionSteps
-				"max_parallel_execution_steps": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Maximum parallel execution steps",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"parallelism_configuration": schemaAttributed19718fd9c263ee134951015(),
 		// Property: PipelineDefinition
 		// CloudFormation resource type schema:
 		//
@@ -87,42 +206,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"pipeline_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PipelineDefinitionBody
-				"pipeline_definition_body": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A specification that defines the pipeline in JSON format.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PipelineDefinitionS3Location
-				"pipeline_definition_s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Bucket
-						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the S3 bucket where the PipelineDefinition file is stored.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ETag
-						"e_tag": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon S3 ETag (a file checksum) of the PipelineDefinition file. If you don't specify a value, SageMaker skips ETag validation of your PipelineDefinition file.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Key
-						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The file name of the PipelineDefinition file (Amazon S3 object name).",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Version
-						"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "For versioning-enabled buckets, a specific version of the PipelineDefinition file.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"pipeline_definition": schemaAttribute9760933ed58104fec4166fb6(),
 		// Property: PipelineDescription
 		// CloudFormation resource type schema:
 		//
@@ -132,10 +216,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"pipeline_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the Pipeline.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"pipeline_description": schemaAttribute6fb9f2dc84f2127c278613c9(),
 		// Property: PipelineDisplayName
 		// CloudFormation resource type schema:
 		//
@@ -146,10 +227,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
 		//	  "type": "string"
 		//	}
-		"pipeline_display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The display name of the Pipeline.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"pipeline_display_name": schemaAttribute3792f7c0740e53f2e1050537(),
 		// Property: PipelineName
 		// CloudFormation resource type schema:
 		//
@@ -160,10 +238,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
 		//	  "type": "string"
 		//	}
-		"pipeline_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Pipeline.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"pipeline_name": schemaAttribute8afdb993a2fdc0a4885ff565(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -174,10 +249,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Role Arn",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute57cf973ac3a9249c99f7c705(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -201,21 +273,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute7a817538f5435841ab964dbe(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

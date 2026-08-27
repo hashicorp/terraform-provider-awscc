@@ -16,6 +16,120 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1b7612d6f6463494073d07b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Asset metadata document. Required and optional keys depend on AssetType. Values may be strings, numbers, booleans, or lists of any of those - validated server-side; see the public Asset API docs for the per-type metadata schema.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23fa3d4fcf5429636ff0054b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "UTF-8 text contents of the file. Mutually exclusive with ContentBytes (max 1.5 MiB).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31cc8158aa1d49c405d7bc29() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the asset was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3bac8f69c6e6bd4ce65cc2d9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of asset. The Asset API treats this as an open string; call ListAssetTypes for the current authoritative set of supported types. As of launch, customer-creatable types include skill, agents_md, and attachment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4213ce51b3f594d8f2f9eda9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the asset was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c1add3d0a57fc089ac50e72() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the parent Agent Space. The asset is created as a child of this agent space.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53383d87347dcc03e02fcb80() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The current asset version. Server-managed; bumps on every successful Update (including no-op updates). This is the drift signal for change detection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62648fad8e51f66cfa65b183() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Path of this file within the asset bundle.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8141e4b851f94a739a94fd20() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the asset. Nested under the parent Agent Space: arn:<partition>:aidevops:<region>:<account-id>:agentspace/<agentspace-id>/asset/<asset-id>.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f03a123f735637eb1fb5043() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the asset (assigned by the service on Create).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2aed8adec71fa803ce01eb5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Base64-encoded binary contents of the file. Mutually exclusive with ContentText (max 6 MiB).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed73635237f7235114e406ce6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Base64-encoded zip bundle containing all files for the asset. Mutually exclusive with Files; enforced by the handler at Create/Update time. Write-only: not repopulated by Read. Server treats a zip as 'replace all files' (max 6 MiB).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5c608b36f848711e87bce5d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Per-file metadata document. Values may be strings, numbers, booleans, or lists of any of those (validated server-side).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee86fc6edefcbaeb5ed95ae01() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContentBytes
+				"content_bytes": schemaAttributec2aed8adec71fa803ce01eb5(),
+				// Property: ContentText
+				"content_text": schemaAttribute23fa3d4fcf5429636ff0054b(),
+				// Property: Metadata
+				"metadata": schemaAttributee5c608b36f848711e87bce5d(),
+				// Property: Path
+				"path": schemaAttribute62648fad8e51f66cfa65b183(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Inline file list. Mutually exclusive with Zip; enforced by the handler at Create/Update time. Write-only: not repopulated by Read.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_devopsagent_asset", assetDataSource)
 }
@@ -33,10 +147,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"agent_space_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the parent Agent Space. The asset is created as a child of this agent space.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_space_id": schemaAttribute4c1add3d0a57fc089ac50e72(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +155,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the asset. Nested under the parent Agent Space: arn:\u003cpartition\u003e:aidevops:\u003cregion\u003e:\u003caccount-id\u003e:agentspace/\u003cagentspace-id\u003e/asset/\u003casset-id\u003e.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the asset. Nested under the parent Agent Space: arn:<partition>:aidevops:<region>:<account-id>:agentspace/<agentspace-id>/asset/<asset-id>.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute8141e4b851f94a739a94fd20(),
 		// Property: AssetId
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +165,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the asset (assigned by the service on Create).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"asset_id": schemaAttribute8f03a123f735637eb1fb5043(),
 		// Property: AssetType
 		// CloudFormation resource type schema:
 		//
@@ -71,10 +176,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z][a-z0-9_]*$",
 		//	  "type": "string"
 		//	}
-		"asset_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of asset. The Asset API treats this as an open string; call ListAssetTypes for the current authoritative set of supported types. As of launch, customer-creatable types include skill, agents_md, and attachment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"asset_type": schemaAttribute3bac8f69c6e6bd4ce65cc2d9(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -83,11 +185,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the asset was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute4213ce51b3f594d8f2f9eda9(),
 		// Property: Files
 		// CloudFormation resource type schema:
 		//
@@ -141,35 +239,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"files": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ContentBytes
-					"content_bytes": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Base64-encoded binary contents of the file. Mutually exclusive with ContentText (max 6 MiB).",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ContentText
-					"content_text": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "UTF-8 text contents of the file. Mutually exclusive with ContentBytes (max 1.5 MiB).",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Metadata
-					"metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
-						CustomType:  jsontypes.NormalizedType{},
-						Description: "Per-file metadata document. Values may be strings, numbers, booleans, or lists of any of those (validated server-side).",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Path
-					"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Path of this file within the asset bundle.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Inline file list. Mutually exclusive with Zip; enforced by the handler at Create/Update time. Write-only: not repopulated by Read.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"files": schemaAttributee86fc6edefcbaeb5ed95ae01(),
 		// Property: Metadata
 		// CloudFormation resource type schema:
 		//
@@ -177,11 +247,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Asset metadata document. Required and optional keys depend on AssetType. Values may be strings, numbers, booleans, or lists of any of those - validated server-side; see the public Asset API docs for the per-type metadata schema.",
 		//	  "type": "object"
 		//	}
-		"metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "Asset metadata document. Required and optional keys depend on AssetType. Values may be strings, numbers, booleans, or lists of any of those - validated server-side; see the public Asset API docs for the per-type metadata schema.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"metadata": schemaAttribute1b7612d6f6463494073d07b5(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -190,11 +256,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the asset was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute31cc8158aa1d49c405d7bc29(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -203,10 +265,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"version": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The current asset version. Server-managed; bumps on every successful Update (including no-op updates). This is the drift signal for change detection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttribute53383d87347dcc03e02fcb80(),
 		// Property: Zip
 		// CloudFormation resource type schema:
 		//
@@ -215,10 +274,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 8388608,
 		//	  "type": "string"
 		//	}
-		"zip": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Base64-encoded zip bundle containing all files for the asset. Mutually exclusive with Files; enforced by the handler at Create/Update time. Write-only: not repopulated by Read. Server treats a zip as 'replace all files' (max 6 MiB).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"zip": schemaAttributed73635237f7235114e406ce6(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,48 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute6bdbcb3893de70fd7cba12b8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A JSON-formatted string with key-value pairs specifying the properties of the associated resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78c5b3ea399a29bc38156c47() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The arn of the resource that you associated to the  Profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c5e51add99cbcc18f3e1b7a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Primary Identifier for  Profile Resource Association",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e8b017a98f20396ff178c7e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of an association between the  Profile and resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0cc5fece6d3fe2d67d46199() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the  profile that you associated the resource to that is specified by ResourceArn.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee91690b453104fff3a8bdf27() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the resource associated to the  Profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_route53profiles_profile_resource_association", profileResourceAssociationDataSource)
 }
@@ -29,10 +71,7 @@ func profileResourceAssociationDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "Primary Identifier for  Profile Resource Association",
 		//	  "type": "string"
 		//	}
-		"profile_resource_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Primary Identifier for  Profile Resource Association",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"profile_resource_association_id": schemaAttribute7c5e51add99cbcc18f3e1b7a(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +79,7 @@ func profileResourceAssociationDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The name of an association between the  Profile and resource.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of an association between the  Profile and resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute8e8b017a98f20396ff178c7e(),
 		// Property: ProfileId
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +87,7 @@ func profileResourceAssociationDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The ID of the  profile that you associated the resource to that is specified by ResourceArn.",
 		//	  "type": "string"
 		//	}
-		"profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the  profile that you associated the resource to that is specified by ResourceArn.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"profile_id": schemaAttributea0cc5fece6d3fe2d67d46199(),
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +95,7 @@ func profileResourceAssociationDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The arn of the resource that you associated to the  Profile.",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The arn of the resource that you associated to the  Profile.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_arn": schemaAttribute78c5b3ea399a29bc38156c47(),
 		// Property: ResourceProperties
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +103,7 @@ func profileResourceAssociationDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "A JSON-formatted string with key-value pairs specifying the properties of the associated resource.",
 		//	  "type": "string"
 		//	}
-		"resource_properties": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A JSON-formatted string with key-value pairs specifying the properties of the associated resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_properties": schemaAttribute6bdbcb3893de70fd7cba12b8(),
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +111,7 @@ func profileResourceAssociationDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The type of the resource associated to the  Profile.",
 		//	  "type": "string"
 		//	}
-		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the resource associated to the  Profile.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_type": schemaAttributee91690b453104fff3a8bdf27(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,483 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute027ae673ae74a3154b6979f5() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Specifies how many MSK Connect Units (MCU) as the minimum scaling unit.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute09e06d97fab888181634985b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute136e53fdb9bc36de12fd344e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Number of workers for a connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute16e9c8215188f1e9f02ea0f0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CpuUtilizationPercentage
+			"cpu_utilization_percentage": schemaAttribute356df7d98293960a669ada23(),
+		}, /*END SCHEMA*/
+		Description: "Information about the scale in policy of the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d9f5effb1e1ee8703306b18() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EncryptionType
+			"encryption_type": schemaAttributeef01eecdcae123933401d82b(),
+		}, /*END SCHEMA*/
+		Description: "Details of encryption in transit to the Kafka cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23ad5b6590efde84081595f8() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the logs get sent to the specified Kinesis Data Firehose delivery stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c3cc87affbae3655c124389() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatchLogs
+			"cloudwatch_logs": schemaAttribute7ac205ee4d9f188f08d45213(),
+			// Property: Firehose
+			"firehose": schemaAttributec6220202f80c53fdb90e4a3f(),
+			// Property: S3
+			"s3": schemaAttribute95ca168035f65accb1d69b93(),
+		}, /*END SCHEMA*/
+		Description: "Specifies where worker logs are delivered.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c5ec099b1605299ccbaf453() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Revision
+			"revision": schemaAttributec75633937cedaf8b6a1291ef(),
+			// Property: WorkerConfigurationArn
+			"worker_configuration_arn": schemaAttributea8fef593e719cc0fa0ac5857(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the worker configuration to use with the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d69971745cc3840cce23d0a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of Kafka Connect. It has to be compatible with both the Kafka cluster's version and the plugins.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31d1857d8014f6cb583dad10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The S3 prefix that is the destination for log delivery.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute356df7d98293960a669ada23() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the CPU utilization percentage threshold at which connector scale in should trigger.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43334fe3f56b0b453f410245() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon S3 objects and other external resources.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45c6ce536702c0df68610221() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BootstrapServers
+			"bootstrap_servers": schemaAttributec7182b358713bcf9d3692b20(),
+			// Property: Vpc
+			"vpc": schemaAttribute6581a2990df5e741d1c3fe21(),
+		}, /*END SCHEMA*/
+		Description: "Details of how to connect to an Apache Kafka cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute488cdeebbd51481222f3d695() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A summary description of the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a4ac21656cbbd599a19113d() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute78f33cc5c4a310442d6df2f3(),
+				// Property: Value
+				"value": schemaAttribute78f33cc5c4a310442d6df2f3(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A collection of tags associated with a resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52ec0e686666c5370492575c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum number of workers for a connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ad7e861295c7c735c61cfea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the custom plugin to use.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62157b055a68b894c0b0f137() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Kinesis Data Firehose delivery stream that is the destination for log delivery.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute628afd347fba1a1ed725cac9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApacheKafkaCluster
+			"apache_kafka_cluster": schemaAttribute45c6ce536702c0df68610221(),
+		}, /*END SCHEMA*/
+		Description: "Details of how to connect to the Kafka cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6581a2990df5e741d1c3fe21() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecurityGroups
+			"security_groups": schemaAttribute7239224eef11e808164728e9(),
+			// Property: Subnets
+			"subnets": schemaAttributec66ad1680e7374d3ddefe04c(),
+		}, /*END SCHEMA*/
+		Description: "Information about a VPC used with the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e79b5036270a00c30e0d878() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the logs get sent to the specified CloudWatch Logs destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f5fe0723927ceba51d05883() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthenticationType
+			"authentication_type": schemaAttributeae1d8f0c92e27eb69075b718(),
+		}, /*END SCHEMA*/
+		Description: "Details of the client authentication used by the Kafka cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7239224eef11e808164728e9() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The AWS security groups to associate with the elastic network interfaces in order to specify what the connector has access to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute736cc7a319fed90f53fe7620() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AutoScaling
+			"auto_scaling": schemaAttribute8a9dc8f7cbd944aed7a2c2fa(),
+			// Property: ProvisionedCapacity
+			"provisioned_capacity": schemaAttributec8d81e32f3cedc48cd7c688e(),
+		}, /*END SCHEMA*/
+		Description: "Information about the capacity allocated to the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78f33cc5c4a310442d6df2f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute792045f386353d80206d27a2() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the logs get sent to the specified Amazon S3 destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ac205ee4d9f188f08d45213() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Enabled
+			"enabled": schemaAttribute6e79b5036270a00c30e0d878(),
+			// Property: LogGroup
+			"log_group": schemaAttributed915604465b6ce2f38ba6327(),
+		}, /*END SCHEMA*/
+		Description: "Details about delivering logs to Amazon CloudWatch Logs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a9dc8f7cbd944aed7a2c2fa() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxAutoscalingTaskCount
+			"max_autoscaling_task_count": schemaAttributeaa038590aecee4d091650efe(),
+			// Property: MaxWorkerCount
+			"max_worker_count": schemaAttributeb694cf9318f41ca15ad9f650(),
+			// Property: McuCount
+			"mcu_count": schemaAttribute027ae673ae74a3154b6979f5(),
+			// Property: MinWorkerCount
+			"min_worker_count": schemaAttribute52ec0e686666c5370492575c(),
+			// Property: ScaleInPolicy
+			"scale_in_policy": schemaAttribute16e9c8215188f1e9f02ea0f0(),
+			// Property: ScaleOutPolicy
+			"scale_out_policy": schemaAttributec976030b35cb60e7d4692a19(),
+		}, /*END SCHEMA*/
+		Description: "Details about auto scaling of a connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f5f065ac74c43cb0c6042f1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the S3 bucket that is the destination for log delivery.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95ca168035f65accb1d69b93() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Bucket
+			"bucket": schemaAttribute8f5f065ac74c43cb0c6042f1(),
+			// Property: Enabled
+			"enabled": schemaAttribute792045f386353d80206d27a2(),
+			// Property: Prefix
+			"prefix": schemaAttribute31d1857d8014f6cb583dad10(),
+		}, /*END SCHEMA*/
+		Description: "Details about delivering logs to Amazon S3.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute99670e720524b496929082db() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomPluginArn
+			"custom_plugin_arn": schemaAttribute5ad7e861295c7c735c61cfea(),
+			// Property: Revision
+			"revision": schemaAttributee6e837d1191d15d3d9e46cc8(),
+		}, /*END SCHEMA*/
+		Description: "Details about a custom plugin.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a718d3077d17d56ee48dd2f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name for the created Connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea87600807fae8321383b3b9b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The network type of the Connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8fef593e719cc0fa0ac5857() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the worker configuration to use.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa038590aecee4d091650efe() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of tasks allocated to the connector during autoscaling operations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab7aded4d6590c3fbb2c9e81() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The configuration for the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae1d8f0c92e27eb69075b718() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of client authentication used to connect to the Kafka cluster. Value NONE means that no client authentication is used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb694cf9318f41ca15ad9f650() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of workers for a connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb76dc5942ea75431e2bbc64f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: WorkerLogDelivery
+			"worker_log_delivery": schemaAttribute2c3cc87affbae3655c124389(),
+		}, /*END SCHEMA*/
+		Description: "Details of what logs are delivered and where they are delivered.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec42ab50284f76541b88996bb() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the CPU utilization percentage threshold at which connector scale out should trigger.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6220202f80c53fdb90e4a3f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeliveryStream
+			"delivery_stream": schemaAttribute62157b055a68b894c0b0f137(),
+			// Property: Enabled
+			"enabled": schemaAttribute23ad5b6590efde84081595f8(),
+		}, /*END SCHEMA*/
+		Description: "Details about delivering logs to Amazon Kinesis Data Firehose.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec66ad1680e7374d3ddefe04c() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec68edfc3d083437e58ea205a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Specifies how many MSK Connect Units (MCU) are allocated to the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7182b358713bcf9d3692b20() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The bootstrap servers string of the Apache Kafka cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec75633937cedaf8b6a1291ef() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The revision of the worker configuration to use.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8d81e32f3cedc48cd7c688e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: McuCount
+			"mcu_count": schemaAttributec68edfc3d083437e58ea205a(),
+			// Property: WorkerCount
+			"worker_count": schemaAttribute136e53fdb9bc36de12fd344e(),
+		}, /*END SCHEMA*/
+		Description: "Details about a fixed capacity allocated to a connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec976030b35cb60e7d4692a19() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CpuUtilizationPercentage
+			"cpu_utilization_percentage": schemaAttributec42ab50284f76541b88996bb(),
+		}, /*END SCHEMA*/
+		Description: "Information about the scale out policy of the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed0ed3d94e0a13b2945237ce9() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomPlugin
+				"custom_plugin": schemaAttribute99670e720524b496929082db(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of plugins to use with the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed915604465b6ce2f38ba6327() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The CloudWatch log group that is the destination for log delivery.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6e837d1191d15d3d9e46cc8() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The revision of the custom plugin to use.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef01eecdcae123933401d82b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of encryption in transit to the Kafka cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_kafkaconnect_connector", connectorDataSource)
 }
@@ -138,80 +615,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"capacity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AutoScaling
-				"auto_scaling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: MaxAutoscalingTaskCount
-						"max_autoscaling_task_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The maximum number of tasks allocated to the connector during autoscaling operations.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MaxWorkerCount
-						"max_worker_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The maximum number of workers for a connector.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: McuCount
-						"mcu_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Specifies how many MSK Connect Units (MCU) as the minimum scaling unit.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MinWorkerCount
-						"min_worker_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The minimum number of workers for a connector.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ScaleInPolicy
-						"scale_in_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: CpuUtilizationPercentage
-								"cpu_utilization_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Specifies the CPU utilization percentage threshold at which connector scale in should trigger.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Information about the scale in policy of the connector.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ScaleOutPolicy
-						"scale_out_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: CpuUtilizationPercentage
-								"cpu_utilization_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Specifies the CPU utilization percentage threshold at which connector scale out should trigger.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Information about the scale out policy of the connector.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Details about auto scaling of a connector.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProvisionedCapacity
-				"provisioned_capacity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: McuCount
-						"mcu_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Specifies how many MSK Connect Units (MCU) are allocated to the connector.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: WorkerCount
-						"worker_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Number of workers for a connector.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Details about a fixed capacity allocated to a connector.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Information about the capacity allocated to the connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"capacity": schemaAttribute736cc7a319fed90f53fe7620(),
 		// Property: ConnectorArn
 		// CloudFormation resource type schema:
 		//
@@ -220,10 +624,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):kafkaconnect:.*",
 		//	  "type": "string"
 		//	}
-		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name for the created Connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connector_arn": schemaAttribute9a718d3077d17d56ee48dd2f(),
 		// Property: ConnectorConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -237,12 +638,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"connector_configuration": // Pattern: ""
-		schema.MapAttribute{       /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The configuration for the connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connector_configuration": schemaAttributeab7aded4d6590c3fbb2c9e81(),
 		// Property: ConnectorDescription
 		// CloudFormation resource type schema:
 		//
@@ -251,10 +647,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"connector_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A summary description of the connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connector_description": schemaAttribute488cdeebbd51481222f3d695(),
 		// Property: ConnectorName
 		// CloudFormation resource type schema:
 		//
@@ -264,10 +657,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"connector_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connector_name": schemaAttribute09e06d97fab888181634985b(),
 		// Property: KafkaCluster
 		// CloudFormation resource type schema:
 		//
@@ -326,43 +716,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"kafka_cluster": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ApacheKafkaCluster
-				"apache_kafka_cluster": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BootstrapServers
-						"bootstrap_servers": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The bootstrap servers string of the Apache Kafka cluster.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Vpc
-						"vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: SecurityGroups
-								"security_groups": schema.SetAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "The AWS security groups to associate with the elastic network interfaces in order to specify what the connector has access to.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Subnets
-								"subnets": schema.SetAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "The list of subnets to connect to in the virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Information about a VPC used with the connector.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Details of how to connect to an Apache Kafka cluster.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Details of how to connect to the Kafka cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kafka_cluster": schemaAttribute628afd347fba1a1ed725cac9(),
 		// Property: KafkaClusterClientAuthentication
 		// CloudFormation resource type schema:
 		//
@@ -384,17 +738,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"kafka_cluster_client_authentication": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AuthenticationType
-				"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of client authentication used to connect to the Kafka cluster. Value NONE means that no client authentication is used.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Details of the client authentication used by the Kafka cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kafka_cluster_client_authentication": schemaAttribute6f5fe0723927ceba51d05883(),
 		// Property: KafkaClusterEncryptionInTransit
 		// CloudFormation resource type schema:
 		//
@@ -416,17 +760,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"kafka_cluster_encryption_in_transit": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EncryptionType
-				"encryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of encryption in transit to the Kafka cluster.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Details of encryption in transit to the Kafka cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kafka_cluster_encryption_in_transit": schemaAttribute1d9f5effb1e1ee8703306b18(),
 		// Property: KafkaConnectVersion
 		// CloudFormation resource type schema:
 		//
@@ -434,10 +768,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version of Kafka Connect. It has to be compatible with both the Kafka cluster's version and the plugins.",
 		//	  "type": "string"
 		//	}
-		"kafka_connect_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of Kafka Connect. It has to be compatible with both the Kafka cluster's version and the plugins.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kafka_connect_version": schemaAttribute2d69971745cc3840cce23d0a(),
 		// Property: LogDelivery
 		// CloudFormation resource type schema:
 		//
@@ -516,75 +847,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"log_delivery": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: WorkerLogDelivery
-				"worker_log_delivery": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CloudWatchLogs
-						"cloudwatch_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Enabled
-								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies whether the logs get sent to the specified CloudWatch Logs destination.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: LogGroup
-								"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The CloudWatch log group that is the destination for log delivery.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Details about delivering logs to Amazon CloudWatch Logs.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Firehose
-						"firehose": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DeliveryStream
-								"delivery_stream": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Kinesis Data Firehose delivery stream that is the destination for log delivery.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Enabled
-								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies whether the logs get sent to the specified Kinesis Data Firehose delivery stream.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Details about delivering logs to Amazon Kinesis Data Firehose.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: S3
-						"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Bucket
-								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the S3 bucket that is the destination for log delivery.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Enabled
-								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies whether the logs get sent to the specified Amazon S3 destination.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Prefix
-								"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The S3 prefix that is the destination for log delivery.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Details about delivering logs to Amazon S3.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Specifies where worker logs are delivered.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Details of what logs are delivered and where they are delivered.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"log_delivery": schemaAttributeb76dc5942ea75431e2bbc64f(),
 		// Property: NetworkType
 		// CloudFormation resource type schema:
 		//
@@ -596,10 +859,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The network type of the Connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_type": schemaAttributea87600807fae8321383b3b9b(),
 		// Property: Plugins
 		// CloudFormation resource type schema:
 		//
@@ -642,31 +902,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"plugins": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: CustomPlugin
-					"custom_plugin": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: CustomPluginArn
-							"custom_plugin_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Amazon Resource Name (ARN) of the custom plugin to use.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Revision
-							"revision": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The revision of the custom plugin to use.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Details about a custom plugin.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "List of plugins to use with the connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"plugins": schemaAttributed0ed3d94e0a13b2945237ce9(),
 		// Property: ServiceExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -675,10 +911,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):iam:.*",
 		//	  "type": "string"
 		//	}
-		"service_execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the IAM role used by the connector to access Amazon S3 objects and other external resources.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"service_execution_role_arn": schemaAttribute43334fe3f56b0b453f410245(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -707,22 +940,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A collection of tags associated with a resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute4a4ac21656cbbd599a19113d(),
 		// Property: WorkerConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -748,22 +966,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"worker_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Revision
-				"revision": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The revision of the worker configuration to use.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: WorkerConfigurationArn
-				"worker_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the worker configuration to use.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies the worker configuration to use with the connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"worker_configuration": schemaAttribute2c5ec099b1605299ccbaf453(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

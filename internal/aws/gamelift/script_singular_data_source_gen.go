@@ -14,6 +14,129 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute24ce3a8d8b75b731b7f9a74c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the file, if object versioning is turned on for the bucket. Amazon GameLift uses this information when retrieving files from your S3 bucket. To retrieve a specific version of the file, provide an object version. To retrieve the latest version of the file, do not set this parameter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2974c8fb5e4e065660b9e21e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The file size of the uploaded Realtime script, expressed in bytes. When files are uploaded from an S3 location, this value remains at \"0\".",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34eba4da9eb0a86149db0b74() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3586d94eedcdc2dfbaa2d701() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An Amazon S3 bucket identifier. This is the name of the S3 bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d30c2299e9d5fff6bb165a7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the Realtime script",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute56d22d8632b08bde64a5dfd4() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute34eba4da9eb0a86149db0b74(),
+				// Property: Value
+				"value": schemaAttributedacfb3b3bd87025312838ba8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d63fa3a2c96e4d27da62627() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example \"1469498468.057\").",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute75ad5319dc657f1b426660dc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version that is associated with a script. Version strings do not need to be unique.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83640ce1b20c3d31eba19c04() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access the S3 bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute893137ca344f41299b1d1a66() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A descriptive label that is associated with a script. Script names do not need to be unique.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f1ee2c7fbeb339ccd2aae9d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Bucket
+			"bucket": schemaAttribute3586d94eedcdc2dfbaa2d701(),
+			// Property: Key
+			"key": schemaAttribute8fc6f25034237360b86c16ce(),
+			// Property: ObjectVersion
+			"object_version": schemaAttribute24ce3a8d8b75b731b7f9a74c(),
+			// Property: RoleArn
+			"role_arn": schemaAttribute83640ce1b20c3d31eba19c04(),
+		}, /*END SCHEMA*/
+		Description: "The location of the Amazon S3 bucket where a zipped file containing your Realtime scripts is stored. The storage location must specify the Amazon S3 bucket name, the zip file name (the \"key\"), and a role ARN that allows Amazon GameLift to access the Amazon S3 storage location. The S3 bucket must be in the same Region where you want to create a new script. By default, Amazon GameLift uploads the latest version of the zip file; if you have S3 object versioning turned on, you can use the ObjectVersion parameter to specify an earlier version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8fc6f25034237360b86c16ce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the zip file that contains the script files.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb21b55b8f49f63b17289c27f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift script resource and uniquely identifies it. ARNs are unique across all Regions. In a GameLift script ARN, the resource ID matches the Id value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca2958a024043d515cc960cb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Node.js version used for execution of the Realtime script.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedacfb3b3bd87025312838ba8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_gamelift_script", scriptDataSource)
 }
@@ -30,10 +153,7 @@ func scriptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.*:script\\/script-\\S+",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) that is assigned to a Amazon GameLift script resource and uniquely identifies it. ARNs are unique across all Regions. In a GameLift script ARN, the resource ID matches the Id value.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeb21b55b8f49f63b17289c27f(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +161,7 @@ func scriptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example \"1469498468.057\").",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A time stamp indicating when this data object was created. Format is a number expressed in Unix time as milliseconds (for example \"1469498468.057\").",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute6d63fa3a2c96e4d27da62627(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -53,10 +170,7 @@ func scriptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^script-\\S+",
 		//	  "type": "string"
 		//	}
-		"script_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for the Realtime script",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"script_id": schemaAttribute3d30c2299e9d5fff6bb165a7(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -66,10 +180,7 @@ func scriptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A descriptive label that is associated with a script. Script names do not need to be unique.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute893137ca344f41299b1d1a66(),
 		// Property: NodeJsVersion
 		// CloudFormation resource type schema:
 		//
@@ -78,10 +189,7 @@ func scriptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\d+\\.[x0-9]+$",
 		//	  "type": "string"
 		//	}
-		"node_js_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Node.js version used for execution of the Realtime script.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"node_js_version": schemaAttributeca2958a024043d515cc960cb(),
 		// Property: SizeOnDisk
 		// CloudFormation resource type schema:
 		//
@@ -90,10 +198,7 @@ func scriptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"size_on_disk": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The file size of the uploaded Realtime script, expressed in bytes. When files are uploaded from an S3 location, this value remains at \"0\".",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"size_on_disk": schemaAttribute2974c8fb5e4e065660b9e21e(),
 		// Property: StorageLocation
 		// CloudFormation resource type schema:
 		//
@@ -130,32 +235,7 @@ func scriptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"storage_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Bucket
-				"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "An Amazon S3 bucket identifier. This is the name of the S3 bucket.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Key
-				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the zip file that contains the script files.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ObjectVersion
-				"object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The version of the file, if object versioning is turned on for the bucket. Amazon GameLift uses this information when retrieving files from your S3 bucket. To retrieve a specific version of the file, provide an object version. To retrieve the latest version of the file, do not set this parameter.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RoleArn
-				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access the S3 bucket.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The location of the Amazon S3 bucket where a zipped file containing your Realtime scripts is stored. The storage location must specify the Amazon S3 bucket name, the zip file name (the \"key\"), and a role ARN that allows Amazon GameLift to access the Amazon S3 storage location. The S3 bucket must be in the same Region where you want to create a new script. By default, Amazon GameLift uploads the latest version of the zip file; if you have S3 object versioning turned on, you can use the ObjectVersion parameter to specify an earlier version.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"storage_location": schemaAttribute8f1ee2c7fbeb339ccd2aae9d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -189,24 +269,7 @@ func scriptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute56d22d8632b08bde64a5dfd4(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -216,10 +279,7 @@ func scriptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version that is associated with a script. Version strings do not need to be unique.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttribute75ad5319dc657f1b426660dc(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,48 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute3d53d26289e1213b025707e2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the readiness check.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute459873a73ba775cd6079fd51() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the resource set to check.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute75ad4b85fc282206bee9014a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeb6497cfe1230fef619e16116(),
+				// Property: Value
+				"value": schemaAttributeb6497cfe1230fef619e16116(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A collection of tags associated with a resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6497cfe1230fef619e16116() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4b25d7b6cee02f1eed89738() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the ReadinessCheck to create.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_route53recoveryreadiness_readiness_check", readinessCheckDataSource)
 }
@@ -30,10 +72,7 @@ func readinessCheckDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"readiness_check_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the readiness check.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"readiness_check_arn": schemaAttribute3d53d26289e1213b025707e2(),
 		// Property: ReadinessCheckName
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +83,7 @@ func readinessCheckDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[a-zA-Z0-9_]+",
 		//	  "type": "string"
 		//	}
-		"readiness_check_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of the ReadinessCheck to create.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"readiness_check_name": schemaAttributed4b25d7b6cee02f1eed89738(),
 		// Property: ResourceSetName
 		// CloudFormation resource type schema:
 		//
@@ -58,10 +94,7 @@ func readinessCheckDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[a-zA-Z0-9_]+",
 		//	  "type": "string"
 		//	}
-		"resource_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the resource set to check.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_set_name": schemaAttribute459873a73ba775cd6079fd51(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -86,22 +119,7 @@ func readinessCheckDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A collection of tags associated with a resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute75ad4b85fc282206bee9014a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

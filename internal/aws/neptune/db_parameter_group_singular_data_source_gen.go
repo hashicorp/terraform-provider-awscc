@@ -15,6 +15,64 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2f4a7b12ff73ac2868c6f424() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Must be `neptune1` for engine versions prior to 1.2.0.0, or `neptune1.2` for engine version `1.2.0.0` and higher.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute56f4de9e39b1b4d7534e885a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Provides the name of the DB parameter group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b8323e2e868ef8cca7a0036() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The parameters to set for this DB parameter group.\n\nThe parameters are expressed as a JSON object consisting of key-value pairs.\n\nChanges to dynamic parameters are applied immediately. During an update, if you have static parameters (whether they were changed or not), it triggers AWS CloudFormation to reboot the associated DB instance without failover.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea28bf7d3291f9e896deea94a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf81874a5838f86daf6a4b34() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee8d57a688fab939817e3e2a6(),
+				// Property: Value
+				"value": schemaAttributea28bf7d3291f9e896deea94a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An optional array of key-value pairs to apply to this DB parameter group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed765a73e1402849395354971() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Provides the customer-specified description for this DB parameter group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8d57a688fab939817e3e2a6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_neptune_db_parameter_group", dBParameterGroupDataSource)
 }
@@ -30,10 +88,7 @@ func dBParameterGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Provides the customer-specified description for this DB parameter group.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Provides the customer-specified description for this DB parameter group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributed765a73e1402849395354971(),
 		// Property: Family
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +96,7 @@ func dBParameterGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Must be `neptune1` for engine versions prior to 1.2.0.0, or `neptune1.2` for engine version `1.2.0.0` and higher.",
 		//	  "type": "string"
 		//	}
-		"family": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Must be `neptune1` for engine versions prior to 1.2.0.0, or `neptune1.2` for engine version `1.2.0.0` and higher.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"family": schemaAttribute2f4a7b12ff73ac2868c6f424(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +104,7 @@ func dBParameterGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Provides the name of the DB parameter group.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Provides the name of the DB parameter group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute56f4de9e39b1b4d7534e885a(),
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -63,11 +112,7 @@ func dBParameterGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The parameters to set for this DB parameter group.\n\nThe parameters are expressed as a JSON object consisting of key-value pairs.\n\nChanges to dynamic parameters are applied immediately. During an update, if you have static parameters (whether they were changed or not), it triggers AWS CloudFormation to reboot the associated DB instance without failover.",
 		//	  "type": "object"
 		//	}
-		"parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "The parameters to set for this DB parameter group.\n\nThe parameters are expressed as a JSON object consisting of key-value pairs.\n\nChanges to dynamic parameters are applied immediately. During an update, if you have static parameters (whether they were changed or not), it triggers AWS CloudFormation to reboot the associated DB instance without failover.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parameters": schemaAttribute9b8323e2e868ef8cca7a0036(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -95,24 +140,7 @@ func dBParameterGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An optional array of key-value pairs to apply to this DB parameter group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeaf81874a5838f86daf6a4b34(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

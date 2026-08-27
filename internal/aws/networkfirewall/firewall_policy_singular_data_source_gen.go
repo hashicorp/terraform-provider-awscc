@@ -15,6 +15,216 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute00396bd49f38b7f1f656171b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Action
+			"action": schemaAttribute18d668e8884121a826086332(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute076898ff970db35072e82886() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18d668e8884121a826086332() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute477aa077da02cbab7eb87ba4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DeepThreatInspection
+				"deep_threat_inspection": schemaAttributefe0321ff0c63223dfe5df2e7(),
+				// Property: Override
+				"override": schemaAttribute00396bd49f38b7f1f656171b(),
+				// Property: Priority
+				"priority": schemaAttributeb4cd172309fc77a8f381fd54(),
+				// Property: ResourceArn
+				"resource_arn": schemaAttribute708d2c8c8fad7b82778a6118(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4e963e96efc5cb478154757a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TcpIdleTimeoutSeconds
+			"tcp_idle_timeout_seconds": schemaAttributeb4cd172309fc77a8f381fd54(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5502b6d7f39e7d22a5b7c5e0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FlowTimeouts
+			"flow_timeouts": schemaAttribute4e963e96efc5cb478154757a(),
+			// Property: RuleOrder
+			"rule_order": schemaAttribute18d668e8884121a826086332(),
+			// Property: StreamExceptionPolicy
+			"stream_exception_policy": schemaAttribute18d668e8884121a826086332(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute56922d817f6c9ff475816ff7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnableTLSSessionHolding
+			"enable_tls_session_holding": schemaAttributefe0321ff0c63223dfe5df2e7(),
+			// Property: PolicyVariables
+			"policy_variables": schemaAttributea66210427d015ec00859d01e(),
+			// Property: StatefulDefaultActions
+			"stateful_default_actions": schemaAttribute076898ff970db35072e82886(),
+			// Property: StatefulEngineOptions
+			"stateful_engine_options": schemaAttribute5502b6d7f39e7d22a5b7c5e0(),
+			// Property: StatefulRuleGroupReferences
+			"stateful_rule_group_references": schemaAttribute477aa077da02cbab7eb87ba4(),
+			// Property: StatelessCustomActions
+			"stateless_custom_actions": schemaAttributebb90fec05c98488a7870c257(),
+			// Property: StatelessDefaultActions
+			"stateless_default_actions": schemaAttribute076898ff970db35072e82886(),
+			// Property: StatelessFragmentDefaultActions
+			"stateless_fragment_default_actions": schemaAttribute076898ff970db35072e82886(),
+			// Property: StatelessRuleGroupReferences
+			"stateless_rule_group_references": schemaAttribute80f6ac4fbe3cced434ba54f3(),
+			// Property: TLSInspectionConfigurationArn
+			"tls_inspection_configuration_arn": schemaAttribute708d2c8c8fad7b82778a6118(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57336a4719773ea699d0e265() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PublishMetricAction
+			"publish_metric_action": schemaAttributeaf04b88df61f766fc104d6a4(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a64888fe59cdc2974a6c8fa() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute18d668e8884121a826086332(),
+				// Property: Value
+				"value": schemaAttribute18d668e8884121a826086332(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute708d2c8c8fad7b82778a6118() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A resource ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80f6ac4fbe3cced434ba54f3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Priority
+				"priority": schemaAttributeb4cd172309fc77a8f381fd54(),
+				// Property: ResourceArn
+				"resource_arn": schemaAttribute708d2c8c8fad7b82778a6118(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea66210427d015ec00859d01e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RuleVariables
+			"rule_variables": schemaAttributee23ba1a30b3710160e2d6f42(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf04b88df61f766fc104d6a4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Dimensions
+			"dimensions": schemaAttributeedef435d0f8d1cc67c475217(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4cd172309fc77a8f381fd54() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb90fec05c98488a7870c257() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ActionDefinition
+				"action_definition": schemaAttribute57336a4719773ea699d0e265(),
+				// Property: ActionName
+				"action_name": schemaAttribute18d668e8884121a826086332(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee23ba1a30b3710160e2d6f42() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Definition
+				"definition": schemaAttribute076898ff970db35072e82886(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeedef435d0f8d1cc67c475217() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Value
+				"value": schemaAttribute18d668e8884121a826086332(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefe0321ff0c63223dfe5df2e7() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_networkfirewall_firewall_policy", firewallPolicyDataSource)
 }
@@ -32,9 +242,7 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^.*$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute18d668e8884121a826086332(),
 		// Property: FirewallPolicy
 		// CloudFormation resource type schema:
 		//
@@ -266,163 +474,7 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"firewall_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EnableTLSSessionHolding
-				"enable_tls_session_holding": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PolicyVariables
-				"policy_variables": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: RuleVariables
-						"rule_variables":          // Pattern: ""
-						schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Definition
-									"definition": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: StatefulDefaultActions
-				"stateful_default_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StatefulEngineOptions
-				"stateful_engine_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: FlowTimeouts
-						"flow_timeouts": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: TcpIdleTimeoutSeconds
-								"tcp_idle_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: RuleOrder
-						"rule_order": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: StreamExceptionPolicy
-						"stream_exception_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: StatefulRuleGroupReferences
-				"stateful_rule_group_references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DeepThreatInspection
-							"deep_threat_inspection": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Override
-							"override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Action
-									"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Priority
-							"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ResourceArn
-							"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A resource ARN.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: StatelessCustomActions
-				"stateless_custom_actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ActionDefinition
-							"action_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: PublishMetricAction
-									"publish_metric_action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Dimensions
-											"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Value
-														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Computed: true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-												}, /*END NESTED OBJECT*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ActionName
-							"action_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: StatelessDefaultActions
-				"stateless_default_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StatelessFragmentDefaultActions
-				"stateless_fragment_default_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StatelessRuleGroupReferences
-				"stateless_rule_group_references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Priority
-							"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ResourceArn
-							"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A resource ARN.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: TLSInspectionConfigurationArn
-				"tls_inspection_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A resource ARN.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"firewall_policy": schemaAttribute56922d817f6c9ff475816ff7(),
 		// Property: FirewallPolicyArn
 		// CloudFormation resource type schema:
 		//
@@ -433,10 +485,7 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^(arn:aws.*)$",
 		//	  "type": "string"
 		//	}
-		"firewall_policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A resource ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"firewall_policy_arn": schemaAttribute708d2c8c8fad7b82778a6118(),
 		// Property: FirewallPolicyId
 		// CloudFormation resource type schema:
 		//
@@ -446,9 +495,7 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$",
 		//	  "type": "string"
 		//	}
-		"firewall_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"firewall_policy_id": schemaAttribute18d668e8884121a826086332(),
 		// Property: FirewallPolicyName
 		// CloudFormation resource type schema:
 		//
@@ -458,9 +505,7 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"firewall_policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"firewall_policy_name": schemaAttribute18d668e8884121a826086332(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -491,21 +536,7 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6a64888fe59cdc2974a6c8fa(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

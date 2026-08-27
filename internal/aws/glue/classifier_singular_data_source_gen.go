@@ -15,6 +15,192 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute02d5196ee990416dcf2d5e6d() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies not to trim values before identifying the type of column values. The default value is true.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute056ea64407a9b82e68eb46f7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "One of XMLClassifier/Name, GrokClassifier/Name, JsonClassifier/Name or CsvClassifier/Name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15b2945e9584034649630ba2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Classification
+			"classification": schemaAttribute8f407912c51c43d25d0e13c5(),
+			// Property: Name
+			"name": schemaAttributeea37f21f2937030e9cfaf842(),
+			// Property: RowTag
+			"row_tag": schemaAttributeb2f149928ed7903887344160(),
+		}, /*END SCHEMA*/
+		Description: "A classifier for XML content.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19b1910031cbc0c7c59ddf2a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Indicates whether the CSV file contains custom data types.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1b0fd74167428966013ec365() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables the configuration of custom data types.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute320ddd30c130b4cf25c867cb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AllowSingleColumn
+			"allow_single_column": schemaAttribute3418c636afe2aa014c88a30a(),
+			// Property: ContainsCustomDatatype
+			"contains_custom_datatype": schemaAttribute19b1910031cbc0c7c59ddf2a(),
+			// Property: ContainsHeader
+			"contains_header": schemaAttribute6a4a9e162bf4d9a02847c24b(),
+			// Property: CustomDatatypeConfigured
+			"custom_datatype_configured": schemaAttribute1b0fd74167428966013ec365(),
+			// Property: Delimiter
+			"delimiter": schemaAttributea85927b5a1f03b2c7cf0519e(),
+			// Property: DisableValueTrimming
+			"disable_value_trimming": schemaAttribute02d5196ee990416dcf2d5e6d(),
+			// Property: Header
+			"header": schemaAttributeaa78d43f1a2232739c923dcd(),
+			// Property: Name
+			"name": schemaAttributeea37f21f2937030e9cfaf842(),
+			// Property: QuoteSymbol
+			"quote_symbol": schemaAttribute566492b3111031ce7aae93c7(),
+		}, /*END SCHEMA*/
+		Description: "A classifier for comma-separated values (CSV).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3418c636afe2aa014c88a30a() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables the processing of files that contain only one column.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute527d46321d23ed49547217f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The grok pattern applied to a data store by this classifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute566492b3111031ce7aae93c7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute640e90fb345d5d2a2eae7a54() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Classification
+			"classification": schemaAttributee743b6f4f7dd8ad024a1705c(),
+			// Property: CustomPatterns
+			"custom_patterns": schemaAttributefb0e4c14b53a90a044060b67(),
+			// Property: GrokPattern
+			"grok_pattern": schemaAttribute527d46321d23ed49547217f3(),
+			// Property: Name
+			"name": schemaAttributeea37f21f2937030e9cfaf842(),
+		}, /*END SCHEMA*/
+		Description: "A classifier that uses grok.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a4a9e162bf4d9a02847c24b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the CSV file contains a header. A value of UNKNOWN specifies that the classifier will detect whether the CSV file contains headings. A value of PRESENT specifies that the CSV file contains headings. A value of ABSENT specifies that the CSV file does not contain headings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute703a943139e3b7e278a6f07b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: JsonPath
+			"json_path": schemaAttributeaa7b9ea43a25b26c298410e4(),
+			// Property: Name
+			"name": schemaAttributeea37f21f2937030e9cfaf842(),
+		}, /*END SCHEMA*/
+		Description: "A classifier for JSON content.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f407912c51c43d25d0e13c5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An identifier of the data format that the classifier matches.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea85927b5a1f03b2c7cf0519e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A custom symbol to denote what separates each column entry in the row.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa78d43f1a2232739c923dcd() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of strings representing column names.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa7b9ea43a25b26c298410e4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A JsonPath string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in Writing JsonPath Custom Classifiers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2f149928ed7903887344160() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The XML tag designating the element that contains each record in an XML document being parsed. This can't identify a self-closing element (closed by />). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <row item_a=\"A\" item_b=\"B\"></row> is okay, but <row item_a=\"A\" item_b=\"B\" /> is not).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee743b6f4f7dd8ad024a1705c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, and so on.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea37f21f2937030e9cfaf842() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the classifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb0e4c14b53a90a044060b67() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Optional custom grok patterns defined by this classifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_classifier", classifierDataSource)
 }
@@ -77,59 +263,7 @@ func classifierDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"csv_classifier": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllowSingleColumn
-				"allow_single_column": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Enables the processing of files that contain only one column.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ContainsCustomDatatype
-				"contains_custom_datatype": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Indicates whether the CSV file contains custom data types.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ContainsHeader
-				"contains_header": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether the CSV file contains a header. A value of UNKNOWN specifies that the classifier will detect whether the CSV file contains headings. A value of PRESENT specifies that the CSV file contains headings. A value of ABSENT specifies that the CSV file does not contain headings.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CustomDatatypeConfigured
-				"custom_datatype_configured": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Enables the configuration of custom data types.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Delimiter
-				"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A custom symbol to denote what separates each column entry in the row.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DisableValueTrimming
-				"disable_value_trimming": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies not to trim values before identifying the type of column values. The default value is true.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Header
-				"header": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of strings representing column names.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the classifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: QuoteSymbol
-				"quote_symbol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A classifier for comma-separated values (CSV).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"csv_classifier": schemaAttribute320ddd30c130b4cf25c867cb(),
 		// Property: GrokClassifier
 		// CloudFormation resource type schema:
 		//
@@ -160,32 +294,7 @@ func classifierDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"grok_classifier": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Classification
-				"classification": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "An identifier of the data format that the classifier matches, such as Twitter, JSON, Omniture logs, and so on.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CustomPatterns
-				"custom_patterns": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Optional custom grok patterns defined by this classifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: GrokPattern
-				"grok_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The grok pattern applied to a data store by this classifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the classifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A classifier that uses grok.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"grok_classifier": schemaAttribute640e90fb345d5d2a2eae7a54(),
 		// Property: JsonClassifier
 		// CloudFormation resource type schema:
 		//
@@ -207,22 +316,7 @@ func classifierDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"json_classifier": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: JsonPath
-				"json_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A JsonPath string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in Writing JsonPath Custom Classifiers.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the classifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A classifier for JSON content.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"json_classifier": schemaAttribute703a943139e3b7e278a6f07b(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -230,10 +324,7 @@ func classifierDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "One of XMLClassifier/Name, GrokClassifier/Name, JsonClassifier/Name or CsvClassifier/Name",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "One of XMLClassifier/Name, GrokClassifier/Name, JsonClassifier/Name or CsvClassifier/Name",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute056ea64407a9b82e68eb46f7(),
 		// Property: XMLClassifier
 		// CloudFormation resource type schema:
 		//
@@ -260,27 +351,7 @@ func classifierDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"xml_classifier": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Classification
-				"classification": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "An identifier of the data format that the classifier matches.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the classifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RowTag
-				"row_tag": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The XML tag designating the element that contains each record in an XML document being parsed. This can't identify a self-closing element (closed by />). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <row item_a=\"A\" item_b=\"B\"></row> is okay, but <row item_a=\"A\" item_b=\"B\" /> is not).",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A classifier for XML content.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"xml_classifier": schemaAttribute15b2945e9584034649630ba2(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

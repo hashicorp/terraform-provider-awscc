@@ -15,6 +15,1062 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute00a78194f2f5c5f09d2b2096() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The S3 Data Source Type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute019ae1081a467d54de8b2292() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time at which the model package was last modified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute01f880099e9ded94de1648f6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ProfileName
+				"profile_name": schemaAttributef2bef85302e70565664aa144(),
+				// Property: TransformJobDefinition
+				"transform_job_definition": schemaAttributeeecf39fb9e530dd093093381(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute04305f5b56f80a25b4796988() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Constraints
+			"constraints": schemaAttribute56677c1fb39077bd8020a95d(),
+			// Property: Statistics
+			"statistics": schemaAttribute56677c1fb39077bd8020a95d(),
+		}, /*END SCHEMA*/
+		Description: "Represents the drift check data quality baselines that can be used when the model monitor is set using the model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0739491eaa775d3104a07b47() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the model package group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute08dec9396fb2a8ea62483aa7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0ad43702b0738775374933ee() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The version of the model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0b6c234849e956b01e3a5827() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the additional Inference specification.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d704dc5669149a1089d92fc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f32e01326f5dbbb566bc9db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The machine learning domain of the model package you specified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f597b0055a99686127b112f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1291375ed37fa21e4458eb7c() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies agreement to the model end-user license agreement (EULA).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute14b66e859ec38dca74629de6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "If your transform data is compressed, specify the compression type. Amazon SageMaker automatically decompresses the data for the transform job accordingly. The default value is None.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute155d7b25a8b37c45b5f0e3e5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IAM roles to be used for the validation of the model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute16b3d315fa47e96e716302fa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of content stored in the file source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1733e45a2b9720654b883400() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The approval status of the model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25f7ea09246ac7e6995537cb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a54096a820c3eba65d61733() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your Amazon SageMaker account or an algorithm in AWS Marketplace that you are subscribed to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c2ea35c00e94d602aff4cad() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time at which the model package was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute310d941846d4625750cabb69() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		// Pattern "[\\S\\s]*" ignored.
+		Description: "Sets the environment variables in the Docker container",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b0df4dd3ce3cd514b54d3d1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the model package group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3bdba430b4a60137aa804ac0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Defines how to assemble the results of the transform job as a single S3 object.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3bdf28a21906f9b89358347a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of content stored in the metric source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c49390de274cbf820e2f549() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the model package for which the overall status is being reported.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d8c765160d3a9cf0e249e17() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PostTrainingReport
+			"post_training_report": schemaAttribute56677c1fb39077bd8020a95d(),
+			// Property: PreTrainingReport
+			"pre_training_report": schemaAttribute56677c1fb39077bd8020a95d(),
+			// Property: Report
+			"report": schemaAttribute56677c1fb39077bd8020a95d(),
+		}, /*END SCHEMA*/
+		Description: "Contains bias metrics for a model.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ecdb9e09de3540949c15fef() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41060f8e2c99994f02d20322() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute420c6a382c9860722d82e1c9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConfigFile
+			"config_file": schemaAttributef028264ccb0571f14c6c0224(),
+			// Property: Constraints
+			"constraints": schemaAttribute56677c1fb39077bd8020a95d(),
+		}, /*END SCHEMA*/
+		Description: "Contains explainability metrics for a model.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute434b7fb496949fbb6ab1162c() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The supported MIME types for the output data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44961311387e28208718cdc4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URI of the source for the model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute494a3783e10cd4f350359c66() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique token that guarantees that the call to this API is idempotent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4faf0448404d3079d9821d3a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FailureReason
+				"failure_reason": schemaAttributefcf38ec769fad184195d875c(),
+				// Property: Name
+				"name": schemaAttribute3c49390de274cbf820e2f549(),
+				// Property: Status
+				"status": schemaAttributed518dc297288cf92e92d4cd2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52331982773a809e08665091() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CompressionType
+			"compression_type": schemaAttribute65fca2f2ce2524937dea9274(),
+			// Property: ModelAccessConfig
+			"model_access_config": schemaAttributed8a40e62a30973e76915b9f5(),
+			// Property: S3DataType
+			"s3_data_type": schemaAttribute52372b5eb01cdbef78018dce(),
+			// Property: S3Uri
+			"s3_uri": schemaAttribute986b2c83aaa58930a8cb8c03(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the S3 location of ML model data to deploy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52372b5eb01cdbef78018dce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the type of ML model data to deploy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5626c7fa673f29e4e35670da() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to certify the model package for listing on AWS Marketplace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute56677c1fb39077bd8020a95d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContentDigest
+			"content_digest": schemaAttribute918cf9b29dc81ac132611217(),
+			// Property: ContentType
+			"content_type": schemaAttribute3bdf28a21906f9b89358347a(),
+			// Property: S3Uri
+			"s3_uri": schemaAttributeb501b8d02b23c3dbf3923db3(),
+		}, /*END SCHEMA*/
+		Description: "Represents a Metric Source Object.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute56db4b43b6feccb7abe9b5cd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name or arn of the model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5711b9ea4ca983359dadd50d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3DataType
+			"s3_data_type": schemaAttribute00a78194f2f5c5f09d2b2096(),
+			// Property: S3Uri
+			"s3_uri": schemaAttributee169ae54f99625d764a77325(),
+		}, /*END SCHEMA*/
+		Description: "Describes the S3 data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5795eef0b2e983a25f5fe13d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS KMS Key ID (KMSKeyId) used for encryption of model package information.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65a6b92aaaf6c371dd7f3b67() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The project ID metadata.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65fca2f2ce2524937dea9274() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies how the ML model data is prepared.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67561639eed7e8372e909d87() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a0cc361be5cb278ffe9bf83() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The content of the model card.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6cf2034b1cde3b4299a13cad() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f859b34aee0833ebbff2d55() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of parallel requests that can be sent to each instance in a transform job. The default value is 1.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70bd9fd400571387e6306fa8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Containers
+			"containers": schemaAttributefc30833544c0eb64f51155ba(),
+			// Property: SupportedContentTypes
+			"supported_content_types": schemaAttributeca8189a4f532291e7243f2e7(),
+			// Property: SupportedRealtimeInferenceInstanceTypes
+			"supported_realtime_inference_instance_types": schemaAttributecaa71c67525acb0e5ee16831(),
+			// Property: SupportedResponseMIMETypes
+			"supported_response_mime_types": schemaAttribute434b7fb496949fbb6ab1162c(),
+			// Property: SupportedTransformInstanceTypes
+			"supported_transform_instance_types": schemaAttribute8da74afaa5fb9840f4d121bf(),
+		}, /*END SCHEMA*/
+		Description: "Details about inference jobs that can be run with models based on this model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7112351b980a37e3dca9f27a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The machine learning framework of the model package container image.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute74af8a7dcd0971bc5f58c941() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataInputConfig
+			"data_input_config": schemaAttribute8ad03e6e4d1f54fb6bc23e53(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78530742ab8e23841420a3be() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78b3822f73fc2a18a33efedb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConfigFile
+			"config_file": schemaAttributef028264ccb0571f14c6c0224(),
+			// Property: PostTrainingConstraints
+			"post_training_constraints": schemaAttribute56677c1fb39077bd8020a95d(),
+			// Property: PreTrainingConstraints
+			"pre_training_constraints": schemaAttribute56677c1fb39077bd8020a95d(),
+		}, /*END SCHEMA*/
+		Description: "Represents the drift check bias baselines that can be used when the model monitor is set using the model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ac1a9f9263e7e064379ecd8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The method to use to split the transform job's data files into smaller batches. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f2915aaaf8a1e12d9743890() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SourceAlgorithms
+			"source_algorithms": schemaAttributeda47fad321200dff9e56af6a(),
+		}, /*END SCHEMA*/
+		Description: "Details about the algorithm that was used to create the model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8018aef0bc8e7e4443012d8c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ML compute instance type for the transform job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute827cff02632d0fd182b626d5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InstanceCount
+			"instance_count": schemaAttributee5294090daa7914b764ec1d2(),
+			// Property: InstanceType
+			"instance_type": schemaAttribute8018aef0bc8e7e4443012d8c(),
+			// Property: VolumeKmsKeyId
+			"volume_kms_key_id": schemaAttribute0d704dc5669149a1089d92fc(),
+		}, /*END SCHEMA*/
+		Description: "Describes the resources, including ML instance types and ML instance count, to use for transform job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8506416c145d09c92a7cd93f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored pointing to single gzip compressed tar archive.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ad03e6e4d1f54fb6bc23e53() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The input configuration object for the model.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d8381c3ecb116987cbe0496() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Bias
+			"bias": schemaAttribute78b3822f73fc2a18a33efedb(),
+			// Property: Explainability
+			"explainability": schemaAttribute420c6a382c9860722d82e1c9(),
+			// Property: ModelDataQuality
+			"model_data_quality": schemaAttribute04305f5b56f80a25b4796988(),
+			// Property: ModelQuality
+			"model_quality": schemaAttribute923ecfcdb813794aa3f60add(),
+		}, /*END SCHEMA*/
+		Description: "Represents the drift check baselines that can be used when the model monitor is set using the model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8da74afaa5fb9840f4d121bf() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute918cf9b29dc81ac132611217() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The digest of the metric source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9213129747ce6efeca0b303d() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		// Pattern "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,256}" ignored.
+		Description: "The metadata properties associated with the model package versions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute923ecfcdb813794aa3f60add() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Constraints
+			"constraints": schemaAttribute56677c1fb39077bd8020a95d(),
+			// Property: Statistics
+			"statistics": schemaAttribute56677c1fb39077bd8020a95d(),
+		}, /*END SCHEMA*/
+		Description: "Represents the drift check model quality baselines that can be used when the model monitor is set using the model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute926dc9c78c38b612bfc19792() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A structure with Model Input details.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute986b2c83aaa58930a8cb8c03() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the S3 path of ML model data to deploy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a085849fb55787e381e50d7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The commit ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b3f57bab3f97e32869e0d16() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ModelCardContent
+			"model_card_content": schemaAttribute6a0cc361be5cb278ffe9bf83(),
+			// Property: ModelCardStatus
+			"model_card_status": schemaAttributed6ba0e2c56c712edf2db805e(),
+		}, /*END SCHEMA*/
+		Description: "The model card associated with the model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b86b00fba3e0c2a9d924ea0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon S3 URI for the file source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c2c3fd0c7fd2b8f79da82e8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The framework version of the Model Package Container Image.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9caa03de01adf60198817cfc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description provided for the model approval.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea14b91ae80997ef6fbad9797() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Constraints
+			"constraints": schemaAttribute56677c1fb39077bd8020a95d(),
+			// Property: Statistics
+			"statistics": schemaAttribute56677c1fb39077bd8020a95d(),
+		}, /*END SCHEMA*/
+		Description: "Metrics that measure the quality of a model.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea2ce4e6e16af706a36a40af1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string that determines the number of records included in a single mini-batch.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3e2af4c5c2a32bf48fd6f68() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates if you want to skip model validation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea44d5ddb0b2cfed39acdfad2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Accept
+			"accept": schemaAttributecf7837ad35d2420c15c2c834(),
+			// Property: AssembleWith
+			"assemble_with": schemaAttribute3bdba430b4a60137aa804ac0(),
+			// Property: KmsKeyId
+			"kms_key_id": schemaAttributef3a382904eca2795b4f2dbe8(),
+			// Property: S3OutputPath
+			"s3_output_path": schemaAttributed082c2948072ec10dc8cd1ca(),
+		}, /*END SCHEMA*/
+		Description: "Describes the results of a transform job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4994f989bbc5adb4e2f5184() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The entity this entity was generated by.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb501b8d02b23c3dbf3923db3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon S3 URI for the metric source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb78449c70dd41dab85e7646d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The repository metadata.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec23a69941b99278ebd1daee6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3DataSource
+			"s3_data_source": schemaAttribute5711b9ea4ca983359dadd50d(),
+		}, /*END SCHEMA*/
+		Description: "Describes the input source of a transform job and the way the transform job consumes it.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4d71f8e1487ad18e42142f2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Containers
+				"containers": schemaAttributefc30833544c0eb64f51155ba(),
+				// Property: Description
+				"description": schemaAttribute0b6c234849e956b01e3a5827(),
+				// Property: Name
+				"name": schemaAttribute78530742ab8e23841420a3be(),
+				// Property: SupportedContentTypes
+				"supported_content_types": schemaAttributeca8189a4f532291e7243f2e7(),
+				// Property: SupportedRealtimeInferenceInstanceTypes
+				"supported_realtime_inference_instance_types": schemaAttributecaa71c67525acb0e5ee16831(),
+				// Property: SupportedResponseMIMETypes
+				"supported_response_mime_types": schemaAttribute434b7fb496949fbb6ab1162c(),
+				// Property: SupportedTransformInstanceTypes
+				"supported_transform_instance_types": schemaAttribute8da74afaa5fb9840f4d121bf(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of additional Inference Specification objects.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5f82a253c11de1c9d8e211a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The multipurpose internet mail extension (MIME) type of the data. Amazon SageMaker uses the MIME type with each http call to transfer data to the transform job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8c64af513cd9eb0155703d4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current status of the model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca7e663ca729ce96bd16cfd6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The DNS host name for the Docker container.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca8189a4f532291e7243f2e7() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The supported MIME types for the input data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecaa71c67525acb0e5ee16831() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of the instance types that are used to generate inferences in real-time",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb38dad4576ba6f1ab533713() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Constraints
+			"constraints": schemaAttribute56677c1fb39077bd8020a95d(),
+			// Property: Statistics
+			"statistics": schemaAttribute56677c1fb39077bd8020a95d(),
+		}, /*END SCHEMA*/
+		Description: "Metrics that measure the quality of the input data for a model.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd54c2eac73d74db34e250ca() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute41060f8e2c99994f02d20322(),
+				// Property: Value
+				"value": schemaAttribute67561639eed7e8372e909d87(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecde2c87b2ae7dcd66d653747() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KmsKeyId
+			"kms_key_id": schemaAttribute5795eef0b2e983a25f5fe13d(),
+		}, /*END SCHEMA*/
+		Description: "An optional AWS Key Management Service key to encrypt, decrypt, and re-encrypt model package information for regulated workloads with highly sensitive data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf7837ad35d2420c15c2c834() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The MIME type used to specify the output data. Amazon SageMaker uses the MIME type with each http call to transfer data from the transform job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed082c2948072ec10dc8cd1ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon S3 path where you want Amazon SageMaker to store the results of the transform job.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed518dc297288cf92e92d4cd2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current status.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5c08f82a4cf2eda35490458() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Report
+			"report": schemaAttribute56677c1fb39077bd8020a95d(),
+		}, /*END SCHEMA*/
+		Description: "Contains explainability metrics for a model.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6ba0e2c56c712edf2db805e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The approval status of the model card within your organization.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8a40e62a30973e76915b9f5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AcceptEula
+			"accept_eula": schemaAttribute1291375ed37fa21e4458eb7c(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the access configuration file for the ML model.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8fea6d52870afbd6fa9e1f6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ValidationStatuses
+			"validation_statuses": schemaAttribute4faf0448404d3079d9821d3a(),
+		}, /*END SCHEMA*/
+		Description: "Details about the current status of the model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda47fad321200dff9e56af6a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AlgorithmName
+				"algorithm_name": schemaAttribute2a54096a820c3eba65d61733(),
+				// Property: ModelDataUrl
+				"model_data_url": schemaAttribute6cf2034b1cde3b4299a13cad(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of algorithms that were used to create a model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedbb64bd631f70691aee8b9ba() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3DataSource
+			"s3_data_source": schemaAttribute52331982773a809e08665091(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the location of ML model data to deploy during endpoint creation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd65b09e80807019e7f43637() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The machine learning task your model package accomplishes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee169ae54f99625d764a77325() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Depending on the value specified for the S3DataType, identifies either a key name prefix or a manifest.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5294090daa7914b764ec1d2() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of ML compute instances to use in the transform job. For distributed transform jobs, specify a value greater than 1. The default value is 1.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeecf39fb9e530dd093093381() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BatchStrategy
+			"batch_strategy": schemaAttributea2ce4e6e16af706a36a40af1(),
+			// Property: Environment
+			"environment": schemaAttribute310d941846d4625750cabb69(),
+			// Property: MaxConcurrentTransforms
+			"max_concurrent_transforms": schemaAttribute6f859b34aee0833ebbff2d55(),
+			// Property: MaxPayloadInMB
+			"max_payload_in_mb": schemaAttribute0f597b0055a99686127b112f(),
+			// Property: TransformInput
+			"transform_input": schemaAttributeef6aa3e0508ce3b24a0a35d9(),
+			// Property: TransformOutput
+			"transform_output": schemaAttributea44d5ddb0b2cfed39acdfad2(),
+			// Property: TransformResources
+			"transform_resources": schemaAttribute827cff02632d0fd182b626d5(),
+		}, /*END SCHEMA*/
+		Description: "Defines the input needed to run a transform job using the inference specification specified in the algorithm.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef6aa3e0508ce3b24a0a35d9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CompressionType
+			"compression_type": schemaAttribute14b66e859ec38dca74629de6(),
+			// Property: ContentType
+			"content_type": schemaAttributec5f82a253c11de1c9d8e211a(),
+			// Property: DataSource
+			"data_source": schemaAttributec23a69941b99278ebd1daee6(),
+			// Property: SplitType
+			"split_type": schemaAttribute7ac1a9f9263e7e064379ecd8(),
+		}, /*END SCHEMA*/
+		Description: "Describes the input source of a transform job and the way the transform job consumes it.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef028264ccb0571f14c6c0224() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContentDigest
+			"content_digest": schemaAttributefd6893eaacd10255e037fccc(),
+			// Property: ContentType
+			"content_type": schemaAttribute16b3d315fa47e96e716302fa(),
+			// Property: S3Uri
+			"s3_uri": schemaAttribute9b86b00fba3e0c2a9d924ea0(),
+		}, /*END SCHEMA*/
+		Description: "Represents a File Source Object.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2bef85302e70565664aa144() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the profile for the model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2f5f1f914cf37d7026e4012() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ValidationProfiles
+			"validation_profiles": schemaAttribute01f880099e9ded94de1648f6(),
+			// Property: ValidationRole
+			"validation_role": schemaAttribute155d7b25a8b37c45b5f0e3e5(),
+		}, /*END SCHEMA*/
+		Description: "Specifies configurations for one or more transform jobs that Amazon SageMaker runs to test the model package.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3a231f2105175bf0bb24b8a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3a382904eca2795b4f2dbe8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef413b3e8b28546947cb487cc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Bias
+			"bias": schemaAttribute3d8c765160d3a9cf0e249e17(),
+			// Property: Explainability
+			"explainability": schemaAttributed5c08f82a4cf2eda35490458(),
+			// Property: ModelDataQuality
+			"model_data_quality": schemaAttributecb38dad4576ba6f1ab533713(),
+			// Property: ModelQuality
+			"model_quality": schemaAttributea14b91ae80997ef6fbad9797(),
+		}, /*END SCHEMA*/
+		Description: "A structure that contains model metrics reports.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb2a49bd827e3bd0d12ad8ec() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CommitId
+			"commit_id": schemaAttribute9a085849fb55787e381e50d7(),
+			// Property: GeneratedBy
+			"generated_by": schemaAttributea4994f989bbc5adb4e2f5184(),
+			// Property: ProjectId
+			"project_id": schemaAttribute65a6b92aaaf6c371dd7f3b67(),
+			// Property: Repository
+			"repository": schemaAttributeb78449c70dd41dab85e7646d(),
+		}, /*END SCHEMA*/
+		Description: "Metadata properties of the tracking entity, trial, or trial component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc30833544c0eb64f51155ba() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContainerHostname
+				"container_hostname": schemaAttributeca7e663ca729ce96bd16cfd6(),
+				// Property: Environment
+				"environment": schemaAttribute310d941846d4625750cabb69(),
+				// Property: Framework
+				"framework": schemaAttribute7112351b980a37e3dca9f27a(),
+				// Property: FrameworkVersion
+				"framework_version": schemaAttribute9c2c3fd0c7fd2b8f79da82e8(),
+				// Property: Image
+				"image": schemaAttribute25f7ea09246ac7e6995537cb(),
+				// Property: ImageDigest
+				"image_digest": schemaAttribute08dec9396fb2a8ea62483aa7(),
+				// Property: ModelDataSource
+				"model_data_source": schemaAttributedbb64bd631f70691aee8b9ba(),
+				// Property: ModelDataUrl
+				"model_data_url": schemaAttribute926dc9c78c38b612bfc19792(),
+				// Property: ModelInput
+				"model_input": schemaAttribute74af8a7dcd0971bc5f58c941(),
+				// Property: NearestModelName
+				"nearest_model_name": schemaAttributef3a231f2105175bf0bb24b8a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefcf38ec769fad184195d875c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "If the overall status is Failed, the reason for the failure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd6893eaacd10255e037fccc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The digest of the file source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_model_package", modelPackageDataSource)
 }
@@ -241,152 +1297,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"additional_inference_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Containers
-					"containers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContainerHostname
-								"container_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The DNS host name for the Docker container.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Environment
-								"environment":       // Pattern: ""
-								schema.MapAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									// Pattern "[\\S\\s]*" ignored.
-									Description: "Sets the environment variables in the Docker container",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Framework
-								"framework": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The machine learning framework of the model package container image.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: FrameworkVersion
-								"framework_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The framework version of the Model Package Container Image.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Image
-								"image": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ImageDigest
-								"image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ModelDataSource
-								"model_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: S3DataSource
-										"s3_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: CompressionType
-												"compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Specifies how the ML model data is prepared.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: ModelAccessConfig
-												"model_access_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: AcceptEula
-														"accept_eula": schema.BoolAttribute{ /*START ATTRIBUTE*/
-															Description: "Specifies agreement to the model end-user license agreement (EULA).",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies the access configuration file for the ML model.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: S3DataType
-												"s3_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Specifies the type of ML model data to deploy.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: S3Uri
-												"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Specifies the S3 path of ML model data to deploy.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "Specifies the S3 location of ML model data to deploy.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Specifies the location of ML model data to deploy during endpoint creation.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ModelDataUrl
-								"model_data_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A structure with Model Input details.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ModelInput
-								"model_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: DataInputConfig
-										"data_input_config": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The input configuration object for the model.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: NearestModelName
-								"nearest_model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Description
-					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A description of the additional Inference specification.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SupportedContentTypes
-					"supported_content_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The supported MIME types for the input data.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SupportedRealtimeInferenceInstanceTypes
-					"supported_realtime_inference_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "A list of the instance types that are used to generate inferences in real-time",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SupportedResponseMIMETypes
-					"supported_response_mime_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The supported MIME types for the output data.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SupportedTransformInstanceTypes
-					"supported_transform_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of additional Inference Specification objects.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"additional_inference_specifications": schemaAttributec4d71f8e1487ad18e42142f2(),
 		// Property: AdditionalInferenceSpecificationsToAdd
 		// CloudFormation resource type schema:
 		//
@@ -605,152 +1516,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"additional_inference_specifications_to_add": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Containers
-					"containers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContainerHostname
-								"container_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The DNS host name for the Docker container.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Environment
-								"environment":       // Pattern: ""
-								schema.MapAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									// Pattern "[\\S\\s]*" ignored.
-									Description: "Sets the environment variables in the Docker container",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Framework
-								"framework": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The machine learning framework of the model package container image.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: FrameworkVersion
-								"framework_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The framework version of the Model Package Container Image.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Image
-								"image": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ImageDigest
-								"image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ModelDataSource
-								"model_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: S3DataSource
-										"s3_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: CompressionType
-												"compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Specifies how the ML model data is prepared.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: ModelAccessConfig
-												"model_access_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: AcceptEula
-														"accept_eula": schema.BoolAttribute{ /*START ATTRIBUTE*/
-															Description: "Specifies agreement to the model end-user license agreement (EULA).",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies the access configuration file for the ML model.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: S3DataType
-												"s3_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Specifies the type of ML model data to deploy.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: S3Uri
-												"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "Specifies the S3 path of ML model data to deploy.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "Specifies the S3 location of ML model data to deploy.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Specifies the location of ML model data to deploy during endpoint creation.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ModelDataUrl
-								"model_data_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A structure with Model Input details.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ModelInput
-								"model_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: DataInputConfig
-										"data_input_config": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The input configuration object for the model.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: NearestModelName
-								"nearest_model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Description
-					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A description of the additional Inference specification.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SupportedContentTypes
-					"supported_content_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The supported MIME types for the input data.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SupportedRealtimeInferenceInstanceTypes
-					"supported_realtime_inference_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "A list of the instance types that are used to generate inferences in real-time",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SupportedResponseMIMETypes
-					"supported_response_mime_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The supported MIME types for the output data.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SupportedTransformInstanceTypes
-					"supported_transform_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of additional Inference Specification objects.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"additional_inference_specifications_to_add": schemaAttributec4d71f8e1487ad18e42142f2(),
 		// Property: ApprovalDescription
 		// CloudFormation resource type schema:
 		//
@@ -760,10 +1526,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"approval_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description provided for the model approval.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"approval_description": schemaAttribute9caa03de01adf60198817cfc(),
 		// Property: CertifyForMarketplace
 		// CloudFormation resource type schema:
 		//
@@ -771,10 +1534,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Whether to certify the model package for listing on AWS Marketplace.",
 		//	  "type": "boolean"
 		//	}
-		"certify_for_marketplace": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether to certify the model package for listing on AWS Marketplace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certify_for_marketplace": schemaAttribute5626c7fa673f29e4e35670da(),
 		// Property: ClientToken
 		// CloudFormation resource type schema:
 		//
@@ -785,10 +1545,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique token that guarantees that the call to this API is idempotent.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"client_token": schemaAttribute494a3783e10cd4f350359c66(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -796,10 +1553,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The time at which the model package was created.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time at which the model package was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute2c2ea35c00e94d602aff4cad(),
 		// Property: CustomerMetadataProperties
 		// CloudFormation resource type schema:
 		//
@@ -820,13 +1574,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"customer_metadata_properties": // Pattern: ""
-		schema.MapAttribute{            /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			// Pattern "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,256}" ignored.
-			Description: "The metadata properties associated with the model package versions.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"customer_metadata_properties": schemaAttribute9213129747ce6efeca0b303d(),
 		// Property: Domain
 		// CloudFormation resource type schema:
 		//
@@ -834,10 +1582,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The machine learning domain of the model package you specified.",
 		//	  "type": "string"
 		//	}
-		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The machine learning domain of the model package you specified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain": schemaAttribute0f32e01326f5dbbb566bc9db(),
 		// Property: DriftCheckBaselines
 		// CloudFormation resource type schema:
 		//
@@ -1135,238 +1880,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"drift_check_baselines": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Bias
-				"bias": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ConfigFile
-						"config_file": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContentDigest
-								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The digest of the file source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContentType
-								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type of content stored in the file source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Uri
-								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon S3 URI for the file source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents a File Source Object.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: PostTrainingConstraints
-						"post_training_constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContentDigest
-								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The digest of the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContentType
-								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type of content stored in the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Uri
-								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon S3 URI for the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents a Metric Source Object.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: PreTrainingConstraints
-						"pre_training_constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContentDigest
-								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The digest of the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContentType
-								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type of content stored in the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Uri
-								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon S3 URI for the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents a Metric Source Object.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Represents the drift check bias baselines that can be used when the model monitor is set using the model package.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Explainability
-				"explainability": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ConfigFile
-						"config_file": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContentDigest
-								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The digest of the file source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContentType
-								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type of content stored in the file source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Uri
-								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon S3 URI for the file source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents a File Source Object.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Constraints
-						"constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContentDigest
-								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The digest of the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContentType
-								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type of content stored in the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Uri
-								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon S3 URI for the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents a Metric Source Object.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Contains explainability metrics for a model.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ModelDataQuality
-				"model_data_quality": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Constraints
-						"constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContentDigest
-								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The digest of the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContentType
-								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type of content stored in the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Uri
-								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon S3 URI for the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents a Metric Source Object.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Statistics
-						"statistics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContentDigest
-								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The digest of the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContentType
-								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type of content stored in the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Uri
-								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon S3 URI for the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents a Metric Source Object.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Represents the drift check data quality baselines that can be used when the model monitor is set using the model package.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ModelQuality
-				"model_quality": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Constraints
-						"constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContentDigest
-								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The digest of the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContentType
-								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type of content stored in the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Uri
-								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon S3 URI for the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents a Metric Source Object.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Statistics
-						"statistics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContentDigest
-								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The digest of the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContentType
-								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type of content stored in the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Uri
-								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon S3 URI for the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents a Metric Source Object.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Represents the drift check model quality baselines that can be used when the model monitor is set using the model package.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Represents the drift check baselines that can be used when the model monitor is set using the model package.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"drift_check_baselines": schemaAttribute8d8381c3ecb116987cbe0496(),
 		// Property: InferenceSpecification
 		// CloudFormation resource type schema:
 		//
@@ -1567,140 +2081,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"inference_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Containers
-				"containers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ContainerHostname
-							"container_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The DNS host name for the Docker container.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Environment
-							"environment":       // Pattern: ""
-							schema.MapAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								// Pattern "[\\S\\s]*" ignored.
-								Description: "Sets the environment variables in the Docker container",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Framework
-							"framework": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The machine learning framework of the model package container image.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: FrameworkVersion
-							"framework_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The framework version of the Model Package Container Image.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Image
-							"image": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ImageDigest
-							"image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ModelDataSource
-							"model_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: S3DataSource
-									"s3_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: CompressionType
-											"compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Specifies how the ML model data is prepared.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: ModelAccessConfig
-											"model_access_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: AcceptEula
-													"accept_eula": schema.BoolAttribute{ /*START ATTRIBUTE*/
-														Description: "Specifies agreement to the model end-user license agreement (EULA).",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Specifies the access configuration file for the ML model.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: S3DataType
-											"s3_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Specifies the type of ML model data to deploy.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: S3Uri
-											"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Specifies the S3 path of ML model data to deploy.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Specifies the S3 location of ML model data to deploy.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Specifies the location of ML model data to deploy during endpoint creation.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ModelDataUrl
-							"model_data_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A structure with Model Input details.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ModelInput
-							"model_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DataInputConfig
-									"data_input_config": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The input configuration object for the model.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: NearestModelName
-							"nearest_model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SupportedContentTypes
-				"supported_content_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The supported MIME types for the input data.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SupportedRealtimeInferenceInstanceTypes
-				"supported_realtime_inference_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of the instance types that are used to generate inferences in real-time",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SupportedResponseMIMETypes
-				"supported_response_mime_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The supported MIME types for the output data.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SupportedTransformInstanceTypes
-				"supported_transform_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Details about inference jobs that can be run with models based on this model package.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"inference_specification": schemaAttribute70bd9fd400571387e6306fa8(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -1708,10 +2089,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The time at which the model package was last modified.",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time at which the model package was last modified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttribute019ae1081a467d54de8b2292(),
 		// Property: MetadataProperties
 		// CloudFormation resource type schema:
 		//
@@ -1746,32 +2124,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"metadata_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CommitId
-				"commit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The commit ID.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: GeneratedBy
-				"generated_by": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The entity this entity was generated by.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProjectId
-				"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The project ID metadata.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Repository
-				"repository": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The repository metadata.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Metadata properties of the tracking entity, trial, or trial component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"metadata_properties": schemaAttributefb2a49bd827e3bd0d12ad8ec(),
 		// Property: ModelApprovalStatus
 		// CloudFormation resource type schema:
 		//
@@ -1784,10 +2137,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"model_approval_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The approval status of the model package.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"model_approval_status": schemaAttribute1733e45a2b9720654b883400(),
 		// Property: ModelCard
 		// CloudFormation resource type schema:
 		//
@@ -1819,22 +2169,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"model_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ModelCardContent
-				"model_card_content": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The content of the model card.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ModelCardStatus
-				"model_card_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The approval status of the model card within your organization.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The model card associated with the model package.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"model_card": schemaAttribute9b3f57bab3f97e32869e0d16(),
 		// Property: ModelMetrics
 		// CloudFormation resource type schema:
 		//
@@ -2105,216 +2440,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"model_metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Bias
-				"bias": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: PostTrainingReport
-						"post_training_report": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContentDigest
-								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The digest of the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContentType
-								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type of content stored in the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Uri
-								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon S3 URI for the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents a Metric Source Object.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: PreTrainingReport
-						"pre_training_report": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContentDigest
-								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The digest of the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContentType
-								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type of content stored in the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Uri
-								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon S3 URI for the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents a Metric Source Object.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Report
-						"report": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContentDigest
-								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The digest of the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContentType
-								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type of content stored in the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Uri
-								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon S3 URI for the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents a Metric Source Object.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Contains bias metrics for a model.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Explainability
-				"explainability": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Report
-						"report": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContentDigest
-								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The digest of the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContentType
-								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type of content stored in the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Uri
-								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon S3 URI for the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents a Metric Source Object.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Contains explainability metrics for a model.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ModelDataQuality
-				"model_data_quality": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Constraints
-						"constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContentDigest
-								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The digest of the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContentType
-								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type of content stored in the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Uri
-								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon S3 URI for the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents a Metric Source Object.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Statistics
-						"statistics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContentDigest
-								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The digest of the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContentType
-								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type of content stored in the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Uri
-								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon S3 URI for the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents a Metric Source Object.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Metrics that measure the quality of the input data for a model.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ModelQuality
-				"model_quality": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Constraints
-						"constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContentDigest
-								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The digest of the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContentType
-								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type of content stored in the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Uri
-								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon S3 URI for the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents a Metric Source Object.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Statistics
-						"statistics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContentDigest
-								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The digest of the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContentType
-								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The type of content stored in the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3Uri
-								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The Amazon S3 URI for the metric source.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents a Metric Source Object.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Metrics that measure the quality of a model.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A structure that contains model metrics reports.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"model_metrics": schemaAttributef413b3e8b28546947cb487cc(),
 		// Property: ModelPackageArn
 		// CloudFormation resource type schema:
 		//
@@ -2325,10 +2451,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"model_package_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the model package group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"model_package_arn": schemaAttribute3b0df4dd3ce3cd514b54d3d1(),
 		// Property: ModelPackageDescription
 		// CloudFormation resource type schema:
 		//
@@ -2338,10 +2461,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*",
 		//	  "type": "string"
 		//	}
-		"model_package_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the model package.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"model_package_description": schemaAttribute3ecdb9e09de3540949c15fef(),
 		// Property: ModelPackageGroupName
 		// CloudFormation resource type schema:
 		//
@@ -2352,10 +2472,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"model_package_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the model package group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"model_package_group_name": schemaAttribute0739491eaa775d3104a07b47(),
 		// Property: ModelPackageName
 		// CloudFormation resource type schema:
 		//
@@ -2363,10 +2480,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The name or arn of the model package.",
 		//	  "type": "string"
 		//	}
-		"model_package_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name or arn of the model package.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"model_package_name": schemaAttribute56db4b43b6feccb7abe9b5cd(),
 		// Property: ModelPackageStatus
 		// CloudFormation resource type schema:
 		//
@@ -2381,10 +2495,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"model_package_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current status of the model package.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"model_package_status": schemaAttributec8c64af513cd9eb0155703d4(),
 		// Property: ModelPackageStatusDetails
 		// CloudFormation resource type schema:
 		//
@@ -2431,35 +2542,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"model_package_status_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ValidationStatuses
-				"validation_statuses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: FailureReason
-							"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "If the overall status is Failed, the reason for the failure.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the model package for which the overall status is being reported.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Status
-							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The current status.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Details about the current status of the model package.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"model_package_status_details": schemaAttributed8fea6d52870afbd6fa9e1f6(),
 		// Property: ModelPackageVersion
 		// CloudFormation resource type schema:
 		//
@@ -2468,10 +2551,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"model_package_version": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The version of the model package.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"model_package_version": schemaAttribute0ad43702b0738775374933ee(),
 		// Property: SamplePayloadUrl
 		// CloudFormation resource type schema:
 		//
@@ -2481,10 +2561,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^(https|s3)://([^/]+)/?(.*)$",
 		//	  "type": "string"
 		//	}
-		"sample_payload_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored pointing to single gzip compressed tar archive.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sample_payload_url": schemaAttribute8506416c145d09c92a7cd93f(),
 		// Property: SecurityConfig
 		// CloudFormation resource type schema:
 		//
@@ -2504,17 +2581,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"security_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KmsKeyId
-				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The AWS KMS Key ID (KMSKeyId) used for encryption of model package information.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An optional AWS Key Management Service key to encrypt, decrypt, and re-encrypt model package information for regulated workloads with highly sensitive data.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_config": schemaAttributecde2c87b2ae7dcd66d653747(),
 		// Property: SkipModelValidation
 		// CloudFormation resource type schema:
 		//
@@ -2526,10 +2593,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"skip_model_validation": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates if you want to skip model validation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"skip_model_validation": schemaAttributea3e2af4c5c2a32bf48fd6f68(),
 		// Property: SourceAlgorithmSpecification
 		// CloudFormation resource type schema:
 		//
@@ -2574,31 +2638,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"source_algorithm_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SourceAlgorithms
-				"source_algorithms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AlgorithmName
-							"algorithm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your Amazon SageMaker account or an algorithm in AWS Marketplace that you are subscribed to.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ModelDataUrl
-							"model_data_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A list of algorithms that were used to create a model package.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Details about the algorithm that was used to create the model package.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_algorithm_specification": schemaAttribute7f2915aaaf8a1e12d9743890(),
 		// Property: SourceUri
 		// CloudFormation resource type schema:
 		//
@@ -2609,10 +2649,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"source_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The URI of the source for the model package.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_uri": schemaAttribute44961311387e28208718cdc4(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -2645,24 +2682,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributecd54c2eac73d74db34e250ca(),
 		// Property: Task
 		// CloudFormation resource type schema:
 		//
@@ -2670,10 +2690,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The machine learning task your model package accomplishes.",
 		//	  "type": "string"
 		//	}
-		"task": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The machine learning task your model package accomplishes.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"task": schemaAttributedd65b09e80807019e7f43637(),
 		// Property: ValidationSpecification
 		// CloudFormation resource type schema:
 		//
@@ -2897,155 +2914,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"validation_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ValidationProfiles
-				"validation_profiles": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ProfileName
-							"profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the profile for the model package.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TransformJobDefinition
-							"transform_job_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: BatchStrategy
-									"batch_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A string that determines the number of records included in a single mini-batch.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Environment
-									"environment":       // Pattern: ""
-									schema.MapAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
-										// Pattern "[\\S\\s]*" ignored.
-										Description: "Sets the environment variables in the Docker container",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: MaxConcurrentTransforms
-									"max_concurrent_transforms": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The maximum number of parallel requests that can be sent to each instance in a transform job. The default value is 1.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: MaxPayloadInMB
-									"max_payload_in_mb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata).",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: TransformInput
-									"transform_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: CompressionType
-											"compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "If your transform data is compressed, specify the compression type. Amazon SageMaker automatically decompresses the data for the transform job accordingly. The default value is None.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: ContentType
-											"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The multipurpose internet mail extension (MIME) type of the data. Amazon SageMaker uses the MIME type with each http call to transfer data to the transform job.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: DataSource
-											"data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: S3DataSource
-													"s3_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: S3DataType
-															"s3_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The S3 Data Source Type",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: S3Uri
-															"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "Depending on the value specified for the S3DataType, identifies either a key name prefix or a manifest.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "Describes the S3 data source.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "Describes the input source of a transform job and the way the transform job consumes it.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: SplitType
-											"split_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The method to use to split the transform job's data files into smaller batches. ",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Describes the input source of a transform job and the way the transform job consumes it.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: TransformOutput
-									"transform_output": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Accept
-											"accept": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The MIME type used to specify the output data. Amazon SageMaker uses the MIME type with each http call to transfer data from the transform job.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: AssembleWith
-											"assemble_with": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Defines how to assemble the results of the transform job as a single S3 object.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: KmsKeyId
-											"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: S3OutputPath
-											"s3_output_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The Amazon S3 path where you want Amazon SageMaker to store the results of the transform job.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Describes the results of a transform job.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: TransformResources
-									"transform_resources": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: InstanceCount
-											"instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Description: "The number of ML compute instances to use in the transform job. For distributed transform jobs, specify a value greater than 1. The default value is 1.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: InstanceType
-											"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The ML compute instance type for the transform job.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: VolumeKmsKeyId
-											"volume_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Describes the resources, including ML instance types and ML instance count, to use for transform job.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Defines the input needed to run a transform job using the inference specification specified in the algorithm.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ValidationRole
-				"validation_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The IAM roles to be used for the validation of the model package.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies configurations for one or more transform jobs that Amazon SageMaker runs to test the model package.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"validation_specification": schemaAttributef2f5f1f914cf37d7026e4012(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,246 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute04771189ede6e2309abcdee3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The priority of the sampling rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2015c95735db055ddb1e64f2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "When the rule was created, in Unix time seconds.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d269e688bfc11221d6896c3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Matches the hostname from a request URL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ffd91a95c443efa32d3751b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a374ef5e1ba9ae0268c0e3e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4de5d940e26dd3a6ad24247c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Matches the path from a request URL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c4bbb74d1e2e45394d7ca85() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Matches the name that the service uses to identify itself in segments.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6390b052fb6c47d4732c7734() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute694a2ddbe1fb1ed8d3e6bfb2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Matches the origin that the service uses to identify its type in segments.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8de57f453cc321a6132962bb() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8eeb6d6de1fcd5ca310d4ec3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Matches the HTTP method from a request URL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea1204a63fd00f703d128ccce() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb029a6c4cbd49d3ecf55786c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CooldownWindowMinutes
+			"cooldown_window_minutes": schemaAttributea1204a63fd00f703d128ccce(),
+			// Property: MaxRate
+			"max_rate": schemaAttributeb5f6db2a4de63f2df3b7ddb9(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5f6db2a4de63f2df3b7ddb9() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb67bb9de51ddd68261e1fbbc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Attributes
+			"attributes": schemaAttributec93d50e164ef4ef2cd3892f7(),
+			// Property: FixedRate
+			"fixed_rate": schemaAttributeb6fbaf0de8a2c3f8c4d8112b(),
+			// Property: HTTPMethod
+			"http_method": schemaAttribute8eeb6d6de1fcd5ca310d4ec3(),
+			// Property: Host
+			"host": schemaAttribute2d269e688bfc11221d6896c3(),
+			// Property: Priority
+			"priority": schemaAttribute04771189ede6e2309abcdee3(),
+			// Property: ReservoirSize
+			"reservoir_size": schemaAttribute8de57f453cc321a6132962bb(),
+			// Property: ResourceARN
+			"resource_arn": schemaAttributefc84f1b2c6f09c86c1c54912(),
+			// Property: RuleARN
+			"rule_arn": schemaAttribute2ffd91a95c443efa32d3751b(),
+			// Property: RuleName
+			"rule_name": schemaAttribute2ffd91a95c443efa32d3751b(),
+			// Property: SamplingRateBoost
+			"sampling_rate_boost": schemaAttributeb029a6c4cbd49d3ecf55786c(),
+			// Property: ServiceName
+			"service_name": schemaAttribute5c4bbb74d1e2e45394d7ca85(),
+			// Property: ServiceType
+			"service_type": schemaAttribute694a2ddbe1fb1ed8d3e6bfb2(),
+			// Property: URLPath
+			"url_path": schemaAttribute4de5d940e26dd3a6ad24247c(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6fbaf0de8a2c3f8c4d8112b() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebcee1c2b906d188362b10cbb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "When the rule was modified, in Unix time seconds.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec93d50e164ef4ef2cd3892f7() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Matches attributes derived from the request.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1af51718b4157bdce0047cd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Attributes
+			"attributes": schemaAttributec93d50e164ef4ef2cd3892f7(),
+			// Property: FixedRate
+			"fixed_rate": schemaAttributeb6fbaf0de8a2c3f8c4d8112b(),
+			// Property: HTTPMethod
+			"http_method": schemaAttribute8eeb6d6de1fcd5ca310d4ec3(),
+			// Property: Host
+			"host": schemaAttribute2d269e688bfc11221d6896c3(),
+			// Property: Priority
+			"priority": schemaAttribute04771189ede6e2309abcdee3(),
+			// Property: ReservoirSize
+			"reservoir_size": schemaAttribute8de57f453cc321a6132962bb(),
+			// Property: ResourceARN
+			"resource_arn": schemaAttributefc84f1b2c6f09c86c1c54912(),
+			// Property: RuleARN
+			"rule_arn": schemaAttribute2ffd91a95c443efa32d3751b(),
+			// Property: RuleName
+			"rule_name": schemaAttribute2ffd91a95c443efa32d3751b(),
+			// Property: SamplingRateBoost
+			"sampling_rate_boost": schemaAttributeb029a6c4cbd49d3ecf55786c(),
+			// Property: ServiceName
+			"service_name": schemaAttribute5c4bbb74d1e2e45394d7ca85(),
+			// Property: ServiceType
+			"service_type": schemaAttribute694a2ddbe1fb1ed8d3e6bfb2(),
+			// Property: URLPath
+			"url_path": schemaAttribute4de5d940e26dd3a6ad24247c(),
+			// Property: Version
+			"version": schemaAttributee6cf9264c7cc5428b78b9284(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1c047e6e29e8931045e43fc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CreatedAt
+			"created_at": schemaAttribute2015c95735db055ddb1e64f2(),
+			// Property: ModifiedAt
+			"modified_at": schemaAttributebcee1c2b906d188362b10cbb(),
+			// Property: SamplingRule
+			"sampling_rule": schemaAttributed1af51718b4157bdce0047cd(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6cf9264c7cc5428b78b9284() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The version of the sampling rule format (1)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef823e063917a9b2499c9d617() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute6390b052fb6c47d4732c7734(),
+				// Property: Value
+				"value": schemaAttribute4a374ef5e1ba9ae0268c0e3e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc84f1b2c6f09c86c1c54912() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Matches the ARN of the AWS resource on which the service runs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_xray_sampling_rule", samplingRuleDataSource)
 }
@@ -30,10 +270,7 @@ func samplingRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
 		//	  "type": "string"
 		//	}
-		"rule_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rule_arn": schemaAttribute2ffd91a95c443efa32d3751b(),
 		// Property: RuleName
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +280,7 @@ func samplingRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rule_name": schemaAttribute2ffd91a95c443efa32d3751b(),
 		// Property: SamplingRule
 		// CloudFormation resource type schema:
 		//
@@ -161,94 +395,7 @@ func samplingRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"sampling_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Attributes
-				"attributes":        // Pattern: ""
-				schema.MapAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Matches attributes derived from the request.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FixedRate
-				"fixed_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: HTTPMethod
-				"http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Matches the HTTP method from a request URL.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Host
-				"host": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Matches the hostname from a request URL.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Priority
-				"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The priority of the sampling rule.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ReservoirSize
-				"reservoir_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceARN
-				"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Matches the ARN of the AWS resource on which the service runs.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RuleARN
-				"rule_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RuleName
-				"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SamplingRateBoost
-				"sampling_rate_boost": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CooldownWindowMinutes
-						"cooldown_window_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MaxRate
-						"max_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServiceName
-				"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Matches the name that the service uses to identify itself in segments.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServiceType
-				"service_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Matches the origin that the service uses to identify its type in segments.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: URLPath
-				"url_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Matches the path from a request URL.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Version
-				"version": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The version of the sampling rule format (1)",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"sampling_rule": schemaAttributed1af51718b4157bdce0047cd(),
 		// Property: SamplingRuleRecord
 		// CloudFormation resource type schema:
 		//
@@ -377,110 +524,7 @@ func samplingRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"sampling_rule_record": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CreatedAt
-				"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "When the rule was created, in Unix time seconds.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ModifiedAt
-				"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "When the rule was modified, in Unix time seconds.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SamplingRule
-				"sampling_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Attributes
-						"attributes":        // Pattern: ""
-						schema.MapAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "Matches attributes derived from the request.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: FixedRate
-						"fixed_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: HTTPMethod
-						"http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Matches the HTTP method from a request URL.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Host
-						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Matches the hostname from a request URL.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Priority
-						"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The priority of the sampling rule.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ReservoirSize
-						"reservoir_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ResourceARN
-						"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Matches the ARN of the AWS resource on which the service runs.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RuleARN
-						"rule_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RuleName
-						"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SamplingRateBoost
-						"sampling_rate_boost": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: CooldownWindowMinutes
-								"cooldown_window_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: MaxRate
-								"max_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Description: "The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ServiceName
-						"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Matches the name that the service uses to identify itself in segments.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ServiceType
-						"service_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Matches the origin that the service uses to identify its type in segments.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: URLPath
-						"url_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Matches the path from a request URL.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Version
-						"version": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The version of the sampling rule format (1)",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"sampling_rule_record": schemaAttributed1c047e6e29e8931045e43fc(),
 		// Property: SamplingRuleUpdate
 		// CloudFormation resource type schema:
 		//
@@ -579,89 +623,7 @@ func samplingRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"sampling_rule_update": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Attributes
-				"attributes":        // Pattern: ""
-				schema.MapAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Matches attributes derived from the request.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FixedRate
-				"fixed_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The percentage of matching requests to instrument, after the reservoir is exhausted.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: HTTPMethod
-				"http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Matches the HTTP method from a request URL.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Host
-				"host": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Matches the hostname from a request URL.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Priority
-				"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The priority of the sampling rule.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ReservoirSize
-				"reservoir_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "A fixed number of matching requests to instrument per second, prior to applying the fixed rate. The reservoir is not used directly by services, but applies to all services using the rule collectively.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceARN
-				"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Matches the ARN of the AWS resource on which the service runs.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RuleARN
-				"rule_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RuleName
-				"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the sampling rule. Specify a rule by either name or ARN, but not both.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SamplingRateBoost
-				"sampling_rate_boost": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CooldownWindowMinutes
-						"cooldown_window_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Time window (in minutes) in which only one sampling rate boost can be triggered. After a boost occurs, no further boosts are allowed until the next window.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MaxRate
-						"max_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "The maximum sampling rate X-Ray will apply when it detects anomalies. X-Ray determines the appropriate rate between your baseline and the maximum, depending on anomaly activity.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServiceName
-				"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Matches the name that the service uses to identify itself in segments.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServiceType
-				"service_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Matches the origin that the service uses to identify its type in segments.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: URLPath
-				"url_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Matches the path from a request URL.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"sampling_rule_update": schemaAttributeb67bb9de51ddd68261e1fbbc(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -688,24 +650,7 @@ func samplingRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributef823e063917a9b2499c9d617(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

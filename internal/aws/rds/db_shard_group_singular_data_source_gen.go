@@ -14,6 +14,84 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute08a2546dcdc4e010b3df47ea() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum capacity of the DB shard group in Aurora capacity units (ACUs).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute12355616d3942db831b8bf16() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a1c8a2e34f8726c6395f47d() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute12355616d3942db831b8bf16(),
+				// Property: Value
+				"value": schemaAttribute7411f91b206a548304f76975(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An optional set of key-value pairs to associate arbitrary data of your choosing with the DB shard group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute46936a1817d4c5cfe47d2227() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether to create standby standby DB data access shard for the DB shard group. Valid values are the following:\n  +  0 - Creates a DB shard group without a standby DB data access shard. This is the default value.\n  +  1 - Creates a DB shard group with a standby DB data access shard in a different Availability Zone (AZ).\n  +  2 - Creates a DB shard group with two standby DB data access shard in two different AZs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute521b7e23038cb979e8e4e986() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum capacity of the DB shard group in Aurora capacity units (ACUs).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f07d8afb8efe8bc3a600858() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the DB shard group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7349fbd7d6561bcaf56accfb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7411f91b206a548304f76975() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea520f3a6cd33644db1690712() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the primary DB cluster for the DB shard group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7859d51ec972500967793b9() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the DB shard group is publicly accessible.\n When the DB shard group is publicly accessible, its Domain Name System (DNS) endpoint resolves to the private IP address from within the DB shard group's virtual private cloud (VPC). It resolves to the public IP address from outside of the DB shard group's VPC. Access to the DB shard group is ultimately controlled by the security group it uses. That public access is not permitted if the security group assigned to the DB shard group doesn't permit it.\n When the DB shard group isn't publicly accessible, it is an internal DB shard group with a DNS name that resolves to a private IP address.\n Default: The default behavior varies depending on whether ``DBSubnetGroupName`` is specified.\n If ``DBSubnetGroupName`` isn't specified, and ``PubliclyAccessible`` isn't specified, the following applies:\n  +  If the default VPC in the target Region doesn?t have an internet gateway attached to it, the DB shard group is private.\n  +  If the default VPC in the target Region has an internet gateway attached to it, the DB shard group is public.\n  \n If ``DBSubnetGroupName`` is specified, and ``PubliclyAccessible`` isn't specified, the following applies:\n  +  If the subnets are part of a VPC that doesn?t have an internet gateway attached to it, the DB shard group is private.\n  +  If the subnets are part of a VPC that has an internet gateway attached to it, the DB shard group is public.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_rds_db_shard_group", dBShardGroupDataSource)
 }
@@ -30,10 +108,7 @@ func dBShardGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"compute_redundancy": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether to create standby standby DB data access shard for the DB shard group. Valid values are the following:\n  +  0 - Creates a DB shard group without a standby DB data access shard. This is the default value.\n  +  1 - Creates a DB shard group with a standby DB data access shard in a different Availability Zone (AZ).\n  +  2 - Creates a DB shard group with two standby DB data access shard in two different AZs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"compute_redundancy": schemaAttribute46936a1817d4c5cfe47d2227(),
 		// Property: DBClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +118,7 @@ func dBShardGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the primary DB cluster for the DB shard group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"db_cluster_identifier": schemaAttributea520f3a6cd33644db1690712(),
 		// Property: DBShardGroupIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +128,7 @@ func dBShardGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"db_shard_group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the DB shard group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"db_shard_group_identifier": schemaAttribute6f07d8afb8efe8bc3a600858(),
 		// Property: DBShardGroupResourceId
 		// CloudFormation resource type schema:
 		//
@@ -67,10 +136,7 @@ func dBShardGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"db_shard_group_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"db_shard_group_resource_id": schemaAttribute7349fbd7d6561bcaf56accfb(),
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -78,10 +144,7 @@ func dBShardGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint": schemaAttribute7349fbd7d6561bcaf56accfb(),
 		// Property: MaxACU
 		// CloudFormation resource type schema:
 		//
@@ -89,10 +152,7 @@ func dBShardGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The maximum capacity of the DB shard group in Aurora capacity units (ACUs).",
 		//	  "type": "number"
 		//	}
-		"max_acu": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum capacity of the DB shard group in Aurora capacity units (ACUs).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"max_acu": schemaAttribute08a2546dcdc4e010b3df47ea(),
 		// Property: MinACU
 		// CloudFormation resource type schema:
 		//
@@ -100,10 +160,7 @@ func dBShardGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The minimum capacity of the DB shard group in Aurora capacity units (ACUs).",
 		//	  "type": "number"
 		//	}
-		"min_acu": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The minimum capacity of the DB shard group in Aurora capacity units (ACUs).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"min_acu": schemaAttribute521b7e23038cb979e8e4e986(),
 		// Property: PubliclyAccessible
 		// CloudFormation resource type schema:
 		//
@@ -111,10 +168,7 @@ func dBShardGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Specifies whether the DB shard group is publicly accessible.\n When the DB shard group is publicly accessible, its Domain Name System (DNS) endpoint resolves to the private IP address from within the DB shard group's virtual private cloud (VPC). It resolves to the public IP address from outside of the DB shard group's VPC. Access to the DB shard group is ultimately controlled by the security group it uses. That public access is not permitted if the security group assigned to the DB shard group doesn't permit it.\n When the DB shard group isn't publicly accessible, it is an internal DB shard group with a DNS name that resolves to a private IP address.\n Default: The default behavior varies depending on whether ``DBSubnetGroupName`` is specified.\n If ``DBSubnetGroupName`` isn't specified, and ``PubliclyAccessible`` isn't specified, the following applies:\n  +  If the default VPC in the target Region doesn?t have an internet gateway attached to it, the DB shard group is private.\n  +  If the default VPC in the target Region has an internet gateway attached to it, the DB shard group is public.\n  \n If ``DBSubnetGroupName`` is specified, and ``PubliclyAccessible`` isn't specified, the following applies:\n  +  If the subnets are part of a VPC that doesn?t have an internet gateway attached to it, the DB shard group is private.\n  +  If the subnets are part of a VPC that has an internet gateway attached to it, the DB shard group is public.",
 		//	  "type": "boolean"
 		//	}
-		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether the DB shard group is publicly accessible.\n When the DB shard group is publicly accessible, its Domain Name System (DNS) endpoint resolves to the private IP address from within the DB shard group's virtual private cloud (VPC). It resolves to the public IP address from outside of the DB shard group's VPC. Access to the DB shard group is ultimately controlled by the security group it uses. That public access is not permitted if the security group assigned to the DB shard group doesn't permit it.\n When the DB shard group isn't publicly accessible, it is an internal DB shard group with a DNS name that resolves to a private IP address.\n Default: The default behavior varies depending on whether ``DBSubnetGroupName`` is specified.\n If ``DBSubnetGroupName`` isn't specified, and ``PubliclyAccessible`` isn't specified, the following applies:\n  +  If the default VPC in the target Region doesn?t have an internet gateway attached to it, the DB shard group is private.\n  +  If the default VPC in the target Region has an internet gateway attached to it, the DB shard group is public.\n  \n If ``DBSubnetGroupName`` is specified, and ``PubliclyAccessible`` isn't specified, the following applies:\n  +  If the subnets are part of a VPC that doesn?t have an internet gateway attached to it, the DB shard group is private.\n  +  If the subnets are part of a VPC that has an internet gateway attached to it, the DB shard group is public.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"publicly_accessible": schemaAttributea7859d51ec972500967793b9(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -147,24 +201,7 @@ func dBShardGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An optional set of key-value pairs to associate arbitrary data of your choosing with the DB shard group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute2a1c8a2e34f8726c6395f47d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

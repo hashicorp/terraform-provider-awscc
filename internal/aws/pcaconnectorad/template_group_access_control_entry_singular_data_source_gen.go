@@ -14,6 +14,24 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute30e2d9fb8076268fd7f6cade() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AutoEnroll
+			"auto_enroll": schemaAttribute9f8e610a15853b7b5baee361(),
+			// Property: Enroll
+			"enroll": schemaAttribute9f8e610a15853b7b5baee361(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f8e610a15853b7b5baee361() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_pcaconnectorad_template_group_access_control_entry", templateGroupAccessControlEntryDataSource)
 }
@@ -45,19 +63,7 @@ func templateGroupAccessControlEntryDataSource(ctx context.Context) (datasource.
 		//	  },
 		//	  "type": "object"
 		//	}
-		"access_rights": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AutoEnroll
-				"auto_enroll": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Enroll
-				"enroll": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"access_rights": schemaAttribute30e2d9fb8076268fd7f6cade(),
 		// Property: GroupDisplayName
 		// CloudFormation resource type schema:
 		//
@@ -67,9 +73,7 @@ func templateGroupAccessControlEntryDataSource(ctx context.Context) (datasource.
 		//	  "pattern": "^[\\x20-\\x7E]+$",
 		//	  "type": "string"
 		//	}
-		"group_display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"group_display_name": schemaAttribute9f8e610a15853b7b5baee361(),
 		// Property: GroupSecurityIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -79,9 +83,7 @@ func templateGroupAccessControlEntryDataSource(ctx context.Context) (datasource.
 		//	  "pattern": "^S-[0-9]-([0-9]+-){1,14}[0-9]+$",
 		//	  "type": "string"
 		//	}
-		"group_security_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"group_security_identifier": schemaAttribute9f8e610a15853b7b5baee361(),
 		// Property: TemplateArn
 		// CloudFormation resource type schema:
 		//
@@ -91,9 +93,7 @@ func templateGroupAccessControlEntryDataSource(ctx context.Context) (datasource.
 		//	  "pattern": "^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector(\\/[\\w-]+)\\/template(\\/[\\w-]+)$",
 		//	  "type": "string"
 		//	}
-		"template_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"template_arn": schemaAttribute9f8e610a15853b7b5baee361(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

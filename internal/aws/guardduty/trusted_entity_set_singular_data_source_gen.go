@@ -14,6 +14,32 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute12d27c18e8142ff500b04937() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9464be27f28c8db08c4a9df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef493ec7c81fa30e8055d300e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributea9464be27f28c8db08c4a9df(),
+				// Property: Value
+				"value": schemaAttributea9464be27f28c8db08c4a9df(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_guardduty_trusted_entity_set", trustedEntitySetDataSource)
 }
@@ -28,18 +54,14 @@ func trustedEntitySetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"activate": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"activate": schemaAttribute12d27c18e8142ff500b04937(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributea9464be27f28c8db08c4a9df(),
 		// Property: DetectorId
 		// CloudFormation resource type schema:
 		//
@@ -48,27 +70,21 @@ func trustedEntitySetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"detector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"detector_id": schemaAttributea9464be27f28c8db08c4a9df(),
 		// Property: ErrorDetails
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"error_details": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"error_details": schemaAttributea9464be27f28c8db08c4a9df(),
 		// Property: ExpectedBucketOwner
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"expected_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"expected_bucket_owner": schemaAttributea9464be27f28c8db08c4a9df(),
 		// Property: Format
 		// CloudFormation resource type schema:
 		//
@@ -77,18 +93,14 @@ func trustedEntitySetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"format": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"format": schemaAttributea9464be27f28c8db08c4a9df(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"trusted_entity_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"trusted_entity_set_id": schemaAttributea9464be27f28c8db08c4a9df(),
 		// Property: Location
 		// CloudFormation resource type schema:
 		//
@@ -97,18 +109,14 @@ func trustedEntitySetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"location": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"location": schemaAttributea9464be27f28c8db08c4a9df(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributea9464be27f28c8db08c4a9df(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -124,9 +132,7 @@ func trustedEntitySetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributea9464be27f28c8db08c4a9df(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -153,30 +159,14 @@ func trustedEntitySetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributef493ec7c81fa30e8055d300e(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttributea9464be27f28c8db08c4a9df(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

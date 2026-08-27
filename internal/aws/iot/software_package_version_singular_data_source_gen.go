@@ -15,6 +15,122 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1792460b431e92c72b735212() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The S3 version",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute332ead408d8ad42892e9b0da() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Location
+			"s3_location": schemaAttribute6b12266b38ca2042cabc896d(),
+		}, /*END SCHEMA*/
+		Description: "The sbom zip archive location of the package version",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62ccc8271671b7d2ac464c94() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The S3 key",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64aca360202bc11de1229930() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The S3 bucket",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6603fb20c9c00921f759bc54() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b12266b38ca2042cabc896d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Bucket
+			"bucket": schemaAttribute64aca360202bc11de1229930(),
+			// Property: Key
+			"key": schemaAttribute62ccc8271671b7d2ac464c94(),
+			// Property: Version
+			"version": schemaAttribute1792460b431e92c72b735212(),
+		}, /*END SCHEMA*/
+		Description: "The Amazon S3 location",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9075b396bcc4d7e59da97535() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea1fdb3cec6a85ad0ebc444a7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The inline json job document associated with a software package version",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb36b7915f4b82a4e6d2a6db8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The validation status of the Sbom file",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb44a1b35abc7ec92aaa0cd59() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee595dfa0a415c617c9c47c26() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee71c876e46339da6891d80c4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Location
+			"s3_location": schemaAttribute6b12266b38ca2042cabc896d(),
+		}, /*END SCHEMA*/
+		Description: "The artifact location of the package version",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdfab9a6932cf10abb599b1e() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeb44a1b35abc7ec92aaa0cd59(),
+				// Property: Value
+				"value": schemaAttributee595dfa0a415c617c9c47c26(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iot_software_package_version", softwarePackageVersionDataSource)
 }
@@ -62,34 +178,7 @@ func softwarePackageVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"artifact": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: S3Location
-				"s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Bucket
-						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The S3 bucket",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Key
-						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The S3 key",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Version
-						"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The S3 version",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The Amazon S3 location",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The artifact location of the package version",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"artifact": schemaAttributee71c876e46339da6891d80c4(),
 		// Property: Attributes
 		// CloudFormation resource type schema:
 		//
@@ -104,11 +193,7 @@ func softwarePackageVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "object"
 		//	}
-		"attributes":        // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"attributes": schemaAttribute9075b396bcc4d7e59da97535(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -118,18 +203,14 @@ func softwarePackageVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^[^\\p{C}]+$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute6603fb20c9c00921f759bc54(),
 		// Property: ErrorReason
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"error_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"error_reason": schemaAttribute6603fb20c9c00921f759bc54(),
 		// Property: PackageName
 		// CloudFormation resource type schema:
 		//
@@ -139,9 +220,7 @@ func softwarePackageVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^[a-zA-Z0-9-_.]+$",
 		//	  "type": "string"
 		//	}
-		"package_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"package_name": schemaAttribute6603fb20c9c00921f759bc54(),
 		// Property: PackageVersionArn
 		// CloudFormation resource type schema:
 		//
@@ -149,9 +228,7 @@ func softwarePackageVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^arn:[!-~]+$",
 		//	  "type": "string"
 		//	}
-		"package_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"package_version_arn": schemaAttribute6603fb20c9c00921f759bc54(),
 		// Property: Recipe
 		// CloudFormation resource type schema:
 		//
@@ -159,10 +236,7 @@ func softwarePackageVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The inline json job document associated with a software package version",
 		//	  "type": "string"
 		//	}
-		"recipe": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The inline json job document associated with a software package version",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"recipe": schemaAttributea1fdb3cec6a85ad0ebc444a7(),
 		// Property: Sbom
 		// CloudFormation resource type schema:
 		//
@@ -202,34 +276,7 @@ func softwarePackageVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"sbom": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: S3Location
-				"s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Bucket
-						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The S3 bucket",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Key
-						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The S3 key",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Version
-						"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The S3 version",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The Amazon S3 location",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The sbom zip archive location of the package version",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sbom": schemaAttribute332ead408d8ad42892e9b0da(),
 		// Property: SbomValidationStatus
 		// CloudFormation resource type schema:
 		//
@@ -243,10 +290,7 @@ func softwarePackageVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"sbom_validation_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The validation status of the Sbom file",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sbom_validation_status": schemaAttributeb36b7915f4b82a4e6d2a6db8(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -258,9 +302,7 @@ func softwarePackageVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute6603fb20c9c00921f759bc54(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -295,24 +337,7 @@ func softwarePackageVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributefdfab9a6932cf10abb599b1e(),
 		// Property: VersionName
 		// CloudFormation resource type schema:
 		//
@@ -322,9 +347,7 @@ func softwarePackageVersionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^[a-zA-Z0-9-_.]+$",
 		//	  "type": "string"
 		//	}
-		"version_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"version_name": schemaAttribute6603fb20c9c00921f759bc54(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

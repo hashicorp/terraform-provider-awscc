@@ -14,6 +14,70 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0588d3ced743f062c0189665() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Timestamp when the consumer was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c73e2236c3ec0fb078381a9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A consumer can't read data while in the CREATING or DELETING states. Valid Values: CREATING | DELETING | ACTIVE",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8bcf4490ccd6a8e76b6c9e15() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon resource name (ARN) of the Kinesis data stream that you want to register the consumer with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeade1ebbdc546dc101e91640e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributef41fe3f081bc42bca834de81(),
+				// Property: Value
+				"value": schemaAttributeca37206516852eb7220648f1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An arbitrary set of tags (key–value pairs) to associate with the Kinesis consumer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb70e02949273c80f8acad7ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Kinesis Stream Consumer. For a given Kinesis data stream, each consumer must have a unique name. However, consumer names don't have to be unique across data streams.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca37206516852eb7220648f1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributece65cb4cbd9a30ada384ce95() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN returned by Kinesis Data Streams when you registered the consumer. If you don't know the ARN of the consumer that you want to deregister, you can use the ListStreamConsumers operation to get a list of the descriptions of all the consumers that are currently registered with a given data stream. The description of a consumer contains its ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef41fe3f081bc42bca834de81() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_kinesis_stream_consumer", streamConsumerDataSource)
 }
@@ -29,10 +93,7 @@ func streamConsumerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The ARN returned by Kinesis Data Streams when you registered the consumer. If you don't know the ARN of the consumer that you want to deregister, you can use the ListStreamConsumers operation to get a list of the descriptions of all the consumers that are currently registered with a given data stream. The description of a consumer contains its ARN.",
 		//	  "type": "string"
 		//	}
-		"consumer_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN returned by Kinesis Data Streams when you registered the consumer. If you don't know the ARN of the consumer that you want to deregister, you can use the ListStreamConsumers operation to get a list of the descriptions of all the consumers that are currently registered with a given data stream. The description of a consumer contains its ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"consumer_arn": schemaAttributece65cb4cbd9a30ada384ce95(),
 		// Property: ConsumerCreationTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +101,7 @@ func streamConsumerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Timestamp when the consumer was created.",
 		//	  "type": "string"
 		//	}
-		"consumer_creation_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Timestamp when the consumer was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"consumer_creation_timestamp": schemaAttribute0588d3ced743f062c0189665(),
 		// Property: ConsumerName
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +112,7 @@ func streamConsumerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9_.-]+$",
 		//	  "type": "string"
 		//	}
-		"consumer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Kinesis Stream Consumer. For a given Kinesis data stream, each consumer must have a unique name. However, consumer names don't have to be unique across data streams.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"consumer_name": schemaAttributeb70e02949273c80f8acad7ae(),
 		// Property: ConsumerStatus
 		// CloudFormation resource type schema:
 		//
@@ -65,10 +120,7 @@ func streamConsumerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "A consumer can't read data while in the CREATING or DELETING states. Valid Values: CREATING | DELETING | ACTIVE",
 		//	  "type": "string"
 		//	}
-		"consumer_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A consumer can't read data while in the CREATING or DELETING states. Valid Values: CREATING | DELETING | ACTIVE",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"consumer_status": schemaAttribute2c73e2236c3ec0fb078381a9(),
 		// Property: StreamARN
 		// CloudFormation resource type schema:
 		//
@@ -79,10 +131,7 @@ func streamConsumerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws.*:kinesis:.*:\\d{12}:stream/\\S+",
 		//	  "type": "string"
 		//	}
-		"stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon resource name (ARN) of the Kinesis data stream that you want to register the consumer with.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"stream_arn": schemaAttribute8bcf4490ccd6a8e76b6c9e15(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -116,24 +165,7 @@ func streamConsumerDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An arbitrary set of tags (key–value pairs) to associate with the Kinesis consumer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeade1ebbdc546dc101e91640e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

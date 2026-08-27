@@ -15,6 +15,205 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute03e2203c40afe32fe944aa68() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DashPlaylistSettings
+				"dash_playlist_settings": schemaAttribute10a909a52d6b84df2af03348(),
+				// Property: HlsPlaylistSettings
+				"hls_playlist_settings": schemaAttributee2332d4d8b0fd3bdba54166f(),
+				// Property: ManifestName
+				"manifest_name": schemaAttributef191dd6c98fad40896fa184d(),
+				// Property: SourceGroup
+				"source_group": schemaAttributee779f6fafefae4dc92869261(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>The channel's output properties.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute064ee516c70e582f2b937ea3() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>The total duration (in seconds) of each manifest. Minimum value: <code>30</code> seconds. Maximum value: <code>3600</code> seconds.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0bfda176648f522289b4df51() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>Minimum amount of time (in seconds) that the player should wait before requesting updates to the manifest. Minimum value: <code>2</code> seconds. Maximum value: <code>60</code> seconds.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c4d0fc04a292d0654770c00() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The ARN of the channel.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0fe0aaf4138e823a337776e7() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>Amount of time (in seconds) that the player should be from the live point at the end of the manifest. Minimum value: <code>2</code> seconds. Maximum value: <code>60</code> seconds.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10a909a52d6b84df2af03348() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ManifestWindowSeconds
+			"manifest_window_seconds": schemaAttribute064ee516c70e582f2b937ea3(),
+			// Property: MinBufferTimeSeconds
+			"min_buffer_time_seconds": schemaAttributefa5950ca3b2033b1c418fcdc(),
+			// Property: MinUpdatePeriodSeconds
+			"min_update_period_seconds": schemaAttribute0bfda176648f522289b4df51(),
+			// Property: SuggestedPresentationDelaySeconds
+			"suggested_presentation_delay_seconds": schemaAttribute0fe0aaf4138e823a337776e7(),
+		}, /*END SCHEMA*/
+		Description: "<p>Dash manifest configuration parameters.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1b3954f0d1d52d22f36226b8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The name of the source location where the slate VOD source is stored.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1eb1fc3217cc20a57d6a5603() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "<p>The log types.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute200fc9bd21f3c33a72677034() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "<p>Determines the type of SCTE 35 tags to use in ad markup. Specify <code>DATERANGE</code> to use <code>DATERANGE</code> tags (for live or VOD content). Specify <code>SCTE35_ENHANCED</code> to use <code>EXT-X-CUE-OUT</code> and <code>EXT-X-CUE-IN</code> tags (for VOD content only).</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2dc2d7801a26ea6299d4daeb() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>The maximum time delay for time-shifted viewing. The minimum allowed maximum time delay is 0 seconds, and the maximum allowed maximum time delay is 21600 seconds (6 hours).</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45483514b55d31bf56374e68() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute7e5ad9903ec5ccf22ff8a53c(),
+				// Property: Value
+				"value": schemaAttribute7e5ad9903ec5ccf22ff8a53c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags to assign to the channel.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e5ad9903ec5ccf22ff8a53c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b69abe35d3d03f4599e7fa3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogTypes
+			"log_types": schemaAttribute1eb1fc3217cc20a57d6a5603(),
+		}, /*END SCHEMA*/
+		Description: "<p>The log configuration for the channel.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8dad0244134e3b17507516d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The slate VOD source name. The VOD source must already exist in a source location before it can be used for slate.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac9c6b78fdf115efbdd5173a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxTimeDelaySeconds
+			"max_time_delay_seconds": schemaAttribute2dc2d7801a26ea6299d4daeb(),
+		}, /*END SCHEMA*/
+		Description: "<p>The configuration for time-shifted viewing.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2332d4d8b0fd3bdba54166f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AdMarkupType
+			"ad_markup_type": schemaAttribute200fc9bd21f3c33a72677034(),
+			// Property: ManifestWindowSeconds
+			"manifest_window_seconds": schemaAttribute064ee516c70e582f2b937ea3(),
+		}, /*END SCHEMA*/
+		Description: "<p>HLS playlist configuration parameters.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee779f6fafefae4dc92869261() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>A string used to match which <code>HttpPackageConfiguration</code> is used for each <code>VodSource</code>.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0ffe5cdf3d1ea5e1505d014() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "<p>The list of audiences defined in channel.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef191dd6c98fad40896fa184d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The name of the manifest for the channel. The name appears in the <code>PlaybackUrl</code>.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef83e4c2611f5791b133b28fd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SourceLocationName
+			"source_location_name": schemaAttribute1b3954f0d1d52d22f36226b8(),
+			// Property: VodSourceName
+			"vod_source_name": schemaAttributea8dad0244134e3b17507516d(),
+		}, /*END SCHEMA*/
+		Description: "<p>Slate VOD source configuration.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa5950ca3b2033b1c418fcdc() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>Minimum amount of content (measured in seconds) that a player must keep available in the buffer. Minimum value: <code>2</code> seconds. Maximum value: <code>60</code> seconds.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_mediatailor_channel", channelDataSource)
 }
@@ -30,10 +229,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "\u003cp\u003eThe ARN of the channel.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The ARN of the channel.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute0c4d0fc04a292d0654770c00(),
 		// Property: Audiences
 		// CloudFormation resource type schema:
 		//
@@ -44,20 +240,14 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"audiences": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "<p>The list of audiences defined in channel.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"audiences": schemaAttributef0ffe5cdf3d1ea5e1505d014(),
 		// Property: ChannelName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"channel_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"channel_name": schemaAttribute7e5ad9903ec5ccf22ff8a53c(),
 		// Property: FillerSlate
 		// CloudFormation resource type schema:
 		//
@@ -76,22 +266,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"filler_slate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SourceLocationName
-				"source_location_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>The name of the source location where the slate VOD source is stored.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VodSourceName
-				"vod_source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>The slate VOD source name. The VOD source must already exist in a source location before it can be used for slate.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "<p>Slate VOD source configuration.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"filler_slate": schemaAttributef83e4c2611f5791b133b28fd(),
 		// Property: LogConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -113,18 +288,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"log_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LogTypes
-				"log_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "<p>The log types.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "<p>The log configuration for the channel.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"log_configuration": schemaAttribute8b69abe35d3d03f4599e7fa3(),
 		// Property: Outputs
 		// CloudFormation resource type schema:
 		//
@@ -197,69 +361,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"outputs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DashPlaylistSettings
-					"dash_playlist_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ManifestWindowSeconds
-							"manifest_window_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "<p>The total duration (in seconds) of each manifest. Minimum value: <code>30</code> seconds. Maximum value: <code>3600</code> seconds.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: MinBufferTimeSeconds
-							"min_buffer_time_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "<p>Minimum amount of content (measured in seconds) that a player must keep available in the buffer. Minimum value: <code>2</code> seconds. Maximum value: <code>60</code> seconds.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: MinUpdatePeriodSeconds
-							"min_update_period_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "<p>Minimum amount of time (in seconds) that the player should wait before requesting updates to the manifest. Minimum value: <code>2</code> seconds. Maximum value: <code>60</code> seconds.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SuggestedPresentationDelaySeconds
-							"suggested_presentation_delay_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "<p>Amount of time (in seconds) that the player should be from the live point at the end of the manifest. Minimum value: <code>2</code> seconds. Maximum value: <code>60</code> seconds.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "<p>Dash manifest configuration parameters.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: HlsPlaylistSettings
-					"hls_playlist_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AdMarkupType
-							"ad_markup_type": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "<p>Determines the type of SCTE 35 tags to use in ad markup. Specify <code>DATERANGE</code> to use <code>DATERANGE</code> tags (for live or VOD content). Specify <code>SCTE35_ENHANCED</code> to use <code>EXT-X-CUE-OUT</code> and <code>EXT-X-CUE-IN</code> tags (for VOD content only).</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ManifestWindowSeconds
-							"manifest_window_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "<p>The total duration (in seconds) of each manifest. Minimum value: <code>30</code> seconds. Maximum value: <code>3600</code> seconds.</p>",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "<p>HLS playlist configuration parameters.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ManifestName
-					"manifest_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>The name of the manifest for the channel. The name appears in the <code>PlaybackUrl</code>.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SourceGroup
-					"source_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>A string used to match which <code>HttpPackageConfiguration</code> is used for each <code>VodSource</code>.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "<p>The channel's output properties.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"outputs": schemaAttribute03e2203c40afe32fe944aa68(),
 		// Property: PlaybackMode
 		// CloudFormation resource type schema:
 		//
@@ -270,9 +372,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"playback_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"playback_mode": schemaAttribute7e5ad9903ec5ccf22ff8a53c(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -298,22 +398,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags to assign to the channel.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute45483514b55d31bf56374e68(),
 		// Property: Tier
 		// CloudFormation resource type schema:
 		//
@@ -324,9 +409,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"tier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tier": schemaAttribute7e5ad9903ec5ccf22ff8a53c(),
 		// Property: TimeShiftConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -344,17 +427,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"time_shift_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaxTimeDelaySeconds
-				"max_time_delay_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "<p>The maximum time delay for time-shifted viewing. The minimum allowed maximum time delay is 0 seconds, and the maximum allowed maximum time delay is 21600 seconds (6 hours).</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "<p>The configuration for time-shifted viewing.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"time_shift_configuration": schemaAttributeac9c6b78fdf115efbdd5173a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

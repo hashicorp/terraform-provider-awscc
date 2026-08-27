@@ -15,6 +15,126 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute02cccfd6675bf886b2b80851() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current state of the Cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0b9f01366db672ba058a7869() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The MediaLive Channels that are currently running on Nodes in this Cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0cb1f6f5619b41a480662375() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique ID of the Cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24246e1a9e97110ae5b66071() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40a703403486d50d413a6e7a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LogicalInterfaceName
+				"logical_interface_name": schemaAttributeae05e6ceb4b1ac5d83a17fd8(),
+				// Property: NetworkId
+				"network_id": schemaAttributed1d83cc500fb2f56fd55c714(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Network mappings for the cluster",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4698d4105edecacbf315a6f9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DefaultRoute
+			"default_route": schemaAttributed8a33b24a5e8e22f0e6f1873(),
+			// Property: InterfaceMappings
+			"interface_mappings": schemaAttribute40a703403486d50d413a6e7a(),
+		}, /*END SCHEMA*/
+		Description: "On premises settings which will have the interface network mappings and default Output logical interface",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6fdc52b82270f9c486c4f569() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IAM role your nodes will use.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b11deb1bc1ecdd7714589f5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea170f9bb28308ed1f2e12d21() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The hardware type for the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae05e6ceb4b1ac5d83a17fd8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "logical interface name, unique in the list",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4b42f16a18f1115a6f2a07f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute24246e1a9e97110ae5b66071(),
+				// Property: Value
+				"value": schemaAttribute24246e1a9e97110ae5b66071(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A collection of key-value pairs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1d83cc500fb2f56fd55c714() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Network Id to be associated with the logical interface name, can be duplicated in list",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8a33b24a5e8e22f0e6f1873() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Default value if the customer does not define it in channel Output API",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3072f7f6064a200ea3be868() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user-specified name of the Cluster to be created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_medialive_cluster", clusterDataSource)
 }
@@ -31,10 +151,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.+:medialive:.+:cluster:.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute7b11deb1bc1ecdd7714589f5(),
 		// Property: ChannelIds
 		// CloudFormation resource type schema:
 		//
@@ -47,11 +164,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"channel_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The MediaLive Channels that are currently running on Nodes in this Cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"channel_ids": schemaAttribute0b9f01366db672ba058a7869(),
 		// Property: ClusterType
 		// CloudFormation resource type schema:
 		//
@@ -65,10 +178,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"cluster_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The hardware type for the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cluster_type": schemaAttributea170f9bb28308ed1f2e12d21(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -76,10 +186,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique ID of the Cluster.",
 		//	  "type": "string"
 		//	}
-		"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique ID of the Cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cluster_id": schemaAttribute0cb1f6f5619b41a480662375(),
 		// Property: InstanceRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -88,10 +195,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.+:iam:.+:role/.+$",
 		//	  "type": "string"
 		//	}
-		"instance_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IAM role your nodes will use.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_role_arn": schemaAttribute6fdc52b82270f9c486c4f569(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -99,10 +203,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The user-specified name of the Cluster to be created.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The user-specified name of the Cluster to be created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributee3072f7f6064a200ea3be868(),
 		// Property: NetworkSettings
 		// CloudFormation resource type schema:
 		//
@@ -137,36 +238,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"network_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DefaultRoute
-				"default_route": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Default value if the customer does not define it in channel Output API",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: InterfaceMappings
-				"interface_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: LogicalInterfaceName
-							"logical_interface_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "logical interface name, unique in the list",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: NetworkId
-							"network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Network Id to be associated with the logical interface name, can be duplicated in list",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Network mappings for the cluster",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "On premises settings which will have the interface network mappings and default Output logical interface",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_settings": schemaAttribute4698d4105edecacbf315a6f9(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -181,10 +253,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current state of the Cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttribute02cccfd6675bf886b2b80851(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -206,22 +275,7 @@ func clusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A collection of key-value pairs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributec4b42f16a18f1115a6f2a07f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

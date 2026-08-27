@@ -15,6 +15,64 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute356df9efa0862d9f592cbf5a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54f307e98eda01f1decce78f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute356df9efa0862d9f592cbf5a(),
+				// Property: Value
+				"value": schemaAttributecd2c39c0407ea7c9468c027f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to assign to the DB subnet group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute59fc1b419cde42a0deb2bfc4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the DB subnet group. This value is stored as a lowercase string.\n Constraints:\n  +  Must contain no more than 255 letters, numbers, periods, underscores, spaces, or hyphens.\n  +  Must not be default.\n  +  First character must be a letter.\n  \n Example: ``mydbsubnetgroup``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5dbcac2de7f9e27ef835c40f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77eb836b617e7040f11c1a48() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description for the DB subnet group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2876c8531b115d824b75b72() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The EC2 Subnet IDs for the DB subnet group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd2c39c0407ea7c9468c027f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_rds_db_subnet_group", dBSubnetGroupDataSource)
 }
@@ -30,10 +88,7 @@ func dBSubnetGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"db_subnet_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"db_subnet_group_arn": schemaAttribute5dbcac2de7f9e27ef835c40f(),
 		// Property: DBSubnetGroupDescription
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +96,7 @@ func dBSubnetGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The description for the DB subnet group.",
 		//	  "type": "string"
 		//	}
-		"db_subnet_group_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description for the DB subnet group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"db_subnet_group_description": schemaAttribute77eb836b617e7040f11c1a48(),
 		// Property: DBSubnetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +104,7 @@ func dBSubnetGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The name for the DB subnet group. This value is stored as a lowercase string.\n Constraints:\n  +  Must contain no more than 255 letters, numbers, periods, underscores, spaces, or hyphens.\n  +  Must not be default.\n  +  First character must be a letter.\n  \n Example: ``mydbsubnetgroup``",
 		//	  "type": "string"
 		//	}
-		"db_subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the DB subnet group. This value is stored as a lowercase string.\n Constraints:\n  +  Must contain no more than 255 letters, numbers, periods, underscores, spaces, or hyphens.\n  +  Must not be default.\n  +  First character must be a letter.\n  \n Example: ``mydbsubnetgroup``",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"db_subnet_group_name": schemaAttribute59fc1b419cde42a0deb2bfc4(),
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -68,11 +117,7 @@ func dBSubnetGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The EC2 Subnet IDs for the DB subnet group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_ids": schemaAttributec2876c8531b115d824b75b72(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -105,24 +150,7 @@ func dBSubnetGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to assign to the DB subnet group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute54f307e98eda01f1decce78f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

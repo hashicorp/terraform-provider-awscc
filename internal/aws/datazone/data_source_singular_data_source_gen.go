@@ -16,6 +16,459 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute00005355081320cddcd9e4e7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnableBusinessNameGeneration
+			"enable_business_name_generation": schemaAttribute6b69e87f36dda300267bfb3c(),
+		}, /*END SCHEMA*/
+		Description: "Specifies whether the business name generation is to be enabled for this data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute015813dea687f5ded1a90b63() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of assets created by the data source during its last run.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0b8e8c614a806bc0667e2e3b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp of when the data source was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute154566f6cb93b3ccfb98c205() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a27db9230dfbbda36032986() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Amazon DataZone project to which the data source is added.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27f0daf3d034ef6526cfd749() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Schedule
+			"schedule": schemaAttribute61fb3ac275d0d80c0d8eaa7d(),
+			// Property: Timezone
+			"timezone": schemaAttributeddce6987ffdabe7bb7401337(),
+		}, /*END SCHEMA*/
+		Description: "The schedule of the data source runs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b97fa2841d750fa8a736d93() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the Amazon DataZone environment to which the data source publishes assets.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c8b40f4888f8b34de5ac9dd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The data access role included in the configuration details of the AWS Glue data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute35053f5b95f618bd507b8c43() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The database name specified in the relational filter configuration for the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute366058b8a4908b8087bc181f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The revision of the metadata form type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3948d8813a664b389d862265() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.ListType{ElemType: types.StringType},
+		Description: "The tracking assets of the Amazon SageMaker run.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f2b33f5b5dcf85bde882663() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Content
+				"content": schemaAttributeea3e5b669b834be6c6d4f2e3(),
+				// Property: FormName
+				"form_name": schemaAttribute7ebb7caab80f8521c49c61d2(),
+				// Property: TypeIdentifier
+				"type_identifier": schemaAttribute9413a413ff44144bd0704feb(),
+				// Property: TypeRevision
+				"type_revision": schemaAttribute366058b8a4908b8087bc181f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The metadata forms that are to be attached to the assets that this data source works with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4006764d4c803134b891e214() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the last run of this data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute436cfcb04fa3fe0fa56320af() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecretManagerArn
+			"secret_manager_arn": schemaAttributea0ee41e2dd751b18d7713197(),
+		}, /*END SCHEMA*/
+		Description: "The details of the credentials required to access an Amazon Redshift cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44c64ba5cde211405316ae0f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AutoImportDataQualityResult
+			"auto_import_data_quality_result": schemaAttributefbbb24635e145c2281a71c91(),
+			// Property: CatalogName
+			"catalog_name": schemaAttributeaf2d2313d96c42357960e32a(),
+			// Property: DataAccessRole
+			"data_access_role": schemaAttribute2c8b40f4888f8b34de5ac9dd(),
+			// Property: RelationalFilterConfigurations
+			"relational_filter_configurations": schemaAttributec746fac23ff673889eb1aeb9(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49499bfa95848a1c43700f0f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp that specifies when the data source was last run.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4e1a3ededb40bf012321d3c8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp of when this data source was updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute525cede91f6f63e64e05893a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataAccessRole
+			"data_access_role": schemaAttribute5920c5ad558a507d906d8fdd(),
+			// Property: RedshiftCredentialConfiguration
+			"redshift_credential_configuration": schemaAttribute436cfcb04fa3fe0fa56320af(),
+			// Property: RedshiftStorage
+			"redshift_storage": schemaAttribute9d0717799afc4ab25546ad1d(),
+			// Property: RelationalFilterConfigurations
+			"relational_filter_configurations": schemaAttribute622d479ec8ef3842a81dca0e(),
+		}, /*END SCHEMA*/
+		Description: "The configuration details of the Amazon Redshift data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5920c5ad558a507d906d8fdd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The data access role included in the configuration details of the Amazon Redshift data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c6f6aaa208d9a74cd3913ce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the data source is enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5edd8a873ade2642b76a1d3e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Amazon Redshift Serverless workgroup.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60a575025ae8a63d69fc887f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61fb3ac275d0d80c0d8eaa7d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The schedule of the data source runs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute622d479ec8ef3842a81dca0e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DatabaseName
+				"database_name": schemaAttribute35053f5b95f618bd507b8c43(),
+				// Property: FilterExpressions
+				"filter_expressions": schemaAttribute78e70d3c51c4e025b92ed507(),
+				// Property: SchemaName
+				"schema_name": schemaAttribute64131b0c1af1bd0d8a91a973(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The relational filter configurations included in the configuration details of the Amazon Redshift data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64131b0c1af1bd0d8a91a973() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The schema name specified in the relational filter configuration for the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b69e87f36dda300267bfb3c() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether automatic business name generation is to be enabled or not as part of the recommendation configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72401fa0565fd1a85c296311() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78e70d3c51c4e025b92ed507() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Expression
+				"expression": schemaAttribute9ec1e9f18a579ccc4c53ced0(),
+				// Property: Type
+				"type": schemaAttributee0f0eae2006a9d0f9ced2c86(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The filter expressions specified in the relational filter configuration for the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ebb7caab80f8521c49c61d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the metadata form.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9273ec29892e9c4cb3b25c6a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GlueRunConfiguration
+			"glue_run_configuration": schemaAttribute44c64ba5cde211405316ae0f(),
+			// Property: RedshiftRunConfiguration
+			"redshift_run_configuration": schemaAttribute525cede91f6f63e64e05893a(),
+			// Property: SageMakerRunConfiguration
+			"sage_maker_run_configuration": schemaAttributed944ce80b942b70c20ff63ff(),
+		}, /*END SCHEMA*/
+		Description: "Configuration of the data source. It can be set to either glueRunConfiguration or redshiftRunConfiguration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9413a413ff44144bd0704feb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the metadata form type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d0717799afc4ab25546ad1d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RedshiftClusterSource
+			"redshift_cluster_source": schemaAttributeb2b2267931174e531d6a5680(),
+			// Property: RedshiftServerlessSource
+			"redshift_serverless_source": schemaAttributecc69252d98c7f6fd8ffc0948(),
+		}, /*END SCHEMA*/
+		Description: "The details of the Amazon Redshift storage as part of the configuration of an Amazon Redshift data source run.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ec1e9f18a579ccc4c53ced0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea038d6ac6e1bf29c2274f70f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of an Amazon Redshift cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0ee41e2dd751b18d7713197() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of a secret manager for an Amazon Redshift cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea212d296a0437342f76989e3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8789219edcd2e7bdb7fdb10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the Amazon DataZone project in which you want to add the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf2d2313d96c42357960e32a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The catalog name in the AWS Glue run configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf5f6d103f97461899c7abfa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Amazon DataZone domain where the data source is created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2b2267931174e531d6a5680() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClusterName
+			"cluster_name": schemaAttributea038d6ac6e1bf29c2274f70f(),
+		}, /*END SCHEMA*/
+		Description: "The name of an Amazon Redshift cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec00a25e1fe16f4372c6cf789() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec27515a54ba4a7d6b22c6ef5() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the assets that this data source creates in the inventory are to be also automatically published to the catalog.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec746fac23ff673889eb1aeb9() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DatabaseName
+				"database_name": schemaAttribute35053f5b95f618bd507b8c43(),
+				// Property: FilterExpressions
+				"filter_expressions": schemaAttribute78e70d3c51c4e025b92ed507(),
+				// Property: SchemaName
+				"schema_name": schemaAttribute64131b0c1af1bd0d8a91a973(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The relational filter configurations included in the configuration details of the AWS Glue data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc69252d98c7f6fd8ffc0948() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: WorkgroupName
+			"workgroup_name": schemaAttribute5edd8a873ade2642b76a1d3e(),
+		}, /*END SCHEMA*/
+		Description: "The details of the Amazon Redshift Serverless workgroup storage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed944ce80b942b70c20ff63ff() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TrackingAssets
+			"tracking_assets": schemaAttribute3948d8813a664b389d862265(),
+		}, /*END SCHEMA*/
+		Description: "The configuration details of the Amazon SageMaker data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed9adf62894d61339c8ed7a48() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeddce6987ffdabe7bb7401337() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timezone of the data source run.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0f0eae2006a9d0f9ced2c86() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The search filter expression type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea3e5b669b834be6c6d4f2e3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The content of the metadata form.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefbbb24635e145c2281a71c91() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether to automatically import data quality metrics as part of the data source run.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_datazone_data_source", dataSourceDataSource)
 }
@@ -69,34 +522,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"asset_forms_input": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Content
-					"content": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The content of the metadata form.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: FormName
-					"form_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the metadata form.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: TypeIdentifier
-					"type_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of the metadata form type.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: TypeRevision
-					"type_revision": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The revision of the metadata form type.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The metadata forms that are to be attached to the assets that this data source works with.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"asset_forms_input": schemaAttribute3f2b33f5b5dcf85bde882663(),
 		// Property: Configuration
 		// CloudFormation resource type schema:
 		//
@@ -339,176 +765,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: GlueRunConfiguration
-				"glue_run_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AutoImportDataQualityResult
-						"auto_import_data_quality_result": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies whether to automatically import data quality metrics as part of the data source run.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: CatalogName
-						"catalog_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The catalog name in the AWS Glue run configuration.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DataAccessRole
-						"data_access_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The data access role included in the configuration details of the AWS Glue data source.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RelationalFilterConfigurations
-						"relational_filter_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DatabaseName
-									"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The database name specified in the relational filter configuration for the data source.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: FilterExpressions
-									"filter_expressions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Expression
-												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Type
-												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The search filter expression type.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "The filter expressions specified in the relational filter configuration for the data source.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: SchemaName
-									"schema_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The schema name specified in the relational filter configuration for the data source.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "The relational filter configurations included in the configuration details of the AWS Glue data source.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: RedshiftRunConfiguration
-				"redshift_run_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DataAccessRole
-						"data_access_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The data access role included in the configuration details of the Amazon Redshift data source.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RedshiftCredentialConfiguration
-						"redshift_credential_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: SecretManagerArn
-								"secret_manager_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of a secret manager for an Amazon Redshift cluster.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The details of the credentials required to access an Amazon Redshift cluster.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RedshiftStorage
-						"redshift_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: RedshiftClusterSource
-								"redshift_cluster_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ClusterName
-										"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The name of an Amazon Redshift cluster.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The name of an Amazon Redshift cluster.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: RedshiftServerlessSource
-								"redshift_serverless_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: WorkgroupName
-										"workgroup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The name of the Amazon Redshift Serverless workgroup.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The details of the Amazon Redshift Serverless workgroup storage.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The details of the Amazon Redshift storage as part of the configuration of an Amazon Redshift data source run.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RelationalFilterConfigurations
-						"relational_filter_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DatabaseName
-									"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The database name specified in the relational filter configuration for the data source.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: FilterExpressions
-									"filter_expressions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Expression
-												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Type
-												"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The search filter expression type.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "The filter expressions specified in the relational filter configuration for the data source.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: SchemaName
-									"schema_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The schema name specified in the relational filter configuration for the data source.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "The relational filter configurations included in the configuration details of the Amazon Redshift data source.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration details of the Amazon Redshift data source.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SageMakerRunConfiguration
-				"sage_maker_run_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: TrackingAssets
-						"tracking_assets":   // Pattern: ""
-						schema.MapAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.ListType{ElemType: types.StringType},
-							Description: "The tracking assets of the Amazon SageMaker run.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration details of the Amazon SageMaker data source.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration of the data source. It can be set to either glueRunConfiguration or redshiftRunConfiguration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"configuration": schemaAttribute9273ec29892e9c4cb3b25c6a(),
 		// Property: ConnectionId
 		// CloudFormation resource type schema:
 		//
@@ -516,10 +773,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
 		//	  "type": "string"
 		//	}
-		"connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_id": schemaAttributea212d296a0437342f76989e3(),
 		// Property: ConnectionIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -527,10 +781,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
 		//	  "type": "string"
 		//	}
-		"connection_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of a connection used to fetch relevant parameters from connection during Datasource run",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_identifier": schemaAttributea212d296a0437342f76989e3(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -539,11 +790,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp of when the data source was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute0b8e8c614a806bc0667e2e3b(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -552,10 +799,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributed9adf62894d61339c8ed7a48(),
 		// Property: DomainId
 		// CloudFormation resource type schema:
 		//
@@ -564,10 +808,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Amazon DataZone domain where the data source is created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_id": schemaAttributeaf5f6d103f97461899c7abfa(),
 		// Property: DomainIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -576,10 +817,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Amazon DataZone domain where the data source is created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_identifier": schemaAttributeaf5f6d103f97461899c7abfa(),
 		// Property: EnableSetting
 		// CloudFormation resource type schema:
 		//
@@ -591,10 +829,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"enable_setting": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether the data source is enabled.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enable_setting": schemaAttribute5c6f6aaa208d9a74cd3913ce(),
 		// Property: EnvironmentId
 		// CloudFormation resource type schema:
 		//
@@ -602,10 +837,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique identifier of the Amazon DataZone environment to which the data source publishes assets.",
 		//	  "type": "string"
 		//	}
-		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the Amazon DataZone environment to which the data source publishes assets.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"environment_id": schemaAttribute2b97fa2841d750fa8a736d93(),
 		// Property: EnvironmentIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -613,10 +845,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique identifier of the Amazon DataZone environment to which the data source publishes assets.",
 		//	  "type": "string"
 		//	}
-		"environment_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the Amazon DataZone environment to which the data source publishes assets.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"environment_identifier": schemaAttribute2b97fa2841d750fa8a736d93(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -625,10 +854,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"data_source_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_source_id": schemaAttributec00a25e1fe16f4372c6cf789(),
 		// Property: LastRunAssetCount
 		// CloudFormation resource type schema:
 		//
@@ -636,10 +862,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of assets created by the data source during its last run.",
 		//	  "type": "number"
 		//	}
-		"last_run_asset_count": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of assets created by the data source during its last run.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_run_asset_count": schemaAttribute015813dea687f5ded1a90b63(),
 		// Property: LastRunAt
 		// CloudFormation resource type schema:
 		//
@@ -647,10 +870,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp that specifies when the data source was last run.",
 		//	  "type": "string"
 		//	}
-		"last_run_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp that specifies when the data source was last run.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_run_at": schemaAttribute49499bfa95848a1c43700f0f(),
 		// Property: LastRunStatus
 		// CloudFormation resource type schema:
 		//
@@ -658,10 +878,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The status of the last run of this data source.",
 		//	  "type": "string"
 		//	}
-		"last_run_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the last run of this data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_run_status": schemaAttribute4006764d4c803134b891e214(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -671,10 +888,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute72401fa0565fd1a85c296311(),
 		// Property: ProjectId
 		// CloudFormation resource type schema:
 		//
@@ -683,10 +897,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Amazon DataZone project to which the data source is added.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"project_id": schemaAttribute1a27db9230dfbbda36032986(),
 		// Property: ProjectIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -694,10 +905,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The identifier of the Amazon DataZone project in which you want to add the data source.",
 		//	  "type": "string"
 		//	}
-		"project_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the Amazon DataZone project in which you want to add the data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"project_identifier": schemaAttributea8789219edcd2e7bdb7fdb10(),
 		// Property: PublishOnImport
 		// CloudFormation resource type schema:
 		//
@@ -705,10 +913,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether the assets that this data source creates in the inventory are to be also automatically published to the catalog.",
 		//	  "type": "boolean"
 		//	}
-		"publish_on_import": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether the assets that this data source creates in the inventory are to be also automatically published to the catalog.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"publish_on_import": schemaAttributec27515a54ba4a7d6b22c6ef5(),
 		// Property: Recommendation
 		// CloudFormation resource type schema:
 		//
@@ -723,17 +928,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"recommendation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EnableBusinessNameGeneration
-				"enable_business_name_generation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether automatic business name generation is to be enabled or not as part of the recommendation configuration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies whether the business name generation is to be enabled for this data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"recommendation": schemaAttribute00005355081320cddcd9e4e7(),
 		// Property: Schedule
 		// CloudFormation resource type schema:
 		//
@@ -755,22 +950,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Schedule
-				"schedule": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The schedule of the data source runs.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Timezone
-				"timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The timezone of the data source run.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The schedule of the data source runs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schedule": schemaAttribute27f0daf3d034ef6526cfd749(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -788,10 +968,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute154566f6cb93b3ccfb98c205(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -801,10 +978,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute60a575025ae8a63d69fc887f(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -813,11 +987,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp of when this data source was updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute4e1a3ededb40bf012321d3c8(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

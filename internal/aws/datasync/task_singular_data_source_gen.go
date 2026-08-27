@@ -15,6 +15,532 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0f8d0ed3005ee7dfb11101f2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A value that determines whether tasks should be queued before executing the tasks.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute129d92e46999a8abfa66fec5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the Amazon Resource Name (ARN) of the IAM policy that allows Datasync to upload a task report to your S3 bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute13679d0fb4127a12d94486f6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for an AWS resource tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19e0ece7c5ee1e364208c329() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ac936c58f28562e39858964() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies what DataSync uses the manifest for.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c0556f24a237b15c62fe1c3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketAccessRoleArn
+			"bucket_access_role_arn": schemaAttribute95c50dc3de496aa57202db7d(),
+			// Property: ManifestObjectPath
+			"manifest_object_path": schemaAttribute67ab8e192809ae3390e38e20(),
+			// Property: ManifestObjectVersionId
+			"manifest_object_version_id": schemaAttribute5995b28262aef0e74d61c1fb(),
+			// Property: S3BucketArn
+			"s3_bucket_arn": schemaAttribute2f813ba5b1290884079db7d4(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the S3 bucket where you're hosting the manifest that you want AWS DataSync to use.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d50133eec1d6bad3994fb9d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ReportLevel
+			"report_level": schemaAttribute62b005aee985ed79aad60075(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the level of reporting for the files, objects, and directories that Datasync attempted to verify at the end of your transfer. This only applies if you configure your task to verify data during and after the transfer (which Datasync does by default)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f813ba5b1290884079db7d4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the Amazon Resource Name (ARN) of the S3 bucket where you're hosting your manifest.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31d89c834d253ab2f03721db() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute5d3fdf08b6871fadbfcf82b9(),
+				// Property: Value
+				"value": schemaAttribute13679d0fb4127a12d94486f6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3520fbe76d1c49fcfefa9725() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the file format of your manifest.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3825caa42b148d37ed8634d7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of a task. This value is a text reference that is used to identify the task in the console.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e5eea6667913424251d6f26() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FilterType
+				"filter_type": schemaAttribute4b3dfe8548dbee68b66e7f75(),
+				// Property: Value
+				"value": schemaAttributef923313cec84f6a552f75050(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4074ef7837637b36212489fb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Atime
+			"atime": schemaAttributeab9e7d2b28c00005fe2f8b78(),
+			// Property: BytesPerSecond
+			"bytes_per_second": schemaAttributea44ac5a1aef90d07d148ea31(),
+			// Property: Gid
+			"gid": schemaAttribute685fce774d2032a93fe0b7dd(),
+			// Property: LogLevel
+			"log_level": schemaAttribute76593a2778e2d47d6ab353eb(),
+			// Property: Mtime
+			"mtime": schemaAttributec322ea104bf0ed617e77e4c2(),
+			// Property: ObjectTags
+			"object_tags": schemaAttributef3606c79462feb3150869650(),
+			// Property: OverwriteMode
+			"overwrite_mode": schemaAttribute7c91cd54ccd83bd43c3ab35a(),
+			// Property: PosixPermissions
+			"posix_permissions": schemaAttribute19e0ece7c5ee1e364208c329(),
+			// Property: PreserveDeletedFiles
+			"preserve_deleted_files": schemaAttribute55d9aefd47fea752a6afd523(),
+			// Property: PreserveDevices
+			"preserve_devices": schemaAttributed49631fdaa67b13ce883c2ad(),
+			// Property: SecurityDescriptorCopyFlags
+			"security_descriptor_copy_flags": schemaAttributec018c1c4b972b7f3674a0fb4(),
+			// Property: TaskQueueing
+			"task_queueing": schemaAttribute0f8d0ed3005ee7dfb11101f2(),
+			// Property: TransferMode
+			"transfer_mode": schemaAttributef22a4ccfd41bd198b73effdc(),
+			// Property: Uid
+			"uid": schemaAttribute4eb5e416e8e6253059210e3d(),
+			// Property: VerifyMode
+			"verify_mode": schemaAttributee47949257fe3f984d42c5aad(),
+		}, /*END SCHEMA*/
+		Description: "Represents the options that are available to control the behavior of a StartTaskExecution operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44dbfbaf423bf2bcb95b9c48() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ReportLevel
+			"report_level": schemaAttribute62b005aee985ed79aad60075(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the level of reporting for the files, objects, and directories that Datasync attempted to skip during your transfer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute475cdc1413847b7712181c1a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the source location for the task.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b3dfe8548dbee68b66e7f75() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4db33c8da45331b3069b83ad() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ReportLevel
+			"report_level": schemaAttribute62b005aee985ed79aad60075(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the level of reporting for the files, objects, and directories that Datasync attempted to transfer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4eb5e416e8e6253059210e3d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user ID (UID) of the file's owner.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4efb2395fd424d394251f01e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies status of a schedule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5293780b11f6fd8f32fa6ed9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the task that was described.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute558caff27c951abf3b51b755() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies a bucket prefix for your report.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute55d9aefd47fea752a6afd523() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A value that specifies whether files in the destination that don't exist in the source file system should be preserved.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5995b28262aef0e74d61c1fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the object version ID of the manifest that you want DataSync to use.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b8715c9cd3b7363063cb43b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of an AWS storage resource's location.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c6bd313a8db67c23822f6c3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the type of task report that you want.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d3fdf08b6871fadbfcf82b9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key for an AWS resource tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62b005aee985ed79aad60075() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6349529b6c7d76fcb1b70c5f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Action
+			"action": schemaAttribute1ac936c58f28562e39858964(),
+			// Property: Format
+			"format": schemaAttribute3520fbe76d1c49fcfefa9725(),
+			// Property: Source
+			"source": schemaAttributea7f85f170ccae89575326d65(),
+		}, /*END SCHEMA*/
+		Description: "Configures a manifest, which is a list of files or objects that you want DataSync to transfer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67ab8e192809ae3390e38e20() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the Amazon S3 object key of your manifest.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute685fce774d2032a93fe0b7dd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The group ID (GID) of the file's owners.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7399a390f6a546948b17e836() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the task.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76593a2778e2d47d6ab353eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A value that determines the types of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute767d6fae74d70aaf6f67a101() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c91cd54ccd83bd43c3ab35a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A value that determines whether files at the destination should be overwritten or preserved when copying files.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute809664b6569a481d86459d4f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the ARN of the S3 bucket where Datasync uploads your report.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ee634a0f817b40b8df3d38e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ScheduleExpression
+			"schedule_expression": schemaAttributeef12843dae96a5e4a0fd4730(),
+			// Property: Status
+			"status": schemaAttribute4efb2395fd424d394251f01e(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the schedule you want your task to use for repeated executions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95c50dc3de496aa57202db7d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the AWS Identity and Access Management (IAM) role that allows DataSync to access your manifest.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea44ac5a1aef90d07d148ea31() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "A value that limits the bandwidth used by AWS DataSync.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7f85f170ccae89575326d65() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3
+			"s3": schemaAttribute2c0556f24a237b15c62fe1c3(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the manifest that you want DataSync to use and where it's hosted.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab9e7d2b28c00005fe2f8b78() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec018c1c4b972b7f3674a0fb4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A value that determines which components of the SMB security descriptor are copied during transfer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2ad45af196bb7862520fd64() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3
+			"s3": schemaAttributec4dd46865ed18518842c8709(),
+		}, /*END SCHEMA*/
+		Description: "Specifies where DataSync uploads your task report.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec322ea104bf0ed617e77e4c2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4dd46865ed18518842c8709() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketAccessRoleArn
+			"bucket_access_role_arn": schemaAttribute129d92e46999a8abfa66fec5(),
+			// Property: S3BucketArn
+			"s3_bucket_arn": schemaAttribute809664b6569a481d86459d4f(),
+			// Property: Subdirectory
+			"subdirectory": schemaAttribute558caff27c951abf3b51b755(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the Amazon S3 bucket where DataSync uploads your task report.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6370b1358e24ef88386a0c0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Deleted
+			"deleted": schemaAttributefe70eaa34edd1e7a9e8c9cd8(),
+			// Property: Skipped
+			"skipped": schemaAttribute44dbfbaf423bf2bcb95b9c48(),
+			// Property: Transferred
+			"transferred": schemaAttribute4db33c8da45331b3069b83ad(),
+			// Property: Verified
+			"verified": schemaAttribute2d50133eec1d6bad3994fb9d(),
+		}, /*END SCHEMA*/
+		Description: "Customizes the reporting level for aspects of your task report. For example, your report might generally only include errors, but you could specify that you want a list of successes and errors just for the files that Datasync attempted to delete in your destination location.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed49631fdaa67b13ce883c2ad() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and recreate the files with that device name and metadata on the destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee47949257fe3f984d42c5aad() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef12843dae96a5e4a0fd4730() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0ffde023ed1a176005cc8f0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Destination
+			"destination": schemaAttributec2ad45af196bb7862520fd64(),
+			// Property: ObjectVersionIds
+			"object_version_ids": schemaAttributef871af192da855a4d9cb567a(),
+			// Property: OutputType
+			"output_type": schemaAttribute5c6bd313a8db67c23822f6c3(),
+			// Property: Overrides
+			"overrides": schemaAttributec6370b1358e24ef88386a0c0(),
+			// Property: ReportLevel
+			"report_level": schemaAttribute62b005aee985ed79aad60075(),
+		}, /*END SCHEMA*/
+		Description: "Specifies how you want to configure a task report, which provides detailed information about for your Datasync transfer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef22a4ccfd41bd198b73effdc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A value that determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3606c79462feb3150869650() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A value that determines whether object tags should be read from the source object store and written to the destination object store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3d60d3d9b4c85314d539933() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The Amazon Resource Names (ARNs) of the source ENIs (Elastic Network Interfaces) that were created for your subnet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7748429a01e43bba6d97fe9() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The Amazon Resource Names (ARNs) of the destination ENIs (Elastic Network Interfaces) that were created for your subnet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef871af192da855a4d9cb567a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether your task report includes the new version of each object transferred into an S3 bucket, this only applies if you enable versioning on your bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef87bbb5a7c647c8fcdbc2e74() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the task mode for the task.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef923313cec84f6a552f75050() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefe70eaa34edd1e7a9e8c9cd8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ReportLevel
+			"report_level": schemaAttribute62b005aee985ed79aad60075(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the level of reporting for the files, objects, and directories that Datasync attempted to delete in your destination location. This only applies if you configure your task to delete data in the destination that isn't in the source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_datasync_task", taskDataSource)
 }
@@ -32,10 +558,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):logs:[a-z\\-0-9]*:[0-9]{12}:log-group:([^:\\*]*)(:\\*)?$",
 		//	  "type": "string"
 		//	}
-		"cloudwatch_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cloudwatch_log_group_arn": schemaAttribute767d6fae74d70aaf6f67a101(),
 		// Property: DestinationLocationArn
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +568,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"destination_location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of an AWS storage resource's location.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"destination_location_arn": schemaAttribute5b8715c9cd3b7363063cb43b(),
 		// Property: DestinationNetworkInterfaceArns
 		// CloudFormation resource type schema:
 		//
@@ -62,11 +582,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 128,
 		//	  "type": "array"
 		//	}
-		"destination_network_interface_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The Amazon Resource Names (ARNs) of the destination ENIs (Elastic Network Interfaces) that were created for your subnet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"destination_network_interface_arns": schemaAttributef7748429a01e43bba6d97fe9(),
 		// Property: Excludes
 		// CloudFormation resource type schema:
 		//
@@ -98,23 +614,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"excludes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: FilterType
-					"filter_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"excludes": schemaAttribute3e5eea6667913424251d6f26(),
 		// Property: Includes
 		// CloudFormation resource type schema:
 		//
@@ -146,23 +646,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"includes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: FilterType
-					"filter_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"includes": schemaAttribute3e5eea6667913424251d6f26(),
 		// Property: ManifestConfig
 		// CloudFormation resource type schema:
 		//
@@ -228,56 +712,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"manifest_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Action
-				"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies what DataSync uses the manifest for.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Format
-				"format": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the file format of your manifest.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Source
-				"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: S3
-						"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BucketAccessRoleArn
-								"bucket_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies the AWS Identity and Access Management (IAM) role that allows DataSync to access your manifest.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ManifestObjectPath
-								"manifest_object_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies the Amazon S3 object key of your manifest.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ManifestObjectVersionId
-								"manifest_object_version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies the object version ID of the manifest that you want DataSync to use.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3BucketArn
-								"s3_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies the Amazon Resource Name (ARN) of the S3 bucket where you're hosting your manifest.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Specifies the S3 bucket where you're hosting the manifest that you want AWS DataSync to use.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Specifies the manifest that you want DataSync to use and where it's hosted.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configures a manifest, which is a list of files or objects that you want DataSync to transfer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"manifest_config": schemaAttribute6349529b6c7d76fcb1b70c5f(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -288,10 +723,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of a task. This value is a text reference that is used to identify the task in the console.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute3825caa42b148d37ed8634d7(),
 		// Property: Options
 		// CloudFormation resource type schema:
 		//
@@ -427,87 +859,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Atime
-				"atime": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to).",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: BytesPerSecond
-				"bytes_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "A value that limits the bandwidth used by AWS DataSync.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Gid
-				"gid": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The group ID (GID) of the file's owners.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LogLevel
-				"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A value that determines the types of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Mtime
-				"mtime": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ObjectTags
-				"object_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A value that determines whether object tags should be read from the source object store and written to the destination object store.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: OverwriteMode
-				"overwrite_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A value that determines whether files at the destination should be overwritten or preserved when copying files.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PosixPermissions
-				"posix_permissions": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PreserveDeletedFiles
-				"preserve_deleted_files": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A value that specifies whether files in the destination that don't exist in the source file system should be preserved.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PreserveDevices
-				"preserve_devices": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and recreate the files with that device name and metadata on the destination.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecurityDescriptorCopyFlags
-				"security_descriptor_copy_flags": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A value that determines which components of the SMB security descriptor are copied during transfer.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TaskQueueing
-				"task_queueing": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A value that determines whether tasks should be queued before executing the tasks.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TransferMode
-				"transfer_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A value that determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Uid
-				"uid": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The user ID (UID) of the file's owner.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VerifyMode
-				"verify_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Represents the options that are available to control the behavior of a StartTaskExecution operation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"options": schemaAttribute4074ef7837637b36212489fb(),
 		// Property: Schedule
 		// CloudFormation resource type schema:
 		//
@@ -532,22 +884,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ScheduleExpression
-				"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Status
-				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies status of a schedule.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies the schedule you want your task to use for repeated executions.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schedule": schemaAttribute8ee634a0f817b40b8df3d38e(),
 		// Property: SourceLocationArn
 		// CloudFormation resource type schema:
 		//
@@ -557,10 +894,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"source_location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the source location for the task.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_location_arn": schemaAttribute475cdc1413847b7712181c1a(),
 		// Property: SourceNetworkInterfaceArns
 		// CloudFormation resource type schema:
 		//
@@ -574,11 +908,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 128,
 		//	  "type": "array"
 		//	}
-		"source_network_interface_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The Amazon Resource Names (ARNs) of the source ENIs (Elastic Network Interfaces) that were created for your subnet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_network_interface_arns": schemaAttributef3d60d3d9b4c85314d539933(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -593,10 +923,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the task that was described.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute5293780b11f6fd8f32fa6ed9(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -632,24 +959,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key for an AWS resource tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for an AWS resource tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute31d89c834d253ab2f03721db(),
 		// Property: TaskArn
 		// CloudFormation resource type schema:
 		//
@@ -659,10 +969,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}$",
 		//	  "type": "string"
 		//	}
-		"task_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the task.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"task_arn": schemaAttribute7399a390f6a546948b17e836(),
 		// Property: TaskMode
 		// CloudFormation resource type schema:
 		//
@@ -674,10 +981,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"task_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the task mode for the task.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"task_mode": schemaAttributef87bbb5a7c647c8fcdbc2e74(),
 		// Property: TaskReportConfig
 		// CloudFormation resource type schema:
 		//
@@ -815,111 +1119,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"task_report_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Destination
-				"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: S3
-						"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BucketAccessRoleArn
-								"bucket_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies the Amazon Resource Name (ARN) of the IAM policy that allows Datasync to upload a task report to your S3 bucket.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3BucketArn
-								"s3_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies the ARN of the S3 bucket where Datasync uploads your report.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Subdirectory
-								"subdirectory": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies a bucket prefix for your report.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Specifies the Amazon S3 bucket where DataSync uploads your task report.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Specifies where DataSync uploads your task report.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ObjectVersionIds
-				"object_version_ids": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether your task report includes the new version of each object transferred into an S3 bucket, this only applies if you enable versioning on your bucket.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: OutputType
-				"output_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the type of task report that you want.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Overrides
-				"overrides": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Deleted
-						"deleted": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ReportLevel
-								"report_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Specifies the level of reporting for the files, objects, and directories that Datasync attempted to delete in your destination location. This only applies if you configure your task to delete data in the destination that isn't in the source.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Skipped
-						"skipped": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ReportLevel
-								"report_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Specifies the level of reporting for the files, objects, and directories that Datasync attempted to skip during your transfer.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Transferred
-						"transferred": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ReportLevel
-								"report_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Specifies the level of reporting for the files, objects, and directories that Datasync attempted to transfer.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Verified
-						"verified": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ReportLevel
-								"report_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Specifies the level of reporting for the files, objects, and directories that Datasync attempted to verify at the end of your transfer. This only applies if you configure your task to verify data during and after the transfer (which Datasync does by default)",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Customizes the reporting level for aspects of your task report. For example, your report might generally only include errors, but you could specify that you want a list of successes and errors just for the files that Datasync attempted to delete in your destination location.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ReportLevel
-				"report_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies how you want to configure a task report, which provides detailed information about for your Datasync transfer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"task_report_config": schemaAttributef0ffde023ed1a176005cc8f0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

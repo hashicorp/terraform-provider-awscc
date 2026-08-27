@@ -15,6 +15,43 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1e813bf45caa303a01fb8a48() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute63b5beffcd7f03d43fb9dcd0(),
+				// Property: Value
+				"value": schemaAttribute63b5beffcd7f03d43fb9dcd0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2fe93b97f63f6fd2ad82f1b6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63b5beffcd7f03d43fb9dcd0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec873f5a3f7d460c55dd3296d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: VpcConnectionArn
+			"vpc_connection_arn": schemaAttribute63b5beffcd7f03d43fb9dcd0(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_quicksight_o_auth_client_application", oAuthClientApplicationDataSource)
 }
@@ -30,9 +67,7 @@ func oAuthClientApplicationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:oauthclientapplication/.+",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute63b5beffcd7f03d43fb9dcd0(),
 		// Property: ClientId
 		// CloudFormation resource type schema:
 		//
@@ -41,9 +76,7 @@ func oAuthClientApplicationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"client_id": schemaAttribute63b5beffcd7f03d43fb9dcd0(),
 		// Property: ClientSecret
 		// CloudFormation resource type schema:
 		//
@@ -52,9 +85,7 @@ func oAuthClientApplicationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"client_secret": schemaAttribute63b5beffcd7f03d43fb9dcd0(),
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +93,7 @@ func oAuthClientApplicationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttribute2fe93b97f63f6fd2ad82f1b6(),
 		// Property: DataSourceType
 		// CloudFormation resource type schema:
 		//
@@ -112,9 +140,7 @@ func oAuthClientApplicationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"data_source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"data_source_type": schemaAttribute63b5beffcd7f03d43fb9dcd0(),
 		// Property: IdentityProviderVpcConnectionProperties
 		// CloudFormation resource type schema:
 		//
@@ -130,15 +156,7 @@ func oAuthClientApplicationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"identity_provider_vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: VpcConnectionArn
-				"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"identity_provider_vpc_connection_properties": schemaAttributec873f5a3f7d460c55dd3296d(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -146,10 +164,7 @@ func oAuthClientApplicationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttribute2fe93b97f63f6fd2ad82f1b6(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -158,9 +173,7 @@ func oAuthClientApplicationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute63b5beffcd7f03d43fb9dcd0(),
 		// Property: OAuthAuthorizationEndpointUrl
 		// CloudFormation resource type schema:
 		//
@@ -169,9 +182,7 @@ func oAuthClientApplicationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"o_auth_authorization_endpoint_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"o_auth_authorization_endpoint_url": schemaAttribute63b5beffcd7f03d43fb9dcd0(),
 		// Property: OAuthClientApplicationId
 		// CloudFormation resource type schema:
 		//
@@ -181,9 +192,7 @@ func oAuthClientApplicationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"o_auth_client_application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"o_auth_client_application_id": schemaAttribute63b5beffcd7f03d43fb9dcd0(),
 		// Property: OAuthClientAuthenticationType
 		// CloudFormation resource type schema:
 		//
@@ -193,9 +202,7 @@ func oAuthClientApplicationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"o_auth_client_authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"o_auth_client_authentication_type": schemaAttribute63b5beffcd7f03d43fb9dcd0(),
 		// Property: OAuthScopes
 		// CloudFormation resource type schema:
 		//
@@ -204,9 +211,7 @@ func oAuthClientApplicationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"o_auth_scopes": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"o_auth_scopes": schemaAttribute63b5beffcd7f03d43fb9dcd0(),
 		// Property: OAuthTokenEndpointUrl
 		// CloudFormation resource type schema:
 		//
@@ -215,9 +220,7 @@ func oAuthClientApplicationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"o_auth_token_endpoint_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"o_auth_token_endpoint_url": schemaAttribute63b5beffcd7f03d43fb9dcd0(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -246,21 +249,7 @@ func oAuthClientApplicationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "maxItems": 200,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute1e813bf45caa303a01fb8a48(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

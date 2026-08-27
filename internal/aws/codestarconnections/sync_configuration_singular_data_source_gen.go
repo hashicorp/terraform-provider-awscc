@@ -14,6 +14,83 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0760e9021f21f3bf07709470() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the branch of the repository from which resources are to be synchronized,",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute22228ddf5a4feb23e3a237e2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "When to trigger Git sync to begin the stack update.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2eb92316ca167e1e272083a4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the repository that is being synced to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5feb8d5a77273bea412b64fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "the ID of the entity that owns the repository.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72dfa6e7ec898da287a9dd1c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source provider repository path of the sync configuration file of the respective SyncType.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute735eb5d542d9c397802e54a3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the external provider where your third-party code repository is configured.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f10c229aa73bf3c0905e8ba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to enable or disable publishing of deployment status to source providers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec067ee44332008a0e76d0314() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the resource that is being synchronized to the repository.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd6c648e1c30cc5135f593a4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A UUID that uniquely identifies the RepositoryLink that the SyncConfig is associated with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee5b325a3d589ee595b2c406() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IAM Role that allows AWS to update CloudFormation stacks based on content in the specified repository.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef752f2b3f871a50277c5c86f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of resource synchronization service that is to be configured, for example, CFN_STACK_SYNC.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_codestarconnections_sync_configuration", syncConfigurationDataSource)
 }
@@ -29,10 +106,7 @@ func syncConfigurationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The name of the branch of the repository from which resources are to be synchronized,",
 		//	  "type": "string"
 		//	}
-		"branch": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the branch of the repository from which resources are to be synchronized,",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"branch": schemaAttribute0760e9021f21f3bf07709470(),
 		// Property: ConfigFile
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +114,7 @@ func syncConfigurationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The source provider repository path of the sync configuration file of the respective SyncType.",
 		//	  "type": "string"
 		//	}
-		"config_file": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The source provider repository path of the sync configuration file of the respective SyncType.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"config_file": schemaAttribute72dfa6e7ec898da287a9dd1c(),
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +123,7 @@ func syncConfigurationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "[a-za-z0-9_\\.-]+",
 		//	  "type": "string"
 		//	}
-		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "the ID of the entity that owns the repository.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"owner_id": schemaAttribute5feb8d5a77273bea412b64fb(),
 		// Property: ProviderType
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +138,7 @@ func syncConfigurationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the external provider where your third-party code repository is configured.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"provider_type": schemaAttribute735eb5d542d9c397802e54a3(),
 		// Property: PublishDeploymentStatus
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +150,7 @@ func syncConfigurationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"publish_deployment_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether to enable or disable publishing of deployment status to source providers.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"publish_deployment_status": schemaAttribute9f10c229aa73bf3c0905e8ba(),
 		// Property: RepositoryLinkId
 		// CloudFormation resource type schema:
 		//
@@ -97,10 +159,7 @@ func syncConfigurationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
 		//	  "type": "string"
 		//	}
-		"repository_link_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A UUID that uniquely identifies the RepositoryLink that the SyncConfig is associated with.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"repository_link_id": schemaAttributecd6c648e1c30cc5135f593a4(),
 		// Property: RepositoryName
 		// CloudFormation resource type schema:
 		//
@@ -109,10 +168,7 @@ func syncConfigurationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "[a-za-z0-9_\\.-]+",
 		//	  "type": "string"
 		//	}
-		"repository_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the repository that is being synced to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"repository_name": schemaAttribute2eb92316ca167e1e272083a4(),
 		// Property: ResourceName
 		// CloudFormation resource type schema:
 		//
@@ -121,10 +177,7 @@ func syncConfigurationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "[a-za-z0-9_\\.-]+",
 		//	  "type": "string"
 		//	}
-		"resource_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the resource that is being synchronized to the repository.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_name": schemaAttributec067ee44332008a0e76d0314(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -132,10 +185,7 @@ func syncConfigurationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The IAM Role that allows AWS to update CloudFormation stacks based on content in the specified repository.",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IAM Role that allows AWS to update CloudFormation stacks based on content in the specified repository.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttributeee5b325a3d589ee595b2c406(),
 		// Property: SyncType
 		// CloudFormation resource type schema:
 		//
@@ -143,10 +193,7 @@ func syncConfigurationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The type of resource synchronization service that is to be configured, for example, CFN_STACK_SYNC.",
 		//	  "type": "string"
 		//	}
-		"sync_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of resource synchronization service that is to be configured, for example, CFN_STACK_SYNC.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sync_type": schemaAttributef752f2b3f871a50277c5c86f(),
 		// Property: TriggerResourceUpdateOn
 		// CloudFormation resource type schema:
 		//
@@ -158,10 +205,7 @@ func syncConfigurationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"trigger_resource_update_on": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "When to trigger Git sync to begin the stack update.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"trigger_resource_update_on": schemaAttribute22228ddf5a4feb23e3a237e2(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

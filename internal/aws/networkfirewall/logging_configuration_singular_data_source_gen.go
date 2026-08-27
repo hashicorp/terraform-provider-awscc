@@ -15,6 +15,61 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute16ab8dce650a980c9b2e033d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A resource ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute220ada46ed814b4456e3ef6d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute482c78ab6752371e24b48c4d() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5628f26ce38c8c58334f4a0a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LogDestination
+				"log_destination": schemaAttribute9cf52c5867d08c99898818c0(),
+				// Property: LogDestinationType
+				"log_destination_type": schemaAttribute220ada46ed814b4456e3ef6d(),
+				// Property: LogType
+				"log_type": schemaAttribute220ada46ed814b4456e3ef6d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9229c18b0fdee6486b251148() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogDestinationConfigs
+			"log_destination_configs": schemaAttribute5628f26ce38c8c58334f4a0a(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9cf52c5867d08c99898818c0() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A key-value pair to configure the logDestinations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_networkfirewall_logging_configuration", loggingConfigurationDataSource)
 }
@@ -29,9 +84,7 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"enable_monitoring_dashboard": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"enable_monitoring_dashboard": schemaAttribute482c78ab6752371e24b48c4d(),
 		// Property: FirewallArn
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +95,7 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^arn:aws.*$",
 		//	  "type": "string"
 		//	}
-		"firewall_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A resource ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"firewall_arn": schemaAttribute16ab8dce650a980c9b2e033d(),
 		// Property: FirewallName
 		// CloudFormation resource type schema:
 		//
@@ -55,9 +105,7 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"firewall_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"firewall_name": schemaAttribute220ada46ed814b4456e3ef6d(),
 		// Property: LoggingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -114,34 +162,7 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LogDestinationConfigs
-				"log_destination_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: LogDestination
-							"log_destination":   // Pattern: ""
-							schema.MapAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "A key-value pair to configure the logDestinations.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: LogDestinationType
-							"log_destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: LogType
-							"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"logging_configuration": schemaAttribute9229c18b0fdee6486b251148(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

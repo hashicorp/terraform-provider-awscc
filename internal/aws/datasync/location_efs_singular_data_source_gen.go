@@ -15,6 +15,112 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute00210831be089c973d587718() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Protocol that is used for encrypting the traffic exchanged between the DataSync Agent and the EFS file system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute02415ae618c3403872a1972d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the Amazon EFS Access point that DataSync uses when accessing the EFS file system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0df5f93080121733beb9e483() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Amazon EFS file system location that is created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute286e75d00c1f07e934bf252b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key for an AWS resource tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4276077635910a196d7682c5() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ace06d9815006dd61b426b1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for an AWS resource tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a4a2984e4cb7809002a473b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the Amazon EFS file system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70c52e39a27f68c16dca0d2d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecurityGroupArns
+			"security_group_arns": schemaAttribute4276077635910a196d7682c5(),
+			// Property: SubnetArn
+			"subnet_arn": schemaAttributefffb23d0ac10d3b59ad2530c(),
+		}, /*END SCHEMA*/
+		Description: "The subnet and security group that DataSync uses to access target EFS file system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91afea88480338be07958e2e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL of the EFS location that was described.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec56ea51ce6054f7c7cb941f5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the AWS IAM role that the DataSync will assume when mounting the EFS file system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca9cfc4051ba111071c68cfc() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute286e75d00c1f07e934bf252b(),
+				// Property: Value
+				"value": schemaAttribute4ace06d9815006dd61b426b1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed40f10cc959130f6c6165d5c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A subdirectory in the location's path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefffb23d0ac10d3b59ad2530c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the subnet that DataSync uses to access the target EFS file system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_datasync_location_efs", locationEFSDataSource)
 }
@@ -32,10 +138,7 @@ func locationEFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]+:[0-9]{12}:access-point/fsap-[0-9a-f]{8,40}$",
 		//	  "type": "string"
 		//	}
-		"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the Amazon EFS Access point that DataSync uses when accessing the EFS file system.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"access_point_arn": schemaAttribute02415ae618c3403872a1972d(),
 		// Property: Ec2Config
 		// CloudFormation resource type schema:
 		//
@@ -68,23 +171,7 @@ func locationEFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"ec_2_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SecurityGroupArns
-				"security_group_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SubnetArn
-				"subnet_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the subnet that DataSync uses to access the target EFS file system.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The subnet and security group that DataSync uses to access target EFS file system.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ec_2_config": schemaAttribute70c52e39a27f68c16dca0d2d(),
 		// Property: EfsFilesystemArn
 		// CloudFormation resource type schema:
 		//
@@ -94,10 +181,7 @@ func locationEFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$",
 		//	  "type": "string"
 		//	}
-		"efs_filesystem_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the Amazon EFS file system.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"efs_filesystem_arn": schemaAttribute5a4a2984e4cb7809002a473b(),
 		// Property: FileSystemAccessRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -107,10 +191,7 @@ func locationEFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
 		//	  "type": "string"
 		//	}
-		"file_system_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the AWS IAM role that the DataSync will assume when mounting the EFS file system.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"file_system_access_role_arn": schemaAttributec56ea51ce6054f7c7cb941f5(),
 		// Property: InTransitEncryption
 		// CloudFormation resource type schema:
 		//
@@ -122,10 +203,7 @@ func locationEFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"in_transit_encryption": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Protocol that is used for encrypting the traffic exchanged between the DataSync Agent and the EFS file system.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"in_transit_encryption": schemaAttribute00210831be089c973d587718(),
 		// Property: LocationArn
 		// CloudFormation resource type schema:
 		//
@@ -135,10 +213,7 @@ func locationEFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Amazon EFS file system location that is created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"location_arn": schemaAttribute0df5f93080121733beb9e483(),
 		// Property: LocationUri
 		// CloudFormation resource type schema:
 		//
@@ -148,10 +223,7 @@ func locationEFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9.\\-/]+$",
 		//	  "type": "string"
 		//	}
-		"location_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The URL of the EFS location that was described.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"location_uri": schemaAttribute91afea88480338be07958e2e(),
 		// Property: Subdirectory
 		// CloudFormation resource type schema:
 		//
@@ -161,10 +233,7 @@ func locationEFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
 		//	  "type": "string"
 		//	}
-		"subdirectory": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A subdirectory in the location's path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subdirectory": schemaAttributed40f10cc959130f6c6165d5c(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -200,24 +269,7 @@ func locationEFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key for an AWS resource tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for an AWS resource tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeca9cfc4051ba111071c68cfc(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

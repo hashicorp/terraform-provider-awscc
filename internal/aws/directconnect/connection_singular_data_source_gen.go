@@ -14,6 +14,98 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute042431d37d9daab9a9d09c70() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The bandwidth of the connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute08f90d32482f8acba88a7cd3() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether you want the connection to support MAC Security (MACsec).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4187d28b06c33905ab6200f1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82114cb2dc240f5444146711() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID or ARN of the LAG to associate the connection with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89ac7ea70c8ae9a688334d2a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The location of the connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90f40f3416ecacf80e6d310d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea39cd346132360e431464fd1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9765eb8f3961044b6681de0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec99838a020199a29dcd49aa6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of the connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf1f53f932677e58c641d7cf() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec9765eb8f3961044b6681de0(),
+				// Property: Value
+				"value": schemaAttributef8c0170587ea8b258e0fee81(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags associated with the connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2e4808aa9ea6e7cb15f53e9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the service provider associated with the requested connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8c0170587ea8b258e0fee81() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_directconnect_connection", connectionDataSource)
 }
@@ -30,10 +122,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[1-9][0-9]*(M|G)bps$",
 		//	  "type": "string"
 		//	}
-		"bandwidth": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The bandwidth of the connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bandwidth": schemaAttribute042431d37d9daab9a9d09c70(),
 		// Property: ConnectionArn
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +131,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-z-]*:directconnect:[a-z0-9-]+:[0-9]{12}:dxcon/dxcon-[a-z0-9]{8,21}$",
 		//	  "type": "string"
 		//	}
-		"connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_arn": schemaAttribute4187d28b06c33905ab6200f1(),
 		// Property: ConnectionId
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +140,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^dxcon-[a-z0-9]{8,21}$",
 		//	  "type": "string"
 		//	}
-		"connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_id": schemaAttribute90f40f3416ecacf80e6d310d(),
 		// Property: ConnectionName
 		// CloudFormation resource type schema:
 		//
@@ -66,10 +149,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\w \\-_,\\/]{1,200}$",
 		//	  "type": "string"
 		//	}
-		"connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_name": schemaAttributea39cd346132360e431464fd1(),
 		// Property: ConnectionState
 		// CloudFormation resource type schema:
 		//
@@ -78,10 +158,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(ordering|requested|pending|available|down|deleting|deleted|rejected|unknown)$",
 		//	  "type": "string"
 		//	}
-		"connection_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The state of the connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_state": schemaAttributec99838a020199a29dcd49aa6(),
 		// Property: LagId
 		// CloudFormation resource type schema:
 		//
@@ -94,10 +171,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(arn:aws[a-z-]*:directconnect:[a-z0-9-]+:[0-9]{12}:dxlag/)?dxlag-[a-zA-Z0-9]{8,21}$",
 		//	  "type": "string"
 		//	}
-		"lag_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID or ARN of the LAG to associate the connection with.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"lag_id": schemaAttribute82114cb2dc240f5444146711(),
 		// Property: Location
 		// CloudFormation resource type schema:
 		//
@@ -106,10 +180,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"location": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The location of the connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"location": schemaAttribute89ac7ea70c8ae9a688334d2a(),
 		// Property: ProviderName
 		// CloudFormation resource type schema:
 		//
@@ -117,10 +188,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the service provider associated with the requested connection.",
 		//	  "type": "string"
 		//	}
-		"provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the service provider associated with the requested connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"provider_name": schemaAttributef2e4808aa9ea6e7cb15f53e9(),
 		// Property: RequestMACSec
 		// CloudFormation resource type schema:
 		//
@@ -128,10 +196,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether you want the connection to support MAC Security (MACsec).",
 		//	  "type": "boolean"
 		//	}
-		"request_mac_sec": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether you want the connection to support MAC Security (MACsec).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"request_mac_sec": schemaAttribute08f90d32482f8acba88a7cd3(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -164,24 +229,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags associated with the connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributedf1f53f932677e58c641d7cf(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

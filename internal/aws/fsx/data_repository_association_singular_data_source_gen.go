@@ -15,6 +15,126 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute081194bdfd119b2e87a6cb39() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Events
+			"events": schemaAttribute34c4f32bea1412ad8410c545(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the type of updated objects (new, changed, deleted) that will be automatically exported from your file system to the linked S3 bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d952ac8d26bda4aaa9e3c5a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "This path specifies where in your file system files will be exported from or imported to. This file system directory can be linked to only one Amazon S3 bucket, and no other S3 bucket can be linked to the directory.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1682dd36ec84e7d1126e3db9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The globally unique ID of the file system, assigned by Amazon FSx.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34c4f32bea1412ad8410c545() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42bd1b1913ffadb040f447da() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify Amazon Web Services resources. We require an ARN when you need to specify a resource unambiguously across all of Amazon Web Services. For more information, see Amazon Resource Names (ARNs) in the Amazon Web Services General Reference.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4742923df422ef4e2fb1e60c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributebb3b08e92dd33c1cbf221b6a(),
+				// Property: Value
+				"value": schemaAttributec06bd1372bc8d7c3989b5475(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of Tag values, with a maximum of 50 elements.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e851956c86deefa767b0eac() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea25884b6f22bff7fcdd56b3e() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A boolean flag indicating whether an import data repository task to import metadata should run after the data repository association is created. The task runs if this flag is set to true.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb3b08e92dd33c1cbf221b6a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec06bd1372bc8d7c3989b5475() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec99b8fabff19809cb27ed42d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AutoExportPolicy
+			"auto_export_policy": schemaAttribute081194bdfd119b2e87a6cb39(),
+			// Property: AutoImportPolicy
+			"auto_import_policy": schemaAttributef9dfe95210d3a3eeb41cbe61(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for an Amazon S3 data repository linked to an Amazon FSx Lustre file system with a data repository association. The configuration defines which file events (new, changed, or deleted files or directories) are automatically imported from the linked data repository to the file system or automatically exported from the file system to the data repository.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeadac39c56616b9063a7a3c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The system-generated, unique ID of the data repository association.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeecdb7b5d0b8f1a355cfd5f2e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The path to the Amazon S3 data repository that will be linked to the file system. The path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix/ . This path specifies where in the S3 data repository files will be imported from or exported to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9dfe95210d3a3eeb41cbe61() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Events
+			"events": schemaAttribute34c4f32bea1412ad8410c545(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the type of updated objects (new, changed, deleted) that will be automatically imported from the linked S3 bucket to your file system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_fsx_data_repository_association", dataRepositoryAssociationDataSource)
 }
@@ -30,10 +150,7 @@ func dataRepositoryAssociationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "The system-generated, unique ID of the data repository association.",
 		//	  "type": "string"
 		//	}
-		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The system-generated, unique ID of the data repository association.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"association_id": schemaAttributeeadac39c56616b9063a7a3c4(),
 		// Property: BatchImportMetaDataOnCreate
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +158,7 @@ func dataRepositoryAssociationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "A boolean flag indicating whether an import data repository task to import metadata should run after the data repository association is created. The task runs if this flag is set to true.",
 		//	  "type": "boolean"
 		//	}
-		"batch_import_meta_data_on_create": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A boolean flag indicating whether an import data repository task to import metadata should run after the data repository association is created. The task runs if this flag is set to true.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"batch_import_meta_data_on_create": schemaAttributea25884b6f22bff7fcdd56b3e(),
 		// Property: DataRepositoryPath
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +166,7 @@ func dataRepositoryAssociationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "The path to the Amazon S3 data repository that will be linked to the file system. The path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix/ . This path specifies where in the S3 data repository files will be imported from or exported to.",
 		//	  "type": "string"
 		//	}
-		"data_repository_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The path to the Amazon S3 data repository that will be linked to the file system. The path can be an S3 bucket or prefix in the format s3://myBucket/myPrefix/ . This path specifies where in the S3 data repository files will be imported from or exported to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_repository_path": schemaAttributeecdb7b5d0b8f1a355cfd5f2e(),
 		// Property: FileSystemId
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +174,7 @@ func dataRepositoryAssociationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "The globally unique ID of the file system, assigned by Amazon FSx.",
 		//	  "type": "string"
 		//	}
-		"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The globally unique ID of the file system, assigned by Amazon FSx.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"file_system_id": schemaAttribute1682dd36ec84e7d1126e3db9(),
 		// Property: FileSystemPath
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +182,7 @@ func dataRepositoryAssociationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "This path specifies where in your file system files will be exported from or imported to. This file system directory can be linked to only one Amazon S3 bucket, and no other S3 bucket can be linked to the directory.",
 		//	  "type": "string"
 		//	}
-		"file_system_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "This path specifies where in your file system files will be exported from or imported to. This file system directory can be linked to only one Amazon S3 bucket, and no other S3 bucket can be linked to the directory.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"file_system_path": schemaAttribute0d952ac8d26bda4aaa9e3c5a(),
 		// Property: ImportedFileChunkSize
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +190,7 @@ func dataRepositoryAssociationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system.",
 		//	  "type": "integer"
 		//	}
-		"imported_file_chunk_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"imported_file_chunk_size": schemaAttribute7e851956c86deefa767b0eac(),
 		// Property: ResourceARN
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +198,7 @@ func dataRepositoryAssociationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify Amazon Web Services resources. We require an ARN when you need to specify a resource unambiguously across all of Amazon Web Services. For more information, see Amazon Resource Names (ARNs) in the Amazon Web Services General Reference.",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify Amazon Web Services resources. We require an ARN when you need to specify a resource unambiguously across all of Amazon Web Services. For more information, see Amazon Resource Names (ARNs) in the Amazon Web Services General Reference.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_arn": schemaAttribute42bd1b1913ffadb040f447da(),
 		// Property: S3
 		// CloudFormation resource type schema:
 		//
@@ -158,36 +257,7 @@ func dataRepositoryAssociationDataSource(ctx context.Context) (datasource.DataSo
 		//	  },
 		//	  "type": "object"
 		//	}
-		"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AutoExportPolicy
-				"auto_export_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Events
-						"events": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Specifies the type of updated objects (new, changed, deleted) that will be automatically exported from your file system to the linked S3 bucket.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: AutoImportPolicy
-				"auto_import_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Events
-						"events": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Specifies the type of updated objects (new, changed, deleted) that will be automatically imported from the linked S3 bucket to your file system.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration for an Amazon S3 data repository linked to an Amazon FSx Lustre file system with a data repository association. The configuration defines which file events (new, changed, or deleted files or directories) are automatically imported from the linked data repository to the file system or automatically exported from the file system to the data repository.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"s3": schemaAttributec99b8fabff19809cb27ed42d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -220,24 +290,7 @@ func dataRepositoryAssociationDataSource(ctx context.Context) (datasource.DataSo
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of Tag values, with a maximum of 50 elements.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute4742923df422ef4e2fb1e60c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

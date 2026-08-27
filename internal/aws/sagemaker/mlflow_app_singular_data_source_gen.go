@@ -15,6 +15,106 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute06dbccec0b9409f1928abd17() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time that weekly maintenance updates are scheduled. For example: Tue:03:30.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute36d4e1c3e7efadc2645a23b2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The date and time that the MLflow App was last modified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute423d549e8e14539b1bab1e16() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The date and time that the MLflow App was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4689fef59540a24ba2b58e1d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the MLflow App.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4df98fa303f8250e0c00ce19() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec96a0c53c85e5e3bc7d6ed18(),
+				// Property: Value
+				"value": schemaAttributec96a0c53c85e5e3bc7d6ed18(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to associate with the MLflow App.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51d755b956dc6360f9831dab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the MLflow App.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute55c354d1700ff03906fc8617() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to enable or disable automatic registration of new MLflow models to the SageMaker Model Registry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d734bcaf97a04ed173384bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The server-generated identifier of the MLflow App.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute99da5dd54b9709b7164d9590() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the MLflow App.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea670dfba17b34df7f0882d1c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for an IAM role in your account that the MLflow App uses to access the artifact store in Amazon S3.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac5ed089d81166c98fc97a48() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The MLflow version used by the MLflow App.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec79748e00cc3d2e065b95e3c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The S3 URI for a general purpose bucket to use as the MLflow App artifact store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec96a0c53c85e5e3bc7d6ed18() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_mlflow_app", mlflowAppDataSource)
 }
@@ -33,10 +133,7 @@ func mlflowAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:mlflow-app/.*",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the MLflow App.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute51d755b956dc6360f9831dab(),
 		// Property: ArtifactStoreUri
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +144,7 @@ func mlflowAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "(https|s3)://([^/]+)/?(.*)",
 		//	  "type": "string"
 		//	}
-		"artifact_store_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The S3 URI for a general purpose bucket to use as the MLflow App artifact store.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"artifact_store_uri": schemaAttributec79748e00cc3d2e065b95e3c(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -59,11 +153,7 @@ func mlflowAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The date and time that the MLflow App was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute423d549e8e14539b1bab1e16(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -72,11 +162,7 @@ func mlflowAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The date and time that the MLflow App was last modified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttribute36d4e1c3e7efadc2645a23b2(),
 		// Property: MlflowAppId
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +170,7 @@ func mlflowAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The server-generated identifier of the MLflow App.",
 		//	  "type": "string"
 		//	}
-		"mlflow_app_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The server-generated identifier of the MLflow App.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"mlflow_app_id": schemaAttribute7d734bcaf97a04ed173384bc(),
 		// Property: MlflowVersion
 		// CloudFormation resource type schema:
 		//
@@ -98,10 +181,7 @@ func mlflowAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[0-9]*.[0-9]*.[0-9]*",
 		//	  "type": "string"
 		//	}
-		"mlflow_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The MLflow version used by the MLflow App.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"mlflow_version": schemaAttributeac5ed089d81166c98fc97a48(),
 		// Property: ModelRegistrationMode
 		// CloudFormation resource type schema:
 		//
@@ -113,10 +193,7 @@ func mlflowAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"model_registration_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether to enable or disable automatic registration of new MLflow models to the SageMaker Model Registry.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"model_registration_mode": schemaAttribute55c354d1700ff03906fc8617(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -127,10 +204,7 @@ func mlflowAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,255}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the MLflow App.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute4689fef59540a24ba2b58e1d(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -141,10 +215,7 @@ func mlflowAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for an IAM role in your account that the MLflow App uses to access the artifact store in Amazon S3.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttributea670dfba17b34df7f0882d1c(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -163,10 +234,7 @@ func mlflowAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the MLflow App.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute99da5dd54b9709b7164d9590(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -197,22 +265,7 @@ func mlflowAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to associate with the MLflow App.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute4df98fa303f8250e0c00ce19(),
 		// Property: WeeklyMaintenanceWindowStart
 		// CloudFormation resource type schema:
 		//
@@ -223,10 +276,7 @@ func mlflowAppDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "(Mon|Tue|Wed|Thu|Fri|Sat|Sun):([01]\\d|2[0-3]):([0-5]\\d)",
 		//	  "type": "string"
 		//	}
-		"weekly_maintenance_window_start": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The day and time of the week in Coordinated Universal Time (UTC) 24-hour standard time that weekly maintenance updates are scheduled. For example: Tue:03:30.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"weekly_maintenance_window_start": schemaAttribute06dbccec0b9409f1928abd17(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

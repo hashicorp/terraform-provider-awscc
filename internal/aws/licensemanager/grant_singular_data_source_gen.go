@@ -15,6 +15,83 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1e02acd741d61c8d2476608a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Arn of the grant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e5e569c700e7722cee9ea63() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "License Arn for the grant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b34817d5b59ce359343fe18() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57b0afe354f83d820f729027() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5cbe5acbed78a5b0fd887365() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name for the created Grant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute711431fa185d7f2490e7c3b0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute766bb3ad1f7a6c43e8a60c95() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the grant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91ad5a77ce273b4ed8fa1680() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute2b34817d5b59ce359343fe18(),
+				// Property: Value
+				"value": schemaAttributee597c09d54b778475f2fcb40(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags to attach.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1f751e8cb54dcc117f24fef() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Home region for the created grant.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee597c09d54b778475f2fcb40() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_licensemanager_grant", grantDataSource)
 }
@@ -33,10 +110,7 @@ func grantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"allowed_operations": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"allowed_operations": schemaAttribute57b0afe354f83d820f729027(),
 		// Property: GrantArn
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +119,7 @@ func grantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"grant_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Arn of the grant.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"grant_arn": schemaAttribute1e02acd741d61c8d2476608a(),
 		// Property: GrantName
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +127,7 @@ func grantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Name for the created Grant.",
 		//	  "type": "string"
 		//	}
-		"grant_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name for the created Grant.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"grant_name": schemaAttribute5cbe5acbed78a5b0fd887365(),
 		// Property: HomeRegion
 		// CloudFormation resource type schema:
 		//
@@ -67,10 +135,7 @@ func grantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Home region for the created grant.",
 		//	  "type": "string"
 		//	}
-		"home_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Home region for the created grant.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"home_region": schemaAttributed1f751e8cb54dcc117f24fef(),
 		// Property: LicenseArn
 		// CloudFormation resource type schema:
 		//
@@ -79,10 +144,7 @@ func grantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"license_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "License Arn for the grant.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"license_arn": schemaAttribute1e5e569c700e7722cee9ea63(),
 		// Property: Principals
 		// CloudFormation resource type schema:
 		//
@@ -94,19 +156,14 @@ func grantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"principals": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"principals": schemaAttribute57b0afe354f83d820f729027(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute711431fa185d7f2490e7c3b0(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -135,24 +192,7 @@ func grantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags to attach.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute91ad5a77ce273b4ed8fa1680(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -160,10 +200,7 @@ func grantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version of the grant.",
 		//	  "type": "string"
 		//	}
-		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of the grant.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttribute766bb3ad1f7a6c43e8a60c95(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

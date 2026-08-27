@@ -15,6 +15,124 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0b5fdcd79a028e9b46b6e27b() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The tags associated with the workflow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute14e22660963fd6315478c54d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttribute8746bfdbde773b801f6acbc2(),
+			// Property: Major
+			"major": schemaAttribute803c092d443853346d7009bc(),
+			// Property: Minor
+			"minor": schemaAttribute78d9d85a257b23afeb47e6d8(),
+			// Property: Patch
+			"patch": schemaAttributebc7ca3ba2f4a7834b63ec453(),
+		}, /*END SCHEMA*/
+		Description: "The latest version references of the workflow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e7142cedc73d7c711e300dd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The uri of the workflow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5bdd991d2cc77611505b0636() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The change description of the workflow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6cb5df91acca2ce897af6b51() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the workflow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78d9d85a257b23afeb47e6d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The latest version ARN of the created workflow, with the same minor version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute803c092d443853346d7009bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The latest version ARN of the created workflow, with the same major version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8746bfdbde773b801f6acbc2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The latest version ARN of the created workflow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute991d29cf003940724c16391d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The KMS key identifier used to encrypt the workflow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb1d4f1a5e6706755d03cb87e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the workflow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc7ca3ba2f4a7834b63ec453() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The latest version ARN of the created workflow, with the same patch version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7db86889997d780ebf851cf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the workflow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed6276286b636ef4dfda3995() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the workflow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8a94d91fc3018320bfbaac7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The data of the workflow.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd87384295778ce5537b37c2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the workflow denotes whether the workflow is used to build, test, or distribute.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_imagebuilder_workflow", workflowDataSource)
 }
@@ -30,10 +148,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the workflow.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the workflow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributec7db86889997d780ebf851cf(),
 		// Property: ChangeDescription
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +156,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The change description of the workflow.",
 		//	  "type": "string"
 		//	}
-		"change_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The change description of the workflow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"change_description": schemaAttribute5bdd991d2cc77611505b0636(),
 		// Property: Data
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +166,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"data": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The data of the workflow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data": schemaAttributef8a94d91fc3018320bfbaac7(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -65,10 +174,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of the workflow.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the workflow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeb1d4f1a5e6706755d03cb87e(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -76,10 +182,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The KMS key identifier used to encrypt the workflow.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The KMS key identifier used to encrypt the workflow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttribute991d29cf003940724c16391d(),
 		// Property: LatestVersion
 		// CloudFormation resource type schema:
 		//
@@ -106,32 +209,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"latest_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The latest version ARN of the created workflow.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Major
-				"major": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The latest version ARN of the created workflow, with the same major version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Minor
-				"minor": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The latest version ARN of the created workflow, with the same minor version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Patch
-				"patch": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The latest version ARN of the created workflow, with the same patch version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The latest version references of the workflow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"latest_version": schemaAttribute14e22660963fd6315478c54d(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -139,10 +217,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the workflow.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the workflow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributeed6276286b636ef4dfda3995(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -156,12 +231,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The tags associated with the workflow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute0b5fdcd79a028e9b46b6e27b(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -174,10 +244,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the workflow denotes whether the workflow is used to build, test, or distribute.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttributefd87384295778ce5537b37c2(),
 		// Property: Uri
 		// CloudFormation resource type schema:
 		//
@@ -185,10 +252,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The uri of the workflow.",
 		//	  "type": "string"
 		//	}
-		"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The uri of the workflow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"uri": schemaAttribute1e7142cedc73d7c711e300dd(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -196,10 +260,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version of the workflow.",
 		//	  "type": "string"
 		//	}
-		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of the workflow.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttribute6cb5df91acca2ce897af6b51(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

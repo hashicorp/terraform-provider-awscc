@@ -14,6 +14,134 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute099000ed74889d67c366aa49() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Content
+				"content": schemaAttribute8b7e36663f2346c3d5a42ad4(),
+				// Property: Type
+				"type": schemaAttributeff61555d4963a83ec7d5ceee(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of methods for validating the configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2243aa0e06323d8bf2e67a74() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of configurations contained in the profile. When calling this API, enter one of the following values for Type: AWS.AppConfig.FeatureFlags, AWS.Freeform",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e1cf75068270c7d09df46d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name of the AWS Key Management Service key to encrypt new configuration data versions in the AWS AppConfig hosted configuration store. This attribute is only used for hosted configuration types. To encrypt data managed in other configuration stores, see the documentation for how to specify an AWS KMS key for that particular service.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3bcdcad741bdd34cd7d720ff() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the configuration profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ce452a4812d3c8e50439373() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag value can be up to 256 characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d081ec18daa0734034f8520() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute787b31a9659ed80634e559e9(),
+				// Property: Value
+				"value": schemaAttribute3ce452a4812d3c8e50439373(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Metadata to assign to the configuration profile. Tags help organize and categorize your AWS AppConfig resources. Each tag consists of a key and an optional value, both of which you define.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute426ce7e1a36597d99f47dd09() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The application ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5492997ad189dd8b98c2a7a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name for the configuration profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5725cd8a799de3b464ac6d82() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The configuration profile ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6718478252e86c802b59a068() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of an IAM role with permission to access the configuration at the specified LocationUri.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute787b31a9659ed80634e559e9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key-value string map. The tag key can be up to 128 characters and must not start with aws:.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b7e36663f2346c3d5a42ad4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Either the JSON Schema content or the Amazon Resource Name (ARN) of an Lambda function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea6078ebf1dc57f81d41b9267() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Key Management Service key identifier (key ID, key alias, or key ARN) provided when the resource was created or updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed392e9fa31aba9c00d79a04f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "On resource deletion this controls whether the Deletion Protection check should be applied, bypassed, or (the default) whether the behavior should be controlled by the account-level Deletion Protection setting. See https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb565015421974ccf6612db8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A URI to locate the configuration. You can specify the AWS AppConfig hosted configuration store, Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff61555d4963a83ec7d5ceee() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "AWS AppConfig supports validators of type JSON_SCHEMA and LAMBDA.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_appconfig_configuration_profile", configurationProfileDataSource)
 }
@@ -30,10 +158,7 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "[a-z0-9]{4,7}",
 		//	  "type": "string"
 		//	}
-		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The application ID.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"application_id": schemaAttribute426ce7e1a36597d99f47dd09(),
 		// Property: ConfigurationProfileId
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +166,7 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The configuration profile ID",
 		//	  "type": "string"
 		//	}
-		"configuration_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The configuration profile ID",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"configuration_profile_id": schemaAttribute5725cd8a799de3b464ac6d82(),
 		// Property: DeletionProtectionCheck
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +179,7 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"deletion_protection_check": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "On resource deletion this controls whether the Deletion Protection check should be applied, bypassed, or (the default) whether the behavior should be controlled by the account-level Deletion Protection setting. See https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"deletion_protection_check": schemaAttributed392e9fa31aba9c00d79a04f(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +189,7 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the configuration profile.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute3bcdcad741bdd34cd7d720ff(),
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +200,7 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "arn:(aws[a-zA-Z-]*)?:[a-z]+:((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1})?:(\\d{12})?:[a-zA-Z0-9-_/:.]+",
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name of the AWS Key Management Service key to encrypt new configuration data versions in the AWS AppConfig hosted configuration store. This attribute is only used for hosted configuration types. To encrypt data managed in other configuration stores, see the documentation for how to specify an AWS KMS key for that particular service.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttribute2e1cf75068270c7d09df46d0(),
 		// Property: KmsKeyIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -95,10 +208,7 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The AWS Key Management Service key identifier (key ID, key alias, or key ARN) provided when the resource was created or updated.",
 		//	  "type": "string"
 		//	}
-		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS Key Management Service key identifier (key ID, key alias, or key ARN) provided when the resource was created or updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_identifier": schemaAttributea6078ebf1dc57f81d41b9267(),
 		// Property: LocationUri
 		// CloudFormation resource type schema:
 		//
@@ -108,10 +218,7 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"location_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A URI to locate the configuration. You can specify the AWS AppConfig hosted configuration store, Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"location_uri": schemaAttributedb565015421974ccf6612db8(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -121,10 +228,7 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the configuration profile.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute5492997ad189dd8b98c2a7a0(),
 		// Property: RetrievalRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -135,10 +239,7 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^((arn):(aws|aws-cn|aws-iso|aws-iso-[a-z]{1}|aws-us-gov|aws-eusc):(iam)::\\d{12}:role[/].*)$",
 		//	  "type": "string"
 		//	}
-		"retrieval_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of an IAM role with permission to access the configuration at the specified LocationUri.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"retrieval_role_arn": schemaAttribute6718478252e86c802b59a068(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -167,24 +268,7 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key-value string map. The tag key can be up to 128 characters and must not start with aws:.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag value can be up to 256 characters.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Metadata to assign to the configuration profile. Tags help organize and categorize your AWS AppConfig resources. Each tag consists of a key and an optional value, both of which you define.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute3d081ec18daa0734034f8520(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -193,10 +277,7 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^[a-zA-Z\\.]+",
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of configurations contained in the profile. When calling this API, enter one of the following values for Type: AWS.AppConfig.FeatureFlags, AWS.Freeform",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute2243aa0e06323d8bf2e67a74(),
 		// Property: Validators
 		// CloudFormation resource type schema:
 		//
@@ -224,24 +305,7 @@ func configurationProfileDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"validators": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Content
-					"content": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Either the JSON Schema content or the Amazon Resource Name (ARN) of an Lambda function.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Type
-					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "AWS AppConfig supports validators of type JSON_SCHEMA and LAMBDA.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of methods for validating the configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"validators": schemaAttribute099000ed74889d67c366aa49(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

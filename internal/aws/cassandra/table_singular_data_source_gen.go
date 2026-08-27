@@ -14,6 +14,321 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1655fb43d9954fa936181614() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReadCapacityAutoScaling
+				"read_capacity_auto_scaling": schemaAttribute6287b8ec9d53f6ddb14476f8(),
+				// Property: ReadCapacityUnits
+				"read_capacity_units": schemaAttribute9ffad6af33207a1b05215ce3(),
+				// Property: Region
+				"region": schemaAttribute982986e5a5bbf73438bc0fe4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute187d752fd9f2a96c21396089() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TargetTrackingScalingPolicyConfiguration
+			"target_tracking_scaling_policy_configuration": schemaAttribute516af1f41147274b13eec7cb(),
+		}, /*END SCHEMA*/
+		Description: "Represents scaling policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28f461aced3ed9fabb01d51b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies what data should be captured in the change data stream",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ae3e7c93820655d6a208a8f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Server-side encryption type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d34d28bc4a2d2d2fbd52bb2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Capacity mode for the specified table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b7d2f0d218f440d041be5b3() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether client side timestamps are enabled (true) or disabled (false) on the table. False by default, once it is enabled it cannot be disabled again.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ba3d9bcdd86c1dc9bae6e33() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ColumnName
+				"column_name": schemaAttribute982986e5a5bbf73438bc0fe4(),
+				// Property: ColumnType
+				"column_type": schemaAttribute982986e5a5bbf73438bc0fe4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Non-key columns of the table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute450dda7ced7c973cb6b3b119() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether CDC is enabled or disabled for the table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute510fdf9bd9af56fda1332c31() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ColumnName
+			"column_name": schemaAttribute982986e5a5bbf73438bc0fe4(),
+			// Property: ColumnType
+			"column_type": schemaAttribute982986e5a5bbf73438bc0fe4(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute516af1f41147274b13eec7cb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DisableScaleIn
+			"disable_scale_in": schemaAttributed1e7c848347f7e8a40e12fd1(),
+			// Property: ScaleInCooldown
+			"scale_in_cooldown": schemaAttribute9ffad6af33207a1b05215ce3(),
+			// Property: ScaleOutCooldown
+			"scale_out_cooldown": schemaAttribute9ffad6af33207a1b05215ce3(),
+			// Property: TargetValue
+			"target_value": schemaAttribute9ffad6af33207a1b05215ce3(),
+		}, /*END SCHEMA*/
+		Description: "Represents configuration for target tracking scaling policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6287b8ec9d53f6ddb14476f8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AutoScalingDisabled
+			"auto_scaling_disabled": schemaAttributed1e7c848347f7e8a40e12fd1(),
+			// Property: MaximumUnits
+			"maximum_units": schemaAttribute9ffad6af33207a1b05215ce3(),
+			// Property: MinimumUnits
+			"minimum_units": schemaAttribute9ffad6af33207a1b05215ce3(),
+			// Property: ScalingPolicy
+			"scaling_policy": schemaAttribute187d752fd9f2a96c21396089(),
+		}, /*END SCHEMA*/
+		Description: "Represents configuration for auto scaling.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63e439eef0030bac32f7fc9b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ReadCapacityUnits
+			"read_capacity_units": schemaAttribute9ffad6af33207a1b05215ce3(),
+			// Property: WriteCapacityUnits
+			"write_capacity_units": schemaAttribute9ffad6af33207a1b05215ce3(),
+		}, /*END SCHEMA*/
+		Description: "Throughput for the specified table, which consists of values for ReadCapacityUnits and WriteCapacityUnits",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79bb498196c24d62eea990ac() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute982986e5a5bbf73438bc0fe4(),
+				// Property: Value
+				"value": schemaAttribute982986e5a5bbf73438bc0fe4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a17315c09cb5365d4163778() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EncryptionType
+			"encryption_type": schemaAttribute2ae3e7c93820655d6a208a8f(),
+			// Property: KmsKeyIdentifier
+			"kms_key_identifier": schemaAttributed40717beb04dd34b4c053019(),
+		}, /*END SCHEMA*/
+		Description: "Represents the settings used to enable server-side encryption",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute901caea7d5e2b06a02a13e09() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Status
+			"status": schemaAttribute450dda7ced7c973cb6b3b119(),
+			// Property: Tags
+			"tags": schemaAttributea57c74b5ad184f8ccd904e4c(),
+			// Property: ViewType
+			"view_type": schemaAttribute28f461aced3ed9fabb01d51b(),
+		}, /*END SCHEMA*/
+		Description: "Represents the CDC configuration for the table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9176ab3f0bfa02516b5546e7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Mode
+			"mode": schemaAttribute2d34d28bc4a2d2d2fbd52bb2(),
+			// Property: ProvisionedThroughput
+			"provisioned_throughput": schemaAttribute63e439eef0030bac32f7fc9b(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute982986e5a5bbf73438bc0fe4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ffad6af33207a1b05215ce3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea57c74b5ad184f8ccd904e4c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute982986e5a5bbf73438bc0fe4(),
+				// Property: Value
+				"value": schemaAttribute982986e5a5bbf73438bc0fe4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to the CDC stream resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaaa598e9786e78ae7b4b0245() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ReadUnitsPerSecond
+			"read_units_per_second": schemaAttribute9ffad6af33207a1b05215ce3(),
+			// Property: WriteUnitsPerSecond
+			"write_units_per_second": schemaAttribute9ffad6af33207a1b05215ce3(),
+		}, /*END SCHEMA*/
+		Description: "Warm throughput configuration for the table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3b0c7271ef774a7c527c391() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether point in time recovery is enabled (true) or disabled (false) on the table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebff80ad0f7e5f0f5de9f3bcf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ReadCapacityAutoScaling
+			"read_capacity_auto_scaling": schemaAttribute6287b8ec9d53f6ddb14476f8(),
+			// Property: WriteCapacityAutoScaling
+			"write_capacity_auto_scaling": schemaAttribute6287b8ec9d53f6ddb14476f8(),
+		}, /*END SCHEMA*/
+		Description: "Represents the read and write settings used for AutoScaling.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec0d5d0313d2ef7f1123a0fdf() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Column
+				"column": schemaAttribute510fdf9bd9af56fda1332c31(),
+				// Property: OrderBy
+				"order_by": schemaAttribute982986e5a5bbf73438bc0fe4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Clustering key columns of the table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec76dd464850de5dacc49dbea() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Default TTL (Time To Live) in seconds, where zero is disabled. If the value is greater than zero, TTL is enabled for the entire table and an expiration timestamp is added to each column.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd0b967d013bbf57db4a0fa2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ColumnName
+				"column_name": schemaAttribute982986e5a5bbf73438bc0fe4(),
+				// Property: ColumnType
+				"column_type": schemaAttribute982986e5a5bbf73438bc0fe4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Partition key columns of the table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1e7c848347f7e8a40e12fd1() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed40717beb04dd34b4c053019() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed537be99230c28322ff6345e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name for Cassandra table",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee41322a0891cbae33c8b1f16() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name for Cassandra keyspace",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cassandra_table", tableDataSource)
 }
@@ -134,110 +449,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"auto_scaling_specifications": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ReadCapacityAutoScaling
-				"read_capacity_auto_scaling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AutoScalingDisabled
-						"auto_scaling_disabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: MaximumUnits
-						"maximum_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: MinimumUnits
-						"minimum_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ScalingPolicy
-						"scaling_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: TargetTrackingScalingPolicyConfiguration
-								"target_tracking_scaling_policy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: DisableScaleIn
-										"disable_scale_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: ScaleInCooldown
-										"scale_in_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: ScaleOutCooldown
-										"scale_out_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: TargetValue
-										"target_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Represents configuration for target tracking scaling policy.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents scaling policy.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Represents configuration for auto scaling.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: WriteCapacityAutoScaling
-				"write_capacity_auto_scaling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AutoScalingDisabled
-						"auto_scaling_disabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: MaximumUnits
-						"maximum_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: MinimumUnits
-						"minimum_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ScalingPolicy
-						"scaling_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: TargetTrackingScalingPolicyConfiguration
-								"target_tracking_scaling_policy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: DisableScaleIn
-										"disable_scale_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: ScaleInCooldown
-										"scale_in_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: ScaleOutCooldown
-										"scale_out_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: TargetValue
-										"target_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Represents configuration for target tracking scaling policy.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Represents scaling policy.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Represents configuration for auto scaling.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Represents the read and write settings used for AutoScaling.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"auto_scaling_specifications": schemaAttributebff80ad0f7e5f0f5de9f3bcf(),
 		// Property: BillingMode
 		// CloudFormation resource type schema:
 		//
@@ -278,31 +490,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"billing_mode": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Mode
-				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Capacity mode for the specified table",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProvisionedThroughput
-				"provisioned_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ReadCapacityUnits
-						"read_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: WriteCapacityUnits
-						"write_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Throughput for the specified table, which consists of values for ReadCapacityUnits and WriteCapacityUnits",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"billing_mode": schemaAttribute9176ab3f0bfa02516b5546e7(),
 		// Property: CdcSpecification
 		// CloudFormation resource type schema:
 		//
@@ -363,39 +551,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"cdc_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Status
-				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether CDC is enabled or disabled for the table",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Tags
-				"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Key
-							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "An array of key-value pairs to apply to the CDC stream resource",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ViewType
-				"view_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies what data should be captured in the change data stream",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Represents the CDC configuration for the table",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cdc_specification": schemaAttribute901caea7d5e2b06a02a13e09(),
 		// Property: ClientSideTimestampsEnabled
 		// CloudFormation resource type schema:
 		//
@@ -403,10 +559,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether client side timestamps are enabled (true) or disabled (false) on the table. False by default, once it is enabled it cannot be disabled again.",
 		//	  "type": "boolean"
 		//	}
-		"client_side_timestamps_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether client side timestamps are enabled (true) or disabled (false) on the table. False by default, once it is enabled it cannot be disabled again.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"client_side_timestamps_enabled": schemaAttribute3b7d2f0d218f440d041be5b3(),
 		// Property: ClusteringKeyColumns
 		// CloudFormation resource type schema:
 		//
@@ -450,32 +603,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"clustering_key_columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Column
-					"column": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ColumnName
-							"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ColumnType
-							"column_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: OrderBy
-					"order_by": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Clustering key columns of the table",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"clustering_key_columns": schemaAttributec0d5d0313d2ef7f1123a0fdf(),
 		// Property: DefaultTimeToLive
 		// CloudFormation resource type schema:
 		//
@@ -484,10 +612,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"default_time_to_live": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Default TTL (Time To Live) in seconds, where zero is disabled. If the value is greater than zero, TTL is enabled for the entire table and an expiration timestamp is added to each column.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_time_to_live": schemaAttributec76dd464850de5dacc49dbea(),
 		// Property: EncryptionSpecification
 		// CloudFormation resource type schema:
 		//
@@ -514,22 +639,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"encryption_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EncryptionType
-				"encryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Server-side encryption type",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: KmsKeyIdentifier
-				"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. ",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Represents the settings used to enable server-side encryption",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"encryption_specification": schemaAttribute7a17315c09cb5365d4163778(),
 		// Property: KeyspaceName
 		// CloudFormation resource type schema:
 		//
@@ -538,10 +648,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
 		//	  "type": "string"
 		//	}
-		"keyspace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name for Cassandra keyspace",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"keyspace_name": schemaAttributee41322a0891cbae33c8b1f16(),
 		// Property: PartitionKeyColumns
 		// CloudFormation resource type schema:
 		//
@@ -569,22 +676,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"partition_key_columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ColumnName
-					"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ColumnType
-					"column_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Partition key columns of the table",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"partition_key_columns": schemaAttributecd0b967d013bbf57db4a0fa2(),
 		// Property: PointInTimeRecoveryEnabled
 		// CloudFormation resource type schema:
 		//
@@ -592,10 +684,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether point in time recovery is enabled (true) or disabled (false) on the table",
 		//	  "type": "boolean"
 		//	}
-		"point_in_time_recovery_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether point in time recovery is enabled (true) or disabled (false) on the table",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"point_in_time_recovery_enabled": schemaAttributeb3b0c7271ef774a7c527c391(),
 		// Property: RegularColumns
 		// CloudFormation resource type schema:
 		//
@@ -622,22 +711,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"regular_columns": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ColumnName
-					"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ColumnType
-					"column_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Non-key columns of the table",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"regular_columns": schemaAttribute3ba3d9bcdd86c1dc9bae6e33(),
 		// Property: ReplicaSpecifications
 		// CloudFormation resource type schema:
 		//
@@ -716,70 +790,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"replica_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ReadCapacityAutoScaling
-					"read_capacity_auto_scaling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AutoScalingDisabled
-							"auto_scaling_disabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: MaximumUnits
-							"maximum_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: MinimumUnits
-							"minimum_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ScalingPolicy
-							"scaling_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: TargetTrackingScalingPolicyConfiguration
-									"target_tracking_scaling_policy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: DisableScaleIn
-											"disable_scale_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: ScaleInCooldown
-											"scale_in_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: ScaleOutCooldown
-											"scale_out_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: TargetValue
-											"target_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Represents configuration for target tracking scaling policy.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Represents scaling policy.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Represents configuration for auto scaling.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ReadCapacityUnits
-					"read_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Region
-					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"replica_specifications": schemaAttribute1655fb43d9954fa936181614(),
 		// Property: TableName
 		// CloudFormation resource type schema:
 		//
@@ -788,10 +799,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
 		//	  "type": "string"
 		//	}
-		"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name for Cassandra table",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"table_name": schemaAttributed537be99230c28322ff6345e(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -823,22 +831,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute79bb498196c24d62eea990ac(),
 		// Property: WarmThroughput
 		// CloudFormation resource type schema:
 		//
@@ -857,20 +850,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"warm_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ReadUnitsPerSecond
-				"read_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: WriteUnitsPerSecond
-				"write_units_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Warm throughput configuration for the table",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"warm_throughput": schemaAttributeaaa598e9786e78ae7b4b0245(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,168 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute091b23b1a18d87d7951f443d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a360b6cfa5985f635ccbe9f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10fef51edc4b0c54f091cb5d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of a control. This name is between 1 and 256 characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute13b7d57569274bfeabdcd2cf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The deployment status of a framework. The statuses are: `CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED`",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20894c924658c9f523b9b930() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute0a360b6cfa5985f635ccbe9f(),
+				// Property: Value
+				"value": schemaAttribute599a6181d57b92e06979409d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Describes whether the control scope includes resources with one or more tags. Each tag is a key-value pair.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute271a1a239d081ba5884b7384() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute0a360b6cfa5985f635ccbe9f(),
+				// Property: Value
+				"value": schemaAttribute599a6181d57b92e06979409d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c78b78fdac7c4f4cf74afcd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ComplianceResourceIds
+			"compliance_resource_ids": schemaAttribute32cfda7c101257e0ee0f79c2(),
+			// Property: ComplianceResourceTypes
+			"compliance_resource_types": schemaAttributecbf559cfda1842c748076bc0(),
+			// Property: Tags
+			"tags": schemaAttribute20894c924658c9f523b9b930(),
+		}, /*END SCHEMA*/
+		Description: "The scope of a control. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute32cfda7c101257e0ee0f79c2() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The ID of the only AWS resource that you want your control scope to contain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3714eda904d6dcd06d1c3438() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An Amazon Resource Name (ARN) that uniquely identifies Framework as a resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute599a6181d57b92e06979409d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d812576ef83f820609afe9b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A framework consists of one or more controls. Each control governs a resource, such as backup plans, backup selections, backup vaults, or recovery points. You can also turn AWS Config recording on or off for each resource. The statuses are:\n\n`ACTIVE` when recording is turned on for all resources governed by the framework.\n\n`PARTIALLY_ACTIVE` when recording is turned off for at least one resource governed by the framework.\n\n`INACTIVE` when recording is turned off for all resources governed by the framework.\n\n`UNAVAILABLE` when AWS Backup is unable to validate recording status at this time.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute739e48ab53c91882a68c0bfe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An optional description of the framework with a maximum 1,024 characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84accb6156f7db022ea09c87() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date and time that a framework is created, in ISO 8601 representation. The value of CreationTime is accurate to milliseconds. For example, 2020-07-10T15:00:00.000-08:00 represents the 10th of July 2020 at 3:00 PM 8 hours behind UTC.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93dde66999db6e75df476e41() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ParameterName
+				"parameter_name": schemaAttribute091b23b1a18d87d7951f443d(),
+				// Property: ParameterValue
+				"parameter_value": schemaAttribute091b23b1a18d87d7951f443d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of ParameterName and ParameterValue pairs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute955f7ac9d8c2dfbc0adae73d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique name of a framework. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ba5ca458917217c8a67935e() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ControlInputParameters
+				"control_input_parameters": schemaAttribute93dde66999db6e75df476e41(),
+				// Property: ControlName
+				"control_name": schemaAttribute10fef51edc4b0c54f091cb5d(),
+				// Property: ControlScope
+				"control_scope": schemaAttribute2c78b78fdac7c4f4cf74afcd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Contains detailed information about all of the controls of a framework. Each framework must contain at least one control.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecbf559cfda1842c748076bc0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Describes whether the control scope includes one or more types of resources, such as `EFS` or `RDS`.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_backup_framework", frameworkDataSource)
 }
@@ -30,10 +192,7 @@ func frameworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The date and time that a framework is created, in ISO 8601 representation. The value of CreationTime is accurate to milliseconds. For example, 2020-07-10T15:00:00.000-08:00 represents the 10th of July 2020 at 3:00 PM 8 hours behind UTC.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date and time that a framework is created, in ISO 8601 representation. The value of CreationTime is accurate to milliseconds. For example, 2020-07-10T15:00:00.000-08:00 represents the 10th of July 2020 at 3:00 PM 8 hours behind UTC.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute84accb6156f7db022ea09c87(),
 		// Property: DeploymentStatus
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +200,7 @@ func frameworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The deployment status of a framework. The statuses are: `CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED`",
 		//	  "type": "string"
 		//	}
-		"deployment_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The deployment status of a framework. The statuses are: `CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED`",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"deployment_status": schemaAttribute13b7d57569274bfeabdcd2cf(),
 		// Property: FrameworkArn
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +208,7 @@ func frameworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "An Amazon Resource Name (ARN) that uniquely identifies Framework as a resource",
 		//	  "type": "string"
 		//	}
-		"framework_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An Amazon Resource Name (ARN) that uniquely identifies Framework as a resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"framework_arn": schemaAttribute3714eda904d6dcd06d1c3438(),
 		// Property: FrameworkControls
 		// CloudFormation resource type schema:
 		//
@@ -147,74 +300,7 @@ func frameworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"framework_controls": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ControlInputParameters
-					"control_input_parameters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ParameterName
-								"parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: ParameterValue
-								"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "A list of ParameterName and ParameterValue pairs.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ControlName
-					"control_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of a control. This name is between 1 and 256 characters.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ControlScope
-					"control_scope": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ComplianceResourceIds
-							"compliance_resource_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "The ID of the only AWS resource that you want your control scope to contain.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ComplianceResourceTypes
-							"compliance_resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "Describes whether the control scope includes one or more types of resources, such as `EFS` or `RDS`.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Tags
-							"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Key
-										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Value
-										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "Describes whether the control scope includes resources with one or more tags. Each tag is a key-value pair.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The scope of a control. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Contains detailed information about all of the controls of a framework. Each framework must contain at least one control.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"framework_controls": schemaAttribute9ba5ca458917217c8a67935e(),
 		// Property: FrameworkDescription
 		// CloudFormation resource type schema:
 		//
@@ -224,10 +310,7 @@ func frameworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"framework_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An optional description of the framework with a maximum 1,024 characters.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"framework_description": schemaAttribute739e48ab53c91882a68c0bfe(),
 		// Property: FrameworkName
 		// CloudFormation resource type schema:
 		//
@@ -238,10 +321,7 @@ func frameworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z][_a-zA-Z0-9]*",
 		//	  "type": "string"
 		//	}
-		"framework_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique name of a framework. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"framework_name": schemaAttribute955f7ac9d8c2dfbc0adae73d(),
 		// Property: FrameworkStatus
 		// CloudFormation resource type schema:
 		//
@@ -249,10 +329,7 @@ func frameworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A framework consists of one or more controls. Each control governs a resource, such as backup plans, backup selections, backup vaults, or recovery points. You can also turn AWS Config recording on or off for each resource. The statuses are:\n\n`ACTIVE` when recording is turned on for all resources governed by the framework.\n\n`PARTIALLY_ACTIVE` when recording is turned off for at least one resource governed by the framework.\n\n`INACTIVE` when recording is turned off for all resources governed by the framework.\n\n`UNAVAILABLE` when AWS Backup is unable to validate recording status at this time.",
 		//	  "type": "string"
 		//	}
-		"framework_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A framework consists of one or more controls. Each control governs a resource, such as backup plans, backup selections, backup vaults, or recovery points. You can also turn AWS Config recording on or off for each resource. The statuses are:\n\n`ACTIVE` when recording is turned on for all resources governed by the framework.\n\n`PARTIALLY_ACTIVE` when recording is turned off for at least one resource governed by the framework.\n\n`INACTIVE` when recording is turned off for all resources governed by the framework.\n\n`UNAVAILABLE` when AWS Backup is unable to validate recording status at this time.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"framework_status": schemaAttribute6d812576ef83f820609afe9b(),
 		// Property: FrameworkTags
 		// CloudFormation resource type schema:
 		//
@@ -280,24 +357,7 @@ func frameworkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"framework_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"framework_tags": schemaAttribute271a1a239d081ba5884b7384(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

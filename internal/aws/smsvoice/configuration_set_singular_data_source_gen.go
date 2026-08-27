@@ -15,6 +15,179 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2002809f2452d0e68fafa6d6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name to use for the configuration set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4afa40caf77c12e4cde68e28() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier for the protect configuration to be associated to the configuration set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53e9b6e21069749e3d027e82() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Amazon CloudWatch log group that you want to record events in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58a09c543d9f407c202cda3d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of an AWS Identity and Access Management role that is able to write event data to an Amazon CloudWatch destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61a9d891a1796d69b420d518() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute837fe88853b0f1945152a476() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "An array of event types that determine which events to log. If 'ALL' is used, then AWS End User Messaging SMS and Voice logs every event type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b199158bf673aa29682477b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish events to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90e015734501378f4c50b3d9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name that identifies the event destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a0027a7711820608d5d2b59() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The default sender ID to set for the ConfigurationSet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea172a8ebc2cd7a0a37a88027() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeliveryStreamArn
+			"delivery_stream_arn": schemaAttributebbf37d86f25bfd88b924e05c(),
+			// Property: IamRoleArn
+			"iam_role_arn": schemaAttribute58a09c543d9f407c202cda3d(),
+		}, /*END SCHEMA*/
+		Description: "An object that contains IamRoleArn and DeliveryStreamArn associated with an Amazon Kinesis Firehose event destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba4aded6d2cc40cd75cb7cbd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TopicArn
+			"topic_arn": schemaAttribute8b199158bf673aa29682477b(),
+		}, /*END SCHEMA*/
+		Description: "An object that contains SNS TopicArn event destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebacc69af1b28c1acb9595c50() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Set to true to enable message feedback.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebbf37d86f25bfd88b924e05c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the delivery stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec13e6f6ffef9eccb1c8815a4() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributedc2559c4b55fb4163e278aa1(),
+				// Property: Value
+				"value": schemaAttributedc1fb0e918663c9f1773656b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf7d4e47a827458d95760cdd() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "When set to true events will be logged. By default this is set to true",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed69116d466861acb8162d8f6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IamRoleArn
+			"iam_role_arn": schemaAttribute58a09c543d9f407c202cda3d(),
+			// Property: LogGroupArn
+			"log_group_arn": schemaAttribute53e9b6e21069749e3d027e82(),
+		}, /*END SCHEMA*/
+		Description: "An object that contains IamRoleArn and LogGroupArn associated with an Amazon CloudWatch event destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc1fb0e918663c9f1773656b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc2559c4b55fb4163e278aa1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7c8afa54a73b04d94bc4f3a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CloudWatchLogsDestination
+				"cloudwatch_logs_destination": schemaAttributed69116d466861acb8162d8f6(),
+				// Property: Enabled
+				"enabled": schemaAttributecf7d4e47a827458d95760cdd(),
+				// Property: EventDestinationName
+				"event_destination_name": schemaAttribute90e015734501378f4c50b3d9(),
+				// Property: KinesisFirehoseDestination
+				"kinesis_firehose_destination": schemaAttributea172a8ebc2cd7a0a37a88027(),
+				// Property: MatchingEventTypes
+				"matching_event_types": schemaAttribute837fe88853b0f1945152a476(),
+				// Property: SnsDestination
+				"sns_destination": schemaAttributeba4aded6d2cc40cd75cb7cbd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An event destination is a location where you send message events.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_smsvoice_configuration_set", configurationSetDataSource)
 }
@@ -29,9 +202,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute61a9d891a1796d69b420d518(),
 		// Property: ConfigurationSetName
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +213,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[A-Za-z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"configuration_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name to use for the configuration set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"configuration_set_name": schemaAttribute2002809f2452d0e68fafa6d6(),
 		// Property: DefaultSenderId
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +222,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[A-Za-z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"default_sender_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The default sender ID to set for the ConfigurationSet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_sender_id": schemaAttribute9a0027a7711820608d5d2b59(),
 		// Property: EventDestinations
 		// CloudFormation resource type schema:
 		//
@@ -173,76 +338,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "maxItems": 5,
 		//	  "type": "array"
 		//	}
-		"event_destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: CloudWatchLogsDestination
-					"cloudwatch_logs_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: IamRoleArn
-							"iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Amazon Resource Name (ARN) of an AWS Identity and Access Management role that is able to write event data to an Amazon CloudWatch destination.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: LogGroupArn
-							"log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the Amazon CloudWatch log group that you want to record events in.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "An object that contains IamRoleArn and LogGroupArn associated with an Amazon CloudWatch event destination.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Enabled
-					"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "When set to true events will be logged. By default this is set to true",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: EventDestinationName
-					"event_destination_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name that identifies the event destination.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: KinesisFirehoseDestination
-					"kinesis_firehose_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DeliveryStreamArn
-							"delivery_stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Amazon Resource Name (ARN) of the delivery stream.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: IamRoleArn
-							"iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Amazon Resource Name (ARN) of an AWS Identity and Access Management role that is able to write event data to an Amazon CloudWatch destination.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "An object that contains IamRoleArn and DeliveryStreamArn associated with an Amazon Kinesis Firehose event destination.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: MatchingEventTypes
-					"matching_event_types": schema.SetAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "An array of event types that determine which events to log. If 'ALL' is used, then AWS End User Messaging SMS and Voice logs every event type.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SnsDestination
-					"sns_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: TopicArn
-							"topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish events to.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "An object that contains SNS TopicArn event destination.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An event destination is a location where you send message events.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"event_destinations": schemaAttributef7c8afa54a73b04d94bc4f3a(),
 		// Property: MessageFeedbackEnabled
 		// CloudFormation resource type schema:
 		//
@@ -250,10 +346,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Set to true to enable message feedback.",
 		//	  "type": "boolean"
 		//	}
-		"message_feedback_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Set to true to enable message feedback.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"message_feedback_enabled": schemaAttributebacc69af1b28c1acb9595c50(),
 		// Property: ProtectConfigurationId
 		// CloudFormation resource type schema:
 		//
@@ -264,10 +357,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[A-Za-z0-9_:/-]+$",
 		//	  "type": "string"
 		//	}
-		"protect_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier for the protect configuration to be associated to the configuration set.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"protect_configuration_id": schemaAttribute4afa40caf77c12e4cde68e28(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -300,24 +390,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributec13e6f6ffef9eccb1c8815a4(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

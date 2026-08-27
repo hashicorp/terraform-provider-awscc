@@ -15,6 +15,165 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1198abb93a35d4ea0e2c31d9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3
+			"s3": schemaAttribute2c9a7b4ab7341edc3df9d13a(),
+		}, /*END SCHEMA*/
+		Description: "Recording Destination Configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15debde04610b70bb8eb3c7a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute205ba640d5230ca86f4e54ac() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Storage indicates the format in which thumbnails are recorded.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c9a7b4ab7341edc3df9d13a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketName
+			"bucket_name": schemaAttributef3cb035e5aa80f8d643b2700(),
+		}, /*END SCHEMA*/
+		Description: "Recording S3 Destination Configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3451bb3fb3853c4b7732c61c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute484deb6a1c4be765d40ead3d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Recording Reconnect Window Seconds. (0 means disabled)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute780bdf46c8a4437f664c5e7a() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Renditions indicates which renditions are recorded for a stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b93cbf4cffa422697e064c7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c886ee871487846b07a2a4f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RecordingMode
+			"recording_mode": schemaAttribute9b93cbf4cffa422697e064c7(),
+			// Property: Resolution
+			"resolution": schemaAttributea4a761d0d12c43efdd2a5830(),
+			// Property: Storage
+			"storage": schemaAttribute205ba640d5230ca86f4e54ac(),
+			// Property: TargetIntervalSeconds
+			"target_interval_seconds": schemaAttribute15debde04610b70bb8eb3c7a(),
+		}, /*END SCHEMA*/
+		Description: "Recording Thumbnail Configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3c9023933345345b0495abb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4a761d0d12c43efdd2a5830() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Resolution indicates the desired resolution of recorded thumbnails.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec0a0c8a4e27db52aaa642744() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecce0ea2c5b9d4fc78641b84c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Recording Configuration State.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5233c06c87ae23b1283758c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Resolution Selection indicates which set of renditions are recorded for a stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3551ce5120cf05964377135() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RenditionSelection
+			"rendition_selection": schemaAttributed5233c06c87ae23b1283758c(),
+			// Property: Renditions
+			"renditions": schemaAttribute780bdf46c8a4437f664c5e7a(),
+		}, /*END SCHEMA*/
+		Description: "Rendition Configuration describes which renditions should be recorded for a stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9e128428b650fe6264f5613() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Recording Configuration Name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3cb035e5aa80f8d643b2700() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa070a0b7a1a48473d48fa78() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute3451bb3fb3853c4b7732c61c(),
+				// Property: Value
+				"value": schemaAttributec0a0c8a4e27db52aaa642744(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs that contain metadata for the asset model.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ivs_recording_configuration", recordingConfigurationDataSource)
 }
@@ -33,10 +192,7 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^arn:aws[-a-z]*:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributea3c9023933345345b0495abb(),
 		// Property: DestinationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -63,23 +219,7 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "object"
 		//	}
-		"destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: S3
-				"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BucketName
-						"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Recording S3 Destination Configuration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Recording Destination Configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"destination_configuration": schemaAttribute1198abb93a35d4ea0e2c31d9(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -90,10 +230,7 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^[a-zA-Z0-9-_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Recording Configuration Name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributee9e128428b650fe6264f5613(),
 		// Property: RecordingReconnectWindowSeconds
 		// CloudFormation resource type schema:
 		//
@@ -104,10 +241,7 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"recording_reconnect_window_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Recording Reconnect Window Seconds. (0 means disabled)",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"recording_reconnect_window_seconds": schemaAttribute484deb6a1c4be765d40ead3d(),
 		// Property: RenditionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -145,23 +279,7 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "object"
 		//	}
-		"rendition_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RenditionSelection
-				"rendition_selection": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Resolution Selection indicates which set of renditions are recorded for a stream.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Renditions
-				"renditions": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Renditions indicates which renditions are recorded for a stream.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Rendition Configuration describes which renditions should be recorded for a stream.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rendition_configuration": schemaAttributee3551ce5120cf05964377135(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -174,10 +292,7 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Recording Configuration State.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributecce0ea2c5b9d4fc78641b84c(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -210,24 +325,7 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs that contain metadata for the asset model.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributefa070a0b7a1a48473d48fa78(),
 		// Property: ThumbnailConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -279,33 +377,7 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "object"
 		//	}
-		"thumbnail_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RecordingMode
-				"recording_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Resolution
-				"resolution": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Resolution indicates the desired resolution of recorded thumbnails.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Storage
-				"storage": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Storage indicates the format in which thumbnails are recorded.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TargetIntervalSeconds
-				"target_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Recording Thumbnail Configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"thumbnail_configuration": schemaAttribute9c886ee871487846b07a2a4f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

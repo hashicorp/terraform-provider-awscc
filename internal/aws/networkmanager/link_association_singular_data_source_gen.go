@@ -14,6 +14,27 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute8effe6447dbe5866bee61fa0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the global network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe81dc3735838d4a098336d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the link",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5bc848c80c5e59b2fd7be87() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the device",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_networkmanager_link_association", linkAssociationDataSource)
 }
@@ -29,10 +50,7 @@ func linkAssociationDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The ID of the device",
 		//	  "type": "string"
 		//	}
-		"device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the device",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"device_id": schemaAttributec5bc848c80c5e59b2fd7be87(),
 		// Property: GlobalNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +58,7 @@ func linkAssociationDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The ID of the global network.",
 		//	  "type": "string"
 		//	}
-		"global_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the global network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"global_network_id": schemaAttribute8effe6447dbe5866bee61fa0(),
 		// Property: LinkId
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +66,7 @@ func linkAssociationDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The ID of the link",
 		//	  "type": "string"
 		//	}
-		"link_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the link",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"link_id": schemaAttributebe81dc3735838d4a098336d2(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

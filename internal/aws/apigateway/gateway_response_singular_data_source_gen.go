@@ -15,6 +15,23 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute52bd145c40c23979d97d7c5b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute954cdf8a658559d7f49b54c7() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_apigateway_gateway_response", gatewayResponseDataSource)
 }
@@ -30,10 +47,7 @@ func gatewayResponseDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"gateway_response_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"gateway_response_id": schemaAttribute52bd145c40c23979d97d7c5b(),
 		// Property: ResponseParameters
 		// CloudFormation resource type schema:
 		//
@@ -47,12 +61,7 @@ func gatewayResponseDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"response_parameters": // Pattern: ""
-		schema.MapAttribute{   /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"response_parameters": schemaAttribute954cdf8a658559d7f49b54c7(),
 		// Property: ResponseTemplates
 		// CloudFormation resource type schema:
 		//
@@ -66,12 +75,7 @@ func gatewayResponseDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"response_templates": // Pattern: ""
-		schema.MapAttribute{  /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"response_templates": schemaAttribute954cdf8a658559d7f49b54c7(),
 		// Property: ResponseType
 		// CloudFormation resource type schema:
 		//
@@ -79,10 +83,7 @@ func gatewayResponseDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"response_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"response_type": schemaAttribute52bd145c40c23979d97d7c5b(),
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
@@ -90,10 +91,7 @@ func gatewayResponseDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rest_api_id": schemaAttribute52bd145c40c23979d97d7c5b(),
 		// Property: StatusCode
 		// CloudFormation resource type schema:
 		//
@@ -101,10 +99,7 @@ func gatewayResponseDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status_code": schemaAttribute52bd145c40c23979d97d7c5b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

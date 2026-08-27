@@ -15,6 +15,71 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute141c978fc547792807983e62() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributed73d5ae3cbe6b7510da7935b(),
+				// Property: Value
+				"value": schemaAttributed73d5ae3cbe6b7510da7935b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute772ee250c21949ec6ab04a41() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of key-value pair outputs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9bfb6a7516a7e3f2340f2b65() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: StackSetAccounts
+			"stack_set_accounts": schemaAttributed1723de949ed339781ef60b3(),
+			// Property: StackSetFailureToleranceCount
+			"stack_set_failure_tolerance_count": schemaAttributee74547f6335eebc8b5e7c81d(),
+			// Property: StackSetFailureTolerancePercentage
+			"stack_set_failure_tolerance_percentage": schemaAttributee74547f6335eebc8b5e7c81d(),
+			// Property: StackSetMaxConcurrencyCount
+			"stack_set_max_concurrency_count": schemaAttributee74547f6335eebc8b5e7c81d(),
+			// Property: StackSetMaxConcurrencyPercentage
+			"stack_set_max_concurrency_percentage": schemaAttributee74547f6335eebc8b5e7c81d(),
+			// Property: StackSetOperationType
+			"stack_set_operation_type": schemaAttributed73d5ae3cbe6b7510da7935b(),
+			// Property: StackSetRegions
+			"stack_set_regions": schemaAttributed1723de949ed339781ef60b3(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1723de949ed339781ef60b3() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed73d5ae3cbe6b7510da7935b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee74547f6335eebc8b5e7c81d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_servicecatalog_cloudformation_provisioned_product", cloudFormationProvisionedProductDataSource)
 }
@@ -34,9 +99,7 @@ func cloudFormationProvisionedProductDataSource(ctx context.Context) (datasource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"accept_language": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"accept_language": schemaAttributed73d5ae3cbe6b7510da7935b(),
 		// Property: CloudformationStackArn
 		// CloudFormation resource type schema:
 		//
@@ -45,9 +108,7 @@ func cloudFormationProvisionedProductDataSource(ctx context.Context) (datasource
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"cloudformation_stack_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"cloudformation_stack_arn": schemaAttributed73d5ae3cbe6b7510da7935b(),
 		// Property: NotificationArns
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +120,7 @@ func cloudFormationProvisionedProductDataSource(ctx context.Context) (datasource
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"notification_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"notification_arns": schemaAttributed1723de949ed339781ef60b3(),
 		// Property: Outputs
 		// CloudFormation resource type schema:
 		//
@@ -76,12 +134,7 @@ func cloudFormationProvisionedProductDataSource(ctx context.Context) (datasource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"outputs":           // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "List of key-value pair outputs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"outputs": schemaAttribute772ee250c21949ec6ab04a41(),
 		// Property: PathId
 		// CloudFormation resource type schema:
 		//
@@ -90,9 +143,7 @@ func cloudFormationProvisionedProductDataSource(ctx context.Context) (datasource
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"path_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"path_id": schemaAttributed73d5ae3cbe6b7510da7935b(),
 		// Property: PathName
 		// CloudFormation resource type schema:
 		//
@@ -101,9 +152,7 @@ func cloudFormationProvisionedProductDataSource(ctx context.Context) (datasource
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"path_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"path_name": schemaAttributed73d5ae3cbe6b7510da7935b(),
 		// Property: ProductId
 		// CloudFormation resource type schema:
 		//
@@ -112,9 +161,7 @@ func cloudFormationProvisionedProductDataSource(ctx context.Context) (datasource
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"product_id": schemaAttributed73d5ae3cbe6b7510da7935b(),
 		// Property: ProductName
 		// CloudFormation resource type schema:
 		//
@@ -123,9 +170,7 @@ func cloudFormationProvisionedProductDataSource(ctx context.Context) (datasource
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"product_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"product_name": schemaAttributed73d5ae3cbe6b7510da7935b(),
 		// Property: ProvisionedProductId
 		// CloudFormation resource type schema:
 		//
@@ -134,9 +179,7 @@ func cloudFormationProvisionedProductDataSource(ctx context.Context) (datasource
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"provisioned_product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"provisioned_product_id": schemaAttributed73d5ae3cbe6b7510da7935b(),
 		// Property: ProvisionedProductName
 		// CloudFormation resource type schema:
 		//
@@ -145,9 +188,7 @@ func cloudFormationProvisionedProductDataSource(ctx context.Context) (datasource
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"provisioned_product_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"provisioned_product_name": schemaAttributed73d5ae3cbe6b7510da7935b(),
 		// Property: ProvisioningArtifactId
 		// CloudFormation resource type schema:
 		//
@@ -156,18 +197,14 @@ func cloudFormationProvisionedProductDataSource(ctx context.Context) (datasource
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"provisioning_artifact_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"provisioning_artifact_id": schemaAttributed73d5ae3cbe6b7510da7935b(),
 		// Property: ProvisioningArtifactName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"provisioning_artifact_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"provisioning_artifact_name": schemaAttributed73d5ae3cbe6b7510da7935b(),
 		// Property: ProvisioningParameters
 		// CloudFormation resource type schema:
 		//
@@ -193,21 +230,7 @@ func cloudFormationProvisionedProductDataSource(ctx context.Context) (datasource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"provisioning_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"provisioning_parameters": schemaAttribute141c978fc547792807983e62(),
 		// Property: ProvisioningPreferences
 		// CloudFormation resource type schema:
 		//
@@ -259,41 +282,7 @@ func cloudFormationProvisionedProductDataSource(ctx context.Context) (datasource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"provisioning_preferences": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: StackSetAccounts
-				"stack_set_accounts": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StackSetFailureToleranceCount
-				"stack_set_failure_tolerance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: StackSetFailureTolerancePercentage
-				"stack_set_failure_tolerance_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: StackSetMaxConcurrencyCount
-				"stack_set_max_concurrency_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: StackSetMaxConcurrencyPercentage
-				"stack_set_max_concurrency_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: StackSetOperationType
-				"stack_set_operation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: StackSetRegions
-				"stack_set_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"provisioning_preferences": schemaAttribute9bfb6a7516a7e3f2340f2b65(),
 		// Property: RecordId
 		// CloudFormation resource type schema:
 		//
@@ -302,9 +291,7 @@ func cloudFormationProvisionedProductDataSource(ctx context.Context) (datasource
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"record_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"record_id": schemaAttributed73d5ae3cbe6b7510da7935b(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -333,21 +320,7 @@ func cloudFormationProvisionedProductDataSource(ctx context.Context) (datasource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute141c978fc547792807983e62(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

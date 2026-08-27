@@ -14,6 +14,170 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute04bd12cf172fe126962da78a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Invocation type for direct lambda integrations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0797a87ceb0badc32410578e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Namespace indentifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17b05b011d2369a2eca41ad6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataSourceName
+			"data_source_name": schemaAttributed74ceb9f339bb02f50120f0f(),
+			// Property: LambdaConfig
+			"lambda_config": schemaAttributec21afdbc103383a17d36dd42(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ead3cecebbca3cde61ac864() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string used to identify this tag. You can specify a maximum of 128 characters for a tag key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58d9fd2ac912bc136c1cd898() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: OnPublish
+			"on_publish": schemaAttributed2ab9ae0366a00a7800b1490(),
+			// Property: OnSubscribe
+			"on_subscribe": schemaAttributed2ab9ae0366a00a7800b1490(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute751eac8560da730f8ec264bd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "String of APPSYNC_JS code to be used by the handlers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8cbf7023bb7c33966f9fac54() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Integration behavior for a handler configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaeb9488e2a5647cda807dc12() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute1ead3cecebbca3cde61ac864(),
+				// Property: Value
+				"value": schemaAttributee0b3830c22839732bb784010(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An arbitrary set of tags (key-value pairs) for this AppSync API.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebffadf58e1cd4771733b2bb4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthType
+				"auth_type": schemaAttributef5107f89df6f0de63be7e01b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of AuthModes supported for Subscribe operations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec21afdbc103383a17d36dd42() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InvokeType
+			"invoke_type": schemaAttribute04bd12cf172fe126962da78a(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed2ab9ae0366a00a7800b1490() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Behavior
+			"behavior": schemaAttribute8cbf7023bb7c33966f9fac54(),
+			// Property: Integration
+			"integration": schemaAttribute17b05b011d2369a2eca41ad6(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed44d9e539bc61b0d8a7bc60a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon S3 endpoint where the code is located.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed74ceb9f339bb02f50120f0f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Data source to invoke for this integration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc5a29702b6f41499800fb7f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthType
+				"auth_type": schemaAttributef5107f89df6f0de63be7e01b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of AuthModes supported for Publish operations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedfd3cd3ad9049de5dcec905f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the Channel Namespace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0b3830c22839732bb784010() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeedfc44b2f1eebb78c082b1a9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "AppSync Api Id that this Channel Namespace belongs to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef5107f89df6f0de63be7e01b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Security configuration for your AppSync API.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_appsync_channel_namespace", channelNamespaceDataSource)
 }
@@ -29,10 +193,7 @@ func channelNamespaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "AppSync Api Id that this Channel Namespace belongs to.",
 		//	  "type": "string"
 		//	}
-		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "AppSync Api Id that this Channel Namespace belongs to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"api_id": schemaAttributeedfc44b2f1eebb78c082b1a9(),
 		// Property: ChannelNamespaceArn
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +201,7 @@ func channelNamespaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The Amazon Resource Name (ARN) for the Channel Namespace.",
 		//	  "type": "string"
 		//	}
-		"channel_namespace_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the Channel Namespace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"channel_namespace_arn": schemaAttributedfd3cd3ad9049de5dcec905f(),
 		// Property: CodeHandlers
 		// CloudFormation resource type schema:
 		//
@@ -53,10 +211,7 @@ func channelNamespaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"code_handlers": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "String of APPSYNC_JS code to be used by the handlers.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"code_handlers": schemaAttribute751eac8560da730f8ec264bd(),
 		// Property: CodeS3Location
 		// CloudFormation resource type schema:
 		//
@@ -64,10 +219,7 @@ func channelNamespaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The Amazon S3 endpoint where the code is located.",
 		//	  "type": "string"
 		//	}
-		"code_s3_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon S3 endpoint where the code is located.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"code_s3_location": schemaAttributed44d9e539bc61b0d8a7bc60a(),
 		// Property: HandlerConfigs
 		// CloudFormation resource type schema:
 		//
@@ -179,77 +331,7 @@ func channelNamespaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"handler_configs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: OnPublish
-				"on_publish": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Behavior
-						"behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Integration behavior for a handler configuration.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Integration
-						"integration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DataSourceName
-								"data_source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Data source to invoke for this integration.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: LambdaConfig
-								"lambda_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: InvokeType
-										"invoke_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Invocation type for direct lambda integrations.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: OnSubscribe
-				"on_subscribe": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Behavior
-						"behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Integration behavior for a handler configuration.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Integration
-						"integration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DataSourceName
-								"data_source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Data source to invoke for this integration.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: LambdaConfig
-								"lambda_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: InvokeType
-										"invoke_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Invocation type for direct lambda integrations.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"handler_configs": schemaAttribute58d9fd2ac912bc136c1cd898(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -260,10 +342,7 @@ func channelNamespaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "([A-Za-z0-9](?:[A-Za-z0-9\\-]{0,48}[A-Za-z0-9])?)",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Namespace indentifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute0797a87ceb0badc32410578e(),
 		// Property: PublishAuthModes
 		// CloudFormation resource type schema:
 		//
@@ -290,19 +369,7 @@ func channelNamespaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"publish_auth_modes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AuthType
-					"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Security configuration for your AppSync API.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "List of AuthModes supported for Publish operations.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"publish_auth_modes": schemaAttributedc5a29702b6f41499800fb7f(),
 		// Property: SubscribeAuthModes
 		// CloudFormation resource type schema:
 		//
@@ -329,19 +396,7 @@ func channelNamespaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"subscribe_auth_modes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AuthType
-					"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Security configuration for your AppSync API.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "List of AuthModes supported for Subscribe operations.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subscribe_auth_modes": schemaAttributebffadf58e1cd4771733b2bb4(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -376,24 +431,7 @@ func channelNamespaceDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string used to identify this tag. You can specify a maximum of 128 characters for a tag key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An arbitrary set of tags (key-value pairs) for this AppSync API.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeaeb9488e2a5647cda807dc12(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

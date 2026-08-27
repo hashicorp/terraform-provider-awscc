@@ -14,6 +14,69 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute040846500586716d7cb7a794() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A flag that Amazon Route 53 Application Recovery Controller sets to true to designate the default control panel for a cluster. When you create a cluster, Amazon Route 53 Application Recovery Controller creates a control panel, and sets this flag for that control panel. If you create a control panel yourself, this flag is set to false.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20c072d5d5da927120b507a6() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Count of associated routing controls",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7312e5c089159ad9a0332dc3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Cluster to associate with the Control Panel",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute740467e3a47c1148b7b2139b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the control panel. You can use any non-white space character in the name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb663c9ebe73e440b38922047() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3ce2ebccb9c551dcbfce228() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The deployment status of control panel. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef08a5b6da3e51b4b7d92d5d5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef5738d765dc9d3480d954e7a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeb663c9ebe73e440b38922047(),
+				// Property: Value
+				"value": schemaAttributeb663c9ebe73e440b38922047(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A collection of tags associated with a resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_route53recoverycontrol_control_panel", controlPanelDataSource)
 }
@@ -30,10 +93,7 @@ func controlPanelDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[A-Za-z0-9:\\/_-]*$",
 		//	  "type": "string"
 		//	}
-		"cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Cluster to associate with the Control Panel",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cluster_arn": schemaAttribute7312e5c089159ad9a0332dc3(),
 		// Property: ControlPanelArn
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +102,7 @@ func controlPanelDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[A-Za-z0-9:\\/_-]*$",
 		//	  "type": "string"
 		//	}
-		"control_panel_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"control_panel_arn": schemaAttributef08a5b6da3e51b4b7d92d5d5(),
 		// Property: DefaultControlPanel
 		// CloudFormation resource type schema:
 		//
@@ -53,10 +110,7 @@ func controlPanelDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "A flag that Amazon Route 53 Application Recovery Controller sets to true to designate the default control panel for a cluster. When you create a cluster, Amazon Route 53 Application Recovery Controller creates a control panel, and sets this flag for that control panel. If you create a control panel yourself, this flag is set to false.",
 		//	  "type": "boolean"
 		//	}
-		"default_control_panel": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A flag that Amazon Route 53 Application Recovery Controller sets to true to designate the default control panel for a cluster. When you create a cluster, Amazon Route 53 Application Recovery Controller creates a control panel, and sets this flag for that control panel. If you create a control panel yourself, this flag is set to false.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_control_panel": schemaAttribute040846500586716d7cb7a794(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -66,10 +120,7 @@ func controlPanelDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the control panel. You can use any non-white space character in the name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute740467e3a47c1148b7b2139b(),
 		// Property: RoutingControlCount
 		// CloudFormation resource type schema:
 		//
@@ -77,10 +128,7 @@ func controlPanelDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Count of associated routing controls",
 		//	  "type": "integer"
 		//	}
-		"routing_control_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Count of associated routing controls",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"routing_control_count": schemaAttribute20c072d5d5da927120b507a6(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -93,10 +141,7 @@ func controlPanelDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The deployment status of control panel. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributee3ce2ebccb9c551dcbfce228(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -124,22 +169,7 @@ func controlPanelDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A collection of tags associated with a resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributef5738d765dc9d3480d954e7a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

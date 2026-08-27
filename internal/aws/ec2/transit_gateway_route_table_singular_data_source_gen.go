@@ -14,6 +14,49 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute59f081f56bd153170373ca48() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the associated tag key-value pair",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79946fec8a4724fed2a6d03c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the transit gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea95f80a74d59f8a480394dbe() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeefd35fedf9fea62939a5efee(),
+				// Property: Value
+				"value": schemaAttribute59f081f56bd153170373ca48(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags are composed of a Key/Value pair. You can use tags to categorize and track each parameter group. The tag value null is permitted.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb09cbecd72261509e42dbd73() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Transit Gateway Route Table primary identifier",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeefd35fedf9fea62939a5efee() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key of the associated tag key-value pair",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_transit_gateway_route_table", transitGatewayRouteTableDataSource)
 }
@@ -49,24 +92,7 @@ func transitGatewayRouteTableDataSource(ctx context.Context) (datasource.DataSou
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key of the associated tag key-value pair",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value of the associated tag key-value pair",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags are composed of a Key/Value pair. You can use tags to categorize and track each parameter group. The tag value null is permitted.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributea95f80a74d59f8a480394dbe(),
 		// Property: TransitGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +100,7 @@ func transitGatewayRouteTableDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "The ID of the transit gateway.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the transit gateway.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_id": schemaAttribute79946fec8a4724fed2a6d03c(),
 		// Property: TransitGatewayRouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +108,7 @@ func transitGatewayRouteTableDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "Transit Gateway Route Table primary identifier",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Transit Gateway Route Table primary identifier",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_route_table_id": schemaAttributeb09cbecd72261509e42dbd73(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

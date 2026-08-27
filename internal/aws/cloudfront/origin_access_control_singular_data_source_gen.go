@@ -14,6 +14,67 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute005778e515b75156a9de7518() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name to identify the origin access control. You can specify up to 64 characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute113e4a818db06a72862edbe1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the origin access control.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1bca946cfd77e404510d3a75() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Description
+			"description": schemaAttribute113e4a818db06a72862edbe1(),
+			// Property: Name
+			"name": schemaAttribute005778e515b75156a9de7518(),
+			// Property: OriginAccessControlOriginType
+			"origin_access_control_origin_type": schemaAttributea7089197c505f0f52bedbbfa(),
+			// Property: SigningBehavior
+			"signing_behavior": schemaAttribute944c4e0f46d004940e5543a0(),
+			// Property: SigningProtocol
+			"signing_protocol": schemaAttribute32ef3ea6cc1d4392d44948c3(),
+		}, /*END SCHEMA*/
+		Description: "The origin access control.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute32ef3ea6cc1d4392d44948c3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The signing protocol of the origin access control, which determines how CloudFront signs (authenticates) requests. The only valid value is ``sigv4``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a1fde074d870792a6a7d396() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute944c4e0f46d004940e5543a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies which requests CloudFront signs (adds authentication information to). Specify ``always`` for the most common use case. For more information, see [origin access control advanced settings](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#oac-advanced-settings) in the *Amazon CloudFront Developer Guide*.\n This field can have one of the following values:\n  +  ``always`` ? CloudFront signs all origin requests, overwriting the ``Authorization`` header from the viewer request if one exists.\n  +  ``never`` ? CloudFront doesn't sign any origin requests. This value turns off origin access control for all origins in all distributions that use this origin access control.\n  +  ``no-override`` ? If the viewer request doesn't contain the ``Authorization`` header, then CloudFront signs the origin request. If the viewer request contains the ``Authorization`` header, then CloudFront doesn't sign the origin request and instead passes along the ``Authorization`` header from the viewer request. *WARNING: To pass along the Authorization header from the viewer request, you must add the Authorization header to a cache policy for all cache behaviors that use origins associated with this origin access control.*",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7089197c505f0f52bedbbfa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of origin that this origin access control is for.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudfront_origin_access_control", originAccessControlDataSource)
 }
@@ -29,10 +90,7 @@ func originAccessControlDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"origin_access_control_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"origin_access_control_id": schemaAttribute7a1fde074d870792a6a7d396(),
 		// Property: OriginAccessControlConfig
 		// CloudFormation resource type schema:
 		//
@@ -60,7 +118,7 @@ func originAccessControlDataSource(ctx context.Context) (datasource.DataSource, 
 		//	    },
 		//	    "SigningProtocol": {
 		//	      "description": "The signing protocol of the origin access control, which determines how CloudFront signs (authenticates) requests. The only valid value is ``sigv4``.",
-		//	      "pattern": "^(sigv4)$",
+		//	      "pattern": "^(sigv4|sigv4a)$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -72,37 +130,7 @@ func originAccessControlDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"origin_access_control_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Description
-				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A description of the origin access control.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A name to identify the origin access control. You can specify up to 64 characters.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: OriginAccessControlOriginType
-				"origin_access_control_origin_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of origin that this origin access control is for.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SigningBehavior
-				"signing_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies which requests CloudFront signs (adds authentication information to). Specify ``always`` for the most common use case. For more information, see [origin access control advanced settings](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#oac-advanced-settings) in the *Amazon CloudFront Developer Guide*.\n This field can have one of the following values:\n  +  ``always`` ? CloudFront signs all origin requests, overwriting the ``Authorization`` header from the viewer request if one exists.\n  +  ``never`` ? CloudFront doesn't sign any origin requests. This value turns off origin access control for all origins in all distributions that use this origin access control.\n  +  ``no-override`` ? If the viewer request doesn't contain the ``Authorization`` header, then CloudFront signs the origin request. If the viewer request contains the ``Authorization`` header, then CloudFront doesn't sign the origin request and instead passes along the ``Authorization`` header from the viewer request. *WARNING: To pass along the Authorization header from the viewer request, you must add the Authorization header to a cache policy for all cache behaviors that use origins associated with this origin access control.*",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SigningProtocol
-				"signing_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The signing protocol of the origin access control, which determines how CloudFront signs (authenticates) requests. The only valid value is ``sigv4``.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The origin access control.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"origin_access_control_config": schemaAttribute1bca946cfd77e404510d3a75(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

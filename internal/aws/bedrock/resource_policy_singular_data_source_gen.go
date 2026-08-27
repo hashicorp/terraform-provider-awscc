@@ -15,6 +15,21 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributec4f637cf0a3c98fff6f87afd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The IAM policy document defining access permissions for the guardrail and guardrail profile resources",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef58f0aaaf55dc9f3a288b2e7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Bedrock Guardrail or Guardrail Profile resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrock_resource_policy", resourcePolicyDataSource)
 }
@@ -30,11 +45,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The IAM policy document defining access permissions for the guardrail and guardrail profile resources",
 		//	  "type": "object"
 		//	}
-		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "The IAM policy document defining access permissions for the guardrail and guardrail profile resources",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_document": schemaAttributec4f637cf0a3c98fff6f87afd(),
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +55,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Bedrock Guardrail or Guardrail Profile resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_arn": schemaAttributef58f0aaaf55dc9f3a288b2e7(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

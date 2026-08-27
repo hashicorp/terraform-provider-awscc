@@ -16,6 +16,40 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute38aad94bbcfa6074ab9554b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ff2678a96545aac02bfcfbd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: jsontypes.NormalizedType{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a09ef095cbaf6d3e87467f0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute38aad94bbcfa6074ab9554b5(),
+				// Property: Value
+				"value": schemaAttribute38aad94bbcfa6074ab9554b5(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b7f9670115bb555f42f7375() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_controltower_landing_zone", landingZoneDataSource)
 }
@@ -33,9 +67,7 @@ func landingZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[0-9a-zA-Z_\\-:\\/]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute38aad94bbcfa6074ab9554b5(),
 		// Property: DriftStatus
 		// CloudFormation resource type schema:
 		//
@@ -46,18 +78,14 @@ func landingZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"drift_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"drift_status": schemaAttribute38aad94bbcfa6074ab9554b5(),
 		// Property: LandingZoneIdentifier
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"landing_zone_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"landing_zone_identifier": schemaAttribute38aad94bbcfa6074ab9554b5(),
 		// Property: LatestAvailableVersion
 		// CloudFormation resource type schema:
 		//
@@ -67,16 +95,11 @@ func landingZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "\\d+.\\d+",
 		//	  "type": "string"
 		//	}
-		"latest_available_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"latest_available_version": schemaAttribute38aad94bbcfa6074ab9554b5(),
 		// Property: Manifest
 		// CloudFormation resource type schema:
 		// {}
-		"manifest": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: jsontypes.NormalizedType{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"manifest": schemaAttribute3ff2678a96545aac02bfcfbd(),
 		// Property: RemediationTypes
 		// CloudFormation resource type schema:
 		//
@@ -89,10 +112,7 @@ func landingZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"remediation_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"remediation_types": schemaAttribute7b7f9670115bb555f42f7375(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -104,9 +124,7 @@ func landingZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute38aad94bbcfa6074ab9554b5(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -129,21 +147,7 @@ func landingZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute5a09ef095cbaf6d3e87467f0(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -153,9 +157,7 @@ func landingZoneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "\\d+.\\d+",
 		//	  "type": "string"
 		//	}
-		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttribute38aad94bbcfa6074ab9554b5(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

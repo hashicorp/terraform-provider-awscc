@@ -14,6 +14,94 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0edbb979db52a7d1fe44bb9b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Azure tenant identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3146b2494fc6e9cb90ddcd19() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute557227a0741ea137527bf72e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9316399d35894ad0ec492565() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Azure client (application) identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea70582fbe38bdb978054ab7c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Azure
+			"azure": schemaAttributeaf4ca81d17e14a58f0f55710(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for the connector that specifies the third-party cloud provider connection details.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8cc0f14dbac741f3b110062() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec723e38aecf268c6c0f495cd(),
+				// Property: Value
+				"value": schemaAttribute557227a0741ea137527bf72e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags for the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa2ad05f9179921c96171dce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the connector. AWS Config automatically assigns the name when creating the Connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf4ca81d17e14a58f0f55710() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClientIdentifier
+			"client_identifier": schemaAttribute9316399d35894ad0ec492565(),
+			// Property: TenantIdentifier
+			"tenant_identifier": schemaAttribute0edbb979db52a7d1fe44bb9b(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for connecting to Microsoft Azure.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec723e38aecf268c6c0f495cd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef47cbba06830fd96f43528b6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time at which the connector was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_config_connector", connectorDataSource)
 }
@@ -29,10 +117,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the connector.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute3146b2494fc6e9cb90ddcd19(),
 		// Property: ConnectorConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -66,29 +151,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"connector_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Azure
-				"azure": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ClientIdentifier
-						"client_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Azure client (application) identifier.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TenantIdentifier
-						"tenant_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Azure tenant identifier.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration for connecting to Microsoft Azure.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration for the connector that specifies the third-party cloud provider connection details.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connector_configuration": schemaAttributea70582fbe38bdb978054ab7c(),
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +159,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time at which the connector was created.",
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time at which the connector was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttributef47cbba06830fd96f43528b6(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -109,10 +169,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the connector. AWS Config automatically assigns the name when creating the Connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributeaa2ad05f9179921c96171dce(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -146,24 +203,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags for the connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributea8cc0f14dbac741f3b110062(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

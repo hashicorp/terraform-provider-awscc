@@ -14,6 +14,62 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute63285275d96e9f7bbeb7dc48() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The reserved publisher id for this type, or the publisher id assigned by CloudFormation for publishing in this region.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b619bce7853c9d295c464cb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Number (ARN) of the extension.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute922cd831a3f2a3e177dd48a2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The kind of extension",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea2162305dca60089d2f408a2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A url to the S3 bucket where logs for the testType run will be available",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea5701f29fcaf7109112172e3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed7d40fe9b95d31e141ca82b9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Number (ARN) of the extension with the versionId.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8a8a468406e34d9e2ccddc8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb02faf2e147d1d1818ac1ce() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version number of a public third-party extension",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudformation_public_type_version", publicTypeVersionDataSource)
 }
@@ -30,10 +86,7 @@ func publicTypeVersionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Number (ARN) of the extension.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute6b619bce7853c9d295c464cb(),
 		// Property: LogDeliveryBucket
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +94,7 @@ func publicTypeVersionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "A url to the S3 bucket where logs for the testType run will be available",
 		//	  "type": "string"
 		//	}
-		"log_delivery_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A url to the S3 bucket where logs for the testType run will be available",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"log_delivery_bucket": schemaAttributea2162305dca60089d2f408a2(),
 		// Property: PublicTypeArn
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +104,7 @@ func publicTypeVersionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+",
 		//	  "type": "string"
 		//	}
-		"public_type_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"public_type_arn": schemaAttributea5701f29fcaf7109112172e3(),
 		// Property: PublicVersionNumber
 		// CloudFormation resource type schema:
 		//
@@ -67,10 +114,7 @@ func publicTypeVersionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 5,
 		//	  "type": "string"
 		//	}
-		"public_version_number": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version number of a public third-party extension",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"public_version_number": schemaAttributeeb02faf2e147d1d1818ac1ce(),
 		// Property: PublisherId
 		// CloudFormation resource type schema:
 		//
@@ -81,10 +125,7 @@ func publicTypeVersionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "[0-9a-zA-Z-]{1,40}",
 		//	  "type": "string"
 		//	}
-		"publisher_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The reserved publisher id for this type, or the publisher id assigned by CloudFormation for publishing in this region.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"publisher_id": schemaAttribute63285275d96e9f7bbeb7dc48(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -97,10 +138,7 @@ func publicTypeVersionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The kind of extension",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute922cd831a3f2a3e177dd48a2(),
 		// Property: TypeName
 		// CloudFormation resource type schema:
 		//
@@ -109,10 +147,7 @@ func publicTypeVersionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}",
 		//	  "type": "string"
 		//	}
-		"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type_name": schemaAttributee8a8a468406e34d9e2ccddc8(),
 		// Property: TypeVersionArn
 		// CloudFormation resource type schema:
 		//
@@ -121,10 +156,7 @@ func publicTypeVersionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+",
 		//	  "type": "string"
 		//	}
-		"type_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Number (ARN) of the extension with the versionId.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type_version_arn": schemaAttributed7d40fe9b95d31e141ca82b9(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

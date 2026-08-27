@@ -16,6 +16,718 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute09a5e45f8af5767ea1eba0e0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Capacity
+			"capacity": schemaAttributeca482410a316b855b32ba16b(),
+			// Property: DefaultOutboundConfig
+			"default_outbound_config": schemaAttributeb5b8905ea4598906d840bb93(),
+			// Property: OutboundMode
+			"outbound_mode": schemaAttributee4db5d78d2b1964328e4476c(),
+		}, /*END SCHEMA*/
+		Description: "SMS Channel Subtype config",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0be7d472a5c289f842bda43e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Campaign name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0e3a9ce6ffe50089cf4cf32e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Connect Campaign Arn",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f27c1a3b6e64de25032e1d2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Capacity
+			"capacity": schemaAttributeca482410a316b855b32ba16b(),
+			// Property: DefaultOutboundConfig
+			"default_outbound_config": schemaAttribute38988a1ca633c66d838478d7(),
+			// Property: OutboundMode
+			"outbound_mode": schemaAttribute2e00c6b417932ff8390c34a0(),
+		}, /*END SCHEMA*/
+		Description: "WhatsApp Channel Subtype config",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute14ade76c3dea87bf33ad801b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15fa32177b79179ef59fd006() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute5f53fb095c976dfca418c890(),
+				// Property: Value
+				"value": schemaAttribute48e9e841e7799d8f80a9ae7f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Daily Hours map",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19e9bd2c32c45c9275806188() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Time Zone Id in the IANA format",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1b896f0be6488e4b03af17ab() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AwaitAnswerMachinePrompt
+			"await_answer_machine_prompt": schemaAttributed662ca882b0df80c0938c3c7(),
+			// Property: EnableAnswerMachineDetection
+			"enable_answer_machine_detection": schemaAttributef8c19e1274740d5594709c01(),
+		}, /*END SCHEMA*/
+		Description: "The configuration used for answering machine detection during outbound calls",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ea43557e4000c4d18e3d516() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EndDate
+				"end_date": schemaAttribute42c8cb7891e1d357af350866(),
+				// Property: Name
+				"name": schemaAttribute66ab9e76c005e4d68668e640(),
+				// Property: StartDate
+				"start_date": schemaAttribute42c8cb7891e1d357af350866(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of restricted period",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ef71f7c38472146a537a242() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Email address used for Email messages",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a5ee48324526c6eaa3eae42() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BandwidthAllocation
+			"bandwidth_allocation": schemaAttribute80cfb6df2d7c7468aed2b5f8(),
+		}, /*END SCHEMA*/
+		Description: "Predictive config",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2cf58f6a74bb130c1e001eb6() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e00c6b417932ff8390c34a0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AgentlessConfig
+			"agentless_config": schemaAttributea31082d6ce64128c0c050e08(),
+		}, /*END SCHEMA*/
+		Description: "WhatsApp Outbound Mode",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37425ce8e34ee59958a8dbdb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Enumeration of Instance Limits handling in a Campaign",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38988a1ca633c66d838478d7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConnectSourcePhoneNumberArn
+			"connect_source_phone_number_arn": schemaAttribute6c6fb1f58fe8a1a9205ca886(),
+			// Property: WisdomTemplateArn
+			"wisdom_template_arn": schemaAttribute6c6fb1f58fe8a1a9205ca886(),
+		}, /*END SCHEMA*/
+		Description: "Default WhatsApp outbound config",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d6d722fdf7bce709d4cc18e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxEntryCount
+			"max_entry_count": schemaAttributeae0f0e87adb17f089fa04750(),
+			// Property: MinEntryInterval
+			"min_entry_interval": schemaAttributea38d65a3c1d3dfc2a6dc414b(),
+		}, /*END SCHEMA*/
+		Description: "Entry limits config for a campaign",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41705f379351af801856c4c7() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Timeout duration for a preview contact in seconds",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute425a09ce6ef055cd9a59c66c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Email
+			"email": schemaAttribute61c7492310addbb3fa82c6af(),
+			// Property: Sms
+			"sms": schemaAttribute09a5e45f8af5767ea1eba0e0(),
+			// Property: Telephony
+			"telephony": schemaAttribute9747487d89704b8f8bcf8013(),
+			// Property: WhatsApp
+			"whats_app": schemaAttribute0f27c1a3b6e64de25032e1d2(),
+		}, /*END SCHEMA*/
+		Description: "The possible types of channel subtype config parameters",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42c8cb7891e1d357af350866() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Date in ISO 8601 format, e.g. 2024-01-01",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44304449e27c66eb4dbd18fa() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AnswerMachineDetectionConfig
+			"answer_machine_detection_config": schemaAttribute1b896f0be6488e4b03af17ab(),
+			// Property: ConnectContactFlowId
+			"connect_contact_flow_id": schemaAttribute47f7a3cf311f07675b1cf98a(),
+			// Property: ConnectSourcePhoneNumber
+			"connect_source_phone_number": schemaAttributeaca38af16da3f0205b89fead(),
+			// Property: RingTimeout
+			"ring_timeout": schemaAttributee76ad5ee5366e70d5834d449(),
+		}, /*END SCHEMA*/
+		Description: "Default Telephone Outbound config",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute47f7a3cf311f07675b1cf98a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the contact flow for the outbound call",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48c009140efa1858a2532c9d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The queue for the call",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48e9e841e7799d8f80a9ae7f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EndTime
+				"end_time": schemaAttributeb511e9166bef9ec347a93dca(),
+				// Property: StartTime
+				"start_time": schemaAttributeb511e9166bef9ec347a93dca(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of time range",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5523473cbafc36b9d974a556() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: OpenHours
+			"open_hours": schemaAttribute7232e70469aa141317cb3617(),
+			// Property: RestrictedPeriods
+			"restricted_periods": schemaAttributeb39693c7efd4cdce1e4e2424(),
+		}, /*END SCHEMA*/
+		Description: "Time window config",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f53fb095c976dfca418c890() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Day of week",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60d9de7c1c7e3aa0408197db() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AllChannelsSubtypes
+			"all_channels_subtypes": schemaAttributebbd771c946a5c59c81a66a95(),
+			// Property: InstanceLimitsHandling
+			"instance_limits_handling": schemaAttribute37425ce8e34ee59958a8dbdb(),
+		}, /*END SCHEMA*/
+		Description: "Communication limits config",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61c7492310addbb3fa82c6af() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Capacity
+			"capacity": schemaAttributeca482410a316b855b32ba16b(),
+			// Property: DefaultOutboundConfig
+			"default_outbound_config": schemaAttribute62ec1be37c075e70fab84550(),
+			// Property: OutboundMode
+			"outbound_mode": schemaAttributeb93556c5dfe5d6c642f75a15(),
+		}, /*END SCHEMA*/
+		Description: "Email Channel Subtype config",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62ec1be37c075e70fab84550() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConnectSourceEmailAddress
+			"connect_source_email_address": schemaAttribute1ef71f7c38472146a537a242(),
+			// Property: SourceEmailAddressDisplayName
+			"source_email_address_display_name": schemaAttributeb81b2d49fe1aa4dae9b4c2b6(),
+			// Property: WisdomTemplateArn
+			"wisdom_template_arn": schemaAttribute6c6fb1f58fe8a1a9205ca886(),
+		}, /*END SCHEMA*/
+		Description: "Default Email outbound config",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66ab9e76c005e4d68668e640() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of a restricted period",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b8ddbd6586f20cfb6ee5135() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Frequency
+				"frequency": schemaAttribute2cf58f6a74bb130c1e001eb6(),
+				// Property: MaxCountPerRecipient
+				"max_count_per_recipient": schemaAttribute2cf58f6a74bb130c1e001eb6(),
+				// Property: Unit
+				"unit": schemaAttributea9eded39b7d0febc6ac6cec4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of communication limit",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c6fb1f58fe8a1a9205ca886() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Arn",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7232e70469aa141317cb3617() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DailyHours
+			"daily_hours": schemaAttribute15fa32177b79179ef59fd006(),
+		}, /*END SCHEMA*/
+		Description: "Open Hours config",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73e65d686e179906d6d0aafd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Local TimeZone Detection scope",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80cfb6df2d7c7468aed2b5f8() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The bandwidth allocation of a queue resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute814323194bff8c7a76825290() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Actions that can be performed by agent during preview phase",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute845b9241adbfa837a776376a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Timestamp with no UTC offset or timezone",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8af3714ccd7963117b123fe7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Time duration in ISO 8601 format",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8de4bfb5560053a1d744f2d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Campaign type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9747487d89704b8f8bcf8013() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Capacity
+			"capacity": schemaAttributeca482410a316b855b32ba16b(),
+			// Property: ConnectQueueId
+			"connect_queue_id": schemaAttribute48c009140efa1858a2532c9d(),
+			// Property: DefaultOutboundConfig
+			"default_outbound_config": schemaAttribute44304449e27c66eb4dbd18fa(),
+			// Property: OutboundMode
+			"outbound_mode": schemaAttributea0c4636093efa2351180615f(),
+		}, /*END SCHEMA*/
+		Description: "Telephony Channel Subtype config",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c52a5faa2556e981db8531f() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee9ef3512bc9294e33532e72e(),
+				// Property: Value
+				"value": schemaAttribute14ade76c3dea87bf33ad801b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more tags.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9cef0e8b6b3a7853aeb36aec() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AgentActions
+			"agent_actions": schemaAttribute814323194bff8c7a76825290(),
+			// Property: BandwidthAllocation
+			"bandwidth_allocation": schemaAttribute80cfb6df2d7c7468aed2b5f8(),
+			// Property: TimeoutConfig
+			"timeout_config": schemaAttributedca20e0542657e6fe13805c5(),
+		}, /*END SCHEMA*/
+		Description: "Preview config",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0c4636093efa2351180615f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AgentlessConfig
+			"agentless_config": schemaAttributea31082d6ce64128c0c050e08(),
+			// Property: PredictiveConfig
+			"predictive_config": schemaAttribute2a5ee48324526c6eaa3eae42(),
+			// Property: PreviewConfig
+			"preview_config": schemaAttribute9cef0e8b6b3a7853aeb36aec(),
+			// Property: ProgressiveConfig
+			"progressive_config": schemaAttributeab4ebdf9ba2bb43fdda727a1(),
+		}, /*END SCHEMA*/
+		Description: "Telephony Outbound Mode",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea19ea126fac151deab818b7f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Local TimeZone Detection method list",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea31082d6ce64128c0c050e08() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Agentless config",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea38d65a3c1d3dfc2a6dc414b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Minimum time interval between entries for the same participant in ISO 8601 duration format",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4ee57d35a02896c936cbaf4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomerProfilesSegmentArn
+			"customer_profiles_segment_arn": schemaAttribute6c6fb1f58fe8a1a9205ca886(),
+			// Property: EventTrigger
+			"event_trigger": schemaAttributeb7ae0c4de2e6bfdcc1850027(),
+		}, /*END SCHEMA*/
+		Description: "The possible source of the campaign",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9eded39b7d0febc6ac6cec4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The communication limit time unit",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab4ebdf9ba2bb43fdda727a1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BandwidthAllocation
+			"bandwidth_allocation": schemaAttribute80cfb6df2d7c7468aed2b5f8(),
+		}, /*END SCHEMA*/
+		Description: "Progressive config",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaca38af16da3f0205b89fead() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae0f0e87adb17f089fa04750() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Maximum number of entries per participant. 0 indicates unlimited entries.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb29447df5662911c62904298() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Connect Instance Id",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb39693c7efd4cdce1e4e2424() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RestrictedPeriodList
+			"restricted_period_list": schemaAttribute1ea43557e4000c4d18e3d516(),
+		}, /*END SCHEMA*/
+		Description: "Restricted period config",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb511e9166bef9ec347a93dca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Time in ISO 8601 format, e.g. T23:11",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5b8905ea4598906d840bb93() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConnectSourcePhoneNumberArn
+			"connect_source_phone_number_arn": schemaAttribute6c6fb1f58fe8a1a9205ca886(),
+			// Property: WisdomTemplateArn
+			"wisdom_template_arn": schemaAttribute6c6fb1f58fe8a1a9205ca886(),
+		}, /*END SCHEMA*/
+		Description: "Default SMS outbound config",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb79c4d0f31e5856926c22a76() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DefaultTimeZone
+			"default_time_zone": schemaAttribute19e9bd2c32c45c9275806188(),
+			// Property: LocalTimeZoneDetection
+			"local_time_zone_detection": schemaAttributea19ea126fac151deab818b7f(),
+			// Property: LocalTimeZoneDetectionScope
+			"local_time_zone_detection_scope": schemaAttribute73e65d686e179906d6d0aafd(),
+		}, /*END SCHEMA*/
+		Description: "Local time zone config",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb7ae0c4de2e6bfdcc1850027() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomerProfilesDomainArn
+			"customer_profiles_domain_arn": schemaAttribute6c6fb1f58fe8a1a9205ca886(),
+		}, /*END SCHEMA*/
+		Description: "The event trigger of the campaign",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb81b2d49fe1aa4dae9b4c2b6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the source email address display name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb93556c5dfe5d6c642f75a15() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AgentlessConfig
+			"agentless_config": schemaAttributea31082d6ce64128c0c050e08(),
+		}, /*END SCHEMA*/
+		Description: "Email Outbound Mode",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebbd771c946a5c59c81a66a95() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CommunicationLimitList
+			"communication_limit_list": schemaAttribute6b8ddbd6586f20cfb6ee5135(),
+		}, /*END SCHEMA*/
+		Description: "Communication limits",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca482410a316b855b32ba16b() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "Allocates outbound capacity for the specific channel of this campaign between multiple active campaigns",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed662ca882b0df80c0938c3c7() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables detection of prompts (e.g., beep after after a voicemail greeting)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedca20e0542657e6fe13805c5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DurationInSeconds
+			"duration_in_seconds": schemaAttribute41705f379351af801856c4c7(),
+		}, /*END SCHEMA*/
+		Description: "Timeout Config for preview contacts",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4db5d78d2b1964328e4476c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AgentlessConfig
+			"agentless_config": schemaAttributea31082d6ce64128c0c050e08(),
+		}, /*END SCHEMA*/
+		Description: "SMS Outbound Mode",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee58d83d09bdf769a8b0d8f20() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Email
+			"email": schemaAttribute5523473cbafc36b9d974a556(),
+			// Property: LocalTimeZoneConfig
+			"local_time_zone_config": schemaAttributeb79c4d0f31e5856926c22a76(),
+			// Property: Sms
+			"sms": schemaAttribute5523473cbafc36b9d974a556(),
+			// Property: Telephony
+			"telephony": schemaAttribute5523473cbafc36b9d974a556(),
+			// Property: WhatsApp
+			"whats_app": schemaAttribute5523473cbafc36b9d974a556(),
+		}, /*END SCHEMA*/
+		Description: "Campaign communication time config",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee76ad5ee5366e70d5834d449() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Maximum ring time for outbound calls in seconds",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9ef3512bc9294e33532e72e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef081d991d7579912fe795a52() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EndTime
+			"end_time": schemaAttribute845b9241adbfa837a776376a(),
+			// Property: RefreshFrequency
+			"refresh_frequency": schemaAttribute8af3714ccd7963117b123fe7(),
+			// Property: StartTime
+			"start_time": schemaAttribute845b9241adbfa837a776376a(),
+		}, /*END SCHEMA*/
+		Description: "Campaign schedule",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8c19e1274740d5594709c01() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Flag to decided whether outbound calls should have answering machine detection enabled or not",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_connectcampaignsv2_campaign", campaignDataSource)
 }
@@ -34,10 +746,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect-campaigns:[-a-z0-9]*:[0-9]{12}:campaign/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Connect Campaign Arn",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute0e3a9ce6ffe50089cf4cf32e(),
 		// Property: ChannelSubtypeConfig
 		// CloudFormation resource type schema:
 		//
@@ -411,266 +1120,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"channel_subtype_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Email
-				"email": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Capacity
-						"capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "Allocates outbound capacity for the specific channel of this campaign between multiple active campaigns",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DefaultOutboundConfig
-						"default_outbound_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ConnectSourceEmailAddress
-								"connect_source_email_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Email address used for Email messages",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: SourceEmailAddressDisplayName
-								"source_email_address_display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the source email address display name",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: WisdomTemplateArn
-								"wisdom_template_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Arn",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Default Email outbound config",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: OutboundMode
-						"outbound_mode": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AgentlessConfig
-								"agentless_config": schema.StringAttribute{ /*START ATTRIBUTE*/
-									CustomType:  jsontypes.NormalizedType{},
-									Description: "Agentless config",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Email Outbound Mode",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Email Channel Subtype config",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Sms
-				"sms": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Capacity
-						"capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "Allocates outbound capacity for the specific channel of this campaign between multiple active campaigns",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DefaultOutboundConfig
-						"default_outbound_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ConnectSourcePhoneNumberArn
-								"connect_source_phone_number_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Arn",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: WisdomTemplateArn
-								"wisdom_template_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Arn",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Default SMS outbound config",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: OutboundMode
-						"outbound_mode": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AgentlessConfig
-								"agentless_config": schema.StringAttribute{ /*START ATTRIBUTE*/
-									CustomType:  jsontypes.NormalizedType{},
-									Description: "Agentless config",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "SMS Outbound Mode",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "SMS Channel Subtype config",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Telephony
-				"telephony": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Capacity
-						"capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "Allocates outbound capacity for the specific channel of this campaign between multiple active campaigns",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ConnectQueueId
-						"connect_queue_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The queue for the call",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DefaultOutboundConfig
-						"default_outbound_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AnswerMachineDetectionConfig
-								"answer_machine_detection_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: AwaitAnswerMachinePrompt
-										"await_answer_machine_prompt": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Description: "Enables detection of prompts (e.g., beep after after a voicemail greeting)",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: EnableAnswerMachineDetection
-										"enable_answer_machine_detection": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Description: "Flag to decided whether outbound calls should have answering machine detection enabled or not",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The configuration used for answering machine detection during outbound calls",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ConnectContactFlowId
-								"connect_contact_flow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The identifier of the contact flow for the outbound call",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ConnectSourcePhoneNumber
-								"connect_source_phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: RingTimeout
-								"ring_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Maximum ring time for outbound calls in seconds",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Default Telephone Outbound config",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: OutboundMode
-						"outbound_mode": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AgentlessConfig
-								"agentless_config": schema.StringAttribute{ /*START ATTRIBUTE*/
-									CustomType:  jsontypes.NormalizedType{},
-									Description: "Agentless config",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: PredictiveConfig
-								"predictive_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: BandwidthAllocation
-										"bandwidth_allocation": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Description: "The bandwidth allocation of a queue resource.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Predictive config",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: PreviewConfig
-								"preview_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: AgentActions
-										"agent_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Description: "Actions that can be performed by agent during preview phase",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: BandwidthAllocation
-										"bandwidth_allocation": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Description: "The bandwidth allocation of a queue resource.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: TimeoutConfig
-										"timeout_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: DurationInSeconds
-												"duration_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-													Description: "Timeout duration for a preview contact in seconds",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "Timeout Config for preview contacts",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Preview config",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ProgressiveConfig
-								"progressive_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: BandwidthAllocation
-										"bandwidth_allocation": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Description: "The bandwidth allocation of a queue resource.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Progressive config",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Telephony Outbound Mode",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Telephony Channel Subtype config",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: WhatsApp
-				"whats_app": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Capacity
-						"capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "Allocates outbound capacity for the specific channel of this campaign between multiple active campaigns",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: DefaultOutboundConfig
-						"default_outbound_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ConnectSourcePhoneNumberArn
-								"connect_source_phone_number_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Arn",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: WisdomTemplateArn
-								"wisdom_template_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Arn",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Default WhatsApp outbound config",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: OutboundMode
-						"outbound_mode": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AgentlessConfig
-								"agentless_config": schema.StringAttribute{ /*START ATTRIBUTE*/
-									CustomType:  jsontypes.NormalizedType{},
-									Description: "Agentless config",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "WhatsApp Outbound Mode",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "WhatsApp Channel Subtype config",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The possible types of channel subtype config parameters",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"channel_subtype_config": schemaAttribute425a09ce6ef055cd9a59c66c(),
 		// Property: CommunicationLimitsOverride
 		// CloudFormation resource type schema:
 		//
@@ -728,46 +1178,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"communication_limits_override": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllChannelsSubtypes
-				"all_channels_subtypes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CommunicationLimitList
-						"communication_limit_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Frequency
-									"frequency": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: MaxCountPerRecipient
-									"max_count_per_recipient": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Unit
-									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The communication limit time unit",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "List of communication limit",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Communication limits",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: InstanceLimitsHandling
-				"instance_limits_handling": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Enumeration of Instance Limits handling in a Campaign",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Communication limits config",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"communication_limits_override": schemaAttribute60d9de7c1c7e3aa0408197db(),
 		// Property: CommunicationTimeConfig
 		// CloudFormation resource type schema:
 		//
@@ -1281,347 +1692,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"communication_time_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Email
-				"email": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: OpenHours
-						"open_hours": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DailyHours
-								"daily_hours": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Key
-											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Day of week",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Value
-											"value": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: EndTime
-														"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Time in ISO 8601 format, e.g. T23:11",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: StartTime
-														"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Time in ISO 8601 format, e.g. T23:11",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-												}, /*END NESTED OBJECT*/
-												Description: "List of time range",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "Daily Hours map",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Open Hours config",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RestrictedPeriods
-						"restricted_periods": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: RestrictedPeriodList
-								"restricted_period_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: EndDate
-											"end_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Date in ISO 8601 format, e.g. 2024-01-01",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Name
-											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The name of a restricted period",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: StartDate
-											"start_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Date in ISO 8601 format, e.g. 2024-01-01",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "List of restricted period",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Restricted period config",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Time window config",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LocalTimeZoneConfig
-				"local_time_zone_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DefaultTimeZone
-						"default_time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Time Zone Id in the IANA format",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: LocalTimeZoneDetection
-						"local_time_zone_detection": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "Local TimeZone Detection method list",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: LocalTimeZoneDetectionScope
-						"local_time_zone_detection_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Local TimeZone Detection scope",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Local time zone config",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Sms
-				"sms": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: OpenHours
-						"open_hours": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DailyHours
-								"daily_hours": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Key
-											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Day of week",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Value
-											"value": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: EndTime
-														"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Time in ISO 8601 format, e.g. T23:11",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: StartTime
-														"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Time in ISO 8601 format, e.g. T23:11",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-												}, /*END NESTED OBJECT*/
-												Description: "List of time range",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "Daily Hours map",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Open Hours config",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RestrictedPeriods
-						"restricted_periods": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: RestrictedPeriodList
-								"restricted_period_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: EndDate
-											"end_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Date in ISO 8601 format, e.g. 2024-01-01",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Name
-											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The name of a restricted period",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: StartDate
-											"start_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Date in ISO 8601 format, e.g. 2024-01-01",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "List of restricted period",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Restricted period config",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Time window config",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Telephony
-				"telephony": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: OpenHours
-						"open_hours": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DailyHours
-								"daily_hours": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Key
-											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Day of week",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Value
-											"value": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: EndTime
-														"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Time in ISO 8601 format, e.g. T23:11",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: StartTime
-														"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Time in ISO 8601 format, e.g. T23:11",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-												}, /*END NESTED OBJECT*/
-												Description: "List of time range",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "Daily Hours map",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Open Hours config",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RestrictedPeriods
-						"restricted_periods": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: RestrictedPeriodList
-								"restricted_period_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: EndDate
-											"end_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Date in ISO 8601 format, e.g. 2024-01-01",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Name
-											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The name of a restricted period",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: StartDate
-											"start_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Date in ISO 8601 format, e.g. 2024-01-01",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "List of restricted period",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Restricted period config",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Time window config",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: WhatsApp
-				"whats_app": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: OpenHours
-						"open_hours": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DailyHours
-								"daily_hours": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Key
-											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Day of week",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Value
-											"value": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: EndTime
-														"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Time in ISO 8601 format, e.g. T23:11",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: StartTime
-														"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "Time in ISO 8601 format, e.g. T23:11",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-												}, /*END NESTED OBJECT*/
-												Description: "List of time range",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "Daily Hours map",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Open Hours config",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RestrictedPeriods
-						"restricted_periods": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: RestrictedPeriodList
-								"restricted_period_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: EndDate
-											"end_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Date in ISO 8601 format, e.g. 2024-01-01",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Name
-											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The name of a restricted period",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: StartDate
-											"start_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Date in ISO 8601 format, e.g. 2024-01-01",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "List of restricted period",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Restricted period config",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Time window config",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Campaign communication time config",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"communication_time_config": schemaAttributee58d83d09bdf769a8b0d8f20(),
 		// Property: ConnectCampaignFlowArn
 		// CloudFormation resource type schema:
 		//
@@ -1632,10 +1703,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.*$",
 		//	  "type": "string"
 		//	}
-		"connect_campaign_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Arn",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connect_campaign_flow_arn": schemaAttribute6c6fb1f58fe8a1a9205ca886(),
 		// Property: ConnectInstanceId
 		// CloudFormation resource type schema:
 		//
@@ -1646,10 +1714,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_\\-.]*$",
 		//	  "type": "string"
 		//	}
-		"connect_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Connect Instance Id",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connect_instance_id": schemaAttributeb29447df5662911c62904298(),
 		// Property: EntryLimitsConfig
 		// CloudFormation resource type schema:
 		//
@@ -1676,22 +1741,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"entry_limits_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaxEntryCount
-				"max_entry_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Maximum number of entries per participant. 0 indicates unlimited entries.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MinEntryInterval
-				"min_entry_interval": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Minimum time interval between entries for the same participant in ISO 8601 duration format",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Entry limits config for a campaign",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"entry_limits_config": schemaAttribute3d6d722fdf7bce709d4cc18e(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -1701,10 +1751,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Campaign name",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute0be7d472a5c289f842bda43e(),
 		// Property: Schedule
 		// CloudFormation resource type schema:
 		//
@@ -1736,27 +1783,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EndTime
-				"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Timestamp with no UTC offset or timezone",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RefreshFrequency
-				"refresh_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Time duration in ISO 8601 format",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StartTime
-				"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Timestamp with no UTC offset or timezone",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Campaign schedule",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schedule": schemaAttributef081d991d7579912fe795a52(),
 		// Property: Source
 		// CloudFormation resource type schema:
 		//
@@ -1800,29 +1827,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomerProfilesSegmentArn
-				"customer_profiles_segment_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Arn",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EventTrigger
-				"event_trigger": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CustomerProfilesDomainArn
-						"customer_profiles_domain_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Arn",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The event trigger of the campaign",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The possible source of the campaign",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source": schemaAttributea4ee57d35a02896c936cbaf4(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1851,24 +1856,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "One or more tags.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute9c52a5faa2556e981db8531f(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -1880,10 +1868,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Campaign type",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute8de4bfb5560053a1d744f2d8(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

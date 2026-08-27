@@ -14,6 +14,70 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1f3d43d44a9d412665614267() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute213f21ba14c7b8a7ff3d88b8(),
+				// Property: Value
+				"value": schemaAttribute2a73cb1ae3b7b5fb979d2aa4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute213f21ba14c7b8a7ff3d88b8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a73cb1ae3b7b5fb979d2aa4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e1079ddc58c48b676ab1790() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the  profile that you associated with the resource that is specified by ResourceId.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b85216ea31d74ed0df1e65d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Primary Identifier for  Profile Association",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8432dad2f3e7390ccd66e5a7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The resource that you associated the  profile with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8fff71435d83cebf89453c60() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of an association between a  Profile and a VPC.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab0a2f504ad0005486f5c8c3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the profile association.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_route53profiles_profile_association", profileAssociationDataSource)
 }
@@ -29,10 +93,7 @@ func profileAssociationDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The Amazon Resource Name (ARN) of the profile association.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the profile association.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeab0a2f504ad0005486f5c8c3(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +101,7 @@ func profileAssociationDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "Primary Identifier for  Profile Association",
 		//	  "type": "string"
 		//	}
-		"profile_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Primary Identifier for  Profile Association",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"profile_association_id": schemaAttribute6b85216ea31d74ed0df1e65d(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +109,7 @@ func profileAssociationDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The name of an association between a  Profile and a VPC.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of an association between a  Profile and a VPC.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute8fff71435d83cebf89453c60(),
 		// Property: ProfileId
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +117,7 @@ func profileAssociationDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The ID of the  profile that you associated with the resource that is specified by ResourceId.",
 		//	  "type": "string"
 		//	}
-		"profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the  profile that you associated with the resource that is specified by ResourceId.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"profile_id": schemaAttribute3e1079ddc58c48b676ab1790(),
 		// Property: ResourceId
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +125,7 @@ func profileAssociationDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The resource that you associated the  profile with.",
 		//	  "type": "string"
 		//	}
-		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The resource that you associated the  profile with.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_id": schemaAttribute8432dad2f3e7390ccd66e5a7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -108,24 +157,7 @@ func profileAssociationDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute1f3d43d44a9d412665614267(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

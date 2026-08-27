@@ -15,6 +15,126 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0b721a90fdfe15952e346179() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d1d5ab542e51773d7358ede() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag's key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f8c9642386cc1c22f739420() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Findings filter name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40857b7509202150c95fcf42() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Findings filter description",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute408eae0e7dd6b1270d6e864c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag's value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42cdc56ffcdc64c27a8ef7b9() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute3d1d5ab542e51773d7358ede(),
+				// Property: Value
+				"value": schemaAttribute408eae0e7dd6b1270d6e864c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A collection of tags associated with a resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6026ac2eaa31e2f7d6b1f9b5() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6660e8f868abd3c41918bd9e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Criterion
+			"criterion": schemaAttributec12ff01873d0d503cc1d3edb(),
+		}, /*END SCHEMA*/
+		Description: "Findings filter criteria.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e4f196b3bdec9d8b185c3ec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Findings filter ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute917830d22b2021dbd281fdd9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Findings filter ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba4783c7bf40baca8ae82eb2() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Findings filter position.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec12ff01873d0d503cc1d3edb() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: eq
+				"eq": schemaAttribute6026ac2eaa31e2f7d6b1f9b5(),
+				// Property: gt
+				"gt": schemaAttribute0b721a90fdfe15952e346179(),
+				// Property: gte
+				"gte": schemaAttribute0b721a90fdfe15952e346179(),
+				// Property: lt
+				"lt": schemaAttribute0b721a90fdfe15952e346179(),
+				// Property: lte
+				"lte": schemaAttribute0b721a90fdfe15952e346179(),
+				// Property: neq
+				"neq": schemaAttribute6026ac2eaa31e2f7d6b1f9b5(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Map of filter criteria.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf9759b2a019943877174a92() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Findings filter action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_macie_findings_filter", findingsFilterDataSource)
 }
@@ -34,10 +154,7 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Findings filter action.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"action": schemaAttributecf9759b2a019943877174a92(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +162,7 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Findings filter ARN.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Findings filter ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute917830d22b2021dbd281fdd9(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +170,7 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Findings filter description",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Findings filter description",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute40857b7509202150c95fcf42(),
 		// Property: FindingCriteria
 		// CloudFormation resource type schema:
 		//
@@ -111,48 +222,7 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"finding_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Criterion
-				"criterion":               // Pattern: ""
-				schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: eq
-							"eq": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: gt
-							"gt": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: gte
-							"gte": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: lt
-							"lt": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: lte
-							"lte": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: neq
-							"neq": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Map of filter criteria.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Findings filter criteria.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"finding_criteria": schemaAttribute6660e8f868abd3c41918bd9e(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -160,10 +230,7 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Findings filter ID.",
 		//	  "type": "string"
 		//	}
-		"findings_filter_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Findings filter ID.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"findings_filter_id": schemaAttribute7e4f196b3bdec9d8b185c3ec(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -171,10 +238,7 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Findings filter name",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Findings filter name",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute3f8c9642386cc1c22f739420(),
 		// Property: Position
 		// CloudFormation resource type schema:
 		//
@@ -182,10 +246,7 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Findings filter position.",
 		//	  "type": "integer"
 		//	}
-		"position": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Findings filter position.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"position": schemaAttributeba4783c7bf40baca8ae82eb2(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -213,24 +274,7 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag's key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag's value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A collection of tags associated with a resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute42cdc56ffcdc64c27a8ef7b9(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

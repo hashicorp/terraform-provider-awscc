@@ -14,6 +14,56 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute46756b9f6c2722ebd9a44931() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The policy document. For AWS CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON format before submitting it.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e5466cda90e84c3b00f2de1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab6bcb784482b136bec13bb8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier (ID) associated with this resource policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaca5e0b4ee988d5b0f7ab3ef() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeed6950339362b5c77af0b11c(),
+				// Property: Value
+				"value": schemaAttribute5e5466cda90e84c3b00f2de1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags that you want to attach to the resource policy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed865feb3a648a87b46b93e71() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the resource policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed6950339362b5c77af0b11c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key identifier, or name, of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_organizations_resource_policy", resourcePolicyDataSource)
 }
@@ -30,10 +80,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws.*:organizations::\\d{12}:resourcepolicy\\/o-[a-z0-9]{10,32}\\/rp-[0-9a-zA-Z_]{4,128}",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the resource policy.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributed865feb3a648a87b46b93e71(),
 		// Property: Content
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +91,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[\\s\\S]*",
 		//	  "type": "string"
 		//	}
-		"content": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The policy document. For AWS CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON format before submitting it.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"content": schemaAttribute46756b9f6c2722ebd9a44931(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +101,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^rp-[0-9a-zA-Z_]{4,128}$",
 		//	  "type": "string"
 		//	}
-		"resource_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier (ID) associated with this resource policy.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_policy_id": schemaAttributeab6bcb784482b136bec13bb8(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -93,24 +134,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key identifier, or name, of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags that you want to attach to the resource policy",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeaca5e0b4ee988d5b0f7ab3ef(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

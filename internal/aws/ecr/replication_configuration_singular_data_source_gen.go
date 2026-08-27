@@ -14,6 +14,97 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0eccbb19708eb3afe5ef761b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The repository filter details. When the ``PREFIX_MATCH`` filter type is specified, this value is required and should be the repository name prefix to configure replication for.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute16ab8edde73d626a3a71222c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Destinations
+				"destinations": schemaAttribute468d9a66c8525345d4d8e252(),
+				// Property: RepositoryFilters
+				"repository_filters": schemaAttributed77296522beec3031816d647(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of objects representing the replication destinations and repository filters for a replication configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute468d9a66c8525345d4d8e252() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Region
+				"region": schemaAttributeda379a3bc1e98b0dc5fa41cb(),
+				// Property: RegistryId
+				"registry_id": schemaAttributec4c021096904c25a592f77fc(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of objects representing the destination for a replication rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4819c9f15679e0385ee207b1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Rules
+			"rules": schemaAttribute16ab8edde73d626a3a71222c(),
+		}, /*END SCHEMA*/
+		Description: "The replication configuration for a registry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb972a309ccd236d0dba3c3c5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4c021096904c25a592f77fc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS account ID of the Amazon ECR private registry to replicate to. When configuring cross-Region replication within your own registry, specify your own account ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed77296522beec3031816d647() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Filter
+				"filter": schemaAttribute0eccbb19708eb3afe5ef761b(),
+				// Property: FilterType
+				"filter_type": schemaAttributeea6bc69474e6bf191f7362b1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of objects representing the filters for a replication rule. Specifying a repository filter for a replication rule provides a method for controlling which repositories in a private registry are replicated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda379a3bc1e98b0dc5fa41cb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Region to replicate to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea6bc69474e6bf191f7362b1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The repository filter type. The only supported value is ``PREFIX_MATCH``, which is a repository name prefix specified with the ``filter`` parameter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ecr_replication_configuration", replicationConfigurationDataSource)
 }
@@ -29,10 +120,7 @@ func replicationConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"registry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"registry_id": schemaAttributeb972a309ccd236d0dba3c3c5(),
 		// Property: ReplicationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -118,59 +206,7 @@ func replicationConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"replication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Rules
-				"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Destinations
-							"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Region
-										"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The Region to replicate to.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: RegistryId
-										"registry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The AWS account ID of the Amazon ECR private registry to replicate to. When configuring cross-Region replication within your own registry, specify your own account ID.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "An array of objects representing the destination for a replication rule.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: RepositoryFilters
-							"repository_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Filter
-										"filter": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The repository filter details. When the ``PREFIX_MATCH`` filter type is specified, this value is required and should be the repository name prefix to configure replication for.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: FilterType
-										"filter_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The repository filter type. The only supported value is ``PREFIX_MATCH``, which is a repository name prefix specified with the ``filter`` parameter.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "An array of objects representing the filters for a replication rule. Specifying a repository filter for a replication rule provides a method for controlling which repositories in a private registry are replicated.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "An array of objects representing the replication destinations and repository filters for a replication configuration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The replication configuration for a registry.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"replication_configuration": schemaAttribute4819c9f15679e0385ee207b1(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,42 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0362c880a51d90cbcadd63b0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RealtimeMetricsSubscriptionConfig
+			"realtime_metrics_subscription_config": schemaAttribute60488b145441bc2c71777026(),
+		}, /*END SCHEMA*/
+		Description: "A subscription configuration for additional CloudWatch metrics.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1dce44204f0cb1f4a8cee966() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the distribution that you are enabling metrics for.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e8e13582eb1899189d8c53c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60488b145441bc2c71777026() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RealtimeMetricsSubscriptionStatus
+			"realtime_metrics_subscription_status": schemaAttribute1e8e13582eb1899189d8c53c(),
+		}, /*END SCHEMA*/
+		Description: "A subscription configuration for additional CloudWatch metrics.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudfront_monitoring_subscription", monitoringSubscriptionDataSource)
 }
@@ -29,10 +65,7 @@ func monitoringSubscriptionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The ID of the distribution that you are enabling metrics for.",
 		//	  "type": "string"
 		//	}
-		"distribution_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the distribution that you are enabling metrics for.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"distribution_id": schemaAttribute1dce44204f0cb1f4a8cee966(),
 		// Property: MonitoringSubscription
 		// CloudFormation resource type schema:
 		//
@@ -61,24 +94,7 @@ func monitoringSubscriptionDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "object"
 		//	}
-		"monitoring_subscription": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RealtimeMetricsSubscriptionConfig
-				"realtime_metrics_subscription_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: RealtimeMetricsSubscriptionStatus
-						"realtime_metrics_subscription_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "A flag that indicates whether additional CloudWatch metrics are enabled for a given CloudFront distribution.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A subscription configuration for additional CloudWatch metrics.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A subscription configuration for additional CloudWatch metrics.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"monitoring_subscription": schemaAttribute0362c880a51d90cbcadd63b0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

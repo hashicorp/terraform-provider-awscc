@@ -15,6 +15,230 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute06796ec0a414fbe86d8b1447() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Owner account of the attachment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute06819ad0ae75783a9d7917ec() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute86b77cda8cebb7ede6225a5e(),
+				// Property: Value
+				"value": schemaAttribute989c6f323e587189c761437a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags for the attachment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a60d85cb6725fe4bb0c695e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the segment attachment..",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1034263a0b090a7ca074f4e0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Creation time of the attachment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f3d73ceb97cdf25f5eb865a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AttachmentPolicyRuleNumber
+			"attachment_policy_rule_number": schemaAttributedd2aff468aa6bf514f385afb(),
+			// Property: SegmentName
+			"segment_name": schemaAttribute72293dad46aebcb9edb21a59(),
+			// Property: Tags
+			"tags": schemaAttributeac2f5f7c14836dab4a06fe47(),
+		}, /*END SCHEMA*/
+		Description: "The attachment to move from one segment to another.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute499b6ee539b8626df7ff0d73() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The Regions where the edges are located.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4bf8ba4ee914b01c9be771fe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Routing policy label",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a67387607d29b4b3a9e40fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the network function group attachment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72293dad46aebcb9edb21a59() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the segment to change.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute74d84a961eb40df60e053992() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Direct Connect Gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bd3b8c265ef6fe3b67e13f6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Id of the attachment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute86b77cda8cebb7ede6225a5e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute884769985976fb3c30935544() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute989c6f323e587189c761437a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea497c8fb89c77f523f51af7f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Errors from the last modification of the attachment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4d0a3b7f1f3442f80428a42() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The policy rule number associated with the attachment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea63fdda76ae60be7395e4e74() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of a core network for the Direct Connect Gateway attachment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac2f5f7c14836dab4a06fe47() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute86b77cda8cebb7ede6225a5e(),
+				// Property: Value
+				"value": schemaAttribute989c6f323e587189c761437a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The key-value tags that changed for the segment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb735ed340a3005d21e6e5970() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of a core network for the Direct Connect Gateway attachment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc5d1fb7a80fb1e2ffdee21a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AttachmentPolicyRuleNumber
+			"attachment_policy_rule_number": schemaAttributedd2aff468aa6bf514f385afb(),
+			// Property: NetworkFunctionGroupName
+			"network_function_group_name": schemaAttributecbd748b5c7018f287270f99b(),
+			// Property: Tags
+			"tags": schemaAttributecb7f733d0e92545f28233f48(),
+		}, /*END SCHEMA*/
+		Description: "The attachment to move from one network function group to another.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebfc83b86ad3d03cb7213d6a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "State of the attachment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb7f733d0e92545f28233f48() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute86b77cda8cebb7ede6225a5e(),
+				// Property: Value
+				"value": schemaAttribute989c6f323e587189c761437a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The key-value tags that changed for the network function group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecbd748b5c7018f287270f99b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the network function group to change.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd2aff468aa6bf514f385afb() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The rule number in the policy document that applies to this change.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2ca91fc69848dc3ce8ce124() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Last update time of the attachment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefe068c2ed0196540a92fcd09() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Attachment type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_networkmanager_direct_connect_gateway_attachment", directConnectGatewayAttachmentDataSource)
 }
@@ -30,10 +254,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  "description": "Id of the attachment.",
 		//	  "type": "string"
 		//	}
-		"attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Id of the attachment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"attachment_id": schemaAttribute7bd3b8c265ef6fe3b67e13f6(),
 		// Property: AttachmentPolicyRuleNumber
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +262,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  "description": "The policy rule number associated with the attachment.",
 		//	  "type": "integer"
 		//	}
-		"attachment_policy_rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The policy rule number associated with the attachment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"attachment_policy_rule_number": schemaAttributea4d0a3b7f1f3442f80428a42(),
 		// Property: AttachmentType
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +270,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  "description": "Attachment type.",
 		//	  "type": "string"
 		//	}
-		"attachment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Attachment type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"attachment_type": schemaAttributefe068c2ed0196540a92fcd09(),
 		// Property: CoreNetworkArn
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +278,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  "description": "The ARN of a core network for the Direct Connect Gateway attachment.",
 		//	  "type": "string"
 		//	}
-		"core_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of a core network for the Direct Connect Gateway attachment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"core_network_arn": schemaAttributea63fdda76ae60be7395e4e74(),
 		// Property: CoreNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +286,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  "description": "The ID of a core network for the Direct Connect Gateway attachment.",
 		//	  "type": "string"
 		//	}
-		"core_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of a core network for the Direct Connect Gateway attachment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"core_network_id": schemaAttributeb735ed340a3005d21e6e5970(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +294,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  "description": "Creation time of the attachment.",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Creation time of the attachment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute1034263a0b090a7ca074f4e0(),
 		// Property: DirectConnectGatewayArn
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +302,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  "description": "The ARN of the Direct Connect Gateway.",
 		//	  "type": "string"
 		//	}
-		"direct_connect_gateway_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Direct Connect Gateway.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"direct_connect_gateway_arn": schemaAttribute74d84a961eb40df60e053992(),
 		// Property: EdgeLocations
 		// CloudFormation resource type schema:
 		//
@@ -111,11 +314,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  },
 		//	  "type": "array"
 		//	}
-		"edge_locations": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The Regions where the edges are located.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"edge_locations": schemaAttribute499b6ee539b8626df7ff0d73(),
 		// Property: LastModificationErrors
 		// CloudFormation resource type schema:
 		//
@@ -126,11 +325,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  },
 		//	  "type": "array"
 		//	}
-		"last_modification_errors": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Errors from the last modification of the attachment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modification_errors": schemaAttributea497c8fb89c77f523f51af7f(),
 		// Property: NetworkFunctionGroupName
 		// CloudFormation resource type schema:
 		//
@@ -138,10 +333,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  "description": "The name of the network function group attachment.",
 		//	  "type": "string"
 		//	}
-		"network_function_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the network function group attachment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_function_group_name": schemaAttribute5a67387607d29b4b3a9e40fb(),
 		// Property: OwnerAccountId
 		// CloudFormation resource type schema:
 		//
@@ -149,10 +341,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  "description": "Owner account of the attachment.",
 		//	  "type": "string"
 		//	}
-		"owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Owner account of the attachment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"owner_account_id": schemaAttribute06796ec0a414fbe86d8b1447(),
 		// Property: ProposedNetworkFunctionGroupChange
 		// CloudFormation resource type schema:
 		//
@@ -196,41 +385,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  },
 		//	  "type": "object"
 		//	}
-		"proposed_network_function_group_change": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AttachmentPolicyRuleNumber
-				"attachment_policy_rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The rule number in the policy document that applies to this change.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NetworkFunctionGroupName
-				"network_function_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the network function group to change.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Tags
-				"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Key
-							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The key-value tags that changed for the network function group.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The attachment to move from one network function group to another.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"proposed_network_function_group_change": schemaAttributebc5d1fb7a80fb1e2ffdee21a(),
 		// Property: ProposedSegmentChange
 		// CloudFormation resource type schema:
 		//
@@ -274,41 +429,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  },
 		//	  "type": "object"
 		//	}
-		"proposed_segment_change": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AttachmentPolicyRuleNumber
-				"attachment_policy_rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The rule number in the policy document that applies to this change.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SegmentName
-				"segment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the segment to change.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Tags
-				"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Key
-							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The key-value tags that changed for the segment.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The attachment to move from one segment to another.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"proposed_segment_change": schemaAttribute2f3d73ceb97cdf25f5eb865a(),
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -316,10 +437,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  "description": "The ARN of the Resource.",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_arn": schemaAttribute884769985976fb3c30935544(),
 		// Property: RoutingPolicyLabel
 		// CloudFormation resource type schema:
 		//
@@ -327,10 +445,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  "description": "Routing policy label",
 		//	  "type": "string"
 		//	}
-		"routing_policy_label": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Routing policy label",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"routing_policy_label": schemaAttribute4bf8ba4ee914b01c9be771fe(),
 		// Property: SegmentName
 		// CloudFormation resource type schema:
 		//
@@ -338,10 +453,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  "description": "The name of the segment attachment..",
 		//	  "type": "string"
 		//	}
-		"segment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the segment attachment..",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"segment_name": schemaAttribute0a60d85cb6725fe4bb0c695e(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -349,10 +461,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  "description": "State of the attachment.",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "State of the attachment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributebfc83b86ad3d03cb7213d6a0(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -381,24 +490,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags for the attachment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute06819ad0ae75783a9d7917ec(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -406,10 +498,7 @@ func directConnectGatewayAttachmentDataSource(ctx context.Context) (datasource.D
 		//	  "description": "Last update time of the attachment.",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Last update time of the attachment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttributee2ca91fc69848dc3ce8ce124(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

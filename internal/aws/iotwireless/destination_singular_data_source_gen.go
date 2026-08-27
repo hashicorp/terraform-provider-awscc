@@ -14,6 +14,69 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1632a973b272b8da21cad376() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Destination arn. Returned after successful create.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23b178efce230b72871a5362() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2822be294079533eac32b9c3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "AWS role ARN that grants access",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3bd884ae631f88549ddbafc0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Must be RuleName",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute659745ba0cf85465eb06893d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique name of destination",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac72831c1ed9720280aa0f89() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute23b178efce230b72871a5362(),
+				// Property: Value
+				"value": schemaAttribute23b178efce230b72871a5362(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs that contain metadata for the destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb861b02f4d76411ad2743055() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Destination description",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec127589a3f4139c310b4054f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Destination expression",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iotwireless_destination", destinationDataSource)
 }
@@ -29,10 +92,7 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Destination arn. Returned after successful create.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Destination arn. Returned after successful create.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute1632a973b272b8da21cad376(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +101,7 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Destination description",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeb861b02f4d76411ad2743055(),
 		// Property: Expression
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +109,7 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Destination expression",
 		//	  "type": "string"
 		//	}
-		"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Destination expression",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"expression": schemaAttributec127589a3f4139c310b4054f(),
 		// Property: ExpressionType
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +122,7 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"expression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Must be RuleName",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"expression_type": schemaAttribute3bd884ae631f88549ddbafc0(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -81,10 +132,7 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9:_-]+",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique name of destination",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute659745ba0cf85465eb06893d(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -94,10 +142,7 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "AWS role ARN that grants access",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute2822be294079533eac32b9c3(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -124,22 +169,7 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs that contain metadata for the destination.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeac72831c1ed9720280aa0f89(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

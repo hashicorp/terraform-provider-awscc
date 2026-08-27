@@ -14,6 +14,118 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute046458cb1e20fae44ae64fee() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44e64d27d144ccaa7d80c9dc() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute046458cb1e20fae44ae64fee(),
+				// Property: Value
+				"value": schemaAttribute491dd2ffa52f51efbdb0e44d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute491dd2ffa52f51efbdb0e44d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the specified tag key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51902cdea2779e42dd646b52() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApiId
+				"api_id": schemaAttributee5e1751123c311bf3c779786(),
+				// Property: Stage
+				"stage": schemaAttributee5e1751123c311bf3c779786(),
+				// Property: Throttle
+				"throttle": schemaAttribute9fec199cb133a6a9fedb0ca2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6219884576788f155d2b41f9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Limit
+			"limit": schemaAttributeeb60d0998794af6d960b030a(),
+			// Property: Offset
+			"offset": schemaAttributeeb60d0998794af6d960b030a(),
+			// Property: Period
+			"period": schemaAttributee5e1751123c311bf3c779786(),
+		}, /*END SCHEMA*/
+		Description: "``QuotaSettings`` is a property of the [AWS::ApiGateway::UsagePlan](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html) resource that specifies a target for the maximum number of requests users can make to your REST APIs.\n In some cases clients can exceed the targets that you set. Don?t rely on usage plans to control costs. Consider using [](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html) to monitor costs and [](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html) to manage API requests.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66bfe3845cdc641bf24c463c() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fec199cb133a6a9fedb0ca2() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BurstLimit
+				"burst_limit": schemaAttributeeb60d0998794af6d960b030a(),
+				// Property: RateLimit
+				"rate_limit": schemaAttribute66bfe3845cdc641bf24c463c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5e1751123c311bf3c779786() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb60d0998794af6d960b030a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeffc503a8bee17fe940724637() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BurstLimit
+			"burst_limit": schemaAttributeeb60d0998794af6d960b030a(),
+			// Property: RateLimit
+			"rate_limit": schemaAttribute66bfe3845cdc641bf24c463c(),
+		}, /*END SCHEMA*/
+		Description: "``ThrottleSettings`` is a property of the [AWS::ApiGateway::UsagePlan](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html) resource that specifies the overall request rate (average requests per second) and burst capacity when users call your REST APIs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_apigateway_usage_plan", usagePlanDataSource)
 }
@@ -69,44 +181,7 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"api_stages": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ApiId
-					"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Stage
-					"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Throttle
-					"throttle":                // Pattern: ""
-					schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BurstLimit
-								"burst_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: RateLimit
-								"rate_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Description: "",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"api_stages": schemaAttribute51902cdea2779e42dd646b52(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -114,10 +189,7 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributee5e1751123c311bf3c779786(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -125,10 +197,7 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"usage_plan_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"usage_plan_id": schemaAttributee5e1751123c311bf3c779786(),
 		// Property: Quota
 		// CloudFormation resource type schema:
 		//
@@ -153,27 +222,7 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"quota": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Limit
-				"limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Offset
-				"offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Period
-				"period": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "``QuotaSettings`` is a property of the [AWS::ApiGateway::UsagePlan](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html) resource that specifies a target for the maximum number of requests users can make to your REST APIs.\n In some cases clients can exceed the targets that you set. Don?t rely on usage plans to control costs. Consider using [](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html) to monitor costs and [](https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html) to manage API requests.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"quota": schemaAttribute6219884576788f155d2b41f9(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -206,24 +255,7 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the specified tag key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute44e64d27d144ccaa7d80c9dc(),
 		// Property: Throttle
 		// CloudFormation resource type schema:
 		//
@@ -244,22 +276,7 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"throttle": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BurstLimit
-				"burst_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RateLimit
-				"rate_limit": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "``ThrottleSettings`` is a property of the [AWS::ApiGateway::UsagePlan](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-usageplan.html) resource that specifies the overall request rate (average requests per second) and burst capacity when users call your REST APIs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"throttle": schemaAttributeffc503a8bee17fe940724637(),
 		// Property: UsagePlanName
 		// CloudFormation resource type schema:
 		//
@@ -267,10 +284,7 @@ func usagePlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"usage_plan_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"usage_plan_name": schemaAttributee5e1751123c311bf3c779786(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

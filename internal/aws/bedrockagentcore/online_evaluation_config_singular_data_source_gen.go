@@ -16,6 +16,338 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0078595997cda07a12d98abc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the online evaluation configuration was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute026f84f8164750d210a4b24b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The CloudWatch log group name for evaluation results.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d957f42e5e6f55edbd77d43() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The comparison operator to use for filtering.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute169794745b69c0df4a2c82ae() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of minutes of inactivity after which an agent session is considered complete.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute16c659e48508104eedf78692() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The percentage of agent traces to sample for evaluation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1870df679a82be082882d42c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the insight.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27a06ba8b194e2e3d18fba45() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key or field name to filter on within the agent trace data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a9aa7dc8fa22bbe06a9f049() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the online evaluation configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2af2b47202e0b2a5cf0a16c8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatchLogs
+			"cloudwatch_logs": schemaAttributec0017bf2d44722e068061b4a(),
+		}, /*END SCHEMA*/
+		Description: "The data source configuration that specifies CloudWatch log groups and service names to monitor.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c5b6f221fcf68f063bc9611() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The boolean value for true/false filtering conditions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37854ddadbcf92a416a423ae() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InsightId
+				"insight_id": schemaAttribute1870df679a82be082882d42c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of insights to enable for failure analysis.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e52af626a05c6a918812833() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the IAM role that grants permissions for evaluation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f9fa3da67b3e2a209d91d4d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the online evaluation configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44e6a0ea11638ca74f8e8555() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Filters
+			"filters": schemaAttributea9868c02d2959915884188fc(),
+			// Property: SamplingConfig
+			"sampling_config": schemaAttributede390f92d6440680d267b070(),
+			// Property: SessionConfig
+			"session_config": schemaAttribute72351aa125c6cf53612e51d8(),
+		}, /*END SCHEMA*/
+		Description: "The evaluation rule that defines sampling configuration, filters, and session detection settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c47bd6b235630bfee85f824() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The string value for text-based filtering.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d2cc7cc8bd777c7afa28d24() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the online evaluation configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d6ad7d7f8138961c6e7017d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6fe2e5a3be2b4f7eccc77b4d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogGroupName
+			"log_group_name": schemaAttribute026f84f8164750d210a4b24b(),
+		}, /*END SCHEMA*/
+		Description: "The CloudWatch configuration for writing evaluation results.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72351aa125c6cf53612e51d8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SessionTimeoutMinutes
+			"session_timeout_minutes": schemaAttribute169794745b69c0df4a2c82ae(),
+		}, /*END SCHEMA*/
+		Description: "The configuration that defines how agent sessions are detected.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8bf032593b0cfde208755d13() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of service names to filter traces within the specified log groups.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92f172070cac5d3732218eb8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the evaluator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9868c02d2959915884188fc() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute27a06ba8b194e2e3d18fba45(),
+				// Property: Operator
+				"operator": schemaAttribute0d957f42e5e6f55edbd77d43(),
+				// Property: Value
+				"value": schemaAttributee5a2ddd64bb80523387dc314(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of filters that determine which agent traces should be included in the evaluation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb09a58012eaabce5452b796d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute5d6ad7d7f8138961c6e7017d(),
+				// Property: Value
+				"value": schemaAttribute5d6ad7d7f8138961c6e7017d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags to assign to the online evaluation configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb1379cf1aadf5b25f9091f60() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the online evaluation configuration. Must be unique within your account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd91f6fb4c6237e14e267772() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the online evaluation configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec0017bf2d44722e068061b4a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogGroupNames
+			"log_group_names": schemaAttributefeef05a05fe40790bcbe43bb(),
+			// Property: ServiceNames
+			"service_names": schemaAttribute8bf032593b0cfde208755d13(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for reading agent traces from CloudWatch logs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4ba9aad82dfc2797b316370() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of frequencies at which clustering reports are generated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede390f92d6440680d267b070() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SamplingPercentage
+			"sampling_percentage": schemaAttribute16c659e48508104eedf78692(),
+		}, /*END SCHEMA*/
+		Description: "The configuration that controls what percentage of agent traces are sampled for evaluation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee29481937fba43c6e96cc125() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The execution status indicating whether the online evaluation is currently running.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5a2ddd64bb80523387dc314() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BooleanValue
+			"boolean_value": schemaAttribute2c5b6f221fcf68f063bc9611(),
+			// Property: DoubleValue
+			"double_value": schemaAttributeea52cb3a2d5db8ef0ce5c3ea(),
+			// Property: StringValue
+			"string_value": schemaAttribute5c47bd6b235630bfee85f824(),
+		}, /*END SCHEMA*/
+		Description: "The value used in filter comparisons.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea52cb3a2d5db8ef0ce5c3ea() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The numeric value for numerical filtering.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed60a55dab0a17a9612af9e1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Frequencies
+			"frequencies": schemaAttributec4ba9aad82dfc2797b316370(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for clustering analysis of evaluation results.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef192e0cd72371661ab518134() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatchConfig
+			"cloudwatch_config": schemaAttribute6fe2e5a3be2b4f7eccc77b4d(),
+		}, /*END SCHEMA*/
+		Description: "The configuration that specifies where evaluation results should be written.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef21deb3b4d859461fcb78227() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the online evaluation configuration was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef65e1446ca19389f936937a6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EvaluatorId
+				"evaluator_id": schemaAttribute92f172070cac5d3732218eb8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of evaluators to apply during online evaluation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefeef05a05fe40790bcbe43bb() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of CloudWatch log group names to monitor for agent traces.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_online_evaluation_config", onlineEvaluationConfigDataSource)
 }
@@ -53,18 +385,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"clustering_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Frequencies
-				"frequencies": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The list of frequencies at which clustering reports are generated.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration for clustering analysis of evaluation results.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"clustering_config": schemaAttributeed60a55dab0a17a9612af9e1(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -73,11 +394,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the online evaluation configuration was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute0078595997cda07a12d98abc(),
 		// Property: DataSourceConfig
 		// CloudFormation resource type schema:
 		//
@@ -128,31 +445,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"data_source_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CloudWatchLogs
-				"cloudwatch_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: LogGroupNames
-						"log_group_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The list of CloudWatch log group names to monitor for agent traces.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ServiceNames
-						"service_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The list of service names to filter traces within the specified log groups.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration for reading agent traces from CloudWatch logs.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The data source configuration that specifies CloudWatch log groups and service names to monitor.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_source_config": schemaAttribute2af2b47202e0b2a5cf0a16c8(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -162,10 +455,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the online evaluation configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute5d2cc7cc8bd777c7afa28d24(),
 		// Property: EvaluationExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -176,10 +466,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^arn:aws(-[^:]+)?:iam::([0-9]{12})?:role/.+$",
 		//	  "type": "string"
 		//	}
-		"evaluation_execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the IAM role that grants permissions for evaluation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"evaluation_execution_role_arn": schemaAttribute3e52af626a05c6a918812833(),
 		// Property: Evaluators
 		// CloudFormation resource type schema:
 		//
@@ -205,19 +492,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"evaluators": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: EvaluatorId
-					"evaluator_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The unique identifier of the evaluator.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of evaluators to apply during online evaluation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"evaluators": schemaAttributef65e1446ca19389f936937a6(),
 		// Property: ExecutionStatus
 		// CloudFormation resource type schema:
 		//
@@ -229,10 +504,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"execution_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The execution status indicating whether the online evaluation is currently running.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"execution_status": schemaAttributee29481937fba43c6e96cc125(),
 		// Property: Insights
 		// CloudFormation resource type schema:
 		//
@@ -260,19 +532,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"insights": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: InsightId
-					"insight_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The unique identifier of the insight.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of insights to enable for failure analysis.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"insights": schemaAttribute37854ddadbcf92a416a423ae(),
 		// Property: OnlineEvaluationConfigArn
 		// CloudFormation resource type schema:
 		//
@@ -281,10 +541,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:online-evaluation-config/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"online_evaluation_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the online evaluation configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"online_evaluation_config_arn": schemaAttributebd91f6fb4c6237e14e267772(),
 		// Property: OnlineEvaluationConfigId
 		// CloudFormation resource type schema:
 		//
@@ -293,10 +550,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"online_evaluation_config_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the online evaluation configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"online_evaluation_config_id": schemaAttribute2a9aa7dc8fa22bbe06a9f049(),
 		// Property: OnlineEvaluationConfigName
 		// CloudFormation resource type schema:
 		//
@@ -305,10 +559,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	  "type": "string"
 		//	}
-		"online_evaluation_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the online evaluation configuration. Must be unique within your account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"online_evaluation_config_name": schemaAttributeb1379cf1aadf5b25f9091f60(),
 		// Property: OutputConfig
 		// CloudFormation resource type schema:
 		//
@@ -330,24 +581,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "object"
 		//	}
-		"output_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CloudWatchConfig
-				"cloudwatch_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: LogGroupName
-						"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The CloudWatch log group name for evaluation results.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The CloudWatch configuration for writing evaluation results.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration that specifies where evaluation results should be written.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"output_config": schemaAttributef192e0cd72371661ab518134(),
 		// Property: Rule
 		// CloudFormation resource type schema:
 		//
@@ -454,77 +688,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Filters
-				"filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Key
-							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The key or field name to filter on within the agent trace data.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Operator
-							"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The comparison operator to use for filtering.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: BooleanValue
-									"boolean_value": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Description: "The boolean value for true/false filtering conditions.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: DoubleValue
-									"double_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "The numeric value for numerical filtering.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: StringValue
-									"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The string value for text-based filtering.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The value used in filter comparisons.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The list of filters that determine which agent traces should be included in the evaluation.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SamplingConfig
-				"sampling_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: SamplingPercentage
-						"sampling_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "The percentage of agent traces to sample for evaluation.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration that controls what percentage of agent traces are sampled for evaluation.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SessionConfig
-				"session_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: SessionTimeoutMinutes
-						"session_timeout_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The number of minutes of inactivity after which an agent session is considered complete.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration that defines how agent sessions are detected.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The evaluation rule that defines sampling configuration, filters, and session detection settings.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rule": schemaAttribute44e6a0ea11638ca74f8e8555(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -540,10 +704,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the online evaluation configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute3f9fa3da67b3e2a209d91d4d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -572,22 +733,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags to assign to the online evaluation configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeb09a58012eaabce5452b796d(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -596,11 +742,7 @@ func onlineEvaluationConfigDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the online evaluation configuration was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttributef21deb3b4d859461fcb78227(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

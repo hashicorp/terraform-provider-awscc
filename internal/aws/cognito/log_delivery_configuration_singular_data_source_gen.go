@@ -14,6 +14,62 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute335c0bc7b02bb2bf72785486() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5332a71c949941f8c6d4b64c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CloudWatchLogsConfiguration
+				"cloudwatch_logs_configuration": schemaAttributed1937019c86598f809bde293(),
+				// Property: EventSource
+				"event_source": schemaAttribute335c0bc7b02bb2bf72785486(),
+				// Property: FirehoseConfiguration
+				"firehose_configuration": schemaAttributed7c79c2463ce3fd6d0cdc2ae(),
+				// Property: LogLevel
+				"log_level": schemaAttribute335c0bc7b02bb2bf72785486(),
+				// Property: S3Configuration
+				"s3_configuration": schemaAttributee49d45fe423b32988c3bb973(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1937019c86598f809bde293() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogGroupArn
+			"log_group_arn": schemaAttribute335c0bc7b02bb2bf72785486(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed7c79c2463ce3fd6d0cdc2ae() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: StreamArn
+			"stream_arn": schemaAttribute335c0bc7b02bb2bf72785486(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee49d45fe423b32988c3bb973() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketArn
+			"bucket_arn": schemaAttribute335c0bc7b02bb2bf72785486(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cognito_log_delivery_configuration", logDeliveryConfigurationDataSource)
 }
@@ -28,9 +84,7 @@ func logDeliveryConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	{
 		//	  "type": "string"
 		//	}
-		"log_delivery_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"log_delivery_configuration_id": schemaAttribute335c0bc7b02bb2bf72785486(),
 		// Property: LogConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -76,60 +130,14 @@ func logDeliveryConfigurationDataSource(ctx context.Context) (datasource.DataSou
 		//	  },
 		//	  "type": "array"
 		//	}
-		"log_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: CloudWatchLogsConfiguration
-					"cloudwatch_logs_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: LogGroupArn
-							"log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: EventSource
-					"event_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: FirehoseConfiguration
-					"firehose_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: StreamArn
-							"stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: LogLevel
-					"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: S3Configuration
-					"s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: BucketArn
-							"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"log_configurations": schemaAttribute5332a71c949941f8c6d4b64c(),
 		// Property: UserPoolId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"user_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"user_pool_id": schemaAttribute335c0bc7b02bb2bf72785486(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

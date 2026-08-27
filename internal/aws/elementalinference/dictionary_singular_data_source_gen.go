@@ -15,6 +15,21 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute326ceb9fe2f6f030a63f907a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b1f56a6d4d9d06c7952931b() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_elementalinference_dictionary", dictionaryDataSource)
 }
@@ -29,9 +44,7 @@ func dictionaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute326ceb9fe2f6f030a63f907a(),
 		// Property: Entries
 		// CloudFormation resource type schema:
 		//
@@ -39,9 +52,7 @@ func dictionaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 40960,
 		//	  "type": "string"
 		//	}
-		"entries": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"entries": schemaAttribute326ceb9fe2f6f030a63f907a(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -51,9 +62,7 @@ func dictionaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"dictionary_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"dictionary_id": schemaAttribute326ceb9fe2f6f030a63f907a(),
 		// Property: Language
 		// CloudFormation resource type schema:
 		//
@@ -68,9 +77,7 @@ func dictionaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"language": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"language": schemaAttribute326ceb9fe2f6f030a63f907a(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -78,9 +85,7 @@ func dictionaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9-_]{0,126}[a-zA-Z0-9])?$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute326ceb9fe2f6f030a63f907a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -94,11 +99,7 @@ func dictionaryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6b1f56a6d4d9d06c7952931b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

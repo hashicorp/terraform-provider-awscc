@@ -14,6 +14,26 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute391c47c9585a9dd3d7057576() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute97cdddfe74d035b8a1b03a09() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the subnet",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3666398beb01541f40ffcac() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the network ACL",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_subnet_network_acl_association", subnetNetworkAclAssociationDataSource)
 }
@@ -28,9 +48,7 @@ func subnetNetworkAclAssociationDataSource(ctx context.Context) (datasource.Data
 		//	{
 		//	  "type": "string"
 		//	}
-		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"association_id": schemaAttribute391c47c9585a9dd3d7057576(),
 		// Property: NetworkAclId
 		// CloudFormation resource type schema:
 		//
@@ -38,10 +56,7 @@ func subnetNetworkAclAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The ID of the network ACL",
 		//	  "type": "string"
 		//	}
-		"network_acl_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the network ACL",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_acl_id": schemaAttributed3666398beb01541f40ffcac(),
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -49,10 +64,7 @@ func subnetNetworkAclAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The ID of the subnet",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the subnet",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_id": schemaAttribute97cdddfe74d035b8a1b03a09(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

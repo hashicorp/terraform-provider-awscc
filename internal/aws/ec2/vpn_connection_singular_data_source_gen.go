@@ -14,6 +14,496 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute07a7fe13534c722252e25092() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IKE version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0ca757e17379de81874864aa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0cee8e54311e447a6b7a8ab4() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicate whether to enable acceleration for the VPN connection.\n Default: ``false``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d5c829fd424b482dcc4cec6() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The lifetime for phase 2 of the IKE negotiation, in seconds.\n Constraints: A value between 900 and 3,600. The value must be less than the value for ``Phase1LifetimeSeconds``.\n Default: ``3600``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1080f3ecae0854cb6cf74832() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the customer gateway at your end of the VPN connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute16f435157b556ccf10e88714() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IPv6 CIDR on the AWS side of the VPN connection.\n Default: ``::/0``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute178f6508dafca2c445249717() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DPDTimeoutAction
+				"dpd_timeout_action": schemaAttribute7c0bde6d7ac24497fa0dc010(),
+				// Property: DPDTimeoutSeconds
+				"dpd_timeout_seconds": schemaAttribute26a2e2b59e965feb202f94e5(),
+				// Property: EnableTunnelLifecycleControl
+				"enable_tunnel_lifecycle_control": schemaAttributed66f3b5b157b265aee39d0a3(),
+				// Property: IKEVersions
+				"ike_versions": schemaAttributea5287679f63d8cca46b069a8(),
+				// Property: LogOptions
+				"log_options": schemaAttribute9c6851ad49bed6e6aeadac05(),
+				// Property: Phase1DHGroupNumbers
+				"phase_1_dh_group_numbers": schemaAttribute64a469657780e350b629eec6(),
+				// Property: Phase1EncryptionAlgorithms
+				"phase_1_encryption_algorithms": schemaAttributedd40380e0990397ab9a36933(),
+				// Property: Phase1IntegrityAlgorithms
+				"phase_1_integrity_algorithms": schemaAttribute6fc8e9d0f88bcab7af163a8b(),
+				// Property: Phase1LifetimeSeconds
+				"phase_1_lifetime_seconds": schemaAttribute6120483b17190a777aa19936(),
+				// Property: Phase2DHGroupNumbers
+				"phase_2_dh_group_numbers": schemaAttributef5c5d13d9304b2824e0f8903(),
+				// Property: Phase2EncryptionAlgorithms
+				"phase_2_encryption_algorithms": schemaAttribute404ecf076eebfa91bff05db3(),
+				// Property: Phase2IntegrityAlgorithms
+				"phase_2_integrity_algorithms": schemaAttribute2a67b485d2f74b77ba4009b9(),
+				// Property: Phase2LifetimeSeconds
+				"phase_2_lifetime_seconds": schemaAttribute0d5c829fd424b482dcc4cec6(),
+				// Property: PreSharedKey
+				"pre_shared_key": schemaAttribute6b94e68b41098f9ce8594013(),
+				// Property: RekeyFuzzPercentage
+				"rekey_fuzz_percentage": schemaAttribute7d1d20fee2d7053b4d322210(),
+				// Property: RekeyMarginTimeSeconds
+				"rekey_margin_time_seconds": schemaAttribute8afc47fe20bb481f850951ce(),
+				// Property: ReplayWindowSize
+				"replay_window_size": schemaAttribute66f18f4af1a015286370a556(),
+				// Property: StartupAction
+				"startup_action": schemaAttribute6337efc480b2cf99cf7ae0e9(),
+				// Property: TunnelInsideCidr
+				"tunnel_inside_cidr": schemaAttribute17fad0298728ed7952364887(),
+				// Property: TunnelInsideIpv6Cidr
+				"tunnel_inside_ipv_6_cidr": schemaAttributee65f6ceb5e2f32c21eb76bb8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tunnel options for the VPN connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17fad0298728ed7952364887() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The range of inside IP addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same virtual private gateway. \n Constraints: A size /30 CIDR block from the ``169.254.0.0/16`` range. The following CIDR blocks are reserved and cannot be used:\n  +   ``169.254.0.0/30`` \n  +   ``169.254.1.0/30`` \n  +   ``169.254.2.0/30`` \n  +   ``169.254.3.0/30`` \n  +   ``169.254.4.0/30`` \n  +   ``169.254.5.0/30`` \n  +   ``169.254.169.252/30``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26a2e2b59e965feb202f94e5() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of seconds after which a DPD timeout occurs.\n Constraints: A value greater than or equal to 30.\n Default: ``30``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27f4206a6a588e545f9b0772() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the encryption algorithm.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a67b485d2f74b77ba4009b9() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Value
+				"value": schemaAttribute65d772719d188a667f8d59f7(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more integrity algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.\n Valid values: ``SHA1`` | ``SHA2-256`` | ``SHA2-384`` | ``SHA2-512``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2eee681ec98d519922b23447() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of VPN connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3669e8268b8b0c771f824bc7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the integrity algorithm.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute404ecf076eebfa91bff05db3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Value
+				"value": schemaAttributec6e71047852bd97a05fbe8b6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more encryption algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.\n Valid values: ``AES128`` | ``AES256`` | ``AES128-GCM-16`` | ``AES256-GCM-16``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute406684203f8112f8af30f3bd() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The Diffie-Hellmann group number.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54191422858413f31a8c19a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The desired bandwidth specification for the VPN tunnel, used when creating or modifying VPN connection options to set the tunnel's throughput capacity. ``standard`` supports up to 1.25 Gbps per tunnel, while ``large`` supports up to 5 Gbps per tunnel. The default value is ``standard``. Existing VPN connections without a bandwidth setting will automatically default to ``standard``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5bc073b8d95b1118eb5329eb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BgpLogEnabled
+			"bgp_log_enabled": schemaAttributebc96ac683821bd523bf7b239(),
+			// Property: BgpLogGroupArn
+			"bgp_log_group_arn": schemaAttribute79cf35c53b7956df8cb7441e(),
+			// Property: BgpLogOutputFormat
+			"bgp_log_output_format": schemaAttributee63fe9d2b2d52cb37721ad4e(),
+			// Property: LogEnabled
+			"log_enabled": schemaAttributef15ecfbc0f18b0b2e4b35ca2(),
+			// Property: LogGroupArn
+			"log_group_arn": schemaAttribute8327cfae9f75754cffd8348d(),
+			// Property: LogOutputFormat
+			"log_output_format": schemaAttribute9035ce966c82f020d71484ae(),
+		}, /*END SCHEMA*/
+		Description: "Options for sending VPN tunnel logs to CloudWatch.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6120483b17190a777aa19936() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The lifetime for phase 1 of the IKE negotiation, in seconds.\n Constraints: A value between 900 and 28,800.\n Default: ``28800``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6337efc480b2cf99cf7ae0e9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify ``start`` for AWS to initiate the IKE negotiation.\n Valid Values: ``add`` | ``start``\n Default: ``add``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64a469657780e350b629eec6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Value
+				"value": schemaAttribute406684203f8112f8af30f3bd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 1 IKE negotiations.\n Valid values: ``2`` | ``14`` | ``15`` | ``16`` | ``17`` | ``18`` | ``19`` | ``20`` | ``21`` | ``22`` | ``23`` | ``24``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65d772719d188a667f8d59f7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The integrity algorithm.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66f18f4af1a015286370a556() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of packets in an IKE replay window.\n Constraints: A value between 64 and 2048.\n Default: ``1024``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b94e68b41098f9ce8594013() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and customer gateway.\n Constraints: Allowed characters are alphanumeric characters, periods (.), and underscores (_). Must be between 8 and 64 characters in length and cannot start with zero (0).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d0b81abef2ac89cd929efe0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the transit gateway associated with the VPN connection.\n You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6fc8e9d0f88bcab7af163a8b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Value
+				"value": schemaAttribute3669e8268b8b0c771f824bc7(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more integrity algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.\n Valid values: ``SHA1`` | ``SHA2-256`` | ``SHA2-384`` | ``SHA2-512``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79cf35c53b7956df8cb7441e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the CloudWatch log group where BGP logs will be sent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c0bde6d7ac24497fa0dc010() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The action to take after DPD timeout occurs. Specify ``restart`` to restart the IKE initiation. Specify ``clear`` to end the IKE session.\n Valid Values: ``clear`` | ``none`` | ``restart``\n Default: ``clear``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d1d20fee2d7053b4d322210() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The percentage of the rekey window (determined by ``RekeyMarginTimeSeconds``) during which the rekey time is randomly selected.\n Constraints: A value between 0 and 100.\n Default: ``100``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8327cfae9f75754cffd8348d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8afc47fe20bb481f850951ce() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for ``RekeyFuzzPercentage``.\n Constraints: A value between 60 and half of ``Phase2LifetimeSeconds``.\n Default: ``270``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b7e7d5e2121dc942f66453d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee6431f5f8c1c0b77bfb36d41(),
+				// Property: Value
+				"value": schemaAttribute0ca757e17379de81874864aa(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Any tags assigned to the VPN connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e8579dd0812e80356deb47b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the storage mode for the pre-shared key (PSK). Valid values are ``Standard`` (stored in the S2Slong service) or ``SecretsManager`` (stored in AWS Secrets Manager).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9035ce966c82f020d71484ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Set log format. Default format is ``json``.\n Valid values: ``json`` | ``text``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94fb41d6a34aa098d5441ca0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.\n Default: ``::/0``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9bab51ccba3fe8e582c7efb6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicate whether the VPN tunnels process IPv4 or IPv6 traffic.\n Default: ``ipv4``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c6851ad49bed6e6aeadac05() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudwatchLogOptions
+			"cloudwatch_log_options": schemaAttribute5bc073b8d95b1118eb5329eb(),
+		}, /*END SCHEMA*/
+		Description: "Options for logging VPN tunnel activity.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea5287679f63d8cca46b069a8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Value
+				"value": schemaAttribute07a7fe13534c722252e25092(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The IKE versions that are permitted for the VPN tunnel.\n Valid values: ``ikev1`` | ``ikev2``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf6f30875c7c866a7f9401ea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the VPN concentrator to associate with the VPN connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb76b3ed11012cee01532c003() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The transit gateway attachment ID to use for the VPN tunnel.\n Required if ``OutsideIpAddressType`` is set to ``PrivateIpv4``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc96ac683821bd523bf7b239() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether to enable BGP logging for the VPN connection. Default value is ``False``.\n Valid values: ``True`` | ``False``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebcd61003db6b06ccdc173ef5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of IP address assigned to the outside interface of the customer gateway device.\n Valid values: ``PrivateIpv4`` | ``PublicIpv4`` | ``Ipv6``\n Default: ``PublicIpv4``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd9041bd1bdcb3cda2f258d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6e71047852bd97a05fbe8b6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The encryption algorithm.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed66f3b5b157b265aee39d0a3() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Turn on or off tunnel endpoint lifecycle control feature.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8ada853fd5706969a6961b0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.\n Default: ``0.0.0.0/0``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd40380e0990397ab9a36933() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Value
+				"value": schemaAttribute27f4206a6a588e545f9b0772(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more encryption algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.\n Valid values: ``AES128`` | ``AES256`` | ``AES128-GCM-16`` | ``AES256-GCM-16``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd480e890cbb8f6c3db216a7() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the VPN connection uses static routes only. Static routes must be used for devices that don't support BGP.\n If you are creating a VPN connection for a device that does not support Border Gateway Protocol (BGP), you must specify ``true``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf1b558d10471b5040af5365() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IPv4 CIDR on the AWS side of the VPN connection.\n Default: ``0.0.0.0/0``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee63fe9d2b2d52cb37721ad4e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The desired output format for BGP logs to be sent to CloudWatch. Default format is ``json``.\n Valid values: ``json`` | ``text``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6431f5f8c1c0b77bfb36d41() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee65f6ceb5e2f32c21eb76bb8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The range of inside IPv6 addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same transit gateway.\n Constraints: A size /126 CIDR block from the local ``fd00::/8`` range.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec69fb96823cbd54b606dc6c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the virtual private gateway at the AWS side of the VPN connection.\n You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef15ecfbc0f18b0b2e4b35ca2() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enable or disable VPN tunnel logging feature. Default value is ``False``.\n Valid values: ``True`` | ``False``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef5c5d13d9304b2824e0f8903() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Value
+				"value": schemaAttribute406684203f8112f8af30f3bd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 2 IKE negotiations.\n Valid values: ``2`` | ``5`` | ``14`` | ``15`` | ``16`` | ``17`` | ``18`` | ``19`` | ``20`` | ``21`` | ``22`` | ``23`` | ``24``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_vpn_connection", vPNConnectionDataSource)
 }
@@ -29,10 +519,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The ID of the customer gateway at your end of the VPN connection.",
 		//	  "type": "string"
 		//	}
-		"customer_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the customer gateway at your end of the VPN connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"customer_gateway_id": schemaAttribute1080f3ecae0854cb6cf74832(),
 		// Property: EnableAcceleration
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +527,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Indicate whether to enable acceleration for the VPN connection.\n Default: ``false``",
 		//	  "type": "boolean"
 		//	}
-		"enable_acceleration": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicate whether to enable acceleration for the VPN connection.\n Default: ``false``",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enable_acceleration": schemaAttribute0cee8e54311e447a6b7a8ab4(),
 		// Property: LocalIpv4NetworkCidr
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +535,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.\n Default: ``0.0.0.0/0``",
 		//	  "type": "string"
 		//	}
-		"local_ipv_4_network_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IPv4 CIDR on the customer gateway (on-premises) side of the VPN connection.\n Default: ``0.0.0.0/0``",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"local_ipv_4_network_cidr": schemaAttributed8ada853fd5706969a6961b0(),
 		// Property: LocalIpv6NetworkCidr
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +543,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.\n Default: ``::/0``",
 		//	  "type": "string"
 		//	}
-		"local_ipv_6_network_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.\n Default: ``::/0``",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"local_ipv_6_network_cidr": schemaAttribute94fb41d6a34aa098d5441ca0(),
 		// Property: OutsideIpAddressType
 		// CloudFormation resource type schema:
 		//
@@ -73,25 +551,19 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The type of IP address assigned to the outside interface of the customer gateway device.\n Valid values: ``PrivateIpv4`` | ``PublicIpv4`` | ``Ipv6``\n Default: ``PublicIpv4``",
 		//	  "type": "string"
 		//	}
-		"outside_ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of IP address assigned to the outside interface of the customer gateway device.\n Valid values: ``PrivateIpv4`` | ``PublicIpv4`` | ``Ipv6``\n Default: ``PublicIpv4``",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"outside_ip_address_type": schemaAttributebcd61003db6b06ccdc173ef5(),
 		// Property: PreSharedKeyStorage
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Describes the storage location for an instance store-backed AMI.",
+		//	  "description": "Specifies the storage mode for the pre-shared key (PSK). Valid values are ``Standard`` (stored in the S2Slong service) or ``SecretsManager`` (stored in AWS Secrets Manager).",
 		//	  "enum": [
 		//	    "Standard",
 		//	    "SecretsManager"
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"pre_shared_key_storage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Describes the storage location for an instance store-backed AMI.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"pre_shared_key_storage": schemaAttribute8e8579dd0812e80356deb47b(),
 		// Property: RemoteIpv4NetworkCidr
 		// CloudFormation resource type schema:
 		//
@@ -99,10 +571,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The IPv4 CIDR on the AWS side of the VPN connection.\n Default: ``0.0.0.0/0``",
 		//	  "type": "string"
 		//	}
-		"remote_ipv_4_network_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IPv4 CIDR on the AWS side of the VPN connection.\n Default: ``0.0.0.0/0``",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"remote_ipv_4_network_cidr": schemaAttributedf1b558d10471b5040af5365(),
 		// Property: RemoteIpv6NetworkCidr
 		// CloudFormation resource type schema:
 		//
@@ -110,10 +579,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The IPv6 CIDR on the AWS side of the VPN connection.\n Default: ``::/0``",
 		//	  "type": "string"
 		//	}
-		"remote_ipv_6_network_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IPv6 CIDR on the AWS side of the VPN connection.\n Default: ``::/0``",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"remote_ipv_6_network_cidr": schemaAttribute16f435157b556ccf10e88714(),
 		// Property: StaticRoutesOnly
 		// CloudFormation resource type schema:
 		//
@@ -121,10 +587,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Indicates whether the VPN connection uses static routes only. Static routes must be used for devices that don't support BGP.\n If you are creating a VPN connection for a device that does not support Border Gateway Protocol (BGP), you must specify ``true``.",
 		//	  "type": "boolean"
 		//	}
-		"static_routes_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the VPN connection uses static routes only. Static routes must be used for devices that don't support BGP.\n If you are creating a VPN connection for a device that does not support Border Gateway Protocol (BGP), you must specify ``true``.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"static_routes_only": schemaAttributedd480e890cbb8f6c3db216a7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -153,24 +616,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Any tags assigned to the VPN connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute8b7e7d5e2121dc942f66453d(),
 		// Property: TransitGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -178,10 +624,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The ID of the transit gateway associated with the VPN connection.\n You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the transit gateway associated with the VPN connection.\n You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_id": schemaAttribute6d0b81abef2ac89cd929efe0(),
 		// Property: TransportTransitGatewayAttachmentId
 		// CloudFormation resource type schema:
 		//
@@ -189,10 +632,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The transit gateway attachment ID to use for the VPN tunnel.\n Required if ``OutsideIpAddressType`` is set to ``PrivateIpv4``.",
 		//	  "type": "string"
 		//	}
-		"transport_transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The transit gateway attachment ID to use for the VPN tunnel.\n Required if ``OutsideIpAddressType`` is set to ``PrivateIpv4``.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"transport_transit_gateway_attachment_id": schemaAttributeb76b3ed11012cee01532c003(),
 		// Property: TunnelBandwidth
 		// CloudFormation resource type schema:
 		//
@@ -205,10 +645,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"tunnel_bandwidth": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The desired bandwidth specification for the VPN tunnel, used when creating or modifying VPN connection options to set the tunnel's throughput capacity. ``standard`` supports up to 1.25 Gbps per tunnel, while ``large`` supports up to 5 Gbps per tunnel. The default value is ``standard``. Existing VPN connections without a bandwidth setting will automatically default to ``standard``.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tunnel_bandwidth": schemaAttribute54191422858413f31a8c19a5(),
 		// Property: TunnelInsideIpVersion
 		// CloudFormation resource type schema:
 		//
@@ -216,10 +653,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Indicate whether the VPN tunnels process IPv4 or IPv6 traffic.\n Default: ``ipv4``",
 		//	  "type": "string"
 		//	}
-		"tunnel_inside_ip_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicate whether the VPN tunnels process IPv4 or IPv6 traffic.\n Default: ``ipv4``",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tunnel_inside_ip_version": schemaAttribute9bab51ccba3fe8e582c7efb6(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -227,10 +661,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The type of VPN connection.",
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of VPN connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute2eee681ec98d519922b23447(),
 		// Property: VpnConcentratorId
 		// CloudFormation resource type schema:
 		//
@@ -238,10 +669,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The ID of the VPN concentrator to associate with the VPN connection.",
 		//	  "type": "string"
 		//	}
-		"vpn_concentrator_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the VPN concentrator to associate with the VPN connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpn_concentrator_id": schemaAttributeaf6f30875c7c866a7f9401ea(),
 		// Property: VpnConnectionId
 		// CloudFormation resource type schema:
 		//
@@ -249,10 +677,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"vpn_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpn_connection_id": schemaAttributebd9041bd1bdcb3cda2f258d0(),
 		// Property: VpnGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -260,10 +685,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The ID of the virtual private gateway at the AWS side of the VPN connection.\n You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.",
 		//	  "type": "string"
 		//	}
-		"vpn_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the virtual private gateway at the AWS side of the VPN connection.\n You must specify either ``TransitGatewayId`` or ``VpnGatewayId``, but not both.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpn_gateway_id": schemaAttributeec69fb96823cbd54b606dc6c(),
 		// Property: VpnTunnelOptionsSpecifications
 		// CloudFormation resource type schema:
 		//
@@ -569,216 +991,7 @@ func vPNConnectionDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"vpn_tunnel_options_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DPDTimeoutAction
-					"dpd_timeout_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The action to take after DPD timeout occurs. Specify ``restart`` to restart the IKE initiation. Specify ``clear`` to end the IKE session.\n Valid Values: ``clear`` | ``none`` | ``restart``\n Default: ``clear``",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: DPDTimeoutSeconds
-					"dpd_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The number of seconds after which a DPD timeout occurs.\n Constraints: A value greater than or equal to 30.\n Default: ``30``",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: EnableTunnelLifecycleControl
-					"enable_tunnel_lifecycle_control": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "Turn on or off tunnel endpoint lifecycle control feature.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: IKEVersions
-					"ike_versions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Value
-								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The IKE version.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "The IKE versions that are permitted for the VPN tunnel.\n Valid values: ``ikev1`` | ``ikev2``",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: LogOptions
-					"log_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: CloudwatchLogOptions
-							"cloudwatch_log_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: BgpLogEnabled
-									"bgp_log_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Description: "Specifies whether to enable BGP logging for the VPN connection. Default value is ``False``.\n Valid values: ``True`` | ``False``",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: BgpLogGroupArn
-									"bgp_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The Amazon Resource Name (ARN) of the CloudWatch log group where BGP logs will be sent.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: BgpLogOutputFormat
-									"bgp_log_output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The desired output format for BGP logs to be sent to CloudWatch. Default format is ``json``.\n Valid values: ``json`` | ``text``",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: LogEnabled
-									"log_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Description: "Enable or disable VPN tunnel logging feature. Default value is ``False``.\n Valid values: ``True`` | ``False``",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: LogGroupArn
-									"log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The Amazon Resource Name (ARN) of the CloudWatch log group to send logs to.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: LogOutputFormat
-									"log_output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Set log format. Default format is ``json``.\n Valid values: ``json`` | ``text``",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Options for sending VPN tunnel logs to CloudWatch.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Options for logging VPN tunnel activity.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Phase1DHGroupNumbers
-					"phase_1_dh_group_numbers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Value
-								"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The Diffie-Hellmann group number.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 1 IKE negotiations.\n Valid values: ``2`` | ``14`` | ``15`` | ``16`` | ``17`` | ``18`` | ``19`` | ``20`` | ``21`` | ``22`` | ``23`` | ``24``",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Phase1EncryptionAlgorithms
-					"phase_1_encryption_algorithms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Value
-								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The value for the encryption algorithm.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "One or more encryption algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.\n Valid values: ``AES128`` | ``AES256`` | ``AES128-GCM-16`` | ``AES256-GCM-16``",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Phase1IntegrityAlgorithms
-					"phase_1_integrity_algorithms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Value
-								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The value for the integrity algorithm.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "One or more integrity algorithms that are permitted for the VPN tunnel for phase 1 IKE negotiations.\n Valid values: ``SHA1`` | ``SHA2-256`` | ``SHA2-384`` | ``SHA2-512``",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Phase1LifetimeSeconds
-					"phase_1_lifetime_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The lifetime for phase 1 of the IKE negotiation, in seconds.\n Constraints: A value between 900 and 28,800.\n Default: ``28800``",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Phase2DHGroupNumbers
-					"phase_2_dh_group_numbers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Value
-								"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The Diffie-Hellmann group number.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "One or more Diffie-Hellman group numbers that are permitted for the VPN tunnel for phase 2 IKE negotiations.\n Valid values: ``2`` | ``5`` | ``14`` | ``15`` | ``16`` | ``17`` | ``18`` | ``19`` | ``20`` | ``21`` | ``22`` | ``23`` | ``24``",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Phase2EncryptionAlgorithms
-					"phase_2_encryption_algorithms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Value
-								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The encryption algorithm.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "One or more encryption algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.\n Valid values: ``AES128`` | ``AES256`` | ``AES128-GCM-16`` | ``AES256-GCM-16``",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Phase2IntegrityAlgorithms
-					"phase_2_integrity_algorithms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Value
-								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The integrity algorithm.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "One or more integrity algorithms that are permitted for the VPN tunnel for phase 2 IKE negotiations.\n Valid values: ``SHA1`` | ``SHA2-256`` | ``SHA2-384`` | ``SHA2-512``",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Phase2LifetimeSeconds
-					"phase_2_lifetime_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The lifetime for phase 2 of the IKE negotiation, in seconds.\n Constraints: A value between 900 and 3,600. The value must be less than the value for ``Phase1LifetimeSeconds``.\n Default: ``3600``",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PreSharedKey
-					"pre_shared_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The pre-shared key (PSK) to establish initial authentication between the virtual private gateway and customer gateway.\n Constraints: Allowed characters are alphanumeric characters, periods (.), and underscores (_). Must be between 8 and 64 characters in length and cannot start with zero (0).",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: RekeyFuzzPercentage
-					"rekey_fuzz_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The percentage of the rekey window (determined by ``RekeyMarginTimeSeconds``) during which the rekey time is randomly selected.\n Constraints: A value between 0 and 100.\n Default: ``100``",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: RekeyMarginTimeSeconds
-					"rekey_margin_time_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for ``RekeyFuzzPercentage``.\n Constraints: A value between 60 and half of ``Phase2LifetimeSeconds``.\n Default: ``270``",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ReplayWindowSize
-					"replay_window_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The number of packets in an IKE replay window.\n Constraints: A value between 64 and 2048.\n Default: ``1024``",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: StartupAction
-					"startup_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify ``start`` for AWS to initiate the IKE negotiation.\n Valid Values: ``add`` | ``start``\n Default: ``add``",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: TunnelInsideCidr
-					"tunnel_inside_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The range of inside IP addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same virtual private gateway. \n Constraints: A size /30 CIDR block from the ``169.254.0.0/16`` range. The following CIDR blocks are reserved and cannot be used:\n  +   ``169.254.0.0/30`` \n  +   ``169.254.1.0/30`` \n  +   ``169.254.2.0/30`` \n  +   ``169.254.3.0/30`` \n  +   ``169.254.4.0/30`` \n  +   ``169.254.5.0/30`` \n  +   ``169.254.169.252/30``",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: TunnelInsideIpv6Cidr
-					"tunnel_inside_ipv_6_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The range of inside IPv6 addresses for the tunnel. Any specified CIDR blocks must be unique across all VPN connections that use the same transit gateway.\n Constraints: A size /126 CIDR block from the local ``fd00::/8`` range.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tunnel options for the VPN connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpn_tunnel_options_specifications": schemaAttribute178f6508dafca2c445249717(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

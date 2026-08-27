@@ -14,6 +14,41 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute5b628a61837031bce576ecd0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b1b325960bfcaa8b4c13d16() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the type without version number.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb1fb3a1ea7e5b6c762e775ba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The configuration data for the extension, in this account and region.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb60713bac59235c42cf1b3f2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An alias by which to refer to this extension configuration data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributece8b733689c242f6985a3e00() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the configuration data, in this account and region.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudformation_hook_type_config", hookTypeConfigDataSource)
 }
@@ -30,10 +65,7 @@ func hookTypeConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[\\s\\S]+",
 		//	  "type": "string"
 		//	}
-		"configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The configuration data for the extension, in this account and region.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"configuration": schemaAttributeb1fb3a1ea7e5b6c762e775ba(),
 		// Property: ConfigurationAlias
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +78,7 @@ func hookTypeConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[a-zA-Z0-9]{1,256}$",
 		//	  "type": "string"
 		//	}
-		"configuration_alias": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An alias by which to refer to this extension configuration data.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"configuration_alias": schemaAttributeb60713bac59235c42cf1b3f2(),
 		// Property: ConfigurationArn
 		// CloudFormation resource type schema:
 		//
@@ -58,10 +87,7 @@ func hookTypeConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type(-configuration)?/hook/.+$",
 		//	  "type": "string"
 		//	}
-		"configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the configuration data, in this account and region.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"configuration_arn": schemaAttributece8b733689c242f6985a3e00(),
 		// Property: TypeArn
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +96,7 @@ func hookTypeConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/hook/.+$",
 		//	  "type": "string"
 		//	}
-		"type_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the type without version number.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type_arn": schemaAttribute7b1b325960bfcaa8b4c13d16(),
 		// Property: TypeName
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +105,7 @@ func hookTypeConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$",
 		//	  "type": "string"
 		//	}
-		"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type_name": schemaAttribute5b628a61837031bce576ecd0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

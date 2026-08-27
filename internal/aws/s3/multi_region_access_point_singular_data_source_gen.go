@@ -14,6 +14,93 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0a4a7fb33266c802bf2b7a37() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. Enabling this setting doesn't affect existing bucket policies.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0ac0c0ff19dddedb85fe7207() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The alias is a unique identifier to, and is part of the public DNS name for this Multi Region Access Point",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d723746127b394d90a29c79() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Bucket
+				"bucket": schemaAttributef2b27eb41c3c8c996503e0f5(),
+				// Property: BucketAccountId
+				"bucket_account_id": schemaAttributef2b27eb41c3c8c996503e0f5(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of buckets that you want to associate this Multi Region Access Point with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c39170bf52116dbac9a56db() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BlockPublicAcls
+			"block_public_acls": schemaAttributeed61d09b3b433797fac2abcd(),
+			// Property: BlockPublicPolicy
+			"block_public_policy": schemaAttribute0a4a7fb33266c802bf2b7a37(),
+			// Property: IgnorePublicAcls
+			"ignore_public_acls": schemaAttribute58594c230410ed77cd0e9059(),
+			// Property: RestrictPublicBuckets
+			"restrict_public_buckets": schemaAttributec4e662e9af0c989601ada84a(),
+		}, /*END SCHEMA*/
+		Description: "The PublicAccessBlock configuration that you want to apply to this Multi Region Access Point. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status 'The Meaning of Public' in the Amazon Simple Storage Service Developer Guide.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58594c230410ed77cd0e9059() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93ecd36ef13b72e3f0968d5a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name you want to assign to this Multi Region Access Point.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b17671117cd4f87b4420fd5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp of the when the Multi Region Access Point is created",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4e662e9af0c989601ada84a() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.\nEnabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed61d09b3b433797fac2abcd() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to TRUE causes the following behavior:\n- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.\n - PUT Object calls fail if the request includes a public ACL.\n. - PUT Bucket calls fail if the request includes a public ACL.\nEnabling this setting doesn't affect existing policies or ACLs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2b27eb41c3c8c996503e0f5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_s3_multi_region_access_point", multiRegionAccessPointDataSource)
 }
@@ -29,10 +116,7 @@ func multiRegionAccessPointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The alias is a unique identifier to, and is part of the public DNS name for this Multi Region Access Point",
 		//	  "type": "string"
 		//	}
-		"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The alias is a unique identifier to, and is part of the public DNS name for this Multi Region Access Point",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"alias": schemaAttribute0ac0c0ff19dddedb85fe7207(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +124,7 @@ func multiRegionAccessPointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The timestamp of the when the Multi Region Access Point is created",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp of the when the Multi Region Access Point is created",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute9b17671117cd4f87b4420fd5(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +135,7 @@ func multiRegionAccessPointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name you want to assign to this Multi Region Access Point.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute93ecd36ef13b72e3f0968d5a(),
 		// Property: PublicAccessBlockConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -84,32 +162,7 @@ func multiRegionAccessPointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "object"
 		//	}
-		"public_access_block_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BlockPublicAcls
-				"block_public_acls": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to TRUE causes the following behavior:\n- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.\n - PUT Object calls fail if the request includes a public ACL.\n. - PUT Bucket calls fail if the request includes a public ACL.\nEnabling this setting doesn't affect existing policies or ACLs.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: BlockPublicPolicy
-				"block_public_policy": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. Enabling this setting doesn't affect existing bucket policies.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IgnorePublicAcls
-				"ignore_public_acls": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RestrictPublicBuckets
-				"restrict_public_buckets": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.\nEnabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The PublicAccessBlock configuration that you want to apply to this Multi Region Access Point. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status 'The Meaning of Public' in the Amazon Simple Storage Service Developer Guide.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"public_access_block_configuration": schemaAttribute2c39170bf52116dbac9a56db(),
 		// Property: Regions
 		// CloudFormation resource type schema:
 		//
@@ -141,22 +194,7 @@ func multiRegionAccessPointDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"regions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Bucket
-					"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: BucketAccountId
-					"bucket_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of buckets that you want to associate this Multi Region Access Point with.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"regions": schemaAttribute1d723746127b394d90a29c79(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

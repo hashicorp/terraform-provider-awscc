@@ -15,6 +15,47 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute282d79261ac15c1f08b065ea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3139b5c93c114445bd56c034() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38dd9d89f185863cc74090ea() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b0826be33f95cd7ffdcb7ec() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TextFullAIPromptEditTemplateConfiguration
+			"text_full_ai_prompt_edit_template_configuration": schemaAttributea1107ce059edf47286ad7fad(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea1107ce059edf47286ad7fad() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Text
+			"text": schemaAttribute282d79261ac15c1f08b065ea(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_wisdom_ai_prompt", aIPromptDataSource)
 }
@@ -30,9 +71,7 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}(:[A-Z0-9_$]+){0,1}$",
 		//	  "type": "string"
 		//	}
-		"ai_prompt_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"ai_prompt_arn": schemaAttribute282d79261ac15c1f08b065ea(),
 		// Property: AIPromptId
 		// CloudFormation resource type schema:
 		//
@@ -40,9 +79,7 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$|^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}(:[A-Z0-9_$]+){0,1}$",
 		//	  "type": "string"
 		//	}
-		"ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"ai_prompt_id": schemaAttribute282d79261ac15c1f08b065ea(),
 		// Property: ApiFormat
 		// CloudFormation resource type schema:
 		//
@@ -55,9 +92,7 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"api_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"api_format": schemaAttribute282d79261ac15c1f08b065ea(),
 		// Property: AssistantArn
 		// CloudFormation resource type schema:
 		//
@@ -65,9 +100,7 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}$",
 		//	  "type": "string"
 		//	}
-		"assistant_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"assistant_arn": schemaAttribute282d79261ac15c1f08b065ea(),
 		// Property: AssistantId
 		// CloudFormation resource type schema:
 		//
@@ -75,9 +108,7 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$|^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}$",
 		//	  "type": "string"
 		//	}
-		"assistant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"assistant_id": schemaAttribute282d79261ac15c1f08b065ea(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -87,9 +118,7 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9\\s_.,-]+",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute282d79261ac15c1f08b065ea(),
 		// Property: ModelId
 		// CloudFormation resource type schema:
 		//
@@ -98,18 +127,14 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"model_id": schemaAttribute282d79261ac15c1f08b065ea(),
 		// Property: ModifiedTimeSeconds
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "number"
 		//	}
-		"modified_time_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"modified_time_seconds": schemaAttribute38dd9d89f185863cc74090ea(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -119,9 +144,7 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9\\s_.,-]+",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute282d79261ac15c1f08b065ea(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -136,11 +159,7 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute3139b5c93c114445bd56c034(),
 		// Property: TemplateConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -163,21 +182,7 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"template_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: TextFullAIPromptEditTemplateConfiguration
-				"text_full_ai_prompt_edit_template_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Text
-						"text": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"template_configuration": schemaAttribute5b0826be33f95cd7ffdcb7ec(),
 		// Property: TemplateType
 		// CloudFormation resource type schema:
 		//
@@ -187,9 +192,7 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"template_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"template_type": schemaAttribute282d79261ac15c1f08b065ea(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -210,9 +213,7 @@ func aIPromptDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute282d79261ac15c1f08b065ea(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

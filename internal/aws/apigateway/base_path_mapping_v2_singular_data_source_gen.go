@@ -14,6 +14,41 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute509d29edd6b955ac030d649f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the API's stage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed2788d6ffc4ecaf50f72ef2c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the API.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedcc0a2c0cf3d5f986aff1cbf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Arn of an AWS::ApiGateway::DomainNameV2 resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee61b5e8d157a3af74ae9540e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The base path name that callers of the API must provide in the URL after the domain name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeed85d47a422af1307546cf9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name (ARN) of the resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_apigateway_base_path_mapping_v2", basePathMappingV2DataSource)
 }
@@ -29,10 +64,7 @@ func basePathMappingV2DataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The base path name that callers of the API must provide in the URL after the domain name.",
 		//	  "type": "string"
 		//	}
-		"base_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The base path name that callers of the API must provide in the URL after the domain name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"base_path": schemaAttributee61b5e8d157a3af74ae9540e(),
 		// Property: BasePathMappingArn
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +72,7 @@ func basePathMappingV2DataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "Amazon Resource Name (ARN) of the resource.",
 		//	  "type": "string"
 		//	}
-		"base_path_mapping_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name (ARN) of the resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"base_path_mapping_arn": schemaAttributeeed85d47a422af1307546cf9(),
 		// Property: DomainNameArn
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +80,7 @@ func basePathMappingV2DataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The Arn of an AWS::ApiGateway::DomainNameV2 resource.",
 		//	  "type": "string"
 		//	}
-		"domain_name_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Arn of an AWS::ApiGateway::DomainNameV2 resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_name_arn": schemaAttributedcc0a2c0cf3d5f986aff1cbf(),
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +88,7 @@ func basePathMappingV2DataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The ID of the API.",
 		//	  "type": "string"
 		//	}
-		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the API.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rest_api_id": schemaAttributed2788d6ffc4ecaf50f72ef2c(),
 		// Property: Stage
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +96,7 @@ func basePathMappingV2DataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The name of the API's stage.",
 		//	  "type": "string"
 		//	}
-		"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the API's stage.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"stage": schemaAttribute509d29edd6b955ac030d649f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

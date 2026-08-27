@@ -14,6 +14,75 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute277af34889fd53c2b6a19c8d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatchEncryptionMode
+			"cloudwatch_encryption_mode": schemaAttributec5c6903e9e083c4b0b9165d5(),
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttributec5c6903e9e083c4b0b9165d5(),
+		}, /*END SCHEMA*/
+		Description: "The encryption configuration for Amazon CloudWatch.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d251078546d0c0a5d8e8441() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schemaAttributec5c6903e9e083c4b0b9165d5(),
+				// Property: S3EncryptionMode
+				"s3_encryption_mode": schemaAttributec5c6903e9e083c4b0b9165d5(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The encryption configuration for Amazon Simple Storage Service (Amazon S3) data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute791dc98e4b393cd0037ae25a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatchEncryption
+			"cloudwatch_encryption": schemaAttribute277af34889fd53c2b6a19c8d(),
+			// Property: JobBookmarksEncryption
+			"job_bookmarks_encryption": schemaAttributee7b2ce0d256d94c13b3e5c6d(),
+			// Property: S3Encryptions
+			"s3_encryptions": schemaAttribute6d251078546d0c0a5d8e8441(),
+		}, /*END SCHEMA*/
+		Description: "The encryption configuration for the security configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5c6903e9e083c4b0b9165d5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee7b2ce0d256d94c13b3e5c6d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: JobBookmarksEncryptionMode
+			"job_bookmarks_encryption_mode": schemaAttributec5c6903e9e083c4b0b9165d5(),
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttributec5c6903e9e083c4b0b9165d5(),
+		}, /*END SCHEMA*/
+		Description: "The encryption configuration for job bookmarks.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeebdb2d162e4a4ded00913f6f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the security configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_security_configuration", securityConfigurationDataSource)
 }
@@ -76,59 +145,7 @@ func securityConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CloudWatchEncryption
-				"cloudwatch_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CloudWatchEncryptionMode
-						"cloudwatch_encryption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: KmsKeyArn
-						"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The encryption configuration for Amazon CloudWatch.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: JobBookmarksEncryption
-				"job_bookmarks_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: JobBookmarksEncryptionMode
-						"job_bookmarks_encryption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: KmsKeyArn
-						"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The encryption configuration for job bookmarks.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: S3Encryptions
-				"s3_encryptions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: KmsKeyArn
-							"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: S3EncryptionMode
-							"s3_encryption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The encryption configuration for Amazon Simple Storage Service (Amazon S3) data.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The encryption configuration for the security configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"encryption_configuration": schemaAttribute791dc98e4b393cd0037ae25a(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -136,10 +153,7 @@ func securityConfigurationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The name for the security configuration.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the security configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributeebdb2d162e4a4ded00913f6f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

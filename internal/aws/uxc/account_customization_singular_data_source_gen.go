@@ -15,6 +15,36 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute57a7b01e7c2fde05e9176258() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The color theme assigned to the account for visual identification in the AWS Console.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb33cc7283a25d03bdca1d5ff() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS account ID that this customization belongs to. This is automatically determined from the caller's identity.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb64c89293442812609a729d() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of AWS service identifiers visible to the account in the AWS Console.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed0dfd889a565127c18b4afbd() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of AWS region identifiers visible to the account in the AWS Console.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_uxc_account_customization", accountCustomizationDataSource)
 }
@@ -42,10 +72,7 @@ func accountCustomizationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"account_color": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The color theme assigned to the account for visual identification in the AWS Console.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"account_color": schemaAttribute57a7b01e7c2fde05e9176258(),
 		// Property: AccountId
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +81,7 @@ func accountCustomizationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS account ID that this customization belongs to. This is automatically determined from the caller's identity.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"account_id": schemaAttributeb33cc7283a25d03bdca1d5ff(),
 		// Property: VisibleRegions
 		// CloudFormation resource type schema:
 		//
@@ -72,11 +96,7 @@ func accountCustomizationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"visible_regions": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of AWS region identifiers visible to the account in the AWS Console.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"visible_regions": schemaAttributed0dfd889a565127c18b4afbd(),
 		// Property: VisibleServices
 		// CloudFormation resource type schema:
 		//
@@ -92,11 +112,7 @@ func accountCustomizationDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"visible_services": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of AWS service identifiers visible to the account in the AWS Console.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"visible_services": schemaAttributebb64c89293442812609a729d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

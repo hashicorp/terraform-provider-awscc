@@ -14,6 +14,12 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributecae3329e55dafecd0e671fec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_route53globalresolver_hosted_zone_association", hostedZoneAssociationDataSource)
 }
@@ -28,9 +34,7 @@ func hostedZoneAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	{
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributecae3329e55dafecd0e671fec(),
 		// Property: HostedZoneAssociationId
 		// CloudFormation resource type schema:
 		//
@@ -39,9 +43,7 @@ func hostedZoneAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"hosted_zone_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"hosted_zone_association_id": schemaAttributecae3329e55dafecd0e671fec(),
 		// Property: HostedZoneId
 		// CloudFormation resource type schema:
 		//
@@ -50,9 +52,7 @@ func hostedZoneAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"hosted_zone_id": schemaAttributecae3329e55dafecd0e671fec(),
 		// Property: HostedZoneName
 		// CloudFormation resource type schema:
 		//
@@ -61,9 +61,7 @@ func hostedZoneAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"hosted_zone_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"hosted_zone_name": schemaAttributecae3329e55dafecd0e671fec(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -73,9 +71,7 @@ func hostedZoneAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributecae3329e55dafecd0e671fec(),
 		// Property: ResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -85,9 +81,7 @@ func hostedZoneAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"resource_arn": schemaAttributecae3329e55dafecd0e671fec(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -99,18 +93,14 @@ func hostedZoneAssociationDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributecae3329e55dafecd0e671fec(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttributecae3329e55dafecd0e671fec(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,64 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute12111033ca187f40dd97f461() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the project.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b8736f81648f526445d6078() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the project was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute520c0c368c65e0dd8c468a89() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78008339c7e5403dd566650c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the project.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ef6b8fae5b46138face341c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the project.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute888974f8ae5229b813c05464() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5011ecd0a17b1ec2c8d5410() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute888974f8ae5229b813c05464(),
+				// Property: Value
+				"value": schemaAttribute520c0c368c65e0dd8c468a89(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockmantle_project", projectDataSource)
 }
@@ -33,10 +91,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[a-zA-Z0-9_\\-]+:bedrock-mantle:[a-zA-Z0-9_\\-]+:[0-9]+:project/(default|proj_[a-z0-9]+)$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the project.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute12111033ca187f40dd97f461(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -45,11 +100,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the project was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute2b8736f81648f526445d6078(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -60,10 +111,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(default|proj_[a-z0-9]+)$",
 		//	  "type": "string"
 		//	}
-		"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the project.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"project_id": schemaAttribute7ef6b8fae5b46138face341c(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +121,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the project.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute78008339c7e5403dd566650c(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -111,24 +156,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributed5011ecd0a17b1ec2c8d5410(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

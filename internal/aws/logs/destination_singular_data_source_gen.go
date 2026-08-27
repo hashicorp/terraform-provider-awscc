@@ -14,6 +14,69 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute053977475e18810f98abeb6b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the physical target where the log events are delivered (for example, a Kinesis stream)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0ea1b2532f4fbe0c80599ddb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of an IAM role that permits CloudWatch Logs to send data to the specified AWS resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49cbc2ed9ecff9155375c214() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute88dabc4fd4d95a3a1a77c1d2(),
+				// Property: Value
+				"value": schemaAttributea1bbc3e8a2dbfd939828b9f5(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute88dabc4fd4d95a3a1a77c1d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, - and @.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea1bbc3e8a2dbfd939828b9f5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, - and @.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd053b95a0e8909841dcf900() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An IAM policy document that governs which AWS accounts can create subscription filters against this destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf638ebedaecff0f5be4c250() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the destination resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0df15cefa0c536edd0ea62e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_logs_destination", destinationDataSource)
 }
@@ -28,9 +91,7 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributee0df15cefa0c536edd0ea62e(),
 		// Property: DestinationName
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +102,7 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[^:*]{1,512}$",
 		//	  "type": "string"
 		//	}
-		"destination_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the destination resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"destination_name": schemaAttributedf638ebedaecff0f5be4c250(),
 		// Property: DestinationPolicy
 		// CloudFormation resource type schema:
 		//
@@ -53,10 +111,7 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"destination_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An IAM policy document that governs which AWS accounts can create subscription filters against this destination.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"destination_policy": schemaAttributebd053b95a0e8909841dcf900(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -65,10 +120,7 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of an IAM role that permits CloudWatch Logs to send data to the specified AWS resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute0ea1b2532f4fbe0c80599ddb(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -101,24 +153,7 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, - and @.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., :, /, =, +, - and @.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute49cbc2ed9ecff9155375c214(),
 		// Property: TargetArn
 		// CloudFormation resource type schema:
 		//
@@ -127,10 +162,7 @@ func destinationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the physical target where the log events are delivered (for example, a Kinesis stream)",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_arn": schemaAttribute053977475e18810f98abeb6b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,85 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute211a95cf0f8302f8a00af7fa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The variable type of the list.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25cd15e074e76fede11b07f8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The list ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25e46ed21caaeac7c53a1aa3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time when the list was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a16d3a041219be4db507d4c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time when the list was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ec4c3322cab0c9238fe05e6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute5e4cad8ea7f750db48df32e0(),
+				// Property: Value
+				"value": schemaAttributef3e7be5f8023afa378f54baa(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags associated with this list.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e4cad8ea7f750db48df32e0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7959254c3c11c3af04995af4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the list.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaedded5235cc95e005de01f4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the list.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed18b55d87cc70415623dc087() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The elements in this list.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3e7be5f8023afa378f54baa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_frauddetector_list", listDataSource)
 }
@@ -30,10 +109,7 @@ func listDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The list ARN.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The list ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute25cd15e074e76fede11b07f8(),
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +117,7 @@ func listDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time when the list was created.",
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time when the list was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttribute25e46ed21caaeac7c53a1aa3(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +127,7 @@ func listDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the list.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeaedded5235cc95e005de01f4(),
 		// Property: Elements
 		// CloudFormation resource type schema:
 		//
@@ -75,11 +145,7 @@ func listDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"elements": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The elements in this list.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"elements": schemaAttributed18b55d87cc70415623dc087(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -87,10 +153,7 @@ func listDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time when the list was last updated.",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time when the list was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttribute2a16d3a041219be4db507d4c(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -101,10 +164,7 @@ func listDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-z_]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the list.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute7959254c3c11c3af04995af4(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -138,24 +198,7 @@ func listDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags associated with this list.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute3ec4c3322cab0c9238fe05e6(),
 		// Property: VariableType
 		// CloudFormation resource type schema:
 		//
@@ -166,10 +209,7 @@ func listDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Z_]{1,64}$",
 		//	  "type": "string"
 		//	}
-		"variable_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The variable type of the list.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"variable_type": schemaAttribute211a95cf0f8302f8a00af7fa(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

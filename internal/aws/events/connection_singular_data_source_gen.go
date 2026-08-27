@@ -14,6 +14,186 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute003718b359c534887431b20a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ccc499d8cf61bdaf524bfe1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ResourceAssociationArn
+			"resource_association_arn": schemaAttribute7362794a2fef0cd563b66051(),
+			// Property: ResourceConfigurationArn
+			"resource_configuration_arn": schemaAttribute7362794a2fef0cd563b66051(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c138795767a89afc125de83() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApiKeyName
+			"api_key_name": schemaAttribute7362794a2fef0cd563b66051(),
+			// Property: ApiKeyValue
+			"api_key_value": schemaAttribute7362794a2fef0cd563b66051(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c4566d9e5d9d5bf338be9f0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Password
+			"password": schemaAttribute7362794a2fef0cd563b66051(),
+			// Property: Username
+			"username": schemaAttribute7362794a2fef0cd563b66051(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4e6b164444a9cf27fbf9d021() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Description of the connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6495acafee6c6d31e2a9946b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The arn of the connection resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64adac27e4ffc568341daa99() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7362794a2fef0cd563b66051() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ad9df2a3e5b2b6bf6964262() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The arn of the secrets manager secret created in the customer account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea482a6fd38be6bee13d9897f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BodyParameters
+			"body_parameters": schemaAttributee72cc04d5b6db4cb02e6b411(),
+			// Property: HeaderParameters
+			"header_parameters": schemaAttributee72cc04d5b6db4cb02e6b411(),
+			// Property: QueryStringParameters
+			"query_string_parameters": schemaAttributee72cc04d5b6db4cb02e6b411(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae8c96925c0195efb12dbefa() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ResourceParameters
+			"resource_parameters": schemaAttribute1ccc499d8cf61bdaf524bfe1(),
+		}, /*END SCHEMA*/
+		Description: "The private resource the HTTP request will be sent to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebcab37d2886489f05ef2b986() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The arn of the connection resource to be used in IAM policies.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedef5b88e78f12fb912fa8fd9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizationEndpoint
+			"authorization_endpoint": schemaAttribute7362794a2fef0cd563b66051(),
+			// Property: ClientParameters
+			"client_parameters": schemaAttributedf60da7a02075fe25ea1708d(),
+			// Property: HttpMethod
+			"http_method": schemaAttribute7362794a2fef0cd563b66051(),
+			// Property: OAuthHttpParameters
+			"o_auth_http_parameters": schemaAttributea482a6fd38be6bee13d9897f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf60da7a02075fe25ea1708d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClientID
+			"client_id": schemaAttribute7362794a2fef0cd563b66051(),
+			// Property: ClientSecret
+			"client_secret": schemaAttribute7362794a2fef0cd563b66051(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6a0d26c8b737bb7fd804f0b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApiKeyAuthParameters
+			"api_key_auth_parameters": schemaAttribute2c138795767a89afc125de83(),
+			// Property: BasicAuthParameters
+			"basic_auth_parameters": schemaAttribute3c4566d9e5d9d5bf338be9f0(),
+			// Property: ConnectivityParameters
+			"connectivity_parameters": schemaAttributef8a5e9cc6fe79ef8aa0cf6bb(),
+			// Property: InvocationHttpParameters
+			"invocation_http_parameters": schemaAttributea482a6fd38be6bee13d9897f(),
+			// Property: OAuthParameters
+			"o_auth_parameters": schemaAttributedef5b88e78f12fb912fa8fd9(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee72cc04d5b6db4cb02e6b411() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IsValueSecret
+				"is_value_secret": schemaAttribute64adac27e4ffc568341daa99(),
+				// Property: Key
+				"key": schemaAttribute7362794a2fef0cd563b66051(),
+				// Property: Value
+				"value": schemaAttribute7362794a2fef0cd563b66051(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8a5e9cc6fe79ef8aa0cf6bb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ResourceParameters
+			"resource_parameters": schemaAttribute1ccc499d8cf61bdaf524bfe1(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_events_connection", connectionDataSource)
 }
@@ -30,10 +210,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:connection\\/[\\.\\-_A-Za-z0-9]+\\/[\\-A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The arn of the connection resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute6495acafee6c6d31e2a9946b(),
 		// Property: ArnForPolicy
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +219,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws([a-z]|\\-)*:events:([a-z]|\\d|\\-)*:([0-9]{12})?:connection\\/[\\.\\-_A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"arn_for_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The arn of the connection resource to be used in IAM policies.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn_for_policy": schemaAttributebcab37d2886489f05ef2b986(),
 		// Property: AuthParameters
 		// CloudFormation resource type schema:
 		//
@@ -330,219 +504,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ApiKeyAuthParameters
-				"api_key_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ApiKeyName
-						"api_key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ApiKeyValue
-						"api_key_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: BasicAuthParameters
-				"basic_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Password
-						"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Username
-						"username": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ConnectivityParameters
-				"connectivity_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ResourceParameters
-						"resource_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ResourceAssociationArn
-								"resource_association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: ResourceConfigurationArn
-								"resource_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: InvocationHttpParameters
-				"invocation_http_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BodyParameters
-						"body_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: IsValueSecret
-									"is_value_secret": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Key
-									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: HeaderParameters
-						"header_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: IsValueSecret
-									"is_value_secret": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Key
-									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: QueryStringParameters
-						"query_string_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: IsValueSecret
-									"is_value_secret": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Key
-									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: OAuthParameters
-				"o_auth_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AuthorizationEndpoint
-						"authorization_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ClientParameters
-						"client_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ClientID
-								"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: ClientSecret
-								"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: HttpMethod
-						"http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: OAuthHttpParameters
-						"o_auth_http_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BodyParameters
-								"body_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: IsValueSecret
-											"is_value_secret": schema.BoolAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: Key
-											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: Value
-											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: HeaderParameters
-								"header_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: IsValueSecret
-											"is_value_secret": schema.BoolAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: Key
-											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: Value
-											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: QueryStringParameters
-								"query_string_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: IsValueSecret
-											"is_value_secret": schema.BoolAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: Key
-											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: Value
-											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"auth_parameters": schemaAttributee6a0d26c8b737bb7fd804f0b(),
 		// Property: AuthorizationType
 		// CloudFormation resource type schema:
 		//
@@ -554,9 +516,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"authorization_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"authorization_type": schemaAttribute7362794a2fef0cd563b66051(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -565,10 +525,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 512,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description of the connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute4e6b164444a9cf27fbf9d021(),
 		// Property: InvocationConnectivityParameters
 		// CloudFormation resource type schema:
 		//
@@ -602,26 +559,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"invocation_connectivity_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ResourceParameters
-				"resource_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ResourceAssociationArn
-						"resource_association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ResourceConfigurationArn
-						"resource_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The private resource the HTTP request will be sent to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"invocation_connectivity_parameters": schemaAttributeae8c96925c0195efb12dbefa(),
 		// Property: KmsKeyIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -630,9 +568,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_\\-/:]*$",
 		//	  "type": "string"
 		//	}
-		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_identifier": schemaAttribute7362794a2fef0cd563b66051(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -643,10 +579,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[\\.\\-_A-Za-z0-9]+",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of the connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute003718b359c534887431b20a(),
 		// Property: SecretArn
 		// CloudFormation resource type schema:
 		//
@@ -655,10 +588,7 @@ func connectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws([a-z]|\\-)*:secretsmanager:([a-z]|\\d|\\-)*:([0-9]{12})?:secret:([a-z]|\\d|\\-)*(!)*[\\/_+=\\.@\\-A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The arn of the secrets manager secret created in the customer account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"secret_arn": schemaAttribute9ad9df2a3e5b2b6bf6964262(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

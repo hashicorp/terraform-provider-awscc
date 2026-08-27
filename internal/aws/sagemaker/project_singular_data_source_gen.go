@@ -14,6 +14,244 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0d4f8995c9ad8c5b8bf2a1f2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the provisioning artifact (also known as a version).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute14c7b5e882355601936a3620() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1695c8b9fd2639217f489bd0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL of the CloudFormation template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17183422dd175359cf48e8c0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The parameter key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18fc44a374bcf3a645d56afb() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute17183422dd175359cf48e8c0(),
+				// Property: Value
+				"value": schemaAttributee657f8508117062dda265868(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Parameters specified by the administrator that are required for provisioning the product.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1dabaa1250db9e9b672f893b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ProvisionedProductId
+			"provisioned_product_id": schemaAttribute0d4f8995c9ad8c5b8bf2a1f2(),
+			// Property: ProvisionedProductStatusMessage
+			"provisioned_product_status_message": schemaAttributea02182987eedbdc49b1050f5(),
+		}, /*END SCHEMA*/
+		Description: "Provisioned ServiceCatalog  Details",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute205419317d8bc1e53b6dab37() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the project.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c5b0afc8b75f3391a3da88e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Project Id.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute405648fdb9ccbd8a1e92d48b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Parameters
+			"parameters": schemaAttributeb4e0466b60306beeba563716(),
+			// Property: RoleARN
+			"role_arn": schemaAttributec1feea83170e3c217221dbad(),
+			// Property: TemplateName
+			"template_name": schemaAttribute968261c7b9b40877b1f1ab5a(),
+			// Property: TemplateURL
+			"template_url": schemaAttribute1695c8b9fd2639217f489bd0(),
+		}, /*END SCHEMA*/
+		Description: "CloudFormation template provider details for a SageMaker project.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute591176b96c1688628a35587f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time at which the project was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute846574604a8dd895ffe7525a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PathId
+			"path_id": schemaAttribute8764bc14cc1975b72f65cafa(),
+			// Property: ProductId
+			"product_id": schemaAttribute9a1fc35934bbc23324266fbf(),
+			// Property: ProvisioningArtifactId
+			"provisioning_artifact_id": schemaAttribute0d4f8995c9ad8c5b8bf2a1f2(),
+			// Property: ProvisioningParameters
+			"provisioning_parameters": schemaAttribute18fc44a374bcf3a645d56afb(),
+		}, /*END SCHEMA*/
+		Description: "Input ServiceCatalog Provisioning Details",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8764bc14cc1975b72f65cafa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The path identifier of the product.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8dd585ff409acc973963d224() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CfnTemplateProviderDetail
+				"cfn_template_provider_detail": schemaAttribute405648fdb9ccbd8a1e92d48b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of template providers associated with the project.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute968261c7b9b40877b1f1ab5a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the template used for the project.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a1fc35934bbc23324266fbf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Service Catalog product identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f428cfb21fd2051e2075813() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Project.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea02182987eedbdc49b1050f5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Provisioned Product Status Message",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead3cf9eb19085714b71e3b79() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute14c7b5e882355601936a3620(),
+				// Property: Value
+				"value": schemaAttributee29ed9609ba7219a089fe56e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead52c6eb16467d81ebef3786() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the project.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4e0466b60306beeba563716() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributecf66d2914705069f2bbd3e89(),
+				// Property: Value
+				"value": schemaAttributec13c865cfc83f4d88bc7cebf(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of parameters used in the CloudFormation template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec13c865cfc83f4d88bc7cebf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the parameter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec1feea83170e3c217221dbad() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the IAM role used by the template provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf66d2914705069f2bbd3e89() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key of the parameter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee29ed9609ba7219a089fe56e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee657f8508117062dda265868() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The parameter value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7f94b0943d132bf04d12ea1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of a project.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_project", projectDataSource)
 }
@@ -29,10 +267,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time at which the project was created.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time at which the project was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute591176b96c1688628a35587f(),
 		// Property: ProjectArn
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +278,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:project.*",
 		//	  "type": "string"
 		//	}
-		"project_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Project.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"project_arn": schemaAttribute9f428cfb21fd2051e2075813(),
 		// Property: ProjectDescription
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +288,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"project_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the project.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"project_description": schemaAttribute205419317d8bc1e53b6dab37(),
 		// Property: ProjectId
 		// CloudFormation resource type schema:
 		//
@@ -69,10 +298,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*",
 		//	  "type": "string"
 		//	}
-		"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Project Id.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"project_id": schemaAttribute2c5b0afc8b75f3391a3da88e(),
 		// Property: ProjectName
 		// CloudFormation resource type schema:
 		//
@@ -83,10 +309,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
-		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the project.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"project_name": schemaAttributead52c6eb16467d81ebef3786(),
 		// Property: ProjectStatus
 		// CloudFormation resource type schema:
 		//
@@ -103,10 +326,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"project_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of a project.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"project_status": schemaAttributef7f94b0943d132bf04d12ea1(),
 		// Property: ServiceCatalogProvisionedProductDetails
 		// CloudFormation resource type schema:
 		//
@@ -127,22 +347,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"service_catalog_provisioned_product_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ProvisionedProductId
-				"provisioned_product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The identifier of the provisioning artifact (also known as a version).",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProvisionedProductStatusMessage
-				"provisioned_product_status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Provisioned Product Status Message",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Provisioned ServiceCatalog  Details",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"service_catalog_provisioned_product_details": schemaAttribute1dabaa1250db9e9b672f893b(),
 		// Property: ServiceCatalogProvisioningDetails
 		// CloudFormation resource type schema:
 		//
@@ -202,46 +407,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"service_catalog_provisioning_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PathId
-				"path_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The path identifier of the product.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProductId
-				"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Service Catalog product identifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProvisioningArtifactId
-				"provisioning_artifact_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The identifier of the provisioning artifact (also known as a version).",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProvisioningParameters
-				"provisioning_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Key
-							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The parameter key.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The parameter value.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Parameters specified by the administrator that are required for provisioning the product.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Input ServiceCatalog Provisioning Details",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"service_catalog_provisioning_details": schemaAttribute846574604a8dd895ffe7525a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -274,24 +440,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 40,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributead3cf9eb19085714b71e3b79(),
 		// Property: TemplateProviderDetails
 		// CloudFormation resource type schema:
 		//
@@ -375,55 +524,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"template_provider_details": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: CfnTemplateProviderDetail
-					"cfn_template_provider_detail": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Parameters
-							"parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Key
-										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The key of the parameter.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Value
-										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The value of the parameter.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "A list of parameters used in the CloudFormation template.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: RoleARN
-							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Amazon Resource Name (ARN) of the IAM role used by the template provider.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TemplateName
-							"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the template used for the project.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TemplateURL
-							"template_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The URL of the CloudFormation template.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "CloudFormation template provider details for a SageMaker project.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of template providers associated with the project.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"template_provider_details": schemaAttribute8dd585ff409acc973963d224(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,48 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1c2e4158d2340c2ecc88913a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The contents of the query with all query statements.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40f84e108467e2a1ec51e5f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The query name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8a737021ef0d4122da10ea1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique ID of the query.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe5ec0448a027ef916418b24() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The query description.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed483112ee952995bc809d13f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the workgroup that contains the named query.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4913d35791ad0dd7f0505fd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The database to which the query belongs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_athena_named_query", namedQueryDataSource)
 }
@@ -31,10 +73,7 @@ func namedQueryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"database": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The database to which the query belongs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"database": schemaAttributee4913d35791ad0dd7f0505fd(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +83,7 @@ func namedQueryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The query description.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributebe5ec0448a027ef916418b24(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +93,7 @@ func namedQueryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The query name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute40f84e108467e2a1ec51e5f3(),
 		// Property: NamedQueryId
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +101,7 @@ func namedQueryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique ID of the query.",
 		//	  "type": "string"
 		//	}
-		"named_query_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique ID of the query.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"named_query_id": schemaAttributeb8a737021ef0d4122da10ea1(),
 		// Property: QueryString
 		// CloudFormation resource type schema:
 		//
@@ -81,10 +111,7 @@ func namedQueryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The contents of the query with all query statements.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"query_string": schemaAttribute1c2e4158d2340c2ecc88913a(),
 		// Property: WorkGroup
 		// CloudFormation resource type schema:
 		//
@@ -94,10 +121,7 @@ func namedQueryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"work_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the workgroup that contains the named query.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"work_group": schemaAttributed483112ee952995bc809d13f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -16,6 +16,289 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute00e7b0d117804b786da7c94a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomInstructions
+			"custom_instructions": schemaAttributec244e50cbf4b78a30a896c60(),
+			// Property: Identity
+			"identity": schemaAttributec12188f4c86264effbace38b(),
+			// Property: ModelProfileId
+			"model_profile_id": schemaAttribute6403a96d98ac37125392ffc7(),
+			// Property: OutputStyle
+			"output_style": schemaAttributeba9b66c808604b42981030dc(),
+			// Property: PromptSummary
+			"prompt_summary": schemaAttributea942d9483704fc96f9ffa7e6(),
+			// Property: QbsAwsAccountId
+			"qbs_aws_account_id": schemaAttribute30f4ba0eb97d7c02abad5ef8(),
+			// Property: ResponseLength
+			"response_length": schemaAttribute163602adc58ba8586e84cdf8(),
+			// Property: SubscriptionId
+			"subscription_id": schemaAttributea819ac3fd42efa9f27a938ed(),
+			// Property: Tone
+			"tone": schemaAttributebfa6a0c0b4a291465ebe5f32(),
+		}, /*END SCHEMA*/
+		Description: "Read-only view of the resolved custom prompt interface for the agent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute160354490c23c13551f61aa2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ModelProfileId
+			"model_profile_id": schemaAttribute6403a96d98ac37125392ffc7(),
+			// Property: QbsAwsAccountId
+			"qbs_aws_account_id": schemaAttribute30f4ba0eb97d7c02abad5ef8(),
+			// Property: SubscriptionId
+			"subscription_id": schemaAttributea819ac3fd42efa9f27a938ed(),
+		}, /*END SCHEMA*/
+		Description: "Reference to an existing custom prompt profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute163602adc58ba8586e84cdf8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The desired response length for the agent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute165f743b1458c1aba30fd35d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The date and time the agent was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ec0aef85a0b43e9bb8c8eb2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the agent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute21e39708d964852118857db8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute29ce606cc7b90c2850662618() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of Space ARNs (max 10) attached to the agent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a306cc77125c56a28d65deb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The lifecycle stage of the agent. PREVIEW or PUBLISHED.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30f4ba0eb97d7c02abad5ef8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The QBS AWS account identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute354cf7978cf384b45791d65b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute813cb1ae6cf87d1deeccb453(),
+				// Property: Value
+				"value": schemaAttribute21e39708d964852118857db8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs to associate with the agent resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43ef7632ae962521fcd6bb32() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The welcome message displayed when a user opens the agent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ef5e64af068ca0cf0c31388() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current status of the agent. One of ACTIVE, CREATING, UPDATING, or FAILED.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58787d2e9f24c0b47763f8c0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The error message if the agent is in FAILED status.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6403a96d98ac37125392ffc7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the model profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute694f4ce40e6809116c9b8dc8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The display name of the agent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute758721292fe01cdba060cf2a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The date and time the agent was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute813cb1ae6cf87d1deeccb453() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea687f3c7fef59c2e9f56cd78() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The icon identifier for the agent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea819ac3fd42efa9f27a938ed() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The subscription identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea942d9483704fc96f9ffa7e6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A summary of the resolved prompt.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8d543713930901cdc136f29() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the user who created the agent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba9b66c808604b42981030dc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The output style for the agent responses.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebfa6a0c0b4a291465ebe5f32() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tone used in agent responses.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec12188f4c86264effbace38b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identity or persona of the agent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec244e50cbf4b78a30a896c60() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Custom instructions for the agent behavior.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6752ca0d699a41ef4c9c870() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ExistingPrompt
+			"existing_prompt": schemaAttribute160354490c23c13551f61aa2(),
+			// Property: NewPrompt
+			"new_prompt": schemaAttributedc1b5343251e7b86003d6cbe(),
+		}, /*END SCHEMA*/
+		Description: "Custom prompt configuration. Specify either ExistingPrompt or NewPrompt.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed433882a2407ae4d430a9ada() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the agent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc1b5343251e7b86003d6cbe() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomInstructions
+			"custom_instructions": schemaAttributec244e50cbf4b78a30a896c60(),
+			// Property: Identity
+			"identity": schemaAttributec12188f4c86264effbace38b(),
+			// Property: OutputStyle
+			"output_style": schemaAttributeba9b66c808604b42981030dc(),
+			// Property: ResponseLength
+			"response_length": schemaAttribute163602adc58ba8586e84cdf8(),
+			// Property: Tone
+			"tone": schemaAttributebfa6a0c0b4a291465ebe5f32(),
+		}, /*END SCHEMA*/
+		Description: "Parameters for creating a new custom prompt configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedcbfcaba3672c57fed31be36() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier for the agent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2e89d42a9c43d6f54cf8b53() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Amazon Web Services account where the agent is being created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef233d4153571c7edd08e4482() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of ActionConnector ARNs (max 10) attached to the agent.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd22e425309543f432043d0d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of up to 3 starter prompts displayed to users.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_quicksight_agent", agentDataSource)
 }
@@ -35,11 +318,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 10,
 		//	  "type": "array"
 		//	}
-		"action_connectors": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of ActionConnector ARNs (max 10) attached to the agent.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"action_connectors": schemaAttributef233d4153571c7edd08e4482(),
 		// Property: AgentId
 		// CloudFormation resource type schema:
 		//
@@ -50,10 +329,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-zA-Z-_.+]+$",
 		//	  "type": "string"
 		//	}
-		"agent_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier for the agent.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_id": schemaAttributedcbfcaba3672c57fed31be36(),
 		// Property: AgentLifecycle
 		// CloudFormation resource type schema:
 		//
@@ -65,10 +341,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"agent_lifecycle": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The lifecycle stage of the agent. PREVIEW or PUBLISHED.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_lifecycle": schemaAttribute2a306cc77125c56a28d65deb(),
 		// Property: AgentStatus
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +355,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"agent_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current status of the agent. One of ACTIVE, CREATING, UPDATING, or FAILED.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_status": schemaAttribute4ef5e64af068ca0cf0c31388(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -93,10 +363,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the agent.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the agent.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributed433882a2407ae4d430a9ada(),
 		// Property: AwsAccountId
 		// CloudFormation resource type schema:
 		//
@@ -107,10 +374,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Amazon Web Services account where the agent is being created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"aws_account_id": schemaAttributee2e89d42a9c43d6f54cf8b53(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -119,11 +383,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The date and time the agent was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute165f743b1458c1aba30fd35d(),
 		// Property: Creator
 		// CloudFormation resource type schema:
 		//
@@ -131,10 +391,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the user who created the agent.",
 		//	  "type": "string"
 		//	}
-		"creator": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the user who created the agent.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creator": schemaAttributeb8d543713930901cdc136f29(),
 		// Property: CustomPromptInput
 		// CloudFormation resource type schema:
 		//
@@ -222,66 +479,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"custom_prompt_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ExistingPrompt
-				"existing_prompt": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ModelProfileId
-						"model_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The identifier of the model profile.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: QbsAwsAccountId
-						"qbs_aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The QBS AWS account identifier.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SubscriptionId
-						"subscription_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The subscription identifier.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Reference to an existing custom prompt profile.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NewPrompt
-				"new_prompt": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CustomInstructions
-						"custom_instructions": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Custom instructions for the agent behavior.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Identity
-						"identity": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The identity or persona of the agent.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: OutputStyle
-						"output_style": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The output style for the agent responses.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ResponseLength
-						"response_length": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The desired response length for the agent.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Tone
-						"tone": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The tone used in agent responses.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Parameters for creating a new custom prompt configuration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Custom prompt configuration. Specify either ExistingPrompt or NewPrompt.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"custom_prompt_input": schemaAttributec6752ca0d699a41ef4c9c870(),
 		// Property: CustomPromptInterface
 		// CloudFormation resource type schema:
 		//
@@ -347,57 +545,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"custom_prompt_interface": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomInstructions
-				"custom_instructions": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Custom instructions for the agent behavior.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Identity
-				"identity": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The identity or persona of the agent.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ModelProfileId
-				"model_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The identifier of the model profile.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: OutputStyle
-				"output_style": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The output style for the agent responses.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PromptSummary
-				"prompt_summary": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A summary of the resolved prompt.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: QbsAwsAccountId
-				"qbs_aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The QBS AWS account identifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResponseLength
-				"response_length": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The desired response length for the agent.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SubscriptionId
-				"subscription_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The subscription identifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Tone
-				"tone": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The tone used in agent responses.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Read-only view of the resolved custom prompt interface for the agent.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"custom_prompt_interface": schemaAttribute00e7b0d117804b786da7c94a(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -407,10 +555,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the agent.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute1ec0aef85a0b43e9bb8c8eb2(),
 		// Property: ErrorMessage
 		// CloudFormation resource type schema:
 		//
@@ -418,10 +563,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The error message if the agent is in FAILED status.",
 		//	  "type": "string"
 		//	}
-		"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The error message if the agent is in FAILED status.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"error_message": schemaAttribute58787d2e9f24c0b47763f8c0(),
 		// Property: IconId
 		// CloudFormation resource type schema:
 		//
@@ -431,10 +573,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"icon_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The icon identifier for the agent.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"icon_id": schemaAttributea687f3c7fef59c2e9f56cd78(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -444,10 +583,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The display name of the agent.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute694f4ce40e6809116c9b8dc8(),
 		// Property: Spaces
 		// CloudFormation resource type schema:
 		//
@@ -459,11 +595,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 10,
 		//	  "type": "array"
 		//	}
-		"spaces": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of Space ARNs (max 10) attached to the agent.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"spaces": schemaAttribute29ce606cc7b90c2850662618(),
 		// Property: StarterPrompts
 		// CloudFormation resource type schema:
 		//
@@ -475,11 +607,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 3,
 		//	  "type": "array"
 		//	}
-		"starter_prompts": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of up to 3 starter prompts displayed to users.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"starter_prompts": schemaAttributefd22e425309543f432043d0d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -511,24 +639,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 200,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs to associate with the agent resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute354cf7978cf384b45791d65b(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -537,11 +648,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The date and time the agent was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute758721292fe01cdba060cf2a(),
 		// Property: WelcomeMessage
 		// CloudFormation resource type schema:
 		//
@@ -550,10 +657,7 @@ func agentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 300,
 		//	  "type": "string"
 		//	}
-		"welcome_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The welcome message displayed when a user opens the agent.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"welcome_message": schemaAttribute43ef7632ae962521fcd6bb32(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

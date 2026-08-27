@@ -14,6 +14,65 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute4468f3fee2f74503a776a081() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EventType
+				"event_type": schemaAttribute868ed40637f1c183ea306c2b(),
+				// Property: LogDestination
+				"log_destination": schemaAttribute5cc78dea2b92032695597a3a(),
+				// Property: LogLevel
+				"log_level": schemaAttributef09b6f1da337b54a61d8d7c4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Configurations for event-based logging that specifies which event types to log and their logging settings. Overrides account-level logging for the specified event",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5cc78dea2b92032695597a3a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "CloudWatch Log Group for event-based logging. Specifies where log events should be sent. The log destination for event-based logging overrides default Log Group for the specified event type and applies to all resources associated with that event.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute868ed40637f1c183ea306c2b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of event to log. These include event types like Connect, Publish, and Disconnect.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa0dbf0bda1c7bebe3766327() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the role that allows IoT to write to Cloudwatch logs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedeb1e5f7f7c4c9e990153dc2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee1706c838c7d1bd3d68a6eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The log level to use. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef09b6f1da337b54a61d8d7c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The logging level for the specified event type. Determines the verbosity of log messages generated for this event type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iot_logging", loggingDataSource)
 }
@@ -32,10 +91,7 @@ func loggingDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"account_id": schemaAttributedeb1e5f7f7c4c9e990153dc2(),
 		// Property: DefaultLogLevel
 		// CloudFormation resource type schema:
 		//
@@ -50,10 +106,7 @@ func loggingDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"default_log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The log level to use. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_log_level": schemaAttributeee1706c838c7d1bd3d68a6eb(),
 		// Property: EventConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -96,29 +149,7 @@ func loggingDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"event_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: EventType
-					"event_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of event to log. These include event types like Connect, Publish, and Disconnect.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: LogDestination
-					"log_destination": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "CloudWatch Log Group for event-based logging. Specifies where log events should be sent. The log destination for event-based logging overrides default Log Group for the specified event type and applies to all resources associated with that event.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: LogLevel
-					"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The logging level for the specified event type. Determines the verbosity of log messages generated for this event type.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Configurations for event-based logging that specifies which event types to log and their logging settings. Overrides account-level logging for the specified event",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"event_configurations": schemaAttribute4468f3fee2f74503a776a081(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -128,10 +159,7 @@ func loggingDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the role that allows IoT to write to Cloudwatch logs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttributeaa0dbf0bda1c7bebe3766327(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

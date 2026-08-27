@@ -14,6 +14,34 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute7118c83b65a7e68e2eef3ee1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the source portfolio. The source portfolio must be a portfolio imported from a different account than the one creating the association. This account must have previously shared this portfolio with the account creating the association.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7cf90f4b16a8dab4fbd2292c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The portfolio identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8431f7290dbd5b2168c21405() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The product identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec55ecb3ebb74f0602719b90e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The language code.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_servicecatalog_portfolio_product_association", portfolioProductAssociationDataSource)
 }
@@ -29,10 +57,7 @@ func portfolioProductAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The language code.",
 		//	  "type": "string"
 		//	}
-		"accept_language": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The language code.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"accept_language": schemaAttributec55ecb3ebb74f0602719b90e(),
 		// Property: PortfolioId
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +65,7 @@ func portfolioProductAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The portfolio identifier.",
 		//	  "type": "string"
 		//	}
-		"portfolio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The portfolio identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"portfolio_id": schemaAttribute7cf90f4b16a8dab4fbd2292c(),
 		// Property: ProductId
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +73,7 @@ func portfolioProductAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The product identifier.",
 		//	  "type": "string"
 		//	}
-		"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The product identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"product_id": schemaAttribute8431f7290dbd5b2168c21405(),
 		// Property: SourcePortfolioId
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +81,7 @@ func portfolioProductAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The identifier of the source portfolio. The source portfolio must be a portfolio imported from a different account than the one creating the association. This account must have previously shared this portfolio with the account creating the association.",
 		//	  "type": "string"
 		//	}
-		"source_portfolio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the source portfolio. The source portfolio must be a portfolio imported from a different account than the one creating the association. This account must have previously shared this portfolio with the account creating the association.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_portfolio_id": schemaAttribute7118c83b65a7e68e2eef3ee1(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

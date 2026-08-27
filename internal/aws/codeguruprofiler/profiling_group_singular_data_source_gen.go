@@ -15,6 +15,104 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute183e24f5ed8c778cd07fccd3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute21b0dd3e0eba2de91ab39324() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the profiling group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute356dba757f498e3f639df1aa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique identifier for each Channel in the notification configuration of a Profiling Group",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute518a05625df453befe27e76e() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The principals for the agent permissions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e98f187de0393edb1e4c003() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The compute platform of the profiling group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b3e16d87846d60c52fd9d6d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeb147b8da43ed63881324d8ae(),
+				// Property: Value
+				"value": schemaAttributef55fbae78012e450af5beaeb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags associated with a profiling group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea730b86daa624f7028e9f015() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Principals
+			"principals": schemaAttribute518a05625df453befe27e76e(),
+		}, /*END SCHEMA*/
+		Description: "The agent permissions attached to this profiling group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb147b8da43ed63881324d8ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec0df20240431b7784ba86e17() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: channelId
+				"channel_id": schemaAttribute356dba757f498e3f639df1aa(),
+				// Property: channelUri
+				"channel_uri": schemaAttribute183e24f5ed8c778cd07fccd3(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Configuration for Notification Channels for Anomaly Detection feature in CodeGuru Profiler which enables customers to detect anomalies in the application profile for those methods that represent the highest proportion of CPU time or latency",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5c1b3b050f838cd1466e9c3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the specified profiling group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef55fbae78012e450af5beaeb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_codeguruprofiler_profiling_group", profilingGroupDataSource)
 }
@@ -44,18 +142,7 @@ func profilingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"agent_permissions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Principals
-				"principals": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The principals for the agent permissions.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The agent permissions attached to this profiling group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agent_permissions": schemaAttributea730b86daa624f7028e9f015(),
 		// Property: AnomalyDetectionNotificationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -82,24 +169,7 @@ func profilingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "array"
 		//	}
-		"anomaly_detection_notification_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: channelId
-					"channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Unique identifier for each Channel in the notification configuration of a Profiling Group",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: channelUri
-					"channel_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Unique arn of the resource to be used for notifications. We support a valid SNS topic arn as a channel uri.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Configuration for Notification Channels for Anomaly Detection feature in CodeGuru Profiler which enables customers to detect anomalies in the application profile for those methods that represent the highest proportion of CPU time or latency",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"anomaly_detection_notification_configuration": schemaAttributec0df20240431b7784ba86e17(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -108,10 +178,7 @@ func profilingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^arn:aws([-\\w]*):codeguru-profiler:(([a-z]+-)+[0-9]+):([0-9]{12}):profilingGroup/[^.]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the specified profiling group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributee5c1b3b050f838cd1466e9c3(),
 		// Property: ComputePlatform
 		// CloudFormation resource type schema:
 		//
@@ -123,10 +190,7 @@ func profilingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"compute_platform": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The compute platform of the profiling group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"compute_platform": schemaAttribute5e98f187de0393edb1e4c003(),
 		// Property: ProfilingGroupName
 		// CloudFormation resource type schema:
 		//
@@ -137,10 +201,7 @@ func profilingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[\\w-]+$",
 		//	  "type": "string"
 		//	}
-		"profiling_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the profiling group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"profiling_group_name": schemaAttribute21b0dd3e0eba2de91ab39324(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -173,24 +234,7 @@ func profilingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. The allowed characters across services are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags associated with a profiling group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute7b3e16d87846d60c52fd9d6d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,62 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0e1d14a8685eaf3c6cd8573c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of your load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute11a531d431b164a4b9817257() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The validation status of the SSL/TLS certificate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute395ab1e2d212a3bba17d2644() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SSL/TLS certificate name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7eb3131a4b85aaf71ec11e29() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ee87dea91f85eb04ce39f0e() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "When true, the SSL/TLS certificate is attached to the Lightsail load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95fc8d250881765a882be5e4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead31255efea227b1352c5653() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed2a4ec77829e247f5d7de125() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The domain name (e.g., example.com ) for your SSL/TLS certificate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_lightsail_load_balancer_tls_certificate", loadBalancerTlsCertificateDataSource)
 }
@@ -35,11 +91,7 @@ func loadBalancerTlsCertificateDataSource(ctx context.Context) (datasource.DataS
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"certificate_alternative_names": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate_alternative_names": schemaAttribute7eb3131a4b85aaf71ec11e29(),
 		// Property: CertificateDomainName
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +99,7 @@ func loadBalancerTlsCertificateDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The domain name (e.g., example.com ) for your SSL/TLS certificate.",
 		//	  "type": "string"
 		//	}
-		"certificate_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The domain name (e.g., example.com ) for your SSL/TLS certificate.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate_domain_name": schemaAttributed2a4ec77829e247f5d7de125(),
 		// Property: CertificateName
 		// CloudFormation resource type schema:
 		//
@@ -58,10 +107,7 @@ func loadBalancerTlsCertificateDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The SSL/TLS certificate name.",
 		//	  "type": "string"
 		//	}
-		"certificate_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The SSL/TLS certificate name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate_name": schemaAttribute395ab1e2d212a3bba17d2644(),
 		// Property: HttpsRedirectionEnabled
 		// CloudFormation resource type schema:
 		//
@@ -69,10 +115,7 @@ func loadBalancerTlsCertificateDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.",
 		//	  "type": "boolean"
 		//	}
-		"https_redirection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"https_redirection_enabled": schemaAttributead31255efea227b1352c5653(),
 		// Property: IsAttached
 		// CloudFormation resource type schema:
 		//
@@ -80,10 +123,7 @@ func loadBalancerTlsCertificateDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "When true, the SSL/TLS certificate is attached to the Lightsail load balancer.",
 		//	  "type": "boolean"
 		//	}
-		"is_attached": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "When true, the SSL/TLS certificate is attached to the Lightsail load balancer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"is_attached": schemaAttribute7ee87dea91f85eb04ce39f0e(),
 		// Property: LoadBalancerName
 		// CloudFormation resource type schema:
 		//
@@ -92,19 +132,14 @@ func loadBalancerTlsCertificateDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "\\w[\\w\\-]*\\w",
 		//	  "type": "string"
 		//	}
-		"load_balancer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of your load balancer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"load_balancer_name": schemaAttribute0e1d14a8685eaf3c6cd8573c(),
 		// Property: LoadBalancerTlsCertificateArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"load_balancer_tls_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"load_balancer_tls_certificate_arn": schemaAttribute95fc8d250881765a882be5e4(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -112,10 +147,7 @@ func loadBalancerTlsCertificateDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The validation status of the SSL/TLS certificate.",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The validation status of the SSL/TLS certificate.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute11a531d431b164a4b9817257(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

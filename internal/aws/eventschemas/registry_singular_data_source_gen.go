@@ -14,6 +14,48 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0daab1345458bb8fa8b719af() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributed4a4a58155cf2effdc8f8b45(),
+				// Property: Value
+				"value": schemaAttributed4a4a58155cf2effdc8f8b45(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags associated with the resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute32cd49b197b3f5caa497de7d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the registry to be created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute673c1fbab63cb2522ac8a8d7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the schema registry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92cd5814a2445e9cdda57042() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the registry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4a4a58155cf2effdc8f8b45() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_eventschemas_registry", registryDataSource)
 }
@@ -29,10 +71,7 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description of the registry to be created.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the registry to be created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute32cd49b197b3f5caa497de7d(),
 		// Property: RegistryArn
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +79,7 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the registry.",
 		//	  "type": "string"
 		//	}
-		"registry_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the registry.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"registry_arn": schemaAttribute92cd5814a2445e9cdda57042(),
 		// Property: RegistryName
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +87,7 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the schema registry.",
 		//	  "type": "string"
 		//	}
-		"registry_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the schema registry.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"registry_name": schemaAttribute673c1fbab63cb2522ac8a8d7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -79,22 +112,7 @@ func registryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags associated with the resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute0daab1345458bb8fa8b719af(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

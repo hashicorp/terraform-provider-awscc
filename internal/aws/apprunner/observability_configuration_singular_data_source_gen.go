@@ -14,6 +14,73 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1f2c94ffa361a2d83ff4ab30() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name for the observability configuration. When you use it for the first time in an AWS Region, App Runner creates revision number 1 of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2471b3ab7081a2b20487e04d() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "It's set to true for the configuration with the highest Revision among all configurations that share the same Name. It's set to false otherwise.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31f20ac03140c5318b84a022() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeadd6da4cbc6e0ece02bd1f80(),
+				// Property: Value
+				"value": schemaAttributeadd6da4cbc6e0ece02bd1f80(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of metadata items that you can associate with your observability configuration resource. A tag is a key-value pair.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66a97b6d578d925183de5a29() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of this ObservabilityConfiguration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9005a8d65568b354285ee67d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The implementation provider chosen for tracing App Runner services.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c3c0f8faa31bdaf253b172d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Vendor
+			"vendor": schemaAttribute9005a8d65568b354285ee67d(),
+		}, /*END SCHEMA*/
+		Description: "The configuration of the tracing feature within this observability configuration. If you don't specify it, App Runner doesn't enable tracing.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeadd6da4cbc6e0ece02bd1f80() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0989ca6b826a3e5ff667ce3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The revision of this observability configuration. It's unique among all the active configurations ('Status': 'ACTIVE') that share the same ObservabilityConfigurationName.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_apprunner_observability_configuration", observabilityConfigurationDataSource)
 }
@@ -29,10 +96,7 @@ func observabilityConfigurationDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "It's set to true for the configuration with the highest Revision among all configurations that share the same Name. It's set to false otherwise.",
 		//	  "type": "boolean"
 		//	}
-		"latest": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "It's set to true for the configuration with the highest Revision among all configurations that share the same Name. It's set to false otherwise.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"latest": schemaAttribute2471b3ab7081a2b20487e04d(),
 		// Property: ObservabilityConfigurationArn
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +107,7 @@ func observabilityConfigurationDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"observability_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of this ObservabilityConfiguration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"observability_configuration_arn": schemaAttribute66a97b6d578d925183de5a29(),
 		// Property: ObservabilityConfigurationName
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +118,7 @@ func observabilityConfigurationDataSource(ctx context.Context) (datasource.DataS
 		//	  "pattern": "[A-Za-z0-9][A-Za-z0-9\\-_]{3,31}",
 		//	  "type": "string"
 		//	}
-		"observability_configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the observability configuration. When you use it for the first time in an AWS Region, App Runner creates revision number 1 of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"observability_configuration_name": schemaAttribute1f2c94ffa361a2d83ff4ab30(),
 		// Property: ObservabilityConfigurationRevision
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +126,7 @@ func observabilityConfigurationDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "The revision of this observability configuration. It's unique among all the active configurations ('Status': 'ACTIVE') that share the same ObservabilityConfigurationName.",
 		//	  "type": "integer"
 		//	}
-		"observability_configuration_revision": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The revision of this observability configuration. It's unique among all the active configurations ('Status': 'ACTIVE') that share the same ObservabilityConfigurationName.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"observability_configuration_revision": schemaAttributee0989ca6b826a3e5ff667ce3(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -91,22 +146,7 @@ func observabilityConfigurationDataSource(ctx context.Context) (datasource.DataS
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of metadata items that you can associate with your observability configuration resource. A tag is a key-value pair.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute31f20ac03140c5318b84a022(),
 		// Property: TraceConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -127,17 +167,7 @@ func observabilityConfigurationDataSource(ctx context.Context) (datasource.DataS
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"trace_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Vendor
-				"vendor": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The implementation provider chosen for tracing App Runner services.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration of the tracing feature within this observability configuration. If you don't specify it, App Runner doesn't enable tracing.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"trace_configuration": schemaAttribute9c3c0f8faa31bdaf253b172d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

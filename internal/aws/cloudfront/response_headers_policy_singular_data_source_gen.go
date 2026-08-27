@@ -15,6 +15,487 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute07f079aac60c8169fb7790af() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FrameOption
+			"frame_option": schemaAttributee9a3ec4157caccbbc7b539bb(),
+			// Property: Override
+			"override": schemaAttribute68abaeee712388f2d2afaff0(),
+		}, /*END SCHEMA*/
+		Description: "Determines whether CloudFront includes the ``X-Frame-Options`` HTTP response header and the header's value.\n For more information about the ``X-Frame-Options`` HTTP response header, see [X-Frame-Options](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) in the MDN Web Docs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0b18584d86e98b554da7a4d8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContentSecurityPolicy
+			"content_security_policy": schemaAttribute9d7079763392257f3bd7d5e6(),
+			// Property: ContentTypeOptions
+			"content_type_options": schemaAttribute1cc191809bbc37792e0a27f1(),
+			// Property: FrameOptions
+			"frame_options": schemaAttribute07f079aac60c8169fb7790af(),
+			// Property: ReferrerPolicy
+			"referrer_policy": schemaAttributef148f388615c5d9bbc3c3c3c(),
+			// Property: StrictTransportSecurity
+			"strict_transport_security": schemaAttribute826b2193b6b464e19ef5b8a1(),
+			// Property: XSSProtection
+			"xss_protection": schemaAttribute6a1e55911fe8a85f8f945922(),
+		}, /*END SCHEMA*/
+		Description: "A configuration for a set of security-related HTTP response headers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0c13396981b807f87c475a6f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Items
+			"items": schemaAttribute8a5000172e3f80e78802cefd(),
+		}, /*END SCHEMA*/
+		Description: "A configuration for a set of custom HTTP response headers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1cc191809bbc37792e0a27f1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Override
+			"override": schemaAttribute5540de0cc19c993ec80d35f6(),
+		}, /*END SCHEMA*/
+		Description: "Determines whether CloudFront includes the ``X-Content-Type-Options`` HTTP response header with its value set to ``nosniff``.\n For more information about the ``X-Content-Type-Options`` HTTP response header, see [X-Content-Type-Options](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options) in the MDN Web Docs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2041423453bb52dfa5bc9660() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "A number that CloudFront uses as the value for the ``max-age`` directive in the ``Strict-Transport-Security`` HTTP response header.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2650cacc2910b07b745978cb() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean that determines whether CloudFront overrides the ``Referrer-Policy`` HTTP response header received from the origin with the one specified in this response headers policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute280f952df5b78d551cf2c82d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Items
+			"items": schemaAttributef43e98d8e931daca2ffac5dc(),
+		}, /*END SCHEMA*/
+		Description: "A list of origins (domain names) that CloudFront can use as the value for the ``Access-Control-Allow-Origin`` HTTP response header.\n For more information about the ``Access-Control-Allow-Origin`` HTTP response header, see [Access-Control-Allow-Origin](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin) in the MDN Web Docs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2829293cb796ffa2e03cc6f7() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean that determines whether CloudFront includes the ``preload`` directive in the ``Strict-Transport-Security`` HTTP response header.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute303161453a1eaccc753ff8bf() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of HTTP headers. You can specify ``*`` to expose all headers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c48ba365b760422409513b1() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "A number that CloudFront uses as the value for the ``Access-Control-Max-Age`` HTTP response header.\n For more information about the ``Access-Control-Max-Age`` HTTP response header, see [Access-Control-Max-Age](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Max-Age) in the MDN Web Docs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3cb63450907caf49924332a7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccessControlAllowCredentials
+			"access_control_allow_credentials": schemaAttributef0cce9c1a4c6997d265a3a5b(),
+			// Property: AccessControlAllowHeaders
+			"access_control_allow_headers": schemaAttributedbdca64735a13a289dde58f5(),
+			// Property: AccessControlAllowMethods
+			"access_control_allow_methods": schemaAttributea95742d20898a1036e42cecc(),
+			// Property: AccessControlAllowOrigins
+			"access_control_allow_origins": schemaAttribute280f952df5b78d551cf2c82d(),
+			// Property: AccessControlExposeHeaders
+			"access_control_expose_headers": schemaAttributeaf617ce7a1e546a435002cda(),
+			// Property: AccessControlMaxAgeSec
+			"access_control_max_age_sec": schemaAttribute3c48ba365b760422409513b1(),
+			// Property: OriginOverride
+			"origin_override": schemaAttribute6cffd8e499883f02618eb8a7(),
+		}, /*END SCHEMA*/
+		Description: "A configuration for a set of HTTP response headers that are used for cross-origin resource sharing (CORS).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54b9d37a0cff4961722268da() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The policy directives and their values that CloudFront includes as values for the ``Content-Security-Policy`` HTTP response header.\n For more information about the ``Content-Security-Policy`` HTTP response header, see [Content-Security-Policy](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) in the MDN Web Docs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5540de0cc19c993ec80d35f6() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean that determines whether CloudFront overrides the ``X-Content-Type-Options`` HTTP response header received from the origin with the one specified in this response headers policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5761e82de7c7b339d07dc0e5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the HTTP response header.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute68abaeee712388f2d2afaff0() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean that determines whether CloudFront overrides the ``X-Frame-Options`` HTTP response header received from the origin with the one specified in this response headers policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute699824aac3c97be8fdf8cec7() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "A number 0?100 (inclusive) that specifies the percentage of responses that you want CloudFront to add the ``Server-Timing`` header to. When you set the sampling rate to 100, CloudFront adds the ``Server-Timing`` header to the HTTP response for every request that matches the cache behavior that this response headers policy is attached to. When you set it to 50, CloudFront adds the header to 50% of the responses for requests that match the cache behavior. You can set the sampling rate to any number 0?100 with up to four decimal places.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a1e55911fe8a85f8f945922() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ModeBlock
+			"mode_block": schemaAttributec4c43955a2bb55986a4a333b(),
+			// Property: Override
+			"override": schemaAttributeaa3038be39b95da4ad6d3d13(),
+			// Property: Protection
+			"protection": schemaAttribute8013b23547cfc8b8d3728238(),
+			// Property: ReportUri
+			"report_uri": schemaAttributed4fb6c5cafd388e573fe7b4b(),
+		}, /*END SCHEMA*/
+		Description: "Determines whether CloudFront includes the ``X-XSS-Protection`` HTTP response header and the header's value.\n For more information about the ``X-XSS-Protection`` HTTP response header, see [X-XSS-Protection](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in the MDN Web Docs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6cffd8e499883f02618eb8a7() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean that determines whether CloudFront overrides HTTP response headers received from the origin with the ones specified in this response headers policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d79a622470b10fb8b6b92b0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Comment
+			"comment": schemaAttribute997de65c2c1d166888f3b56e(),
+			// Property: CorsConfig
+			"cors_config": schemaAttribute3cb63450907caf49924332a7(),
+			// Property: CustomHeadersConfig
+			"custom_headers_config": schemaAttribute0c13396981b807f87c475a6f(),
+			// Property: Name
+			"name": schemaAttributee79e2c50892d4d155eac010b(),
+			// Property: RemoveHeadersConfig
+			"remove_headers_config": schemaAttributea9f15a68b4e26d722fa5e438(),
+			// Property: SecurityHeadersConfig
+			"security_headers_config": schemaAttribute0b18584d86e98b554da7a4d8(),
+			// Property: ServerTimingHeadersConfig
+			"server_timing_headers_config": schemaAttribute72cf2b8a1a38e57c0d749ba0(),
+		}, /*END SCHEMA*/
+		Description: "A response headers policy configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72cf2b8a1a38e57c0d749ba0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Enabled
+			"enabled": schemaAttributed3a2508cca8550c53964f6c9(),
+			// Property: SamplingRate
+			"sampling_rate": schemaAttribute699824aac3c97be8fdf8cec7(),
+		}, /*END SCHEMA*/
+		Description: "A configuration for enabling the ``Server-Timing`` header in HTTP responses sent from CloudFront.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76f6a53eac62854c0a3d2b7e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8013b23547cfc8b8d3728238() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean that determines the value of the ``X-XSS-Protection`` HTTP response header. When this setting is ``true``, the value of the ``X-XSS-Protection`` header is ``1``. When this setting is ``false``, the value of the ``X-XSS-Protection`` header is ``0``.\n For more information about these settings, see [X-XSS-Protection](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in the MDN Web Docs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute826b2193b6b464e19ef5b8a1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccessControlMaxAgeSec
+			"access_control_max_age_sec": schemaAttribute2041423453bb52dfa5bc9660(),
+			// Property: IncludeSubdomains
+			"include_subdomains": schemaAttributea36434a5702149055fd11a76(),
+			// Property: Override
+			"override": schemaAttributec793c3fefe4a5c39d73d118c(),
+			// Property: Preload
+			"preload": schemaAttribute2829293cb796ffa2e03cc6f7(),
+		}, /*END SCHEMA*/
+		Description: "Determines whether CloudFront includes the ``Strict-Transport-Security`` HTTP response header and the header's value.\n For more information about the ``Strict-Transport-Security`` HTTP response header, see [Security headers](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/understanding-response-headers-policies.html#understanding-response-headers-policies-security) in the *Amazon CloudFront Developer Guide* and [Strict-Transport-Security](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security) in the MDN Web Docs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a5000172e3f80e78802cefd() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Header
+				"header": schemaAttributee08a2d9938fbdaebd16ab54f(),
+				// Property: Override
+				"override": schemaAttributee91499d568ba91f92637b2e1(),
+				// Property: Value
+				"value": schemaAttribute5761e82de7c7b339d07dc0e5(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of HTTP response headers and their values.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c12037d1caa29320dac1d27() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of HTTP methods. Valid values are:\n  +   ``GET`` \n  +   ``DELETE`` \n  +   ``HEAD`` \n  +   ``OPTIONS`` \n  +   ``PATCH`` \n  +   ``POST`` \n  +   ``PUT`` \n  +   ``ALL`` \n  \n ``ALL`` is a special value that includes all of the listed HTTP methods.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute997de65c2c1d166888f3b56e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A comment to describe the response headers policy.\n The comment cannot be longer than 128 characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d7079763392257f3bd7d5e6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContentSecurityPolicy
+			"content_security_policy": schemaAttribute54b9d37a0cff4961722268da(),
+			// Property: Override
+			"override": schemaAttributec497ec617de7cf7bbf8c45b1(),
+		}, /*END SCHEMA*/
+		Description: "The policy directives and their values that CloudFront includes as values for the ``Content-Security-Policy`` HTTP response header.\n For more information about the ``Content-Security-Policy`` HTTP response header, see [Content-Security-Policy](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) in the MDN Web Docs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea36434a5702149055fd11a76() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean that determines whether CloudFront includes the ``includeSubDomains`` directive in the ``Strict-Transport-Security`` HTTP response header.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea72548e4c8293900e531ddc1() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of HTTP header names. You can specify ``*`` to allow all headers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea95742d20898a1036e42cecc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Items
+			"items": schemaAttribute8c12037d1caa29320dac1d27(),
+		}, /*END SCHEMA*/
+		Description: "A list of HTTP methods that CloudFront includes as values for the ``Access-Control-Allow-Methods`` HTTP response header.\n For more information about the ``Access-Control-Allow-Methods`` HTTP response header, see [Access-Control-Allow-Methods](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods) in the MDN Web Docs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9f15a68b4e26d722fa5e438() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Items
+			"items": schemaAttributec8d1a288ecb685bf70dd33c6(),
+		}, /*END SCHEMA*/
+		Description: "A configuration for a set of HTTP headers to remove from the HTTP response.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa3038be39b95da4ad6d3d13() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean that determines whether CloudFront overrides the ``X-XSS-Protection`` HTTP response header received from the origin with the one specified in this response headers policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf617ce7a1e546a435002cda() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Items
+			"items": schemaAttribute303161453a1eaccc753ff8bf(),
+		}, /*END SCHEMA*/
+		Description: "A list of HTTP headers that CloudFront includes as values for the ``Access-Control-Expose-Headers`` HTTP response header.\n For more information about the ``Access-Control-Expose-Headers`` HTTP response header, see [Access-Control-Expose-Headers](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers) in the MDN Web Docs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec497ec617de7cf7bbf8c45b1() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean that determines whether CloudFront overrides the ``Content-Security-Policy`` HTTP response header received from the origin with the one specified in this response headers policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4c43955a2bb55986a4a333b() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean that determines whether CloudFront includes the ``mode=block`` directive in the ``X-XSS-Protection`` header.\n For more information about this directive, see [X-XSS-Protection](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in the MDN Web Docs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5bfc10d95470bfcb54c2111() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Determines whether CloudFront includes the ``Referrer-Policy`` HTTP response header and the header's value.\n For more information about the ``Referrer-Policy`` HTTP response header, see [Referrer-Policy](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy) in the MDN Web Docs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec793c3fefe4a5c39d73d118c() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean that determines whether CloudFront overrides the ``Strict-Transport-Security`` HTTP response header received from the origin with the one specified in this response headers policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8d1a288ecb685bf70dd33c6() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Header
+				"header": schemaAttributeff2ab746840796cb9319b33f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of HTTP header names.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3a2508cca8550c53964f6c9() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean that determines whether CloudFront adds the ``Server-Timing`` header to HTTP responses that it sends in response to requests that match a cache behavior that's associated with this response headers policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4fb6c5cafd388e573fe7b4b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A reporting URI, which CloudFront uses as the value of the ``report`` directive in the ``X-XSS-Protection`` header.\n You cannot specify a ``ReportUri`` when ``ModeBlock`` is ``true``.\n For more information about using a reporting URL, see [X-XSS-Protection](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in the MDN Web Docs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedbdca64735a13a289dde58f5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Items
+			"items": schemaAttributea72548e4c8293900e531ddc1(),
+		}, /*END SCHEMA*/
+		Description: "A list of HTTP header names that CloudFront includes as values for the ``Access-Control-Allow-Headers`` HTTP response header.\n For more information about the ``Access-Control-Allow-Headers`` HTTP response header, see [Access-Control-Allow-Headers](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers) in the MDN Web Docs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee08a2d9938fbdaebd16ab54f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The HTTP response header name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee79e2c50892d4d155eac010b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name to identify the response headers policy.\n The name must be unique for response headers policies in this AWS-account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee91499d568ba91f92637b2e1() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean that determines whether CloudFront overrides a response header with the same name received from the origin with the header specified here.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9a3ec4157caccbbc7b539bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the ``X-Frame-Options`` HTTP response header. Valid values are ``DENY`` and ``SAMEORIGIN``.\n For more information about these values, see [X-Frame-Options](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) in the MDN Web Docs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0cce9c1a4c6997d265a3a5b() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean that CloudFront uses as the value for the ``Access-Control-Allow-Credentials`` HTTP response header.\n For more information about the ``Access-Control-Allow-Credentials`` HTTP response header, see [Access-Control-Allow-Credentials](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials) in the MDN Web Docs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef148f388615c5d9bbc3c3c3c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Override
+			"override": schemaAttribute2650cacc2910b07b745978cb(),
+			// Property: ReferrerPolicy
+			"referrer_policy": schemaAttributec5bfc10d95470bfcb54c2111(),
+		}, /*END SCHEMA*/
+		Description: "Determines whether CloudFront includes the ``Referrer-Policy`` HTTP response header and the header's value.\n For more information about the ``Referrer-Policy`` HTTP response header, see [Referrer-Policy](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy) in the MDN Web Docs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef43e98d8e931daca2ffac5dc() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of origins (domain names). You can specify ``*`` to allow all origins.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff2ab746840796cb9319b33f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The HTTP header name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudfront_response_headers_policy", responseHeadersPolicyDataSource)
 }
@@ -30,10 +511,7 @@ func responseHeadersPolicyDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"response_headers_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"response_headers_policy_id": schemaAttribute76f6a53eac62854c0a3d2b7e(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +519,7 @@ func responseHeadersPolicyDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttribute76f6a53eac62854c0a3d2b7e(),
 		// Property: ResponseHeadersPolicyConfig
 		// CloudFormation resource type schema:
 		//
@@ -388,289 +863,7 @@ func responseHeadersPolicyDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"response_headers_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Comment
-				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A comment to describe the response headers policy.\n The comment cannot be longer than 128 characters.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CorsConfig
-				"cors_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AccessControlAllowCredentials
-						"access_control_allow_credentials": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "A Boolean that CloudFront uses as the value for the ``Access-Control-Allow-Credentials`` HTTP response header.\n For more information about the ``Access-Control-Allow-Credentials`` HTTP response header, see [Access-Control-Allow-Credentials](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials) in the MDN Web Docs.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AccessControlAllowHeaders
-						"access_control_allow_headers": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Items
-								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "The list of HTTP header names. You can specify ``*`` to allow all headers.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "A list of HTTP header names that CloudFront includes as values for the ``Access-Control-Allow-Headers`` HTTP response header.\n For more information about the ``Access-Control-Allow-Headers`` HTTP response header, see [Access-Control-Allow-Headers](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers) in the MDN Web Docs.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AccessControlAllowMethods
-						"access_control_allow_methods": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Items
-								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "The list of HTTP methods. Valid values are:\n  +   ``GET`` \n  +   ``DELETE`` \n  +   ``HEAD`` \n  +   ``OPTIONS`` \n  +   ``PATCH`` \n  +   ``POST`` \n  +   ``PUT`` \n  +   ``ALL`` \n  \n ``ALL`` is a special value that includes all of the listed HTTP methods.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "A list of HTTP methods that CloudFront includes as values for the ``Access-Control-Allow-Methods`` HTTP response header.\n For more information about the ``Access-Control-Allow-Methods`` HTTP response header, see [Access-Control-Allow-Methods](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods) in the MDN Web Docs.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AccessControlAllowOrigins
-						"access_control_allow_origins": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Items
-								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "The list of origins (domain names). You can specify ``*`` to allow all origins.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "A list of origins (domain names) that CloudFront can use as the value for the ``Access-Control-Allow-Origin`` HTTP response header.\n For more information about the ``Access-Control-Allow-Origin`` HTTP response header, see [Access-Control-Allow-Origin](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin) in the MDN Web Docs.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AccessControlExposeHeaders
-						"access_control_expose_headers": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Items
-								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "The list of HTTP headers. You can specify ``*`` to expose all headers.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "A list of HTTP headers that CloudFront includes as values for the ``Access-Control-Expose-Headers`` HTTP response header.\n For more information about the ``Access-Control-Expose-Headers`` HTTP response header, see [Access-Control-Expose-Headers](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers) in the MDN Web Docs.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AccessControlMaxAgeSec
-						"access_control_max_age_sec": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "A number that CloudFront uses as the value for the ``Access-Control-Max-Age`` HTTP response header.\n For more information about the ``Access-Control-Max-Age`` HTTP response header, see [Access-Control-Max-Age](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Max-Age) in the MDN Web Docs.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: OriginOverride
-						"origin_override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "A Boolean that determines whether CloudFront overrides HTTP response headers received from the origin with the ones specified in this response headers policy.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A configuration for a set of HTTP response headers that are used for cross-origin resource sharing (CORS).",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CustomHeadersConfig
-				"custom_headers_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Items
-						"items": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Header
-									"header": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The HTTP response header name.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Override
-									"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Description: "A Boolean that determines whether CloudFront overrides a response header with the same name received from the origin with the header specified here.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The value for the HTTP response header.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "The list of HTTP response headers and their values.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A configuration for a set of custom HTTP response headers.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A name to identify the response headers policy.\n The name must be unique for response headers policies in this AWS-account.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RemoveHeadersConfig
-				"remove_headers_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Items
-						"items": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Header
-									"header": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The HTTP header name.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "The list of HTTP header names.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A configuration for a set of HTTP headers to remove from the HTTP response.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecurityHeadersConfig
-				"security_headers_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ContentSecurityPolicy
-						"content_security_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContentSecurityPolicy
-								"content_security_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The policy directives and their values that CloudFront includes as values for the ``Content-Security-Policy`` HTTP response header.\n For more information about the ``Content-Security-Policy`` HTTP response header, see [Content-Security-Policy](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) in the MDN Web Docs.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Override
-								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "A Boolean that determines whether CloudFront overrides the ``Content-Security-Policy`` HTTP response header received from the origin with the one specified in this response headers policy.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The policy directives and their values that CloudFront includes as values for the ``Content-Security-Policy`` HTTP response header.\n For more information about the ``Content-Security-Policy`` HTTP response header, see [Content-Security-Policy](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) in the MDN Web Docs.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ContentTypeOptions
-						"content_type_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Override
-								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "A Boolean that determines whether CloudFront overrides the ``X-Content-Type-Options`` HTTP response header received from the origin with the one specified in this response headers policy.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Determines whether CloudFront includes the ``X-Content-Type-Options`` HTTP response header with its value set to ``nosniff``.\n For more information about the ``X-Content-Type-Options`` HTTP response header, see [X-Content-Type-Options](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options) in the MDN Web Docs.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: FrameOptions
-						"frame_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: FrameOption
-								"frame_option": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The value of the ``X-Frame-Options`` HTTP response header. Valid values are ``DENY`` and ``SAMEORIGIN``.\n For more information about these values, see [X-Frame-Options](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) in the MDN Web Docs.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Override
-								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "A Boolean that determines whether CloudFront overrides the ``X-Frame-Options`` HTTP response header received from the origin with the one specified in this response headers policy.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Determines whether CloudFront includes the ``X-Frame-Options`` HTTP response header and the header's value.\n For more information about the ``X-Frame-Options`` HTTP response header, see [X-Frame-Options](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) in the MDN Web Docs.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ReferrerPolicy
-						"referrer_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Override
-								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "A Boolean that determines whether CloudFront overrides the ``Referrer-Policy`` HTTP response header received from the origin with the one specified in this response headers policy.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ReferrerPolicy
-								"referrer_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Determines whether CloudFront includes the ``Referrer-Policy`` HTTP response header and the header's value.\n For more information about the ``Referrer-Policy`` HTTP response header, see [Referrer-Policy](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy) in the MDN Web Docs.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Determines whether CloudFront includes the ``Referrer-Policy`` HTTP response header and the header's value.\n For more information about the ``Referrer-Policy`` HTTP response header, see [Referrer-Policy](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy) in the MDN Web Docs.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: StrictTransportSecurity
-						"strict_transport_security": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AccessControlMaxAgeSec
-								"access_control_max_age_sec": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "A number that CloudFront uses as the value for the ``max-age`` directive in the ``Strict-Transport-Security`` HTTP response header.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: IncludeSubdomains
-								"include_subdomains": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "A Boolean that determines whether CloudFront includes the ``includeSubDomains`` directive in the ``Strict-Transport-Security`` HTTP response header.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Override
-								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "A Boolean that determines whether CloudFront overrides the ``Strict-Transport-Security`` HTTP response header received from the origin with the one specified in this response headers policy.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Preload
-								"preload": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "A Boolean that determines whether CloudFront includes the ``preload`` directive in the ``Strict-Transport-Security`` HTTP response header.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Determines whether CloudFront includes the ``Strict-Transport-Security`` HTTP response header and the header's value.\n For more information about the ``Strict-Transport-Security`` HTTP response header, see [Security headers](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/understanding-response-headers-policies.html#understanding-response-headers-policies-security) in the *Amazon CloudFront Developer Guide* and [Strict-Transport-Security](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security) in the MDN Web Docs.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: XSSProtection
-						"xss_protection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ModeBlock
-								"mode_block": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "A Boolean that determines whether CloudFront includes the ``mode=block`` directive in the ``X-XSS-Protection`` header.\n For more information about this directive, see [X-XSS-Protection](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in the MDN Web Docs.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Override
-								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "A Boolean that determines whether CloudFront overrides the ``X-XSS-Protection`` HTTP response header received from the origin with the one specified in this response headers policy.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Protection
-								"protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "A Boolean that determines the value of the ``X-XSS-Protection`` HTTP response header. When this setting is ``true``, the value of the ``X-XSS-Protection`` header is ``1``. When this setting is ``false``, the value of the ``X-XSS-Protection`` header is ``0``.\n For more information about these settings, see [X-XSS-Protection](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in the MDN Web Docs.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ReportUri
-								"report_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A reporting URI, which CloudFront uses as the value of the ``report`` directive in the ``X-XSS-Protection`` header.\n You cannot specify a ``ReportUri`` when ``ModeBlock`` is ``true``.\n For more information about using a reporting URL, see [X-XSS-Protection](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in the MDN Web Docs.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Determines whether CloudFront includes the ``X-XSS-Protection`` HTTP response header and the header's value.\n For more information about the ``X-XSS-Protection`` HTTP response header, see [X-XSS-Protection](https://docs.aws.amazon.com/https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection) in the MDN Web Docs.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A configuration for a set of security-related HTTP response headers.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServerTimingHeadersConfig
-				"server_timing_headers_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Enabled
-						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "A Boolean that determines whether CloudFront adds the ``Server-Timing`` header to HTTP responses that it sends in response to requests that match a cache behavior that's associated with this response headers policy.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SamplingRate
-						"sampling_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "A number 0?100 (inclusive) that specifies the percentage of responses that you want CloudFront to add the ``Server-Timing`` header to. When you set the sampling rate to 100, CloudFront adds the ``Server-Timing`` header to the HTTP response for every request that matches the cache behavior that this response headers policy is attached to. When you set it to 50, CloudFront adds the header to 50% of the responses for requests that match the cache behavior. You can set the sampling rate to any number 0?100 with up to four decimal places.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A configuration for enabling the ``Server-Timing`` header in HTTP responses sent from CloudFront.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A response headers policy configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"response_headers_policy_config": schemaAttribute6d79a622470b10fb8b6b92b0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

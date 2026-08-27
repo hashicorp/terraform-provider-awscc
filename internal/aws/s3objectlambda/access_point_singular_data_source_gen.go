@@ -15,6 +15,180 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0f48fb3e6394eb4ea64ba316() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the Object lambda Access Point Policy is Public or not. Object lambda Access Points are private by default.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute136ff876ec874b45b0435872() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date and time when the Object lambda Access Point was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1f04a0ca61f4ccabcb9a4e55() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BlockPublicAcls
+			"block_public_acls": schemaAttributeaa57ef1eac69c103f9eb932e(),
+			// Property: BlockPublicPolicy
+			"block_public_policy": schemaAttributebc52c6ac7f495c23877334aa(),
+			// Property: IgnorePublicAcls
+			"ignore_public_acls": schemaAttributee10b5f080a5c9ed2ea520354(),
+			// Property: RestrictPublicBuckets
+			"restrict_public_buckets": schemaAttribute8113bcd1c8da8b1c074b7e73(),
+		}, /*END SCHEMA*/
+		Description: "The PublicAccessBlock configuration that you want to apply to this Access Point. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status 'The Meaning of Public' in the Amazon Simple Storage Service Developer Guide.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3647143de30d4445b64042a6() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute605941ad85f9b80bff1bc57e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FunctionArn
+			"function_arn": schemaAttributea8d49dbe79e2d540c9309459(),
+			// Property: FunctionPayload
+			"function_payload": schemaAttributea8d49dbe79e2d540c9309459(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6081eb35f2a76844027cb544() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Actions
+				"actions": schemaAttributee30074016ebb95d1e0b555b0(),
+				// Property: ContentTransformation
+				"content_transformation": schemaAttributec8473ede33d1389869740cab(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66f9bc14c8552533840ce7d5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Status
+			"status": schemaAttribute7b6f2c63273e0fa988999aa9(),
+			// Property: Value
+			"value": schemaAttributebd8c15150a36982eef346646(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b6f2c63273e0fa988999aa9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the Object Lambda alias.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8113bcd1c8da8b1c074b7e73() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.\nEnabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute990383c48ada03308a787049() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name you want to assign to this Object lambda Access Point.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8d49dbe79e2d540c9309459() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa57ef1eac69c103f9eb932e() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether Amazon S3 should block public access control lists (ACLs) to this object lambda access point. Setting this element to TRUE causes the following behavior:\n- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.\n - PUT Object calls fail if the request includes a public ACL.\n. - PUT Bucket calls fail if the request includes a public ACL.\nEnabling this setting doesn't affect existing policies or ACLs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc52c6ac7f495c23877334aa() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. Enabling this setting doesn't affect existing bucket policies.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd8c15150a36982eef346646() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the Object Lambda alias.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8473ede33d1389869740cab() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AwsLambda
+			"aws_lambda": schemaAttribute605941ad85f9b80bff1bc57e(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee10b5f080a5c9ed2ea520354() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee30074016ebb95d1e0b555b0() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefe99387f399e18fa158f3f4d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IsPublic
+			"is_public": schemaAttribute0f48fb3e6394eb4ea64ba316(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeffe7268f5ba534e33b01f153() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AllowedFeatures
+			"allowed_features": schemaAttributee30074016ebb95d1e0b555b0(),
+			// Property: CloudWatchMetricsEnabled
+			"cloudwatch_metrics_enabled": schemaAttribute3647143de30d4445b64042a6(),
+			// Property: SupportingAccessPoint
+			"supporting_access_point": schemaAttributea8d49dbe79e2d540c9309459(),
+			// Property: TransformationConfigurations
+			"transformation_configurations": schemaAttribute6081eb35f2a76844027cb544(),
+		}, /*END SCHEMA*/
+		Description: "The Object lambda Access Point Configuration that configures transformations to be applied on the objects on specified S3 Actions",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_s3objectlambda_access_point", accessPointDataSource)
 }
@@ -45,21 +219,7 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"alias": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Status
-				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The status of the Object Lambda alias.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Value
-				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The value of the Object Lambda alias.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"alias": schemaAttribute66f9bc14c8552533840ce7d5(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -67,9 +227,7 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:[^:]+:s3-object-lambda:[^:]*:\\d{12}:accesspoint/.*",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributea8d49dbe79e2d540c9309459(),
 		// Property: CreationDate
 		// CloudFormation resource type schema:
 		//
@@ -77,10 +235,7 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The date and time when the Object lambda Access Point was created.",
 		//	  "type": "string"
 		//	}
-		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date and time when the Object lambda Access Point was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_date": schemaAttribute136ff876ec874b45b0435872(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -91,10 +246,7 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name you want to assign to this Object lambda Access Point.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute990383c48ada03308a787049(),
 		// Property: ObjectLambdaConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -171,58 +323,7 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"object_lambda_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllowedFeatures
-				"allowed_features": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CloudWatchMetricsEnabled
-				"cloudwatch_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SupportingAccessPoint
-				"supporting_access_point": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: TransformationConfigurations
-				"transformation_configurations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Actions
-							"actions": schema.SetAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ContentTransformation
-							"content_transformation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: AwsLambda
-									"aws_lambda": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: FunctionArn
-											"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: FunctionPayload
-											"function_payload": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The Object lambda Access Point Configuration that configures transformations to be applied on the objects on specified S3 Actions",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"object_lambda_configuration": schemaAttributeffe7268f5ba534e33b01f153(),
 		// Property: PolicyStatus
 		// CloudFormation resource type schema:
 		//
@@ -236,16 +337,7 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"policy_status": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IsPublic
-				"is_public": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether the Object lambda Access Point Policy is Public or not. Object lambda Access Points are private by default.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"policy_status": schemaAttributefe99387f399e18fa158f3f4d(),
 		// Property: PublicAccessBlockConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -272,32 +364,7 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"public_access_block_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BlockPublicAcls
-				"block_public_acls": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether Amazon S3 should block public access control lists (ACLs) to this object lambda access point. Setting this element to TRUE causes the following behavior:\n- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.\n - PUT Object calls fail if the request includes a public ACL.\n. - PUT Bucket calls fail if the request includes a public ACL.\nEnabling this setting doesn't affect existing policies or ACLs.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: BlockPublicPolicy
-				"block_public_policy": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether Amazon S3 should block public bucket policies for buckets in this account. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access. Enabling this setting doesn't affect existing bucket policies.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IgnorePublicAcls
-				"ignore_public_acls": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on buckets in this account and any objects that they contain. Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RestrictPublicBuckets
-				"restrict_public_buckets": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.\nEnabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The PublicAccessBlock configuration that you want to apply to this Access Point. You can enable the configuration options in any combination. For more information about when Amazon S3 considers a bucket or object public, see https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status 'The Meaning of Public' in the Amazon Simple Storage Service Developer Guide.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"public_access_block_configuration": schemaAttribute1f04a0ca61f4ccabcb9a4e55(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

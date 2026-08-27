@@ -14,6 +14,41 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute6b93430843a217ca20833174() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec18c9092c29f6286e87d5f15() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A message to be included in the email invitation sent to the invited account. Updating this field has no effect.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4eef3426254e2a847186fb5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The root email address for the account to be invited, for validation. Updating this field has no effect.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1d0d098b15287afa15e4524() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the graph to which the member account will be invited",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8211d7029332068bae8652c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS account ID to be invited to join the graph as a member",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_detective_member_invitation", memberInvitationDataSource)
 }
@@ -30,10 +65,7 @@ func memberInvitationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
 		//	  "type": "boolean"
 		//	}
-		"disable_email_notification": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"disable_email_notification": schemaAttribute6b93430843a217ca20833174(),
 		// Property: GraphArn
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +74,7 @@ func memberInvitationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "arn:aws(-[\\w]+)*:detective:(([a-z]+-)+[0-9]+):[0-9]{12}:graph:[0-9a-f]{32}",
 		//	  "type": "string"
 		//	}
-		"graph_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the graph to which the member account will be invited",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"graph_arn": schemaAttributee1d0d098b15287afa15e4524(),
 		// Property: MemberEmailAddress
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +83,7 @@ func memberInvitationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": ".*@.*",
 		//	  "type": "string"
 		//	}
-		"member_email_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The root email address for the account to be invited, for validation. Updating this field has no effect.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"member_email_address": schemaAttributec4eef3426254e2a847186fb5(),
 		// Property: MemberId
 		// CloudFormation resource type schema:
 		//
@@ -66,10 +92,7 @@ func memberInvitationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "[0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"member_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS account ID to be invited to join the graph as a member",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"member_id": schemaAttributee8211d7029332068bae8652c(),
 		// Property: Message
 		// CloudFormation resource type schema:
 		//
@@ -79,10 +102,7 @@ func memberInvitationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A message to be included in the email invitation sent to the invited account. Updating this field has no effect.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"message": schemaAttributec18c9092c29f6286e87d5f15(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

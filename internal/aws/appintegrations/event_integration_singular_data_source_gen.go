@@ -14,6 +14,81 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute382233cda02a4e4f1604e1c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the event integration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63e244a885136173bc2413a3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Source
+			"source": schemaAttribute9a6d4db86d3e627fcaa88c9c(),
+		}, /*END SCHEMA*/
+		Description: "The EventFilter (source) associated with the event integration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65a64dac77fcc90a226d0592() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributede4c3917a684db9aafd41122(),
+				// Property: Value
+				"value": schemaAttribute87af11757fb93f060a47db0b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags (keys and values) associated with the event integration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87af11757fb93f060a47db0b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Corresponding tag value for the key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a6d4db86d3e627fcaa88c9c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source of the events.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8086ec26e2a1ddaf07ca035() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the event integration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeccd0ea759e201ffb362fd94d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The event integration description.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecee67c0c2c29d579113f344d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Eventbridge bus for the event integration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede4c3917a684db9aafd41122() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A key to identify the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_appintegrations_event_integration", eventIntegrationDataSource)
 }
@@ -31,10 +106,7 @@ func eventIntegrationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The event integration description.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeccd0ea759e201ffb362fd94d(),
 		// Property: EventBridgeBus
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +117,7 @@ func eventIntegrationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
 		//	  "type": "string"
 		//	}
-		"event_bridge_bus": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Eventbridge bus for the event integration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"event_bridge_bus": schemaAttributecee67c0c2c29d579113f344d(),
 		// Property: EventFilter
 		// CloudFormation resource type schema:
 		//
@@ -69,17 +138,7 @@ func eventIntegrationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"event_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Source
-				"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The source of the events.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The EventFilter (source) associated with the event integration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"event_filter": schemaAttribute63e244a885136173bc2413a3(),
 		// Property: EventIntegrationArn
 		// CloudFormation resource type schema:
 		//
@@ -90,10 +149,7 @@ func eventIntegrationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"event_integration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the event integration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"event_integration_arn": schemaAttribute382233cda02a4e4f1604e1c4(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -104,10 +160,7 @@ func eventIntegrationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the event integration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributeb8086ec26e2a1ddaf07ca035(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -140,24 +193,7 @@ func eventIntegrationDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A key to identify the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Corresponding tag value for the key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags (keys and values) associated with the event integration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute65a64dac77fcc90a226d0592(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

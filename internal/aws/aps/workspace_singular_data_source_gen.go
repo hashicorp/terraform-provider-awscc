@@ -14,6 +14,257 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute048b1888facca8b80a93e7cb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1831a3a296dd5397e36e5f57() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "AMP Workspace prometheus endpoint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d2285cae418c908f40d0178() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Value of the label",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1f5123b2e80907e9b1d8edd1() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute20042b6c11721d5fb22eb9a7(),
+				// Property: Value
+				"value": schemaAttribute1d2285cae418c908f40d0178(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of series labels",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20042b6c11721d5fb22eb9a7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the label",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute239e268158eca62501b88ba7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "KMS Key ARN used to encrypt and decrypt AMP workspace data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute293a3e1f9bcb93a25d151f1b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Workspace arn.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ce117f3c07a266940dcb28c() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LabelSet
+				"label_set": schemaAttribute1f5123b2e80907e9b1d8edd1(),
+				// Property: Limits
+				"limits": schemaAttributecb423356a4d6e970f7e63abc(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of label set and associated limits",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3914322d16eaa9add1a6ac1e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The time window in seconds for accepting out-of-order samples",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3aea707bd2937c774e71d79c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Required to identify a specific APS Workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41a384bfd1c04407e9355e94() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Query logs with QSP above this limit are vended",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5048b53974902d8e921d75cc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LimitsPerLabelSets
+			"limits_per_label_sets": schemaAttribute2ce117f3c07a266940dcb28c(),
+			// Property: OutOfOrderTimeWindowInSeconds
+			"out_of_order_time_window_in_seconds": schemaAttribute3914322d16eaa9add1a6ac1e(),
+			// Property: RetentionPeriodInDays
+			"retention_period_in_days": schemaAttribute7df7f9e869cd70b1b49a0f84(),
+			// Property: RuleQueryOffsetInSeconds
+			"rule_query_offset_in_seconds": schemaAttribute5228538c33b0ef5b939169f5(),
+		}, /*END SCHEMA*/
+		Description: "Workspace configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5228538c33b0ef5b939169f5() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Duration in seconds to offset rule evaluation queries into the past",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute577b7a3be7c5ff3242077614() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the CloudWatch Logs log group",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute717db425b48d28bd65c89b2f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Destinations
+			"destinations": schemaAttributeae8fcfd517730db9d1778d51(),
+		}, /*END SCHEMA*/
+		Description: "Query logging configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute723c892494b99bd10a3961b0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7df7f9e869cd70b1b49a0f84() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "How many days that metrics are retained in the workspace",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8168998edba8ceb90165e949() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "CloudWatch log group ARN",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute883c3084d6d8f32646989727() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of active series that can be ingested for this label set",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae8fcfd517730db9d1778d51() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CloudWatchLogs
+				"cloudwatch_logs": schemaAttributefca67ea518cc65cc5f023a4b(),
+				// Property: Filters
+				"filters": schemaAttributec5180ba22cc4fd37093152ab(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The destinations configuration for query logging",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebcea196cd0dbb6ed00931910() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AMP Workspace alert manager definition data",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5180ba22cc4fd37093152ab() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: QspThreshold
+			"qsp_threshold": schemaAttribute41a384bfd1c04407e9355e94(),
+		}, /*END SCHEMA*/
+		Description: "Filters for logging",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb423356a4d6e970f7e63abc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxSeries
+			"max_series": schemaAttribute883c3084d6d8f32646989727(),
+		}, /*END SCHEMA*/
+		Description: "Limits that can be applied to a label set",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6aa1645443c42cb0d60b0e4() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute723c892494b99bd10a3961b0(),
+				// Property: Value
+				"value": schemaAttribute048b1888facca8b80a93e7cb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef29e5e4a57f703422047b8e5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogGroupArn
+			"log_group_arn": schemaAttribute8168998edba8ceb90165e949(),
+		}, /*END SCHEMA*/
+		Description: "Logging configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa523abf56227889e2a62818() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "AMP Workspace alias.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefca67ea518cc65cc5f023a4b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogGroupArn
+			"log_group_arn": schemaAttribute577b7a3be7c5ff3242077614(),
+		}, /*END SCHEMA*/
+		Description: "Represents a cloudwatch logs destination for query logging",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_aps_workspace", workspaceDataSource)
 }
@@ -29,10 +280,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AMP Workspace alert manager definition data",
 		//	  "type": "string"
 		//	}
-		"alert_manager_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AMP Workspace alert manager definition data",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"alert_manager_definition": schemaAttributebcea196cd0dbb6ed00931910(),
 		// Property: Alias
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +290,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "AMP Workspace alias.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"alias": schemaAttributefa523abf56227889e2a62818(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +301,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):aps:[a-z0-9-]+:[0-9]+:workspace/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Workspace arn.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute293a3e1f9bcb93a25d151f1b(),
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +312,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z]*:kms:[-a-z0-9]+:[0-9]{12}:key/.+$",
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "KMS Key ARN used to encrypt and decrypt AMP workspace data.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttribute239e268158eca62501b88ba7(),
 		// Property: LoggingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -90,17 +329,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LogGroupArn
-				"log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "CloudWatch log group ARN",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Logging configuration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"logging_configuration": schemaAttributef29e5e4a57f703422047b8e5(),
 		// Property: PrometheusEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -108,10 +337,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "AMP Workspace prometheus endpoint",
 		//	  "type": "string"
 		//	}
-		"prometheus_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "AMP Workspace prometheus endpoint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"prometheus_endpoint": schemaAttribute1831a3a296dd5397e36e5f57(),
 		// Property: QueryLoggingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -173,45 +399,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"query_logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Destinations
-				"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: CloudWatchLogs
-							"cloudwatch_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: LogGroupArn
-									"log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The ARN of the CloudWatch Logs log group",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Represents a cloudwatch logs destination for query logging",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Filters
-							"filters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: QspThreshold
-									"qsp_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "Query logs with QSP above this limit are vended",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Filters for logging",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The destinations configuration for query logging",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Query logging configuration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"query_logging_configuration": schemaAttribute717db425b48d28bd65c89b2f(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -244,24 +432,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributed6aa1645443c42cb0d60b0e4(),
 		// Property: WorkspaceConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -346,67 +517,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"workspace_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LimitsPerLabelSets
-				"limits_per_label_sets": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: LabelSet
-							"label_set": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Name
-										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Name of the label",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Value
-										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Value of the label",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "An array of series labels",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Limits
-							"limits": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: MaxSeries
-									"max_series": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "The maximum number of active series that can be ingested for this label set",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Limits that can be applied to a label set",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "An array of label set and associated limits",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: OutOfOrderTimeWindowInSeconds
-				"out_of_order_time_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The time window in seconds for accepting out-of-order samples",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RetentionPeriodInDays
-				"retention_period_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "How many days that metrics are retained in the workspace",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RuleQueryOffsetInSeconds
-				"rule_query_offset_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Duration in seconds to offset rule evaluation queries into the past",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Workspace configuration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"workspace_configuration": schemaAttribute5048b53974902d8e921d75cc(),
 		// Property: WorkspaceId
 		// CloudFormation resource type schema:
 		//
@@ -417,10 +528,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{1,99}$",
 		//	  "type": "string"
 		//	}
-		"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Required to identify a specific APS Workspace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"workspace_id": schemaAttribute3aea707bd2937c774e71d79c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,34 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute7e9539c4043852623aaa7973() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c4dc4b73fe31d3aab7c87b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, or EVENT_TYPE.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba1c2ca800f935fc114e37b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The log level for a specific target. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5212fbba48e34e6b1de3dfa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The target name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iot_resource_specific_logging", resourceSpecificLoggingDataSource)
 }
@@ -36,10 +64,7 @@ func resourceSpecificLoggingDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The log level for a specific target. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"log_level": schemaAttributeba1c2ca800f935fc114e37b5(),
 		// Property: TargetId
 		// CloudFormation resource type schema:
 		//
@@ -50,10 +75,7 @@ func resourceSpecificLoggingDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "[a-zA-Z0-9.:\\s_\\-]+",
 		//	  "type": "string"
 		//	}
-		"target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_id": schemaAttribute7e9539c4043852623aaa7973(),
 		// Property: TargetName
 		// CloudFormation resource type schema:
 		//
@@ -64,10 +86,7 @@ func resourceSpecificLoggingDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "[a-zA-Z0-9.:\\s_\\-]+",
 		//	  "type": "string"
 		//	}
-		"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The target name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_name": schemaAttributed5212fbba48e34e6b1de3dfa(),
 		// Property: TargetType
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +101,7 @@ func resourceSpecificLoggingDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, or EVENT_TYPE.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_type": schemaAttribute9c4dc4b73fe31d3aab7c87b5(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

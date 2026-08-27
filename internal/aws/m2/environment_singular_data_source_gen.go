@@ -15,6 +15,180 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute148b3441e608f5c38dd57e7a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID or the Amazon Resource Name (ARN) of the customer managed KMS Key used for encrypting environment-related resources.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a80284a97340364c27f268a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The unique identifiers of the subnets assigned to this runtime environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1cf2edb5fefe09f8092f747a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FileSystemId
+			"file_system_id": schemaAttribute62c2ac9be7c75aec8cd42243(),
+			// Property: MountPoint
+			"mount_point": schemaAttributecff4ce654b918b147d44a3d2(),
+		}, /*END SCHEMA*/
+		Description: "Defines the storage configuration for an Amazon EFS file system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20d502b1b1e6090471e292ab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the runtime environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26f344ec626e0499448202bf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the runtime engine for the environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute322fbb88bd646d2087bc64f5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The target platform for the environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3be58858acc8a7e77908771e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ecd5898e2b4fa92d123a565() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Configures a desired maintenance window for the environment. If you do not provide a value, a random system-generated value will be assigned.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45538e740bf7768fe90526e6() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the environment is publicly accessible.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57d1268d418ca68273b330eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of instance underlying the environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60518c6fdbbf0a6526a8d2cd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62c2ac9be7c75aec8cd42243() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The file system identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute688384580ec8c7e46f9f4652() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6afda01c45ef6239c07d26a5() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of security groups for the VPC associated with this environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e46d3a5d7494755b7b0d111() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DesiredCapacity
+			"desired_capacity": schemaAttribute952c09e17b1cb5616a42db85(),
+		}, /*END SCHEMA*/
+		Description: "Defines the details of a high availability configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7fa5b09f045d85c418910be5() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Efs
+				"efs": schemaAttribute1cf2edb5fefe09f8092f747a(),
+				// Property: Fsx
+				"fsx": schemaAttributef2015903434ef06427906a49(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The storage configurations defined for the runtime environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute81cf8ff19ccb0f150a6569f8() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Tags associated to this environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute952c09e17b1cb5616a42db85() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c31ffac18c82de85c1b56c5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecff4ce654b918b147d44a3d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The mount point for the file system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2015903434ef06427906a49() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FileSystemId
+			"file_system_id": schemaAttribute62c2ac9be7c75aec8cd42243(),
+			// Property: MountPoint
+			"mount_point": schemaAttributecff4ce654b918b147d44a3d2(),
+		}, /*END SCHEMA*/
+		Description: "Defines the storage configuration for an Amazon FSx file system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_m2_environment", environmentDataSource)
 }
@@ -32,10 +206,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the environment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute3be58858acc8a7e77908771e(),
 		// Property: EngineType
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +218,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"engine_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The target platform for the environment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"engine_type": schemaAttribute322fbb88bd646d2087bc64f5(),
 		// Property: EngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +227,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\S{1,10}$",
 		//	  "type": "string"
 		//	}
-		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of the runtime engine for the environment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"engine_version": schemaAttribute26f344ec626e0499448202bf(),
 		// Property: EnvironmentArn
 		// CloudFormation resource type schema:
 		//
@@ -71,10 +236,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"environment_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the runtime environment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"environment_arn": schemaAttribute20d502b1b1e6090471e292ab(),
 		// Property: EnvironmentId
 		// CloudFormation resource type schema:
 		//
@@ -83,10 +245,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\S{1,80}$",
 		//	  "type": "string"
 		//	}
-		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the environment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"environment_id": schemaAttribute60518c6fdbbf0a6526a8d2cd(),
 		// Property: HighAvailabilityConfig
 		// CloudFormation resource type schema:
 		//
@@ -105,16 +264,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"high_availability_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DesiredCapacity
-				"desired_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Defines the details of a high availability configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"high_availability_config": schemaAttribute7e46d3a5d7494755b7b0d111(),
 		// Property: InstanceType
 		// CloudFormation resource type schema:
 		//
@@ -123,10 +273,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\S{1,20}$",
 		//	  "type": "string"
 		//	}
-		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of instance underlying the environment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_type": schemaAttribute57d1268d418ca68273b330eb(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -135,10 +282,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 2048,
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID or the Amazon Resource Name (ARN) of the customer managed KMS Key used for encrypting environment-related resources.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttribute148b3441e608f5c38dd57e7a(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -147,10 +291,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the environment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute9c31ffac18c82de85c1b56c5(),
 		// Property: NetworkType
 		// CloudFormation resource type schema:
 		//
@@ -161,9 +302,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"network_type": schemaAttribute688384580ec8c7e46f9f4652(),
 		// Property: PreferredMaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -172,10 +311,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\S{1,50}$",
 		//	  "type": "string"
 		//	}
-		"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Configures a desired maintenance window for the environment. If you do not provide a value, a random system-generated value will be assigned.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"preferred_maintenance_window": schemaAttribute3ecd5898e2b4fa92d123a565(),
 		// Property: PubliclyAccessible
 		// CloudFormation resource type schema:
 		//
@@ -183,10 +319,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether the environment is publicly accessible.",
 		//	  "type": "boolean"
 		//	}
-		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether the environment is publicly accessible.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"publicly_accessible": schemaAttribute45538e740bf7768fe90526e6(),
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -199,11 +332,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of security groups for the VPC associated with this environment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_ids": schemaAttribute6afda01c45ef6239c07d26a5(),
 		// Property: StorageConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -260,48 +389,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"storage_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Efs
-					"efs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: FileSystemId
-							"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The file system identifier.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: MountPoint
-							"mount_point": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The mount point for the file system.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Defines the storage configuration for an Amazon EFS file system.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Fsx
-					"fsx": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: FileSystemId
-							"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The file system identifier.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: MountPoint
-							"mount_point": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The mount point for the file system.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Defines the storage configuration for an Amazon FSx file system.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The storage configurations defined for the runtime environment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"storage_configurations": schemaAttribute7fa5b09f045d85c418910be5(),
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -314,11 +402,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The unique identifiers of the subnets assigned to this runtime environment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_ids": schemaAttribute1a80284a97340364c27f268a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -334,12 +418,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Tags associated to this environment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute81cf8ff19ccb0f150a6569f8(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

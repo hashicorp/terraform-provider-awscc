@@ -14,6 +14,20 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute29513ad4c4ea044c7417a12d() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d0b85e9d4e92efa18383c68() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_apigateway_request_validator", requestValidatorDataSource)
 }
@@ -29,10 +43,7 @@ func requestValidatorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute2d0b85e9d4e92efa18383c68(),
 		// Property: RequestValidatorId
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +51,7 @@ func requestValidatorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"request_validator_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"request_validator_id": schemaAttribute2d0b85e9d4e92efa18383c68(),
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +59,7 @@ func requestValidatorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rest_api_id": schemaAttribute2d0b85e9d4e92efa18383c68(),
 		// Property: ValidateRequestBody
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +67,7 @@ func requestValidatorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "",
 		//	  "type": "boolean"
 		//	}
-		"validate_request_body": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"validate_request_body": schemaAttribute29513ad4c4ea044c7417a12d(),
 		// Property: ValidateRequestParameters
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +75,7 @@ func requestValidatorDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "",
 		//	  "type": "boolean"
 		//	}
-		"validate_request_parameters": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"validate_request_parameters": schemaAttribute29513ad4c4ea044c7417a12d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

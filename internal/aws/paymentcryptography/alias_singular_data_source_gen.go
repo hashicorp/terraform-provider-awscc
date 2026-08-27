@@ -14,6 +14,12 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute6466341c1f11fded097f7373() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_paymentcryptography_alias", aliasDataSource)
 }
@@ -31,9 +37,7 @@ func aliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^alias/[a-zA-Z0-9/_-]+$",
 		//	  "type": "string"
 		//	}
-		"alias_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"alias_name": schemaAttribute6466341c1f11fded097f7373(),
 		// Property: KeyArn
 		// CloudFormation resource type schema:
 		//
@@ -43,9 +47,7 @@ func aliasDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws:payment-cryptography:[a-z]{2}-[a-z]{1,16}-[0-9]+:[0-9]{12}:key/[0-9a-zA-Z]{16,64}$",
 		//	  "type": "string"
 		//	}
-		"key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"key_arn": schemaAttribute6466341c1f11fded097f7373(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

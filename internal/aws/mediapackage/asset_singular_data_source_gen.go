@@ -14,6 +14,105 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0f404646fbc2c3e5ca11278e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the PackagingConfiguration being applied to the Asset.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute335ec5e01f633ab0a823944d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38d7b7b755fff2fc8a311dbf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Asset.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c8de8a94d055a3908da86a8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the source object in S3.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5cb72281377b3d3c877468f4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IAM role_arn used to access the source S3 bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6474c9b6c03492df4f9fb0da() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL of the parent manifest for the repackaged Asset.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83ff80487c217acedcdbfe6e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the PackagingGroup for the Asset.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8da5fd86c7fc85123e213e39() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time the Asset was initially submitted for Ingest.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0ea67282f9d805be40f30ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The resource ID to include in SPEKE key requests.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf76ac462eea2df67ad8d2b6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PackagingConfigurationId
+				"packaging_configuration_id": schemaAttribute0f404646fbc2c3e5ca11278e(),
+				// Property: Url
+				"url": schemaAttribute6474c9b6c03492df4f9fb0da(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of egress endpoints available for the Asset.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec0378334a99cfe7d0c8a4fd0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute335ec5e01f633ab0a823944d(),
+				// Property: Value
+				"value": schemaAttribute335ec5e01f633ab0a823944d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A collection of tags associated with a resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec15dafb4fd2516ddf990b50a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier for the Asset.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_mediapackage_asset", assetDataSource)
 }
@@ -29,10 +128,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the Asset.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Asset.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute38d7b7b755fff2fc8a311dbf(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +136,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time the Asset was initially submitted for Ingest.",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time the Asset was initially submitted for Ingest.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute8da5fd86c7fc85123e213e39(),
 		// Property: EgressEndpoints
 		// CloudFormation resource type schema:
 		//
@@ -70,24 +163,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"egress_endpoints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: PackagingConfigurationId
-					"packaging_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of the PackagingConfiguration being applied to the Asset.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Url
-					"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The URL of the parent manifest for the repackaged Asset.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of egress endpoints available for the Asset.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"egress_endpoints": schemaAttributebf76ac462eea2df67ad8d2b6(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -95,10 +171,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique identifier for the Asset.",
 		//	  "type": "string"
 		//	}
-		"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier for the Asset.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"asset_id": schemaAttributec15dafb4fd2516ddf990b50a(),
 		// Property: PackagingGroupId
 		// CloudFormation resource type schema:
 		//
@@ -106,10 +179,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the PackagingGroup for the Asset.",
 		//	  "type": "string"
 		//	}
-		"packaging_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the PackagingGroup for the Asset.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"packaging_group_id": schemaAttribute83ff80487c217acedcdbfe6e(),
 		// Property: ResourceId
 		// CloudFormation resource type schema:
 		//
@@ -117,10 +187,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The resource ID to include in SPEKE key requests.",
 		//	  "type": "string"
 		//	}
-		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The resource ID to include in SPEKE key requests.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_id": schemaAttributeb0ea67282f9d805be40f30ca(),
 		// Property: SourceArn
 		// CloudFormation resource type schema:
 		//
@@ -128,10 +195,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "ARN of the source object in S3.",
 		//	  "type": "string"
 		//	}
-		"source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ARN of the source object in S3.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_arn": schemaAttribute5c8de8a94d055a3908da86a8(),
 		// Property: SourceRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -139,10 +203,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The IAM role_arn used to access the source S3 bucket.",
 		//	  "type": "string"
 		//	}
-		"source_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IAM role_arn used to access the source S3 bucket.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_role_arn": schemaAttribute5cb72281377b3d3c877468f4(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -167,22 +228,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A collection of tags associated with a resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributec0378334a99cfe7d0c8a4fd0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

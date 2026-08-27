@@ -15,6 +15,112 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1e979817124abed0071409a9() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute212695c3e729d0bf16f6438b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributead217b8d0da722cc05895c87(),
+				// Property: Value
+				"value": schemaAttributead217b8d0da722cc05895c87(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute29210822fe2bbbd28164247e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HealthScoreThreshold
+			"health_score_threshold": schemaAttributebaf026fbb9b785c4ef8edf29(),
+			// Property: MinTrafficImpact
+			"min_traffic_impact": schemaAttributebaf026fbb9b785c4ef8edf29(),
+			// Property: Status
+			"status": schemaAttributead217b8d0da722cc05895c87(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a594e0f8e9aea73b6e608ef() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3184c215da2a83ca0470ecaf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AvailabilityLocalHealthEventsConfig
+			"availability_local_health_events_config": schemaAttribute29210822fe2bbbd28164247e(),
+			// Property: AvailabilityScoreThreshold
+			"availability_score_threshold": schemaAttributebaf026fbb9b785c4ef8edf29(),
+			// Property: PerformanceLocalHealthEventsConfig
+			"performance_local_health_events_config": schemaAttribute29210822fe2bbbd28164247e(),
+			// Property: PerformanceScoreThreshold
+			"performance_score_threshold": schemaAttributebaf026fbb9b785c4ef8edf29(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7009934a9a302cd755acf919() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead217b8d0da722cc05895c87() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4c9c7ded5be9d358981ef5b() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebaf026fbb9b785c4ef8edf29() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed34923feebf98d37bda5153d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketName
+			"bucket_name": schemaAttributead217b8d0da722cc05895c87(),
+			// Property: BucketPrefix
+			"bucket_prefix": schemaAttributead217b8d0da722cc05895c87(),
+			// Property: LogDeliveryStatus
+			"log_delivery_status": schemaAttributead217b8d0da722cc05895c87(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefaa10620cd467579cf31e081() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Config
+			"s3_config": schemaAttributed34923feebf98d37bda5153d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_internetmonitor_monitor", monitorDataSource)
 }
@@ -31,10 +137,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute2a594e0f8e9aea73b6e608ef(),
 		// Property: HealthEventsConfig
 		// CloudFormation resource type schema:
 		//
@@ -100,64 +203,14 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"health_events_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AvailabilityLocalHealthEventsConfig
-				"availability_local_health_events_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: HealthScoreThreshold
-						"health_score_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: MinTrafficImpact
-						"min_traffic_impact": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Status
-						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: AvailabilityScoreThreshold
-				"availability_score_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PerformanceLocalHealthEventsConfig
-				"performance_local_health_events_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: HealthScoreThreshold
-						"health_score_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: MinTrafficImpact
-						"min_traffic_impact": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Status
-						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PerformanceScoreThreshold
-				"performance_score_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"health_events_config": schemaAttribute3184c215da2a83ca0470ecaf(),
 		// Property: IncludeLinkedAccounts
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"include_linked_accounts": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"include_linked_accounts": schemaAttribute1e979817124abed0071409a9(),
 		// Property: InternetMeasurementsLogDelivery
 		// CloudFormation resource type schema:
 		//
@@ -187,29 +240,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"internet_measurements_log_delivery": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: S3Config
-				"s3_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BucketName
-						"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: BucketPrefix
-						"bucket_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: LogDeliveryStatus
-						"log_delivery_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"internet_measurements_log_delivery": schemaAttributefaa10620cd467579cf31e081(),
 		// Property: LinkedAccountId
 		// CloudFormation resource type schema:
 		//
@@ -219,9 +250,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(\\d{12})$",
 		//	  "type": "string"
 		//	}
-		"linked_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"linked_account_id": schemaAttributead217b8d0da722cc05895c87(),
 		// Property: MaxCityNetworksToMonitor
 		// CloudFormation resource type schema:
 		//
@@ -230,9 +259,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"max_city_networks_to_monitor": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"max_city_networks_to_monitor": schemaAttribute7009934a9a302cd755acf919(),
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
 		//
@@ -241,10 +268,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 		//	  "type": "string"
 		//	}
-		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"modified_at": schemaAttribute2a594e0f8e9aea73b6e608ef(),
 		// Property: MonitorArn
 		// CloudFormation resource type schema:
 		//
@@ -254,9 +278,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.*",
 		//	  "type": "string"
 		//	}
-		"monitor_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"monitor_arn": schemaAttributead217b8d0da722cc05895c87(),
 		// Property: MonitorName
 		// CloudFormation resource type schema:
 		//
@@ -266,9 +288,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_.-]+$",
 		//	  "type": "string"
 		//	}
-		"monitor_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"monitor_name": schemaAttributead217b8d0da722cc05895c87(),
 		// Property: ProcessingStatus
 		// CloudFormation resource type schema:
 		//
@@ -283,18 +303,14 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"processing_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"processing_status": schemaAttributead217b8d0da722cc05895c87(),
 		// Property: ProcessingStatusInfo
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"processing_status_info": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"processing_status_info": schemaAttributead217b8d0da722cc05895c87(),
 		// Property: Resources
 		// CloudFormation resource type schema:
 		//
@@ -308,10 +324,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resources": schemaAttributeb4c9c7ded5be9d358981ef5b(),
 		// Property: ResourcesToAdd
 		// CloudFormation resource type schema:
 		//
@@ -324,10 +337,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"resources_to_add": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resources_to_add": schemaAttributeb4c9c7ded5be9d358981ef5b(),
 		// Property: ResourcesToRemove
 		// CloudFormation resource type schema:
 		//
@@ -340,10 +350,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"resources_to_remove": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resources_to_remove": schemaAttributeb4c9c7ded5be9d358981ef5b(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -356,9 +363,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributead217b8d0da722cc05895c87(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -379,21 +384,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute212695c3e729d0bf16f6438b(),
 		// Property: TrafficPercentageToMonitor
 		// CloudFormation resource type schema:
 		//
@@ -402,9 +393,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"traffic_percentage_to_monitor": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"traffic_percentage_to_monitor": schemaAttribute7009934a9a302cd755acf919(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

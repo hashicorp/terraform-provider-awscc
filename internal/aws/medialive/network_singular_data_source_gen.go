@@ -15,6 +15,111 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute07332a532687577bc6735b22() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "IP address cidr pool",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42f63cf3f5b524e44b574a56() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Cidr
+				"cidr": schemaAttribute07332a532687577bc6735b22(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of IP address cidr pools for the network",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72576dfb07ac5d8b2e2bb711() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributebc397b61c20fb24594eb90bb(),
+				// Property: Value
+				"value": schemaAttributebc397b61c20fb24594eb90bb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A collection of key-value pairs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79d243b89fda9d305b94051b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique ID of the Network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83364a98edf778079d7dc847() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeace0eed7075da52b6e65c6c6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user-specified name of the Network to be created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead889895249f5b5e7dffad66() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Cidr
+				"cidr": schemaAttributefc82508ec11053dafc8230fb(),
+				// Property: Gateway
+				"gateway": schemaAttributef9a8390d2e76ad516fdd3e39(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The routes for the network",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc397b61c20fb24594eb90bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb5e9d6381c63d4d6ae2840c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef16bac570a5012ddbacebe6f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current state of the Network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9a8390d2e76ad516fdd3e39() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "IP address for the route packet paths",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc82508ec11053dafc8230fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Ip address cidr",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_medialive_network", networkDataSource)
 }
@@ -30,10 +135,7 @@ func networkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the Network.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributecb5e9d6381c63d4d6ae2840c(),
 		// Property: AssociatedClusterIds
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +147,7 @@ func networkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"associated_cluster_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"associated_cluster_ids": schemaAttribute83364a98edf778079d7dc847(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +155,7 @@ func networkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique ID of the Network.",
 		//	  "type": "string"
 		//	}
-		"network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique ID of the Network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_id": schemaAttribute79d243b89fda9d305b94051b(),
 		// Property: IpPools
 		// CloudFormation resource type schema:
 		//
@@ -79,19 +175,7 @@ func networkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"ip_pools": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Cidr
-					"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "IP address cidr pool",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of IP address cidr pools for the network",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ip_pools": schemaAttribute42f63cf3f5b524e44b574a56(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -99,10 +183,7 @@ func networkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The user-specified name of the Network to be created.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The user-specified name of the Network to be created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributeace0eed7075da52b6e65c6c6(),
 		// Property: Routes
 		// CloudFormation resource type schema:
 		//
@@ -125,24 +206,7 @@ func networkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"routes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Cidr
-					"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Ip address cidr",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Gateway
-					"gateway": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "IP address for the route packet paths",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The routes for the network",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"routes": schemaAttributead889895249f5b5e7dffad66(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -161,10 +225,7 @@ func networkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current state of the Network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributef16bac570a5012ddbacebe6f(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -186,22 +247,7 @@ func networkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A collection of key-value pairs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute72576dfb07ac5d8b2e2bb711(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

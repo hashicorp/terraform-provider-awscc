@@ -15,6 +15,150 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0e85309b8936c1c858027fe1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date and time when the IdNamespace was updated",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute35d2bf601f06f7fc1f566f98() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AttributeMatchingModel
+			"attribute_matching_model": schemaAttribute3ce6b7cbe771502c19cc275d(),
+			// Property: RecordMatchingModels
+			"record_matching_models": schemaAttributefb2b77cb06a3d74bad638466(),
+			// Property: RuleDefinitionTypes
+			"rule_definition_types": schemaAttributefb2b77cb06a3d74bad638466(),
+			// Property: Rules
+			"rules": schemaAttribute596b61809ba8b45c2695aa6a(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ce6b7cbe771502c19cc275d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f9d90bcecc49f6114b8d7f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute596b61809ba8b45c2695aa6a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MatchingKeys
+				"matching_keys": schemaAttributefb2b77cb06a3d74bad638466(),
+				// Property: RuleName
+				"rule_name": schemaAttribute3ce6b7cbe771502c19cc275d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5dfd8d18bf3f0f165a71d179() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IdMappingType
+				"id_mapping_type": schemaAttribute3ce6b7cbe771502c19cc275d(),
+				// Property: ProviderProperties
+				"provider_properties": schemaAttribute618d71257e15b08abac57768(),
+				// Property: RuleBasedProperties
+				"rule_based_properties": schemaAttribute35d2bf601f06f7fc1f566f98(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute618d71257e15b08abac57768() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ProviderConfiguration
+			"provider_configuration": schemaAttributefadfdf101fbc6f279a296262(),
+			// Property: ProviderServiceArn
+			"provider_service_arn": schemaAttribute3ce6b7cbe771502c19cc275d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6849a2083375e4530321c3a4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb42d8ae4d2561dadfdb3d1e7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date and time when the IdNamespace was created",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8b03f0b7bd0dce54166382c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The arn associated with the IdNamespace",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee10b5393b1d274c41b15a168() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InputSourceARN
+				"input_source_arn": schemaAttribute3ce6b7cbe771502c19cc275d(),
+				// Property: SchemaName
+				"schema_name": schemaAttribute3ce6b7cbe771502c19cc275d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefaa896b55563564d01cd36da() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute6849a2083375e4530321c3a4(),
+				// Property: Value
+				"value": schemaAttribute4f9d90bcecc49f6114b8d7f3(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefadfdf101fbc6f279a296262() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Additional Provider configuration that would be required for the provider service. The Configuration must be in JSON string format.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb2b77cb06a3d74bad638466() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_entityresolution_id_namespace", idNamespaceDataSource)
 }
@@ -30,10 +174,7 @@ func idNamespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The date and time when the IdNamespace was created",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date and time when the IdNamespace was created",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributeb42d8ae4d2561dadfdb3d1e7(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -42,9 +183,7 @@ func idNamespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute3ce6b7cbe771502c19cc275d(),
 		// Property: IdMappingWorkflowProperties
 		// CloudFormation resource type schema:
 		//
@@ -164,71 +303,7 @@ func idNamespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"id_mapping_workflow_properties": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: IdMappingType
-					"id_mapping_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ProviderProperties
-					"provider_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ProviderConfiguration
-							"provider_configuration": // Pattern: ""
-							schema.MapAttribute{      /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "Additional Provider configuration that would be required for the provider service. The Configuration must be in JSON string format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ProviderServiceArn
-							"provider_service_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: RuleBasedProperties
-					"rule_based_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AttributeMatchingModel
-							"attribute_matching_model": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: RecordMatchingModels
-							"record_matching_models": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: RuleDefinitionTypes
-							"rule_definition_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Rules
-							"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: MatchingKeys
-										"matching_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: RuleName
-										"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"id_mapping_workflow_properties": schemaAttribute5dfd8d18bf3f0f165a71d179(),
 		// Property: IdNamespaceArn
 		// CloudFormation resource type schema:
 		//
@@ -237,10 +312,7 @@ func idNamespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):entityresolution:[a-z]{2}-[a-z]{1,10}-[0-9]:[0-9]{12}:(idnamespace/[a-zA-Z_0-9-]{1,255})$",
 		//	  "type": "string"
 		//	}
-		"id_namespace_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The arn associated with the IdNamespace",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"id_namespace_arn": schemaAttributed8b03f0b7bd0dce54166382c(),
 		// Property: IdNamespaceName
 		// CloudFormation resource type schema:
 		//
@@ -250,9 +322,7 @@ func idNamespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z_0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"id_namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"id_namespace_name": schemaAttribute3ce6b7cbe771502c19cc275d(),
 		// Property: InputSourceConfig
 		// CloudFormation resource type schema:
 		//
@@ -281,21 +351,7 @@ func idNamespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"input_source_config": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: InputSourceARN
-					"input_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SchemaName
-					"schema_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"input_source_config": schemaAttributee10b5393b1d274c41b15a168(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -305,9 +361,7 @@ func idNamespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-us-gov|aws-cn):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute3ce6b7cbe771502c19cc275d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -341,23 +395,7 @@ func idNamespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributefaa896b55563564d01cd36da(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -368,9 +406,7 @@ func idNamespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute3ce6b7cbe771502c19cc275d(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -378,10 +414,7 @@ func idNamespaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The date and time when the IdNamespace was updated",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date and time when the IdNamespace was updated",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute0e85309b8936c1c858027fe1(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,56 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute48476d6c9e7a06f58fee67b9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Stream-key value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8385ca2f2010cb9ebef8128d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0b39b200536be72682b859e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Stream Key ARN is automatically generated on creation and assigned as the unique identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9f19e96d67315c526804c0d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb4053e7c9a58d31be84c9bc() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute8385ca2f2010cb9ebef8128d(),
+				// Property: Value
+				"value": schemaAttributeb9f19e96d67315c526804c0d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs that contain metadata for the asset model.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9895d93d60f7904f82087a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Channel ARN for the stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ivs_stream_key", streamKeyDataSource)
 }
@@ -32,10 +82,7 @@ func streamKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:stream-key/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Stream Key ARN is automatically generated on creation and assigned as the unique identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributea0b39b200536be72682b859e(),
 		// Property: ChannelArn
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +91,7 @@ func streamKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"channel_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Channel ARN for the stream.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"channel_arn": schemaAttributef9895d93d60f7904f82087a0(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -80,24 +124,7 @@ func streamKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs that contain metadata for the asset model.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeeb4053e7c9a58d31be84c9bc(),
 		// Property: Value
 		// CloudFormation resource type schema:
 		//
@@ -105,10 +132,7 @@ func streamKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Stream-key value.",
 		//	  "type": "string"
 		//	}
-		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Stream-key value.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"value": schemaAttribute48476d6c9e7a06f58fee67b9(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,253 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0611609dba7754f8ffe11a96() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The final snapshot name which is taken before Serverless Cache is deleted.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute06464d49a6645860a5363c3a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Endpoint address.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute09b2d970a693f109cb591358() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute7cad176980d47e6e0fad071f(),
+				// Property: Value
+				"value": schemaAttribute541d6aa3229e2baecdfae5d0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a65cb894cc645c78544ac62() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The daily time range (in UTC) during which the service takes automatic snapshot of the Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ba3b4ee90a212a12b3bed97() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the user group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41c276fb86920114d841d8e0() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The subnet id's of the Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4406be7c086aa6a4a8d35e8b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The major engine version of the Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48308b5a7cee22979fbf7729() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The creation time of the Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c42b0d377f44a51ad7a5c0f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataStorage
+			"data_storage": schemaAttribute6bc770cb7883ba0bea7b8a6d(),
+			// Property: ECPUPerSecond
+			"ecpu_per_second": schemaAttributea3c87fa026071d576deac0f8(),
+		}, /*END SCHEMA*/
+		Description: "The cache capacity limit of the Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute541d6aa3229e2baecdfae5d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a999ac4a088538751df7ec8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Serverless Cache. This value must be unique.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62ca0bb2ae44e9085b10de24() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6507324ed9e665d15a7a287c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6bc770cb7883ba0bea7b8a6d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Maximum
+			"maximum": schemaAttributef1ba71e4cc1d0b78c07715e7(),
+			// Property: Minimum
+			"minimum": schemaAttributeccda2ca3ce707cec41fe4613(),
+			// Property: Unit
+			"unit": schemaAttributec22ff5da68e4b48df8a25a5e(),
+		}, /*END SCHEMA*/
+		Description: "The cached data capacity of the Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute738be13496399f74e7a02bb8() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The ARN's of snapshot to restore Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute765e52cd2b675ea1c0dcbf2a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Address
+			"address": schemaAttribute06464d49a6645860a5363c3a(),
+			// Property: Port
+			"port": schemaAttribute9de7b945290869801e2466df(),
+		}, /*END SCHEMA*/
+		Description: "The address and the port.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78d5d880651528c9c5422fcd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the KMS key used to encrypt the cluster.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7cad176980d47e6e0fad071f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with 'aws:'. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91ec56ba435fcb05625043f6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The full engine version of the Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9937f84495af61abe9f6601e() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "One or more Amazon VPC security groups associated with this Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b37f35669fb8bf580496a78() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The snapshot retention limit of the Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9de7b945290869801e2466df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Endpoint port.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3c87fa026071d576deac0f8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Maximum
+			"maximum": schemaAttributed3969cf42e3d773b6cc6f0d7(),
+			// Property: Minimum
+			"minimum": schemaAttributeab922d5eb1999efa894dc793(),
+		}, /*END SCHEMA*/
+		Description: "The ECPU per second of the Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa03d1ddff175340674979cd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab922d5eb1999efa894dc793() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum ECPU per second of the Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec22ff5da68e4b48df8a25a5e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unit of cached data capacity of the Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeccda2ca3ce707cec41fe4613() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum cached data capacity of the Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3969cf42e3d773b6cc6f0d7() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum ECPU per second of the Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1ba71e4cc1d0b78c07715e7() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum cached data capacity of the Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef744df4232a34c6d97c08853() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The engine name of the Serverless Cache.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_elasticache_serverless_cache", serverlessCacheDataSource)
 }
@@ -30,10 +277,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The ARN of the Serverless Cache.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Serverless Cache.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute62ca0bb2ae44e9085b10de24(),
 		// Property: CacheUsageLimits
 		// CloudFormation resource type schema:
 		//
@@ -84,51 +328,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"cache_usage_limits": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DataStorage
-				"data_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Maximum
-						"maximum": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The maximum cached data capacity of the Serverless Cache.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Minimum
-						"minimum": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The minimum cached data capacity of the Serverless Cache.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Unit
-						"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The unit of cached data capacity of the Serverless Cache.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The cached data capacity of the Serverless Cache.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ECPUPerSecond
-				"ecpu_per_second": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Maximum
-						"maximum": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The maximum ECPU per second of the Serverless Cache.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Minimum
-						"minimum": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The minimum ECPU per second of the Serverless Cache.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The ECPU per second of the Serverless Cache.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The cache capacity limit of the Serverless Cache.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cache_usage_limits": schemaAttribute4c42b0d377f44a51ad7a5c0f(),
 		// Property: CreateTime
 		// CloudFormation resource type schema:
 		//
@@ -136,10 +336,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The creation time of the Serverless Cache.",
 		//	  "type": "string"
 		//	}
-		"create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The creation time of the Serverless Cache.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"create_time": schemaAttribute48308b5a7cee22979fbf7729(),
 		// Property: DailySnapshotTime
 		// CloudFormation resource type schema:
 		//
@@ -147,10 +344,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The daily time range (in UTC) during which the service takes automatic snapshot of the Serverless Cache.",
 		//	  "type": "string"
 		//	}
-		"daily_snapshot_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The daily time range (in UTC) during which the service takes automatic snapshot of the Serverless Cache.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"daily_snapshot_time": schemaAttribute1a65cb894cc645c78544ac62(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -158,10 +352,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The description of the Serverless Cache.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the Serverless Cache.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeaa03d1ddff175340674979cd(),
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -180,22 +371,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Address
-				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Endpoint address.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Port
-				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Endpoint port.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The address and the port.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint": schemaAttribute765e52cd2b675ea1c0dcbf2a(),
 		// Property: Engine
 		// CloudFormation resource type schema:
 		//
@@ -203,10 +379,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The engine name of the Serverless Cache.",
 		//	  "type": "string"
 		//	}
-		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The engine name of the Serverless Cache.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"engine": schemaAttributef744df4232a34c6d97c08853(),
 		// Property: FinalSnapshotName
 		// CloudFormation resource type schema:
 		//
@@ -214,10 +387,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The final snapshot name which is taken before Serverless Cache is deleted.",
 		//	  "type": "string"
 		//	}
-		"final_snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The final snapshot name which is taken before Serverless Cache is deleted.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"final_snapshot_name": schemaAttribute0611609dba7754f8ffe11a96(),
 		// Property: FullEngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -225,10 +395,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The full engine version of the Serverless Cache.",
 		//	  "type": "string"
 		//	}
-		"full_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The full engine version of the Serverless Cache.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"full_engine_version": schemaAttribute91ec56ba435fcb05625043f6(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -236,10 +403,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The ID of the KMS key used to encrypt the cluster.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the KMS key used to encrypt the cluster.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttribute78d5d880651528c9c5422fcd(),
 		// Property: MajorEngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -247,10 +411,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The major engine version of the Serverless Cache.",
 		//	  "type": "string"
 		//	}
-		"major_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The major engine version of the Serverless Cache.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"major_engine_version": schemaAttribute4406be7c086aa6a4a8d35e8b(),
 		// Property: ReaderEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -269,22 +430,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"reader_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Address
-				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Endpoint address.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Port
-				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Endpoint port.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The address and the port.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"reader_endpoint": schemaAttribute765e52cd2b675ea1c0dcbf2a(),
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -297,11 +443,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "One or more Amazon VPC security groups associated with this Serverless Cache.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_ids": schemaAttribute9937f84495af61abe9f6601e(),
 		// Property: ServerlessCacheName
 		// CloudFormation resource type schema:
 		//
@@ -309,10 +451,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The name of the Serverless Cache. This value must be unique.",
 		//	  "type": "string"
 		//	}
-		"serverless_cache_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Serverless Cache. This value must be unique.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"serverless_cache_name": schemaAttribute5a999ac4a088538751df7ec8(),
 		// Property: SnapshotArnsToRestore
 		// CloudFormation resource type schema:
 		//
@@ -325,11 +464,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"snapshot_arns_to_restore": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The ARN's of snapshot to restore Serverless Cache.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"snapshot_arns_to_restore": schemaAttribute738be13496399f74e7a02bb8(),
 		// Property: SnapshotRetentionLimit
 		// CloudFormation resource type schema:
 		//
@@ -337,10 +472,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The snapshot retention limit of the Serverless Cache.",
 		//	  "type": "integer"
 		//	}
-		"snapshot_retention_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The snapshot retention limit of the Serverless Cache.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"snapshot_retention_limit": schemaAttribute9b37f35669fb8bf580496a78(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -348,10 +480,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The status of the Serverless Cache.",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the Serverless Cache.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute6507324ed9e665d15a7a287c(),
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -364,11 +493,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The subnet id's of the Serverless Cache.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_ids": schemaAttribute41c276fb86920114d841d8e0(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -402,24 +527,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with 'aws:'. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this Serverless Cache.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute09b2d970a693f109cb591358(),
 		// Property: UserGroupId
 		// CloudFormation resource type schema:
 		//
@@ -427,10 +535,7 @@ func serverlessCacheDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The ID of the user group.",
 		//	  "type": "string"
 		//	}
-		"user_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the user group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"user_group_id": schemaAttribute1ba3b4ee90a212a12b3bed97(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

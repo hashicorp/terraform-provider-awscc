@@ -14,6 +14,93 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1ac61febaa7b5091624b1e9d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CdnIdentifierSecret
+			"cdn_identifier_secret": schemaAttribute418e0cb097b10758392fe2fd(),
+			// Property: SecretsRoleArn
+			"secrets_role_arn": schemaAttribute52737399945f90abfb74fc01(),
+		}, /*END SCHEMA*/
+		Description: "CDN Authorization",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute272c5f62cbcc0caa9fef9775() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Sets a custom AWS CloudWatch log group name for egress logs. If a log group name isn't specified, the default name is used: /aws/MediaPackage/VodEgressAccessLogs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34f91fee413d3db796f73c0d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the PackagingGroup.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute418e0cb097b10758392fe2fd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52737399945f90abfb74fc01() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f9ab7c83fac60f22396f7db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The fully qualified domain name for Assets in the PackagingGroup.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3ed503e73b671021dd77d78() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeda85e0dfe0e2c9a084630a61(),
+				// Property: Value
+				"value": schemaAttributeda85e0dfe0e2c9a084630a61(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A collection of tags associated with a resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda85e0dfe0e2c9a084630a61() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee93248434a09856971cb1c95() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogGroupName
+			"log_group_name": schemaAttribute272c5f62cbcc0caa9fef9775(),
+		}, /*END SCHEMA*/
+		Description: "The configuration parameters for egress access logging.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef5c3f92fddfd362762512f6a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the PackagingGroup.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_mediapackage_packaging_group", packagingGroupDataSource)
 }
@@ -29,10 +116,7 @@ func packagingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The ARN of the PackagingGroup.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the PackagingGroup.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute34f91fee413d3db796f73c0d(),
 		// Property: Authorization
 		// CloudFormation resource type schema:
 		//
@@ -55,22 +139,7 @@ func packagingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"authorization": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CdnIdentifierSecret
-				"cdn_identifier_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that is used for CDN authorization.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecretsRoleArn
-				"secrets_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "CDN Authorization",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"authorization": schemaAttribute1ac61febaa7b5091624b1e9d(),
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -78,10 +147,7 @@ func packagingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The fully qualified domain name for Assets in the PackagingGroup.",
 		//	  "type": "string"
 		//	}
-		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The fully qualified domain name for Assets in the PackagingGroup.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_name": schemaAttribute6f9ab7c83fac60f22396f7db(),
 		// Property: EgressAccessLogs
 		// CloudFormation resource type schema:
 		//
@@ -99,17 +165,7 @@ func packagingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"egress_access_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LogGroupName
-				"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Sets a custom AWS CloudWatch log group name for egress logs. If a log group name isn't specified, the default name is used: /aws/MediaPackage/VodEgressAccessLogs.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration parameters for egress access logging.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"egress_access_logs": schemaAttributee93248434a09856971cb1c95(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -120,10 +176,7 @@ func packagingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"packaging_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the PackagingGroup.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"packaging_group_id": schemaAttributef5c3f92fddfd362762512f6a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -148,22 +201,7 @@ func packagingGroupDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A collection of tags associated with a resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributed3ed503e73b671021dd77d78(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

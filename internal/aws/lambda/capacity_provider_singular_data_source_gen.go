@@ -15,6 +15,273 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0c9880a96cea824e06b4d21d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of EC2 instance types that the capacity provider should not use, even if they meet other requirements.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0dd4696c305cc67c98df1947() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Set this property to filter the system logs for your capacity provider that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level of detail and lower, where ``DEBUG`` is the highest level and ``WARN`` is the lowest.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute178831cb42772053faf586c7() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PredefinedMetricType
+				"predefined_metric_type": schemaAttribute7ad0729a7c476612957203e6(),
+				// Property: TargetValue
+				"target_value": schemaAttribute2a227aab54e4cd77cffaf5ae(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of target tracking scaling policies for the capacity provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27ef560c0327835bc3094034() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Amazon CloudWatch log group the capacity provider sends logs to. By default, Lambda capacity providers send logs to a default log group named ``/aws/lambda/capacity-provider/<capacity provider name>``. To use a different log group, enter an existing log group or enter a new log group name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28d841fa56d4027d0130e005() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxVCpuCount
+			"max_v_cpu_count": schemaAttribute456aa5d54761c674049e0079(),
+			// Property: ScalingMode
+			"scaling_mode": schemaAttributefcfdee61ce867dee75013e48(),
+			// Property: ScalingPolicies
+			"scaling_policies": schemaAttribute178831cb42772053faf586c7(),
+		}, /*END SCHEMA*/
+		Description: "The scaling configuration for the capacity provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a227aab54e4cd77cffaf5ae() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The target value for the metric that the scaling policy attempts to maintain through scaling actions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b0d3ffb8a8cb330355efc95() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec0f2863ae18caf3156ff7446(),
+				// Property: Value
+				"value": schemaAttribute2c3c226bd43e3d78d2a5a54e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A key-value pair that provides metadata for the capacity provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c3c226bd43e3d78d2a5a54e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38f4000ecc96591e3adb5680() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of subnet IDs where the capacity provider launches compute instances.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute456aa5d54761c674049e0079() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of vCPUs that the capacity provider can provision across all compute instances.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6255052d34c2c97372783062() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The mode for tag propagation. Use ``Explicit`` to propagate specific tags, or ``None`` to disable propagation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute688957a1cccb9c80c8f3f0f0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttributec0fb577fe80b221190315859(),
+			// Property: SubnetIds
+			"subnet_ids": schemaAttribute38f4000ecc96591e3adb5680(),
+		}, /*END SCHEMA*/
+		Description: "The VPC configuration for the capacity provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c2350cf92315429b06c4ba2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the KMS key used to encrypt the capacity provider's resources.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72243cd057d86ab037b01a73() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of EC2 instance types that the capacity provider is allowed to use. If not specified, all compatible instance types are allowed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ad0729a7c476612957203e6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The predefined metric type to track for scaling decisions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7daeaf0fd33fab293484dddc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CapacityProviderOperatorRoleArn
+			"capacity_provider_operator_role_arn": schemaAttributeceda58e91b8f766d3f766898(),
+		}, /*END SCHEMA*/
+		Description: "The permissions configuration for the capacity provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb00a7607e8f1649227631f89() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AllowedInstanceTypes
+			"allowed_instance_types": schemaAttribute72243cd057d86ab037b01a73(),
+			// Property: Architectures
+			"architectures": schemaAttributee80e6e2c52dba477b592ff05(),
+			// Property: ExcludedInstanceTypes
+			"excluded_instance_types": schemaAttribute0c9880a96cea824e06b4d21d(),
+		}, /*END SCHEMA*/
+		Description: "The instance requirements for compute resources managed by the capacity provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb913fb927585aa3356daa073() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebdf3933758ca1ae5d5ca9d8d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current state of the capacity provider. Indicates whether the provider is being created, is active and ready for use, has failed, or is being deleted.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf6e37cf32086e8104abed3f() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec0f2863ae18caf3156ff7446(),
+				// Property: Value
+				"value": schemaAttribute2c3c226bd43e3d78d2a5a54e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags to explicitly propagate to managed resources. Maximum of 40 tags.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec0f2863ae18caf3156ff7446() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec0fb577fe80b221190315859() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of security group IDs that control network access for compute instances managed by the capacity provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeceda58e91b8f766d3f766898() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM role that the capacity provider uses to manage compute instances and other AWS resources.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee795cf4347fe7d87b6a8c429() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogGroup
+			"log_group": schemaAttribute27ef560c0327835bc3094034(),
+			// Property: SystemLogLevel
+			"system_log_level": schemaAttribute0dd4696c305cc67c98df1947(),
+		}, /*END SCHEMA*/
+		Description: "The capacity provider's Amazon CloudWatch Logs configuration settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee80e6e2c52dba477b592ff05() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of supported CPU architectures for compute instances. Valid values include ``x86_64`` and ``arm64``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2d2f88d79d30f0655e77ec6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LoggingConfig
+			"logging_config": schemaAttributee795cf4347fe7d87b6a8c429(),
+		}, /*END SCHEMA*/
+		Description: "The telemetry configuration for the capacity provider, including logging settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefcfdee61ce867dee75013e48() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The scaling mode that determines how the capacity provider responds to changes in demand.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd39ebd6a34eecde9ac2d64e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ExplicitTags
+			"explicit_tags": schemaAttributebf6e37cf32086e8104abed3f(),
+			// Property: Mode
+			"mode": schemaAttribute6255052d34c2c97372783062(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for tag propagation to managed resources launched by the capacity provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_lambda_capacity_provider", capacityProviderDataSource)
 }
@@ -33,10 +300,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:capacity-provider:[a-zA-Z0-9-_]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeb913fb927585aa3356daa073(),
 		// Property: CapacityProviderName
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +311,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^(arn:aws[a-zA-Z-]*:lambda:(eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:\\d{12}:capacity-provider:[a-zA-Z0-9-_]+)|[a-zA-Z0-9-_]+$",
 		//	  "type": "string"
 		//	}
-		"capacity_provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"capacity_provider_name": schemaAttributeb913fb927585aa3356daa073(),
 		// Property: CapacityProviderScalingConfig
 		// CloudFormation resource type schema:
 		//
@@ -106,41 +367,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"capacity_provider_scaling_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaxVCpuCount
-				"max_v_cpu_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum number of vCPUs that the capacity provider can provision across all compute instances.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ScalingMode
-				"scaling_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The scaling mode that determines how the capacity provider responds to changes in demand.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ScalingPolicies
-				"scaling_policies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: PredefinedMetricType
-							"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The predefined metric type to track for scaling decisions.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TargetValue
-							"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The target value for the metric that the scaling policy attempts to maintain through scaling actions.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A list of target tracking scaling policies for the capacity provider.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The scaling configuration for the capacity provider.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"capacity_provider_scaling_config": schemaAttribute28d841fa56d4027d0130e005(),
 		// Property: InstanceRequirements
 		// CloudFormation resource type schema:
 		//
@@ -192,30 +419,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"instance_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllowedInstanceTypes
-				"allowed_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of EC2 instance types that the capacity provider is allowed to use. If not specified, all compatible instance types are allowed.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Architectures
-				"architectures": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of supported CPU architectures for compute instances. Valid values include ``x86_64`` and ``arm64``.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ExcludedInstanceTypes
-				"excluded_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of EC2 instance types that the capacity provider should not use, even if they meet other requirements.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The instance requirements for compute resources managed by the capacity provider.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_requirements": schemaAttributeb00a7607e8f1649227631f89(),
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -226,10 +430,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:[a-z0-9-.]+:.*)|()$",
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the KMS key used to encrypt the capacity provider's resources.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttribute6c2350cf92315429b06c4ba2(),
 		// Property: PermissionsConfig
 		// CloudFormation resource type schema:
 		//
@@ -250,17 +451,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"permissions_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CapacityProviderOperatorRoleArn
-				"capacity_provider_operator_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the IAM role that the capacity provider uses to manage compute instances and other AWS resources.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The permissions configuration for the capacity provider.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"permissions_config": schemaAttribute7daeaf0fd33fab293484dddc(),
 		// Property: PropagateTags
 		// CloudFormation resource type schema:
 		//
@@ -309,36 +500,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"propagate_tags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ExplicitTags
-				"explicit_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Key
-							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The key name of the tag.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The value for the tag.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A list of tags to explicitly propagate to managed resources. Maximum of 40 tags.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Mode
-				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The mode for tag propagation. Use ``Explicit`` to propagate specific tags, or ``None`` to disable propagation.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration for tag propagation to managed resources launched by the capacity provider.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"propagate_tags": schemaAttributefd39ebd6a34eecde9ac2d64e(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -352,10 +514,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current state of the capacity provider. Indicates whether the provider is being created, is active and ready for use, has failed, or is being deleted.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributebdf3933758ca1ae5d5ca9d8d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -387,24 +546,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A key-value pair that provides metadata for the capacity provider.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute2b0d3ffb8a8cb330355efc95(),
 		// Property: TelemetryConfig
 		// CloudFormation resource type schema:
 		//
@@ -438,29 +580,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "object"
 		//	}
-		"telemetry_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LoggingConfig
-				"logging_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: LogGroup
-						"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the Amazon CloudWatch log group the capacity provider sends logs to. By default, Lambda capacity providers send logs to a default log group named ``/aws/lambda/capacity-provider/<capacity provider name>``. To use a different log group, enter an existing log group or enter a new log group name.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SystemLogLevel
-						"system_log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Set this property to filter the system logs for your capacity provider that Lambda sends to CloudWatch. Lambda only sends system logs at the selected level of detail and lower, where ``DEBUG`` is the highest level and ``WARN`` is the lowest.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The capacity provider's Amazon CloudWatch Logs configuration settings.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The telemetry configuration for the capacity provider, including logging settings.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"telemetry_config": schemaAttributef2d2f88d79d30f0655e77ec6(),
 		// Property: VpcConfig
 		// CloudFormation resource type schema:
 		//
@@ -501,24 +621,7 @@ func capacityProviderDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SecurityGroupIds
-				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of security group IDs that control network access for compute instances managed by the capacity provider.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SubnetIds
-				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of subnet IDs where the capacity provider launches compute instances.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The VPC configuration for the capacity provider.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_config": schemaAttribute688957a1cccb9c80c8f3f0f0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,152 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute234890e5894f3ed326d3a486() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the major version of the engine that this option group should be associated with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44600046706d006ff0460dd4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the option group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54871d8104359bf69648fcb0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the option that has settings that you can set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute699ff354b2cf2ea07684ca7d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute54871d8104359bf69648fcb0(),
+				// Property: Value
+				"value": schemaAttributea37ff6c263e0cad1acfcc95b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The option settings to include in an option group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute714741ca63aa69a128804dbf() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeaa09b2bae9a39afd201d4c15(),
+				// Property: Value
+				"value": schemaAttributea7b2968a887e78257c38773d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to assign to the option group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8525614f79e959d702cdfffd() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of DB security groups used for this option.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute88bd86162194af5e4736634a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The optional port for the option.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea37ff6c263e0cad1acfcc95b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current value of the option setting.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7b2968a887e78257c38773d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa09b2bae9a39afd201d4c15() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab635af22da9451d63a63074() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the name of the engine that this option group should be associated with.\n Valid Values: \n  +   ``mariadb`` \n  +   ``mysql`` \n  +   ``oracle-ee`` \n  +   ``oracle-ee-cdb`` \n  +   ``oracle-se2`` \n  +   ``oracle-se2-cdb`` \n  +   ``postgres`` \n  +   ``sqlserver-ee`` \n  +   ``sqlserver-se`` \n  +   ``sqlserver-ex`` \n  +   ``sqlserver-web``",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6c7d8ed0db4afd83c0ed6dc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the option group to be created.\n Constraints:\n  +  Must be 1 to 255 letters, numbers, or hyphens\n  +  First character must be a letter\n  +  Can't end with a hyphen or contain two consecutive hyphens\n  \n Example: ``myoptiongroup``\n If you don't specify a value for ``OptionGroupName`` property, a name is automatically created for the option group.\n  This value is stored as a lowercase string.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec82a137ba47de1e9dbd57ef7() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DBSecurityGroupMemberships
+				"db_security_group_memberships": schemaAttribute8525614f79e959d702cdfffd(),
+				// Property: OptionName
+				"option_name": schemaAttributed8dd2951ee5a6833fa5a545b(),
+				// Property: OptionSettings
+				"option_settings": schemaAttribute699ff354b2cf2ea07684ca7d(),
+				// Property: OptionVersion
+				"option_version": schemaAttributed18594ba4f03275cc2450187(),
+				// Property: Port
+				"port": schemaAttribute88bd86162194af5e4736634a(),
+				// Property: VpcSecurityGroupMemberships
+				"vpc_security_group_memberships": schemaAttributef68a6d1a7aee25101432ae93(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of all available options for an option group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed18594ba4f03275cc2450187() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version for the option.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8dd2951ee5a6833fa5a545b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The configuration of options to include in a group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef68a6d1a7aee25101432ae93() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of VPC security group names used for this option.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_rds_option_group", optionGroupDataSource)
 }
@@ -30,10 +176,7 @@ func optionGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the name of the engine that this option group should be associated with.\n Valid Values: \n  +   ``mariadb`` \n  +   ``mysql`` \n  +   ``oracle-ee`` \n  +   ``oracle-ee-cdb`` \n  +   ``oracle-se2`` \n  +   ``oracle-se2-cdb`` \n  +   ``postgres`` \n  +   ``sqlserver-ee`` \n  +   ``sqlserver-se`` \n  +   ``sqlserver-ex`` \n  +   ``sqlserver-web``",
 		//	  "type": "string"
 		//	}
-		"engine_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the name of the engine that this option group should be associated with.\n Valid Values: \n  +   ``mariadb`` \n  +   ``mysql`` \n  +   ``oracle-ee`` \n  +   ``oracle-ee-cdb`` \n  +   ``oracle-se2`` \n  +   ``oracle-se2-cdb`` \n  +   ``postgres`` \n  +   ``sqlserver-ee`` \n  +   ``sqlserver-se`` \n  +   ``sqlserver-ex`` \n  +   ``sqlserver-web``",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"engine_name": schemaAttributeab635af22da9451d63a63074(),
 		// Property: MajorEngineVersion
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +184,7 @@ func optionGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the major version of the engine that this option group should be associated with.",
 		//	  "type": "string"
 		//	}
-		"major_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the major version of the engine that this option group should be associated with.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"major_engine_version": schemaAttribute234890e5894f3ed326d3a486(),
 		// Property: OptionConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -114,60 +254,7 @@ func optionGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"option_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DBSecurityGroupMemberships
-					"db_security_group_memberships": schema.SetAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "A list of DB security groups used for this option.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: OptionName
-					"option_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The configuration of options to include in a group.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: OptionSettings
-					"option_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Name
-								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the option that has settings that you can set.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Value
-								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The current value of the option setting.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "The option settings to include in an option group.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: OptionVersion
-					"option_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The version for the option.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Port
-					"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The optional port for the option.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: VpcSecurityGroupMemberships
-					"vpc_security_group_memberships": schema.SetAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "A list of VPC security group names used for this option.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of all available options for an option group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"option_configurations": schemaAttributec82a137ba47de1e9dbd57ef7(),
 		// Property: OptionGroupDescription
 		// CloudFormation resource type schema:
 		//
@@ -175,10 +262,7 @@ func optionGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of the option group.",
 		//	  "type": "string"
 		//	}
-		"option_group_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the option group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"option_group_description": schemaAttribute44600046706d006ff0460dd4(),
 		// Property: OptionGroupName
 		// CloudFormation resource type schema:
 		//
@@ -186,10 +270,7 @@ func optionGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the option group to be created.\n Constraints:\n  +  Must be 1 to 255 letters, numbers, or hyphens\n  +  First character must be a letter\n  +  Can't end with a hyphen or contain two consecutive hyphens\n  \n Example: ``myoptiongroup``\n If you don't specify a value for ``OptionGroupName`` property, a name is automatically created for the option group.\n  This value is stored as a lowercase string.",
 		//	  "type": "string"
 		//	}
-		"option_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the option group to be created.\n Constraints:\n  +  Must be 1 to 255 letters, numbers, or hyphens\n  +  First character must be a letter\n  +  Can't end with a hyphen or contain two consecutive hyphens\n  \n Example: ``myoptiongroup``\n If you don't specify a value for ``OptionGroupName`` property, a name is automatically created for the option group.\n  This value is stored as a lowercase string.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"option_group_name": schemaAttributec6c7d8ed0db4afd83c0ed6dc(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -220,24 +301,7 @@ func optionGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A key is the required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A value is the optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with ``aws:`` or ``rds:``. The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', ':', '/', '=', '+', '-', '@' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-@]*)$\").",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to assign to the option group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute714741ca63aa69a128804dbf(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

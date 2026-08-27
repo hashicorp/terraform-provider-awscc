@@ -14,6 +14,13 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributee355aadac8ebf3011cbea8ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_apigateway_documentation_version", documentationVersionDataSource)
 }
@@ -29,10 +36,7 @@ func documentationVersionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributee355aadac8ebf3011cbea8ca(),
 		// Property: DocumentationVersion
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +45,7 @@ func documentationVersionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"documentation_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"documentation_version": schemaAttributee355aadac8ebf3011cbea8ca(),
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
@@ -53,10 +54,7 @@ func documentationVersionDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rest_api_id": schemaAttributee355aadac8ebf3011cbea8ca(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

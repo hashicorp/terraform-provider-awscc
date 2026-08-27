@@ -15,6 +15,72 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1a060446f6bc49e87da3e352() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Playback-restriction-policy identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a13e9c91ca8d940210b9003() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Playback-restriction-policy name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ba99f2fcf75ee07210bbc65() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54e753b369521abffdc9d5bf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f52062af6b1f4811a344abc() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of country codes that control geoblocking restriction. Allowed values are the officially assigned ISO 3166-1 alpha-2 codes. Default: All countries (an empty array).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c3a9675b94b671d9b0ed1f9() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether channel playback is constrained by origin site.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec980cdfec7040d134fec38e6() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute2ba99f2fcf75ee07210bbc65(),
+				// Property: Value
+				"value": schemaAttribute54e753b369521abffdc9d5bf(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb496a8ed8e102baa428e461() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of origin sites that control CORS restriction. Allowed values are the same as valid values of the Origin header defined at https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ivs_playback_restriction_policy", playbackRestrictionPolicyDataSource)
 }
@@ -36,11 +102,7 @@ func playbackRestrictionPolicyDataSource(ctx context.Context) (datasource.DataSo
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"allowed_countries": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of country codes that control geoblocking restriction. Allowed values are the officially assigned ISO 3166-1 alpha-2 codes. Default: All countries (an empty array).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"allowed_countries": schemaAttribute5f52062af6b1f4811a344abc(),
 		// Property: AllowedOrigins
 		// CloudFormation resource type schema:
 		//
@@ -53,11 +115,7 @@ func playbackRestrictionPolicyDataSource(ctx context.Context) (datasource.DataSo
 		//	  },
 		//	  "type": "array"
 		//	}
-		"allowed_origins": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of origin sites that control CORS restriction. Allowed values are the same as valid values of the Origin header defined at https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"allowed_origins": schemaAttributecb496a8ed8e102baa428e461(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +126,7 @@ func playbackRestrictionPolicyDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:playback-restriction-policy/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Playback-restriction-policy identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute1a060446f6bc49e87da3e352(),
 		// Property: EnableStrictOriginEnforcement
 		// CloudFormation resource type schema:
 		//
@@ -80,10 +135,7 @@ func playbackRestrictionPolicyDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "Whether channel playback is constrained by origin site.",
 		//	  "type": "boolean"
 		//	}
-		"enable_strict_origin_enforcement": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether channel playback is constrained by origin site.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enable_strict_origin_enforcement": schemaAttribute9c3a9675b94b671d9b0ed1f9(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -94,10 +146,7 @@ func playbackRestrictionPolicyDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^[a-zA-Z0-9-_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Playback-restriction-policy name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute2a13e9c91ca8d940210b9003(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -131,24 +180,7 @@ func playbackRestrictionPolicyDataSource(ctx context.Context) (datasource.DataSo
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributec980cdfec7040d134fec38e6(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

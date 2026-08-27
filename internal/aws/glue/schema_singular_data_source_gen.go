@@ -14,6 +14,138 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute27475a72ff9078aca185d71d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Definition for the initial schema version in plain-text.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34d4b4412219ba9a16eeaadd() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates if the latest version needs to be updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45178d330fa21275dc3c5370() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the schema. If description is not provided, there will not be any default value for this.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4643c0ddb74263c27230669c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Represents the version ID associated with the initial schema version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a81da1c0a5268d0f405ba87() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Compatibility setting for the schema.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b723cee6b43917fba59a8d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the registry in which the schema will be created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5bfefc8d06c408e4d3db3d1c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name for the Registry.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d962f0418f37b02d5c502f6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A key to identify the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a2c650debd30b34c3c48803() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IsLatest
+			"is_latest": schemaAttribute34d4b4412219ba9a16eeaadd(),
+			// Property: VersionNumber
+			"version_number": schemaAttribute9a9a5187bc482aa2303e7f1b(),
+		}, /*END SCHEMA*/
+		Description: "Specify checkpoint version for update. This is only required to update the Compatibility.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e5e16ce7c951ad2cf682036() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttribute5bfefc8d06c408e4d3db3d1c(),
+			// Property: Name
+			"name": schemaAttribute4b723cee6b43917fba59a8d0(),
+		}, /*END SCHEMA*/
+		Description: "Identifier for the registry which the schema is part of.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8baeed7a4e7857510a994911() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Corresponding tag value for the key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute99aad3c85013295d61092c82() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the schema.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a9a5187bc482aa2303e7f1b() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Indicates the version number in the schema to update.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd70186eed0f85aeb7853ddf() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute6d962f0418f37b02d5c502f6(),
+				// Property: Value
+				"value": schemaAttribute8baeed7a4e7857510a994911(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of tags to tag the schema",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf07442a7916d70b97e34cba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Data format name to use for the schema. Accepted values: 'AVRO', 'JSON', 'PROTOBUF'",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1e45cef7d7d82e297bd886d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name for the Schema.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_glue_schema", schemaDataSource)
 }
@@ -30,10 +162,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws(-(cn|us-gov|iso(-[bef])?))?:glue:.*",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name for the Schema.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributed1e45cef7d7d82e297bd886d(),
 		// Property: CheckpointVersion
 		// CloudFormation resource type schema:
 		//
@@ -54,22 +183,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"checkpoint_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IsLatest
-				"is_latest": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates if the latest version needs to be updated.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VersionNumber
-				"version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Indicates the version number in the schema to update.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specify checkpoint version for update. This is only required to update the Compatibility.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"checkpoint_version": schemaAttribute7a2c650debd30b34c3c48803(),
 		// Property: Compatibility
 		// CloudFormation resource type schema:
 		//
@@ -87,10 +201,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"compatibility": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Compatibility setting for the schema.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"compatibility": schemaAttribute4a81da1c0a5268d0f405ba87(),
 		// Property: DataFormat
 		// CloudFormation resource type schema:
 		//
@@ -103,10 +214,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"data_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Data format name to use for the schema. Accepted values: 'AVRO', 'JSON', 'PROTOBUF'",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_format": schemaAttributecf07442a7916d70b97e34cba(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -116,10 +224,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the schema. If description is not provided, there will not be any default value for this.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute45178d330fa21275dc3c5370(),
 		// Property: InitialSchemaVersionId
 		// CloudFormation resource type schema:
 		//
@@ -128,10 +233,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"initial_schema_version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Represents the version ID associated with the initial schema version.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"initial_schema_version_id": schemaAttribute4643c0ddb74263c27230669c(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -141,10 +243,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of the schema.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute99aad3c85013295d61092c82(),
 		// Property: Registry
 		// CloudFormation resource type schema:
 		//
@@ -166,22 +265,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"registry": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Amazon Resource Name for the Registry.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Name of the registry in which the schema will be created.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Identifier for the registry which the schema is part of.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"registry": schemaAttribute7e5e16ce7c951ad2cf682036(),
 		// Property: SchemaDefinition
 		// CloudFormation resource type schema:
 		//
@@ -191,10 +275,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"schema_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Definition for the initial schema version in plain-text.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schema_definition": schemaAttribute27475a72ff9078aca185d71d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -226,24 +307,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A key to identify the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Corresponding tag value for the key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "List of tags to tag the schema",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributebd70186eed0f85aeb7853ddf(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

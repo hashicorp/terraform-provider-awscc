@@ -14,6 +14,13 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute88de2f259d5f6d9e9909a23a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "User account id, used as the primary identifier for the resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_devopsguru_log_anomaly_detection_integration", logAnomalyDetectionIntegrationDataSource)
 }
@@ -30,10 +37,7 @@ func logAnomalyDetectionIntegrationDataSource(ctx context.Context) (datasource.D
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "User account id, used as the primary identifier for the resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"account_id": schemaAttribute88de2f259d5f6d9e9909a23a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

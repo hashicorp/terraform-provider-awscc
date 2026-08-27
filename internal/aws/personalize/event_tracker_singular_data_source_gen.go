@@ -14,6 +14,63 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute208702084e2e83b794b0c59b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec2d1125a0f090e31ad9b9402(),
+				// Property: Value
+				"value": schemaAttributece015a0e097274fc832c94db(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags to apply to the event tracker.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e1e81ae6c7c4973d9b8277b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the event tracker. Include this ID in requests to the PutEvents API.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4569be58640bcd5deafd0ae0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the dataset group that receives the event data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45be74835a54b7fdf3af6554() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the event tracker.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2d1125a0f090e31ad9b9402() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributece015a0e097274fc832c94db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb469ed7d9be245b2259e4f8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the event tracker.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_personalize_event_tracker", eventTrackerDataSource)
 }
@@ -31,10 +88,7 @@ func eventTrackerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:([a-z\\d-]+):personalize:.*:.*:.+$",
 		//	  "type": "string"
 		//	}
-		"dataset_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the dataset group that receives the event data.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dataset_group_arn": schemaAttribute4569be58640bcd5deafd0ae0(),
 		// Property: EventTrackerArn
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +98,7 @@ func eventTrackerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^arn:([a-z\\d-]+):personalize:.*:.*:.+$",
 		//	  "type": "string"
 		//	}
-		"event_tracker_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the event tracker.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"event_tracker_arn": schemaAttributeeb469ed7d9be245b2259e4f8(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -58,10 +109,7 @@ func eventTrackerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the event tracker.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute45be74835a54b7fdf3af6554(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -95,24 +143,7 @@ func eventTrackerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags to apply to the event tracker.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute208702084e2e83b794b0c59b(),
 		// Property: TrackingId
 		// CloudFormation resource type schema:
 		//
@@ -121,10 +152,7 @@ func eventTrackerDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "maxLength": 256,
 		//	  "type": "string"
 		//	}
-		"tracking_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the event tracker. Include this ID in requests to the PutEvents API.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tracking_id": schemaAttribute3e1e81ae6c7c4973d9b8277b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

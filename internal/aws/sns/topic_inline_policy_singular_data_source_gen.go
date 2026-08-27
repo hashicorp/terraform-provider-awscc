@@ -15,6 +15,21 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute69ffcb0ff52559d44a86c6d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "A policy document that contains permissions to add to the specified SNS topics.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0dda0028a9cbd813a089c2f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the topic to which you want to add the policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sns_topic_inline_policy", topicInlinePolicyDataSource)
 }
@@ -30,11 +45,7 @@ func topicInlinePolicyDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "A policy document that contains permissions to add to the specified SNS topics.",
 		//	  "type": "object"
 		//	}
-		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "A policy document that contains permissions to add to the specified SNS topics.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_document": schemaAttribute69ffcb0ff52559d44a86c6d8(),
 		// Property: TopicArn
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +53,7 @@ func topicInlinePolicyDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The Amazon Resource Name (ARN) of the topic to which you want to add the policy.",
 		//	  "type": "string"
 		//	}
-		"topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the topic to which you want to add the policy.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"topic_arn": schemaAttributef0dda0028a9cbd813a089c2f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

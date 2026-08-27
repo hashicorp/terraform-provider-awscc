@@ -15,6 +15,49 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2beca171f7b9bfa32bb668f5() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute83c86721328f662f698cc6b0(),
+				// Property: Value
+				"value": schemaAttribute83c86721328f662f698cc6b0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more tags to be assigned to the db subnet group",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute46740562cd8574f36066dbe0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the db subnet group. This value is stored as a lowercase string.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83c86721328f662f698cc6b0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93b69179ceaef319895396d8() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "One or more subnet IDs to be assigned to the db subnet group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecbb2c0e65e88f233db8cd6d1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description for the subnet group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_docdb_db_subnet_group", dBSubnetGroupDataSource)
 }
@@ -32,10 +75,7 @@ func dBSubnetGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"db_subnet_group_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description for the subnet group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"db_subnet_group_description": schemaAttributecbb2c0e65e88f233db8cd6d1(),
 		// Property: DBSubnetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +86,7 @@ func dBSubnetGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "[a-zA-Z][0-9a-zA-Z-:._ ]*",
 		//	  "type": "string"
 		//	}
-		"db_subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the db subnet group. This value is stored as a lowercase string.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"db_subnet_group_name": schemaAttribute46740562cd8574f36066dbe0(),
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -63,11 +100,7 @@ func dBSubnetGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "One or more subnet IDs to be assigned to the db subnet group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_ids": schemaAttribute93b69179ceaef319895396d8(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -92,22 +125,7 @@ func dBSubnetGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "One or more tags to be assigned to the db subnet group",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute2beca171f7b9bfa32bb668f5(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

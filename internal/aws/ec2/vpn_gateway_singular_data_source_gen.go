@@ -14,6 +14,56 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0c02c95c64a97f37547032d4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b56e280abe30259896ce94e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b9b71ac330e8a29fa6ce5ab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83937660ee052e9a83872240() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute5b9b71ac330e8a29fa6ce5ab(),
+				// Property: Value
+				"value": schemaAttribute0c02c95c64a97f37547032d4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Any tags assigned to the virtual private gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf9167d778ca5af567fab525() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of VPN connection the virtual private gateway supports.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee67be4063239bee7a8d41211() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The private Autonomous System Number (ASN) for the Amazon side of a BGP session.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_vpn_gateway", vPNGatewayDataSource)
 }
@@ -30,10 +80,7 @@ func vPNGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
-		"amazon_side_asn": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The private Autonomous System Number (ASN) for the Amazon side of a BGP session.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"amazon_side_asn": schemaAttributee67be4063239bee7a8d41211(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -62,24 +109,7 @@ func vPNGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Any tags assigned to the virtual private gateway.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute83937660ee052e9a83872240(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -87,10 +117,7 @@ func vPNGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of VPN connection the virtual private gateway supports.",
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of VPN connection the virtual private gateway supports.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttributecf9167d778ca5af567fab525(),
 		// Property: VPNGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -98,10 +125,7 @@ func vPNGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"vpn_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpn_gateway_id": schemaAttribute5b56e280abe30259896ce94e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,12 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributecc5a4948f00d467f1aa5f723() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_servicecatalog_service_action_association", serviceActionAssociationDataSource)
 }
@@ -31,9 +37,7 @@ func serviceActionAssociationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"product_id": schemaAttributecc5a4948f00d467f1aa5f723(),
 		// Property: ProvisioningArtifactId
 		// CloudFormation resource type schema:
 		//
@@ -43,9 +47,7 @@ func serviceActionAssociationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"provisioning_artifact_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"provisioning_artifact_id": schemaAttributecc5a4948f00d467f1aa5f723(),
 		// Property: ServiceActionId
 		// CloudFormation resource type schema:
 		//
@@ -55,9 +57,7 @@ func serviceActionAssociationDataSource(ctx context.Context) (datasource.DataSou
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"service_action_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"service_action_id": schemaAttributecc5a4948f00d467f1aa5f723(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

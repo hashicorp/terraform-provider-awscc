@@ -14,6 +14,18 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute3ea39281e82f0e895ee0c595() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea160c09e4a6027130ca447a8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_wisdom_ai_prompt_version", aIPromptVersionDataSource)
 }
@@ -29,9 +41,7 @@ func aIPromptVersionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}(:[A-Z0-9_$]+){0,1}$",
 		//	  "type": "string"
 		//	}
-		"ai_prompt_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"ai_prompt_arn": schemaAttributea160c09e4a6027130ca447a8(),
 		// Property: AIPromptId
 		// CloudFormation resource type schema:
 		//
@@ -39,9 +49,7 @@ func aIPromptVersionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"ai_prompt_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"ai_prompt_id": schemaAttributea160c09e4a6027130ca447a8(),
 		// Property: AIPromptVersionId
 		// CloudFormation resource type schema:
 		//
@@ -49,9 +57,7 @@ func aIPromptVersionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
 		//	  "type": "string"
 		//	}
-		"ai_prompt_version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"ai_prompt_version_id": schemaAttributea160c09e4a6027130ca447a8(),
 		// Property: AssistantArn
 		// CloudFormation resource type schema:
 		//
@@ -59,9 +65,7 @@ func aIPromptVersionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?$",
 		//	  "type": "string"
 		//	}
-		"assistant_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"assistant_arn": schemaAttributea160c09e4a6027130ca447a8(),
 		// Property: AssistantId
 		// CloudFormation resource type schema:
 		//
@@ -69,27 +73,21 @@ func aIPromptVersionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"assistant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"assistant_id": schemaAttributea160c09e4a6027130ca447a8(),
 		// Property: ModifiedTimeSeconds
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "number"
 		//	}
-		"modified_time_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"modified_time_seconds": schemaAttribute3ea39281e82f0e895ee0c595(),
 		// Property: VersionNumber
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "number"
 		//	}
-		"version_number": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"version_number": schemaAttribute3ea39281e82f0e895ee0c595(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

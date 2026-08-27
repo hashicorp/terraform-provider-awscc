@@ -14,6 +14,166 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1e93b8237cd49a1a84807499() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies a location to store the status file for an AS2 message.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33953499493f5608c7d07973() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the partner profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a20d055837e02cb7017ade8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Contains one or more values that you assigned to the key name you create.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d24a1bc02fb95292d0ae101() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the base directory for the agreement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b05ed9fb3bdfbdcbd958ed7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies a location to store the MDN file for an AS2 message.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c1c1ab77f19da5852605374() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether to preserve the filename received for this agreement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c8b00db59f66de8be66cfae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name assigned to the tag that you create.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57c6610f190168ce4a8281d5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the local profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6019549988c72e86f14f62aa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A textual description for the agreement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute624d1ab84e2dab2d79916ab0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the access role for the agreement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77790c5baf990dd940e323c9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FailedFilesDirectory
+			"failed_files_directory": schemaAttributede51c61e05b32e315bfa8fc1(),
+			// Property: MdnFilesDirectory
+			"mdn_files_directory": schemaAttribute4b05ed9fb3bdfbdcbd958ed7(),
+			// Property: PayloadFilesDirectory
+			"payload_files_directory": schemaAttributea9e73d6bb9e4a6e8b7cf6140(),
+			// Property: StatusFilesDirectory
+			"status_files_directory": schemaAttribute1e93b8237cd49a1a84807499(),
+			// Property: TemporaryFilesDirectory
+			"temporary_files_directory": schemaAttribute81447601a49fc0f539951f4c(),
+		}, /*END SCHEMA*/
+		Description: "Specifies a separate directory for each type of file to store for an AS2 message.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute81447601a49fc0f539951f4c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies a location to store the temporary processing file for an AS2 message.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea64ff08f31f42e42a768f8a2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether to enforce an AS2 message is signed for this agreement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9e73d6bb9e4a6e8b7cf6140() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies a location to store the payload file for an AS2 message.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb81221bf55dc9f6d7889b892() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the unique Amazon Resource Name (ARN) for the agreement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec600d31e2e80049b87751e45() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the server.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc6ac731dd82a470041afc98() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the agreement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed55cba9327f24be5356ed4d1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the status of the agreement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede51c61e05b32e315bfa8fc1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies a location to store the failed files for an AS2 message.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb851eec9cf361b51003d76a() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute4c8b00db59f66de8be66cfae(),
+				// Property: Value
+				"value": schemaAttribute3a20d055837e02cb7017ade8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Key-value pairs that can be used to group and search for agreements. Tags are metadata attached to agreements for any purpose.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_transfer_agreement", agreementDataSource)
 }
@@ -32,10 +192,7 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:.*role/.*",
 		//	  "type": "string"
 		//	}
-		"access_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the access role for the agreement.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"access_role": schemaAttribute624d1ab84e2dab2d79916ab0(),
 		// Property: AgreementId
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +203,7 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^a-([0-9a-f]{17})$",
 		//	  "type": "string"
 		//	}
-		"agreement_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for the agreement.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"agreement_id": schemaAttributecc6ac731dd82a470041afc98(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -60,10 +214,7 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:.*",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the unique Amazon Resource Name (ARN) for the agreement.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeb81221bf55dc9f6d7889b892(),
 		// Property: BaseDirectory
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +224,7 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(|/.*)$",
 		//	  "type": "string"
 		//	}
-		"base_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the base directory for the agreement.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"base_directory": schemaAttribute3d24a1bc02fb95292d0ae101(),
 		// Property: CustomDirectories
 		// CloudFormation resource type schema:
 		//
@@ -119,37 +267,7 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"custom_directories": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FailedFilesDirectory
-				"failed_files_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies a location to store the failed files for an AS2 message.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MdnFilesDirectory
-				"mdn_files_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies a location to store the MDN file for an AS2 message.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PayloadFilesDirectory
-				"payload_files_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies a location to store the payload file for an AS2 message.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StatusFilesDirectory
-				"status_files_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies a location to store the status file for an AS2 message.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TemporaryFilesDirectory
-				"temporary_files_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies a location to store the temporary processing file for an AS2 message.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies a separate directory for each type of file to store for an AS2 message.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"custom_directories": schemaAttribute77790c5baf990dd940e323c9(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -160,10 +278,7 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A textual description for the agreement.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute6019549988c72e86f14f62aa(),
 		// Property: EnforceMessageSigning
 		// CloudFormation resource type schema:
 		//
@@ -175,10 +290,7 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"enforce_message_signing": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether to enforce an AS2 message is signed for this agreement.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enforce_message_signing": schemaAttributea64ff08f31f42e42a768f8a2(),
 		// Property: LocalProfileId
 		// CloudFormation resource type schema:
 		//
@@ -189,10 +301,7 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^p-([0-9a-f]{17})$",
 		//	  "type": "string"
 		//	}
-		"local_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for the local profile.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"local_profile_id": schemaAttribute57c6610f190168ce4a8281d5(),
 		// Property: PartnerProfileId
 		// CloudFormation resource type schema:
 		//
@@ -203,10 +312,7 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^p-([0-9a-f]{17})$",
 		//	  "type": "string"
 		//	}
-		"partner_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for the partner profile.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"partner_profile_id": schemaAttribute33953499493f5608c7d07973(),
 		// Property: PreserveFilename
 		// CloudFormation resource type schema:
 		//
@@ -218,10 +324,7 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"preserve_filename": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether to preserve the filename received for this agreement.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"preserve_filename": schemaAttribute4c1c1ab77f19da5852605374(),
 		// Property: ServerId
 		// CloudFormation resource type schema:
 		//
@@ -232,10 +335,7 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^s-([0-9a-f]{17})$",
 		//	  "type": "string"
 		//	}
-		"server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier for the server.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"server_id": schemaAttributec600d31e2e80049b87751e45(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -247,10 +347,7 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the status of the agreement.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributed55cba9327f24be5356ed4d1(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -284,24 +381,7 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name assigned to the tag that you create.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Contains one or more values that you assigned to the key name you create.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Key-value pairs that can be used to group and search for agreements. Tags are metadata attached to agreements for any purpose.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeeb851eec9cf361b51003d76a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

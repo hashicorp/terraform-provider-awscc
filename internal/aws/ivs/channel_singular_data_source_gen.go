@@ -14,6 +14,147 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute3758ef779d4d985734c059a2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates which content-packaging format is used (MPEG-TS or fMP4). If multitrackInputConfiguration is specified and enabled is true, then containerFormat is required and must be set to FRAGMENTED_MP4. Otherwise, containerFormat may be set to TS or FRAGMENTED_MP4. Default: TS.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41e926e14fbd6796d007ce5a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: \"\" (recording is disabled).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute420e6d23102e6b1f08e07041() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether the channel is authorized.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a2c6cccd6e8ea9fc97edbe7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60b60d31c0e8672a0c2526a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7119481e85796cb43ccdbece() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Channel",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83f194158c15d7a14d867488() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute5a2c6cccd6e8ea9fc97edbe7(),
+				// Property: Value
+				"value": schemaAttributef70316fd89aa3e274de66a9d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs that contain metadata for the asset model.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8fa256f4d4162fa250f04e45() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether multitrack input is enabled. Can be set to true only if channel type is STANDARD. Setting enabled to true with any other channel type will cause an exception. If true, then policy, maximumResolution, and containerFormat are required, and containerFormat must be set to FRAGMENTED_MP4. Default: false.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea21587bed9dcde3086bff9a9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Enabled
+			"enabled": schemaAttribute8fa256f4d4162fa250f04e45(),
+			// Property: MaximumResolution
+			"maximum_resolution": schemaAttributec6522cdf98722652e3b1b50b(),
+			// Property: Policy
+			"policy": schemaAttributef7573bb26c3ed71e9633a521(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3b2c083f17a3d80e01c39da() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec43ba7b3edf0196c33f05393() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Channel Playback URL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6522cdf98722652e3b1b50b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Maximum resolution for multitrack input. Required if enabled is true.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5132bf2ac31bb42a6715ae0() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether the channel allows insecure ingest.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef282d7673523ab84ec6e51d6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string (\"\").",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef70316fd89aa3e274de66a9d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7248beb52554b1a0a78b00c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Channel ARN is automatically generated on creation and assigned as the unique identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7573bb26c3ed71e9633a521() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether multitrack input is allowed or required. Required if enabled is true.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff0443455a6ef3559385127e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Channel latency mode.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ivs_channel", channelDataSource)
 }
@@ -32,10 +173,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Channel ARN is automatically generated on creation and assigned as the unique identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributef7248beb52554b1a0a78b00c(),
 		// Property: Authorized
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +182,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Whether the channel is authorized.",
 		//	  "type": "boolean"
 		//	}
-		"authorized": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether the channel is authorized.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"authorized": schemaAttribute420e6d23102e6b1f08e07041(),
 		// Property: ContainerFormat
 		// CloudFormation resource type schema:
 		//
@@ -60,10 +195,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"container_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates which content-packaging format is used (MPEG-TS or fMP4). If multitrackInputConfiguration is specified and enabled is true, then containerFormat is required and must be set to FRAGMENTED_MP4. Otherwise, containerFormat may be set to TS or FRAGMENTED_MP4. Default: TS.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"container_format": schemaAttribute3758ef779d4d985734c059a2(),
 		// Property: IngestEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -71,10 +203,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.",
 		//	  "type": "string"
 		//	}
-		"ingest_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ingest_endpoint": schemaAttribute60b60d31c0e8672a0c2526a5(),
 		// Property: InsecureIngest
 		// CloudFormation resource type schema:
 		//
@@ -83,10 +212,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Whether the channel allows insecure ingest.",
 		//	  "type": "boolean"
 		//	}
-		"insecure_ingest": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether the channel allows insecure ingest.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"insecure_ingest": schemaAttributed5132bf2ac31bb42a6715ae0(),
 		// Property: LatencyMode
 		// CloudFormation resource type schema:
 		//
@@ -99,10 +225,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"latency_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Channel latency mode.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"latency_mode": schemaAttributeff0443455a6ef3559385127e(),
 		// Property: MultitrackInputConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -134,26 +257,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"multitrack_input_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Enabled
-				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether multitrack input is enabled. Can be set to true only if channel type is STANDARD. Setting enabled to true with any other channel type will cause an exception. If true, then policy, maximumResolution, and containerFormat are required, and containerFormat must be set to FRAGMENTED_MP4. Default: false.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaximumResolution
-				"maximum_resolution": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Maximum resolution for multitrack input. Required if enabled is true.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Policy
-				"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether multitrack input is allowed or required. Required if enabled is true.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"multitrack_input_configuration": schemaAttributea21587bed9dcde3086bff9a9(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -165,10 +269,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-_]*$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Channel",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute7119481e85796cb43ccdbece(),
 		// Property: PlaybackUrl
 		// CloudFormation resource type schema:
 		//
@@ -176,10 +277,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Channel Playback URL.",
 		//	  "type": "string"
 		//	}
-		"playback_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Channel Playback URL.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"playback_url": schemaAttributec43ba7b3edf0196c33f05393(),
 		// Property: Preset
 		// CloudFormation resource type schema:
 		//
@@ -192,10 +290,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"preset": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string (\"\").",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"preset": schemaAttributef282d7673523ab84ec6e51d6(),
 		// Property: RecordingConfigurationArn
 		// CloudFormation resource type schema:
 		//
@@ -207,10 +302,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^$|arn:aws:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"recording_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: \"\" (recording is disabled).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"recording_configuration_arn": schemaAttribute41e926e14fbd6796d007ce5a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -243,24 +335,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs that contain metadata for the asset model.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute83f194158c15d7a14d867488(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -275,10 +350,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttributeb3b2c083f17a3d80e01c39da(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

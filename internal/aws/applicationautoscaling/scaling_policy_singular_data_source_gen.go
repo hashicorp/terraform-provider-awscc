@@ -14,6 +14,703 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0aacfddbba88655169c3a65c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the metric. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that's returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0ae20b49193f10863a58b227() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PredefinedMetricType
+			"predefined_metric_type": schemaAttribute5ab7284e4d7f9724db3aafe2(),
+			// Property: ResourceLabel
+			"resource_label": schemaAttribute477fe78eabef8fd824176b5e(),
+		}, /*END SCHEMA*/
+		Description: "The predefined metric pair specification that determines the appropriate scaling metric and load metric to use.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0e649c8587570062159cea05() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity. The value is specified as a percentage relative to the forecast capacity. For example, if the buffer is 10, this means a 10 percent buffer, such that if the forecast capacity is 50, and the maximum capacity is 40, then the effective maximum capacity is 55. \n Required if the ``MaxCapacityBreachBehavior`` property is set to ``IncreaseMaxCapacity``, and cannot be used otherwise.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f51126dd9693af6e6e93727() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the metric.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1008082a2a18465bd896b44f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Dimensions
+			"dimensions": schemaAttribute231c4efff3644bd0d4174895(),
+			// Property: MetricName
+			"metric_name": schemaAttribute0aacfddbba88655169c3a65c(),
+			// Property: Metrics
+			"metrics": schemaAttribute6b75496f7688748241109f48(),
+			// Property: Namespace
+			"namespace": schemaAttributeaed6e95b50c08ca62471faa2(),
+			// Property: Statistic
+			"statistic": schemaAttributef2bf07e69fd5626d2addfdf2(),
+			// Property: Unit
+			"unit": schemaAttribute7e289cd7bf2ae652af1dfec4(),
+		}, /*END SCHEMA*/
+		Description: "A customized metric. You can specify either a predefined metric or a customized metric.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1130e469c79d7ba683ae7cc6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PredefinedMetricType
+			"predefined_metric_type": schemaAttributeea40501de905ed42846d925e(),
+			// Property: ResourceLabel
+			"resource_label": schemaAttribute6c789b95b613d72d64f6b775(),
+		}, /*END SCHEMA*/
+		Description: "The predefined load metric specification.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15b3787706173e3d95b592e8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Identifies the resource associated with the metric type. You can't specify a resource label unless the metric type is ``ALBRequestCountPerTarget`` and there is a target group attached to the Spot Fleet or ECS service.\n You create the resource label by appending the final portion of the load balancer ARN and the final portion of the target group ARN into a single value, separated by a forward slash (/). The format of the resource label is:\n ``app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff``.\n Where:\n  +  app/<load-balancer-name>/<load-balancer-id> is the final portion of the load balancer ARN\n  +  targetgroup/<target-group-name>/<target-group-id> is the final portion of the target group ARN.\n  \n To find the ARN for an Application Load Balancer, use the [DescribeLoadBalancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html) API operation. To find the ARN for the target group, use the [DescribeTargetGroups](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html) API operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute168050739964790f5d7e8707() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. \n The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a6e420c3f35aa19e2d91945() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the resource associated with the scaling policy. This string consists of the resource type and unique identifier.\n  +  ECS service - The resource type is ``service`` and the unique identifier is the cluster name and service name. Example: ``service/my-cluster/my-service``.\n  +  Spot Fleet - The resource type is ``spot-fleet-request`` and the unique identifier is the Spot Fleet request ID. Example: ``spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE``.\n  +  EMR cluster - The resource type is ``instancegroup`` and the unique identifier is the cluster ID and instance group ID. Example: ``instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0``.\n  +  AppStream 2.0 fleet - The resource type is ``fleet`` and the unique identifier is the fleet name. Example: ``fleet/sample-fleet``.\n  +  DynamoDB table - The resource type is ``table`` and the unique identifier is the table name. Example: ``table/my-table``.\n  +  DynamoDB global secondary index - The resource type is ``index`` and the unique identifier is the index name. Example: ``table/my-table/index/my-table-index``.\n  +  Aurora DB cluster - The resource type is ``cluster`` and the unique identifier is the cluster name. Example: ``cluster:my-db-cluster``.\n  +  SageMaker endpoint variant - The resource type is ``variant`` and the unique identifier is the resource ID. Example: ``endpoint/my-end-point/variant/KMeansClustering``.\n  +  Custom resources are not supported with a resource type. This parameter must specify the ``OutputValue`` from the CloudFormation template stack used to access the resources. The unique identifier is defined by the service provider. More information is available in our [GitHub repository](https://docs.aws.amazon.com/https://github.com/aws/aws-auto-scaling-custom-resource).\n  +  Amazon Comprehend document classification endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: ``arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE``.\n  +  Amazon Comprehend entity recognizer endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: ``arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE``.\n  +  Lambda provisioned concurrency - The resource type is ``function`` and the unique identifier is the function name with a function version or alias name suffix that is not ``$LATEST``. Example: ``function:my-function:prod`` or ``function:my-function:1``.\n  +  Amazon Keyspaces table - The resource type is ``table`` and the unique identifier is the table name. Example: ``keyspace/mykeyspace/table/mytable``.\n  +  Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN. Example: ``arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5``.\n  +  Amazon ElastiCache replication group - The resource type is ``replication-group`` and the unique identifier is the replication group name. Example: ``replication-group/mycluster``.\n  +  Amazon ElastiCache cache cluster - The resource type is ``cache-cluster`` and the unique identifier is the cache cluster name. Example: ``cache-cluster/mycluster``.\n  +  Neptune cluster - The resource type is ``cluster`` and the unique identifier is the cluster name. Example: ``cluster:mycluster``.\n  +  SageMaker serverless endpoint - The resource type is ``variant`` and the unique identifier is the resource ID. Example: ``endpoint/my-end-point/variant/KMeansClustering``.\n  +  SageMaker inference component - The resource type is ``inference-component`` and the unique identifier is the resource ID. Example: ``inference-component/my-inference-component``.\n  +  Pool of WorkSpaces - The resource type is ``workspacespool`` and the unique identifier is the pool ID. Example: ``workspacespool/wspool-123456``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d7a5ad916e39c78ac628fa4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The predictive scaling mode. Defaults to ``ForecastOnly`` if not specified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute231c4efff3644bd0d4174895() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttributebfe07ffade1dc9dc2b63c095(),
+				// Property: Value
+				"value": schemaAttribute3010370c39c9b0fcd29769ac(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The dimensions of the metric. \n Conditional: If you published your metric with dimensions, you must specify the same dimensions in your scaling policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24928a4cbf3f0173fa3bc7ca() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Expression
+				"expression": schemaAttributecd6c204dbb39eb74a4d3dab5(),
+				// Property: Id
+				"id": schemaAttributeef277c3cf58406d0069ebb63(),
+				// Property: Label
+				"label": schemaAttribute45d27c514bdf05225138221e(),
+				// Property: MetricStat
+				"metric_stat": schemaAttributea0942aa28f664b0e3a306604(),
+				// Property: ReturnData
+				"return_data": schemaAttribute9f9c32ee8d05e6e924b09846(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more metric data queries to provide data points for a metric specification.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute27380fba943572481dd3c1e0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The scaling policy type.\n The following policy types are supported: \n ``TargetTrackingScaling``—Not supported for Amazon EMR\n ``StepScaling``—Not supported for DynamoDB, Amazon Comprehend, Lambda, Amazon Keyspaces, Amazon MSK, Amazon ElastiCache, or Neptune.\n ``PredictiveScaling``—Only supported for Amazon ECS",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3010370c39c9b0fcd29769ac() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the dimension.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute356843eb286ca208b16ae1d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The CloudFormation-generated ID of an Application Auto Scaling scalable target. For more information about the ID, see the Return Value section of the ``AWS::ApplicationAutoScaling::ScalableTarget`` resource.\n  You must specify either the ``ScalingTargetId`` property, or the ``ResourceId``, ``ScalableDimension``, and ``ServiceNamespace`` properties, but not both.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37a452eee83440761bc59b96() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether scale in by the target tracking scaling policy is disabled. If the value is ``true``, scale in is disabled and the target tracking scaling policy won't remove capacity from the scalable target. Otherwise, scale in is enabled and the target tracking scaling policy can remove capacity from the scalable target. The default value is ``false``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3832d43718cc8b8cabb5dd65() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A label that uniquely identifies a specific target group from which to determine the average request count.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f2639b66f4603e8e76d0f98() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum value to scale by when the adjustment type is ``PercentChangeInCapacity``. For example, suppose that you create a step scaling policy to scale out an Amazon ECS service by 25 percent and you specify a ``MinAdjustmentMagnitude`` of 2. If the service has 4 tasks and the scaling policy is performed, 25 percent of 4 is 1. However, because you specified a ``MinAdjustmentMagnitude`` of 2, Application Auto Scaling scales out the service by 2 tasks.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute412c1b5419b200b36e64e92c() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MetricIntervalLowerBound
+				"metric_interval_lower_bound": schemaAttributeb12dd502900f40d44b32ec87(),
+				// Property: MetricIntervalUpperBound
+				"metric_interval_upper_bound": schemaAttribute57b60ab3053702c975a9cedb(),
+				// Property: ScalingAdjustment
+				"scaling_adjustment": schemaAttribute982633836d44b1f0047818ea(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A set of adjustments that enable you to scale based on the size of the alarm breach.\n At least one step adjustment is required if you are adding a new step scaling policy configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute414080afacc40931d9217efd() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount of time, in seconds, to wait for a previous scaling activity to take effect. If not specified, the default value is 300. For more information, see [Cooldown period](https://docs.aws.amazon.com/autoscaling/application/userguide/step-scaling-policy-overview.html#step-scaling-cooldown) in the *Application Auto Scaling User Guide*.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45d27c514bdf05225138221e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute477fe78eabef8fd824176b5e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A label that uniquely identifies a specific target group from which to determine the total and average request count.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a6625ba6a3bc4b59589529c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MetricDataQueries
+			"metric_data_queries": schemaAttributea355041f58cc58b5f7174208(),
+		}, /*END SCHEMA*/
+		Description: "The customized load metric specification.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5679a982fc694611a08f3343() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PredefinedMetricType
+			"predefined_metric_type": schemaAttribute8f0ef7a22e5398bcfef8bc1f(),
+			// Property: ResourceLabel
+			"resource_label": schemaAttribute15b3787706173e3d95b592e8(),
+		}, /*END SCHEMA*/
+		Description: "A predefined metric. You can specify either a predefined metric or a customized metric.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57b60ab3053702c975a9cedb() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The upper bound for the difference between the alarm threshold and the CloudWatch metric. If the metric value is above the breach threshold, the upper bound is exclusive (the metric must be less than the threshold plus the upper bound). Otherwise, it is inclusive (the metric must be less than or equal to the threshold plus the upper bound). A null value indicates positive infinity.\n You must specify at least one upper or lower bound.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute590e48b5475c3953461b27b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The namespace of the AWS service that provides the resource, or a ``custom-resource``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ab7284e4d7f9724db3aafe2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates which metrics to use. There are two different types of metrics for each metric type: one is a load metric and one is a scaling metric.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e9596a15ea7f98fd2f3b9f4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Defines the behavior that should be applied if the forecast capacity approaches or exceeds the maximum capacity. Defaults to ``HonorMaxCapacity`` if not specified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ef9185567adfd91e470b1e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*.\n The most commonly used metric for scaling is ``Average``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f9ff9359f9b60748bae6104() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxCapacityBreachBehavior
+			"max_capacity_breach_behavior": schemaAttribute5e9596a15ea7f98fd2f3b9f4(),
+			// Property: MaxCapacityBuffer
+			"max_capacity_buffer": schemaAttribute0e649c8587570062159cea05(),
+			// Property: MetricSpecifications
+			"metric_specifications": schemaAttribute829581b52566d416d61addba(),
+			// Property: Mode
+			"mode": schemaAttribute1d7a5ad916e39c78ac628fa4(),
+			// Property: SchedulingBufferTime
+			"scheduling_buffer_time": schemaAttributed4079813d35e0a318b26fdd0(),
+		}, /*END SCHEMA*/
+		Description: "The predictive scaling policy configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute655b1c62f0bf02ce7455f5cb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MetricDataQueries
+			"metric_data_queries": schemaAttribute24928a4cbf3f0173fa3bc7ca(),
+		}, /*END SCHEMA*/
+		Description: "The customized scaling metric specification.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6acef2220779f4e078ac1568() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The target value for the metric. Although this property accepts numbers of type Double, it won't accept values that are either too small or too large. Values must be in the range of -2^360 to 2^360. The value must be a valid number based on the choice of metric. For example, if the metric is CPU utilization, then the target value is a percent value that represents how much of the CPU can be used before scaling out.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b75496f7688748241109f48() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Expression
+				"expression": schemaAttribute92402abb280e1c7a1d3dba0d(),
+				// Property: Id
+				"id": schemaAttributeef277c3cf58406d0069ebb63(),
+				// Property: Label
+				"label": schemaAttribute45d27c514bdf05225138221e(),
+				// Property: MetricStat
+				"metric_stat": schemaAttributebe3166f84d265dbd97830d71(),
+				// Property: ReturnData
+				"return_data": schemaAttribute9f9c32ee8d05e6e924b09846(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The metrics to include in the target tracking scaling policy, as a metric data query. This can include both raw metric and metric math expressions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c3ee4cd5ec048046e4a9830() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the ``ScalingAdjustment`` value in the ``StepAdjustment`` property is an absolute number or a percentage of the current capacity.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c789b95b613d72d64f6b775() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A label that uniquely identifies a target group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute74dc2c785ca9fa031fb76874() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute798c789d0224bf84eafa56c3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Dimensions
+			"dimensions": schemaAttribute7b96f8332d2eccc64cb40110(),
+			// Property: MetricName
+			"metric_name": schemaAttribute0f51126dd9693af6e6e93727(),
+			// Property: Namespace
+			"namespace": schemaAttributeaed6e95b50c08ca62471faa2(),
+		}, /*END SCHEMA*/
+		Description: "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b96f8332d2eccc64cb40110() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttributebfe07ffade1dc9dc2b63c095(),
+				// Property: Value
+				"value": schemaAttribute3010370c39c9b0fcd29769ac(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Describes the dimensions of the metric.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e289cd7bf2ae652af1dfec4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unit of the metric. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute829581b52566d416d61addba() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomizedCapacityMetricSpecification
+				"customized_capacity_metric_specification": schemaAttributef587e8949dbe31b6872b342f(),
+				// Property: CustomizedLoadMetricSpecification
+				"customized_load_metric_specification": schemaAttribute4a6625ba6a3bc4b59589529c(),
+				// Property: CustomizedScalingMetricSpecification
+				"customized_scaling_metric_specification": schemaAttribute655b1c62f0bf02ce7455f5cb(),
+				// Property: PredefinedLoadMetricSpecification
+				"predefined_load_metric_specification": schemaAttribute1130e469c79d7ba683ae7cc6(),
+				// Property: PredefinedMetricPairSpecification
+				"predefined_metric_pair_specification": schemaAttribute0ae20b49193f10863a58b227(),
+				// Property: PredefinedScalingMetricSpecification
+				"predefined_scaling_metric_specification": schemaAttributebce7934d2fe854eec83a850c(),
+				// Property: TargetValue
+				"target_value": schemaAttributedb1c6700d8eaebf1866f8a8d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "This structure includes the metrics and target utilization to use for predictive scaling. \n This is an array, but we currently only support a single metric specification. That is, you can specify a target value and a single metric pair, or a target value and one scaling metric and one load metric.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f0ef7a22e5398bcfef8bc1f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The metric type. The ``ALBRequestCountPerTarget`` metric type applies only to Spot fleet requests and ECS services.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92402abb280e1c7a1d3dba0d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``TargetTrackingMetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute982633836d44b1f0047818ea() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount by which to scale. The adjustment is based on the value that you specified in the ``AdjustmentType`` property (either an absolute number or a percentage). A positive value adds to the current capacity and a negative number subtracts from the current capacity.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f9c32ee8d05e6e924b09846() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether to return the timestamps and raw data values of this metric. \n If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.\n If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fea75bf68283b33dcf5b750() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount of time, in seconds, after a scale-in activity completes before another scale-in activity can start. For more information and for default values, see [Define cooldown periods](https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown) in the *Application Auto Scaling User Guide*.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0942aa28f664b0e3a306604() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Metric
+			"metric": schemaAttribute798c789d0224bf84eafa56c3(),
+			// Property: Stat
+			"stat": schemaAttribute168050739964790f5d7e8707(),
+			// Property: Unit
+			"unit": schemaAttributeaef2a19e69ff04de6dd40fc6(),
+		}, /*END SCHEMA*/
+		Description: "Information about the metric data to return. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0fe7e57d69011f429a7baa8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The scalable dimension. This string consists of the service namespace, resource type, and scaling property.\n  +  ``ecs:service:DesiredCount`` - The task count of an ECS service.\n  +  ``elasticmapreduce:instancegroup:InstanceCount`` - The instance count of an EMR Instance Group.\n  +  ``ec2:spot-fleet-request:TargetCapacity`` - The target capacity of a Spot Fleet.\n  +  ``appstream:fleet:DesiredCapacity`` - The capacity of an AppStream 2.0 fleet.\n  +  ``dynamodb:table:ReadCapacityUnits`` - The provisioned read capacity for a DynamoDB table.\n  +  ``dynamodb:table:WriteCapacityUnits`` - The provisioned write capacity for a DynamoDB table.\n  +  ``dynamodb:index:ReadCapacityUnits`` - The provisioned read capacity for a DynamoDB global secondary index.\n  +  ``dynamodb:index:WriteCapacityUnits`` - The provisioned write capacity for a DynamoDB global secondary index.\n  +  ``rds:cluster:ReadReplicaCount`` - The count of Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible edition and Aurora PostgreSQL-compatible edition.\n  +  ``sagemaker:variant:DesiredInstanceCount`` - The number of EC2 instances for a SageMaker model endpoint variant.\n  +  ``custom-resource:ResourceType:Property`` - The scalable dimension for a custom resource provided by your own application or service.\n  +  ``comprehend:document-classifier-endpoint:DesiredInferenceUnits`` - The number of inference units for an Amazon Comprehend document classification endpoint.\n  +  ``comprehend:entity-recognizer-endpoint:DesiredInferenceUnits`` - The number of inference units for an Amazon Comprehend entity recognizer endpoint.\n  +  ``lambda:function:ProvisionedConcurrency`` - The provisioned concurrency for a Lambda function.\n  +  ``cassandra:table:ReadCapacityUnits`` - The provisioned read capacity for an Amazon Keyspaces table.\n  +  ``cassandra:table:WriteCapacityUnits`` - The provisioned write capacity for an Amazon Keyspaces table.\n  +  ``kafka:broker-storage:VolumeSize`` - The provisioned volume size (in GiB) for brokers in an Amazon MSK cluster.\n  +  ``elasticache:cache-cluster:Nodes`` - The number of nodes for an Amazon ElastiCache cache cluster.\n  +  ``elasticache:replication-group:NodeGroups`` - The number of node groups for an Amazon ElastiCache replication group.\n  +  ``elasticache:replication-group:Replicas`` - The number of replicas per node group for an Amazon ElastiCache replication group.\n  +  ``neptune:cluster:ReadReplicaCount`` - The count of read replicas in an Amazon Neptune DB cluster.\n  +  ``sagemaker:variant:DesiredProvisionedConcurrency`` - The provisioned concurrency for a SageMaker serverless endpoint.\n  +  ``sagemaker:inference-component:DesiredCopyCount`` - The number of copies across an endpoint for a SageMaker inference component.\n  +  ``workspaces:workspacespool:DesiredUserSessions`` - The number of user sessions for the WorkSpaces in the pool.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea19ec73cfc4ca4bf17aba79b() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount of time, in seconds, to wait for a previous scale-out activity to take effect. For more information and for default values, see [Define cooldown periods](https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown) in the *Application Auto Scaling User Guide*.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea355041f58cc58b5f7174208() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Expression
+				"expression": schemaAttributecd6c204dbb39eb74a4d3dab5(),
+				// Property: Id
+				"id": schemaAttributeef277c3cf58406d0069ebb63(),
+				// Property: Label
+				"label": schemaAttribute45d27c514bdf05225138221e(),
+				// Property: MetricStat
+				"metric_stat": schemaAttributea0942aa28f664b0e3a306604(),
+				// Property: ReturnData
+				"return_data": schemaAttribute9f9c32ee8d05e6e924b09846(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaed6e95b50c08ca62471faa2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The namespace of the metric.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaef2a19e69ff04de6dd40fc6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb12dd502900f40d44b32ec87() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The lower bound for the difference between the alarm threshold and the CloudWatch metric. If the metric value is above the breach threshold, the lower bound is inclusive (the metric must be greater than or equal to the threshold plus the lower bound). Otherwise, it is exclusive (the metric must be greater than the threshold plus the lower bound). A null value indicates negative infinity.\n You must specify at least one upper or lower bound.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebce7934d2fe854eec83a850c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PredefinedMetricType
+			"predefined_metric_type": schemaAttributeea40501de905ed42846d925e(),
+			// Property: ResourceLabel
+			"resource_label": schemaAttribute3832d43718cc8b8cabb5dd65(),
+		}, /*END SCHEMA*/
+		Description: "The predefined scaling metric specification.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebda41bf53657057455093e75() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the scaling policy.\n Updates to the name of a target tracking scaling policy are not supported, unless you also update the metric used for scaling. To change only a target tracking scaling policy's name, first delete the policy by removing the existing ``AWS::ApplicationAutoScaling::ScalingPolicy`` resource from the template and updating the stack. Then, recreate the resource with the same settings and a different name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe3166f84d265dbd97830d71() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Metric
+			"metric": schemaAttributedc712453b2d21211b8e5d5fc(),
+			// Property: Stat
+			"stat": schemaAttribute5ef9185567adfd91e470b1e1(),
+			// Property: Unit
+			"unit": schemaAttributeaef2a19e69ff04de6dd40fc6(),
+		}, /*END SCHEMA*/
+		Description: "Information about the metric data to return.\n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe9577c7b1aa9d626ca647b8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The namespace of the metric. For more information, see the table in [services that publish CloudWatch metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html) in the *Amazon CloudWatch User Guide*.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebfe07ffade1dc9dc2b63c095() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the dimension.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd6c204dbb39eb74a4d3dab5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4079813d35e0a318b26fdd0() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount of time, in seconds, that the start time can be advanced. \n The value must be less than the forecast interval duration of 3600 seconds (60 minutes). Defaults to 300 seconds if not specified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed48f39560d4caffd23681549() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The aggregation type for the CloudWatch metrics. Valid values are ``Minimum``, ``Maximum``, and ``Average``. If the aggregation type is null, the value is treated as ``Average``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb1c6700d8eaebf1866f8a8d() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the target utilization.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc58630873e9809dca69fb78() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AdjustmentType
+			"adjustment_type": schemaAttribute6c3ee4cd5ec048046e4a9830(),
+			// Property: Cooldown
+			"cooldown": schemaAttribute414080afacc40931d9217efd(),
+			// Property: MetricAggregationType
+			"metric_aggregation_type": schemaAttributed48f39560d4caffd23681549(),
+			// Property: MinAdjustmentMagnitude
+			"min_adjustment_magnitude": schemaAttribute3f2639b66f4603e8e76d0f98(),
+			// Property: StepAdjustments
+			"step_adjustments": schemaAttribute412c1b5419b200b36e64e92c(),
+		}, /*END SCHEMA*/
+		Description: "A step scaling policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc712453b2d21211b8e5d5fc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Dimensions
+			"dimensions": schemaAttributef023f1bb855166dfaaad3a46(),
+			// Property: MetricName
+			"metric_name": schemaAttribute0f51126dd9693af6e6e93727(),
+			// Property: Namespace
+			"namespace": schemaAttributebe9577c7b1aa9d626ca647b8(),
+		}, /*END SCHEMA*/
+		Description: "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea40501de905ed42846d925e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The metric type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef277c3cf58406d0069ebb63() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef023f1bb855166dfaaad3a46() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttributebfe07ffade1dc9dc2b63c095(),
+				// Property: Value
+				"value": schemaAttribute3010370c39c9b0fcd29769ac(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The dimensions for the metric. For the list of available dimensions, see the AWS documentation available from the table in [services that publish CloudWatch metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html) in the *Amazon CloudWatch User Guide*. \n Conditional: If you published your metric with dimensions, you must specify the same dimensions in your scaling policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2bf07e69fd5626d2addfdf2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The statistic of the metric.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef587e8949dbe31b6872b342f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MetricDataQueries
+			"metric_data_queries": schemaAttribute24928a4cbf3f0173fa3bc7ca(),
+		}, /*END SCHEMA*/
+		Description: "The customized capacity metric specification.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef63c6a3faa790a5528d39c86() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomizedMetricSpecification
+			"customized_metric_specification": schemaAttribute1008082a2a18465bd896b44f(),
+			// Property: DisableScaleIn
+			"disable_scale_in": schemaAttribute37a452eee83440761bc59b96(),
+			// Property: PredefinedMetricSpecification
+			"predefined_metric_specification": schemaAttribute5679a982fc694611a08f3343(),
+			// Property: ScaleInCooldown
+			"scale_in_cooldown": schemaAttribute9fea75bf68283b33dcf5b750(),
+			// Property: ScaleOutCooldown
+			"scale_out_cooldown": schemaAttributea19ec73cfc4ca4bf17aba79b(),
+			// Property: TargetValue
+			"target_value": schemaAttribute6acef2220779f4e078ac1568(),
+		}, /*END SCHEMA*/
+		Description: "A target tracking scaling policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_applicationautoscaling_scaling_policy", scalingPolicyDataSource)
 }
@@ -29,10 +726,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute74dc2c785ca9fa031fb76874(),
 		// Property: PolicyName
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +734,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The name of the scaling policy.\n Updates to the name of a target tracking scaling policy are not supported, unless you also update the metric used for scaling. To change only a target tracking scaling policy's name, first delete the policy by removing the existing ``AWS::ApplicationAutoScaling::ScalingPolicy`` resource from the template and updating the stack. Then, recreate the resource with the same settings and a different name.",
 		//	  "type": "string"
 		//	}
-		"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the scaling policy.\n Updates to the name of a target tracking scaling policy are not supported, unless you also update the metric used for scaling. To change only a target tracking scaling policy's name, first delete the policy by removing the existing ``AWS::ApplicationAutoScaling::ScalingPolicy`` resource from the template and updating the stack. Then, recreate the resource with the same settings and a different name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_name": schemaAttributebda41bf53657057455093e75(),
 		// Property: PolicyType
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +742,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The scaling policy type.\n The following policy types are supported: \n ``TargetTrackingScaling``—Not supported for Amazon EMR\n ``StepScaling``—Not supported for DynamoDB, Amazon Comprehend, Lambda, Amazon Keyspaces, Amazon MSK, Amazon ElastiCache, or Neptune.\n ``PredictiveScaling``—Only supported for Amazon ECS",
 		//	  "type": "string"
 		//	}
-		"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The scaling policy type.\n The following policy types are supported: \n ``TargetTrackingScaling``—Not supported for Amazon EMR\n ``StepScaling``—Not supported for DynamoDB, Amazon Comprehend, Lambda, Amazon Keyspaces, Amazon MSK, Amazon ElastiCache, or Neptune.\n ``PredictiveScaling``—Only supported for Amazon ECS",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_type": schemaAttribute27380fba943572481dd3c1e0(),
 		// Property: PredictiveScalingPolicyConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -428,364 +1116,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"predictive_scaling_policy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaxCapacityBreachBehavior
-				"max_capacity_breach_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Defines the behavior that should be applied if the forecast capacity approaches or exceeds the maximum capacity. Defaults to ``HonorMaxCapacity`` if not specified.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaxCapacityBuffer
-				"max_capacity_buffer": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The size of the capacity buffer to use when the forecast capacity is close to or exceeds the maximum capacity. The value is specified as a percentage relative to the forecast capacity. For example, if the buffer is 10, this means a 10 percent buffer, such that if the forecast capacity is 50, and the maximum capacity is 40, then the effective maximum capacity is 55. \n Required if the ``MaxCapacityBreachBehavior`` property is set to ``IncreaseMaxCapacity``, and cannot be used otherwise.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MetricSpecifications
-				"metric_specifications": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: CustomizedCapacityMetricSpecification
-							"customized_capacity_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: MetricDataQueries
-									"metric_data_queries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Expression
-												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Id
-												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Label
-												"label": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: MetricStat
-												"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Metric
-														"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: Dimensions
-																"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-																	NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: Name
-																			"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The name of the dimension.",
-																				Computed:    true,
-																			}, /*END ATTRIBUTE*/
-																			// Property: Value
-																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the dimension.",
-																				Computed:    true,
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																	}, /*END NESTED OBJECT*/
-																	Description: "Describes the dimensions of the metric.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: MetricName
-																"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The name of the metric.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Namespace
-																"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The namespace of the metric.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Stat
-														"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. \n The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Unit
-														"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Information about the metric data to return. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: ReturnData
-												"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "Indicates whether to return the timestamps and raw data values of this metric. \n If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.\n If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "One or more metric data queries to provide data points for a metric specification.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The customized capacity metric specification.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: CustomizedLoadMetricSpecification
-							"customized_load_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: MetricDataQueries
-									"metric_data_queries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Expression
-												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Id
-												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Label
-												"label": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: MetricStat
-												"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Metric
-														"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: Dimensions
-																"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-																	NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: Name
-																			"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The name of the dimension.",
-																				Computed:    true,
-																			}, /*END ATTRIBUTE*/
-																			// Property: Value
-																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the dimension.",
-																				Computed:    true,
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																	}, /*END NESTED OBJECT*/
-																	Description: "Describes the dimensions of the metric.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: MetricName
-																"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The name of the metric.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Namespace
-																"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The namespace of the metric.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Stat
-														"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. \n The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Unit
-														"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Information about the metric data to return. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: ReturnData
-												"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "Indicates whether to return the timestamps and raw data values of this metric. \n If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.\n If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The customized load metric specification.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: CustomizedScalingMetricSpecification
-							"customized_scaling_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: MetricDataQueries
-									"metric_data_queries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Expression
-												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Id
-												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Label
-												"label": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: MetricStat
-												"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Metric
-														"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: Dimensions
-																"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-																	NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: Name
-																			"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The name of the dimension.",
-																				Computed:    true,
-																			}, /*END ATTRIBUTE*/
-																			// Property: Value
-																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Description: "The value of the dimension.",
-																				Computed:    true,
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																	}, /*END NESTED OBJECT*/
-																	Description: "Describes the dimensions of the metric.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: MetricName
-																"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The name of the metric.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Namespace
-																"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The namespace of the metric.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Stat
-														"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*. \n The most commonly used metrics for predictive scaling are ``Average`` and ``Sum``.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Unit
-														"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Information about the metric data to return. \n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: ReturnData
-												"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Description: "Indicates whether to return the timestamps and raw data values of this metric. \n If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.\n If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Description: "One or more metric data queries to provide data points for a metric specification.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The customized scaling metric specification.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: PredefinedLoadMetricSpecification
-							"predefined_load_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: PredefinedMetricType
-									"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The metric type.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ResourceLabel
-									"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A label that uniquely identifies a target group.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The predefined load metric specification.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: PredefinedMetricPairSpecification
-							"predefined_metric_pair_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: PredefinedMetricType
-									"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Indicates which metrics to use. There are two different types of metrics for each metric type: one is a load metric and one is a scaling metric.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ResourceLabel
-									"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A label that uniquely identifies a specific target group from which to determine the total and average request count.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The predefined metric pair specification that determines the appropriate scaling metric and load metric to use.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: PredefinedScalingMetricSpecification
-							"predefined_scaling_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: PredefinedMetricType
-									"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The metric type.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ResourceLabel
-									"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A label that uniquely identifies a specific target group from which to determine the average request count.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The predefined scaling metric specification.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TargetValue
-							"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "Specifies the target utilization.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "This structure includes the metrics and target utilization to use for predictive scaling. \n This is an array, but we currently only support a single metric specification. That is, you can specify a target value and a single metric pair, or a target value and one scaling metric and one load metric.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Mode
-				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The predictive scaling mode. Defaults to ``ForecastOnly`` if not specified.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SchedulingBufferTime
-				"scheduling_buffer_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The amount of time, in seconds, that the start time can be advanced. \n The value must be less than the forecast interval duration of 3600 seconds (60 minutes). Defaults to 300 seconds if not specified.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The predictive scaling policy configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"predictive_scaling_policy_configuration": schemaAttribute5f9ff9359f9b60748bae6104(),
 		// Property: ResourceId
 		// CloudFormation resource type schema:
 		//
@@ -793,10 +1124,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The identifier of the resource associated with the scaling policy. This string consists of the resource type and unique identifier.\n  +  ECS service - The resource type is ``service`` and the unique identifier is the cluster name and service name. Example: ``service/my-cluster/my-service``.\n  +  Spot Fleet - The resource type is ``spot-fleet-request`` and the unique identifier is the Spot Fleet request ID. Example: ``spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE``.\n  +  EMR cluster - The resource type is ``instancegroup`` and the unique identifier is the cluster ID and instance group ID. Example: ``instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0``.\n  +  AppStream 2.0 fleet - The resource type is ``fleet`` and the unique identifier is the fleet name. Example: ``fleet/sample-fleet``.\n  +  DynamoDB table - The resource type is ``table`` and the unique identifier is the table name. Example: ``table/my-table``.\n  +  DynamoDB global secondary index - The resource type is ``index`` and the unique identifier is the index name. Example: ``table/my-table/index/my-table-index``.\n  +  Aurora DB cluster - The resource type is ``cluster`` and the unique identifier is the cluster name. Example: ``cluster:my-db-cluster``.\n  +  SageMaker endpoint variant - The resource type is ``variant`` and the unique identifier is the resource ID. Example: ``endpoint/my-end-point/variant/KMeansClustering``.\n  +  Custom resources are not supported with a resource type. This parameter must specify the ``OutputValue`` from the CloudFormation template stack used to access the resources. The unique identifier is defined by the service provider. More information is available in our [GitHub repository](https://docs.aws.amazon.com/https://github.com/aws/aws-auto-scaling-custom-resource).\n  +  Amazon Comprehend document classification endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: ``arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE``.\n  +  Amazon Comprehend entity recognizer endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: ``arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE``.\n  +  Lambda provisioned concurrency - The resource type is ``function`` and the unique identifier is the function name with a function version or alias name suffix that is not ``$LATEST``. Example: ``function:my-function:prod`` or ``function:my-function:1``.\n  +  Amazon Keyspaces table - The resource type is ``table`` and the unique identifier is the table name. Example: ``keyspace/mykeyspace/table/mytable``.\n  +  Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN. Example: ``arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5``.\n  +  Amazon ElastiCache replication group - The resource type is ``replication-group`` and the unique identifier is the replication group name. Example: ``replication-group/mycluster``.\n  +  Amazon ElastiCache cache cluster - The resource type is ``cache-cluster`` and the unique identifier is the cache cluster name. Example: ``cache-cluster/mycluster``.\n  +  Neptune cluster - The resource type is ``cluster`` and the unique identifier is the cluster name. Example: ``cluster:mycluster``.\n  +  SageMaker serverless endpoint - The resource type is ``variant`` and the unique identifier is the resource ID. Example: ``endpoint/my-end-point/variant/KMeansClustering``.\n  +  SageMaker inference component - The resource type is ``inference-component`` and the unique identifier is the resource ID. Example: ``inference-component/my-inference-component``.\n  +  Pool of WorkSpaces - The resource type is ``workspacespool`` and the unique identifier is the pool ID. Example: ``workspacespool/wspool-123456``.",
 		//	  "type": "string"
 		//	}
-		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the resource associated with the scaling policy. This string consists of the resource type and unique identifier.\n  +  ECS service - The resource type is ``service`` and the unique identifier is the cluster name and service name. Example: ``service/my-cluster/my-service``.\n  +  Spot Fleet - The resource type is ``spot-fleet-request`` and the unique identifier is the Spot Fleet request ID. Example: ``spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE``.\n  +  EMR cluster - The resource type is ``instancegroup`` and the unique identifier is the cluster ID and instance group ID. Example: ``instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0``.\n  +  AppStream 2.0 fleet - The resource type is ``fleet`` and the unique identifier is the fleet name. Example: ``fleet/sample-fleet``.\n  +  DynamoDB table - The resource type is ``table`` and the unique identifier is the table name. Example: ``table/my-table``.\n  +  DynamoDB global secondary index - The resource type is ``index`` and the unique identifier is the index name. Example: ``table/my-table/index/my-table-index``.\n  +  Aurora DB cluster - The resource type is ``cluster`` and the unique identifier is the cluster name. Example: ``cluster:my-db-cluster``.\n  +  SageMaker endpoint variant - The resource type is ``variant`` and the unique identifier is the resource ID. Example: ``endpoint/my-end-point/variant/KMeansClustering``.\n  +  Custom resources are not supported with a resource type. This parameter must specify the ``OutputValue`` from the CloudFormation template stack used to access the resources. The unique identifier is defined by the service provider. More information is available in our [GitHub repository](https://docs.aws.amazon.com/https://github.com/aws/aws-auto-scaling-custom-resource).\n  +  Amazon Comprehend document classification endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: ``arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE``.\n  +  Amazon Comprehend entity recognizer endpoint - The resource type and unique identifier are specified using the endpoint ARN. Example: ``arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE``.\n  +  Lambda provisioned concurrency - The resource type is ``function`` and the unique identifier is the function name with a function version or alias name suffix that is not ``$LATEST``. Example: ``function:my-function:prod`` or ``function:my-function:1``.\n  +  Amazon Keyspaces table - The resource type is ``table`` and the unique identifier is the table name. Example: ``keyspace/mykeyspace/table/mytable``.\n  +  Amazon MSK cluster - The resource type and unique identifier are specified using the cluster ARN. Example: ``arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5``.\n  +  Amazon ElastiCache replication group - The resource type is ``replication-group`` and the unique identifier is the replication group name. Example: ``replication-group/mycluster``.\n  +  Amazon ElastiCache cache cluster - The resource type is ``cache-cluster`` and the unique identifier is the cache cluster name. Example: ``cache-cluster/mycluster``.\n  +  Neptune cluster - The resource type is ``cluster`` and the unique identifier is the cluster name. Example: ``cluster:mycluster``.\n  +  SageMaker serverless endpoint - The resource type is ``variant`` and the unique identifier is the resource ID. Example: ``endpoint/my-end-point/variant/KMeansClustering``.\n  +  SageMaker inference component - The resource type is ``inference-component`` and the unique identifier is the resource ID. Example: ``inference-component/my-inference-component``.\n  +  Pool of WorkSpaces - The resource type is ``workspacespool`` and the unique identifier is the pool ID. Example: ``workspacespool/wspool-123456``.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_id": schemaAttribute1a6e420c3f35aa19e2d91945(),
 		// Property: ScalableDimension
 		// CloudFormation resource type schema:
 		//
@@ -804,10 +1132,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The scalable dimension. This string consists of the service namespace, resource type, and scaling property.\n  +  ``ecs:service:DesiredCount`` - The task count of an ECS service.\n  +  ``elasticmapreduce:instancegroup:InstanceCount`` - The instance count of an EMR Instance Group.\n  +  ``ec2:spot-fleet-request:TargetCapacity`` - The target capacity of a Spot Fleet.\n  +  ``appstream:fleet:DesiredCapacity`` - The capacity of an AppStream 2.0 fleet.\n  +  ``dynamodb:table:ReadCapacityUnits`` - The provisioned read capacity for a DynamoDB table.\n  +  ``dynamodb:table:WriteCapacityUnits`` - The provisioned write capacity for a DynamoDB table.\n  +  ``dynamodb:index:ReadCapacityUnits`` - The provisioned read capacity for a DynamoDB global secondary index.\n  +  ``dynamodb:index:WriteCapacityUnits`` - The provisioned write capacity for a DynamoDB global secondary index.\n  +  ``rds:cluster:ReadReplicaCount`` - The count of Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible edition and Aurora PostgreSQL-compatible edition.\n  +  ``sagemaker:variant:DesiredInstanceCount`` - The number of EC2 instances for a SageMaker model endpoint variant.\n  +  ``custom-resource:ResourceType:Property`` - The scalable dimension for a custom resource provided by your own application or service.\n  +  ``comprehend:document-classifier-endpoint:DesiredInferenceUnits`` - The number of inference units for an Amazon Comprehend document classification endpoint.\n  +  ``comprehend:entity-recognizer-endpoint:DesiredInferenceUnits`` - The number of inference units for an Amazon Comprehend entity recognizer endpoint.\n  +  ``lambda:function:ProvisionedConcurrency`` - The provisioned concurrency for a Lambda function.\n  +  ``cassandra:table:ReadCapacityUnits`` - The provisioned read capacity for an Amazon Keyspaces table.\n  +  ``cassandra:table:WriteCapacityUnits`` - The provisioned write capacity for an Amazon Keyspaces table.\n  +  ``kafka:broker-storage:VolumeSize`` - The provisioned volume size (in GiB) for brokers in an Amazon MSK cluster.\n  +  ``elasticache:cache-cluster:Nodes`` - The number of nodes for an Amazon ElastiCache cache cluster.\n  +  ``elasticache:replication-group:NodeGroups`` - The number of node groups for an Amazon ElastiCache replication group.\n  +  ``elasticache:replication-group:Replicas`` - The number of replicas per node group for an Amazon ElastiCache replication group.\n  +  ``neptune:cluster:ReadReplicaCount`` - The count of read replicas in an Amazon Neptune DB cluster.\n  +  ``sagemaker:variant:DesiredProvisionedConcurrency`` - The provisioned concurrency for a SageMaker serverless endpoint.\n  +  ``sagemaker:inference-component:DesiredCopyCount`` - The number of copies across an endpoint for a SageMaker inference component.\n  +  ``workspaces:workspacespool:DesiredUserSessions`` - The number of user sessions for the WorkSpaces in the pool.",
 		//	  "type": "string"
 		//	}
-		"scalable_dimension": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The scalable dimension. This string consists of the service namespace, resource type, and scaling property.\n  +  ``ecs:service:DesiredCount`` - The task count of an ECS service.\n  +  ``elasticmapreduce:instancegroup:InstanceCount`` - The instance count of an EMR Instance Group.\n  +  ``ec2:spot-fleet-request:TargetCapacity`` - The target capacity of a Spot Fleet.\n  +  ``appstream:fleet:DesiredCapacity`` - The capacity of an AppStream 2.0 fleet.\n  +  ``dynamodb:table:ReadCapacityUnits`` - The provisioned read capacity for a DynamoDB table.\n  +  ``dynamodb:table:WriteCapacityUnits`` - The provisioned write capacity for a DynamoDB table.\n  +  ``dynamodb:index:ReadCapacityUnits`` - The provisioned read capacity for a DynamoDB global secondary index.\n  +  ``dynamodb:index:WriteCapacityUnits`` - The provisioned write capacity for a DynamoDB global secondary index.\n  +  ``rds:cluster:ReadReplicaCount`` - The count of Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible edition and Aurora PostgreSQL-compatible edition.\n  +  ``sagemaker:variant:DesiredInstanceCount`` - The number of EC2 instances for a SageMaker model endpoint variant.\n  +  ``custom-resource:ResourceType:Property`` - The scalable dimension for a custom resource provided by your own application or service.\n  +  ``comprehend:document-classifier-endpoint:DesiredInferenceUnits`` - The number of inference units for an Amazon Comprehend document classification endpoint.\n  +  ``comprehend:entity-recognizer-endpoint:DesiredInferenceUnits`` - The number of inference units for an Amazon Comprehend entity recognizer endpoint.\n  +  ``lambda:function:ProvisionedConcurrency`` - The provisioned concurrency for a Lambda function.\n  +  ``cassandra:table:ReadCapacityUnits`` - The provisioned read capacity for an Amazon Keyspaces table.\n  +  ``cassandra:table:WriteCapacityUnits`` - The provisioned write capacity for an Amazon Keyspaces table.\n  +  ``kafka:broker-storage:VolumeSize`` - The provisioned volume size (in GiB) for brokers in an Amazon MSK cluster.\n  +  ``elasticache:cache-cluster:Nodes`` - The number of nodes for an Amazon ElastiCache cache cluster.\n  +  ``elasticache:replication-group:NodeGroups`` - The number of node groups for an Amazon ElastiCache replication group.\n  +  ``elasticache:replication-group:Replicas`` - The number of replicas per node group for an Amazon ElastiCache replication group.\n  +  ``neptune:cluster:ReadReplicaCount`` - The count of read replicas in an Amazon Neptune DB cluster.\n  +  ``sagemaker:variant:DesiredProvisionedConcurrency`` - The provisioned concurrency for a SageMaker serverless endpoint.\n  +  ``sagemaker:inference-component:DesiredCopyCount`` - The number of copies across an endpoint for a SageMaker inference component.\n  +  ``workspaces:workspacespool:DesiredUserSessions`` - The number of user sessions for the WorkSpaces in the pool.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scalable_dimension": schemaAttributea0fe7e57d69011f429a7baa8(),
 		// Property: ScalingTargetId
 		// CloudFormation resource type schema:
 		//
@@ -815,10 +1140,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The CloudFormation-generated ID of an Application Auto Scaling scalable target. For more information about the ID, see the Return Value section of the ``AWS::ApplicationAutoScaling::ScalableTarget`` resource.\n  You must specify either the ``ScalingTargetId`` property, or the ``ResourceId``, ``ScalableDimension``, and ``ServiceNamespace`` properties, but not both.",
 		//	  "type": "string"
 		//	}
-		"scaling_target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The CloudFormation-generated ID of an Application Auto Scaling scalable target. For more information about the ID, see the Return Value section of the ``AWS::ApplicationAutoScaling::ScalableTarget`` resource.\n  You must specify either the ``ScalingTargetId`` property, or the ``ResourceId``, ``ScalableDimension``, and ``ServiceNamespace`` properties, but not both.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scaling_target_id": schemaAttribute356843eb286ca208b16ae1d0(),
 		// Property: ServiceNamespace
 		// CloudFormation resource type schema:
 		//
@@ -826,10 +1148,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The namespace of the AWS service that provides the resource, or a ``custom-resource``.",
 		//	  "type": "string"
 		//	}
-		"service_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The namespace of the AWS service that provides the resource, or a ``custom-resource``.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"service_namespace": schemaAttribute590e48b5475c3953461b27b5(),
 		// Property: StepScalingPolicyConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -884,56 +1203,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"step_scaling_policy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AdjustmentType
-				"adjustment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether the ``ScalingAdjustment`` value in the ``StepAdjustment`` property is an absolute number or a percentage of the current capacity.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Cooldown
-				"cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The amount of time, in seconds, to wait for a previous scaling activity to take effect. If not specified, the default value is 300. For more information, see [Cooldown period](https://docs.aws.amazon.com/autoscaling/application/userguide/step-scaling-policy-overview.html#step-scaling-cooldown) in the *Application Auto Scaling User Guide*.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MetricAggregationType
-				"metric_aggregation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The aggregation type for the CloudWatch metrics. Valid values are ``Minimum``, ``Maximum``, and ``Average``. If the aggregation type is null, the value is treated as ``Average``.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MinAdjustmentMagnitude
-				"min_adjustment_magnitude": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The minimum value to scale by when the adjustment type is ``PercentChangeInCapacity``. For example, suppose that you create a step scaling policy to scale out an Amazon ECS service by 25 percent and you specify a ``MinAdjustmentMagnitude`` of 2. If the service has 4 tasks and the scaling policy is performed, 25 percent of 4 is 1. However, because you specified a ``MinAdjustmentMagnitude`` of 2, Application Auto Scaling scales out the service by 2 tasks.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StepAdjustments
-				"step_adjustments": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: MetricIntervalLowerBound
-							"metric_interval_lower_bound": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The lower bound for the difference between the alarm threshold and the CloudWatch metric. If the metric value is above the breach threshold, the lower bound is inclusive (the metric must be greater than or equal to the threshold plus the lower bound). Otherwise, it is exclusive (the metric must be greater than the threshold plus the lower bound). A null value indicates negative infinity.\n You must specify at least one upper or lower bound.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: MetricIntervalUpperBound
-							"metric_interval_upper_bound": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The upper bound for the difference between the alarm threshold and the CloudWatch metric. If the metric value is above the breach threshold, the upper bound is exclusive (the metric must be less than the threshold plus the upper bound). Otherwise, it is inclusive (the metric must be less than or equal to the threshold plus the upper bound). A null value indicates positive infinity.\n You must specify at least one upper or lower bound.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ScalingAdjustment
-							"scaling_adjustment": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The amount by which to scale. The adjustment is based on the value that you specified in the ``AdjustmentType`` property (either an absolute number or a percentage). A positive value adds to the current capacity and a negative number subtracts from the current capacity.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A set of adjustments that enable you to scale based on the size of the alarm breach.\n At least one step adjustment is required if you are adding a new step scaling policy configuration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A step scaling policy.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"step_scaling_policy_configuration": schemaAttributedc58630873e9809dca69fb78(),
 		// Property: TargetTrackingScalingPolicyConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -1109,177 +1379,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"target_tracking_scaling_policy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomizedMetricSpecification
-				"customized_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Dimensions
-						"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Name
-									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The name of the dimension.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The value of the dimension.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "The dimensions of the metric. \n Conditional: If you published your metric with dimensions, you must specify the same dimensions in your scaling policy.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MetricName
-						"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the metric. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that's returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Metrics
-						"metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Expression
-									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The math expression to perform on the returned data, if this object is performing a math expression. This expression can use the ``Id`` of the other metrics to refer to those metrics, and can also use the ``Id`` of other expressions to use the result of those expressions. \n Conditional: Within each ``TargetTrackingMetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Id
-									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A short name that identifies the object's results in the response. This name must be unique among all ``MetricDataQuery`` objects specified for a single scaling policy. If you are performing math expressions on this set of data, this name represents that data and can serve as a variable in the mathematical expression. The valid characters are letters, numbers, and underscores. The first character must be a lowercase letter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Label
-									"label": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A human-readable label for this metric or expression. This is especially useful if this is a math expression, so that you know what the value represents.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: MetricStat
-									"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Metric
-											"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Dimensions
-													"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: Name
-																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The name of the dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Value
-																"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The value of the dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-														}, /*END NESTED OBJECT*/
-														Description: "The dimensions for the metric. For the list of available dimensions, see the AWS documentation available from the table in [services that publish CloudWatch metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html) in the *Amazon CloudWatch User Guide*. \n Conditional: If you published your metric with dimensions, you must specify the same dimensions in your scaling policy.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: MetricName
-													"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The name of the metric.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: Namespace
-													"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The namespace of the metric. For more information, see the table in [services that publish CloudWatch metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html) in the *Amazon CloudWatch User Guide*.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Description: "The CloudWatch metric to return, including the metric name, namespace, and dimensions. To get the exact metric name, namespace, and dimensions, inspect the [Metric](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html) object that is returned by a call to [ListMetrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Stat
-											"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The statistic to return. It can include any CloudWatch statistic or extended statistic. For a list of valid values, see the table in [Statistics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic) in the *Amazon CloudWatch User Guide*.\n The most commonly used metric for scaling is ``Average``.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Unit
-											"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The unit to use for the returned data points. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Description: "Information about the metric data to return.\n Conditional: Within each ``MetricDataQuery`` object, you must specify either ``Expression`` or ``MetricStat``, but not both.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: ReturnData
-									"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Description: "Indicates whether to return the timestamps and raw data values of this metric. \n If you use any math expressions, specify ``true`` for this value for only the final math expression that the metric specification is based on. You must specify ``false`` for ``ReturnData`` for all the other metrics and expressions used in the metric specification.\n If you are only retrieving metrics and not performing any math expressions, do not specify anything for ``ReturnData``. This sets it to its default (``true``).",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "The metrics to include in the target tracking scaling policy, as a metric data query. This can include both raw metric and metric math expressions.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Namespace
-						"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The namespace of the metric.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Statistic
-						"statistic": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The statistic of the metric.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Unit
-						"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The unit of the metric. For a complete list of the units that CloudWatch supports, see the [MetricDatum](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html) data type in the *Amazon CloudWatch API Reference*.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A customized metric. You can specify either a predefined metric or a customized metric.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DisableScaleIn
-				"disable_scale_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether scale in by the target tracking scaling policy is disabled. If the value is ``true``, scale in is disabled and the target tracking scaling policy won't remove capacity from the scalable target. Otherwise, scale in is enabled and the target tracking scaling policy can remove capacity from the scalable target. The default value is ``false``.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PredefinedMetricSpecification
-				"predefined_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: PredefinedMetricType
-						"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The metric type. The ``ALBRequestCountPerTarget`` metric type applies only to Spot fleet requests and ECS services.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ResourceLabel
-						"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Identifies the resource associated with the metric type. You can't specify a resource label unless the metric type is ``ALBRequestCountPerTarget`` and there is a target group attached to the Spot Fleet or ECS service.\n You create the resource label by appending the final portion of the load balancer ARN and the final portion of the target group ARN into a single value, separated by a forward slash (/). The format of the resource label is:\n ``app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff``.\n Where:\n  +  app/<load-balancer-name>/<load-balancer-id> is the final portion of the load balancer ARN\n  +  targetgroup/<target-group-name>/<target-group-id> is the final portion of the target group ARN.\n  \n To find the ARN for an Application Load Balancer, use the [DescribeLoadBalancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html) API operation. To find the ARN for the target group, use the [DescribeTargetGroups](https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html) API operation.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A predefined metric. You can specify either a predefined metric or a customized metric.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ScaleInCooldown
-				"scale_in_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The amount of time, in seconds, after a scale-in activity completes before another scale-in activity can start. For more information and for default values, see [Define cooldown periods](https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown) in the *Application Auto Scaling User Guide*.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ScaleOutCooldown
-				"scale_out_cooldown": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The amount of time, in seconds, to wait for a previous scale-out activity to take effect. For more information and for default values, see [Define cooldown periods](https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown) in the *Application Auto Scaling User Guide*.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TargetValue
-				"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The target value for the metric. Although this property accepts numbers of type Double, it won't accept values that are either too small or too large. Values must be in the range of -2^360 to 2^360. The value must be a valid number based on the choice of metric. For example, if the metric is CPU utilization, then the target value is a percent value that represents how much of the CPU can be used before scaling out.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A target tracking scaling policy.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_tracking_scaling_policy_configuration": schemaAttributef63c6a3faa790a5528d39c86(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -16,6 +16,387 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute041b8419638c0c433f3acca0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Effort
+			"effort": schemaAttributefce4471fcf9e1152482b0827(),
+		}, /*END SCHEMA*/
+		Description: "The reasoning configuration for reasoning models.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute05fbbd4e6bf9eb738b060f9b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Definition
+				"definition": schemaAttribute9ef0791bf4cb700720bae2d2(),
+				// Property: Label
+				"label": schemaAttributeab0d84b9be671208d85151ea(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute16523b65de61c56625a9fd28() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Definition
+				"definition": schemaAttribute5626c36add47e84e0486195e(),
+				// Property: Label
+				"label": schemaAttribute3c63c880a8c64c69f0dc53b7(),
+				// Property: Value
+				"value": schemaAttribute77acdb7d87c9055c337ae1fd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24e94be63df9ff91d03f88d7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CodeBased
+			"code_based": schemaAttribute470ffaeb518eb1580a3cbcc2(),
+			// Property: LlmAsAJudge
+			"llm_as_a_judge": schemaAttributef79ca4ad73fce803a73ecd80(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for the evaluator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28dc2eb03d8afec3ba59a128() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec1b7c7f90f6c5d4097bde78b(),
+				// Property: Value
+				"value": schemaAttributec1b7c7f90f6c5d4097bde78b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of tags to assign to the evaluator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute320a4697da91f173fa0c3da0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the model to use for evaluation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute35fdd43c8a39de1de2d1f276() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The sampling temperature between 0 and 2.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c63c880a8c64c69f0dc53b7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The label that describes this numerical rating option.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41bb5d68c28ccca860a39000() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxOutputTokens
+			"max_output_tokens": schemaAttribute628b04eebeeca85c345119e9(),
+			// Property: ModelId
+			"model_id": schemaAttribute320a4697da91f173fa0c3da0(),
+			// Property: Reasoning
+			"reasoning": schemaAttribute041b8419638c0c433f3acca0(),
+			// Property: Temperature
+			"temperature": schemaAttribute35fdd43c8a39de1de2d1f276(),
+			// Property: TopP
+			"top_p": schemaAttribute9fd7d47e312e3e784f7d01a1(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for using OpenResponses-compatible models in evaluator assessments.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41ff13a1ec70ca6f3b969734() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current status of the evaluator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute470ffaeb518eb1580a3cbcc2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LambdaConfig
+			"lambda_config": schemaAttribute4a291052e628ce197c034c39(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for code-based evaluation using a Lambda function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a291052e628ce197c034c39() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LambdaArn
+			"lambda_arn": schemaAttributefdae33db4feff6e73030d9a7(),
+			// Property: LambdaTimeoutInSeconds
+			"lambda_timeout_in_seconds": schemaAttribute8ca5b8ab692ff2958c1c9db1(),
+		}, /*END SCHEMA*/
+		Description: "The Lambda function configuration for code-based evaluation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c1288de67e41f59f5f189ca() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AdditionalModelRequestFields
+			"additional_model_request_fields": schemaAttribute4d8f66a757d70404acf8c1e2(),
+			// Property: InferenceConfig
+			"inference_config": schemaAttributed46837dbfe8835a22b3d05c3(),
+			// Property: ModelId
+			"model_id": schemaAttributeef289c8e4a29a6a00be1c738(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for using Amazon Bedrock models in evaluator assessments.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4d8f66a757d70404acf8c1e2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "Additional model-specific request fields.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5626c36add47e84e0486195e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description that explains what this numerical rating represents.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e4061cc18c1e4f48de1e293() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The temperature value that controls randomness in the model's responses.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute628b04eebeeca85c345119e9() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of output tokens to generate, including visible output and reasoning tokens.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72cf5d8cfd4ef5b9c774c2d9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BedrockEvaluatorModelConfig
+			"bedrock_evaluator_model_config": schemaAttribute4c1288de67e41f59f5f189ca(),
+			// Property: ResponsesEvaluatorModelConfig
+			"responses_evaluator_model_config": schemaAttribute41bb5d68c28ccca860a39000(),
+		}, /*END SCHEMA*/
+		Description: "The model configuration that specifies which foundation model to use for evaluation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77acdb7d87c9055c337ae1fd() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The numerical value for this rating scale option.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ca5b8ab692ff2958c1c9db1() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The timeout in seconds for the Lambda function invocation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute970214117366117a733c674e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the evaluator. Must be unique within your account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9942c8536252e18820670c2a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the evaluator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute996e758513d4d9ec9620323f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The evaluation instructions that guide the language model in assessing agent performance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a4668db661c3cc25e4eff9c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of tokens to generate in the model response.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d5adf6f51999be7796c8f71() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The top-p sampling parameter that controls the diversity of the model's responses.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ef0791bf4cb700720bae2d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description that explains what this categorical rating represents.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fd7d47e312e3e784f7d01a1() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The nucleus sampling probability mass between 0 and 1.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeab0d84b9be671208d85151ea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The label of this categorical rating option.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaca4e445b01dc50597a85cb1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the evaluator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeadfc7f93b323da0114540737() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The evaluation level that determines the scope of evaluation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc82f296fae1632834438fa4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the KMS key used to encrypt evaluator data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec1b7c7f90f6c5d4097bde78b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf007ef44b569043fdd3f0f5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the evaluator was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecff53dc49f2abfe485e9dd88() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the evaluator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed46837dbfe8835a22b3d05c3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxTokens
+			"max_tokens": schemaAttribute9a4668db661c3cc25e4eff9c(),
+			// Property: Temperature
+			"temperature": schemaAttribute5e4061cc18c1e4f48de1e293(),
+			// Property: TopP
+			"top_p": schemaAttribute9d5adf6f51999be7796c8f71(),
+		}, /*END SCHEMA*/
+		Description: "The inference configuration parameters that control model behavior during evaluation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee00bf421a09ec9df2597d852() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the evaluator was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee224e293ea91b92ebbf5a9e4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Categorical
+			"categorical": schemaAttribute05fbbd4e6bf9eb738b060f9b(),
+			// Property: Numerical
+			"numerical": schemaAttribute16523b65de61c56625a9fd28(),
+		}, /*END SCHEMA*/
+		Description: "The rating scale that defines how evaluators should score agent performance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef289c8e4a29a6a00be1c738() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the Amazon Bedrock model to use for evaluation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef79ca4ad73fce803a73ecd80() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Instructions
+			"instructions": schemaAttribute996e758513d4d9ec9620323f(),
+			// Property: ModelConfig
+			"model_config": schemaAttribute72cf5d8cfd4ef5b9c774c2d9(),
+			// Property: RatingScale
+			"rating_scale": schemaAttributee224e293ea91b92ebbf5a9e4(),
+		}, /*END SCHEMA*/
+		Description: "The configuration for LLM-as-a-Judge evaluation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefce4471fcf9e1152482b0827() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The level of reasoning effort the model applies.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdae33db4feff6e73030d9a7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Lambda function used for evaluation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_bedrockagentcore_evaluator", evaluatorDataSource)
 }
@@ -32,11 +413,7 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the evaluator was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributecf007ef44b569043fdd3f0f5(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +423,7 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the evaluator.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeaca4e445b01dc50597a85cb1(),
 		// Property: EvaluatorArn
 		// CloudFormation resource type schema:
 		//
@@ -58,10 +432,7 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov):bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:evaluator/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"evaluator_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the evaluator.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"evaluator_arn": schemaAttribute9942c8536252e18820670c2a(),
 		// Property: EvaluatorConfig
 		// CloudFormation resource type schema:
 		//
@@ -311,182 +682,7 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"evaluator_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CodeBased
-				"code_based": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: LambdaConfig
-						"lambda_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: LambdaArn
-								"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the Lambda function used for evaluation.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: LambdaTimeoutInSeconds
-								"lambda_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The timeout in seconds for the Lambda function invocation.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The Lambda function configuration for code-based evaluation.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration for code-based evaluation using a Lambda function.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LlmAsAJudge
-				"llm_as_a_judge": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Instructions
-						"instructions": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The evaluation instructions that guide the language model in assessing agent performance.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ModelConfig
-						"model_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BedrockEvaluatorModelConfig
-								"bedrock_evaluator_model_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: AdditionalModelRequestFields
-										"additional_model_request_fields": schema.StringAttribute{ /*START ATTRIBUTE*/
-											CustomType:  jsontypes.NormalizedType{},
-											Description: "Additional model-specific request fields.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: InferenceConfig
-										"inference_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: MaxTokens
-												"max_tokens": schema.Int64Attribute{ /*START ATTRIBUTE*/
-													Description: "The maximum number of tokens to generate in the model response.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Temperature
-												"temperature": schema.Float64Attribute{ /*START ATTRIBUTE*/
-													Description: "The temperature value that controls randomness in the model's responses.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: TopP
-												"top_p": schema.Float64Attribute{ /*START ATTRIBUTE*/
-													Description: "The top-p sampling parameter that controls the diversity of the model's responses.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "The inference configuration parameters that control model behavior during evaluation.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ModelId
-										"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The identifier of the Amazon Bedrock model to use for evaluation.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The configuration for using Amazon Bedrock models in evaluator assessments.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ResponsesEvaluatorModelConfig
-								"responses_evaluator_model_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: MaxOutputTokens
-										"max_output_tokens": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The maximum number of output tokens to generate, including visible output and reasoning tokens.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ModelId
-										"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The identifier of the model to use for evaluation.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Reasoning
-										"reasoning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Effort
-												"effort": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Description: "The level of reasoning effort the model applies.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "The reasoning configuration for reasoning models.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Temperature
-										"temperature": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Description: "The sampling temperature between 0 and 2.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: TopP
-										"top_p": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Description: "The nucleus sampling probability mass between 0 and 1.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The configuration for using OpenResponses-compatible models in evaluator assessments.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The model configuration that specifies which foundation model to use for evaluation.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: RatingScale
-						"rating_scale": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Categorical
-								"categorical": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Definition
-											"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The description that explains what this categorical rating represents.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Label
-											"label": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The label of this categorical rating option.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Numerical
-								"numerical": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Definition
-											"definition": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The description that explains what this numerical rating represents.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Label
-											"label": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The label that describes this numerical rating option.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Value
-											"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-												Description: "The numerical value for this rating scale option.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "The rating scale that defines how evaluators should score agent performance.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The configuration for LLM-as-a-Judge evaluation.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration for the evaluator.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"evaluator_config": schemaAttribute24e94be63df9ff91d03f88d7(),
 		// Property: EvaluatorId
 		// CloudFormation resource type schema:
 		//
@@ -495,10 +691,7 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(Builtin.[a-zA-Z0-9_-]+|[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9]{10})$",
 		//	  "type": "string"
 		//	}
-		"evaluator_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the evaluator.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"evaluator_id": schemaAttributecff53dc49f2abfe485e9dd88(),
 		// Property: EvaluatorName
 		// CloudFormation resource type schema:
 		//
@@ -507,10 +700,7 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$",
 		//	  "type": "string"
 		//	}
-		"evaluator_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the evaluator. Must be unique within your account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"evaluator_name": schemaAttribute970214117366117a733c674e(),
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -521,10 +711,7 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(|-cn|-us-gov):kms:[a-zA-Z0-9-]+:[0-9]{12}:key/[a-zA-Z0-9-]{36}$",
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the KMS key used to encrypt evaluator data.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttributebc82f296fae1632834438fa4(),
 		// Property: Level
 		// CloudFormation resource type schema:
 		//
@@ -537,10 +724,7 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"level": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The evaluation level that determines the scope of evaluation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"level": schemaAttributeadfc7f93b323da0114540737(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -556,10 +740,7 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current status of the evaluator.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute41ff13a1ec70ca6f3b969734(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -589,22 +770,7 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of tags to assign to the evaluator.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute28dc2eb03d8afec3ba59a128(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -613,11 +779,7 @@ func evaluatorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the evaluator was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttributee00bf421a09ec9df2597d852(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

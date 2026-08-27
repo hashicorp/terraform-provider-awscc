@@ -15,6 +15,80 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute336b0f9a602f5198a8cc36e2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the query parameter. A query parameter name must start with a letter or underscore, and contain only letters, digits, and underscores.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4749ade70fb0a463579593af() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Optionally define specific log groups as part of your query definition",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66ee5385a0642bdc5681841f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the query parameter that explains its purpose or expected values.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a421f6c21d11cbc65f672e4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique identifier of a query definition",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea6b929a80407a97933e25976() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DefaultValue
+				"default_value": schemaAttributeec48fd5acd7ecd80b6b0df3a(),
+				// Property: Description
+				"description": schemaAttribute66ee5385a0642bdc5681841f(),
+				// Property: Name
+				"name": schemaAttribute336b0f9a602f5198a8cc36e2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Use this parameter to include specific query parameters as part of your query definition. Query parameters are supported only for Logs Insights QL queries. Query parameters allow you to use placeholder variables in your query string that are substituted with values at execution time. Use the {{parameterName}} syntax in your query string to reference a parameter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed0714b1a2d973643726bba04() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name for the saved query definition",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedc5419be51bddb468b66be03() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The query string to use for this definition",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec48fd5acd7ecd80b6b0df3a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The default value to use for this query parameter if no value is supplied at execution time.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefae1f1f54e6635691d3970dd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Query language of the query string. Possible values are CWLI, SQL, PPL, with CWLI being the default.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_logs_query_definition", queryDefinitionDataSource)
 }
@@ -38,11 +112,7 @@ func queryDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "array"
 		//	}
-		"log_group_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Optionally define specific log groups as part of your query definition",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"log_group_names": schemaAttribute4749ade70fb0a463579593af(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +122,7 @@ func queryDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the saved query definition",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributed0714b1a2d973643726bba04(),
 		// Property: Parameters
 		// CloudFormation resource type schema:
 		//
@@ -91,29 +158,7 @@ func queryDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "maxItems": 20,
 		//	  "type": "array"
 		//	}
-		"parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DefaultValue
-					"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The default value to use for this query parameter if no value is supplied at execution time.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Description
-					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A description of the query parameter that explains its purpose or expected values.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the query parameter. A query parameter name must start with a letter or underscore, and contain only letters, digits, and underscores.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Use this parameter to include specific query parameters as part of your query definition. Query parameters are supported only for Logs Insights QL queries. Query parameters allow you to use placeholder variables in your query string that are substituted with values at execution time. Use the {{parameterName}} syntax in your query string to reference a parameter.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parameters": schemaAttributea6b929a80407a97933e25976(),
 		// Property: QueryDefinitionId
 		// CloudFormation resource type schema:
 		//
@@ -123,10 +168,7 @@ func queryDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"query_definition_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique identifier of a query definition",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"query_definition_id": schemaAttribute7a421f6c21d11cbc65f672e4(),
 		// Property: QueryLanguage
 		// CloudFormation resource type schema:
 		//
@@ -140,10 +182,7 @@ func queryDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"query_language": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Query language of the query string. Possible values are CWLI, SQL, PPL, with CWLI being the default.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"query_language": schemaAttributefae1f1f54e6635691d3970dd(),
 		// Property: QueryString
 		// CloudFormation resource type schema:
 		//
@@ -153,10 +192,7 @@ func queryDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The query string to use for this definition",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"query_string": schemaAttributedc5419be51bddb468b66be03(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

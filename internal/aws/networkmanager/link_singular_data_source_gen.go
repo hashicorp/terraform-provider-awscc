@@ -14,6 +14,125 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute16014a0728c5c868643fddf4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the site",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute228dcaadba10662cfbe96a2c() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributea3bdce0c03d3727eb86a088e(),
+				// Property: Value
+				"value": schemaAttribute24039b083b7804cdd054ab74(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags for the link.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24039b083b7804cdd054ab74() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b5a86f53c9c431bd88dcdab() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Upload speed in Mbps.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute50cc2275db5f302e0279f094() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Download speed in Mbps.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute716c4d261a375bbb5afaa418() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The provider of the link.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b06f18720cd32fd6fc835fa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the link.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3bdce0c03d3727eb86a088e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4bc8b5cc573fcb582cebf01() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the link.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec031498c398e019004eb1afa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the link.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec673cc8adf245a2828d0b1b6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the link.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3cded78f68eccbeea63d891() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of the link.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec0c876b5ac6304bfc1b96e9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DownloadSpeed
+			"download_speed": schemaAttribute50cc2275db5f302e0279f094(),
+			// Property: UploadSpeed
+			"upload_speed": schemaAttribute2b5a86f53c9c431bd88dcdab(),
+		}, /*END SCHEMA*/
+		Description: "The Bandwidth for the link.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef17a188472541c94f5bea0af() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the global network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8b62bb20bb0ffa519a67f69() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date and time that the device was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_networkmanager_link", linkDataSource)
 }
@@ -40,22 +159,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"bandwidth": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DownloadSpeed
-				"download_speed": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Download speed in Mbps.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: UploadSpeed
-				"upload_speed": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Upload speed in Mbps.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The Bandwidth for the link.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bandwidth": schemaAttributeec0c876b5ac6304bfc1b96e9(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +167,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The date and time that the device was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date and time that the device was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributef8b62bb20bb0ffa519a67f69(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +175,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of the link.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the link.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributea4bc8b5cc573fcb582cebf01(),
 		// Property: GlobalNetworkId
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +183,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the global network.",
 		//	  "type": "string"
 		//	}
-		"global_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the global network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"global_network_id": schemaAttributef17a188472541c94f5bea0af(),
 		// Property: LinkArn
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +191,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the link.",
 		//	  "type": "string"
 		//	}
-		"link_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the link.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"link_arn": schemaAttributec673cc8adf245a2828d0b1b6(),
 		// Property: LinkId
 		// CloudFormation resource type schema:
 		//
@@ -107,10 +199,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the link.",
 		//	  "type": "string"
 		//	}
-		"link_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the link.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"link_id": schemaAttributec031498c398e019004eb1afa(),
 		// Property: Provider
 		// CloudFormation resource type schema:
 		//
@@ -118,10 +207,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The provider of the link.",
 		//	  "type": "string"
 		//	}
-		"provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The provider of the link.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"provider_name": schemaAttribute716c4d261a375bbb5afaa418(),
 		// Property: SiteId
 		// CloudFormation resource type schema:
 		//
@@ -129,10 +215,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the site",
 		//	  "type": "string"
 		//	}
-		"site_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the site",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"site_id": schemaAttribute16014a0728c5c868643fddf4(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -140,10 +223,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The state of the link.",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The state of the link.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributed3cded78f68eccbeea63d891(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -172,24 +252,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags for the link.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute228dcaadba10662cfbe96a2c(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -197,10 +260,7 @@ func linkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of the link.",
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of the link.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute8b06f18720cd32fd6fc835fa(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,78 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0d18af7f5125a2dfc53b726f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ExecutionRole name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a5d97225116f717e4dd3470() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "AdminRole ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute782b3b2910d51644207e2dd0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The product identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84c9c10dcd91ed5ac10b10b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Permission to create, update, and delete stack instances. Choose from ALLOWED and NOT_ALLOWED.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea400de7bfc3cf83243972d7a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The language code.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7669ddd62665ba13b0dd3b5() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "One or more AWS Regions where the provisioned product will be available.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb862c2d6d6e1e30fc74c1931() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "One or more AWS accounts that will have access to the provisioned product.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed09e20610809b4ac10674d59() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique identifier for the constraint",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed99f4e6d0f7fa846792d6ea7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The portfolio identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede9a91cb21ae3f20dda94dbc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the constraint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_servicecatalog_stack_set_constraint", stackSetConstraintDataSource)
 }
@@ -30,10 +102,7 @@ func stackSetConstraintDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The language code.",
 		//	  "type": "string"
 		//	}
-		"accept_language": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The language code.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"accept_language": schemaAttributea400de7bfc3cf83243972d7a(),
 		// Property: AccountList
 		// CloudFormation resource type schema:
 		//
@@ -45,11 +114,7 @@ func stackSetConstraintDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"account_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "One or more AWS accounts that will have access to the provisioned product.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"account_list": schemaAttributeb862c2d6d6e1e30fc74c1931(),
 		// Property: AdminRole
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +122,7 @@ func stackSetConstraintDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "AdminRole ARN.",
 		//	  "type": "string"
 		//	}
-		"admin_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "AdminRole ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"admin_role": schemaAttribute4a5d97225116f717e4dd3470(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +130,7 @@ func stackSetConstraintDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The description of the constraint.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the constraint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributede9a91cb21ae3f20dda94dbc(),
 		// Property: ExecutionRole
 		// CloudFormation resource type schema:
 		//
@@ -79,10 +138,7 @@ func stackSetConstraintDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "ExecutionRole name.",
 		//	  "type": "string"
 		//	}
-		"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ExecutionRole name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"execution_role": schemaAttribute0d18af7f5125a2dfc53b726f(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -90,10 +146,7 @@ func stackSetConstraintDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "Unique identifier for the constraint",
 		//	  "type": "string"
 		//	}
-		"stack_set_constraint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique identifier for the constraint",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"stack_set_constraint_id": schemaAttributed09e20610809b4ac10674d59(),
 		// Property: PortfolioId
 		// CloudFormation resource type schema:
 		//
@@ -101,10 +154,7 @@ func stackSetConstraintDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The portfolio identifier.",
 		//	  "type": "string"
 		//	}
-		"portfolio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The portfolio identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"portfolio_id": schemaAttributed99f4e6d0f7fa846792d6ea7(),
 		// Property: ProductId
 		// CloudFormation resource type schema:
 		//
@@ -112,10 +162,7 @@ func stackSetConstraintDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The product identifier.",
 		//	  "type": "string"
 		//	}
-		"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The product identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"product_id": schemaAttribute782b3b2910d51644207e2dd0(),
 		// Property: RegionList
 		// CloudFormation resource type schema:
 		//
@@ -127,11 +174,7 @@ func stackSetConstraintDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"region_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "One or more AWS Regions where the provisioned product will be available.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"region_list": schemaAttributea7669ddd62665ba13b0dd3b5(),
 		// Property: StackInstanceControl
 		// CloudFormation resource type schema:
 		//
@@ -139,10 +182,7 @@ func stackSetConstraintDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "Permission to create, update, and delete stack instances. Choose from ALLOWED and NOT_ALLOWED.",
 		//	  "type": "string"
 		//	}
-		"stack_instance_control": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Permission to create, update, and delete stack instances. Choose from ALLOWED and NOT_ALLOWED.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"stack_instance_control": schemaAttribute84c9c10dcd91ed5ac10b10b5(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

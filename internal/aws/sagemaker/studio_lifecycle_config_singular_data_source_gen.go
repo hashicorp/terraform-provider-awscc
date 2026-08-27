@@ -14,6 +14,55 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute00ba46fc91708f571ce34fd1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1df415be8f7ced1967daa3d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The App type that the Lifecycle Configuration is attached to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute47053bce4e47bc916754f557() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute00ba46fc91708f571ce34fd1(),
+				// Property: Value
+				"value": schemaAttribute00ba46fc91708f571ce34fd1(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to be associated with the Lifecycle Configuration. Each tag consists of a key and an optional value. Tag keys must be unique per resource. Tags are searchable using the Search API.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute68b888ee485906fdbbdcea18() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Amazon SageMaker Studio Lifecycle Configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6c620b5e1caaad5badc33bac() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed470d85f57548236aa76063f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The content of your Amazon SageMaker Studio Lifecycle Configuration script. This content must be base64 encoded.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sagemaker_studio_lifecycle_config", studioLifecycleConfigDataSource)
 }
@@ -35,10 +84,7 @@ func studioLifecycleConfigDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"studio_lifecycle_config_app_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The App type that the Lifecycle Configuration is attached to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"studio_lifecycle_config_app_type": schemaAttribute1df415be8f7ced1967daa3d8(),
 		// Property: StudioLifecycleConfigArn
 		// CloudFormation resource type schema:
 		//
@@ -49,10 +95,7 @@ func studioLifecycleConfigDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
 		//	  "type": "string"
 		//	}
-		"studio_lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"studio_lifecycle_config_arn": schemaAttribute6c620b5e1caaad5badc33bac(),
 		// Property: StudioLifecycleConfigContent
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +106,7 @@ func studioLifecycleConfigDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "[\\S\\s]+",
 		//	  "type": "string"
 		//	}
-		"studio_lifecycle_config_content": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The content of your Amazon SageMaker Studio Lifecycle Configuration script. This content must be base64 encoded.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"studio_lifecycle_config_content": schemaAttributed470d85f57548236aa76063f(),
 		// Property: StudioLifecycleConfigName
 		// CloudFormation resource type schema:
 		//
@@ -77,10 +117,7 @@ func studioLifecycleConfigDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
 		//	  "type": "string"
 		//	}
-		"studio_lifecycle_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Amazon SageMaker Studio Lifecycle Configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"studio_lifecycle_config_name": schemaAttribute68b888ee485906fdbbdcea18(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -112,22 +149,7 @@ func studioLifecycleConfigDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to be associated with the Lifecycle Configuration. Each tag consists of a key and an optional value. Tag keys must be unique per resource. Tags are searchable using the Search API.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute47053bce4e47bc916754f557(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

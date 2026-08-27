@@ -14,6 +14,111 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0580121f7156665d55498a16() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Specify the maximum number of application versions to retain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute17a18e77fd443354cd43706e() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Set to true to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30ecf919aa6c17db5a891d1b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeleteSourceFromS3
+			"delete_source_from_s3": schemaAttribute17a18e77fd443354cd43706e(),
+			// Property: Enabled
+			"enabled": schemaAttributecdcb3f544a144f2305520f97(),
+			// Property: MaxAgeInDays
+			"max_age_in_days": schemaAttribute37f02ddac4a03d0f72f07241(),
+		}, /*END SCHEMA*/
+		Description: "Specify a max age rule to restrict the length of time that application versions are retained for an application.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37f02ddac4a03d0f72f07241() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Specify the number of days to retain an application versions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute416781266fe49cf5796984b0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name for the Elastic Beanstalk application. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the application name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute788a379c62d502e4db125a70() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxAgeRule
+			"max_age_rule": schemaAttribute30ecf919aa6c17db5a891d1b(),
+			// Property: MaxCountRule
+			"max_count_rule": schemaAttributed8c5c87a183ac96087867573(),
+		}, /*END SCHEMA*/
+		Description: "Defines lifecycle settings for application versions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea45cf65e5b4866304c8f9df2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of an IAM service role that Elastic Beanstalk has permission to assume. The ServiceRole property is required the first time that you provide a ResourceLifecycleConfig for the application. After you provide it once, Elastic Beanstalk persists the Service Role with the application, and you don't need to specify it again. You can, however, specify it in subsequent updates to change the Service Role to another value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd0ffef0276e700d24f6bb7b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ServiceRole
+			"service_role": schemaAttributea45cf65e5b4866304c8f9df2(),
+			// Property: VersionLifecycleConfig
+			"version_lifecycle_config": schemaAttribute788a379c62d502e4db125a70(),
+		}, /*END SCHEMA*/
+		Description: "Specifies an application resource lifecycle configuration to prevent your application from accumulating too many versions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecdcb3f544a144f2305520f97() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specify true to apply the rule, or false to disable it.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed674b1e984b02f16c4429999() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Your description of the application.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8c5c87a183ac96087867573() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeleteSourceFromS3
+			"delete_source_from_s3": schemaAttribute17a18e77fd443354cd43706e(),
+			// Property: Enabled
+			"enabled": schemaAttributecdcb3f544a144f2305520f97(),
+			// Property: MaxCount
+			"max_count": schemaAttribute0580121f7156665d55498a16(),
+		}, /*END SCHEMA*/
+		Description: "Specify a max count rule to restrict the number of application versions that are retained for an application.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_elasticbeanstalk_application", applicationDataSource)
 }
@@ -29,10 +134,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A name for the Elastic Beanstalk application. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the application name.",
 		//	  "type": "string"
 		//	}
-		"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the Elastic Beanstalk application. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the application name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"application_name": schemaAttribute416781266fe49cf5796984b0(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +142,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Your description of the application.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Your description of the application.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributed674b1e984b02f16c4429999(),
 		// Property: ResourceLifecycleConfig
 		// CloudFormation resource type schema:
 		//
@@ -103,68 +202,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"resource_lifecycle_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ServiceRole
-				"service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of an IAM service role that Elastic Beanstalk has permission to assume. The ServiceRole property is required the first time that you provide a ResourceLifecycleConfig for the application. After you provide it once, Elastic Beanstalk persists the Service Role with the application, and you don't need to specify it again. You can, however, specify it in subsequent updates to change the Service Role to another value.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VersionLifecycleConfig
-				"version_lifecycle_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: MaxAgeRule
-						"max_age_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DeleteSourceFromS3
-								"delete_source_from_s3": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "Set to true to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Enabled
-								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "Specify true to apply the rule, or false to disable it.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: MaxAgeInDays
-								"max_age_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Specify the number of days to retain an application versions.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Specify a max age rule to restrict the length of time that application versions are retained for an application.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MaxCountRule
-						"max_count_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DeleteSourceFromS3
-								"delete_source_from_s3": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "Set to true to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Enabled
-								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "Specify true to apply the rule, or false to disable it.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: MaxCount
-								"max_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "Specify the maximum number of application versions to retain.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Specify a max count rule to restrict the number of application versions that are retained for an application.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Defines lifecycle settings for application versions.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies an application resource lifecycle configuration to prevent your application from accumulating too many versions.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_lifecycle_config": schemaAttributebd0ffef0276e700d24f6bb7b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

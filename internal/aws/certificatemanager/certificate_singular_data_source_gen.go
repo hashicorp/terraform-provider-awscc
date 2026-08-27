@@ -15,6 +15,108 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute332a000659f8dad3d59d70e1() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec2df36f6dbe124c3e8be57eb(),
+				// Property: Value
+				"value": schemaAttributea8badea07a32970d5530725b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Key-value pairs that can identify the certificate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute59ec51e704e35587fc8349bd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7373d129039fd9e2abb97c5f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "You can opt out of certificate transparency logging by specifying the DISABLED option. Opt in by specifying ENABLED.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e612cbac7c0a5c7f830c3a2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DomainName
+				"domain_name": schemaAttribute59ec51e704e35587fc8349bd(),
+				// Property: HostedZoneId
+				"hosted_zone_id": schemaAttribute59ec51e704e35587fc8349bd(),
+				// Property: ValidationDomain
+				"validation_domain": schemaAttribute59ec51e704e35587fc8349bd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Domain information that domain name registrars use to verify your identity.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c437aba9ba5dc5cf670ea5f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The method you want to use to validate that you own or control the domain associated with a public certificate. Valid values are DNS, EMAIL or HTTP",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea28cd01ba3ad3fca3f3531a9() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Additional FQDNs to be included in the Subject Alternative Name extension of the ACM certificate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8badea07a32970d5530725b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag's value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2df36f6dbe124c3e8be57eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag's key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee64018d308fc4427a1b0de88() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the certificate can be exported. ENABLED allows the certificate to be exported, DISABLED prevents export.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef10028347fda02f48d5079ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the algorithm of the public and private key pair that your certificate uses to encrypt data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef671e540bb57605517db8259() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used to issue the certificate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9d12006d3383f5bc84914df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The fully qualified domain name (FQDN), such as www.example.com, with which you want to secure an ACM certificate",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_certificatemanager_certificate", certificateDataSource)
 }
@@ -30,10 +132,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used to issue the certificate.",
 		//	  "type": "string"
 		//	}
-		"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used to issue the certificate.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate_arn": schemaAttributef671e540bb57605517db8259(),
 		// Property: CertificateAuthorityArn
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +140,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used to issue the certificate.",
 		//	  "type": "string"
 		//	}
-		"certificate_authority_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used to issue the certificate.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate_authority_arn": schemaAttributef671e540bb57605517db8259(),
 		// Property: CertificateExport
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +152,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"certificate_export": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether the certificate can be exported. ENABLED allows the certificate to be exported, DISABLED prevents export.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate_export": schemaAttributee64018d308fc4427a1b0de88(),
 		// Property: CertificateTransparencyLoggingPreference
 		// CloudFormation resource type schema:
 		//
@@ -71,10 +164,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"certificate_transparency_logging_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "You can opt out of certificate transparency logging by specifying the DISABLED option. Opt in by specifying ENABLED.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate_transparency_logging_preference": schemaAttribute7373d129039fd9e2abb97c5f(),
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +172,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The fully qualified domain name (FQDN), such as www.example.com, with which you want to secure an ACM certificate",
 		//	  "type": "string"
 		//	}
-		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The fully qualified domain name (FQDN), such as www.example.com, with which you want to secure an ACM certificate",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_name": schemaAttributef9d12006d3383f5bc84914df(),
 		// Property: DomainValidationOptions
 		// CloudFormation resource type schema:
 		//
@@ -108,26 +195,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"domain_validation_options": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DomainName
-					"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: HostedZoneId
-					"hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ValidationDomain
-					"validation_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Domain information that domain name registrars use to verify your identity.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_validation_options": schemaAttribute7e612cbac7c0a5c7f830c3a2(),
 		// Property: KeyAlgorithm
 		// CloudFormation resource type schema:
 		//
@@ -135,10 +203,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the algorithm of the public and private key pair that your certificate uses to encrypt data.",
 		//	  "type": "string"
 		//	}
-		"key_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the algorithm of the public and private key pair that your certificate uses to encrypt data.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"key_algorithm": schemaAttributef10028347fda02f48d5079ae(),
 		// Property: SubjectAlternativeNames
 		// CloudFormation resource type schema:
 		//
@@ -149,11 +214,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"subject_alternative_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Additional FQDNs to be included in the Subject Alternative Name extension of the ACM certificate.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subject_alternative_names": schemaAttributea28cd01ba3ad3fca3f3531a9(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -181,24 +242,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag's key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag's value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Key-value pairs that can identify the certificate.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute332a000659f8dad3d59d70e1(),
 		// Property: ValidationMethod
 		// CloudFormation resource type schema:
 		//
@@ -206,10 +250,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The method you want to use to validate that you own or control the domain associated with a public certificate. Valid values are DNS, EMAIL or HTTP",
 		//	  "type": "string"
 		//	}
-		"validation_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The method you want to use to validate that you own or control the domain associated with a public certificate. Valid values are DNS, EMAIL or HTTP",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"validation_method": schemaAttribute8c437aba9ba5dc5cf670ea5f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

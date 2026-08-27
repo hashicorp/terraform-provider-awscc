@@ -15,6 +15,130 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0736aaad9fc74fc74aa970fa() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of one or more identifiers of Amazon Redshift source objects.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute177a351e2364964415d8627e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Amazon SNS topic used to transmit the event notifications.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute22a2db9b7c2367c55ccb6551() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Amazon Redshift event notification subscription",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute32664719f488c8de05f9c463() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the Amazon Redshift event notification subscription.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43e0d433f31558fc524a83d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of source that will be generating the events.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c3981c96cd017b1feb4ccfa() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of the sources that publish events to the Amazon Redshift event notification subscription.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d63988dd9dd2c9996ea4d12() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d284cff59ebcb230653e330() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date and time the Amazon Redshift event notification subscription was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f357d314907f13a2b01d795() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9cd64f680d835d2b7b7c7ac() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS account associated with the Amazon Redshift event notification subscription.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5209257c86e788d9dc28274() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Specifies the Amazon Redshift event categories to be published by the event notification subscription.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9f046bb9f65dd0c8be0040a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the Amazon Redshift event severity to be published by the event notification subscription.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda22a2e9c79edd3c39fae008() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute8f357d314907f13a2b01d795(),
+				// Property: Value
+				"value": schemaAttribute5d63988dd9dd2c9996ea4d12(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee317aa4c4cfc443117c5c28c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Amazon Redshift event notification subscription.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef616f680d88608ba63bbbfa3() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A boolean value; set to true to activate the subscription, and set to false to create the subscription but not activate it.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdd31df8b81f62d55209172c() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of Amazon Redshift event categories specified in the event notification subscription.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_redshift_event_subscription", eventSubscriptionDataSource)
 }
@@ -30,10 +154,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The name of the Amazon Redshift event notification subscription.",
 		//	  "type": "string"
 		//	}
-		"cust_subscription_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Amazon Redshift event notification subscription.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cust_subscription_id": schemaAttributee317aa4c4cfc443117c5c28c(),
 		// Property: CustomerAwsId
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +162,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The AWS account associated with the Amazon Redshift event notification subscription.",
 		//	  "type": "string"
 		//	}
-		"customer_aws_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS account associated with the Amazon Redshift event notification subscription.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"customer_aws_id": schemaAttributeb9cd64f680d835d2b7b7c7ac(),
 		// Property: Enabled
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +170,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "A boolean value; set to true to activate the subscription, and set to false to create the subscription but not activate it.",
 		//	  "type": "boolean"
 		//	}
-		"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A boolean value; set to true to activate the subscription, and set to false to create the subscription but not activate it.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enabled": schemaAttributef616f680d88608ba63bbbfa3(),
 		// Property: EventCategories
 		// CloudFormation resource type schema:
 		//
@@ -75,11 +190,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"event_categories": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Specifies the Amazon Redshift event categories to be published by the event notification subscription.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"event_categories": schemaAttributec5209257c86e788d9dc28274(),
 		// Property: EventCategoriesList
 		// CloudFormation resource type schema:
 		//
@@ -92,11 +203,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"event_categories_list": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of Amazon Redshift event categories specified in the event notification subscription.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"event_categories_list": schemaAttributefdd31df8b81f62d55209172c(),
 		// Property: Severity
 		// CloudFormation resource type schema:
 		//
@@ -108,10 +215,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"severity": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the Amazon Redshift event severity to be published by the event notification subscription.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"severity": schemaAttributec9f046bb9f65dd0c8be0040a(),
 		// Property: SnsTopicArn
 		// CloudFormation resource type schema:
 		//
@@ -119,10 +223,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The Amazon Resource Name (ARN) of the Amazon SNS topic used to transmit the event notifications.",
 		//	  "type": "string"
 		//	}
-		"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Amazon SNS topic used to transmit the event notifications.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sns_topic_arn": schemaAttribute177a351e2364964415d8627e(),
 		// Property: SourceIds
 		// CloudFormation resource type schema:
 		//
@@ -134,11 +235,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  },
 		//	  "type": "array"
 		//	}
-		"source_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of one or more identifiers of Amazon Redshift source objects.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_ids": schemaAttribute0736aaad9fc74fc74aa970fa(),
 		// Property: SourceIdsList
 		// CloudFormation resource type schema:
 		//
@@ -150,11 +247,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  },
 		//	  "type": "array"
 		//	}
-		"source_ids_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of the sources that publish events to the Amazon Redshift event notification subscription.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_ids_list": schemaAttribute4c3981c96cd017b1feb4ccfa(),
 		// Property: SourceType
 		// CloudFormation resource type schema:
 		//
@@ -169,10 +262,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of source that will be generating the events.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_type": schemaAttribute43e0d433f31558fc524a83d8(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -185,10 +275,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the Amazon Redshift event notification subscription.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute32664719f488c8de05f9c463(),
 		// Property: SubscriptionCreationTime
 		// CloudFormation resource type schema:
 		//
@@ -196,10 +283,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The date and time the Amazon Redshift event notification subscription was created.",
 		//	  "type": "string"
 		//	}
-		"subscription_creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date and time the Amazon Redshift event notification subscription was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subscription_creation_time": schemaAttribute7d284cff59ebcb230653e330(),
 		// Property: SubscriptionName
 		// CloudFormation resource type schema:
 		//
@@ -208,10 +292,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"subscription_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Amazon Redshift event notification subscription",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subscription_name": schemaAttribute22a2db9b7c2367c55ccb6551(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -243,24 +324,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeda22a2e9c79edd3c39fae008(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

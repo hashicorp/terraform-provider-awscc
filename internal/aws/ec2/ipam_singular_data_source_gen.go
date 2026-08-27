@@ -14,6 +14,151 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1b1844b8d5a34af865082f3f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A metered account is an account that is charged for active IP addresses managed in IPAM",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute21aa435095827f4d2f815588() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enable provisioning of GUA space in private pools.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3510218521dc614c2cce3761() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute6526a1bc06be002da2342d6e(),
+				// Property: Value
+				"value": schemaAttributec44476476def1d4bb50afc76(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37a0daf9c7f93eb2cdace3ed() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The count of resource discoveries associated with this IPAM.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute39f2545f1fdfb305431282cf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tier of the IPAM.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41fe3593db3b406034179f41() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Id of the default scope for publicly routable IP space, created with this IPAM.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48abd9546a8d18fdfccb20c4() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of scopes that currently exist in this IPAM.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64a8afaecb679823a9af0afc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6526a1bc06be002da2342d6e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84c348210ac2983eebd47cc6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the IPAM.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b487e82d7ecbb9f6a0fb7fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Id of the IPAM.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebed9a4488f64cc284afb2683() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Id of the default resource discovery, created with this IPAM.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf07a5ba3395c7b08c942796() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the region.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec44476476def1d4bb50afc76() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4ec394adaa0ff6dbaea8e93() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Id of the default association to the default resource discovery, created with this IPAM.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec764533629603196ac8b8185() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OrganizationsEntityPath
+				"organizations_entity_path": schemaAttributed2fec43baf36b06d2293c286(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A set of organizational unit (OU) exclusions for the default resource discovery, created with this IPAM.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed2fec43baf36b06d2293c286() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An AWS Organizations entity path. Build the path for the OU(s) using AWS Organizations IDs separated by a '/'. Include all child OUs by ending the path with '/*'.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef28925c50858fc32036c1acd() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RegionName
+				"region_name": schemaAttributebf07a5ba3395c7b08c942796(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The regions IPAM is enabled for. Allows pools to be created in these regions, as well as enabling monitoring",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_ipam", iPAMDataSource)
 }
@@ -29,10 +174,7 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the IPAM.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the IPAM.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute84c348210ac2983eebd47cc6(),
 		// Property: DefaultResourceDiscoveryAssociationId
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +182,7 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Id of the default association to the default resource discovery, created with this IPAM.",
 		//	  "type": "string"
 		//	}
-		"default_resource_discovery_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Id of the default association to the default resource discovery, created with this IPAM.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_resource_discovery_association_id": schemaAttributec4ec394adaa0ff6dbaea8e93(),
 		// Property: DefaultResourceDiscoveryId
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +190,7 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Id of the default resource discovery, created with this IPAM.",
 		//	  "type": "string"
 		//	}
-		"default_resource_discovery_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Id of the default resource discovery, created with this IPAM.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_resource_discovery_id": schemaAttributebed9a4488f64cc284afb2683(),
 		// Property: DefaultResourceDiscoveryOrganizationalUnitExclusions
 		// CloudFormation resource type schema:
 		//
@@ -79,28 +215,14 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"default_resource_discovery_organizational_unit_exclusions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: OrganizationsEntityPath
-					"organizations_entity_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "An AWS Organizations entity path. Build the path for the OU(s) using AWS Organizations IDs separated by a '/'. Include all child OUs by ending the path with '/*'.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A set of organizational unit (OU) exclusions for the default resource discovery, created with this IPAM.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_resource_discovery_organizational_unit_exclusions": schemaAttributec764533629603196ac8b8185(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute64a8afaecb679823a9af0afc(),
 		// Property: EnablePrivateGua
 		// CloudFormation resource type schema:
 		//
@@ -108,10 +230,7 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Enable provisioning of GUA space in private pools.",
 		//	  "type": "boolean"
 		//	}
-		"enable_private_gua": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Enable provisioning of GUA space in private pools.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enable_private_gua": schemaAttribute21aa435095827f4d2f815588(),
 		// Property: IpamId
 		// CloudFormation resource type schema:
 		//
@@ -119,10 +238,7 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Id of the IPAM.",
 		//	  "type": "string"
 		//	}
-		"ipam_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Id of the IPAM.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipam_id": schemaAttribute8b487e82d7ecbb9f6a0fb7fb(),
 		// Property: MeteredAccount
 		// CloudFormation resource type schema:
 		//
@@ -134,10 +250,7 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"metered_account": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A metered account is an account that is charged for active IP addresses managed in IPAM",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"metered_account": schemaAttribute1b1844b8d5a34af865082f3f(),
 		// Property: OperatingRegions
 		// CloudFormation resource type schema:
 		//
@@ -161,19 +274,7 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"operating_regions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: RegionName
-					"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the region.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The regions IPAM is enabled for. Allows pools to be created in these regions, as well as enabling monitoring",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"operating_regions": schemaAttributef28925c50858fc32036c1acd(),
 		// Property: PrivateDefaultScopeId
 		// CloudFormation resource type schema:
 		//
@@ -181,10 +282,7 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Id of the default scope for publicly routable IP space, created with this IPAM.",
 		//	  "type": "string"
 		//	}
-		"private_default_scope_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Id of the default scope for publicly routable IP space, created with this IPAM.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"private_default_scope_id": schemaAttribute41fe3593db3b406034179f41(),
 		// Property: PublicDefaultScopeId
 		// CloudFormation resource type schema:
 		//
@@ -193,10 +291,7 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
-		"public_default_scope_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Id of the default scope for publicly routable IP space, created with this IPAM.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"public_default_scope_id": schemaAttribute41fe3593db3b406034179f41(),
 		// Property: ResourceDiscoveryAssociationCount
 		// CloudFormation resource type schema:
 		//
@@ -204,10 +299,7 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The count of resource discoveries associated with this IPAM.",
 		//	  "type": "integer"
 		//	}
-		"resource_discovery_association_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The count of resource discoveries associated with this IPAM.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_discovery_association_count": schemaAttribute37a0daf9c7f93eb2cdace3ed(),
 		// Property: ScopeCount
 		// CloudFormation resource type schema:
 		//
@@ -215,10 +307,7 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of scopes that currently exist in this IPAM.",
 		//	  "type": "integer"
 		//	}
-		"scope_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of scopes that currently exist in this IPAM.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scope_count": schemaAttribute48abd9546a8d18fdfccb20c4(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -251,24 +340,7 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute3510218521dc614c2cce3761(),
 		// Property: Tier
 		// CloudFormation resource type schema:
 		//
@@ -280,10 +352,7 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"tier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The tier of the IPAM.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tier": schemaAttribute39f2545f1fdfb305431282cf(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

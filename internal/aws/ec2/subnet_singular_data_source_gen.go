@@ -15,6 +15,200 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute05a98ea2bfa265aceb622f33() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0ad3511ced24c55e8bc9d03d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An IPv4 IPAM pool ID for the subnet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0e5536f07d6d8022ca9f4fdc() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether this is an IPv6 only subnet. For more information, see [Subnet basics](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#subnet-basics) in the *User Guide*.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1344d00a02620ca2f252fb2f() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.\n AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23169968737eaed89e8f8a27() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "An IPv4 netmask length for the subnet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25efb8e7e72b166df95f8313() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2db1cdca9884ebf66a873890() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute447a9260225e779140dfc430() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Outpost.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52fc69f57e9b9fe2393b1aab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Availability Zone of the subnet.\n If you update this property, you must also update the ``CidrBlock`` property.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute610663601a5f96ab1934bd6d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An IPv6 IPAM pool ID for the subnet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6644c5a6732ed33153d5b818() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The mode of VPC BPA. Options here are off, block-bidirectional, block-ingress ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d247de3a0068eb596b3f7f4() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Indicates the device position for local network interfaces in this subnet. For example, ``1`` indicates local network interfaces in this subnet are the secondary network interface (eth1).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b465b1c110ec5673cc79475() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations.\n  You must first configure a NAT gateway in a public subnet (separate from the subnet containing the IPv6-only workloads). For example, the subnet containing the NAT gateway should have a ``0.0.0.0/0`` route pointing to the internet gateway. For more information, see [Configure DNS64 and NAT64](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-nat64-dns64.html#nat-gateway-nat64-dns64-walkthrough) in the *User Guide*.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute824244d7d5dacd544519cc81() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute89acbfb69d4027f574c6bc4e(),
+				// Property: Value
+				"value": schemaAttributef021eda6812f2ab213b8ce10(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Any tags assigned to the subnet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89acbfb69d4027f574c6bc4e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92e97ed1bc22b5b398cdf2b4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InternetGatewayBlockMode
+			"internet_gateway_block_mode": schemaAttribute6644c5a6732ed33153d5b818(),
+		}, /*END SCHEMA*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb1c685b56f26fbc9040fd08a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb856b27f558cc2983ff81da1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AZ ID of the subnet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba9084d842fca0687272522d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IPv4 CIDR block assigned to the subnet.\n If you update this property, we create a new subnet, and then delete the existing one.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb760338496c0d6481d42be3() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether a network interface created in this subnet receives an IPv6 address. The default value is ``false``.\n If you specify ``AssignIpv6AddressOnCreation``, you must also specify an IPv6 CIDR block.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee56c1dac069f2786e2ecd6fa() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "An IPv6 netmask length for the subnet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5ed36ed766fcd20bd1901f6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnableResourceNameDnsAAAARecord
+			"enable_resource_name_dns_aaaa_record": schemaAttribute2db1cdca9884ebf66a873890(),
+			// Property: EnableResourceNameDnsARecord
+			"enable_resource_name_dns_a_record": schemaAttribute2db1cdca9884ebf66a873890(),
+			// Property: HostnameType
+			"hostname_type": schemaAttributeb1c685b56f26fbc9040fd08a(),
+		}, /*END SCHEMA*/
+		Description: "The hostname type for EC2 instances launched into this subnet and how DNS A and AAAA record queries to the instances should be handled. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*.\n Available options:\n  +  EnableResourceNameDnsAAAARecord (true | false)\n  +  EnableResourceNameDnsARecord (true | false)\n  +  HostnameType (ip-name | resource-name)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9f0fcfb7b3611e73f73452a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the VPC the subnet is in.\n If you update this property, you must also update the ``CidrBlock`` property.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef021eda6812f2ab213b8ce10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7aed44beb1a227104e3d59a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IPv6 CIDR block.\n If you specify ``AssignIpv6AddressOnCreation``, you must also specify an IPv6 CIDR block.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_subnet", subnetDataSource)
 }
@@ -30,10 +224,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether a network interface created in this subnet receives an IPv6 address. The default value is ``false``.\n If you specify ``AssignIpv6AddressOnCreation``, you must also specify an IPv6 CIDR block.",
 		//	  "type": "boolean"
 		//	}
-		"assign_ipv_6_address_on_creation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether a network interface created in this subnet receives an IPv6 address. The default value is ``false``.\n If you specify ``AssignIpv6AddressOnCreation``, you must also specify an IPv6 CIDR block.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"assign_ipv_6_address_on_creation": schemaAttributedb760338496c0d6481d42be3(),
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +232,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Availability Zone of the subnet.\n If you update this property, you must also update the ``CidrBlock`` property.",
 		//	  "type": "string"
 		//	}
-		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Availability Zone of the subnet.\n If you update this property, you must also update the ``CidrBlock`` property.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"availability_zone": schemaAttribute52fc69f57e9b9fe2393b1aab(),
 		// Property: AvailabilityZoneId
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +240,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AZ ID of the subnet.",
 		//	  "type": "string"
 		//	}
-		"availability_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AZ ID of the subnet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"availability_zone_id": schemaAttributeb856b27f558cc2983ff81da1(),
 		// Property: BlockPublicAccessStates
 		// CloudFormation resource type schema:
 		//
@@ -70,17 +255,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"block_public_access_states": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: InternetGatewayBlockMode
-				"internet_gateway_block_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The mode of VPC BPA. Options here are off, block-bidirectional, block-ingress ",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"block_public_access_states": schemaAttribute92e97ed1bc22b5b398cdf2b4(),
 		// Property: CidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -88,10 +263,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The IPv4 CIDR block assigned to the subnet.\n If you update this property, we create a new subnet, and then delete the existing one.",
 		//	  "type": "string"
 		//	}
-		"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IPv4 CIDR block assigned to the subnet.\n If you update this property, we create a new subnet, and then delete the existing one.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cidr_block": schemaAttributeba9084d842fca0687272522d(),
 		// Property: EnableDns64
 		// CloudFormation resource type schema:
 		//
@@ -99,10 +271,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations.\n  You must first configure a NAT gateway in a public subnet (separate from the subnet containing the IPv6-only workloads). For example, the subnet containing the NAT gateway should have a ``0.0.0.0/0`` route pointing to the internet gateway. For more information, see [Configure DNS64 and NAT64](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-nat64-dns64.html#nat-gateway-nat64-dns64-walkthrough) in the *User Guide*.",
 		//	  "type": "boolean"
 		//	}
-		"enable_dns_64": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether DNS queries made to the Amazon-provided DNS Resolver in this subnet should return synthetic IPv6 addresses for IPv4-only destinations.\n  You must first configure a NAT gateway in a public subnet (separate from the subnet containing the IPv6-only workloads). For example, the subnet containing the NAT gateway should have a ``0.0.0.0/0`` route pointing to the internet gateway. For more information, see [Configure DNS64 and NAT64](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-nat64-dns64.html#nat-gateway-nat64-dns64-walkthrough) in the *User Guide*.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enable_dns_64": schemaAttribute7b465b1c110ec5673cc79475(),
 		// Property: EnableLniAtDeviceIndex
 		// CloudFormation resource type schema:
 		//
@@ -110,10 +279,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates the device position for local network interfaces in this subnet. For example, ``1`` indicates local network interfaces in this subnet are the secondary network interface (eth1).",
 		//	  "type": "integer"
 		//	}
-		"enable_lni_at_device_index": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Indicates the device position for local network interfaces in this subnet. For example, ``1`` indicates local network interfaces in this subnet are the secondary network interface (eth1).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enable_lni_at_device_index": schemaAttribute6d247de3a0068eb596b3f7f4(),
 		// Property: Ipv4IpamPoolId
 		// CloudFormation resource type schema:
 		//
@@ -121,10 +287,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "An IPv4 IPAM pool ID for the subnet.",
 		//	  "type": "string"
 		//	}
-		"ipv_4_ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An IPv4 IPAM pool ID for the subnet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_4_ipam_pool_id": schemaAttribute0ad3511ced24c55e8bc9d03d(),
 		// Property: Ipv4NetmaskLength
 		// CloudFormation resource type schema:
 		//
@@ -132,10 +295,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "An IPv4 netmask length for the subnet.",
 		//	  "type": "integer"
 		//	}
-		"ipv_4_netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "An IPv4 netmask length for the subnet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_4_netmask_length": schemaAttribute23169968737eaed89e8f8a27(),
 		// Property: Ipv6CidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -143,10 +303,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The IPv6 CIDR block.\n If you specify ``AssignIpv6AddressOnCreation``, you must also specify an IPv6 CIDR block.",
 		//	  "type": "string"
 		//	}
-		"ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IPv6 CIDR block.\n If you specify ``AssignIpv6AddressOnCreation``, you must also specify an IPv6 CIDR block.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_6_cidr_block": schemaAttributef7aed44beb1a227104e3d59a(),
 		// Property: Ipv6CidrBlocks
 		// CloudFormation resource type schema:
 		//
@@ -158,11 +315,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"ipv_6_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_6_cidr_blocks": schemaAttribute25efb8e7e72b166df95f8313(),
 		// Property: Ipv6IpamPoolId
 		// CloudFormation resource type schema:
 		//
@@ -170,10 +323,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "An IPv6 IPAM pool ID for the subnet.",
 		//	  "type": "string"
 		//	}
-		"ipv_6_ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An IPv6 IPAM pool ID for the subnet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_6_ipam_pool_id": schemaAttribute610663601a5f96ab1934bd6d(),
 		// Property: Ipv6Native
 		// CloudFormation resource type schema:
 		//
@@ -181,10 +331,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether this is an IPv6 only subnet. For more information, see [Subnet basics](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#subnet-basics) in the *User Guide*.",
 		//	  "type": "boolean"
 		//	}
-		"ipv_6_native": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether this is an IPv6 only subnet. For more information, see [Subnet basics](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#subnet-basics) in the *User Guide*.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_6_native": schemaAttribute0e5536f07d6d8022ca9f4fdc(),
 		// Property: Ipv6NetmaskLength
 		// CloudFormation resource type schema:
 		//
@@ -192,10 +339,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "An IPv6 netmask length for the subnet.",
 		//	  "type": "integer"
 		//	}
-		"ipv_6_netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "An IPv6 netmask length for the subnet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_6_netmask_length": schemaAttributee56c1dac069f2786e2ecd6fa(),
 		// Property: MapPublicIpOnLaunch
 		// CloudFormation resource type schema:
 		//
@@ -203,10 +347,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.\n AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).",
 		//	  "type": "boolean"
 		//	}
-		"map_public_ip_on_launch": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether instances launched in this subnet receive a public IPv4 address. The default value is ``false``.\n AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses. For more information, see the *Public IPv4 Address* tab on the [VPC pricing page](https://docs.aws.amazon.com/vpc/pricing/).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"map_public_ip_on_launch": schemaAttribute1344d00a02620ca2f252fb2f(),
 		// Property: NetworkAclAssociationId
 		// CloudFormation resource type schema:
 		//
@@ -214,10 +355,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"network_acl_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_acl_association_id": schemaAttribute05a98ea2bfa265aceb622f33(),
 		// Property: OutpostArn
 		// CloudFormation resource type schema:
 		//
@@ -225,10 +363,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the Outpost.",
 		//	  "type": "string"
 		//	}
-		"outpost_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Outpost.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"outpost_arn": schemaAttribute447a9260225e779140dfc430(),
 		// Property: PrivateDnsNameOptionsOnLaunch
 		// CloudFormation resource type schema:
 		//
@@ -248,24 +383,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"private_dns_name_options_on_launch": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EnableResourceNameDnsAAAARecord
-				"enable_resource_name_dns_aaaa_record": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: EnableResourceNameDnsARecord
-				"enable_resource_name_dns_a_record": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: HostnameType
-				"hostname_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The hostname type for EC2 instances launched into this subnet and how DNS A and AAAA record queries to the instances should be handled. For more information, see [Amazon EC2 instance hostname types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-naming.html) in the *User Guide*.\n Available options:\n  +  EnableResourceNameDnsAAAARecord (true | false)\n  +  EnableResourceNameDnsARecord (true | false)\n  +  HostnameType (ip-name | resource-name)",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"private_dns_name_options_on_launch": schemaAttributee5ed36ed766fcd20bd1901f6(),
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -273,10 +391,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_id": schemaAttribute05a98ea2bfa265aceb622f33(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -304,24 +419,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Any tags assigned to the subnet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute824244d7d5dacd544519cc81(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -329,10 +427,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the VPC the subnet is in.\n If you update this property, you must also update the ``CidrBlock`` property.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the VPC the subnet is in.\n If you update this property, you must also update the ``CidrBlock`` property.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttributee9f0fcfb7b3611e73f73452a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

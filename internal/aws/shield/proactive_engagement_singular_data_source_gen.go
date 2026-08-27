@@ -14,6 +14,57 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1d901fee76f160b380770fa3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Additional notes regarding the contact.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b3b90b146082dd84469ca0a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The phone number for the contact",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute625121d33e6c92e5710c7aa9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "If `ENABLED`, the Shield Response Team (SRT) will use email and phone to notify contacts about escalations to the SRT and to initiate proactive customer support.\nIf `DISABLED`, the SRT will not proactively notify contacts about escalations or to initiate proactive customer support.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6cfac0c99622ba0b3b508419() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9580f4cd1126abf7a8f31d02() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The email address for the contact.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca0792caf6bec3a7c7f6f1fc() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContactNotes
+				"contact_notes": schemaAttribute1d901fee76f160b380770fa3(),
+				// Property: EmailAddress
+				"email_address": schemaAttribute9580f4cd1126abf7a8f31d02(),
+				// Property: PhoneNumber
+				"phone_number": schemaAttribute5b3b90b146082dd84469ca0a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you for escalations to the SRT and to initiate proactive customer support.\nTo enable proactive engagement, the contact list must include at least one phone number.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_shield_proactive_engagement", proactiveEngagementDataSource)
 }
@@ -28,9 +79,7 @@ func proactiveEngagementDataSource(ctx context.Context) (datasource.DataSource, 
 		//	{
 		//	  "type": "string"
 		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"account_id": schemaAttribute6cfac0c99622ba0b3b508419(),
 		// Property: EmergencyContactList
 		// CloudFormation resource type schema:
 		//
@@ -72,29 +121,7 @@ func proactiveEngagementDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"emergency_contact_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ContactNotes
-					"contact_notes": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Additional notes regarding the contact.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: EmailAddress
-					"email_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The email address for the contact.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PhoneNumber
-					"phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The phone number for the contact",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you for escalations to the SRT and to initiate proactive customer support.\nTo enable proactive engagement, the contact list must include at least one phone number.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"emergency_contact_list": schemaAttributeca0792caf6bec3a7c7f6f1fc(),
 		// Property: ProactiveEngagementStatus
 		// CloudFormation resource type schema:
 		//
@@ -106,10 +133,7 @@ func proactiveEngagementDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"proactive_engagement_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "If `ENABLED`, the Shield Response Team (SRT) will use email and phone to notify contacts about escalations to the SRT and to initiate proactive customer support.\nIf `DISABLED`, the SRT will not proactively notify contacts about escalations or to initiate proactive customer support.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"proactive_engagement_status": schemaAttribute625121d33e6c92e5710c7aa9(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

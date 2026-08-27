@@ -15,6 +15,154 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0d40a4607bc0b94c521b8d3b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the OptOutList to associate with the pool. You can use the OptOutListName or OptOutListArn.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute134455ad1ec949326f099802() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An optional IAM Role Arn for a service to assume, to be able to post inbound SMS messages.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e75a820b4a64ef9724fe16f() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "By default this is set to false. When set to true you can receive incoming text messages from your end recipients.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute22e6c9ee56ae9631674a97e2() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "By default this is set to false. When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a8d4163e839e0535698ccb9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4015d35732c6edb378ebace4() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "When set to true the pool can't be deleted. By default this is set to false.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute421ff83b63645bf28204581b() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or SenderIdArn and it's IsoCountryCode.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48de5677241251cc6dccfd94() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Message
+			"message": schemaAttribute6abe82e3237996d7d1e09353(),
+		}, /*END SCHEMA*/
+		Description: "A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable message. Keywords \"HELP\" and \"STOP\" are mandatory keywords",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b80a07c2ea5449a05f8dec5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the two way channel.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6abe82e3237996d7d1e09353() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute711df90192c3b6b027c1e797() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HELP
+			"help": schemaAttribute48de5677241251cc6dccfd94(),
+			// Property: STOP
+			"stop": schemaAttribute48de5677241251cc6dccfd94(),
+		}, /*END SCHEMA*/
+		Description: "A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable message. Keywords \"HELP\" and \"STOP\" are mandatory keywords",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b36b2ff744a8a9abd6e0f6e() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute3a8d4163e839e0535698ccb9(),
+				// Property: Value
+				"value": schemaAttributef26cf4f74c195450250bbdeb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80715fd14ca9578ce6a7365a() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether shared routes are enabled for the pool.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute99c4bb40915d5cfc65067ef8() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Action
+				"action": schemaAttribute6abe82e3237996d7d1e09353(),
+				// Property: Keyword
+				"keyword": schemaAttribute6abe82e3237996d7d1e09353(),
+				// Property: Message
+				"message": schemaAttribute6abe82e3237996d7d1e09353(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable message.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb34d41f675d3fdabe8cbed9c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ChannelArn
+			"channel_arn": schemaAttribute5b80a07c2ea5449a05f8dec5(),
+			// Property: ChannelRole
+			"channel_role": schemaAttribute134455ad1ec949326f099802(),
+			// Property: Enabled
+			"enabled": schemaAttribute1e75a820b4a64ef9724fe16f(),
+		}, /*END SCHEMA*/
+		Description: "When you set up two-way SMS, you can receive incoming messages from your customers. When one of your customers sends a message to your phone number, the message body is sent to an Amazon SNS topic or Amazon Connect for processing.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef26cf4f74c195450250bbdeb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_smsvoice_pool", poolDataSource)
 }
@@ -29,9 +177,7 @@ func poolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute6abe82e3237996d7d1e09353(),
 		// Property: DeletionProtectionEnabled
 		// CloudFormation resource type schema:
 		//
@@ -39,10 +185,7 @@ func poolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "When set to true the pool can't be deleted. By default this is set to false.",
 		//	  "type": "boolean"
 		//	}
-		"deletion_protection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "When set to true the pool can't be deleted. By default this is set to false.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"deletion_protection_enabled": schemaAttribute4015d35732c6edb378ebace4(),
 		// Property: MandatoryKeywords
 		// CloudFormation resource type schema:
 		//
@@ -87,34 +230,7 @@ func poolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"mandatory_keywords": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: HELP
-				"help": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Message
-						"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable message. Keywords \"HELP\" and \"STOP\" are mandatory keywords",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: STOP
-				"stop": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Message
-						"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable message. Keywords \"HELP\" and \"STOP\" are mandatory keywords",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable message. Keywords \"HELP\" and \"STOP\" are mandatory keywords",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"mandatory_keywords": schemaAttribute711df90192c3b6b027c1e797(),
 		// Property: OptOutListName
 		// CloudFormation resource type schema:
 		//
@@ -125,10 +241,7 @@ func poolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z0-9_:/-]+$",
 		//	  "type": "string"
 		//	}
-		"opt_out_list_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the OptOutList to associate with the pool. You can use the OptOutListName or OptOutListArn.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"opt_out_list_name": schemaAttribute0d40a4607bc0b94c521b8d3b(),
 		// Property: OptionalKeywords
 		// CloudFormation resource type schema:
 		//
@@ -168,26 +281,7 @@ func poolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"optional_keywords": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Action
-					"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Keyword
-					"keyword": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Message
-					"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A keyword is a word that you can search for on a particular phone number or pool. It is also a specific word or phrase that an end user can send to your number to elicit a response, such as an informational message or a special offer. When your number receives a message that begins with a keyword, AWS End User Messaging SMS and Voice responds with a customizable message.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"optional_keywords": schemaAttribute99c4bb40915d5cfc65067ef8(),
 		// Property: OriginationIdentities
 		// CloudFormation resource type schema:
 		//
@@ -204,20 +298,14 @@ func poolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"origination_identities": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The origination identity to use such as a PhoneNumberId, PhoneNumberArn, SenderId or SenderIdArn and it's IsoCountryCode.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"origination_identities": schemaAttribute421ff83b63645bf28204581b(),
 		// Property: PoolId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"pool_id": schemaAttribute6abe82e3237996d7d1e09353(),
 		// Property: SelfManagedOptOutsEnabled
 		// CloudFormation resource type schema:
 		//
@@ -225,10 +313,7 @@ func poolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "By default this is set to false. When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.",
 		//	  "type": "boolean"
 		//	}
-		"self_managed_opt_outs_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "By default this is set to false. When an end recipient sends a message that begins with HELP or STOP to one of your dedicated numbers, AWS End User Messaging SMS and Voice automatically replies with a customizable message and adds the end recipient to the OptOutList. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"self_managed_opt_outs_enabled": schemaAttribute22e6c9ee56ae9631674a97e2(),
 		// Property: SharedRoutesEnabled
 		// CloudFormation resource type schema:
 		//
@@ -236,10 +321,7 @@ func poolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether shared routes are enabled for the pool.",
 		//	  "type": "boolean"
 		//	}
-		"shared_routes_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether shared routes are enabled for the pool.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"shared_routes_enabled": schemaAttribute80715fd14ca9578ce6a7365a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -272,24 +354,7 @@ func poolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute7b36b2ff744a8a9abd6e0f6e(),
 		// Property: TwoWay
 		// CloudFormation resource type schema:
 		//
@@ -317,27 +382,7 @@ func poolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"two_way": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ChannelArn
-				"channel_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the two way channel.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ChannelRole
-				"channel_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "An optional IAM Role Arn for a service to assume, to be able to post inbound SMS messages.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Enabled
-				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "By default this is set to false. When set to true you can receive incoming text messages from your end recipients.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "When you set up two-way SMS, you can receive incoming messages from your customers. When one of your customers sends a message to your phone number, the message body is sent to an Amazon SNS topic or Amazon Connect for processing.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"two_way": schemaAttributeb34d41f675d3fdabe8cbed9c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

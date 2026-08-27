@@ -14,6 +14,18 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute56fa25841924dbf68c576341() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc2f4e72fe31dd89481fade1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_deadline_limit", limitDataSource)
 }
@@ -29,9 +41,7 @@ func limitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1024,
 		//	  "type": "string"
 		//	}
-		"amount_requirement_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"amount_requirement_name": schemaAttributecc2f4e72fe31dd89481fade1(),
 		// Property: CurrentCount
 		// CloudFormation resource type schema:
 		//
@@ -40,9 +50,7 @@ func limitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"current_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"current_count": schemaAttribute56fa25841924dbf68c576341(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -52,9 +60,7 @@ func limitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributecc2f4e72fe31dd89481fade1(),
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -63,9 +69,7 @@ func limitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"display_name": schemaAttributecc2f4e72fe31dd89481fade1(),
 		// Property: FarmId
 		// CloudFormation resource type schema:
 		//
@@ -73,9 +77,7 @@ func limitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^farm-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"farm_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"farm_id": schemaAttributecc2f4e72fe31dd89481fade1(),
 		// Property: LimitId
 		// CloudFormation resource type schema:
 		//
@@ -83,9 +85,7 @@ func limitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^limit-[0-9a-f]{32}$",
 		//	  "type": "string"
 		//	}
-		"limit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"limit_id": schemaAttributecc2f4e72fe31dd89481fade1(),
 		// Property: MaxCount
 		// CloudFormation resource type schema:
 		//
@@ -94,9 +94,7 @@ func limitDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": -1,
 		//	  "type": "integer"
 		//	}
-		"max_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"max_count": schemaAttribute56fa25841924dbf68c576341(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,20 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute4cb514fffc5b42be3b04aae2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name for resource policy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2ce4907b6c2b14bf07f58e6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The policy document",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_logs_resource_policy", resourcePolicyDataSource)
 }
@@ -32,10 +46,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The policy document",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_document": schemaAttributeb2ce4907b6c2b14bf07f58e6(),
 		// Property: PolicyName
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +57,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$",
 		//	  "type": "string"
 		//	}
-		"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for resource policy",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_name": schemaAttribute4cb514fffc5b42be3b04aae2(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

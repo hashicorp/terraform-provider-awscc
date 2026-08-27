@@ -14,6 +14,76 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0773163955497889a1d98e28() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The JSON representation of a lens.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute236d8fe1da4364e350b85847() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the lens.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4685ab6c96b7d5df8cd9be4a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58f4f470623c232862e181bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the lens.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5dce35a190f8b3286765a333() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Web Services account ID that owns the lens.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute74cbd03c954f90d43609600b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The full name of the lens.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8cea8da215ebc90f0b18241d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute4685ab6c96b7d5df8cd9be4a(),
+				// Property: Value
+				"value": schemaAttribute4685ab6c96b7d5df8cd9be4a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags assigned to the lens.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f4385067d2edcaf5a5ac9a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the lens.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed271b897fd5fe13c9ed6bf5a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the lens.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_wellarchitected_lens", lensDataSource)
 }
@@ -31,10 +101,7 @@ func lensDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the lens.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributed271b897fd5fe13c9ed6bf5a(),
 		// Property: JSONString
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +111,7 @@ func lensDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
-		"json_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The JSON representation of a lens.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"json_string": schemaAttribute0773163955497889a1d98e28(),
 		// Property: LensArn
 		// CloudFormation resource type schema:
 		//
@@ -55,10 +119,7 @@ func lensDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the lens.",
 		//	  "type": "string"
 		//	}
-		"lens_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the lens.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"lens_arn": schemaAttribute8f4385067d2edcaf5a5ac9a5(),
 		// Property: LensId
 		// CloudFormation resource type schema:
 		//
@@ -66,10 +127,7 @@ func lensDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unique identifier of the lens.",
 		//	  "type": "string"
 		//	}
-		"lens_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the lens.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"lens_id": schemaAttribute236d8fe1da4364e350b85847(),
 		// Property: LensVersion
 		// CloudFormation resource type schema:
 		//
@@ -79,10 +137,7 @@ func lensDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"lens_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of the lens.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"lens_version": schemaAttribute58f4f470623c232862e181bb(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -92,10 +147,7 @@ func lensDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The full name of the lens.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute74cbd03c954f90d43609600b(),
 		// Property: Owner
 		// CloudFormation resource type schema:
 		//
@@ -103,10 +155,7 @@ func lensDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Web Services account ID that owns the lens.",
 		//	  "type": "string"
 		//	}
-		"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Web Services account ID that owns the lens.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"owner": schemaAttribute5dce35a190f8b3286765a333(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -135,22 +184,7 @@ func lensDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags assigned to the lens.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute8cea8da215ebc90f0b18241d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

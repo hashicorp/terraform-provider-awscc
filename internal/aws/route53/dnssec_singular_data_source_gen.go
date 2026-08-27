@@ -14,6 +14,13 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributee8c536ac1c16e7338b763dbd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique string (ID) used to identify a hosted zone.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_route53_dnssec", dNSSECDataSource)
 }
@@ -30,10 +37,7 @@ func dNSSECDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Z0-9]{1,32}$",
 		//	  "type": "string"
 		//	}
-		"hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique string (ID) used to identify a hosted zone.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"hosted_zone_id": schemaAttributee8c536ac1c16e7338b763dbd(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

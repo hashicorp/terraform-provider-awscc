@@ -14,6 +14,70 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute3847ff1380d39bff8d304bcd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the capacity manager data export.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42553b294f7119de2c331327() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Amazon S3 bucket where the capacity manager data export will be stored. The bucket must exist and be accessible by EC2 Capacity Manager service.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute56d994573883be89f3c2b104() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The format of the exported capacity manager data. Choose 'csv' for comma-separated values or 'parquet' for optimized columnar storage format.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ca0e3705052a5fd4f3315e9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8aaf83805d4be91090aa3c69() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute6ca0e3705052a5fd4f3315e9(),
+				// Property: Value
+				"value": schemaAttribute9622a07842f9f8186d6fb20c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to the capacity manager data export.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9622a07842f9f8186d6fb20c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ebe9d5bcd289f84b0f86c19() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The schedule for the capacity manager data export. Currently supports hourly exports that provide periodic snapshots of capacity manager data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed7d7d90b486fd2c13d56f8c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The prefix for the S3 bucket location where exported files will be placed. If not specified, files will be placed in the root of the bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_capacity_manager_data_export", capacityManagerDataExportDataSource)
 }
@@ -29,10 +93,7 @@ func capacityManagerDataExportDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "The unique identifier of the capacity manager data export.",
 		//	  "type": "string"
 		//	}
-		"capacity_manager_data_export_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the capacity manager data export.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"capacity_manager_data_export_id": schemaAttribute3847ff1380d39bff8d304bcd(),
 		// Property: OutputFormat
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +105,7 @@ func capacityManagerDataExportDataSource(ctx context.Context) (datasource.DataSo
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The format of the exported capacity manager data. Choose 'csv' for comma-separated values or 'parquet' for optimized columnar storage format.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"output_format": schemaAttribute56d994573883be89f3c2b104(),
 		// Property: S3BucketName
 		// CloudFormation resource type schema:
 		//
@@ -55,10 +113,7 @@ func capacityManagerDataExportDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "The name of the Amazon S3 bucket where the capacity manager data export will be stored. The bucket must exist and be accessible by EC2 Capacity Manager service.",
 		//	  "type": "string"
 		//	}
-		"s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Amazon S3 bucket where the capacity manager data export will be stored. The bucket must exist and be accessible by EC2 Capacity Manager service.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"s3_bucket_name": schemaAttribute42553b294f7119de2c331327(),
 		// Property: S3BucketPrefix
 		// CloudFormation resource type schema:
 		//
@@ -66,10 +121,7 @@ func capacityManagerDataExportDataSource(ctx context.Context) (datasource.DataSo
 		//	  "description": "The prefix for the S3 bucket location where exported files will be placed. If not specified, files will be placed in the root of the bucket.",
 		//	  "type": "string"
 		//	}
-		"s3_bucket_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The prefix for the S3 bucket location where exported files will be placed. If not specified, files will be placed in the root of the bucket.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"s3_bucket_prefix": schemaAttributeed7d7d90b486fd2c13d56f8c(),
 		// Property: Schedule
 		// CloudFormation resource type schema:
 		//
@@ -80,10 +132,7 @@ func capacityManagerDataExportDataSource(ctx context.Context) (datasource.DataSo
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"schedule": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The schedule for the capacity manager data export. Currently supports hourly exports that provide periodic snapshots of capacity manager data.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schedule": schemaAttribute9ebe9d5bcd289f84b0f86c19(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -116,24 +165,7 @@ func capacityManagerDataExportDataSource(ctx context.Context) (datasource.DataSo
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to the capacity manager data export.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute8aaf83805d4be91090aa3c69(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

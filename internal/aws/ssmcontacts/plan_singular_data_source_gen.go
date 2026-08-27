@@ -15,6 +15,112 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute339a11f5a68802e7c092c903() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute436091ec5d129a131e12a886() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DurationInMinutes
+				"duration_in_minutes": schemaAttributec0a8257843b85ac825c1d411(),
+				// Property: Targets
+				"targets": schemaAttributece3561d63bd073207554f937(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The stages that an escalation plan or engagement plan engages contacts and contact methods in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b9e6bb2f370feecd38a69c4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ChannelId
+			"channel_id": schemaAttributeed1481536686957f5eedec99(),
+			// Property: RetryIntervalInMinutes
+			"retry_interval_in_minutes": schemaAttributeb79ca3c99289ddf5baead2b3(),
+		}, /*END SCHEMA*/
+		Description: "Information about the contact channel that SSM Incident Manager uses to engage the contact.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ff8b2b55e44754aa4988959() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContactId
+			"contact_id": schemaAttribute96f84bed36ce9fc973c26a87(),
+			// Property: IsEssential
+			"is_essential": schemaAttribute339a11f5a68802e7c092c903(),
+		}, /*END SCHEMA*/
+		Description: "The contact that SSM Incident Manager is engaging during an incident.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute69a0b7e106ded6f281bf0b6f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Rotation Ids to associate with Oncall Contact for engagement.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96f84bed36ce9fc973c26a87() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the contact.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb79ca3c99289ddf5baead2b3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of minutes to wait to retry sending engagement in the case the engagement initially fails.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec0a8257843b85ac825c1d411() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The time to wait until beginning the next stage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributece3561d63bd073207554f937() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ChannelTargetInfo
+				"channel_target_info": schemaAttribute4b9e6bb2f370feecd38a69c4(),
+				// Property: ContactTargetInfo
+				"contact_target_info": schemaAttribute5ff8b2b55e44754aa4988959(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The contacts or contact methods that the escalation plan or engagement plan is engaging.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed1481536686957f5eedec99() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the contact channel.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef48a3b706f20ed86227a59b4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Contact ID for the AWS SSM Incident Manager Contact to associate the plan.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ssmcontacts_plan", planDataSource)
 }
@@ -30,10 +136,7 @@ func planDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the contact.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the contact.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute96f84bed36ce9fc973c26a87(),
 		// Property: ContactId
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +145,7 @@ func planDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]*:[0-9]+:([\\w+=\\/,.@:-]+)*",
 		//	  "type": "string"
 		//	}
-		"contact_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Contact ID for the AWS SSM Incident Manager Contact to associate the plan.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"contact_id": schemaAttributef48a3b706f20ed86227a59b4(),
 		// Property: RotationIds
 		// CloudFormation resource type schema:
 		//
@@ -57,11 +157,7 @@ func planDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"rotation_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Rotation Ids to associate with Oncall Contact for engagement.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rotation_ids": schemaAttribute69a0b7e106ded6f281bf0b6f(),
 		// Property: Stages
 		// CloudFormation resource type schema:
 		//
@@ -146,62 +242,7 @@ func planDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"stages": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DurationInMinutes
-					"duration_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The time to wait until beginning the next stage.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Targets
-					"targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ChannelTargetInfo
-								"channel_target_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ChannelId
-										"channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The Amazon Resource Name (ARN) of the contact channel.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: RetryIntervalInMinutes
-										"retry_interval_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The number of minutes to wait to retry sending engagement in the case the engagement initially fails.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Information about the contact channel that SSM Incident Manager uses to engage the contact.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ContactTargetInfo
-								"contact_target_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ContactId
-										"contact_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The Amazon Resource Name (ARN) of the contact.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: IsEssential
-										"is_essential": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Description: "A Boolean value determining if the contact's acknowledgement stops the progress of stages in the plan.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "The contact that SSM Incident Manager is engaging during an incident.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "The contacts or contact methods that the escalation plan or engagement plan is engaging.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The stages that an escalation plan or engagement plan engages contacts and contact methods in.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"stages": schemaAttribute436091ec5d129a131e12a886(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

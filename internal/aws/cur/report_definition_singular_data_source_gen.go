@@ -15,6 +15,112 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute181a52504442bdb02a293371() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributec616124b71d065571f0320ba(),
+				// Property: Value
+				"value": schemaAttributec616124b71d065571f0320ba(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1cc910dd97776584e3a35d4b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether you want Amazon Web Services to overwrite the previous version of each report or to deliver the report in addition to the previous versions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b1c77d23220ab88adb877b9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The prefix that AWS adds to the report name when AWS delivers the report. Your prefix can't include spaces.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute818b31e706580e41c0d2010b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The region of the S3 bucket that AWS delivers the report into.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b3c7ab9d25a299a53f00b7a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The S3 bucket where AWS delivers the report.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea2fdce7b8b19629946d06206() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether you want Amazon Web Services to update your reports after they have been finalized if Amazon Web Services detects charges related to previous months. These charges can include refunds, credits, or support fees.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9d2c51f78585ccda1f92a54() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of strings that indicate additional content that Amazon Web Services includes in the report, such as individual resource IDs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebed40add8981c90941b37718() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon resource name of the billing view. You can get this value by using the billing view service public APIs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec616124b71d065571f0320ba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec818d6eabc23446065009bf8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The compression format that AWS uses for the report.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb3318d6158c98984e260eef() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the report that you want to create. The name must be unique, is case sensitive, and can't include spaces.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb3c5018f208d7f7fc8d8351() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The granularity of the line items in the report.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed311f351292f321d002b451() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The format that AWS saves the report in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeda71e212db01cf5611b96d9() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of manifests that you want Amazon Web Services to create for this report.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cur_report_definition", reportDefinitionDataSource)
 }
@@ -40,11 +146,7 @@ func reportDefinitionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"additional_artifacts": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of manifests that you want Amazon Web Services to create for this report.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"additional_artifacts": schemaAttributeeda71e212db01cf5611b96d9(),
 		// Property: AdditionalSchemaElements
 		// CloudFormation resource type schema:
 		//
@@ -62,11 +164,7 @@ func reportDefinitionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  },
 		//	  "type": "array"
 		//	}
-		"additional_schema_elements": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of strings that indicate additional content that Amazon Web Services includes in the report, such as individual resource IDs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"additional_schema_elements": schemaAttributeb9d2c51f78585ccda1f92a54(),
 		// Property: BillingViewArn
 		// CloudFormation resource type schema:
 		//
@@ -77,10 +175,7 @@ func reportDefinitionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "(arn:aws(-cn)?:billing::[0-9]{12}:billingview/)?[a-zA-Z0-9_\\+=\\.\\-@].{1,30}",
 		//	  "type": "string"
 		//	}
-		"billing_view_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon resource name of the billing view. You can get this value by using the billing view service public APIs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"billing_view_arn": schemaAttributebed40add8981c90941b37718(),
 		// Property: Compression
 		// CloudFormation resource type schema:
 		//
@@ -93,10 +188,7 @@ func reportDefinitionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"compression": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The compression format that AWS uses for the report.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"compression": schemaAttributec818d6eabc23446065009bf8(),
 		// Property: Format
 		// CloudFormation resource type schema:
 		//
@@ -108,10 +200,7 @@ func reportDefinitionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"format": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The format that AWS saves the report in.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"format": schemaAttributeed311f351292f321d002b451(),
 		// Property: RefreshClosedReports
 		// CloudFormation resource type schema:
 		//
@@ -119,10 +208,7 @@ func reportDefinitionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "Whether you want Amazon Web Services to update your reports after they have been finalized if Amazon Web Services detects charges related to previous months. These charges can include refunds, credits, or support fees.",
 		//	  "type": "boolean"
 		//	}
-		"refresh_closed_reports": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether you want Amazon Web Services to update your reports after they have been finalized if Amazon Web Services detects charges related to previous months. These charges can include refunds, credits, or support fees.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"refresh_closed_reports": schemaAttributea2fdce7b8b19629946d06206(),
 		// Property: ReportName
 		// CloudFormation resource type schema:
 		//
@@ -133,10 +219,7 @@ func reportDefinitionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "[0-9A-Za-z!\\-_.*\\'()]+",
 		//	  "type": "string"
 		//	}
-		"report_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the report that you want to create. The name must be unique, is case sensitive, and can't include spaces.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"report_name": schemaAttributecb3318d6158c98984e260eef(),
 		// Property: ReportVersioning
 		// CloudFormation resource type schema:
 		//
@@ -148,10 +231,7 @@ func reportDefinitionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"report_versioning": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether you want Amazon Web Services to overwrite the previous version of each report or to deliver the report in addition to the previous versions.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"report_versioning": schemaAttribute1cc910dd97776584e3a35d4b(),
 		// Property: S3Bucket
 		// CloudFormation resource type schema:
 		//
@@ -162,10 +242,7 @@ func reportDefinitionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "[A-Za-z0-9_\\.\\-]+",
 		//	  "type": "string"
 		//	}
-		"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The S3 bucket where AWS delivers the report.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"s3_bucket": schemaAttribute9b3c7ab9d25a299a53f00b7a(),
 		// Property: S3Prefix
 		// CloudFormation resource type schema:
 		//
@@ -176,10 +253,7 @@ func reportDefinitionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "pattern": "[0-9A-Za-z!\\-_.*\\'()/]*",
 		//	  "type": "string"
 		//	}
-		"s3_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The prefix that AWS adds to the report name when AWS delivers the report. Your prefix can't include spaces.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"s3_prefix": schemaAttribute7b1c77d23220ab88adb877b9(),
 		// Property: S3Region
 		// CloudFormation resource type schema:
 		//
@@ -187,10 +261,7 @@ func reportDefinitionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "The region of the S3 bucket that AWS delivers the report into.",
 		//	  "type": "string"
 		//	}
-		"s3_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The region of the S3 bucket that AWS delivers the report into.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"s3_region": schemaAttribute818b31e706580e41c0d2010b(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -219,21 +290,7 @@ func reportDefinitionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute181a52504442bdb02a293371(),
 		// Property: TimeUnit
 		// CloudFormation resource type schema:
 		//
@@ -246,10 +303,7 @@ func reportDefinitionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"time_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The granularity of the line items in the report.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"time_unit": schemaAttributedb3c5018f208d7f7fc8d8351(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

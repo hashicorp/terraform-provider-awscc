@@ -15,6 +15,130 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2ccb96233195a1ca35c0049a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "For the CloudWatch alarm that you want Route 53 health checkers to use to determine whether this health check is healthy, the region that the alarm was created in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f1bbfdb7c874e3fd8b5510b() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute4ccbf45f976ab7965dcbb3c0(),
+				// Property: Value
+				"value": schemaAttributeb23934d00cde5d5009fdf776(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ccbf45f976ab7965dcbb3c0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61b50717fa822b1923904e3a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether this health check is healthy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute863414146dbc41a5d4215ae7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute901d0af69cac13ebb6d17c62() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4df8d72900a63a536e78b31() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttribute61b50717fa822b1923904e3a(),
+			// Property: Region
+			"region": schemaAttribute2ccb96233195a1ca35c0049a(),
+		}, /*END SCHEMA*/
+		Description: "A complex type that identifies the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether the specified health check is healthy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb23934d00cde5d5009fdf776() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed9270ca0ee89762f167b4ed4() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd6816c2daa30754d5decb37() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee174085a0fc7698063498024() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AlarmIdentifier
+			"alarm_identifier": schemaAttributea4df8d72900a63a536e78b31(),
+			// Property: ChildHealthChecks
+			"child_health_checks": schemaAttributed9270ca0ee89762f167b4ed4(),
+			// Property: EnableSNI
+			"enable_sni": schemaAttributedd6816c2daa30754d5decb37(),
+			// Property: FailureThreshold
+			"failure_threshold": schemaAttribute901d0af69cac13ebb6d17c62(),
+			// Property: FullyQualifiedDomainName
+			"fully_qualified_domain_name": schemaAttribute863414146dbc41a5d4215ae7(),
+			// Property: HealthThreshold
+			"health_threshold": schemaAttribute901d0af69cac13ebb6d17c62(),
+			// Property: IPAddress
+			"ip_address": schemaAttribute863414146dbc41a5d4215ae7(),
+			// Property: InsufficientDataHealthStatus
+			"insufficient_data_health_status": schemaAttribute863414146dbc41a5d4215ae7(),
+			// Property: Inverted
+			"inverted": schemaAttributedd6816c2daa30754d5decb37(),
+			// Property: MeasureLatency
+			"measure_latency": schemaAttributedd6816c2daa30754d5decb37(),
+			// Property: Port
+			"port": schemaAttribute901d0af69cac13ebb6d17c62(),
+			// Property: Regions
+			"regions": schemaAttributed9270ca0ee89762f167b4ed4(),
+			// Property: RequestInterval
+			"request_interval": schemaAttribute901d0af69cac13ebb6d17c62(),
+			// Property: ResourcePath
+			"resource_path": schemaAttribute863414146dbc41a5d4215ae7(),
+			// Property: RoutingControlArn
+			"routing_control_arn": schemaAttribute863414146dbc41a5d4215ae7(),
+			// Property: SearchString
+			"search_string": schemaAttribute863414146dbc41a5d4215ae7(),
+			// Property: Type
+			"type": schemaAttribute863414146dbc41a5d4215ae7(),
+		}, /*END SCHEMA*/
+		Description: "A complex type that contains information about the health check.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_route53_health_check", healthCheckDataSource)
 }
@@ -145,104 +269,14 @@ func healthCheckDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"health_check_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AlarmIdentifier
-				"alarm_identifier": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Name
-						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether this health check is healthy.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Region
-						"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "For the CloudWatch alarm that you want Route 53 health checkers to use to determine whether this health check is healthy, the region that the alarm was created in.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A complex type that identifies the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether the specified health check is healthy.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ChildHealthChecks
-				"child_health_checks": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EnableSNI
-				"enable_sni": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: FailureThreshold
-				"failure_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: FullyQualifiedDomainName
-				"fully_qualified_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: HealthThreshold
-				"health_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: IPAddress
-				"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: InsufficientDataHealthStatus
-				"insufficient_data_health_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Inverted
-				"inverted": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MeasureLatency
-				"measure_latency": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Port
-				"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Regions
-				"regions": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RequestInterval
-				"request_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourcePath
-				"resource_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: RoutingControlArn
-				"routing_control_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SearchString
-				"search_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Type
-				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A complex type that contains information about the health check.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"health_check_config": schemaAttributee174085a0fc7698063498024(),
 		// Property: HealthCheckId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"health_check_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"health_check_id": schemaAttribute863414146dbc41a5d4215ae7(),
 		// Property: HealthCheckTags
 		// CloudFormation resource type schema:
 		//
@@ -273,24 +307,7 @@ func healthCheckDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"health_check_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"health_check_tags": schemaAttribute3f1bbfdb7c874e3fd8b5510b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

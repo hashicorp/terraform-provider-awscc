@@ -14,6 +14,69 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1f0682cbef674491d810228a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee9598dea907e1adce6d843a6(),
+				// Property: Value
+				"value": schemaAttributee9598dea907e1adce6d843a6(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags associated with the resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41145583332bd6a94d67dba5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Defines the current state of the discoverer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ba1e51208eef2fe55e9c711() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Id of the discoverer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5cce4fc410b859bd38c075fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the event bus.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d965b913aa280a9a704d0a2() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Defines whether event schemas from other accounts are discovered. Default is True.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8827eca04fd565edbb33f6cd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the discoverer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec419b9ef6b62d21c55276438() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the discoverer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9598dea907e1adce6d843a6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_eventschemas_discoverer", discovererDataSource)
 }
@@ -30,10 +93,7 @@ func discovererDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Defines whether event schemas from other accounts are discovered. Default is True.",
 		//	  "type": "boolean"
 		//	}
-		"cross_account": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Defines whether event schemas from other accounts are discovered. Default is True.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cross_account": schemaAttribute7d965b913aa280a9a704d0a2(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +101,7 @@ func discovererDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A description for the discoverer.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description for the discoverer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributec419b9ef6b62d21c55276438(),
 		// Property: DiscovererArn
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +109,7 @@ func discovererDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the discoverer.",
 		//	  "type": "string"
 		//	}
-		"discoverer_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the discoverer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"discoverer_arn": schemaAttribute8827eca04fd565edbb33f6cd(),
 		// Property: DiscovererId
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +117,7 @@ func discovererDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Id of the discoverer.",
 		//	  "type": "string"
 		//	}
-		"discoverer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Id of the discoverer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"discoverer_id": schemaAttribute5ba1e51208eef2fe55e9c711(),
 		// Property: SourceArn
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +125,7 @@ func discovererDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the event bus.",
 		//	  "type": "string"
 		//	}
-		"source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the event bus.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_arn": schemaAttribute5cce4fc410b859bd38c075fb(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +133,7 @@ func discovererDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Defines the current state of the discoverer.",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Defines the current state of the discoverer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttribute41145583332bd6a94d67dba5(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -113,22 +158,7 @@ func discovererDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags associated with the resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute1f0682cbef674491d810228a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

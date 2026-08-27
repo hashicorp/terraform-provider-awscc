@@ -14,6 +14,27 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute04f5f72ce95f471c9f785f53() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the route table.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1afb42d0cb05493707cc9f1f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the public IPv4 pool.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3d3b4db6053b2b907f0004d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The route table association ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_ip_pool_route_table_association", ipPoolRouteTableAssociationDataSource)
 }
@@ -29,10 +50,7 @@ func ipPoolRouteTableAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The route table association ID.",
 		//	  "type": "string"
 		//	}
-		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The route table association ID.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"association_id": schemaAttributef3d3b4db6053b2b907f0004d(),
 		// Property: PublicIpv4Pool
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +58,7 @@ func ipPoolRouteTableAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The ID of the public IPv4 pool.",
 		//	  "type": "string"
 		//	}
-		"public_ipv_4_pool": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the public IPv4 pool.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"public_ipv_4_pool": schemaAttribute1afb42d0cb05493707cc9f1f(),
 		// Property: RouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +66,7 @@ func ipPoolRouteTableAssociationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The ID of the route table.",
 		//	  "type": "string"
 		//	}
-		"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the route table.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"route_table_id": schemaAttribute04f5f72ce95f471c9f785f53(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

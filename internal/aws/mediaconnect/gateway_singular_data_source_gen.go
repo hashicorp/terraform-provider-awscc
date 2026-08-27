@@ -15,6 +15,64 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute00b03555973d893ad4bbcb10() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the network. This name is used to reference the network and must be unique among networks in this gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute08840bb87d8be651e4df9b73() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute603951e8ff1972cf1f93ea5d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current status of the gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea2c0a2cb1b67f038c347b186() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CidrBlock
+				"cidr_block": schemaAttributeddcfc3aaf6ce5330cb3008d1(),
+				// Property: Name
+				"name": schemaAttribute00b03555973d893ad4bbcb10(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of networks in the gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea5def4e0171369a44c8ee4bd() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The range of IP addresses that contribute content or initiate output requests for flows communicating with this gateway. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeabefea14e43fcc1363da4e26() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the gateway. This name can not be modified after the gateway is created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeddcfc3aaf6ce5330cb3008d1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique IP address range to use for this network. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_mediaconnect_gateway", gatewayDataSource)
 }
@@ -34,11 +92,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"egress_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The range of IP addresses that contribute content or initiate output requests for flows communicating with this gateway. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"egress_cidr_blocks": schemaAttributea5def4e0171369a44c8ee4bd(),
 		// Property: GatewayArn
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +100,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the gateway.",
 		//	  "type": "string"
 		//	}
-		"gateway_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the gateway.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"gateway_arn": schemaAttribute08840bb87d8be651e4df9b73(),
 		// Property: GatewayState
 		// CloudFormation resource type schema:
 		//
@@ -65,10 +116,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"gateway_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current status of the gateway.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"gateway_state": schemaAttribute603951e8ff1972cf1f93ea5d(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -76,10 +124,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the gateway. This name can not be modified after the gateway is created.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the gateway. This name can not be modified after the gateway is created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributeabefea14e43fcc1363da4e26(),
 		// Property: Networks
 		// CloudFormation resource type schema:
 		//
@@ -109,24 +154,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"networks": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: CidrBlock
-					"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A unique IP address range to use for this network. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the network. This name is used to reference the network and must be unique among networks in this gateway.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of networks in the gateway.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"networks": schemaAttributea2c0a2cb1b67f038c347b186(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,55 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1093dcc1994bfa7d510045c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the portfolio to which this launch role constraint applies.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15c0f2d77b1edf1938f3949a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The language code for the constraint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6149cf16fb4ce444e9d9dd81() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The local IAM role name to use in the launch constraint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute639638a11af43471d7b544d1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier for the launch role constraint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9d23cf1314a0918b3c47e06() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the product to which this launch role constraint applies.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8e8d5f11cf4f18136f6c429() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM role used for the launch constraint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefbc8f8a69db6b297b3d35c09() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the launch role constraint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_servicecatalog_launch_role_constraint", launchRoleConstraintDataSource)
 }
@@ -29,10 +78,7 @@ func launchRoleConstraintDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The language code for the constraint.",
 		//	  "type": "string"
 		//	}
-		"accept_language": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The language code for the constraint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"accept_language": schemaAttribute15c0f2d77b1edf1938f3949a(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +86,7 @@ func launchRoleConstraintDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The description of the launch role constraint.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the launch role constraint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributefbc8f8a69db6b297b3d35c09(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +94,7 @@ func launchRoleConstraintDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The unique identifier for the launch role constraint.",
 		//	  "type": "string"
 		//	}
-		"launch_role_constraint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier for the launch role constraint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"launch_role_constraint_id": schemaAttribute639638a11af43471d7b544d1(),
 		// Property: LocalRoleName
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +102,7 @@ func launchRoleConstraintDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The local IAM role name to use in the launch constraint.",
 		//	  "type": "string"
 		//	}
-		"local_role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The local IAM role name to use in the launch constraint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"local_role_name": schemaAttribute6149cf16fb4ce444e9d9dd81(),
 		// Property: PortfolioId
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +110,7 @@ func launchRoleConstraintDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The ID of the portfolio to which this launch role constraint applies.",
 		//	  "type": "string"
 		//	}
-		"portfolio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the portfolio to which this launch role constraint applies.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"portfolio_id": schemaAttribute1093dcc1994bfa7d510045c4(),
 		// Property: ProductId
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +118,7 @@ func launchRoleConstraintDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "description": "The ID of the product to which this launch role constraint applies.",
 		//	  "type": "string"
 		//	}
-		"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the product to which this launch role constraint applies.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"product_id": schemaAttributec9d23cf1314a0918b3c47e06(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +127,7 @@ func launchRoleConstraintDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "arn:(aws|aws-cn|aws-us-gov):iam::[0-9]*:(role)\\/.*",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the IAM role used for the launch constraint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttributef8e8d5f11cf4f18136f6c429(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

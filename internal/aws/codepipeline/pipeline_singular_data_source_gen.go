@@ -16,6 +16,853 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute00568f916fc535453fdae56c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source provider for the event, such as connections configured for a repository with Git tags, for the specified trigger configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0549415bbb2800fb403ac6e8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the artifact to be worked on (for example, \"My App\").",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute092964ebf3a1dde92bd5488a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the artifact store, such as S3.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0e94679effaf24d1b20cdbc2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The action declaration's AWS Region, such as us-east-1.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f29336ce75ec17ba52bb9b4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The rule declaration's AWS Region, such as us-east-1.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute134145384534b07b650fdad0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The variable namespace associated with the action. All variables produced as output by this action fall under this namespace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute14b80c9dc31e04109ce442c8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The provider of the service being called by the rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1b60e4d9afaca56dd9d4448a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Category
+			"category": schemaAttribute93d799da665c31b76105d212(),
+			// Property: Owner
+			"owner": schemaAttribute657e90e3969eb2444260abd1(),
+			// Property: Provider
+			"provider": schemaAttribute14b80c9dc31e04109ce442c8(),
+			// Property: Version
+			"version": schemaAttributeae5bf1de3d525805a15c5450(),
+		}, /*END SCHEMA*/
+		Description: "Represents information about a rule type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1b9a5ca269ccdbb1c628648d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID used to identify the key. For an AWS KMS key, you can use the key ID, the key ARN, or the alias ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1bac0951865eb06ebeff5aa2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The specified retry mode type for the given stage. FAILED_ACTIONS will retry only the failed actions. ALL_ACTIONS will retry both failed and successful",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1c4bcf1fbbe4a187d5febb52() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of a pipeline-level variable.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1cbcb2a5315de67dd422d8e9() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute2413fd86dc9d511098e5f108(),
+				// Property: Type
+				"type": schemaAttribute2413fd86dc9d511098e5f108(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1da33891bfce32ed1138190a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Files
+				"files": schemaAttribute22e5d723d139dd74751941b9(),
+				// Property: Name
+				"name": schemaAttributeb8f73b4757de30e2e8fe0dbb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute22e5d723d139dd74751941b9() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The files that you want to associate with the output artifact that will be exported from the compute action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute22f8477cf552973046bd4fef() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Excludes
+			"excludes": schemaAttributee72a62cb3c659f78253a4c62(),
+			// Property: Includes
+			"includes": schemaAttribute3ea0aedc53fb117f3685b90f(),
+		}, /*END SCHEMA*/
+		Description: "The Git tags specified as filter criteria for whether a Git tag repository event will start the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2413fd86dc9d511098e5f108() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Reserved for future use.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25766c989538145d26c9ce2d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DefaultValue
+				"default_value": schemaAttribute1c4bcf1fbbe4a187d5febb52(),
+				// Property: Description
+				"description": schemaAttributee10b78360503c50509046db8(),
+				// Property: Name
+				"name": schemaAttributebe6eb96efe2dbcc2f2aded02(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list that defines the pipeline variables for a pipeline resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9@\\-_]+.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2747dc4d892b36d055934910() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of variables that are to be exported from the compute action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a452c98b7d2f4ef78f7c774() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Category
+			"category": schemaAttribute9ab71a9b8f7f654f6b9db3a0(),
+			// Property: Owner
+			"owner": schemaAttributed204064a5b65e389abfab53a(),
+			// Property: Provider
+			"provider": schemaAttribute52771253adb769db0e63b6e9(),
+			// Property: Version
+			"version": schemaAttribute929ba10ddfa2232100218b72(),
+		}, /*END SCHEMA*/
+		Description: "Represents information about an action type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3257696bdd543d66981e5360() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Branches
+				"branches": schemaAttribute718f202f50e1cb6e7db70d3d(),
+				// Property: FilePaths
+				"file_paths": schemaAttributecd19dfe8f03d97879d6a8b68(),
+				// Property: Tags
+				"tags": schemaAttribute22f8477cf552973046bd4fef(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The field where the repository event that will start the pipeline, such as pushing Git tags, is specified with details.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3441caef2ffa5b81f9f5538b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute0549415bbb2800fb403ac6e8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute355ca9ec785b487ad013a1fc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The action declaration's name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38c4bf4eb37da54190de6c0f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder in the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute390478cb54ba8c68f1ec5d92() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The order in which actions are run.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ea0aedc53fb117f3685b90f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ebb14146c8806401493823c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Conditions
+			"conditions": schemaAttribute52600b62b80f6227884ed8bc(),
+			// Property: Result
+			"result": schemaAttributeebaf97363c4d0298ff2c8ae1(),
+			// Property: RetryConfiguration
+			"retry_configuration": schemaAttribute888386a9d0e4cba47b21a217(),
+		}, /*END SCHEMA*/
+		Description: "The method to use when a stage has not completed successfully",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute413a2ac1190233ef7591116c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of encryption key, such as an AWS KMS key. When creating or updating a pipeline, the value must be set to 'KMS'.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute420748f274ce512bab773c9c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute437eb2032c330c791b7783eb() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The shell commands to run with your compute action in CodePipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52600b62b80f6227884ed8bc() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Result
+				"result": schemaAttributeebaf97363c4d0298ff2c8ae1(),
+				// Property: Rules
+				"rules": schemaAttributeb700aed65f3f4492b28e0e2e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52771253adb769db0e63b6e9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The provider of the service being called by the action. Valid providers are determined by the action category. For example, an action in the Deploy category type might have a provider of CodeDeploy, which would be specified as CodeDeploy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5370fd682ea2df23fdbb5436() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the stage where you want to disable the inbound or outbound transition of artifacts.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5612fff1d2317bfa3b0a6bf2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The reason given to the user that a stage is disabled, such as waiting for manual approval or manual tests. This message is displayed in the pipeline console UI.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute564060e5a671c19be22a927e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "CodePipeline provides the following pipeline types, which differ in characteristics and price, so that you can tailor your pipeline features and cost to the needs of your applications.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6575d25af658a58a7a811690() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM service role that performs the declared rule. This is assumed through the roleArn for the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute657e90e3969eb2444260abd1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The creator of the rule being called. Only AWS is supported.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ace563d29bb9f79b8a81a10() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EncryptionKey
+			"encryption_key": schemaAttributedaa734da2b674674551cc2d0(),
+			// Property: Location
+			"location": schemaAttribute38c4bf4eb37da54190de6c0f(),
+			// Property: Type
+			"type": schemaAttribute092964ebf3a1dde92bd5488a(),
+		}, /*END SCHEMA*/
+		Description: "The S3 bucket where artifacts for the pipeline are stored.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6bb894cc7ac23c489aac63ae() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Branches
+				"branches": schemaAttribute718f202f50e1cb6e7db70d3d(),
+				// Property: Events
+				"events": schemaAttribute9dfce945e49057f6990e14fc(),
+				// Property: FilePaths
+				"file_paths": schemaAttributecd19dfe8f03d97879d6a8b68(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The field where the repository event that will start the pipeline is specified as pull requests.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute707d83760df88561b1ab5365() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: GitConfiguration
+				"git_configuration": schemaAttributea453c023688abe7d4e10153d(),
+				// Property: ProviderType
+				"provider_type": schemaAttribute00568f916fc535453fdae56c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The trigger configuration specifying a type of event, such as Git tags, that starts the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70a79d48419d630407a6fd37() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the stage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70f8fc8d3f1a9e89fbff5352() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag's value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute718f202f50e1cb6e7db70d3d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Excludes
+			"excludes": schemaAttribute93de43dc05e9df7a56d852d5(),
+			// Property: Includes
+			"includes": schemaAttributeeef823f491804d8e70d55235(),
+		}, /*END SCHEMA*/
+		Description: "The Git repository branches specified as filter criteria to start the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7262cbfb7935e3389cfb6623() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttributeda9f5597d7f109eaeb2afb39(),
+				// Property: Type
+				"type": schemaAttributec513c818de2d2fc3d62eaa9d(),
+				// Property: Value
+				"value": schemaAttribute87319437b8c72e5be98bbdbe(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of environment variables that are input to a compute based action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7518f99d0eed18166980de0a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "A timeout duration in minutes that can be applied against the ActionType?s default timeout value specified in Quotas for AWS CodePipeline. This attribute is available only to the manual approval ActionType.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7847d18f9e54886307ba4751() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the pipeline source action where the trigger configuration, such as Git tags, is specified. The trigger configuration will start the pipeline upon the specified change only.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79c55d4d88baae46a29c9848() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Conditions
+			"conditions": schemaAttribute52600b62b80f6227884ed8bc(),
+		}, /*END SCHEMA*/
+		Description: "The method to use when a stage has completed successfully",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83a5bb0bae970f82a719424e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the IAM service role that performs the declared action. This is assumed through the roleArn for the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87319437b8c72e5be98bbdbe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the environment variable.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute888386a9d0e4cba47b21a217() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RetryMode
+			"retry_mode": schemaAttribute1bac0951865eb06ebeff5aa2(),
+		}, /*END SCHEMA*/
+		Description: "The configuration that specifies the retry configuration for a stage",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ea1dfcbabb82b79c86ac027() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ArtifactStore
+				"artifact_store": schemaAttribute6ace563d29bb9f79b8a81a10(),
+				// Property: Region
+				"region": schemaAttribute0e94679effaf24d1b20cdbc2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A mapping of artifactStore objects and their corresponding AWS Regions. There must be an artifact store for the pipeline Region and for each cross-region action in the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute929ba10ddfa2232100218b72() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string that describes the action version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92fb9cc5b005b6e8e7e5a277() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for CodePipeline to use to either perform actions with no actionRoleArn, or to use to assume roles for actions with an actionRoleArn",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93d799da665c31b76105d212() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A category for the provider type for the rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93de43dc05e9df7a56d852d5() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of patterns of Git branches that, when a commit is pushed, are to be excluded from starting the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94fa8177480fe83d2af8eb13() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Conditions
+			"conditions": schemaAttribute52600b62b80f6227884ed8bc(),
+		}, /*END SCHEMA*/
+		Description: "The method to use before stage runs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a9ae810feedd0bbc940c32a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of patterns of Git repository file paths that, when a commit is pushed, are to be excluded from starting the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ab71a9b8f7f654f6b9db3a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the values below.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9cb5eab5a0a8a8ae533681df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The rule's configuration. These are key-value pairs that specify input values for a rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9dfce945e49057f6990e14fc() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The field that specifies which pull request events to filter on (opened, updated, closed) for the trigger configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e2ecb9698f06eaa41b86a38() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ActionTypeId
+				"action_type_id": schemaAttribute2a452c98b7d2f4ef78f7c774(),
+				// Property: Commands
+				"commands": schemaAttribute437eb2032c330c791b7783eb(),
+				// Property: Configuration
+				"configuration": schemaAttributebb66d5cd424ecee20e278971(),
+				// Property: EnvironmentVariables
+				"environment_variables": schemaAttribute7262cbfb7935e3389cfb6623(),
+				// Property: InputArtifacts
+				"input_artifacts": schemaAttribute3441caef2ffa5b81f9f5538b(),
+				// Property: Name
+				"name": schemaAttribute355ca9ec785b487ad013a1fc(),
+				// Property: Namespace
+				"namespace": schemaAttribute134145384534b07b650fdad0(),
+				// Property: OutputArtifacts
+				"output_artifacts": schemaAttribute1da33891bfce32ed1138190a(),
+				// Property: OutputVariables
+				"output_variables": schemaAttribute2747dc4d892b36d055934910(),
+				// Property: Region
+				"region": schemaAttribute0e94679effaf24d1b20cdbc2(),
+				// Property: RoleArn
+				"role_arn": schemaAttribute83a5bb0bae970f82a719424e(),
+				// Property: RunOrder
+				"run_order": schemaAttribute390478cb54ba8c68f1ec5d92(),
+				// Property: TimeoutInMinutes
+				"timeout_in_minutes": schemaAttribute7518f99d0eed18166980de0a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea453c023688abe7d4e10153d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PullRequest
+			"pull_request": schemaAttribute6bb894cc7ac23c489aac63ae(),
+			// Property: Push
+			"push": schemaAttribute3257696bdd543d66981e5360(),
+			// Property: SourceActionName
+			"source_action_name": schemaAttribute7847d18f9e54886307ba4751(),
+		}, /*END SCHEMA*/
+		Description: "A type of trigger configuration for Git-based source actions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae5bf1de3d525805a15c5450() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string that describes the rule version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb15154f9561b0e78a1b335bd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb700aed65f3f4492b28e0e2e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Commands
+				"commands": schemaAttribute437eb2032c330c791b7783eb(),
+				// Property: Configuration
+				"configuration": schemaAttribute9cb5eab5a0a8a8ae533681df(),
+				// Property: InputArtifacts
+				"input_artifacts": schemaAttribute3441caef2ffa5b81f9f5538b(),
+				// Property: Name
+				"name": schemaAttributec1dc2c8692a73d473e3f1b74(),
+				// Property: Region
+				"region": schemaAttribute0f29336ce75ec17ba52bb9b4(),
+				// Property: RoleArn
+				"role_arn": schemaAttribute6575d25af658a58a7a811690(),
+				// Property: RuleTypeId
+				"rule_type_id": schemaAttribute1b60e4d9afaca56dd9d4448a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8f73b4757de30e2e8fe0dbb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the output of an artifact, such as \"My App\".",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb66d5cd424ecee20e278971() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The action's configuration. These are key-value pairs that specify input values for an action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe6eb96efe2dbcc2f2aded02() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of a pipeline-level variable.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec1dc2c8692a73d473e3f1b74() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The rule declaration's name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3081e3c7fc665e9be55822a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec513c818de2d2fc3d62eaa9d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the environment variable.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc1299835e48d8d60c93b296() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd19dfe8f03d97879d6a8b68() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Excludes
+			"excludes": schemaAttribute9a9ae810feedd0bbc940c32a(),
+			// Property: Includes
+			"includes": schemaAttributee74ffc5f2da3ecff9e2626c3(),
+		}, /*END SCHEMA*/
+		Description: "The Git repository file paths specified as filter criteria to start the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributece20a7c807807175f2bca952() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Reason
+				"reason": schemaAttribute5612fff1d2317bfa3b0a6bf2(),
+				// Property: StageName
+				"stage_name": schemaAttribute5370fd682ea2df23fdbb5436(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Represents the input of a DisableStageTransition action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributece3b281eda831e869a6f13cb() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether to rerun the CodePipeline pipeline after you update it.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed204064a5b65e389abfab53a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The creator of the action being called. There are three valid values for the Owner field in the action category section within your pipeline structure: AWS, ThirdParty, and Custom.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda9f5597d7f109eaeb2afb39() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the environment variable.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedaa734da2b674674551cc2d0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Id
+			"id": schemaAttribute1b9a5ca269ccdbb1c628648d(),
+			// Property: Type
+			"type": schemaAttribute413a2ac1190233ef7591116c(),
+		}, /*END SCHEMA*/
+		Description: "Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee10b78360503c50509046db8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of a pipeline-level variable. It's used to add additional context about the variable, and not being used at time when pipeline executes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee72a62cb3c659f78253a4c62() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee74ffc5f2da3ecff9e2626c3() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of patterns of Git repository file paths that, when a commit is pushed, are to be included as criteria that starts the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee778ce8dc859a8c82a7f15d8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributef17719a7bf0e452ee077b402(),
+				// Property: Value
+				"value": schemaAttribute70f8fc8d3f1a9e89fbff5352(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Specifies the tags applied to the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeebaf97363c4d0298ff2c8ae1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The specified result for when the failure conditions are met, such as rolling back the stage",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee749dcc007b0769e8041c2f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Actions
+				"actions": schemaAttribute9e2ecb9698f06eaa41b86a38(),
+				// Property: BeforeEntry
+				"before_entry": schemaAttribute94fa8177480fe83d2af8eb13(),
+				// Property: Blockers
+				"blockers": schemaAttribute1cbcb2a5315de67dd422d8e9(),
+				// Property: Name
+				"name": schemaAttribute70a79d48419d630407a6fd37(),
+				// Property: OnFailure
+				"on_failure": schemaAttribute3ebb14146c8806401493823c(),
+				// Property: OnSuccess
+				"on_success": schemaAttribute79c55d4d88baae46a29c9848(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Represents information about a stage and its definition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeef823f491804d8e70d55235() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of patterns of Git branches that, when a commit is pushed, are to be included as criteria that starts the pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef17719a7bf0e452ee077b402() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag's key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_codepipeline_pipeline", pipelineDataSource)
 }
@@ -32,10 +879,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws(-[\\w]+)*:codepipeline:[a-z0-9-]+:[0-9]{12}:.+",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the pipeline.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeb15154f9561b0e78a1b335bd(),
 		// Property: ArtifactStore
 		// CloudFormation resource type schema:
 		//
@@ -80,39 +924,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"artifact_store": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EncryptionKey
-				"encryption_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Id
-						"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ID used to identify the key. For an AWS KMS key, you can use the key ID, the key ARN, or the alias ARN.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Type
-						"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The type of encryption key, such as an AWS KMS key. When creating or updating a pipeline, the value must be set to 'KMS'.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Location
-				"location": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder in the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Type
-				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of the artifact store, such as S3.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The S3 bucket where artifacts for the pipeline are stored.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"artifact_store": schemaAttribute6ace563d29bb9f79b8a81a10(),
 		// Property: ArtifactStores
 		// CloudFormation resource type schema:
 		//
@@ -177,53 +989,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"artifact_stores": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ArtifactStore
-					"artifact_store": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: EncryptionKey
-							"encryption_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Id
-									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The ID used to identify the key. For an AWS KMS key, you can use the key ID, the key ARN, or the alias ARN.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Type
-									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The type of encryption key, such as an AWS KMS key. When creating or updating a pipeline, the value must be set to 'KMS'.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Represents information about the key used to encrypt data in the artifact store, such as an AWS Key Management Service (AWS KMS) key",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Location
-							"location": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The S3 bucket used for storing the artifacts for a pipeline. You can specify the name of an S3 bucket but not a folder in the bucket. A folder to contain the pipeline artifacts is created for you based on the name of the pipeline. You can use any S3 bucket in the same AWS Region as the pipeline to store your pipeline artifacts.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The type of the artifact store, such as S3.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The S3 bucket where artifacts for the pipeline are stored.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Region
-					"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The action declaration's AWS Region, such as us-east-1.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A mapping of artifactStore objects and their corresponding AWS Regions. There must be an artifact store for the pipeline Region and for each cross-region action in the pipeline.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"artifact_stores": schemaAttribute8ea1dfcbabb82b79c86ac027(),
 		// Property: DisableInboundStageTransitions
 		// CloudFormation resource type schema:
 		//
@@ -251,24 +1017,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"disable_inbound_stage_transitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Reason
-					"reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The reason given to the user that a stage is disabled, such as waiting for manual approval or manual tests. This message is displayed in the pipeline console UI.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: StageName
-					"stage_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the stage where you want to disable the inbound or outbound transition of artifacts.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Represents the input of a DisableStageTransition action.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"disable_inbound_stage_transitions": schemaAttributece20a7c807807175f2bca952(),
 		// Property: ExecutionMode
 		// CloudFormation resource type schema:
 		//
@@ -282,10 +1031,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"execution_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"execution_mode": schemaAttributec3081e3c7fc665e9be55822a(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -293,10 +1039,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the pipeline.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the pipeline.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute420748f274ce512bab773c9c(),
 		// Property: PipelineType
 		// CloudFormation resource type schema:
 		//
@@ -308,10 +1051,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"pipeline_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "CodePipeline provides the following pipeline types, which differ in characteristics and price, so that you can tailor your pipeline features and cost to the needs of your applications.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"pipeline_type": schemaAttribute564060e5a671c19be22a927e(),
 		// Property: RestartExecutionOnUpdate
 		// CloudFormation resource type schema:
 		//
@@ -319,10 +1059,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether to rerun the CodePipeline pipeline after you update it.",
 		//	  "type": "boolean"
 		//	}
-		"restart_execution_on_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether to rerun the CodePipeline pipeline after you update it.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"restart_execution_on_update": schemaAttributece3b281eda831e869a6f13cb(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -331,10 +1068,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws(-[\\w]+)*:iam::[0-9]{12}:role/.*",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for CodePipeline to use to either perform actions with no actionRoleArn, or to use to assume roles for actions with an actionRoleArn",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute92fb9cc5b005b6e8e7e5a277(),
 		// Property: Stages
 		// CloudFormation resource type schema:
 		//
@@ -878,478 +1612,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"stages": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Actions
-					"actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ActionTypeId
-								"action_type_id": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Category
-										"category": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the values below.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Owner
-										"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The creator of the action being called. There are three valid values for the Owner field in the action category section within your pipeline structure: AWS, ThirdParty, and Custom.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Provider
-										"provider": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The provider of the service being called by the action. Valid providers are determined by the action category. For example, an action in the Deploy category type might have a provider of CodeDeploy, which would be specified as CodeDeploy.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Version
-										"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "A string that describes the action version.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Represents information about an action type.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Commands
-								"commands": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "The shell commands to run with your compute action in CodePipeline.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Configuration
-								"configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-									CustomType:  jsontypes.NormalizedType{},
-									Description: "The action's configuration. These are key-value pairs that specify input values for an action.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: EnvironmentVariables
-								"environment_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Name
-											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The name of the environment variable.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Type
-											"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The type of the environment variable.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Value
-											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The value of the environment variable.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Description: "The list of environment variables that are input to a compute based action.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: InputArtifacts
-								"input_artifacts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Name
-											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The name of the artifact to be worked on (for example, \"My App\").",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Name
-								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The action declaration's name.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Namespace
-								"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The variable namespace associated with the action. All variables produced as output by this action fall under this namespace.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: OutputArtifacts
-								"output_artifacts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Files
-											"files": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Description: "The files that you want to associate with the output artifact that will be exported from the compute action.",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: Name
-											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "The name of the output of an artifact, such as \"My App\".",
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: OutputVariables
-								"output_variables": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "The list of variables that are to be exported from the compute action.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Region
-								"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The action declaration's AWS Region, such as us-east-1.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: RoleArn
-								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The ARN of the IAM service role that performs the declared action. This is assumed through the roleArn for the pipeline.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: RunOrder
-								"run_order": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The order in which actions are run.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: TimeoutInMinutes
-								"timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "A timeout duration in minutes that can be applied against the ActionType?s default timeout value specified in Quotas for AWS CodePipeline. This attribute is available only to the manual approval ActionType.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: BeforeEntry
-					"before_entry": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Conditions
-							"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Result
-										"result": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The specified result for when the failure conditions are met, such as rolling back the stage",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Rules
-										"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Commands
-													"commands": schema.ListAttribute{ /*START ATTRIBUTE*/
-														ElementType: types.StringType,
-														Description: "The shell commands to run with your compute action in CodePipeline.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: Configuration
-													"configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-														CustomType:  jsontypes.NormalizedType{},
-														Description: "The rule's configuration. These are key-value pairs that specify input values for a rule.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: InputArtifacts
-													"input_artifacts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: Name
-																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The name of the artifact to be worked on (for example, \"My App\").",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-														}, /*END NESTED OBJECT*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: Name
-													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The rule declaration's name.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: Region
-													"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The rule declaration's AWS Region, such as us-east-1.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: RoleArn
-													"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The ARN of the IAM service role that performs the declared rule. This is assumed through the roleArn for the pipeline.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: RuleTypeId
-													"rule_type_id": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Category
-															"category": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "A category for the provider type for the rule.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Owner
-															"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The creator of the rule being called. Only AWS is supported.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Provider
-															"provider": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The provider of the service being called by the rule.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Version
-															"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "A string that describes the rule version.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "Represents information about a rule type.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The method to use before stage runs.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Blockers
-					"blockers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Name
-								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Reserved for future use.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Type
-								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Reserved for future use.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the stage.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: OnFailure
-					"on_failure": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Conditions
-							"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Result
-										"result": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The specified result for when the failure conditions are met, such as rolling back the stage",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Rules
-										"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Commands
-													"commands": schema.ListAttribute{ /*START ATTRIBUTE*/
-														ElementType: types.StringType,
-														Description: "The shell commands to run with your compute action in CodePipeline.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: Configuration
-													"configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-														CustomType:  jsontypes.NormalizedType{},
-														Description: "The rule's configuration. These are key-value pairs that specify input values for a rule.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: InputArtifacts
-													"input_artifacts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: Name
-																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The name of the artifact to be worked on (for example, \"My App\").",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-														}, /*END NESTED OBJECT*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: Name
-													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The rule declaration's name.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: Region
-													"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The rule declaration's AWS Region, such as us-east-1.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: RoleArn
-													"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The ARN of the IAM service role that performs the declared rule. This is assumed through the roleArn for the pipeline.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: RuleTypeId
-													"rule_type_id": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Category
-															"category": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "A category for the provider type for the rule.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Owner
-															"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The creator of the rule being called. Only AWS is supported.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Provider
-															"provider": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The provider of the service being called by the rule.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Version
-															"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "A string that describes the rule version.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "Represents information about a rule type.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Result
-							"result": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The specified result for when the failure conditions are met, such as rolling back the stage",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: RetryConfiguration
-							"retry_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: RetryMode
-									"retry_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The specified retry mode type for the given stage. FAILED_ACTIONS will retry only the failed actions. ALL_ACTIONS will retry both failed and successful",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "The configuration that specifies the retry configuration for a stage",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The method to use when a stage has not completed successfully",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: OnSuccess
-					"on_success": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Conditions
-							"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Result
-										"result": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The specified result for when the failure conditions are met, such as rolling back the stage",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Rules
-										"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Commands
-													"commands": schema.ListAttribute{ /*START ATTRIBUTE*/
-														ElementType: types.StringType,
-														Description: "The shell commands to run with your compute action in CodePipeline.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: Configuration
-													"configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-														CustomType:  jsontypes.NormalizedType{},
-														Description: "The rule's configuration. These are key-value pairs that specify input values for a rule.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: InputArtifacts
-													"input_artifacts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: Name
-																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The name of the artifact to be worked on (for example, \"My App\").",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-														}, /*END NESTED OBJECT*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: Name
-													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The rule declaration's name.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: Region
-													"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The rule declaration's AWS Region, such as us-east-1.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: RoleArn
-													"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The ARN of the IAM service role that performs the declared rule. This is assumed through the roleArn for the pipeline.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: RuleTypeId
-													"rule_type_id": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Category
-															"category": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "A category for the provider type for the rule.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Owner
-															"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The creator of the rule being called. Only AWS is supported.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Provider
-															"provider": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The provider of the service being called by the rule.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Version
-															"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "A string that describes the rule version.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "Represents information about a rule type.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The method to use when a stage has completed successfully",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Represents information about a stage and its definition.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"stages": schemaAttributeee749dcc007b0769e8041c2f(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1377,24 +1640,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag's key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag's value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Specifies the tags applied to the pipeline.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributee778ce8dc859a8c82a7f15d8(),
 		// Property: Triggers
 		// CloudFormation resource type schema:
 		//
@@ -1581,150 +1827,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"triggers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: GitConfiguration
-					"git_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: PullRequest
-							"pull_request": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Branches
-										"branches": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Excludes
-												"excludes": schema.ListAttribute{ /*START ATTRIBUTE*/
-													ElementType: types.StringType,
-													Description: "The list of patterns of Git branches that, when a commit is pushed, are to be excluded from starting the pipeline.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Includes
-												"includes": schema.ListAttribute{ /*START ATTRIBUTE*/
-													ElementType: types.StringType,
-													Description: "The list of patterns of Git branches that, when a commit is pushed, are to be included as criteria that starts the pipeline.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "The Git repository branches specified as filter criteria to start the pipeline.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Events
-										"events": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Description: "The field that specifies which pull request events to filter on (opened, updated, closed) for the trigger configuration.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: FilePaths
-										"file_paths": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Excludes
-												"excludes": schema.ListAttribute{ /*START ATTRIBUTE*/
-													ElementType: types.StringType,
-													Description: "The list of patterns of Git repository file paths that, when a commit is pushed, are to be excluded from starting the pipeline.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Includes
-												"includes": schema.ListAttribute{ /*START ATTRIBUTE*/
-													ElementType: types.StringType,
-													Description: "The list of patterns of Git repository file paths that, when a commit is pushed, are to be included as criteria that starts the pipeline.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "The Git repository file paths specified as filter criteria to start the pipeline.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "The field where the repository event that will start the pipeline is specified as pull requests.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Push
-							"push": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Branches
-										"branches": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Excludes
-												"excludes": schema.ListAttribute{ /*START ATTRIBUTE*/
-													ElementType: types.StringType,
-													Description: "The list of patterns of Git branches that, when a commit is pushed, are to be excluded from starting the pipeline.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Includes
-												"includes": schema.ListAttribute{ /*START ATTRIBUTE*/
-													ElementType: types.StringType,
-													Description: "The list of patterns of Git branches that, when a commit is pushed, are to be included as criteria that starts the pipeline.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "The Git repository branches specified as filter criteria to start the pipeline.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: FilePaths
-										"file_paths": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Excludes
-												"excludes": schema.ListAttribute{ /*START ATTRIBUTE*/
-													ElementType: types.StringType,
-													Description: "The list of patterns of Git repository file paths that, when a commit is pushed, are to be excluded from starting the pipeline.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Includes
-												"includes": schema.ListAttribute{ /*START ATTRIBUTE*/
-													ElementType: types.StringType,
-													Description: "The list of patterns of Git repository file paths that, when a commit is pushed, are to be included as criteria that starts the pipeline.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "The Git repository file paths specified as filter criteria to start the pipeline.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Tags
-										"tags": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Excludes
-												"excludes": schema.ListAttribute{ /*START ATTRIBUTE*/
-													ElementType: types.StringType,
-													Description: "The list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Includes
-												"includes": schema.ListAttribute{ /*START ATTRIBUTE*/
-													ElementType: types.StringType,
-													Description: "The list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "The Git tags specified as filter criteria for whether a Git tag repository event will start the pipeline.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "The field where the repository event that will start the pipeline, such as pushing Git tags, is specified with details.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SourceActionName
-							"source_action_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the pipeline source action where the trigger configuration, such as Git tags, is specified. The trigger configuration will start the pipeline upon the specified change only.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "A type of trigger configuration for Git-based source actions.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ProviderType
-					"provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The source provider for the event, such as connections configured for a repository with Git tags, for the specified trigger configuration.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The trigger configuration specifying a type of event, such as Git tags, that starts the pipeline.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"triggers": schemaAttribute707d83760df88561b1ab5365(),
 		// Property: Variables
 		// CloudFormation resource type schema:
 		//
@@ -1755,29 +1858,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DefaultValue
-					"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value of a pipeline-level variable.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Description
-					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The description of a pipeline-level variable. It's used to add additional context about the variable, and not being used at time when pipeline executes.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of a pipeline-level variable.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list that defines the pipeline variables for a pipeline resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9@\\-_]+.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"variables": schemaAttribute25766c989538145d26c9ce2d(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -1785,10 +1866,7 @@ func pipelineDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version of the pipeline.",
 		//	  "type": "string"
 		//	}
-		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of the pipeline.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttributecc1299835e48d8d60c93b296(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

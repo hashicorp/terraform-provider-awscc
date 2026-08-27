@@ -15,6 +15,21 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute54e640ba913ae1ccfb3f1933() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec46f2bd29d7b6c12569750c() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cognito_terms", termsDataSource)
 }
@@ -29,9 +44,7 @@ func termsDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"client_id": schemaAttribute54e640ba913ae1ccfb3f1933(),
 		// Property: Enforcement
 		// CloudFormation resource type schema:
 		//
@@ -41,9 +54,7 @@ func termsDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"enforcement": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"enforcement": schemaAttribute54e640ba913ae1ccfb3f1933(),
 		// Property: Links
 		// CloudFormation resource type schema:
 		//
@@ -59,11 +70,7 @@ func termsDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"links":             // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"links": schemaAttributeec46f2bd29d7b6c12569750c(),
 		// Property: TermsId
 		// CloudFormation resource type schema:
 		//
@@ -71,9 +78,7 @@ func termsDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[4][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
 		//	  "type": "string"
 		//	}
-		"terms_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"terms_id": schemaAttribute54e640ba913ae1ccfb3f1933(),
 		// Property: TermsName
 		// CloudFormation resource type schema:
 		//
@@ -81,9 +86,7 @@ func termsDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(terms-of-use|privacy-policy)$",
 		//	  "type": "string"
 		//	}
-		"terms_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"terms_name": schemaAttribute54e640ba913ae1ccfb3f1933(),
 		// Property: TermsSource
 		// CloudFormation resource type schema:
 		//
@@ -93,18 +96,14 @@ func termsDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"terms_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"terms_source": schemaAttribute54e640ba913ae1ccfb3f1933(),
 		// Property: UserPoolId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"user_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"user_pool_id": schemaAttribute54e640ba913ae1ccfb3f1933(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

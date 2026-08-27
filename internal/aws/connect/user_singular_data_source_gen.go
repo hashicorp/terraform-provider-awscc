@@ -15,6 +15,360 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute11f3d926b4f16ee95ea20c36() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AfterContactWorkTimeLimit
+			"after_contact_work_time_limit": schemaAttribute2e8e2df01478308a6147f58f(),
+			// Property: AutoAccept
+			"auto_accept": schemaAttribute29c50a4c363decf1d2ed1bb4(),
+			// Property: DeskPhoneNumber
+			"desk_phone_number": schemaAttributee5ff3cf78128eefa009b7910(),
+			// Property: PersistentConnection
+			"persistent_connection": schemaAttribute41761f3e548b75477926a0a8(),
+			// Property: PhoneType
+			"phone_type": schemaAttribute6b55b87ad8c388c14a17c98f(),
+		}, /*END SCHEMA*/
+		Description: "The phone settings for the user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1b6836e04b8656026b73b8a7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Email
+			"email": schemaAttribute5928d382dbe69431e5c97186(),
+			// Property: FirstName
+			"first_name": schemaAttribute7d2ca39228eb764b76c8f93b(),
+			// Property: LastName
+			"last_name": schemaAttributec5e773dcdafe571cee6bdef7(),
+			// Property: Mobile
+			"mobile": schemaAttribute5d9fc9e2b54d2079cf0c8fe8(),
+			// Property: SecondaryEmail
+			"secondary_email": schemaAttributec575479d8fcbe1e83bbd93c6(),
+		}, /*END SCHEMA*/
+		Description: "The information about the identity of the user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2838d83fa4eeaf58a1fc9579() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AfterContactWorkMode
+			"after_contact_work_mode": schemaAttribute86930dbc73129e4bd093e225(),
+			// Property: AfterContactWorkTimeLimit
+			"after_contact_work_time_limit": schemaAttribute2e8e2df01478308a6147f58f(),
+		}, /*END SCHEMA*/
+		Description: "After Contact Work configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute29c50a4c363decf1d2ed1bb4() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The Auto accept setting.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e8e2df01478308a6147f58f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The After Call Work (ACW) timeout setting, in seconds.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute353a90556a1cd1b16cd85a75() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of user's proficiency. You must use name of predefined attribute present in the Amazon Connect instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute41761f3e548b75477926a0a8() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The Persistent Connection setting.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute437ff8b1ff5755a37010e7cf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the Amazon Connect instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4eaaf3c8cd7134aaeac01e9a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AttributeName
+				"attribute_name": schemaAttribute353a90556a1cd1b16cd85a75(),
+				// Property: AttributeValue
+				"attribute_value": schemaAttribute5bced53cda05005779607fc0(),
+				// Property: Level
+				"level": schemaAttributec927f5b3cea8f89f9fac20d8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more predefined attributes assigned to a user, with a level that indicates how skilled they are.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute521346152caf55dadd3b1540() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The agent first callback auto accept setting.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5928d382dbe69431e5c97186() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The email address. If you are using SAML for identity management and include this parameter, an error is returned.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5bced53cda05005779607fc0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of user's proficiency. You must use value of predefined attribute present in the Amazon Connect instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d9fc9e2b54d2079cf0c8fe8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The mobile phone number.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65f6055d9c1a8e44c6f9836a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the user account in the directory used for identity management.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6853561d5332f545f53cf09e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the routing profile for the user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a34414556e195c6d75677cd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Voice Enhancement Mode setting.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b55b87ad8c388c14a17c98f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The phone type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7cbe3615c08e68fa2e3d9380() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d2ca39228eb764b76c8f93b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The first name. This is required if you are using Amazon Connect or SAML for identity management.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute86930dbc73129e4bd093e225() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The after contact work (ACW) mode for the channel.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a6c1b214669110c9e6c2650() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Channel
+				"channel": schemaAttributec3f98406f7c7c1a97c8c2771(),
+				// Property: PersistentConnection
+				"persistent_connection": schemaAttribute41761f3e548b75477926a0a8(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Persistent Connection configurations of a user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4ef82e2e910a3e7ddb73e2c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb0773c05d8e491e4e3b7bbfe() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Channel
+				"channel": schemaAttributec3f98406f7c7c1a97c8c2771(),
+				// Property: VoiceEnhancementMode
+				"voice_enhancement_mode": schemaAttribute6a34414556e195c6d75677cd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Voice Enhancement configurations of a user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb590890b96e85ae934dd650f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The password for the user account. A password is required if you are using Amazon Connect for identity management. Otherwise, it is an error to include a password.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5a419bc264bcb49b42356bf() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AfterContactWorkConfig
+				"after_contact_work_config": schemaAttribute2838d83fa4eeaf58a1fc9579(),
+				// Property: AgentFirstCallbackAfterContactWorkConfig
+				"agent_first_callback_after_contact_work_config": schemaAttribute2838d83fa4eeaf58a1fc9579(),
+				// Property: Channel
+				"channel": schemaAttributec3f98406f7c7c1a97c8c2771(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "After Contact Work configurations of a user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6ebbbb46556915f15c6e064() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "One or more security profile arns for the user",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3f98406f7c7c1a97c8c2771() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The channels that agents can handle in the Contact Control Panel (CCP).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec575479d8fcbe1e83bbd93c6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The secondary email address. If you provide a secondary email, the user receives email notifications -- other than password reset notifications -- to this email address instead of to their primary email address.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5e773dcdafe571cee6bdef7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The last name. This is required if you are using Amazon Connect or SAML for identity management.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec927f5b3cea8f89f9fac20d8() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The level of the proficiency. The valid values are 0 to 10.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd12ea891ba50a07cd18be3f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Channel
+				"channel": schemaAttributec3f98406f7c7c1a97c8c2771(),
+				// Property: PhoneNumber
+				"phone_number": schemaAttributee5ff3cf78128eefa009b7910(),
+				// Property: PhoneType
+				"phone_type": schemaAttribute6b55b87ad8c388c14a17c98f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Phone Number configurations of a user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeced92d36d7f36ed8f5650c1b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed405004ad9f7647dabebcd3e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the hierarchy group for the user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed84ee13cb0c5708561a8250f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user name for the account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1782a5bd675067c0ae3939d() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeced92d36d7f36ed8f5650c1b(),
+				// Property: Value
+				"value": schemaAttribute7cbe3615c08e68fa2e3d9380(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more tags.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5ff3cf78128eefa009b7910() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The phone number for the user's desk phone.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea5cfb7b833b336b9b99d192() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AgentFirstCallbackAutoAccept
+				"agent_first_callback_auto_accept": schemaAttribute521346152caf55dadd3b1540(),
+				// Property: AutoAccept
+				"auto_accept": schemaAttribute29c50a4c363decf1d2ed1bb4(),
+				// Property: Channel
+				"channel": schemaAttributec3f98406f7c7c1a97c8c2771(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Auto-accept configurations of a user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_user", userDataSource)
 }
@@ -94,53 +448,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"after_contact_work_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AfterContactWorkConfig
-					"after_contact_work_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AfterContactWorkMode
-							"after_contact_work_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The after contact work (ACW) mode for the channel.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: AfterContactWorkTimeLimit
-							"after_contact_work_time_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The After Call Work (ACW) timeout setting, in seconds.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "After Contact Work configuration.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: AgentFirstCallbackAfterContactWorkConfig
-					"agent_first_callback_after_contact_work_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AfterContactWorkMode
-							"after_contact_work_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The after contact work (ACW) mode for the channel.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: AfterContactWorkTimeLimit
-							"after_contact_work_time_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The After Call Work (ACW) timeout setting, in seconds.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "After Contact Work configuration.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Channel
-					"channel": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The channels that agents can handle in the Contact Control Panel (CCP).",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "After Contact Work configurations of a user.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"after_contact_work_configs": schemaAttributeb5a419bc264bcb49b42356bf(),
 		// Property: AutoAcceptConfigs
 		// CloudFormation resource type schema:
 		//
@@ -178,29 +486,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"auto_accept_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AgentFirstCallbackAutoAccept
-					"agent_first_callback_auto_accept": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "The agent first callback auto accept setting.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: AutoAccept
-					"auto_accept": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "The Auto accept setting.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Channel
-					"channel": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The channels that agents can handle in the Contact Control Panel (CCP).",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Auto-accept configurations of a user.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"auto_accept_configs": schemaAttributeea5cfb7b833b336b9b99d192(),
 		// Property: DirectoryUserId
 		// CloudFormation resource type schema:
 		//
@@ -208,10 +494,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The identifier of the user account in the directory used for identity management.",
 		//	  "type": "string"
 		//	}
-		"directory_user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the user account in the directory used for identity management.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"directory_user_id": schemaAttribute65f6055d9c1a8e44c6f9836a(),
 		// Property: HierarchyGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -220,10 +503,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent-group/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"hierarchy_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the hierarchy group for the user.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"hierarchy_group_arn": schemaAttributed405004ad9f7647dabebcd3e(),
 		// Property: IdentityInfo
 		// CloudFormation resource type schema:
 		//
@@ -256,37 +536,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"identity_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Email
-				"email": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The email address. If you are using SAML for identity management and include this parameter, an error is returned.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FirstName
-				"first_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The first name. This is required if you are using Amazon Connect or SAML for identity management.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LastName
-				"last_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The last name. This is required if you are using Amazon Connect or SAML for identity management.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Mobile
-				"mobile": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The mobile phone number.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecondaryEmail
-				"secondary_email": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The secondary email address. If you provide a secondary email, the user receives email notifications -- other than password reset notifications -- to this email address instead of to their primary email address.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The information about the identity of the user.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"identity_info": schemaAttribute1b6836e04b8656026b73b8a7(),
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -295,10 +545,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the Amazon Connect instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_arn": schemaAttribute437ff8b1ff5755a37010e7cf(),
 		// Property: Password
 		// CloudFormation resource type schema:
 		//
@@ -307,10 +554,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The password for the user account. A password is required if you are using Amazon Connect for identity management. Otherwise, it is an error to include a password.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"password": schemaAttributeb590890b96e85ae934dd650f(),
 		// Property: PersistentConnectionConfigs
 		// CloudFormation resource type schema:
 		//
@@ -344,24 +588,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"persistent_connection_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Channel
-					"channel": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The channels that agents can handle in the Contact Control Panel (CCP).",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PersistentConnection
-					"persistent_connection": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "The Persistent Connection setting.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Persistent Connection configurations of a user.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"persistent_connection_configs": schemaAttribute9a6c1b214669110c9e6c2650(),
 		// Property: PhoneConfig
 		// CloudFormation resource type schema:
 		//
@@ -397,37 +624,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"phone_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AfterContactWorkTimeLimit
-				"after_contact_work_time_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The After Call Work (ACW) timeout setting, in seconds.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: AutoAccept
-				"auto_accept": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "The Auto accept setting.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DeskPhoneNumber
-				"desk_phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The phone number for the user's desk phone.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PersistentConnection
-				"persistent_connection": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "The Persistent Connection setting.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PhoneType
-				"phone_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The phone type.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The phone settings for the user.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"phone_config": schemaAttribute11f3d926b4f16ee95ea20c36(),
 		// Property: PhoneNumberConfigs
 		// CloudFormation resource type schema:
 		//
@@ -469,29 +666,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"phone_number_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Channel
-					"channel": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The channels that agents can handle in the Contact Control Panel (CCP).",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PhoneNumber
-					"phone_number": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The phone number for the user's desk phone.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PhoneType
-					"phone_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The phone type.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Phone Number configurations of a user.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"phone_number_configs": schemaAttributecd12ea891ba50a07cd18be3f(),
 		// Property: RoutingProfileArn
 		// CloudFormation resource type schema:
 		//
@@ -500,10 +675,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/routing-profile/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"routing_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the routing profile for the user.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"routing_profile_arn": schemaAttribute6853561d5332f545f53cf09e(),
 		// Property: SecurityProfileArns
 		// CloudFormation resource type schema:
 		//
@@ -520,11 +692,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"security_profile_arns": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "One or more security profile arns for the user",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_profile_arns": schemaAttributeb6ebbbb46556915f15c6e064(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -558,24 +726,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "One or more tags.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributee1782a5bd675067c0ae3939d(),
 		// Property: UserArn
 		// CloudFormation resource type schema:
 		//
@@ -584,10 +735,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/agent/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"user_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) for the user.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"user_arn": schemaAttributea4ef82e2e910a3e7ddb73e2c(),
 		// Property: UserProficiencies
 		// CloudFormation resource type schema:
 		//
@@ -626,29 +774,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"user_proficiencies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AttributeName
-					"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of user's proficiency. You must use name of predefined attribute present in the Amazon Connect instance.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: AttributeValue
-					"attribute_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value of user's proficiency. You must use value of predefined attribute present in the Amazon Connect instance.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Level
-					"level": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Description: "The level of the proficiency. The valid values are 0 to 10.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "One or more predefined attributes assigned to a user, with a level that indicates how skilled they are.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"user_proficiencies": schemaAttribute4eaaf3c8cd7134aaeac01e9a(),
 		// Property: Username
 		// CloudFormation resource type schema:
 		//
@@ -659,10 +785,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9\\_\\-\\.\\@]+",
 		//	  "type": "string"
 		//	}
-		"username": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The user name for the account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"username": schemaAttributed84ee13cb0c5708561a8250f(),
 		// Property: VoiceEnhancementConfigs
 		// CloudFormation resource type schema:
 		//
@@ -701,24 +824,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"voice_enhancement_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Channel
-					"channel": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The channels that agents can handle in the Contact Control Panel (CCP).",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: VoiceEnhancementMode
-					"voice_enhancement_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Voice Enhancement Mode setting.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Voice Enhancement configurations of a user.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"voice_enhancement_configs": schemaAttributeb0773c05d8e491e4e3b7bbfe(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,115 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1d631b81547b8031784b892c() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25b72df0c2c48a23a75ce2d9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the specified tag key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3369f3e985e73339bf8d9704() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the alarm",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38d10f7705a52192a77a6352() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute56846f995be27bca51562587() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Actions will be suppressed if the suppressor alarm is in the ALARM state. ActionsSuppressor can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f0fd4dcafa118e3821f0438() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Expression which aggregates the state of other Alarms (Metric or Composite Alarms)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute696b8709681b99ac0e73cb57() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The actions to execute when this alarm transitions to the OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea00761c850e1a7ff2c2f81e7() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Actions will be suppressed if ExtensionPeriod is active. The length of time that actions are suppressed is in seconds.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8e44a049fa893107215947a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name (ARN) of the alarm",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb7d8e68b7d526b804c67bf79() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Composite Alarm",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebeb82aea941af8bed2c6a623() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Actions will be suppressed if WaitPeriod is active. The length of time that actions are suppressed is in seconds.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0a36c8a802b6d0012d3696c() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Name (ARN).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee229ea0fb8415ff2005b9b8d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6bac63955fbed846903aff7() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee229ea0fb8415ff2005b9b8d(),
+				// Property: Value
+				"value": schemaAttribute25b72df0c2c48a23a75ce2d9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs to associate with the composite alarm. You can associate as many as 50 tags with an alarm.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudwatch_composite_alarm", compositeAlarmDataSource)
 }
@@ -30,10 +139,7 @@ func compositeAlarmDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
 		//	  "type": "boolean"
 		//	}
-		"actions_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"actions_enabled": schemaAttribute38d10f7705a52192a77a6352(),
 		// Property: ActionsSuppressor
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +149,7 @@ func compositeAlarmDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"actions_suppressor": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Actions will be suppressed if the suppressor alarm is in the ALARM state. ActionsSuppressor can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"actions_suppressor": schemaAttribute56846f995be27bca51562587(),
 		// Property: ActionsSuppressorExtensionPeriod
 		// CloudFormation resource type schema:
 		//
@@ -55,10 +158,7 @@ func compositeAlarmDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"actions_suppressor_extension_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Actions will be suppressed if WaitPeriod is active. The length of time that actions are suppressed is in seconds.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"actions_suppressor_extension_period": schemaAttributebeb82aea941af8bed2c6a623(),
 		// Property: ActionsSuppressorWaitPeriod
 		// CloudFormation resource type schema:
 		//
@@ -67,10 +167,7 @@ func compositeAlarmDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"actions_suppressor_wait_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Actions will be suppressed if ExtensionPeriod is active. The length of time that actions are suppressed is in seconds.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"actions_suppressor_wait_period": schemaAttributea00761c850e1a7ff2c2f81e7(),
 		// Property: AlarmActions
 		// CloudFormation resource type schema:
 		//
@@ -85,11 +182,7 @@ func compositeAlarmDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxItems": 5,
 		//	  "type": "array"
 		//	}
-		"alarm_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Name (ARN).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"alarm_actions": schemaAttributee0a36c8a802b6d0012d3696c(),
 		// Property: AlarmDescription
 		// CloudFormation resource type schema:
 		//
@@ -99,10 +192,7 @@ func compositeAlarmDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"alarm_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the alarm",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"alarm_description": schemaAttribute3369f3e985e73339bf8d9704(),
 		// Property: AlarmName
 		// CloudFormation resource type schema:
 		//
@@ -112,10 +202,7 @@ func compositeAlarmDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Composite Alarm",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"alarm_name": schemaAttributeb7d8e68b7d526b804c67bf79(),
 		// Property: AlarmRule
 		// CloudFormation resource type schema:
 		//
@@ -125,10 +212,7 @@ func compositeAlarmDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"alarm_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Expression which aggregates the state of other Alarms (Metric or Composite Alarms)",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"alarm_rule": schemaAttribute5f0fd4dcafa118e3821f0438(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -138,10 +222,7 @@ func compositeAlarmDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name (ARN) of the alarm",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributea8e44a049fa893107215947a(),
 		// Property: InsufficientDataActions
 		// CloudFormation resource type schema:
 		//
@@ -156,11 +237,7 @@ func compositeAlarmDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxItems": 5,
 		//	  "type": "array"
 		//	}
-		"insufficient_data_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"insufficient_data_actions": schemaAttribute1d631b81547b8031784b892c(),
 		// Property: OKActions
 		// CloudFormation resource type schema:
 		//
@@ -175,11 +252,7 @@ func compositeAlarmDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "maxItems": 5,
 		//	  "type": "array"
 		//	}
-		"ok_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The actions to execute when this alarm transitions to the OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ok_actions": schemaAttribute696b8709681b99ac0e73cb57(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -212,24 +285,7 @@ func compositeAlarmDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A unique identifier for the tag. The combination of tag keys and values can help you organize and categorize your resources.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the specified tag key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs to associate with the composite alarm. You can associate as many as 50 tags with an alarm.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributef6bac63955fbed846903aff7(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,70 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute11af39926f50edeb1fdd57be() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee1427682c8a2fc9ec5299787(),
+				// Property: Value
+				"value": schemaAttribute42377b6a28a8bcff9dadd61a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags for the global network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42377b6a28a8bcff9dadd61a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute861686bf5d2fac6d84178388() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date and time that the global network was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90a4b951a06adb811ea222f6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the global network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2369e082b2bb714e426bdfe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the global network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb517dc42dd7b75e8a359ae60() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of the global network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1427682c8a2fc9ec5299787() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3736bc6f6e15c48de423207() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the global network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_networkmanager_global_network", globalNetworkDataSource)
 }
@@ -29,10 +93,7 @@ func globalNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The Amazon Resource Name (ARN) of the global network.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the global network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributef3736bc6f6e15c48de423207(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +101,7 @@ func globalNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The date and time that the global network was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date and time that the global network was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute861686bf5d2fac6d84178388(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +109,7 @@ func globalNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The description of the global network.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the global network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute90a4b951a06adb811ea222f6(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +117,7 @@ func globalNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The ID of the global network.",
 		//	  "type": "string"
 		//	}
-		"global_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the global network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"global_network_id": schemaAttributeb2369e082b2bb714e426bdfe(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +125,7 @@ func globalNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The state of the global network.",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The state of the global network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributeb517dc42dd7b75e8a359ae60(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -105,24 +154,7 @@ func globalNetworkDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags for the global network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute11af39926f50edeb1fdd57be(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,123 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0915346c5efa92bbbee64ea2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Resource Name (Arn) for the Resource Discovery.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d717ff57af8d1373c58fa1a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the region.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1734c62b5c43fc770aacd201() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Id of the IPAM Pool.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f4134086d1c368ab84db6d7() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributebcc9d7a9cb6b22c3eb1597cf(),
+				// Property: Value
+				"value": schemaAttribute87a02f8d8ebbcdd58c7add91(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute736486c96bcb4ed0c5a45128() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Determines whether or not address space from this pool is publicly advertised. Must be set if and only if the pool is IPv6.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87a02f8d8ebbcdd58c7add91() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8dacc8d41bc43fa95db7c202() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Owner Account ID of the Resource Discovery",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9921dda9bf9d566f150f26c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An AWS Organizations entity path. Build the path for the OU(s) using AWS Organizations IDs separated by a '/'. Include all child OUs by ending the path with '/*'.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea2095f3fc809106c8efafd66() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9f3a6c2cb4a6b959afe15e7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of this Resource Discovery.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebcc9d7a9cb6b22c3eb1597cf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec25885db22a51693b56a6b2f() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OrganizationsEntityPath
+				"organizations_entity_path": schemaAttribute9921dda9bf9d566f150f26c4(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A set of organizational unit (OU) exclusions for this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeace2d962b4b9cd97c6253f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The region the resource discovery is setup in. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef28b2e9884eb628c13f2a9a8() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RegionName
+				"region_name": schemaAttribute0d717ff57af8d1373c58fa1a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The regions Resource Discovery is enabled for. Allows resource discoveries to be created in these regions, as well as enabling monitoring",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_ipam_resource_discovery", iPAMResourceDiscoveryDataSource)
 }
@@ -28,9 +145,7 @@ func iPAMResourceDiscoveryDataSource(ctx context.Context) (datasource.DataSource
 		//	{
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributea2095f3fc809106c8efafd66(),
 		// Property: IpamResourceDiscoveryArn
 		// CloudFormation resource type schema:
 		//
@@ -38,10 +153,7 @@ func iPAMResourceDiscoveryDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "Amazon Resource Name (Arn) for the Resource Discovery.",
 		//	  "type": "string"
 		//	}
-		"ipam_resource_discovery_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Resource Name (Arn) for the Resource Discovery.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipam_resource_discovery_arn": schemaAttribute0915346c5efa92bbbee64ea2(),
 		// Property: IpamResourceDiscoveryId
 		// CloudFormation resource type schema:
 		//
@@ -49,10 +161,7 @@ func iPAMResourceDiscoveryDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "Id of the IPAM Pool.",
 		//	  "type": "string"
 		//	}
-		"ipam_resource_discovery_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Id of the IPAM Pool.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipam_resource_discovery_id": schemaAttribute1734c62b5c43fc770aacd201(),
 		// Property: IpamResourceDiscoveryRegion
 		// CloudFormation resource type schema:
 		//
@@ -60,10 +169,7 @@ func iPAMResourceDiscoveryDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The region the resource discovery is setup in. ",
 		//	  "type": "string"
 		//	}
-		"ipam_resource_discovery_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The region the resource discovery is setup in. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipam_resource_discovery_region": schemaAttributeeace2d962b4b9cd97c6253f3(),
 		// Property: IsDefault
 		// CloudFormation resource type schema:
 		//
@@ -71,10 +177,7 @@ func iPAMResourceDiscoveryDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "Determines whether or not address space from this pool is publicly advertised. Must be set if and only if the pool is IPv6.",
 		//	  "type": "boolean"
 		//	}
-		"is_default": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Determines whether or not address space from this pool is publicly advertised. Must be set if and only if the pool is IPv6.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"is_default": schemaAttribute736486c96bcb4ed0c5a45128(),
 		// Property: OperatingRegions
 		// CloudFormation resource type schema:
 		//
@@ -98,19 +201,7 @@ func iPAMResourceDiscoveryDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"operating_regions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: RegionName
-					"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the region.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The regions Resource Discovery is enabled for. Allows resource discoveries to be created in these regions, as well as enabling monitoring",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"operating_regions": schemaAttributef28b2e9884eb628c13f2a9a8(),
 		// Property: OrganizationalUnitExclusions
 		// CloudFormation resource type schema:
 		//
@@ -135,19 +226,7 @@ func iPAMResourceDiscoveryDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"organizational_unit_exclusions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: OrganizationsEntityPath
-					"organizations_entity_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "An AWS Organizations entity path. Build the path for the OU(s) using AWS Organizations IDs separated by a '/'. Include all child OUs by ending the path with '/*'.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A set of organizational unit (OU) exclusions for this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"organizational_unit_exclusions": schemaAttributec25885db22a51693b56a6b2f(),
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -155,10 +234,7 @@ func iPAMResourceDiscoveryDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "Owner Account ID of the Resource Discovery",
 		//	  "type": "string"
 		//	}
-		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Owner Account ID of the Resource Discovery",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"owner_id": schemaAttribute8dacc8d41bc43fa95db7c202(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -166,10 +242,7 @@ func iPAMResourceDiscoveryDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The state of this Resource Discovery.",
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The state of this Resource Discovery.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributea9f3a6c2cb4a6b959afe15e7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -202,24 +275,7 @@ func iPAMResourceDiscoveryDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute2f4134086d1c368ab84db6d7(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

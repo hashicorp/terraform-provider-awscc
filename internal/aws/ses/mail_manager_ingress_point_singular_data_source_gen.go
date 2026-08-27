@@ -14,6 +14,96 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute5d085eccc9e6e72c34fb25af() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e5f3850deab8525290601e7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IpType
+			"ip_type": schemaAttribute5d085eccc9e6e72c34fb25af(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute71d4740e17ef0ea3e814b00b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecretArn
+			"secret_arn": schemaAttribute5d085eccc9e6e72c34fb25af(),
+			// Property: SmtpPassword
+			"smtp_password": schemaAttribute5d085eccc9e6e72c34fb25af(),
+			// Property: TlsAuthConfiguration
+			"tls_auth_configuration": schemaAttribute74445fb8ce4a711565b9428d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute74445fb8ce4a711565b9428d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TrustStore
+			"trust_store": schemaAttribute89d6433ce4e53fad60bc5fb3(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89d6433ce4e53fad60bc5fb3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CAContent
+			"ca_content": schemaAttribute5d085eccc9e6e72c34fb25af(),
+			// Property: CrlContent
+			"crl_content": schemaAttribute5d085eccc9e6e72c34fb25af(),
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttribute5d085eccc9e6e72c34fb25af(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c6647a0d09a4479401053ee() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: VpcEndpointId
+			"vpc_endpoint_id": schemaAttribute5d085eccc9e6e72c34fb25af(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed37a6c6d27842eff26108a66() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PrivateNetworkConfiguration
+			"private_network_configuration": schemaAttribute8c6647a0d09a4479401053ee(),
+			// Property: PublicNetworkConfiguration
+			"public_network_configuration": schemaAttribute6e5f3850deab8525290601e7(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8f3716913c527cb45b51631() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute5d085eccc9e6e72c34fb25af(),
+				// Property: Value
+				"value": schemaAttribute5d085eccc9e6e72c34fb25af(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ses_mail_manager_ingress_point", mailManagerIngressPointDataSource)
 }
@@ -28,18 +118,14 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 		//	{
 		//	  "type": "string"
 		//	}
-		"a_record": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"a_record": schemaAttribute5d085eccc9e6e72c34fb25af(),
 		// Property: IngressPointArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"ingress_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"ingress_point_arn": schemaAttribute5d085eccc9e6e72c34fb25af(),
 		// Property: IngressPointConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -92,43 +178,7 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "object"
 		//	}
-		"ingress_point_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SecretArn
-				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SmtpPassword
-				"smtp_password": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: TlsAuthConfiguration
-				"tls_auth_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: TrustStore
-						"trust_store": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: CAContent
-								"ca_content": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: CrlContent
-								"crl_content": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: KmsKeyArn
-								"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"ingress_point_configuration": schemaAttribute71d4740e17ef0ea3e814b00b(),
 		// Property: IngressPointId
 		// CloudFormation resource type schema:
 		//
@@ -137,9 +187,7 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"ingress_point_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"ingress_point_id": schemaAttribute5d085eccc9e6e72c34fb25af(),
 		// Property: IngressPointName
 		// CloudFormation resource type schema:
 		//
@@ -149,9 +197,7 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "pattern": "^[A-Za-z0-9_\\-]+$",
 		//	  "type": "string"
 		//	}
-		"ingress_point_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"ingress_point_name": schemaAttribute5d085eccc9e6e72c34fb25af(),
 		// Property: NetworkConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -187,31 +233,7 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 		//	  },
 		//	  "type": "object"
 		//	}
-		"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PrivateNetworkConfiguration
-				"private_network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: VpcEndpointId
-						"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PublicNetworkConfiguration
-				"public_network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: IpType
-						"ip_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"network_configuration": schemaAttributed37a6c6d27842eff26108a66(),
 		// Property: RuleSetId
 		// CloudFormation resource type schema:
 		//
@@ -220,9 +242,7 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"rule_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"rule_set_id": schemaAttribute5d085eccc9e6e72c34fb25af(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -237,9 +257,7 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute5d085eccc9e6e72c34fb25af(),
 		// Property: StatusToUpdate
 		// CloudFormation resource type schema:
 		//
@@ -250,9 +268,7 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status_to_update": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status_to_update": schemaAttribute5d085eccc9e6e72c34fb25af(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -283,21 +299,7 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributee8f3716913c527cb45b51631(),
 		// Property: TlsPolicy
 		// CloudFormation resource type schema:
 		//
@@ -309,9 +311,7 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"tls_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tls_policy": schemaAttribute5d085eccc9e6e72c34fb25af(),
 		// Property: TrafficPolicyId
 		// CloudFormation resource type schema:
 		//
@@ -320,9 +320,7 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"traffic_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"traffic_policy_id": schemaAttribute5d085eccc9e6e72c34fb25af(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -334,9 +332,7 @@ func mailManagerIngressPointDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute5d085eccc9e6e72c34fb25af(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

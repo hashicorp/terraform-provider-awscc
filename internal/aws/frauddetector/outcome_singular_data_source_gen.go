@@ -14,6 +14,62 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0ae634c6777fba92db3dd438() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The outcome description.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0cd4828df2426ab736a89ae4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp when the outcome was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0f4ce80adc350c30d5c2447c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp when the outcome was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37e7ebf8d6a755c73fbd706c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the outcome.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6751502d0778219ce4ac3a8d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3c9af47a872f36923235937() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The outcome ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9b7234574e0b15880d08999() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute6751502d0778219ce4ac3a8d(),
+				// Property: Value
+				"value": schemaAttribute6751502d0778219ce4ac3a8d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags associated with this outcome.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_frauddetector_outcome", outcomeDataSource)
 }
@@ -29,10 +85,7 @@ func outcomeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The outcome ARN.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The outcome ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeb3c9af47a872f36923235937(),
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +93,7 @@ func outcomeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp when the outcome was created.",
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp when the outcome was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttribute0f4ce80adc350c30d5c2447c(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -53,10 +103,7 @@ func outcomeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The outcome description.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute0ae634c6777fba92db3dd438(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -64,10 +111,7 @@ func outcomeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp when the outcome was last updated.",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp when the outcome was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttribute0cd4828df2426ab736a89ae4(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -78,10 +122,7 @@ func outcomeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-z_-]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the outcome.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute37e7ebf8d6a755c73fbd706c(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -112,22 +153,7 @@ func outcomeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags associated with this outcome.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeb9b7234574e0b15880d08999(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,137 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute105e015bde01e3ebe8ee8b6f() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "true if client ip should be preserved",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute135ecaf004a8e4f827f0fa21() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute162fd30500d03fb0fc50bb8a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute16fe8d96914dcaa7be9208ee() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The percentage of traffic to sent to an AWS Region",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute194db44947e4246c2f4fd359() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the endpoint group",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1fb57bcbc34323169d864c4f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34f36196795676928955af35() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "A network port number",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute372b56af996c9bf5db7726f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the AWS Region where the endpoint group is located",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79649c73e41180d16f50988c() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The weight for the endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d996bce0f0999e4215dc3f1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Attachment ARN that provides access control to the cross account endpoint. Not required for resources hosted in the same account as the endpoint group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9424aa3826765fd4dbf0fc19() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AttachmentArn
+				"attachment_arn": schemaAttribute8d996bce0f0999e4215dc3f1(),
+				// Property: ClientIPPreservationEnabled
+				"client_ip_preservation_enabled": schemaAttribute105e015bde01e3ebe8ee8b6f(),
+				// Property: EndpointId
+				"endpoint_id": schemaAttribute135ecaf004a8e4f827f0fa21(),
+				// Property: Weight
+				"weight": schemaAttribute79649c73e41180d16f50988c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of endpoint objects.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0b589be50035399cbfe298d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0cc26894a76ed3eca3597b2() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb07e3a3dde073296f02f4e94() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EndpointPort
+				"endpoint_port": schemaAttribute34f36196795676928955af35(),
+				// Property: ListenerPort
+				"listener_port": schemaAttribute34f36196795676928955af35(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed252cf48d26e727e456e59c8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the listener",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef4d9df3dff8938ed01a354d7() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_globalaccelerator_endpoint_group", endpointGroupDataSource)
 }
@@ -59,34 +190,7 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"endpoint_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AttachmentArn
-					"attachment_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Attachment ARN that provides access control to the cross account endpoint. Not required for resources hosted in the same account as the endpoint group.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ClientIPPreservationEnabled
-					"client_ip_preservation_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "true if client ip should be preserved",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: EndpointId
-					"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Id of the endpoint. For Network/Application Load Balancer this value is the ARN.  For EIP, this value is the allocation ID.  For EC2 instances, this is the EC2 instance ID",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Weight
-					"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The weight for the endpoint.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of endpoint objects.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_configurations": schemaAttribute9424aa3826765fd4dbf0fc19(),
 		// Property: EndpointGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -94,10 +198,7 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The Amazon Resource Name (ARN) of the endpoint group",
 		//	  "type": "string"
 		//	}
-		"endpoint_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the endpoint group",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_group_arn": schemaAttribute194db44947e4246c2f4fd359(),
 		// Property: EndpointGroupRegion
 		// CloudFormation resource type schema:
 		//
@@ -105,10 +206,7 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The name of the AWS Region where the endpoint group is located",
 		//	  "type": "string"
 		//	}
-		"endpoint_group_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the AWS Region where the endpoint group is located",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_group_region": schemaAttribute372b56af996c9bf5db7726f3(),
 		// Property: HealthCheckIntervalSeconds
 		// CloudFormation resource type schema:
 		//
@@ -117,10 +215,7 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
 		//	  "type": "integer"
 		//	}
-		"health_check_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The time in seconds between each health check for an endpoint. Must be a value of 10 or 30",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"health_check_interval_seconds": schemaAttribute162fd30500d03fb0fc50bb8a(),
 		// Property: HealthCheckPath
 		// CloudFormation resource type schema:
 		//
@@ -129,10 +224,7 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"health_check_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"health_check_path": schemaAttribute1fb57bcbc34323169d864c4f(),
 		// Property: HealthCheckPort
 		// CloudFormation resource type schema:
 		//
@@ -143,10 +235,7 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minimum": -1,
 		//	  "type": "integer"
 		//	}
-		"health_check_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The port that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"health_check_port": schemaAttributef4d9df3dff8938ed01a354d7(),
 		// Property: HealthCheckProtocol
 		// CloudFormation resource type schema:
 		//
@@ -160,10 +249,7 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"health_check_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The protocol that AWS Global Accelerator uses to check the health of endpoints in this endpoint group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"health_check_protocol": schemaAttributea0b589be50035399cbfe298d(),
 		// Property: ListenerArn
 		// CloudFormation resource type schema:
 		//
@@ -171,10 +257,7 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The Amazon Resource Name (ARN) of the listener",
 		//	  "type": "string"
 		//	}
-		"listener_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the listener",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"listener_arn": schemaAttributed252cf48d26e727e456e59c8(),
 		// Property: PortOverrides
 		// CloudFormation resource type schema:
 		//
@@ -204,23 +287,7 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"port_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: EndpointPort
-					"endpoint_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "A network port number",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ListenerPort
-					"listener_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "A network port number",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"port_overrides": schemaAttributeb07e3a3dde073296f02f4e94(),
 		// Property: ThresholdCount
 		// CloudFormation resource type schema:
 		//
@@ -229,10 +296,7 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
 		//	  "type": "integer"
 		//	}
-		"threshold_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of consecutive health checks required to set the state of the endpoint to unhealthy.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"threshold_count": schemaAttributea0cc26894a76ed3eca3597b2(),
 		// Property: TrafficDialPercentage
 		// CloudFormation resource type schema:
 		//
@@ -243,10 +307,7 @@ func endpointGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minimum": 0,
 		//	  "type": "number"
 		//	}
-		"traffic_dial_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The percentage of traffic to sent to an AWS Region",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"traffic_dial_percentage": schemaAttribute16fe8d96914dcaa7be9208ee(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

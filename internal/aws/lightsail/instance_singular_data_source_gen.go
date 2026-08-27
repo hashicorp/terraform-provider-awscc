@@ -15,6 +15,474 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute00182e98696da5f8c69460e6() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "From Port of the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute015d9759073cb82cfc255e42() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The bundle of specification information for your virtual private server (or instance ), including the pricing plan (e.g., micro_1_0 ).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute058905429a18d104aae515f8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute13d23109cdcae6020e611653() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Access From Protocol of the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18e90b20ae89fa62f495af95() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of your key pair.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1b91cfc843b0b8fd4c43c940() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Status of the Addon",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2498627dc6a48b7f2a1d0f1b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Resource type of Lightsail instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a8efd4214aa149efbfd7620() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "cidrs",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2df3783420463bc155388dad() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "IOPS of disk.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute30650fbb9741245bf860efbf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Access Direction for Protocol of the Instance(inbound/outbound).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31ba372f1a8cc0e9ea1c0e9e() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "IPv6 addresses of the instance",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3629dfdee06023bf999a91ef() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Is the Attached disk is the system disk of the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3635382535ffa98dd313d389() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The add-on type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute382ceb5cca677e6da3085046() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CpuCount
+			"cpu_count": schemaAttribute8335b711ff254c2b9da91075(),
+			// Property: Disks
+			"disks": schemaAttribute965b23234b328e8c0eddb440(),
+			// Property: RamSizeInGb
+			"ram_size_in_gb": schemaAttributeafc73f1952ce315948673abe(),
+		}, /*END SCHEMA*/
+		Description: "Hardware of the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e5dc53f08173fc636ef2248() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Attachment state of the disk.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4006984cd6cda1bfddb4d479() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40a2e0cc753fbf6cd7aec3b9() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "To Port of the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40f4b57838330c1b429755a8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A launch script you can create that configures a server with additional user data. For example, you might want to run apt-get -y update.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44af39c693918b94349580ba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Private IP Address of the Instance",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ce999555b081c119161524d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Access Type Protocol of the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73aa5d737c19334cb44a0f52() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SnapshotTimeOfDay
+			"snapshot_time_of_day": schemaAttributee49ca1a45bbdb86034e2b2db(),
+		}, /*END SCHEMA*/
+		Description: "An object that represents additional parameters when enabling or modifying the automatic snapshot add-on",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7416f1a9bb1d0f68b4e84bec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Support code to help identify any issues",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute763d5889a417e1dcabe6983c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ad338694c0a222bb19a2ace() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The names to use for your new Lightsail disk.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c89a066207a1b4fcaf652b1() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute763d5889a417e1dcabe6983c(),
+				// Property: Value
+				"value": schemaAttributef589885ac844904d30966b21(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8335b711ff254c2b9da91075() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "CPU count of the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute965b23234b328e8c0eddb440() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AttachedTo
+				"attached_to": schemaAttributef438d2b0e5c51e6a845821db(),
+				// Property: AttachmentState
+				"attachment_state": schemaAttribute3e5dc53f08173fc636ef2248(),
+				// Property: DiskName
+				"disk_name": schemaAttribute7ad338694c0a222bb19a2ace(),
+				// Property: IOPS
+				"iops": schemaAttribute2df3783420463bc155388dad(),
+				// Property: IsSystemDisk
+				"is_system_disk": schemaAttribute3629dfdee06023bf999a91ef(),
+				// Property: Path
+				"path": schemaAttributee9df1a1f3e2041396cd73a16(),
+				// Property: SizeInGb
+				"size_in_gb": schemaAttributec6506077c2311053c5f9fc8a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Disks attached to the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9cc41f482cdeb6730241d64d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AvailabilityZone
+			"availability_zone": schemaAttribute058905429a18d104aae515f8(),
+			// Property: RegionName
+			"region_name": schemaAttributed8b66eaa5539cfc8de0a0573(),
+		}, /*END SCHEMA*/
+		Description: "Location of a resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea89357d0fa33d529005090e5() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Status code of the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea947dd40c89a9c6f33e722bd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Port Protocol of the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeafc73f1952ce315948673abe() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "RAM Size of the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5544f3e8ad62cc2fa4a371a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Username of the  Lightsail instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb70de266cb29ccfb326692c3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "CommonName for Protocol of the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba03d563470e07b3b2ba86b2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The names to use for your new Lightsail instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec135a21fa49876ba56001fdd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID for a virtual private server image (e.g., app_wordpress_4_4 or app_lamp_7_0 ). Use the get blueprints operation to return a list of available images (or blueprints ).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5e2a3b3f60e22a9cc4055dd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MonthlyTransfer
+			"monthly_transfer": schemaAttributec7ca04af3969af7c73d16655(),
+			// Property: Ports
+			"ports": schemaAttributeed6a11ac2d6fd0bbeef2c668(),
+		}, /*END SCHEMA*/
+		Description: "Networking of the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6506077c2311053c5f9fc8a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Size of the disk attached to the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7ca04af3969af7c73d16655() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GbPerMonthAllocated
+			"gb_per_month_allocated": schemaAttributef63656f189aa03b855baaf0f(),
+		}, /*END SCHEMA*/
+		Description: "Monthly Transfer of the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8c1f9a5eaa11f51dd1c6477() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AddOnType
+				"add_on_type": schemaAttribute3635382535ffa98dd313d389(),
+				// Property: AutoSnapshotAddOnRequest
+				"auto_snapshot_add_on_request": schemaAttribute73aa5d737c19334cb44a0f52(),
+				// Property: Status
+				"status": schemaAttribute1b91cfc843b0b8fd4c43c940(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of objects representing the add-ons to enable for the new instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8cac8072a094f8a4c5d4b26() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Public IP Address of the Instance",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecafe0c2d573875f7ff964104() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "IPv6 Cidrs",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb9d8cfabc8d86bc0a367add() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "SSH Key Name of the  Lightsail instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8b66eaa5539cfc8de0a0573() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Region Name in which to create your instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedce3d94dcd43c849ae8ef730() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Is the IP Address of the Instance is the static IP",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede43e1d1433bb08f6e679114() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Code
+			"code": schemaAttributea89357d0fa33d529005090e5(),
+			// Property: Name
+			"name": schemaAttributef6247f5d71e038517c9842c8(),
+		}, /*END SCHEMA*/
+		Description: "Current State of the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee49ca1a45bbdb86034e2b2db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The daily time when an automatic snapshot will be created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9df1a1f3e2041396cd73a16() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Path of the disk attached to the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed6a11ac2d6fd0bbeef2c668() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccessDirection
+				"access_direction": schemaAttribute30650fbb9741245bf860efbf(),
+				// Property: AccessFrom
+				"access_from": schemaAttribute13d23109cdcae6020e611653(),
+				// Property: AccessType
+				"access_type": schemaAttribute4ce999555b081c119161524d(),
+				// Property: CidrListAliases
+				"cidr_list_aliases": schemaAttributef6336f57481d9b12f576f9bc(),
+				// Property: Cidrs
+				"cidrs": schemaAttribute2a8efd4214aa149efbfd7620(),
+				// Property: CommonName
+				"common_name": schemaAttributeb70de266cb29ccfb326692c3(),
+				// Property: FromPort
+				"from_port": schemaAttribute00182e98696da5f8c69460e6(),
+				// Property: Ipv6Cidrs
+				"ipv_6_cidrs": schemaAttributecafe0c2d573875f7ff964104(),
+				// Property: Protocol
+				"protocol": schemaAttributea947dd40c89a9c6f33e722bd(),
+				// Property: ToPort
+				"to_port": schemaAttribute40a2e0cc753fbf6cd7aec3b9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Ports to the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef438d2b0e5c51e6a845821db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Instance attached to the disk.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef589885ac844904d30966b21() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6247f5d71e038517c9842c8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Status code of the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6336f57481d9b12f576f9bc() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "cidr List Aliases",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef63656f189aa03b855baaf0f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "GbPerMonthAllocated of the Instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_lightsail_instance", instanceDataSource)
 }
@@ -72,36 +540,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"add_ons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AddOnType
-					"add_on_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The add-on type",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: AutoSnapshotAddOnRequest
-					"auto_snapshot_add_on_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: SnapshotTimeOfDay
-							"snapshot_time_of_day": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The daily time when an automatic snapshot will be created.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "An object that represents additional parameters when enabling or modifying the automatic snapshot add-on",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Status
-					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Status of the Addon",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of objects representing the add-ons to enable for the new instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"add_ons": schemaAttributec8c1f9a5eaa11f51dd1c6477(),
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -111,10 +550,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"availability_zone": schemaAttribute058905429a18d104aae515f8(),
 		// Property: BlueprintId
 		// CloudFormation resource type schema:
 		//
@@ -124,10 +560,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"blueprint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID for a virtual private server image (e.g., app_wordpress_4_4 or app_lamp_7_0 ). Use the get blueprints operation to return a list of available images (or blueprints ).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"blueprint_id": schemaAttributec135a21fa49876ba56001fdd(),
 		// Property: BundleId
 		// CloudFormation resource type schema:
 		//
@@ -137,10 +570,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"bundle_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The bundle of specification information for your virtual private server (or instance ), including the pricing plan (e.g., micro_1_0 ).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bundle_id": schemaAttribute015d9759073cb82cfc255e42(),
 		// Property: Hardware
 		// CloudFormation resource type schema:
 		//
@@ -207,75 +637,14 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"hardware": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CpuCount
-				"cpu_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "CPU count of the Instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Disks
-				"disks": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AttachedTo
-							"attached_to": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Instance attached to the disk.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: AttachmentState
-							"attachment_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Attachment state of the disk.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: DiskName
-							"disk_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The names to use for your new Lightsail disk.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: IOPS
-							"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "IOPS of disk.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: IsSystemDisk
-							"is_system_disk": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "Is the Attached disk is the system disk of the Instance.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Path
-							"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Path of the disk attached to the instance.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SizeInGb
-							"size_in_gb": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Size of the disk attached to the Instance.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Disks attached to the Instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RamSizeInGb
-				"ram_size_in_gb": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "RAM Size of the Instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Hardware of the Instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"hardware": schemaAttribute382ceb5cca677e6da3085046(),
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"instance_arn": schemaAttribute4006984cd6cda1bfddb4d479(),
 		// Property: InstanceName
 		// CloudFormation resource type schema:
 		//
@@ -286,10 +655,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9][\\w\\-.]*[a-zA-Z0-9]$",
 		//	  "type": "string"
 		//	}
-		"instance_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The names to use for your new Lightsail instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_name": schemaAttributeba03d563470e07b3b2ba86b2(),
 		// Property: Ipv6Addresses
 		// CloudFormation resource type schema:
 		//
@@ -301,11 +667,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"ipv_6_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "IPv6 addresses of the instance",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_6_addresses": schemaAttribute31ba372f1a8cc0e9ea1c0e9e(),
 		// Property: IsStaticIp
 		// CloudFormation resource type schema:
 		//
@@ -313,10 +675,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Is the IP Address of the Instance is the static IP",
 		//	  "type": "boolean"
 		//	}
-		"is_static_ip": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Is the IP Address of the Instance is the static IP",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"is_static_ip": schemaAttributedce3d94dcd43c849ae8ef730(),
 		// Property: KeyPairName
 		// CloudFormation resource type schema:
 		//
@@ -324,10 +683,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of your key pair.",
 		//	  "type": "string"
 		//	}
-		"key_pair_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of your key pair.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"key_pair_name": schemaAttribute18e90b20ae89fa62f495af95(),
 		// Property: Location
 		// CloudFormation resource type schema:
 		//
@@ -346,22 +702,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AvailabilityZone
-				"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RegionName
-				"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Region Name in which to create your instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Location of a resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"location": schemaAttribute9cc41f482cdeb6730241d64d(),
 		// Property: Networking
 		// CloudFormation resource type schema:
 		//
@@ -451,86 +792,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"networking": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MonthlyTransfer
-				"monthly_transfer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: GbPerMonthAllocated
-						"gb_per_month_allocated": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "GbPerMonthAllocated of the Instance.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Monthly Transfer of the Instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Ports
-				"ports": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AccessDirection
-							"access_direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Access Direction for Protocol of the Instance(inbound/outbound).",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: AccessFrom
-							"access_from": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Access From Protocol of the Instance.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: AccessType
-							"access_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Access Type Protocol of the Instance.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: CidrListAliases
-							"cidr_list_aliases": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "cidr List Aliases",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Cidrs
-							"cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "cidrs",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: CommonName
-							"common_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "CommonName for Protocol of the Instance.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: FromPort
-							"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "From Port of the Instance.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Ipv6Cidrs
-							"ipv_6_cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "IPv6 Cidrs",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Protocol
-							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Port Protocol of the Instance.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ToPort
-							"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "To Port of the Instance.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Ports to the Instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Networking of the Instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"networking": schemaAttributec5e2a3b3f60e22a9cc4055dd(),
 		// Property: PrivateIpAddress
 		// CloudFormation resource type schema:
 		//
@@ -538,10 +800,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Private IP Address of the Instance",
 		//	  "type": "string"
 		//	}
-		"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Private IP Address of the Instance",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"private_ip_address": schemaAttribute44af39c693918b94349580ba(),
 		// Property: PublicIpAddress
 		// CloudFormation resource type schema:
 		//
@@ -549,10 +808,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Public IP Address of the Instance",
 		//	  "type": "string"
 		//	}
-		"public_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Public IP Address of the Instance",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"public_ip_address": schemaAttributec8cac8072a094f8a4c5d4b26(),
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -560,10 +816,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Resource type of Lightsail instance.",
 		//	  "type": "string"
 		//	}
-		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Resource type of Lightsail instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_type": schemaAttribute2498627dc6a48b7f2a1d0f1b(),
 		// Property: SshKeyName
 		// CloudFormation resource type schema:
 		//
@@ -571,10 +824,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "SSH Key Name of the  Lightsail instance.",
 		//	  "type": "string"
 		//	}
-		"ssh_key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "SSH Key Name of the  Lightsail instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ssh_key_name": schemaAttributecb9d8cfabc8d86bc0a367add(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -593,22 +843,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"state": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Code
-				"code": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Status code of the Instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Status code of the Instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Current State of the Instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributede43e1d1433bb08f6e679114(),
 		// Property: SupportCode
 		// CloudFormation resource type schema:
 		//
@@ -616,10 +851,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Support code to help identify any issues",
 		//	  "type": "string"
 		//	}
-		"support_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Support code to help identify any issues",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"support_code": schemaAttribute7416f1a9bb1d0f68b4e84bec(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -651,24 +883,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute7c89a066207a1b4fcaf652b1(),
 		// Property: UserData
 		// CloudFormation resource type schema:
 		//
@@ -676,10 +891,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A launch script you can create that configures a server with additional user data. For example, you might want to run apt-get -y update.",
 		//	  "type": "string"
 		//	}
-		"user_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A launch script you can create that configures a server with additional user data. For example, you might want to run apt-get -y update.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"user_data": schemaAttribute40f4b57838330c1b429755a8(),
 		// Property: UserName
 		// CloudFormation resource type schema:
 		//
@@ -687,10 +899,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Username of the  Lightsail instance.",
 		//	  "type": "string"
 		//	}
-		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Username of the  Lightsail instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"user_name": schemaAttributeb5544f3e8ad62cc2fa4a371a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

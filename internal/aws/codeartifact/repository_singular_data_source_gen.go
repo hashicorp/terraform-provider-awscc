@@ -16,6 +16,101 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute02b8a7e434702488df232750() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the repository.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute09ae7bb89c9088ffa1393577() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the repository.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10c2c51ca823da07fd4e6362() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the repository. This is used for GetAtt",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3da03db5e1b38d72b9eb9b0f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of upstream repositories associated with the repository.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5912646e60aa08fc30427239() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A text description of the repository.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e004795fc31617fb3325ef9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the domain that contains the repository.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute730af6ec36fc0af1ec3b0e9f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c8ffc11361584ec5ca1b070() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of external connections associated with the repository.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8eadf034c928f6a187c18256() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The 12-digit account ID of the AWS account that owns the domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6b5f672339f010ef3b3cd7e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The access control resource policy on the provided repository.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecdf88b6e73ebb8021720235a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee45d3d52b3490dda90b34c03(),
+				// Property: Value
+				"value": schemaAttribute730af6ec36fc0af1ec3b0e9f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee45d3d52b3490dda90b34c03() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_codeartifact_repository", repositoryDataSource)
 }
@@ -33,10 +128,7 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the repository.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute02b8a7e434702488df232750(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +137,7 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A text description of the repository.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute5912646e60aa08fc30427239(),
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +148,7 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([a-z][a-z0-9\\-]{0,48}[a-z0-9])$",
 		//	  "type": "string"
 		//	}
-		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the domain that contains the repository.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_name": schemaAttribute5e004795fc31617fb3325ef9(),
 		// Property: DomainOwner
 		// CloudFormation resource type schema:
 		//
@@ -71,10 +157,7 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"domain_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The 12-digit account ID of the AWS account that owns the domain.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_owner": schemaAttribute8eadf034c928f6a187c18256(),
 		// Property: ExternalConnections
 		// CloudFormation resource type schema:
 		//
@@ -85,11 +168,7 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"external_connections": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of external connections associated with the repository.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"external_connections": schemaAttribute7c8ffc11361584ec5ca1b070(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -100,10 +179,7 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([A-Za-z0-9][A-Za-z0-9._\\-]{1,99})$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the repository. This is used for GetAtt",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute10c2c51ca823da07fd4e6362(),
 		// Property: PermissionsPolicyDocument
 		// CloudFormation resource type schema:
 		//
@@ -113,11 +189,7 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 2,
 		//	  "type": "object"
 		//	}
-		"permissions_policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "The access control resource policy on the provided repository.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"permissions_policy_document": schemaAttributeb6b5f672339f010ef3b3cd7e(),
 		// Property: RepositoryName
 		// CloudFormation resource type schema:
 		//
@@ -128,10 +200,7 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([A-Za-z0-9][A-Za-z0-9._\\-]{1,99})$",
 		//	  "type": "string"
 		//	}
-		"repository_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the repository.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"repository_name": schemaAttribute09ae7bb89c9088ffa1393577(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -162,24 +231,7 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributecdf88b6e73ebb8021720235a(),
 		// Property: Upstreams
 		// CloudFormation resource type schema:
 		//
@@ -190,11 +242,7 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"upstreams": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of upstream repositories associated with the repository.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"upstreams": schemaAttribute3da03db5e1b38d72b9eb9b0f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

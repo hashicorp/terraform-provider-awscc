@@ -14,6 +14,41 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute098b5c98fa2de7318810a977() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute53b27689ff58a9095d099efb(),
+				// Property: Value
+				"value": schemaAttribute53b27689ff58a9095d099efb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The metadata that you apply to CodeDeploy applications to help you organize and categorize them. Each tag consists of a key and an optional value, both of which you define. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23b82c04fa382378a18d5d3f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name for the application. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the application name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53b27689ff58a9095d099efb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6704885a1cd488c11faf22c7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The compute platform that CodeDeploy deploys the application to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_codedeploy_application", applicationDataSource)
 }
@@ -29,10 +64,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A name for the application. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the application name.",
 		//	  "type": "string"
 		//	}
-		"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A name for the application. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the application name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"application_name": schemaAttribute23b82c04fa382378a18d5d3f(),
 		// Property: ComputePlatform
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +72,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The compute platform that CodeDeploy deploys the application to.",
 		//	  "type": "string"
 		//	}
-		"compute_platform": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The compute platform that CodeDeploy deploys the application to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"compute_platform": schemaAttribute6704885a1cd488c11faf22c7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -69,22 +98,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The metadata that you apply to CodeDeploy applications to help you organize and categorize them. Each tag consists of a key and an optional value, both of which you define. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute098b5c98fa2de7318810a977(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

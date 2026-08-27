@@ -14,6 +14,41 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute10d883533657a05259cbb9f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The application ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute210a59b38c2740f709935856() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The deployment ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94c7008141649c73bc0d560c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the deployment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd7977b21c0837f884ed54d7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The environment ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed9aebf83cd49271f25bea044() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The version number of the application to deploy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_m2_deployment", deploymentDataSource)
 }
@@ -30,10 +65,7 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\S{1,80}$",
 		//	  "type": "string"
 		//	}
-		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The application ID.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"application_id": schemaAttribute10d883533657a05259cbb9f3(),
 		// Property: ApplicationVersion
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +73,7 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version number of the application to deploy",
 		//	  "type": "integer"
 		//	}
-		"application_version": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The version number of the application to deploy",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"application_version": schemaAttributed9aebf83cd49271f25bea044(),
 		// Property: DeploymentId
 		// CloudFormation resource type schema:
 		//
@@ -53,10 +82,7 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\S{1,80}$",
 		//	  "type": "string"
 		//	}
-		"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The deployment ID.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"deployment_id": schemaAttribute210a59b38c2740f709935856(),
 		// Property: EnvironmentId
 		// CloudFormation resource type schema:
 		//
@@ -65,10 +91,7 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\S{1,80}$",
 		//	  "type": "string"
 		//	}
-		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The environment ID.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"environment_id": schemaAttributecd7977b21c0837f884ed54d7(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -76,10 +99,7 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The status of the deployment.",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the deployment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute94c7008141649c73bc0d560c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

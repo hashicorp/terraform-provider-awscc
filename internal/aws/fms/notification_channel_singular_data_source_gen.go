@@ -14,6 +14,13 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributec20ebb4fdf81b83c7b38a840() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A resource ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_fms_notification_channel", notificationChannelDataSource)
 }
@@ -32,10 +39,7 @@ func notificationChannelDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^([^\\s]+)$",
 		//	  "type": "string"
 		//	}
-		"sns_role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A resource ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sns_role_name": schemaAttributec20ebb4fdf81b83c7b38a840(),
 		// Property: SnsTopicArn
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +50,7 @@ func notificationChannelDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^([^\\s]+)$",
 		//	  "type": "string"
 		//	}
-		"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A resource ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sns_topic_arn": schemaAttributec20ebb4fdf81b83c7b38a840(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -16,6 +16,930 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute06b41367ec4c6d10e34b8b1c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of Elastic Graphics accelerator. Amazon Elastic Graphics is no longer available.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute091fc77a7dca78e356d9053f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The state of the instance as a 16-bit unsigned integer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d1293f6c01d915ce24da7ed() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The private IPv4 addresses.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0e0f7a21131386dca5d5f3ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The position of the network interface in the attachment order. A primary network interface has a device index of 0.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute103a72d8ca8ec7ffa5ab0fec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The instance type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10c2f7965b46c0c2736add41() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the snapshot.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute115940fec2212c3080d62960() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the RAM disk to select.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15cfe622c2b96bcc1e66be14() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LaunchTemplateId
+			"launch_template_id": schemaAttributefced1a5ad2e17877d16ed81b(),
+			// Property: LaunchTemplateName
+			"launch_template_name": schemaAttributec99f1b1fedd74d46f539b075(),
+			// Property: Version
+			"version": schemaAttribute37ab33b5de8c528d9d6a239a(),
+		}, /*END SCHEMA*/
+		Description: "The launch template to use to launch the instances.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute162fc4ff02bc5d2ef99797b3() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the private IPv4 address is the primary private IPv4 address. Only one IPv4 address can be designated as primary.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1754610eb2f6d45d90a5ab5f() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the EBS volume is deleted on instance termination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18f3e54f32539d6be057fc4e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HttpEndpoint
+			"http_endpoint": schemaAttribute9ba533b49928106073816415(),
+			// Property: HttpProtocolIpv6
+			"http_protocol_ipv_6": schemaAttributea811ebb885f2820e6733cf24(),
+			// Property: HttpPutResponseHopLimit
+			"http_put_response_hop_limit": schemaAttribute3354f0867ec222b4f887d311(),
+			// Property: HttpTokens
+			"http_tokens": schemaAttributeb8212b50c375f851490b7ad5(),
+			// Property: InstanceMetadataTags
+			"instance_metadata_tags": schemaAttribute7cdcccf53ff8cf5c2338f244(),
+		}, /*END SCHEMA*/
+		Description: "The metadata options for the instance",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19563e1f9d957173eb2ef792() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the EBS volume. The volume and instance must be within the same Availability Zone.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1cc243c3ac6f90e9c736807d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CoreCount
+			"core_count": schemaAttribute908799887dffb5d6643191da(),
+			// Property: ThreadsPerCore
+			"threads_per_core": schemaAttribute908799887dffb5d6643191da(),
+		}, /*END SCHEMA*/
+		Description: "The CPU options for the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1dbb6da4092e2603b5e4f7c0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute22296b56d02bc19537b09ff0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the host resource group in which to launch the instances. If you specify a host resource group ARN, omit the Tenancy parameter or set it to host.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2270a5c32b5acc0aae9be061() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The device name (for example, /dev/sdh or xvdh).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute22cf9ec758881c654927f800() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "If you specify host for the Affinity property, the ID of a dedicated host that the instance is associated with. If you don't specify an ID, Amazon EC2 launches the instance onto any available, compatible dedicated host in your account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2623f323c3083cf2c6150481() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AssociationParameters
+				"association_parameters": schemaAttributef39f5058b9a8f84acfc65f63(),
+				// Property: DocumentName
+				"document_name": schemaAttributec0a53cee063dd9fdbf326675(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The SSM document and parameter values in AWS Systems Manager to associate with this instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute281a21c55a9605f03c6e5d1b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute298fa2aa1850923a22c66ab5() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Type
+				"type": schemaAttribute06b41367ec4c6d10e34b8b1c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An elastic GPU to associate with the instance. Amazon Elastic Graphics is no longer available.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute29bfe290ca0df1c8ff50288f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LicenseConfigurationArn
+				"license_configuration_arn": schemaAttribute62a9341f3f9f47104096e351(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The license configurations.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e090a352fc3ba12eeb2e111() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether UDP traffic uses ENA Express for your instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3100b7d110373c14c4bae369() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records. For more information, see Amazon EC2 instance hostname types in the Amazon Elastic Compute Cloud User Guide.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33028721f3538c220f107585() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Ipv6Address
+				"ipv_6_address": schemaAttributeaf1d2e90dcd6f404cad2ccdf(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The IPv6 addresses associated with the network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3354f0867ec222b4f887d311() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of network hops that the metadata token can travel. Maximum is 64.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37a8d8c0a0e096c59c19c621() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current state of the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37ab33b5de8c528d9d6a239a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version number of the launch template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute39b92f5d50644a3633488dbb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Enabled
+			"enabled": schemaAttribute8bd62b657c08fd5b9159d0d8(),
+		}, /*END SCHEMA*/
+		Description: "Indicates whether the instance is enabled for AWS Nitro Enclaves.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f7e931289d0e785182cd59d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AssociateCarrierIpAddress
+				"associate_carrier_ip_address": schemaAttribute544b1be4ff1c1b5635112d1d(),
+				// Property: AssociatePublicIpAddress
+				"associate_public_ip_address": schemaAttribute771e06c34235e59db42c872f(),
+				// Property: DeleteOnTermination
+				"delete_on_termination": schemaAttribute7e0076b990a12f1228c47cf6(),
+				// Property: Description
+				"description": schemaAttribute6d142344ba4115f77f28a35b(),
+				// Property: DeviceIndex
+				"device_index": schemaAttribute0e0f7a21131386dca5d5f3ca(),
+				// Property: EnaSrdSpecification
+				"ena_srd_specification": schemaAttributeb72f97fbcfdbfc69e146d4df(),
+				// Property: GroupSet
+				"group_set": schemaAttributeea32988b7bdd44a0a4058495(),
+				// Property: Ipv6AddressCount
+				"ipv_6_address_count": schemaAttributef8fa6d0ffe63c2497580f1e9(),
+				// Property: Ipv6Addresses
+				"ipv_6_addresses": schemaAttribute33028721f3538c220f107585(),
+				// Property: NetworkInterfaceId
+				"network_interface_id": schemaAttribute1dbb6da4092e2603b5e4f7c0(),
+				// Property: PrivateIpAddress
+				"private_ip_address": schemaAttributea31e29d7e253a0ca4150b9ca(),
+				// Property: PrivateIpAddresses
+				"private_ip_addresses": schemaAttributee613e36a62a768d3bf0f3c19(),
+				// Property: SecondaryPrivateIpAddressCount
+				"secondary_private_ip_address_count": schemaAttribute7d069186d0e10c652a2b061d(),
+				// Property: SubnetId
+				"subnet_id": schemaAttributef4e91a25cd3ca6fd11b24d51(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The network interfaces to associate with the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40eea6044b6a00dcbeb050b4() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. If you specify a snapshot, the default is the snapshot size. You can specify a volume size that is equal to or larger than the snapshot size.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute418d01f6847b0fc46c9ea9b8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the AWS Key Management Service (AWS KMS) customer managed CMK to use for Amazon EBS encryption. If KmsKeyId is specified, the encrypted state must be true. If the encrypted state is true but you do not specify KmsKeyId, your AWS managed CMK for EBS is used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44bc9222bdcef7122d23da2a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The public DNS name of the specified instance. For example: ec2-107-20-50-45.compute-1.amazonaws.com.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45a97abd7d6d9eaf2ebc6223() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether to assign the tags from the instance to all of the volumes attached to the instance at launch. If you specify true and you assign tags to the instance, those tags are automatically assigned to all of the volumes that you attach to the instance at launch. If you specify false, those tags are not assigned to the attached volumes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute488dd312398f84de1fbf5b64() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnableResourceNameDnsAAAARecord
+			"enable_resource_name_dns_aaaa_record": schemaAttribute3100b7d110373c14c4bae369(),
+			// Property: EnableResourceNameDnsARecord
+			"enable_resource_name_dns_a_record": schemaAttribute93bf10688e9a7a34a968b563(),
+			// Property: HostnameType
+			"hostname_type": schemaAttributeacb4721fd993ce650692a03b(),
+		}, /*END SCHEMA*/
+		Description: "The options for the instance hostname.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48b85fb900e56dd0e4096cdc() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "[EC2-VPC] The number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f42b227cd800fd382f5bd9e() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "If you set this parameter to true, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute544b1be4ff1c1b5635112d1d() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Not currently supported by AWS CloudFormation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57ff55f67ddb273a6a1c9818() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the instance is optimized for Amazon EBS I/O.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b96df8f25a04bdd76f1f99e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of elastic inference accelerator. Amazon Elastic Inference is no longer available.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5cbb17bd6498845d4d724d85() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the VPC that the instance is running in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d7788c633bc56f93651fc3c() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The value of an input parameter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62a9341f3f9f47104096e351() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the license configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute631157ca6f717d9df4af6054() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The private DNS name of the specified instance. For example: ip-10-24-34-0.ec2.internal.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute671b393b12c93c9f7baed25b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Availability Zone of the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d142344ba4115f77f28a35b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f00274dd7b7e31c869535c5() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether ENA Express is enabled for the network interface when you launch an instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute71832d300f09e61d84b698b6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Code
+			"code": schemaAttribute091fc77a7dca78e356d9053f(),
+			// Property: Name
+			"name": schemaAttribute37a8d8c0a0e096c59c19c621(),
+		}, /*END SCHEMA*/
+		Description: "The current state of the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute71ce48ead404b8baf93ddf29() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The private IP address of the specified instance. For example: 10.24.34.0.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute771e06c34235e59db42c872f() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether to assign a public IPv4 address to an instance you launch in a VPC.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute783f22a605e03397dc469623() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether an instance stops or terminates when you initiate shutdown from the instance (using the operating system command for system shutdown).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7cdcccf53ff8cf5c2338f244() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether tags from the instance are propagated to the EBS volumes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d069186d0e10c652a2b061d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of secondary private IPv4 addresses.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e0076b990a12f1228c47cf6() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "If set to true, the interface is deleted when the instance is terminated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute81ccfbbe435c7dfe40b7cadf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Configured
+			"configured": schemaAttributea5da2fdaad42a6afc7f6f101(),
+		}, /*END SCHEMA*/
+		Description: "Indicates whether an instance is enabled for hibernation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85fb3f9622dade1cf232aedf() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The IDs of the security groups.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89c0fa14762c54404c9e1f15() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the instance is associated with a dedicated host. If you want the instance to always restart on the same host on which it was launched, specify host. If you want the instance to restart on any available host, but try to launch onto the last host it ran on (on a best-effort basis), specify default.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8bd62b657c08fd5b9159d0d8() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "If this parameter is set to true, the instance is enabled for AWS Nitro Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c2d862881a055b367da767b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Count
+				"count": schemaAttribute9f35832e798d52c608f8f62d(),
+				// Property: Type
+				"type": schemaAttribute5b96df8f25a04bdd76f1f99e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An elastic inference accelerator to associate with the instance. Amazon Elastic Inference is no longer available.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f5bb909ef870d214576c5d4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The public IP address of the specified instance. For example: 192.0.2.0.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute908799887dffb5d6643191da() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93bf10688e9a7a34a968b563() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether to respond to DNS queries for instance hostnames with DNS A records. For more information, see Amazon EC2 instance hostname types in the Amazon Elastic Compute Cloud User Guide.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94635d4a7bbe7951a9f2222f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "[EC2-VPC] The ID of the subnet to launch the instance into.\n\n",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ba533b49928106073816415() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables or disables the HTTP metadata endpoint on your instances. If you specify a value of disabled, you cannot access your instance metadata.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9bb9d24a67c0d1062e0b9f61() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The EC2 Instance ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f35832e798d52c608f8f62d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of elastic inference accelerators to attach to the instance. Amazon Elastic Inference is no longer available.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea25dacab9db3064d07c8981a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the kernel.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea31e29d7e253a0ca4150b9ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The private IPv4 address of the network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea460abcbe800ce5f3733cc38() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DeviceName
+				"device_name": schemaAttribute2270a5c32b5acc0aae9be061(),
+				// Property: Ebs
+				"ebs": schemaAttributefb0d2a8b05388cb1c930556b(),
+				// Property: NoDevice
+				"no_device": schemaAttributedcde2b1963607c32401f94c9(),
+				// Property: VirtualName
+				"virtual_name": schemaAttribute281a21c55a9605f03c6e5d1b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The block device mapping entries that defines the block devices to attach to the instance at launch.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea5a2caaea081d74bf7693868() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "[EC2-VPC] The primary IPv4 address. You must specify a value from the IPv4 address range of the subnet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea5da2fdaad42a6afc7f6f101() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "If you set this parameter to true, your instance is enabled for hibernation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea811ebb885f2820e6733cf24() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables or disables the IPv6 endpoint for the instance metadata service. To use this option, the instance must be a Nitro-based instance launched in a subnet that supports IPv6.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeacb4721fd993ce650692a03b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of hostnames to assign to instances in the subnet at launch. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID. For more information, see Amazon EC2 instance hostname types in the Amazon Elastic Compute Cloud User Guide.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf1d2e90dcd6f404cad2ccdf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IPv6 address.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb1b7aa9c9bcacfd7deafbbd1() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Ipv6Address
+				"ipv_6_address": schemaAttributeaf1d2e90dcd6f404cad2ccdf(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "[EC2-VPC] The IPv6 addresses from the range of the subnet to associate with the primary network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb48d053f6e47d3f55d49ae39() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The volume type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb671658ac59388460fe8d63f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user data to make available to the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb72f97fbcfdbfc69e146d4df() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnaSrdEnabled
+			"ena_srd_enabled": schemaAttribute6f00274dd7b7e31c869535c5(),
+			// Property: EnaSrdUdpSpecification
+			"ena_srd_udp_specification": schemaAttributeb9fe4de1157b01dfa947ff02(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the ENA Express settings for the network interface that's attached to the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb74f6bb2d418fcdbccbeb4fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb7657581a6591c4dc34beee7() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Device
+				"device": schemaAttribute2270a5c32b5acc0aae9be061(),
+				// Property: VolumeId
+				"volume_id": schemaAttribute19563e1f9d957173eb2ef792(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The volumes to attach to the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8212b50c375f851490b7ad5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether IMDSv2 is required.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9fe4de1157b01dfa947ff02() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnaSrdUdpEnabled
+			"ena_srd_udp_enabled": schemaAttribute2e090a352fc3ba12eeb2e111(),
+		}, /*END SCHEMA*/
+		Description: "Contains ENA Express settings for UDP network traffic for the network interface that's attached to the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec0a53cee063dd9fdbf326675() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of an SSM document to associate with the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2c15f286f6607c38c72f22f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "the names of the security groups. For a nondefault VPC, you must use security group IDs instead.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec39de01b4707b72aecda9ba0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CPUCredits
+			"cpu_credits": schemaAttribute281a21c55a9605f03c6e5d1b(),
+		}, /*END SCHEMA*/
+		Description: "The credit option for CPU usage of the burstable performance instance. Valid values are standard and unlimited.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec99f1b1fedd74d46f539b075() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the launch template. You must specify the LaunchTemplateName or the LaunchTemplateId, but not both.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc98e5b34921115941a5fa9c() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether detailed monitoring is enabled for the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1d2dfb6cf302095a604f1a8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of an input parameter that is in the associated SSM document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedcde2b1963607c32401f94c9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: jsontypes.NormalizedType{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0b020adae89522e60a01d11() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the AMI. An AMI ID is required to launch an instance and must be specified here or in a launch template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee2644ebd766a5993cf13b07f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IAM instance profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4914932962f0232ed9855e6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "This property is reserved for internal use. If you use it, the stack fails with this error: Bad property set: [Testing this property] (Service: AmazonEC2; Status Code: 400; Error Code: InvalidParameterCombination; Request ID: 0XXXXXX-49c7-4b40-8bcc-76885dcXXXXX).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee613e36a62a768d3bf0f3c19() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Primary
+				"primary": schemaAttribute162fc4ff02bc5d2ef99797b3(),
+				// Property: PrivateIpAddress
+				"private_ip_address": schemaAttribute0d1293f6c01d915ce24da7ed(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more private IPv4 addresses to assign to the network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee66bc5f47157afd8ed1ec2c8() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether to enable an instance launched in a VPC to perform NAT.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee7c0b7a3de10df97b39e6366() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of an existing placement group that you want to launch the instance into (cluster | partition | spread).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea32988b7bdd44a0a4058495() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The IDs of the security groups for the network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea7388a8baabaf710ffa7fc8() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of I/O operations per second (IOPS). For gp3, io1, and io2 volumes, this represents the number of IOPS that are provisioned for the volume. For gp2 volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec45aaaf405f4a4dc0f69878() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the volume should be encrypted.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeee11b2485fe992072660c26() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the key pair.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef02285d6af9f7e65e0410bfc() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute281a21c55a9605f03c6e5d1b(),
+				// Property: Value
+				"value": schemaAttribute281a21c55a9605f03c6e5d1b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags to add to the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef39f5058b9a8f84acfc65f63() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributed1d2dfb6cf302095a604f1a8(),
+				// Property: Value
+				"value": schemaAttribute5d7788c633bc56f93651fc3c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The input parameter values to use with the associated SSM document.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef4e91a25cd3ca6fd11b24d51() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the subnet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8fa6d0ffe63c2497580f1e9() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "A number of IPv6 addresses to assign to the network interface.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb0d2a8b05388cb1c930556b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeleteOnTermination
+			"delete_on_termination": schemaAttribute1754610eb2f6d45d90a5ab5f(),
+			// Property: Encrypted
+			"encrypted": schemaAttributeec45aaaf405f4a4dc0f69878(),
+			// Property: Iops
+			"iops": schemaAttributeea7388a8baabaf710ffa7fc8(),
+			// Property: KmsKeyId
+			"kms_key_id": schemaAttribute418d01f6847b0fc46c9ea9b8(),
+			// Property: SnapshotId
+			"snapshot_id": schemaAttribute10c2f7965b46c0c2736add41(),
+			// Property: VolumeSize
+			"volume_size": schemaAttribute40eea6044b6a00dcbeb050b4(),
+			// Property: VolumeType
+			"volume_type": schemaAttributeb48d053f6e47d3f55d49ae39(),
+		}, /*END SCHEMA*/
+		Description: "Parameters used to automatically set up EBS volumes when the instance is launched.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefced1a5ad2e17877d16ed81b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the launch template. You must specify the LaunchTemplateName or the LaunchTemplateId, but not both.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_instance", instanceDataSource)
 }
@@ -31,10 +955,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "This property is reserved for internal use. If you use it, the stack fails with this error: Bad property set: [Testing this property] (Service: AmazonEC2; Status Code: 400; Error Code: InvalidParameterCombination; Request ID: 0XXXXXX-49c7-4b40-8bcc-76885dcXXXXX).",
 		//	  "type": "string"
 		//	}
-		"additional_info": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "This property is reserved for internal use. If you use it, the stack fails with this error: Bad property set: [Testing this property] (Service: AmazonEC2; Status Code: 400; Error Code: InvalidParameterCombination; Request ID: 0XXXXXX-49c7-4b40-8bcc-76885dcXXXXX).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"additional_info": schemaAttributee4914932962f0232ed9855e6(),
 		// Property: Affinity
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +967,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"affinity": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the instance is associated with a dedicated host. If you want the instance to always restart on the same host on which it was launched, specify host. If you want the instance to restart on any available host, but try to launch onto the last host it ran on (on a best-effort basis), specify default.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"affinity": schemaAttribute89c0fa14762c54404c9e1f15(),
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +975,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Availability Zone of the instance.",
 		//	  "type": "string"
 		//	}
-		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Availability Zone of the instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"availability_zone": schemaAttribute671b393b12c93c9f7baed25b(),
 		// Property: BlockDeviceMappings
 		// CloudFormation resource type schema:
 		//
@@ -125,70 +1040,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"block_device_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DeviceName
-					"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The device name (for example, /dev/sdh or xvdh).",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Ebs
-					"ebs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DeleteOnTermination
-							"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "Indicates whether the EBS volume is deleted on instance termination.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Encrypted
-							"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "Indicates whether the volume should be encrypted.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Iops
-							"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The number of I/O operations per second (IOPS). For gp3, io1, and io2 volumes, this represents the number of IOPS that are provisioned for the volume. For gp2 volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: KmsKeyId
-							"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The identifier of the AWS Key Management Service (AWS KMS) customer managed CMK to use for Amazon EBS encryption. If KmsKeyId is specified, the encrypted state must be true. If the encrypted state is true but you do not specify KmsKeyId, your AWS managed CMK for EBS is used.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SnapshotId
-							"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The ID of the snapshot.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: VolumeSize
-							"volume_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Description: "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. If you specify a snapshot, the default is the snapshot size. You can specify a volume size that is equal to or larger than the snapshot size.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: VolumeType
-							"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The volume type.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Parameters used to automatically set up EBS volumes when the instance is launched.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: NoDevice
-					"no_device": schema.StringAttribute{ /*START ATTRIBUTE*/
-						CustomType: jsontypes.NormalizedType{},
-						Computed:   true,
-					}, /*END ATTRIBUTE*/
-					// Property: VirtualName
-					"virtual_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The block device mapping entries that defines the block devices to attach to the instance at launch.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"block_device_mappings": schemaAttributea460abcbe800ce5f3733cc38(),
 		// Property: CpuOptions
 		// CloudFormation resource type schema:
 		//
@@ -205,20 +1057,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"cpu_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CoreCount
-				"core_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ThreadsPerCore
-				"threads_per_core": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The CPU options for the instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cpu_options": schemaAttribute1cc243c3ac6f90e9c736807d(),
 		// Property: CreditSpecification
 		// CloudFormation resource type schema:
 		//
@@ -232,16 +1071,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"credit_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CPUCredits
-				"cpu_credits": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The credit option for CPU usage of the burstable performance instance. Valid values are standard and unlimited.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"credit_specification": schemaAttributec39de01b4707b72aecda9ba0(),
 		// Property: DisableApiTermination
 		// CloudFormation resource type schema:
 		//
@@ -249,10 +1079,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "If you set this parameter to true, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can.",
 		//	  "type": "boolean"
 		//	}
-		"disable_api_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "If you set this parameter to true, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"disable_api_termination": schemaAttribute4f42b227cd800fd382f5bd9e(),
 		// Property: EbsOptimized
 		// CloudFormation resource type schema:
 		//
@@ -260,10 +1087,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether the instance is optimized for Amazon EBS I/O.",
 		//	  "type": "boolean"
 		//	}
-		"ebs_optimized": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the instance is optimized for Amazon EBS I/O.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ebs_optimized": schemaAttribute57ff55f67ddb273a6a1c9818(),
 		// Property: ElasticGpuSpecifications
 		// CloudFormation resource type schema:
 		//
@@ -286,19 +1110,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"elastic_gpu_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Type
-					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of Elastic Graphics accelerator. Amazon Elastic Graphics is no longer available.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An elastic GPU to associate with the instance. Amazon Elastic Graphics is no longer available.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"elastic_gpu_specifications": schemaAttribute298fa2aa1850923a22c66ab5(),
 		// Property: ElasticInferenceAccelerators
 		// CloudFormation resource type schema:
 		//
@@ -326,24 +1138,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"elastic_inference_accelerators": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Count
-					"count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The number of elastic inference accelerators to attach to the instance. Amazon Elastic Inference is no longer available.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Type
-					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of elastic inference accelerator. Amazon Elastic Inference is no longer available.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An elastic inference accelerator to associate with the instance. Amazon Elastic Inference is no longer available.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"elastic_inference_accelerators": schemaAttribute8c2d862881a055b367da767b(),
 		// Property: EnclaveOptions
 		// CloudFormation resource type schema:
 		//
@@ -358,17 +1153,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"enclave_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Enabled
-				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "If this parameter is set to true, the instance is enabled for AWS Nitro Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Indicates whether the instance is enabled for AWS Nitro Enclaves.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enclave_options": schemaAttribute39b92f5d50644a3633488dbb(),
 		// Property: HibernationOptions
 		// CloudFormation resource type schema:
 		//
@@ -384,17 +1169,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"hibernation_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Configured
-				"configured": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "If you set this parameter to true, your instance is enabled for hibernation.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Indicates whether an instance is enabled for hibernation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"hibernation_options": schemaAttribute81ccfbbe435c7dfe40b7cadf(),
 		// Property: HostId
 		// CloudFormation resource type schema:
 		//
@@ -402,10 +1177,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "If you specify host for the Affinity property, the ID of a dedicated host that the instance is associated with. If you don't specify an ID, Amazon EC2 launches the instance onto any available, compatible dedicated host in your account.",
 		//	  "type": "string"
 		//	}
-		"host_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "If you specify host for the Affinity property, the ID of a dedicated host that the instance is associated with. If you don't specify an ID, Amazon EC2 launches the instance onto any available, compatible dedicated host in your account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"host_id": schemaAttribute22cf9ec758881c654927f800(),
 		// Property: HostResourceGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -413,10 +1185,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the host resource group in which to launch the instances. If you specify a host resource group ARN, omit the Tenancy parameter or set it to host.",
 		//	  "type": "string"
 		//	}
-		"host_resource_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the host resource group in which to launch the instances. If you specify a host resource group ARN, omit the Tenancy parameter or set it to host.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"host_resource_group_arn": schemaAttribute22296b56d02bc19537b09ff0(),
 		// Property: IamInstanceProfile
 		// CloudFormation resource type schema:
 		//
@@ -424,10 +1193,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The IAM instance profile.",
 		//	  "type": "string"
 		//	}
-		"iam_instance_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IAM instance profile.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"iam_instance_profile": schemaAttributee2644ebd766a5993cf13b07f(),
 		// Property: ImageId
 		// CloudFormation resource type schema:
 		//
@@ -435,10 +1201,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the AMI. An AMI ID is required to launch an instance and must be specified here or in a launch template.",
 		//	  "type": "string"
 		//	}
-		"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the AMI. An AMI ID is required to launch an instance and must be specified here or in a launch template.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"image_id": schemaAttributee0b020adae89522e60a01d11(),
 		// Property: InstanceId
 		// CloudFormation resource type schema:
 		//
@@ -446,10 +1209,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The EC2 Instance ID.",
 		//	  "type": "string"
 		//	}
-		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The EC2 Instance ID.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_id": schemaAttribute9bb9d24a67c0d1062e0b9f61(),
 		// Property: InstanceInitiatedShutdownBehavior
 		// CloudFormation resource type schema:
 		//
@@ -457,10 +1217,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether an instance stops or terminates when you initiate shutdown from the instance (using the operating system command for system shutdown).",
 		//	  "type": "string"
 		//	}
-		"instance_initiated_shutdown_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether an instance stops or terminates when you initiate shutdown from the instance (using the operating system command for system shutdown).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_initiated_shutdown_behavior": schemaAttribute783f22a605e03397dc469623(),
 		// Property: InstanceType
 		// CloudFormation resource type schema:
 		//
@@ -468,10 +1225,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The instance type.",
 		//	  "type": "string"
 		//	}
-		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The instance type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_type": schemaAttribute103a72d8ca8ec7ffa5ab0fec(),
 		// Property: Ipv6AddressCount
 		// CloudFormation resource type schema:
 		//
@@ -479,10 +1233,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "[EC2-VPC] The number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet.",
 		//	  "type": "integer"
 		//	}
-		"ipv_6_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "[EC2-VPC] The number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_6_address_count": schemaAttribute48b85fb900e56dd0e4096cdc(),
 		// Property: Ipv6Addresses
 		// CloudFormation resource type schema:
 		//
@@ -505,19 +1256,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"ipv_6_addresses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Ipv6Address
-					"ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The IPv6 address.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "[EC2-VPC] The IPv6 addresses from the range of the subnet to associate with the primary network interface.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_6_addresses": schemaAttributeb1b7aa9c9bcacfd7deafbbd1(),
 		// Property: KernelId
 		// CloudFormation resource type schema:
 		//
@@ -525,10 +1264,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the kernel.",
 		//	  "type": "string"
 		//	}
-		"kernel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the kernel.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kernel_id": schemaAttributea25dacab9db3064d07c8981a(),
 		// Property: KeyName
 		// CloudFormation resource type schema:
 		//
@@ -536,10 +1272,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the key pair.",
 		//	  "type": "string"
 		//	}
-		"key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the key pair.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"key_name": schemaAttributeeee11b2485fe992072660c26(),
 		// Property: LaunchTemplate
 		// CloudFormation resource type schema:
 		//
@@ -576,27 +1309,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LaunchTemplateId
-				"launch_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ID of the launch template. You must specify the LaunchTemplateName or the LaunchTemplateId, but not both.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LaunchTemplateName
-				"launch_template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the launch template. You must specify the LaunchTemplateName or the LaunchTemplateId, but not both.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Version
-				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The version number of the launch template.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The launch template to use to launch the instances.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"launch_template": schemaAttribute15cfe622c2b96bcc1e66be14(),
 		// Property: LicenseSpecifications
 		// CloudFormation resource type schema:
 		//
@@ -619,19 +1332,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"license_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: LicenseConfigurationArn
-					"license_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Amazon Resource Name (ARN) of the license configuration.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The license configurations.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"license_specifications": schemaAttribute29bfe290ca0df1c8ff50288f(),
 		// Property: MetadataOptions
 		// CloudFormation resource type schema:
 		//
@@ -681,37 +1382,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"metadata_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: HttpEndpoint
-				"http_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Enables or disables the HTTP metadata endpoint on your instances. If you specify a value of disabled, you cannot access your instance metadata.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: HttpProtocolIpv6
-				"http_protocol_ipv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Enables or disables the IPv6 endpoint for the instance metadata service. To use this option, the instance must be a Nitro-based instance launched in a subnet that supports IPv6.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: HttpPutResponseHopLimit
-				"http_put_response_hop_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The number of network hops that the metadata token can travel. Maximum is 64.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: HttpTokens
-				"http_tokens": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether IMDSv2 is required.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: InstanceMetadataTags
-				"instance_metadata_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether tags from the instance are propagated to the EBS volumes.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The metadata options for the instance",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"metadata_options": schemaAttribute18f3e54f32539d6be057fc4e(),
 		// Property: Monitoring
 		// CloudFormation resource type schema:
 		//
@@ -719,10 +1390,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether detailed monitoring is enabled for the instance.",
 		//	  "type": "boolean"
 		//	}
-		"monitoring": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether detailed monitoring is enabled for the instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"monitoring": schemaAttributecc98e5b34921115941a5fa9c(),
 		// Property: NetworkInterfaces
 		// CloudFormation resource type schema:
 		//
@@ -855,127 +1523,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"network_interfaces": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AssociateCarrierIpAddress
-					"associate_carrier_ip_address": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "Not currently supported by AWS CloudFormation.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: AssociatePublicIpAddress
-					"associate_public_ip_address": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "Indicates whether to assign a public IPv4 address to an instance you launch in a VPC.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: DeleteOnTermination
-					"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Description: "If set to true, the interface is deleted when the instance is terminated.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Description
-					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The description of the network interface.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: DeviceIndex
-					"device_index": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The position of the network interface in the attachment order. A primary network interface has a device index of 0.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: EnaSrdSpecification
-					"ena_srd_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: EnaSrdEnabled
-							"ena_srd_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "Specifies whether ENA Express is enabled for the network interface when you launch an instance.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: EnaSrdUdpSpecification
-							"ena_srd_udp_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: EnaSrdUdpEnabled
-									"ena_srd_udp_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Description: "Indicates whether UDP traffic uses ENA Express for your instance.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Contains ENA Express settings for UDP network traffic for the network interface that's attached to the instance.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Specifies the ENA Express settings for the network interface that's attached to the instance.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: GroupSet
-					"group_set": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "The IDs of the security groups for the network interface.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Ipv6AddressCount
-					"ipv_6_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "A number of IPv6 addresses to assign to the network interface.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Ipv6Addresses
-					"ipv_6_addresses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Ipv6Address
-								"ipv_6_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The IPv6 address.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "The IPv6 addresses associated with the network interface.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: NetworkInterfaceId
-					"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of the network interface.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PrivateIpAddress
-					"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The private IPv4 address of the network interface.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: PrivateIpAddresses
-					"private_ip_addresses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Primary
-								"primary": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "Indicates whether the private IPv4 address is the primary private IPv4 address. Only one IPv4 address can be designated as primary.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: PrivateIpAddress
-								"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The private IPv4 addresses.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "One or more private IPv4 addresses to assign to the network interface.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SecondaryPrivateIpAddressCount
-					"secondary_private_ip_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The number of secondary private IPv4 addresses.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SubnetId
-					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of the subnet.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The network interfaces to associate with the instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_interfaces": schemaAttribute3f7e931289d0e785182cd59d(),
 		// Property: PlacementGroupName
 		// CloudFormation resource type schema:
 		//
@@ -983,10 +1531,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of an existing placement group that you want to launch the instance into (cluster | partition | spread).",
 		//	  "type": "string"
 		//	}
-		"placement_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of an existing placement group that you want to launch the instance into (cluster | partition | spread).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"placement_group_name": schemaAttributee7c0b7a3de10df97b39e6366(),
 		// Property: PrivateDnsName
 		// CloudFormation resource type schema:
 		//
@@ -994,10 +1539,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The private DNS name of the specified instance. For example: ip-10-24-34-0.ec2.internal.",
 		//	  "type": "string"
 		//	}
-		"private_dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The private DNS name of the specified instance. For example: ip-10-24-34-0.ec2.internal.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"private_dns_name": schemaAttribute631157ca6f717d9df4af6054(),
 		// Property: PrivateDnsNameOptions
 		// CloudFormation resource type schema:
 		//
@@ -1024,27 +1566,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"private_dns_name_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EnableResourceNameDnsAAAARecord
-				"enable_resource_name_dns_aaaa_record": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA records. For more information, see Amazon EC2 instance hostname types in the Amazon Elastic Compute Cloud User Guide.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EnableResourceNameDnsARecord
-				"enable_resource_name_dns_a_record": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether to respond to DNS queries for instance hostnames with DNS A records. For more information, see Amazon EC2 instance hostname types in the Amazon Elastic Compute Cloud User Guide.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: HostnameType
-				"hostname_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of hostnames to assign to instances in the subnet at launch. For IPv4 only subnets, an instance DNS name must be based on the instance IPv4 address. For IPv6 only subnets, an instance DNS name must be based on the instance ID. For dual-stack subnets, you can specify whether DNS names use the instance IPv4 address or the instance ID. For more information, see Amazon EC2 instance hostname types in the Amazon Elastic Compute Cloud User Guide.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The options for the instance hostname.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"private_dns_name_options": schemaAttribute488dd312398f84de1fbf5b64(),
 		// Property: PrivateIp
 		// CloudFormation resource type schema:
 		//
@@ -1052,10 +1574,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The private IP address of the specified instance. For example: 10.24.34.0.",
 		//	  "type": "string"
 		//	}
-		"private_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The private IP address of the specified instance. For example: 10.24.34.0.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"private_ip": schemaAttribute71ce48ead404b8baf93ddf29(),
 		// Property: PrivateIpAddress
 		// CloudFormation resource type schema:
 		//
@@ -1063,10 +1582,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "[EC2-VPC] The primary IPv4 address. You must specify a value from the IPv4 address range of the subnet.",
 		//	  "type": "string"
 		//	}
-		"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "[EC2-VPC] The primary IPv4 address. You must specify a value from the IPv4 address range of the subnet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"private_ip_address": schemaAttributea5a2caaea081d74bf7693868(),
 		// Property: PropagateTagsToVolumeOnCreation
 		// CloudFormation resource type schema:
 		//
@@ -1074,10 +1590,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether to assign the tags from the instance to all of the volumes attached to the instance at launch. If you specify true and you assign tags to the instance, those tags are automatically assigned to all of the volumes that you attach to the instance at launch. If you specify false, those tags are not assigned to the attached volumes.",
 		//	  "type": "boolean"
 		//	}
-		"propagate_tags_to_volume_on_creation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether to assign the tags from the instance to all of the volumes attached to the instance at launch. If you specify true and you assign tags to the instance, those tags are automatically assigned to all of the volumes that you attach to the instance at launch. If you specify false, those tags are not assigned to the attached volumes.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"propagate_tags_to_volume_on_creation": schemaAttribute45a97abd7d6d9eaf2ebc6223(),
 		// Property: PublicDnsName
 		// CloudFormation resource type schema:
 		//
@@ -1085,10 +1598,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The public DNS name of the specified instance. For example: ec2-107-20-50-45.compute-1.amazonaws.com.",
 		//	  "type": "string"
 		//	}
-		"public_dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The public DNS name of the specified instance. For example: ec2-107-20-50-45.compute-1.amazonaws.com.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"public_dns_name": schemaAttribute44bc9222bdcef7122d23da2a(),
 		// Property: PublicIp
 		// CloudFormation resource type schema:
 		//
@@ -1096,10 +1606,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The public IP address of the specified instance. For example: 192.0.2.0.",
 		//	  "type": "string"
 		//	}
-		"public_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The public IP address of the specified instance. For example: 192.0.2.0.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"public_ip": schemaAttribute8f5bb909ef870d214576c5d4(),
 		// Property: RamdiskId
 		// CloudFormation resource type schema:
 		//
@@ -1107,10 +1614,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the RAM disk to select.",
 		//	  "type": "string"
 		//	}
-		"ramdisk_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the RAM disk to select.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ramdisk_id": schemaAttribute115940fec2212c3080d62960(),
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -1123,11 +1627,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The IDs of the security groups.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_ids": schemaAttribute85fb3f9622dade1cf232aedf(),
 		// Property: SecurityGroups
 		// CloudFormation resource type schema:
 		//
@@ -1140,11 +1640,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "the names of the security groups. For a nondefault VPC, you must use security group IDs instead.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_groups": schemaAttributec2c15f286f6607c38c72f22f(),
 		// Property: SourceDestCheck
 		// CloudFormation resource type schema:
 		//
@@ -1152,10 +1648,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether to enable an instance launched in a VPC to perform NAT.",
 		//	  "type": "boolean"
 		//	}
-		"source_dest_check": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether to enable an instance launched in a VPC to perform NAT.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_dest_check": schemaAttributee66bc5f47157afd8ed1ec2c8(),
 		// Property: SsmAssociations
 		// CloudFormation resource type schema:
 		//
@@ -1207,39 +1700,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"ssm_associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AssociationParameters
-					"association_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Key
-								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of an input parameter that is in the associated SSM document.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Value
-								"value": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "The value of an input parameter.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "The input parameter values to use with the associated SSM document.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: DocumentName
-					"document_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of an SSM document to associate with the instance.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The SSM document and parameter values in AWS Systems Manager to associate with this instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ssm_associations": schemaAttribute2623f323c3083cf2c6150481(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -1258,22 +1719,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"state": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Code
-				"code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The state of the instance as a 16-bit unsigned integer.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The current state of the instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The current state of the instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttribute71832d300f09e61d84b698b6(),
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -1281,10 +1727,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "[EC2-VPC] The ID of the subnet to launch the instance into.\n\n",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "[EC2-VPC] The ID of the subnet to launch the instance into.\n\n",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_id": schemaAttribute94635d4a7bbe7951a9f2222f(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -1310,22 +1753,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags to add to the instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributef02285d6af9f7e65e0410bfc(),
 		// Property: Tenancy
 		// CloudFormation resource type schema:
 		//
@@ -1333,10 +1761,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware.",
 		//	  "type": "string"
 		//	}
-		"tenancy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tenancy": schemaAttributeb74f6bb2d418fcdbccbeb4fb(),
 		// Property: UserData
 		// CloudFormation resource type schema:
 		//
@@ -1344,10 +1769,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The user data to make available to the instance.",
 		//	  "type": "string"
 		//	}
-		"user_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The user data to make available to the instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"user_data": schemaAttributeb671658ac59388460fe8d63f(),
 		// Property: Volumes
 		// CloudFormation resource type schema:
 		//
@@ -1375,24 +1797,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"volumes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Device
-					"device": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The device name (for example, /dev/sdh or xvdh).",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: VolumeId
-					"volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of the EBS volume. The volume and instance must be within the same Availability Zone.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The volumes to attach to the instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"volumes": schemaAttributeb7657581a6591c4dc34beee7(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -1400,10 +1805,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the VPC that the instance is running in.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the VPC that the instance is running in.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttribute5cbb17bd6498845d4d724d85(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

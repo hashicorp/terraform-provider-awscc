@@ -14,6 +14,34 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute03637dce2cf7daff9a6b0334() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the policy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bc3d050d3c1c8019e119889() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The possible types for the access policy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd5d50301b526109c5ab81a4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the policy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdeff7cb4ecc62b54548c3b2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The JSON policy document that is the content for the policy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_opensearchserverless_access_policy", accessPolicyDataSource)
 }
@@ -31,10 +59,7 @@ func accessPolicyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the policy",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute03637dce2cf7daff9a6b0334(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +70,7 @@ func accessPolicyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-z][a-z0-9-]{2,31}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the policy",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributedd5d50301b526109c5ab81a4(),
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +81,7 @@ func accessPolicyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The JSON policy document that is the content for the policy",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy": schemaAttributefdeff7cb4ecc62b54548c3b2(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +92,7 @@ func accessPolicyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The possible types for the access policy",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttribute7bc3d050d3c1c8019e119889(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

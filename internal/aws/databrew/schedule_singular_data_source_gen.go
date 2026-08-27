@@ -15,6 +15,47 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0fa17546d88c27fb5237c83c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Schedule cron",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1312c232e4b3f9ae47cca028() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute65c7a6793015b8f8de3643d2(),
+				// Property: Value
+				"value": schemaAttribute65c7a6793015b8f8de3643d2(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a5be38ba17ad2f466ab5cb1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Schedule Name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65c7a6793015b8f8de3643d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e313b9f181a3319596ec1bd() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_databrew_schedule", scheduleDataSource)
 }
@@ -32,10 +73,7 @@ func scheduleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"cron_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Schedule cron",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cron_expression": schemaAttribute0fa17546d88c27fb5237c83c(),
 		// Property: JobNames
 		// CloudFormation resource type schema:
 		//
@@ -50,10 +88,7 @@ func scheduleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"job_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"job_names": schemaAttribute6e313b9f181a3319596ec1bd(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +98,7 @@ func scheduleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Schedule Name",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute3a5be38ba17ad2f466ab5cb1(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -96,21 +128,7 @@ func scheduleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute1312c232e4b3f9ae47cca028(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

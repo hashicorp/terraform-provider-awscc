@@ -14,6 +14,126 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute068409595112182feae073e9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d809b30e8a8e96636cee7c1() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CidrIp
+				"cidr_ip": schemaAttribute068409595112182feae073e9(),
+				// Property: CidrIpv6
+				"cidr_ipv_6": schemaAttribute068409595112182feae073e9(),
+				// Property: Description
+				"description": schemaAttribute068409595112182feae073e9(),
+				// Property: DestinationPrefixListId
+				"destination_prefix_list_id": schemaAttribute068409595112182feae073e9(),
+				// Property: DestinationSecurityGroupId
+				"destination_security_group_id": schemaAttribute068409595112182feae073e9(),
+				// Property: FromPort
+				"from_port": schemaAttribute4916da693b5d168c5f8b3eec(),
+				// Property: IpProtocol
+				"ip_protocol": schemaAttribute068409595112182feae073e9(),
+				// Property: ToPort
+				"to_port": schemaAttribute4916da693b5d168c5f8b3eec(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "[VPC only] The outbound rules associated with the security group. There is a short interruption during which you cannot connect to the security group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute22a8e8eb5d9129ce71a77f20() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CidrIp
+				"cidr_ip": schemaAttribute068409595112182feae073e9(),
+				// Property: CidrIpv6
+				"cidr_ipv_6": schemaAttribute068409595112182feae073e9(),
+				// Property: Description
+				"description": schemaAttribute068409595112182feae073e9(),
+				// Property: FromPort
+				"from_port": schemaAttribute4916da693b5d168c5f8b3eec(),
+				// Property: IpProtocol
+				"ip_protocol": schemaAttribute068409595112182feae073e9(),
+				// Property: SourcePrefixListId
+				"source_prefix_list_id": schemaAttribute068409595112182feae073e9(),
+				// Property: SourceSecurityGroupId
+				"source_security_group_id": schemaAttribute068409595112182feae073e9(),
+				// Property: SourceSecurityGroupName
+				"source_security_group_name": schemaAttribute068409595112182feae073e9(),
+				// Property: SourceSecurityGroupOwnerId
+				"source_security_group_owner_id": schemaAttribute068409595112182feae073e9(),
+				// Property: ToPort
+				"to_port": schemaAttribute4916da693b5d168c5f8b3eec(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The inbound rules associated with the security group. There is a short interruption during which you cannot connect to the security group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute259987099aec37e7cf95a5eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the VPC for the security group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute35fa0b05ee3aeef501a20ea2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute068409595112182feae073e9(),
+				// Property: Value
+				"value": schemaAttribute068409595112182feae073e9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Any tags assigned to the security group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4916da693b5d168c5f8b3eec() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53f6c58c6b574f2a2e11a723() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the security group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8aa656b4859f7f69652af587() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The group ID of the specified security group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c527fead8b7dbe9ec73be0c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the security group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2f82f7540cad20020cc4a00() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The group name or group ID depending on whether the SG is created in default or specific VPC",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_security_group", securityGroupDataSource)
 }
@@ -29,10 +149,7 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "A description for the security group.",
 		//	  "type": "string"
 		//	}
-		"group_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description for the security group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"group_description": schemaAttribute8c527fead8b7dbe9ec73be0c(),
 		// Property: GroupId
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +157,7 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The group ID of the specified security group.",
 		//	  "type": "string"
 		//	}
-		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The group ID of the specified security group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"group_id": schemaAttribute8aa656b4859f7f69652af587(),
 		// Property: GroupName
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +165,7 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The name of the security group.",
 		//	  "type": "string"
 		//	}
-		"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the security group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"group_name": schemaAttribute53f6c58c6b574f2a2e11a723(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +173,7 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The group name or group ID depending on whether the SG is created in default or specific VPC",
 		//	  "type": "string"
 		//	}
-		"security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The group name or group ID depending on whether the SG is created in default or specific VPC",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_id": schemaAttributeb2f82f7540cad20020cc4a00(),
 		// Property: SecurityGroupEgress
 		// CloudFormation resource type schema:
 		//
@@ -108,46 +216,7 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"security_group_egress": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: CidrIp
-					"cidr_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: CidrIpv6
-					"cidr_ipv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Description
-					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: DestinationPrefixListId
-					"destination_prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: DestinationSecurityGroupId
-					"destination_security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: FromPort
-					"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: IpProtocol
-					"ip_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ToPort
-					"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "[VPC only] The outbound rules associated with the security group. There is a short interruption during which you cannot connect to the security group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_egress": schemaAttribute1d809b30e8a8e96636cee7c1(),
 		// Property: SecurityGroupIngress
 		// CloudFormation resource type schema:
 		//
@@ -196,54 +265,7 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"security_group_ingress": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: CidrIp
-					"cidr_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: CidrIpv6
-					"cidr_ipv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Description
-					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: FromPort
-					"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: IpProtocol
-					"ip_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SourcePrefixListId
-					"source_prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SourceSecurityGroupId
-					"source_security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SourceSecurityGroupName
-					"source_security_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: SourceSecurityGroupOwnerId
-					"source_security_group_owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ToPort
-					"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The inbound rules associated with the security group. There is a short interruption during which you cannot connect to the security group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_ingress": schemaAttribute22a8e8eb5d9129ce71a77f20(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -269,22 +291,7 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Any tags assigned to the security group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute35fa0b05ee3aeef501a20ea2(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -292,10 +299,7 @@ func securityGroupDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The ID of the VPC for the security group.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the VPC for the security group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttribute259987099aec37e7cf95a5eb(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,365 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute083728518233b728c766c149() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source image for the container recipe.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0846342af49b2b4bb79957ba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the component parameter to set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1801ebc71af0cfc7217d3ab7() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Use to override the device's volume size.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ca074f605e1a9a9f7be3a3e() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Sets the value for the named component parameter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e4649d0c3f29b8b2df2729d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ComponentArn
+				"component_arn": schemaAttributef6a17220fe690fd4e2998713(),
+				// Property: Parameters
+				"parameters": schemaAttribute7849a0ff882de3983699b379(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Components for build and test that are included in the container recipe.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2270a811446204d04e85f302() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The working directory to be used during build and test workflows.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26daec64cabf64c4af542120() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Tags that are attached to the container recipe.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute288af4cbd6bf0347f604987a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Use to configure the KMS key to use when encrypting the device.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c803a57512f6e34a2bc9a21() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The snapshot that defines the device contents.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute331689d71cf6874718aa73ea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The latest version ARN of the created container recipe, with the same patch version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3c35dbd220c802b54f58b334() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The latest version ARN of the created container recipe, with the same minor version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute445fc279047b3455c77d6303() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The semantic version of the container recipe (<major>.<minor>.<patch>).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b45e93f591cb437170ddf17() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeleteOnTermination
+			"delete_on_termination": schemaAttributea4d2910479fa6e0a5dea606e(),
+			// Property: Encrypted
+			"encrypted": schemaAttribute786854ebb078f5602df3cdeb(),
+			// Property: Iops
+			"iops": schemaAttribute9c3a4c2c05d40febbd48c334(),
+			// Property: KmsKeyId
+			"kms_key_id": schemaAttribute288af4cbd6bf0347f604987a(),
+			// Property: SnapshotId
+			"snapshot_id": schemaAttribute2c803a57512f6e34a2bc9a21(),
+			// Property: Throughput
+			"throughput": schemaAttributec3199c78b33f301626efebc7(),
+			// Property: VolumeSize
+			"volume_size": schemaAttribute1801ebc71af0cfc7217d3ab7(),
+			// Property: VolumeType
+			"volume_type": schemaAttribute853376a3a035b674175e0ddc(),
+		}, /*END SCHEMA*/
+		Description: "Use to manage Amazon EBS-specific configuration for this mapping.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4d4eaff2c222a613e6296792() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the operating system version for the source image.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5534063804117fe6c9289eb1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Dockerfiles are text documents that are used to build Docker containers, and ensure that they contain all of the elements required by the application running inside. The template data consists of contextual variables where Image Builder places build information or scripts, based on your container image recipe.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57acbee53a18e02bb26396f4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the operating system platform when you use a custom source image.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5fb6eff2ebe6323b5ad39f6b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RepositoryName
+			"repository_name": schemaAttribute7b9de7009b9438f10e1a126b(),
+			// Property: Service
+			"service": schemaAttributeb8bb78b8903db04ea2039255(),
+		}, /*END SCHEMA*/
+		Description: "The destination repository for the container image.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5fc55b638f900a60b894d829() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AMI ID to use as the base image for a container build and test instance. If not specified, Image Builder will use the appropriate ECS-optimized AMI as a base image.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7849a0ff882de3983699b379() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute0846342af49b2b4bb79957ba(),
+				// Property: Value
+				"value": schemaAttribute1ca074f605e1a9a9f7be3a3e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A group of parameter settings that are used to configure the component for a specific recipe.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute786854ebb078f5602df3cdeb() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Use to configure device encryption.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b776fa3871c617f13b70f95() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The S3 URI for the Dockerfile that will be used to build your container image.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b9de7009b9438f10e1a126b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the container repository where the output container image is stored. This name is prefixed by the repository location.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute853376a3a035b674175e0ddc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Use to override the device's volume type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute933f60adf363b4765c236e86() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the container recipe.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95036251b7e24eedfe833c7a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The latest version ARN of the created container recipe, with the same major version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c3a4c2c05d40febbd48c334() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Use to configure device IOPS.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fb215fdb47a220eefffe60d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Use to remove a mapping from the parent image.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea248f41f1d8814a8bb232325() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the type of container, such as Docker.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4d2910479fa6e0a5dea606e() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Use to configure delete on termination of the associated device.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaef732be5391a9f01bdbcd3f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Use to manage instance ephemeral devices.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8bb78b8903db04ea2039255() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the service in which this image was registered.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebcacbc1726caaef5b655aa67() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DeviceName
+				"device_name": schemaAttributee4833897d3dfda63d658c324(),
+				// Property: Ebs
+				"ebs": schemaAttribute4b45e93f591cb437170ddf17(),
+				// Property: NoDevice
+				"no_device": schemaAttribute9fb215fdb47a220eefffe60d(),
+				// Property: VirtualName
+				"virtual_name": schemaAttributeaef732be5391a9f01bdbcd3f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Defines the block devices to attach for building an instance from this Image Builder AMI.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec167488251a273e6eab27298() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BlockDeviceMappings
+			"block_device_mappings": schemaAttributebcacbc1726caaef5b655aa67(),
+			// Property: Image
+			"image": schemaAttribute5fc55b638f900a60b894d829(),
+		}, /*END SCHEMA*/
+		Description: "A group of options that can be used to configure an instance for building and testing container images.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3199c78b33f301626efebc7() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "For GP3 volumes only - The throughput in MiB/s that the volume supports.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec81d5d4600af7d81f557b19b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the container recipe.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4cfe0ab7fa8c06257b0f2fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Identifies which KMS key is used to encrypt the container image.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee24240d035a8ba6143d52854() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttributef26c15cf875a476779f1f058(),
+			// Property: Major
+			"major": schemaAttribute95036251b7e24eedfe833c7a(),
+			// Property: Minor
+			"minor": schemaAttribute3c35dbd220c802b54f58b334(),
+			// Property: Patch
+			"patch": schemaAttribute331689d71cf6874718aa73ea(),
+		}, /*END SCHEMA*/
+		Description: "The latest version references of the container recipe.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4833897d3dfda63d658c324() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The device to which these mappings apply.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb846cd77dad89a55f151fe1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the container recipe.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef26c15cf875a476779f1f058() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The latest version ARN of the created container recipe.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef6a17220fe690fd4e2998713() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_imagebuilder_container_recipe", containerRecipeDataSource)
 }
@@ -31,10 +390,7 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:container-recipe/.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the container recipe.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute933f60adf363b4765c236e86(),
 		// Property: Components
 		// CloudFormation resource type schema:
 		//
@@ -82,39 +438,7 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "array"
 		//	}
-		"components": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ComponentArn
-					"component_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Amazon Resource Name (ARN) of the component.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Parameters
-					"parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Name
-								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the component parameter to set.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Value
-								"value": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Description: "Sets the value for the named component parameter.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "A group of parameter settings that are used to configure the component for a specific recipe.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Components for build and test that are included in the container recipe.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"components": schemaAttribute1e4649d0c3f29b8b2df2729d(),
 		// Property: ContainerType
 		// CloudFormation resource type schema:
 		//
@@ -125,10 +449,7 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"container_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the type of container, such as Docker.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"container_type": schemaAttributea248f41f1d8814a8bb232325(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -136,10 +457,7 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The description of the container recipe.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the container recipe.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeeb846cd77dad89a55f151fe1(),
 		// Property: DockerfileTemplateData
 		// CloudFormation resource type schema:
 		//
@@ -147,10 +465,7 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Dockerfiles are text documents that are used to build Docker containers, and ensure that they contain all of the elements required by the application running inside. The template data consists of contextual variables where Image Builder places build information or scripts, based on your container image recipe.",
 		//	  "type": "string"
 		//	}
-		"dockerfile_template_data": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Dockerfiles are text documents that are used to build Docker containers, and ensure that they contain all of the elements required by the application running inside. The template data consists of contextual variables where Image Builder places build information or scripts, based on your container image recipe.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dockerfile_template_data": schemaAttribute5534063804117fe6c9289eb1(),
 		// Property: DockerfileTemplateUri
 		// CloudFormation resource type schema:
 		//
@@ -158,10 +473,7 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The S3 URI for the Dockerfile that will be used to build your container image.",
 		//	  "type": "string"
 		//	}
-		"dockerfile_template_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The S3 URI for the Dockerfile that will be used to build your container image.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dockerfile_template_uri": schemaAttribute7b776fa3871c617f13b70f95(),
 		// Property: ImageOsVersionOverride
 		// CloudFormation resource type schema:
 		//
@@ -169,10 +481,7 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Specifies the operating system version for the source image.",
 		//	  "type": "string"
 		//	}
-		"image_os_version_override": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the operating system version for the source image.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"image_os_version_override": schemaAttribute4d4eaff2c222a613e6296792(),
 		// Property: InstanceConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -261,88 +570,7 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"instance_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BlockDeviceMappings
-				"block_device_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DeviceName
-							"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The device to which these mappings apply.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Ebs
-							"ebs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DeleteOnTermination
-									"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Description: "Use to configure delete on termination of the associated device.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Encrypted
-									"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Description: "Use to configure device encryption.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Iops
-									"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "Use to configure device IOPS.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: KmsKeyId
-									"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Use to configure the KMS key to use when encrypting the device.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: SnapshotId
-									"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The snapshot that defines the device contents.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Throughput
-									"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "For GP3 volumes only - The throughput in MiB/s that the volume supports.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: VolumeSize
-									"volume_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Description: "Use to override the device's volume size.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: VolumeType
-									"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Use to override the device's volume type.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "Use to manage Amazon EBS-specific configuration for this mapping.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: NoDevice
-							"no_device": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Use to remove a mapping from the parent image.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: VirtualName
-							"virtual_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Use to manage instance ephemeral devices.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Defines the block devices to attach for building an instance from this Image Builder AMI.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Image
-				"image": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The AMI ID to use as the base image for a container build and test instance. If not specified, Image Builder will use the appropriate ECS-optimized AMI as a base image.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A group of options that can be used to configure an instance for building and testing container images.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_configuration": schemaAttributec167488251a273e6eab27298(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -350,10 +578,7 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Identifies which KMS key is used to encrypt the container image.",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Identifies which KMS key is used to encrypt the container image.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttributed4cfe0ab7fa8c06257b0f2fb(),
 		// Property: LatestVersion
 		// CloudFormation resource type schema:
 		//
@@ -380,32 +605,7 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"latest_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The latest version ARN of the created container recipe.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Major
-				"major": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The latest version ARN of the created container recipe, with the same major version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Minor
-				"minor": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The latest version ARN of the created container recipe, with the same minor version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Patch
-				"patch": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The latest version ARN of the created container recipe, with the same patch version.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The latest version references of the container recipe.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"latest_version": schemaAttributee24240d035a8ba6143d52854(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -413,10 +613,7 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The name of the container recipe.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the container recipe.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributec81d5d4600af7d81f557b19b(),
 		// Property: ParentImage
 		// CloudFormation resource type schema:
 		//
@@ -424,10 +621,7 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The source image for the container recipe.",
 		//	  "type": "string"
 		//	}
-		"parent_image": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The source image for the container recipe.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"parent_image": schemaAttribute083728518233b728c766c149(),
 		// Property: PlatformOverride
 		// CloudFormation resource type schema:
 		//
@@ -439,10 +633,7 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"platform_override": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the operating system platform when you use a custom source image.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"platform_override": schemaAttribute57acbee53a18e02bb26396f4(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -456,12 +647,7 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Tags that are attached to the container recipe.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute26daec64cabf64c4af542120(),
 		// Property: TargetRepository
 		// CloudFormation resource type schema:
 		//
@@ -483,22 +669,7 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"target_repository": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RepositoryName
-				"repository_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the container repository where the output container image is stored. This name is prefixed by the repository location.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Service
-				"service": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the service in which this image was registered.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The destination repository for the container image.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_repository": schemaAttribute5fb6eff2ebe6323b5ad39f6b(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -506,10 +677,7 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The semantic version of the container recipe (\u003cmajor\u003e.\u003cminor\u003e.\u003cpatch\u003e).",
 		//	  "type": "string"
 		//	}
-		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The semantic version of the container recipe (<major>.<minor>.<patch>).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttribute445fc279047b3455c77d6303(),
 		// Property: WorkingDirectory
 		// CloudFormation resource type schema:
 		//
@@ -517,10 +685,7 @@ func containerRecipeDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The working directory to be used during build and test workflows.",
 		//	  "type": "string"
 		//	}
-		"working_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The working directory to be used during build and test workflows.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"working_directory": schemaAttribute2270a811446204d04e85f302(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,130 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute09f4a1e3291efdd7f9eeb1fe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute167dae1863f82c2921e5eee7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Key
+			"key": schemaAttributeee2164bf82142045af496651(),
+			// Property: Value
+			"value": schemaAttribute414b9e33390872098a1ebf3c(),
+		}, /*END SCHEMA*/
+		Description: "Query string key=value pair match (single pair).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1743830dbae7889484954386() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Query string key presence check (any value accepted).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute26a90a39104064cd088c0484() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Wildcard host pattern (e.g., *.example.com) ? RFC 3986 unreserved characters plus *. Mutually exclusive with HostHeader.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28e0d3612396933eee5cc211() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c77dbfc3c926f3ef1ebc02f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Exact host match ? RFC 3986 unreserved characters. Mutually exclusive with HostHeaderWildcard.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3dfe2f237d24d9c85dbada65() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Exact path match ? must start with /. Mutually exclusive with PathPrefix.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute414b9e33390872098a1ebf3c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Query string value ? RFC 3986 unreserved characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70d2a1f7ff6178cdfad777c5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Path prefix matching ? strict starts-with, must start with /. Mutually exclusive with PathExact.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute752ed348c5dd41264decafb5() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeead6455676c61f0589b7933f(),
+				// Property: Value
+				"value": schemaAttribute28e0d3612396933eee5cc211(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to assign to the LinkRoutingRule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b4b8c9e13ec966f0678e4ea() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HostHeader
+			"host_header": schemaAttribute2c77dbfc3c926f3ef1ebc02f(),
+			// Property: HostHeaderWildcard
+			"host_header_wildcard": schemaAttribute26a90a39104064cd088c0484(),
+			// Property: PathExact
+			"path_exact": schemaAttribute3dfe2f237d24d9c85dbada65(),
+			// Property: PathPrefix
+			"path_prefix": schemaAttribute70d2a1f7ff6178cdfad777c5(),
+			// Property: QueryStringEquals
+			"query_string_equals": schemaAttribute167dae1863f82c2921e5eee7(),
+			// Property: QueryStringExists
+			"query_string_exists": schemaAttribute1743830dbae7889484954386(),
+		}, /*END SCHEMA*/
+		Description: "Conditions for a routing rule. All non-null fields must match (AND logic). At least one field must be set. HostHeader and HostHeaderWildcard are mutually exclusive. PathPrefix and PathExact are mutually exclusive.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee7f2047f58f5928a0e1e9bbf() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeead6455676c61f0589b7933f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee2164bf82142045af496651() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Query string key ? RFC 3986 unreserved characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_rtbfabric_link_routing_rule", linkRoutingRuleDataSource)
 }
@@ -31,9 +155,7 @@ func linkRoutingRuleDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:aws:rtbfabric:[a-zA-Z0-9_-]+:[0-9]{12}:gateway/[a-zA-Z0-9-]+/link/[a-zA-Z0-9-]+/routing-rule/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute09f4a1e3291efdd7f9eeb1fe(),
 		// Property: Conditions
 		// CloudFormation resource type schema:
 		//
@@ -104,63 +226,14 @@ func linkRoutingRuleDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"conditions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: HostHeader
-				"host_header": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Exact host match ? RFC 3986 unreserved characters. Mutually exclusive with HostHeaderWildcard.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: HostHeaderWildcard
-				"host_header_wildcard": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Wildcard host pattern (e.g., *.example.com) ? RFC 3986 unreserved characters plus *. Mutually exclusive with HostHeader.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PathExact
-				"path_exact": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Exact path match ? must start with /. Mutually exclusive with PathPrefix.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PathPrefix
-				"path_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Path prefix matching ? strict starts-with, must start with /. Mutually exclusive with PathExact.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: QueryStringEquals
-				"query_string_equals": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Key
-						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Query string key ? RFC 3986 unreserved characters.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Value
-						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Query string value ? RFC 3986 unreserved characters.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Query string key=value pair match (single pair).",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: QueryStringExists
-				"query_string_exists": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Query string key presence check (any value accepted).",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Conditions for a routing rule. All non-null fields must match (AND logic). At least one field must be set. HostHeader and HostHeaderWildcard are mutually exclusive. PathPrefix and PathExact are mutually exclusive.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"conditions": schemaAttribute9b4b8c9e13ec966f0678e4ea(),
 		// Property: CreatedTimestamp
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"created_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"created_timestamp": schemaAttribute09f4a1e3291efdd7f9eeb1fe(),
 		// Property: GatewayId
 		// CloudFormation resource type schema:
 		//
@@ -168,9 +241,7 @@ func linkRoutingRuleDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^rtb-gw-[a-z0-9-]{1,25}$",
 		//	  "type": "string"
 		//	}
-		"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"gateway_id": schemaAttribute09f4a1e3291efdd7f9eeb1fe(),
 		// Property: LinkId
 		// CloudFormation resource type schema:
 		//
@@ -178,9 +249,7 @@ func linkRoutingRuleDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^link-[a-z0-9-]{1,25}$",
 		//	  "type": "string"
 		//	}
-		"link_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"link_id": schemaAttribute09f4a1e3291efdd7f9eeb1fe(),
 		// Property: Priority
 		// CloudFormation resource type schema:
 		//
@@ -189,9 +258,7 @@ func linkRoutingRuleDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minimum": 1,
 		//	  "type": "integer"
 		//	}
-		"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"priority": schemaAttributee7f2047f58f5928a0e1e9bbf(),
 		// Property: RuleId
 		// CloudFormation resource type schema:
 		//
@@ -199,9 +266,7 @@ func linkRoutingRuleDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^rule-[a-z0-9-]{1,25}$",
 		//	  "type": "string"
 		//	}
-		"rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"rule_id": schemaAttribute09f4a1e3291efdd7f9eeb1fe(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -216,9 +281,7 @@ func linkRoutingRuleDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute09f4a1e3291efdd7f9eeb1fe(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -252,33 +315,14 @@ func linkRoutingRuleDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to assign to the LinkRoutingRule.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute752ed348c5dd41264decafb5(),
 		// Property: UpdatedTimestamp
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"updated_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"updated_timestamp": schemaAttribute09f4a1e3291efdd7f9eeb1fe(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

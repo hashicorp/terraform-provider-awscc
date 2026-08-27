@@ -14,6 +14,24 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute02eab7fbf866df208a12ef32() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GroupIdentifier
+			"group_identifier": schemaAttribute13f169848b006fa3b4e43af0(),
+			// Property: UserIdentifier
+			"user_identifier": schemaAttribute13f169848b006fa3b4e43af0(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute13f169848b006fa3b4e43af0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_datazone_project_membership", projectMembershipDataSource)
 }
@@ -35,9 +53,7 @@ func projectMembershipDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"designation": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"designation": schemaAttribute13f169848b006fa3b4e43af0(),
 		// Property: DomainIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -45,9 +61,7 @@ func projectMembershipDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^dzd[-_][a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"domain_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"domain_identifier": schemaAttribute13f169848b006fa3b4e43af0(),
 		// Property: Member
 		// CloudFormation resource type schema:
 		//
@@ -62,28 +76,14 @@ func projectMembershipDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  },
 		//	  "type": "object"
 		//	}
-		"member": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: GroupIdentifier
-				"group_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UserIdentifier
-				"user_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"member": schemaAttribute02eab7fbf866df208a12ef32(),
 		// Property: MemberIdentifier
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"member_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"member_identifier": schemaAttribute13f169848b006fa3b4e43af0(),
 		// Property: MemberIdentifierType
 		// CloudFormation resource type schema:
 		//
@@ -94,9 +94,7 @@ func projectMembershipDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"member_identifier_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"member_identifier_type": schemaAttribute13f169848b006fa3b4e43af0(),
 		// Property: ProjectIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -104,9 +102,7 @@ func projectMembershipDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^[a-zA-Z0-9_-]{1,36}$",
 		//	  "type": "string"
 		//	}
-		"project_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"project_identifier": schemaAttribute13f169848b006fa3b4e43af0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

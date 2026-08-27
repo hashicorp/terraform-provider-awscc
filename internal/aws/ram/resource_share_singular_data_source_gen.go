@@ -16,6 +16,151 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute06f043044e723e2d2371478a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Specifies from which source accounts the service principal has access to the resources in this resource share.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ca1de3e366977a97e089346() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d519f2d0ac72a95ec0f3e3e() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the consumer account retains access to the resource share after leaving the organization.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5333ccaba0f434ca91e99d80() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Specifies a list of one or more ARNs of the resources to associate with the resource share.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53680c146194dcf56907a962() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The feature set of the resource share.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54d9d6c96e225e1ce3188a0b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute550b11db7294502e491ec7e6() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeb43db0345b8169372e1ec246(),
+				// Property: Value
+				"value": schemaAttribute54d9d6c96e225e1ce3188a0b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Specifies one or more tags to attach to the resource share itself. It doesn't attach the tags to the resources associated with the resource share.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute681b1399b4a64fc01b2027fe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The date and time when the resource share was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6eb34a7f1d33bda307c06940() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Specifies the principals to associate with the resource share. The possible values are:\n\n- An AWS account ID\n\n- An Amazon Resource Name (ARN) of an organization in AWS Organizations\n\n- An ARN of an organizational unit (OU) in AWS Organizations\n\n- An ARN of an IAM role\n\n- An ARN of an IAM user",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute81bf1464f7fd9e6fc32259a9() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether principals outside your organization in AWS Organizations can be associated with a resource share. A value of `true` lets you share with individual AWS accounts that are not in your organization. A value of `false` only has meaning if your account is a member of an AWS Organization. The default value is `true`.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87d94f34083835f95f5a08a8() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The resource share restricts access to an account",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9da4faf8ac10bad4ea331ea0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Specifies the [Amazon Resource Names (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the AWS RAM permission to associate with the resource share. If you do not specify an ARN for the permission, AWS RAM automatically attaches the default version of the permission for each resource type. You can associate only one permission with each resource type included in the resource share.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0c1c69d28b48d4a732d14a7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current status of the resource share.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea1fac22efe9ffb208c2ac21b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The date and time when the resource share was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb43db0345b8169372e1ec246() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed726effc72c8204235fcf516() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the AWS account that owns the resource share.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee668f734eff32d4c337684a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the name of the resource share.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa9582922da8cc41a4577e23() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ExclusiveAccountAccess
+			"exclusive_account_access": schemaAttribute87d94f34083835f95f5a08a8(),
+			// Property: RetainSharingOnAccountLeaveOrganization
+			"retain_sharing_on_account_leave_organization": schemaAttribute3d519f2d0ac72a95ec0f3e3e(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the configuration for the resource share",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ram_resource_share", resourceShareDataSource)
 }
@@ -31,19 +176,14 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Specifies whether principals outside your organization in AWS Organizations can be associated with a resource share. A value of `true` lets you share with individual AWS accounts that are not in your organization. A value of `false` only has meaning if your account is a member of an AWS Organization. The default value is `true`.",
 		//	  "type": "boolean"
 		//	}
-		"allow_external_principals": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether principals outside your organization in AWS Organizations can be associated with a resource share. A value of `true` lets you share with individual AWS accounts that are not in your organization. A value of `false` only has meaning if your account is a member of an AWS Organization. The default value is `true`.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"allow_external_principals": schemaAttribute81bf1464f7fd9e6fc32259a9(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute1ca1de3e366977a97e089346(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -52,11 +192,7 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The date and time when the resource share was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute681b1399b4a64fc01b2027fe(),
 		// Property: FeatureSet
 		// CloudFormation resource type schema:
 		//
@@ -69,10 +205,7 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"feature_set": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The feature set of the resource share.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"feature_set": schemaAttribute53680c146194dcf56907a962(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -81,11 +214,7 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The date and time when the resource share was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttributea1fac22efe9ffb208c2ac21b(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -93,10 +222,7 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Specifies the name of the resource share.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the name of the resource share.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributee668f734eff32d4c337684a0(),
 		// Property: OwningAccountId
 		// CloudFormation resource type schema:
 		//
@@ -104,10 +230,7 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The ID of the AWS account that owns the resource share.",
 		//	  "type": "string"
 		//	}
-		"owning_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the AWS account that owns the resource share.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"owning_account_id": schemaAttributed726effc72c8204235fcf516(),
 		// Property: PermissionArns
 		// CloudFormation resource type schema:
 		//
@@ -119,11 +242,7 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"permission_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Specifies the [Amazon Resource Names (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the AWS RAM permission to associate with the resource share. If you do not specify an ARN for the permission, AWS RAM automatically attaches the default version of the permission for each resource type. You can associate only one permission with each resource type included in the resource share.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"permission_arns": schemaAttribute9da4faf8ac10bad4ea331ea0(),
 		// Property: Principals
 		// CloudFormation resource type schema:
 		//
@@ -135,11 +254,7 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"principals": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Specifies the principals to associate with the resource share. The possible values are:\n\n- An AWS account ID\n\n- An Amazon Resource Name (ARN) of an organization in AWS Organizations\n\n- An ARN of an organizational unit (OU) in AWS Organizations\n\n- An ARN of an IAM role\n\n- An ARN of an IAM user",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"principals": schemaAttribute6eb34a7f1d33bda307c06940(),
 		// Property: ResourceArns
 		// CloudFormation resource type schema:
 		//
@@ -151,11 +266,7 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"resource_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Specifies a list of one or more ARNs of the resources to associate with the resource share.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_arns": schemaAttribute5333ccaba0f434ca91e99d80(),
 		// Property: ResourceShareConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -174,22 +285,7 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"resource_share_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ExclusiveAccountAccess
-				"exclusive_account_access": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "The resource share restricts access to an account",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RetainSharingOnAccountLeaveOrganization
-				"retain_sharing_on_account_leave_organization": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether the consumer account retains access to the resource share after leaving the organization.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies the configuration for the resource share",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_share_configuration": schemaAttributefa9582922da8cc41a4577e23(),
 		// Property: Sources
 		// CloudFormation resource type schema:
 		//
@@ -201,11 +297,7 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"sources": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Specifies from which source accounts the service principal has access to the resources in this resource share.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sources": schemaAttribute06f043044e723e2d2371478a(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -220,10 +312,7 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current status of the resource share.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributea0c1c69d28b48d4a732d14a7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -252,24 +341,7 @@ func resourceShareDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Specifies one or more tags to attach to the resource share itself. It doesn't attach the tags to the resources associated with the resource share.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute550b11db7294502e491ec7e6(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

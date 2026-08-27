@@ -14,6 +14,34 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0339a04e9a8f574cbae3a05e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ResourceId",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31956c152656e5364967a966() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Id",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute636875617dd1fc0fba32c9f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ResolverDNSSECValidationStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute751f5145068cc6cbdef5ec44() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "AccountId",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_route53resolver_resolver_dnssec_config", resolverDNSSECConfigDataSource)
 }
@@ -31,10 +59,7 @@ func resolverDNSSECConfigDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resolver_dnssec_config_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Id",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resolver_dnssec_config_id": schemaAttribute31956c152656e5364967a966(),
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +69,7 @@ func resolverDNSSECConfigDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minLength": 12,
 		//	  "type": "string"
 		//	}
-		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "AccountId",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"owner_id": schemaAttribute751f5145068cc6cbdef5ec44(),
 		// Property: ResourceId
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +79,7 @@ func resolverDNSSECConfigDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ResourceId",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_id": schemaAttribute0339a04e9a8f574cbae3a05e(),
 		// Property: ValidationStatus
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +93,7 @@ func resolverDNSSECConfigDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"validation_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ResolverDNSSECValidationStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"validation_status": schemaAttribute636875617dd1fc0fba32c9f3(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

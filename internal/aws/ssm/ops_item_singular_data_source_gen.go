@@ -15,6 +15,134 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute01a9db163c75d0d7ffb8dff3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the OpsItem.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute01e64394c403ffed73f29727() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The origin of the OpsItem.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0977d7b93a1f69089aa3f807() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute449c41bac8d9f2155878fc6e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the OpsItem.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53b281b20c41da5f2bf8898e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user who created the OpsItem.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a70201362a961de605807cf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user who last modified the OpsItem.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a77dcb525e2b9d3f99f17c7() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The priority of the OpsItem.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5af986f5ef9c2a788e0e5894() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute0977d7b93a1f69089aa3f807(),
+				// Property: Value
+				"value": schemaAttribute0977d7b93a1f69089aa3f807(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags for the OpsItem.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6633bfe55a07bed0a57b481f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the OpsItem.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute78ece86021ffc8cc52f7b8da() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The time the OpsItem was last modified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute808b196af36b98da30a2c40e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of OpsItem.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8dfb38efe9b48a3a358c50df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the OpsItem.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute922794abc3ced3841d868d8c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The severity of the OpsItem.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4d4d0a1915ddc67928708fb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the OpsItem.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf7ae6c41c3c448bd82df618() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The category of the OpsItem.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef49096217a88d4e220324bca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The time the OpsItem was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdab1d79cb39c5afb158ee74() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The title of the OpsItem.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ssm_ops_item", opsItemDataSource)
 }
@@ -30,10 +158,7 @@ func opsItemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The category of the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"category": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The category of the OpsItem.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"category": schemaAttributedf7ae6c41c3c448bd82df618(),
 		// Property: CreatedBy
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +166,7 @@ func opsItemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The user who created the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The user who created the OpsItem.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_by": schemaAttribute53b281b20c41da5f2bf8898e(),
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
 		//
@@ -53,11 +175,7 @@ func opsItemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time the OpsItem was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_time": schemaAttributef49096217a88d4e220324bca(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -65,10 +183,7 @@ func opsItemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the OpsItem.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute6633bfe55a07bed0a57b481f(),
 		// Property: LastModifiedBy
 		// CloudFormation resource type schema:
 		//
@@ -76,10 +191,7 @@ func opsItemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The user who last modified the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"last_modified_by": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The user who last modified the OpsItem.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_by": schemaAttribute5a70201362a961de605807cf(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -88,11 +200,7 @@ func opsItemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time the OpsItem was last modified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttribute78ece86021ffc8cc52f7b8da(),
 		// Property: OpsItemArn
 		// CloudFormation resource type schema:
 		//
@@ -100,10 +208,7 @@ func opsItemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"ops_item_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the OpsItem.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ops_item_arn": schemaAttribute449c41bac8d9f2155878fc6e(),
 		// Property: OpsItemId
 		// CloudFormation resource type schema:
 		//
@@ -112,10 +217,7 @@ func opsItemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(oi)-[0-9a-f]{12}$",
 		//	  "type": "string"
 		//	}
-		"ops_item_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the OpsItem.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ops_item_id": schemaAttribute8dfb38efe9b48a3a358c50df(),
 		// Property: OpsItemType
 		// CloudFormation resource type schema:
 		//
@@ -123,10 +225,7 @@ func opsItemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of OpsItem.",
 		//	  "type": "string"
 		//	}
-		"ops_item_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of OpsItem.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ops_item_type": schemaAttribute808b196af36b98da30a2c40e(),
 		// Property: Priority
 		// CloudFormation resource type schema:
 		//
@@ -134,10 +233,7 @@ func opsItemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The priority of the OpsItem.",
 		//	  "type": "integer"
 		//	}
-		"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The priority of the OpsItem.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"priority": schemaAttribute5a77dcb525e2b9d3f99f17c7(),
 		// Property: Severity
 		// CloudFormation resource type schema:
 		//
@@ -145,10 +241,7 @@ func opsItemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The severity of the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"severity": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The severity of the OpsItem.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"severity": schemaAttribute922794abc3ced3841d868d8c(),
 		// Property: Source
 		// CloudFormation resource type schema:
 		//
@@ -156,10 +249,7 @@ func opsItemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The origin of the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The origin of the OpsItem.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source": schemaAttribute01e64394c403ffed73f29727(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -167,10 +257,7 @@ func opsItemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The status of the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the OpsItem.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributeb4d4d0a1915ddc67928708fb(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -196,22 +283,7 @@ func opsItemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags for the OpsItem.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute5af986f5ef9c2a788e0e5894(),
 		// Property: Title
 		// CloudFormation resource type schema:
 		//
@@ -219,10 +291,7 @@ func opsItemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The title of the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"title": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The title of the OpsItem.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"title": schemaAttributefdab1d79cb39c5afb158ee74(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -230,10 +299,7 @@ func opsItemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version of the OpsItem.",
 		//	  "type": "string"
 		//	}
-		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of the OpsItem.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttribute01a9db163c75d0d7ffb8dff3(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

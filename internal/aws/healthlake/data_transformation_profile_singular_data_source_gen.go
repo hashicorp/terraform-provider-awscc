@@ -15,6 +15,165 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute07cba15418cfef8ec3883548() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The human-readable name of the profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d3d7f1d2718cbac1705fc00() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the starter profile to seed the profile from.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute12cee76825edd4510f860299() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier (key ID or ARN) of a customer-managed KMS key used to encrypt the profile's template content at rest. If omitted, an AWS owned key is used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute137a0f8808deb94e6142d1a7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute16fdacac5621246268b5e8c8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A human-readable description of the profile's purpose.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2933036469d8855851f3170b() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The version number of the source profile to clone.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d7414e76e22b241a81d0087() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique, server-generated identifier of the profile (32-character lowercase hexadecimal).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ef7771c76d69d5c52a92a4f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The target format that this profile converts to. Always FHIR_R4.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute71979682a8b4005accbb1fab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e263ffc96a5423e1b4a204b() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Map of template file paths to their Velocity template content.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95834dd39055de28c6bfdb4f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: StarterProfileName
+			"starter_profile_name": schemaAttribute0d3d7f1d2718cbac1705fc00(),
+		}, /*END SCHEMA*/
+		Description: "Create the profile from a predefined starter profile of transformation templates.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea05449b882edde7d0ad084cd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source format that this profile converts from.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb17ce151c3b843446295154b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ProfileMapping
+			"profile_mapping": schemaAttribute8e263ffc96a5423e1b4a204b(),
+		}, /*END SCHEMA*/
+		Description: "Create the profile from raw Velocity template mapping content.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5622e665a495e50f04bc112() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the data transformation profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9f831536b7ba1f0a1f9c7d0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ExistingVersionedProfileId
+			"existing_versioned_profile_id": schemaAttributee8066c775dda6d70a5fab54b(),
+			// Property: ProfileMapping
+			"profile_mapping": schemaAttributeb17ce151c3b843446295154b(),
+			// Property: StarterProfile
+			"starter_profile": schemaAttribute95834dd39055de28c6bfdb4f(),
+		}, /*END SCHEMA*/
+		Description: "The source from which to create the profile's initial template content. Exactly one of the members must be specified. Use StarterProfile (C-CDA only), ProfileMapping (C-CDA or CSV), or ExistingVersionedProfileId to clone an existing profile. Each produces a published profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee8066c775dda6d70a5fab54b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ProfileId
+			"profile_id": schemaAttributeef7fd437b04b4fac089362cc(),
+			// Property: Version
+			"version": schemaAttribute2933036469d8855851f3170b(),
+		}, /*END SCHEMA*/
+		Description: "Create the profile by cloning a specific version of an existing profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef7fd437b04b4fac089362cc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the source profile to clone.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef656211fbe58d58f5e3f86b4() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute137a0f8808deb94e6142d1a7(),
+				// Property: Value
+				"value": schemaAttribute71979682a8b4005accbb1fab(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this profile.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_healthlake_data_transformation_profile", dataTransformationProfileDataSource)
 }
@@ -31,10 +190,7 @@ func dataTransformationProfileDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^arn:aws(-[a-z]+)*:healthlake:[a-z0-9-]+:[0-9]{12}:dataTransformationProfile/[a-f0-9]{32}$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the data transformation profile.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeb5622e665a495e50f04bc112(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +200,7 @@ func dataTransformationProfileDataSource(ctx context.Context) (datasource.DataSo
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier (key ID or ARN) of a customer-managed KMS key used to encrypt the profile's template content at rest. If omitted, an AWS owned key is used.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttribute12cee76825edd4510f860299(),
 		// Property: ProfileDescription
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +210,7 @@ func dataTransformationProfileDataSource(ctx context.Context) (datasource.DataSo
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"profile_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A human-readable description of the profile's purpose.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"profile_description": schemaAttribute16fdacac5621246268b5e8c8(),
 		// Property: ProfileId
 		// CloudFormation resource type schema:
 		//
@@ -71,10 +221,7 @@ func dataTransformationProfileDataSource(ctx context.Context) (datasource.DataSo
 		//	  "pattern": "^[a-f0-9]{32}$",
 		//	  "type": "string"
 		//	}
-		"profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique, server-generated identifier of the profile (32-character lowercase hexadecimal).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"profile_id": schemaAttribute3d7414e76e22b241a81d0087(),
 		// Property: ProfileName
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +231,7 @@ func dataTransformationProfileDataSource(ctx context.Context) (datasource.DataSo
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The human-readable name of the profile.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"profile_name": schemaAttribute07cba15418cfef8ec3883548(),
 		// Property: Source
 		// CloudFormation resource type schema:
 		//
@@ -151,55 +295,7 @@ func dataTransformationProfileDataSource(ctx context.Context) (datasource.DataSo
 		//	  },
 		//	  "type": "object"
 		//	}
-		"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ExistingVersionedProfileId
-				"existing_versioned_profile_id": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ProfileId
-						"profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The unique identifier of the source profile to clone.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Version
-						"version": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "The version number of the source profile to clone.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Create the profile by cloning a specific version of an existing profile.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProfileMapping
-				"profile_mapping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ProfileMapping
-						"profile_mapping":   // Pattern: ""
-						schema.MapAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "Map of template file paths to their Velocity template content.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Create the profile from raw Velocity template mapping content.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StarterProfile
-				"starter_profile": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: StarterProfileName
-						"starter_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the starter profile to seed the profile from.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Create the profile from a predefined starter profile of transformation templates.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The source from which to create the profile's initial template content. Exactly one of the members must be specified. Use StarterProfile (C-CDA only), ProfileMapping (C-CDA or CSV), or ExistingVersionedProfileId to clone an existing profile. Each produces a published profile.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source": schemaAttributec9f831536b7ba1f0a1f9c7d0(),
 		// Property: SourceFormat
 		// CloudFormation resource type schema:
 		//
@@ -211,10 +307,7 @@ func dataTransformationProfileDataSource(ctx context.Context) (datasource.DataSo
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"source_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The source format that this profile converts from.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_format": schemaAttributea05449b882edde7d0ad084cd(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -247,24 +340,7 @@ func dataTransformationProfileDataSource(ctx context.Context) (datasource.DataSo
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this profile.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributef656211fbe58d58f5e3f86b4(),
 		// Property: TargetFormat
 		// CloudFormation resource type schema:
 		//
@@ -275,10 +351,7 @@ func dataTransformationProfileDataSource(ctx context.Context) (datasource.DataSo
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"target_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The target format that this profile converts to. Always FHIR_R4.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_format": schemaAttribute5ef7771c76d69d5c52a92a4f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

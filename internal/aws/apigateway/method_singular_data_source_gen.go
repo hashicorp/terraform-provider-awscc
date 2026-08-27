@@ -15,6 +15,141 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0a01b4be51e9f7bf1d3be426() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31c73441011dca1c084bb332() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The method's authorization type. This parameter is required. For valid values, see [Method](https://docs.aws.amazon.com/apigateway/latest/api/API_Method.html) in the *API Gateway API Reference*.\n  If you specify the ``AuthorizerId`` property, specify ``CUSTOM`` or ``COGNITO_USER_POOLS`` for this property.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a4b71918f01bbaa56f84642() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute561df63632962685a747a716() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CacheKeyParameters
+			"cache_key_parameters": schemaAttribute89888dececf46ab01731a6e4(),
+			// Property: CacheNamespace
+			"cache_namespace": schemaAttribute0a01b4be51e9f7bf1d3be426(),
+			// Property: ConnectionId
+			"connection_id": schemaAttribute0a01b4be51e9f7bf1d3be426(),
+			// Property: ConnectionType
+			"connection_type": schemaAttribute0a01b4be51e9f7bf1d3be426(),
+			// Property: ContentHandling
+			"content_handling": schemaAttribute0a01b4be51e9f7bf1d3be426(),
+			// Property: Credentials
+			"credentials": schemaAttribute0a01b4be51e9f7bf1d3be426(),
+			// Property: IntegrationHttpMethod
+			"integration_http_method": schemaAttribute0a01b4be51e9f7bf1d3be426(),
+			// Property: IntegrationResponses
+			"integration_responses": schemaAttributeedf97c95570db8317592caa7(),
+			// Property: IntegrationTarget
+			"integration_target": schemaAttribute0a01b4be51e9f7bf1d3be426(),
+			// Property: PassthroughBehavior
+			"passthrough_behavior": schemaAttribute0a01b4be51e9f7bf1d3be426(),
+			// Property: RequestParameters
+			"request_parameters": schemaAttribute8ceb8ec472807942ff572049(),
+			// Property: RequestTemplates
+			"request_templates": schemaAttribute8ceb8ec472807942ff572049(),
+			// Property: ResponseTransferMode
+			"response_transfer_mode": schemaAttribute0a01b4be51e9f7bf1d3be426(),
+			// Property: TimeoutInMillis
+			"timeout_in_millis": schemaAttribute94d76c84cce9eceb6d5bed0d(),
+			// Property: Type
+			"type": schemaAttribute0a01b4be51e9f7bf1d3be426(),
+			// Property: Uri
+			"uri": schemaAttribute0a01b4be51e9f7bf1d3be426(),
+		}, /*END SCHEMA*/
+		Description: "``Integration`` is a property of the [AWS::ApiGateway::Method](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html) resource that specifies information about the target backend that a method calls.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89888dececf46ab01731a6e4() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ceb8ec472807942ff572049() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94d76c84cce9eceb6d5bed0d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf0c3e179fc3c7cb97679e41() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.BoolType,
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed31f86e2618e87320dbf6a80() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ResponseModels
+				"response_models": schemaAttribute8ceb8ec472807942ff572049(),
+				// Property: ResponseParameters
+				"response_parameters": schemaAttributebf0c3e179fc3c7cb97679e41(),
+				// Property: StatusCode
+				"status_code": schemaAttribute0a01b4be51e9f7bf1d3be426(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeedf97c95570db8317592caa7() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ContentHandling
+				"content_handling": schemaAttribute0a01b4be51e9f7bf1d3be426(),
+				// Property: ResponseParameters
+				"response_parameters": schemaAttribute8ceb8ec472807942ff572049(),
+				// Property: ResponseTemplates
+				"response_templates": schemaAttribute8ceb8ec472807942ff572049(),
+				// Property: SelectionPattern
+				"selection_pattern": schemaAttribute0a01b4be51e9f7bf1d3be426(),
+				// Property: StatusCode
+				"status_code": schemaAttribute0a01b4be51e9f7bf1d3be426(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_apigateway_method", methodDataSource)
 }
@@ -30,10 +165,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "boolean"
 		//	}
-		"api_key_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"api_key_required": schemaAttribute3a4b71918f01bbaa56f84642(),
 		// Property: AuthorizationScopes
 		// CloudFormation resource type schema:
 		//
@@ -44,11 +176,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"authorization_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"authorization_scopes": schemaAttribute89888dececf46ab01731a6e4(),
 		// Property: AuthorizationType
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +184,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The method's authorization type. This parameter is required. For valid values, see [Method](https://docs.aws.amazon.com/apigateway/latest/api/API_Method.html) in the *API Gateway API Reference*.\n  If you specify the ``AuthorizerId`` property, specify ``CUSTOM`` or ``COGNITO_USER_POOLS`` for this property.",
 		//	  "type": "string"
 		//	}
-		"authorization_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The method's authorization type. This parameter is required. For valid values, see [Method](https://docs.aws.amazon.com/apigateway/latest/api/API_Method.html) in the *API Gateway API Reference*.\n  If you specify the ``AuthorizerId`` property, specify ``CUSTOM`` or ``COGNITO_USER_POOLS`` for this property.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"authorization_type": schemaAttribute31c73441011dca1c084bb332(),
 		// Property: AuthorizerId
 		// CloudFormation resource type schema:
 		//
@@ -67,10 +192,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"authorizer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"authorizer_id": schemaAttribute0a01b4be51e9f7bf1d3be426(),
 		// Property: HttpMethod
 		// CloudFormation resource type schema:
 		//
@@ -78,10 +200,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"http_method": schemaAttribute0a01b4be51e9f7bf1d3be426(),
 		// Property: Integration
 		// CloudFormation resource type schema:
 		//
@@ -248,130 +367,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"integration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CacheKeyParameters
-				"cache_key_parameters": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CacheNamespace
-				"cache_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ConnectionId
-				"connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ConnectionType
-				"connection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ContentHandling
-				"content_handling": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Credentials
-				"credentials": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IntegrationHttpMethod
-				"integration_http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IntegrationResponses
-				"integration_responses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ContentHandling
-							"content_handling": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ResponseParameters
-							"response_parameters": // Pattern: ""
-							schema.MapAttribute{   /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ResponseTemplates
-							"response_templates": // Pattern: ""
-							schema.MapAttribute{  /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: SelectionPattern
-							"selection_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: StatusCode
-							"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IntegrationTarget
-				"integration_target": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PassthroughBehavior
-				"passthrough_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RequestParameters
-				"request_parameters": // Pattern: ""
-				schema.MapAttribute{  /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RequestTemplates
-				"request_templates": // Pattern: ""
-				schema.MapAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResponseTransferMode
-				"response_transfer_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TimeoutInMillis
-				"timeout_in_millis": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Type
-				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Uri
-				"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "``Integration`` is a property of the [AWS::ApiGateway::Method](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigateway-method.html) resource that specifies information about the target backend that a method calls.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"integration": schemaAttribute561df63632962685a747a716(),
 		// Property: MethodResponses
 		// CloudFormation resource type schema:
 		//
@@ -414,33 +410,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"method_responses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ResponseModels
-					"response_models":   // Pattern: ""
-					schema.MapAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ResponseParameters
-					"response_parameters": // Pattern: ""
-					schema.MapAttribute{   /*START ATTRIBUTE*/
-						ElementType: types.BoolType,
-						Description: "",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: StatusCode
-					"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"method_responses": schemaAttributed31f86e2618e87320dbf6a80(),
 		// Property: OperationName
 		// CloudFormation resource type schema:
 		//
@@ -448,10 +418,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"operation_name": schemaAttribute0a01b4be51e9f7bf1d3be426(),
 		// Property: RequestModels
 		// CloudFormation resource type schema:
 		//
@@ -465,12 +432,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"request_models":    // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"request_models": schemaAttribute8ceb8ec472807942ff572049(),
 		// Property: RequestParameters
 		// CloudFormation resource type schema:
 		//
@@ -484,12 +446,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"request_parameters": // Pattern: ""
-		schema.MapAttribute{  /*START ATTRIBUTE*/
-			ElementType: types.BoolType,
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"request_parameters": schemaAttributebf0c3e179fc3c7cb97679e41(),
 		// Property: RequestValidatorId
 		// CloudFormation resource type schema:
 		//
@@ -497,10 +454,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"request_validator_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"request_validator_id": schemaAttribute0a01b4be51e9f7bf1d3be426(),
 		// Property: ResourceId
 		// CloudFormation resource type schema:
 		//
@@ -508,10 +462,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_id": schemaAttribute0a01b4be51e9f7bf1d3be426(),
 		// Property: RestApiId
 		// CloudFormation resource type schema:
 		//
@@ -519,10 +470,7 @@ func methodDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rest_api_id": schemaAttribute0a01b4be51e9f7bf1d3be426(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

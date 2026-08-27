@@ -14,6 +14,90 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute24110acffb0184cec1fabe22() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributef30a8f02a4692bf9db8f5197(),
+				// Property: Value
+				"value": schemaAttributef30a8f02a4692bf9db8f5197(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Any tags assigned to the Host.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d424153f2080c23b4924851() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the host accepts any untargeted instance launches that match its instance type configuration, or if it only accepts Host tenancy instance launches that specify its unique host ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54d6c74f5600bbd6a95e7e8b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Availability Zone in which to allocate the Dedicated Host.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77ffa5462b3d150161c0a224() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Outpost hardware asset.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93f25cf5fa67382bce17efbe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether to enable or disable host recovery for the Dedicated Host. Host recovery is disabled by default.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e3fade0fbf6709caad738b7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which to allocate the Dedicated Host.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ff5aa2213c95cf6e1cfb5c3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the instance type to be supported by the Dedicated Hosts. If you specify an instance type, the Dedicated Hosts support instances of the specified instance type only.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5a3818d3a5381bb121b3a37() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the instance family to be supported by the Dedicated Hosts. If you specify an instance family, the Dedicated Hosts support multiple instance types within that instance family.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec81c0894934ae07a82c11e76() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Automatically allocates a new dedicated host and moves your instances on to it if a degradation is detected on your current host.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee88497fe5310c31138bfd907() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ID of the host created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef30a8f02a4692bf9db8f5197() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_host", hostDataSource)
 }
@@ -29,10 +113,7 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the Outpost hardware asset.",
 		//	  "type": "string"
 		//	}
-		"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Outpost hardware asset.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"asset_id": schemaAttribute77ffa5462b3d150161c0a224(),
 		// Property: AutoPlacement
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +126,7 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"auto_placement": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the host accepts any untargeted instance launches that match its instance type configuration, or if it only accepts Host tenancy instance launches that specify its unique host ID.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"auto_placement": schemaAttribute3d424153f2080c23b4924851(),
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +134,7 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Availability Zone in which to allocate the Dedicated Host.",
 		//	  "type": "string"
 		//	}
-		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Availability Zone in which to allocate the Dedicated Host.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"availability_zone": schemaAttribute54d6c74f5600bbd6a95e7e8b(),
 		// Property: HostId
 		// CloudFormation resource type schema:
 		//
@@ -67,10 +142,7 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "ID of the host created.",
 		//	  "type": "string"
 		//	}
-		"host_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ID of the host created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"host_id": schemaAttributee88497fe5310c31138bfd907(),
 		// Property: HostMaintenance
 		// CloudFormation resource type schema:
 		//
@@ -83,10 +155,7 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"host_maintenance": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Automatically allocates a new dedicated host and moves your instances on to it if a degradation is detected on your current host.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"host_maintenance": schemaAttributec81c0894934ae07a82c11e76(),
 		// Property: HostRecovery
 		// CloudFormation resource type schema:
 		//
@@ -99,10 +168,7 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"host_recovery": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether to enable or disable host recovery for the Dedicated Host. Host recovery is disabled by default.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"host_recovery": schemaAttribute93f25cf5fa67382bce17efbe(),
 		// Property: InstanceFamily
 		// CloudFormation resource type schema:
 		//
@@ -110,10 +176,7 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the instance family to be supported by the Dedicated Hosts. If you specify an instance family, the Dedicated Hosts support multiple instance types within that instance family.",
 		//	  "type": "string"
 		//	}
-		"instance_family": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the instance family to be supported by the Dedicated Hosts. If you specify an instance family, the Dedicated Hosts support multiple instance types within that instance family.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_family": schemaAttributeb5a3818d3a5381bb121b3a37(),
 		// Property: InstanceType
 		// CloudFormation resource type schema:
 		//
@@ -121,10 +184,7 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies the instance type to be supported by the Dedicated Hosts. If you specify an instance type, the Dedicated Hosts support instances of the specified instance type only.",
 		//	  "type": "string"
 		//	}
-		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the instance type to be supported by the Dedicated Hosts. If you specify an instance type, the Dedicated Hosts support instances of the specified instance type only.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_type": schemaAttribute9ff5aa2213c95cf6e1cfb5c3(),
 		// Property: OutpostArn
 		// CloudFormation resource type schema:
 		//
@@ -132,10 +192,7 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which to allocate the Dedicated Host.",
 		//	  "type": "string"
 		//	}
-		"outpost_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which to allocate the Dedicated Host.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"outpost_arn": schemaAttribute9e3fade0fbf6709caad738b7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -161,22 +218,7 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Any tags assigned to the Host.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute24110acffb0184cec1fabe22(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

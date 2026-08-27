@@ -15,6 +15,183 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute00fe12a1d2b2b778d2981dc9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SingleHeaderConfig
+			"single_header_config": schemaAttributeca50e2fb09052f407d1ff7f4(),
+			// Property: SingleWeightConfig
+			"single_weight_config": schemaAttribute79542097a6773b6ef33562c7(),
+			// Property: Type
+			"type": schemaAttribute580a60ca177920da2b3ed0a4(),
+		}, /*END SCHEMA*/
+		Description: "Contains the parameters for routing production traffic from your primary to staging distributions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute08519700cccaf3b9732854f7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d1e06584b56c11193b5ef14() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute13c438a345b634905ce3630f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Enabled
+			"enabled": schemaAttribute48ecadb77522bf44d63b9e5e(),
+			// Property: SingleHeaderPolicyConfig
+			"single_header_policy_config": schemaAttributee12730b6d30146f5ed8fd068(),
+			// Property: SingleWeightPolicyConfig
+			"single_weight_policy_config": schemaAttributed6908b5712c77cb380554278(),
+			// Property: StagingDistributionDnsNames
+			"staging_distribution_dns_names": schemaAttributea4d525c4094ca5676d53a951(),
+			// Property: TrafficConfig
+			"traffic_config": schemaAttribute00fe12a1d2b2b778d2981dc9(),
+			// Property: Type
+			"type": schemaAttribute580a60ca177920da2b3ed0a4(),
+		}, /*END SCHEMA*/
+		Description: "Contains the configuration for a continuous deployment policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b0defa17d8450d613577486() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The request header value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48ecadb77522bf44d63b9e5e() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean that indicates whether this continuous deployment policy is enabled (in effect). When this value is ``true``, this policy is enabled and in effect. When this value is ``false``, this policy is not enabled and has no effect.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute580a60ca177920da2b3ed0a4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of traffic configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79542097a6773b6ef33562c7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SessionStickinessConfig
+			"session_stickiness_config": schemaAttribute8775a3c6084b9762c995b06f(),
+			// Property: Weight
+			"weight": schemaAttributeea30cab58e9ff07db460e3b5(),
+		}, /*END SCHEMA*/
+		Description: "Contains the percentage of traffic to send to the staging distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8775a3c6084b9762c995b06f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IdleTTL
+			"idle_ttl": schemaAttribute8d162d2d4dd003bf898a58e4(),
+			// Property: MaximumTTL
+			"maximum_ttl": schemaAttributea614949f65811582c13e3985(),
+		}, /*END SCHEMA*/
+		Description: "Session stickiness provides the ability to define multiple requests from a single viewer as a single session. This prevents the potentially inconsistent experience of sending some of a given user's requests to your staging distribution, while others are sent to your primary distribution. Define the session duration using TTL values.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d162d2d4dd003bf898a58e4() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount of time after which you want sessions to cease if no requests are received. Allowed values are 300?3600 seconds (5?60 minutes).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a3e120fe3f6d460055529ff() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The request header name that you want CloudFront to send to your staging distribution. The header must contain the prefix ``aws-cf-cd-``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4d525c4094ca5676d53a951() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The CloudFront domain name of the staging distribution. For example: ``d111111abcdef8.cloudfront.net``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea614949f65811582c13e3985() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum amount of time to consider requests from the viewer as being part of the same session. Allowed values are 300?3600 seconds (5?60 minutes).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebec58da921b60c28d858af3d() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca50e2fb09052f407d1ff7f4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Header
+			"header": schemaAttribute9a3e120fe3f6d460055529ff(),
+			// Property: Value
+			"value": schemaAttribute3b0defa17d8450d613577486(),
+		}, /*END SCHEMA*/
+		Description: "Determines which HTTP requests are sent to the staging distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6908b5712c77cb380554278() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SessionStickinessConfig
+			"session_stickiness_config": schemaAttribute8775a3c6084b9762c995b06f(),
+			// Property: Weight
+			"weight": schemaAttributebec58da921b60c28d858af3d(),
+		}, /*END SCHEMA*/
+		Description: "This configuration determines the percentage of HTTP requests that are sent to the staging distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee12730b6d30146f5ed8fd068() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Header
+			"header": schemaAttribute0d1e06584b56c11193b5ef14(),
+			// Property: Value
+			"value": schemaAttribute0d1e06584b56c11193b5ef14(),
+		}, /*END SCHEMA*/
+		Description: "This configuration determines which HTTP requests are sent to the staging distribution. If the HTTP request contains a header and value that matches what you specify here, the request is sent to the staging distribution. Otherwise the request is sent to the primary distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea30cab58e9ff07db460e3b5() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The percentage of traffic to send to a staging distribution, expressed as a decimal number between 0 and 0.15. For example, a value of 0.10 means 10% of traffic is sent to the staging distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudfront_continuous_deployment_policy", continuousDeploymentPolicyDataSource)
 }
@@ -198,129 +375,7 @@ func continuousDeploymentPolicyDataSource(ctx context.Context) (datasource.DataS
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"continuous_deployment_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Enabled
-				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "A Boolean that indicates whether this continuous deployment policy is enabled (in effect). When this value is ``true``, this policy is enabled and in effect. When this value is ``false``, this policy is not enabled and has no effect.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SingleHeaderPolicyConfig
-				"single_header_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Header
-						"header": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Value
-						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "This configuration determines which HTTP requests are sent to the staging distribution. If the HTTP request contains a header and value that matches what you specify here, the request is sent to the staging distribution. Otherwise the request is sent to the primary distribution.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SingleWeightPolicyConfig
-				"single_weight_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: SessionStickinessConfig
-						"session_stickiness_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: IdleTTL
-								"idle_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The amount of time after which you want sessions to cease if no requests are received. Allowed values are 300?3600 seconds (5?60 minutes).",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: MaximumTTL
-								"maximum_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Description: "The maximum amount of time to consider requests from the viewer as being part of the same session. Allowed values are 300?3600 seconds (5?60 minutes).",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Session stickiness provides the ability to define multiple requests from a single viewer as a single session. This prevents the potentially inconsistent experience of sending some of a given user's requests to your staging distribution, while others are sent to your primary distribution. Define the session duration using TTL values.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Weight
-						"weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "This configuration determines the percentage of HTTP requests that are sent to the staging distribution.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StagingDistributionDnsNames
-				"staging_distribution_dns_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The CloudFront domain name of the staging distribution. For example: ``d111111abcdef8.cloudfront.net``.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TrafficConfig
-				"traffic_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: SingleHeaderConfig
-						"single_header_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Header
-								"header": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The request header name that you want CloudFront to send to your staging distribution. The header must contain the prefix ``aws-cf-cd-``.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Value
-								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The request header value.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Determines which HTTP requests are sent to the staging distribution.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SingleWeightConfig
-						"single_weight_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: SessionStickinessConfig
-								"session_stickiness_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: IdleTTL
-										"idle_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The amount of time after which you want sessions to cease if no requests are received. Allowed values are 300?3600 seconds (5?60 minutes).",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: MaximumTTL
-										"maximum_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Description: "The maximum amount of time to consider requests from the viewer as being part of the same session. Allowed values are 300?3600 seconds (5?60 minutes).",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Session stickiness provides the ability to define multiple requests from a single viewer as a single session. This prevents the potentially inconsistent experience of sending some of a given user's requests to your staging distribution, while others are sent to your primary distribution. Define the session duration using TTL values.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Weight
-								"weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Description: "The percentage of traffic to send to a staging distribution, expressed as a decimal number between 0 and 0.15. For example, a value of 0.10 means 10% of traffic is sent to the staging distribution.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Contains the percentage of traffic to send to the staging distribution.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Type
-						"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The type of traffic configuration.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Contains the parameters for routing production traffic from your primary to staging distributions.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Type
-				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of traffic configuration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Contains the configuration for a continuous deployment policy.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"continuous_deployment_policy_config": schemaAttribute13c438a345b634905ce3630f(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -328,10 +383,7 @@ func continuousDeploymentPolicyDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"continuous_deployment_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"continuous_deployment_policy_id": schemaAttribute08519700cccaf3b9732854f7(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -339,10 +391,7 @@ func continuousDeploymentPolicyDataSource(ctx context.Context) (datasource.DataS
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttribute08519700cccaf3b9732854f7(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

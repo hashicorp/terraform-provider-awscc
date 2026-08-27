@@ -15,6 +15,85 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute12743cb960de3508655883d1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the KMS key used to encrypt and decrypt the snapshot.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a41a301baf3e23f4eecdecd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the graph snapshot.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute601ce5b61f44a1f674cc8258() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a259790e9e2746b4842250d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f0c2d95aa1e9cddafc7940f() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute6a259790e9e2746b4842250d(),
+				// Property: Value
+				"value": schemaAttribute601ce5b61f44a1f674cc8258(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b1b2faffaa78c0b51f55247() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the Neptune Analytics graph to create the snapshot from.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute895caeda0d14313cbdc5d3d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The time when the snapshot was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeadab35a6b652dacd1b0a59d2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current status of the graph snapshot.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd3710216f5d98abafd6ae71() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The snapshot name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9ee02132feb5ad7f90db735() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the graph snapshot.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_neptunegraph_graph_snapshot", graphSnapshotDataSource)
 }
@@ -33,10 +112,7 @@ func graphSnapshotDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^arn:.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the graph snapshot.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute1a41a301baf3e23f4eecdecd(),
 		// Property: GraphIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +121,7 @@ func graphSnapshotDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^g-[a-z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"graph_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the Neptune Analytics graph to create the snapshot from.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"graph_identifier": schemaAttribute7b1b2faffaa78c0b51f55247(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +130,7 @@ func graphSnapshotDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^gs-[a-z0-9]{10}$",
 		//	  "type": "string"
 		//	}
-		"graph_snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the graph snapshot.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"graph_snapshot_id": schemaAttributee9ee02132feb5ad7f90db735(),
 		// Property: KmsKeyIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +140,7 @@ func graphSnapshotDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the KMS key used to encrypt and decrypt the snapshot.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_identifier": schemaAttribute12743cb960de3508655883d1(),
 		// Property: SnapshotCreateTime
 		// CloudFormation resource type schema:
 		//
@@ -82,11 +149,7 @@ func graphSnapshotDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"snapshot_create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time when the snapshot was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"snapshot_create_time": schemaAttribute895caeda0d14313cbdc5d3d0(),
 		// Property: SnapshotName
 		// CloudFormation resource type schema:
 		//
@@ -97,10 +160,7 @@ func graphSnapshotDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The snapshot name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"snapshot_name": schemaAttributedd3710216f5d98abafd6ae71(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -114,10 +174,7 @@ func graphSnapshotDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current status of the graph snapshot.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributeadab35a6b652dacd1b0a59d2(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -151,24 +208,7 @@ func graphSnapshotDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6f0c2d95aa1e9cddafc7940f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

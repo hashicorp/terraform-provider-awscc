@@ -15,6 +15,71 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0f4785b508ebaf4167abf3b6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the portal product was last modified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b2130d2432e4a1cdd33c1cb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5138cd054fb857d69eb74b95() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ae8396eba4f9db4b1e65ee2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the portal product.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87348c58823ca729b8f5ca1d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute5138cd054fb857d69eb74b95(),
+				// Property: Value
+				"value": schemaAttribute2b2130d2432e4a1cdd33c1cb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The collection of tags associated with the portal product.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a9e1b1675a1bf04073ec624() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The portal product identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute99d00acbea90025728f765e3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the portal product.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf6282c3870139a43ebb6bb8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the portal product as it appears in a published portal.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_apigatewayv2_portal_product", portalProductDataSource)
 }
@@ -32,10 +97,7 @@ func portalProductDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the portal product.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute6ae8396eba4f9db4b1e65ee2(),
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +107,7 @@ func portalProductDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the portal product as it appears in a published portal.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"display_name": schemaAttributebf6282c3870139a43ebb6bb8(),
 		// Property: LastModified
 		// CloudFormation resource type schema:
 		//
@@ -57,11 +116,7 @@ func portalProductDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_modified": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the portal product was last modified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified": schemaAttribute0f4785b508ebaf4167abf3b6(),
 		// Property: PortalProductArn
 		// CloudFormation resource type schema:
 		//
@@ -71,10 +126,7 @@ func portalProductDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 20,
 		//	  "type": "string"
 		//	}
-		"portal_product_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the portal product.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"portal_product_arn": schemaAttribute99d00acbea90025728f765e3(),
 		// Property: PortalProductId
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +137,7 @@ func portalProductDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^[a-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"portal_product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The portal product identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"portal_product_id": schemaAttribute8a9e1b1675a1bf04073ec624(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -120,24 +169,7 @@ func portalProductDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The collection of tags associated with the portal product.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute87348c58823ca729b8f5ca1d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

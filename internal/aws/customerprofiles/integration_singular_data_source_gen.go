@@ -15,6 +15,313 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1c0d4f7cb7809aba6212079e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketName
+			"bucket_name": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+			// Property: BucketPrefix
+			"bucket_prefix": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2089952f0b010208ae639439() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Scheduled
+			"scheduled": schemaAttributeac550798a649c1a8a8ba34b4(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute241815b9836a0eaca4c8f5ff() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a9b83074d7f3326c45dfe3b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b98b9769656a06e15340719() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DatetimeTypeFieldName
+			"datetime_type_field_name": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a6cc3f4e00abc0c1c9e6a99() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+				// Property: Value
+				"value": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The mapping between 3rd party event types and ObjectType names",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3bb51aa61ac80683bc1eed33() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Marketo
+			"marketo": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+			// Property: S3
+			"s3": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+			// Property: Salesforce
+			"salesforce": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+			// Property: ServiceNow
+			"service_now": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+			// Property: Zendesk
+			"zendesk": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute44fdb214810de570b4faa944() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute514c5fae9250733533b30a62() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of unique names for active event triggers associated with the integration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f989cc6acdbe174b081ae26() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time of this integration got last updated at",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute648853f5acc8715989d1b540() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConnectorProfileName
+			"connector_profile_name": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+			// Property: ConnectorType
+			"connector_type": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+			// Property: IncrementalPullConfig
+			"incremental_pull_config": schemaAttribute2b98b9769656a06e15340719(),
+			// Property: SourceConnectorProperties
+			"source_connector_properties": schemaAttributea6559b2a9cd0a4bc410d88b0(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65f35ba21850828542b44976() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EnableDynamicFieldUpdate
+			"enable_dynamic_field_update": schemaAttribute241815b9836a0eaca4c8f5ff(),
+			// Property: IncludeDeletedRecords
+			"include_deleted_records": schemaAttribute241815b9836a0eaca4c8f5ff(),
+			// Property: Object
+			"object": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f563589fba7923246323a45() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time of this integration got created",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute731dd7adc7c7fd4c2796f243() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute75950612760074c026c44022() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URI of the S3 bucket or any other type of data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87687dd3990f4794572dd775() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+				// Property: Value
+				"value": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags (keys and values) associated with the integration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91a33aad2ffba11b70eef947() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Object
+			"object": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9df465fbeeeaee6c31834d30() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Scope of the integration, such as 'PROFILE' or 'DOMAIN'",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea6559b2a9cd0a4bc410d88b0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Marketo
+			"marketo": schemaAttribute91a33aad2ffba11b70eef947(),
+			// Property: S3
+			"s3": schemaAttribute1c0d4f7cb7809aba6212079e(),
+			// Property: Salesforce
+			"salesforce": schemaAttribute65f35ba21850828542b44976(),
+			// Property: ServiceNow
+			"service_now": schemaAttribute91a33aad2ffba11b70eef947(),
+			// Property: Zendesk
+			"zendesk": schemaAttribute91a33aad2ffba11b70eef947(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac550798a649c1a8a8ba34b4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataPullMode
+			"data_pull_mode": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+			// Property: FirstExecutionFrom
+			"first_execution_from": schemaAttribute44fdb214810de570b4faa944(),
+			// Property: ScheduleEndTime
+			"schedule_end_time": schemaAttribute44fdb214810de570b4faa944(),
+			// Property: ScheduleExpression
+			"schedule_expression": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+			// Property: ScheduleOffset
+			"schedule_offset": schemaAttribute731dd7adc7c7fd4c2796f243(),
+			// Property: ScheduleStartTime
+			"schedule_start_time": schemaAttribute44fdb214810de570b4faa944(),
+			// Property: Timezone
+			"timezone": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf48ac64cdbc1a521b8e73f9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the ObjectType defined for the 3rd party data in Profile Service",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeafe827f56248567a152e8eff() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Description
+			"description": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+			// Property: FlowName
+			"flow_name": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+			// Property: KmsArn
+			"kms_arn": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+			// Property: SourceFlowConfig
+			"source_flow_config": schemaAttribute648853f5acc8715989d1b540(),
+			// Property: Tasks
+			"tasks": schemaAttributee16e5599bead545ebaf7e9a0(),
+			// Property: TriggerConfig
+			"trigger_config": schemaAttributeefe84fe611524e3e2bf81532(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb07420c0083adf6fdab40fb4() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebcf88bf295af049cd8b2eb37() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique name of the domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee16e5599bead545ebaf7e9a0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConnectorOperator
+				"connector_operator": schemaAttribute3bb51aa61ac80683bc1eed33(),
+				// Property: DestinationField
+				"destination_field": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+				// Property: SourceFields
+				"source_fields": schemaAttributeb07420c0083adf6fdab40fb4(),
+				// Property: TaskProperties
+				"task_properties": schemaAttributeeb814571ad0e39e85e26f194(),
+				// Property: TaskType
+				"task_type": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb814571ad0e39e85e26f194() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OperatorPropertyKey
+				"operator_property_key": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+				// Property: Property
+				"property": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeefe84fe611524e3e2bf81532() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: TriggerProperties
+			"trigger_properties": schemaAttribute2089952f0b010208ae639439(),
+			// Property: TriggerType
+			"trigger_type": schemaAttribute2a9b83074d7f3326c45dfe3b(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_customerprofiles_integration", integrationDataSource)
 }
@@ -30,10 +337,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time of this integration got created",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time of this integration got created",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute6f563589fba7923246323a45(),
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +348,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique name of the domain.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_name": schemaAttributebcf88bf295af049cd8b2eb37(),
 		// Property: EventTriggerNames
 		// CloudFormation resource type schema:
 		//
@@ -64,11 +365,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"event_trigger_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of unique names for active event triggers associated with the integration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"event_trigger_names": schemaAttribute514c5fae9250733533b30a62(),
 		// Property: FlowDefinition
 		// CloudFormation resource type schema:
 		//
@@ -489,228 +786,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"flow_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Description
-				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: FlowName
-				"flow_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: KmsArn
-				"kms_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourceFlowConfig
-				"source_flow_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ConnectorProfileName
-						"connector_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ConnectorType
-						"connector_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: IncrementalPullConfig
-						"incremental_pull_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DatetimeTypeFieldName
-								"datetime_type_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SourceConnectorProperties
-						"source_connector_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Marketo
-								"marketo": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Object
-										"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: S3
-								"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: BucketName
-										"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: BucketPrefix
-										"bucket_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Salesforce
-								"salesforce": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: EnableDynamicFieldUpdate
-										"enable_dynamic_field_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: IncludeDeletedRecords
-										"include_deleted_records": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Object
-										"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: ServiceNow
-								"service_now": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Object
-										"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Zendesk
-								"zendesk": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Object
-										"object": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Tasks
-				"tasks": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ConnectorOperator
-							"connector_operator": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Marketo
-									"marketo": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: S3
-									"s3": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Salesforce
-									"salesforce": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: ServiceNow
-									"service_now": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Zendesk
-									"zendesk": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: DestinationField
-							"destination_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: SourceFields
-							"source_fields": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: TaskProperties
-							"task_properties": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: OperatorPropertyKey
-										"operator_property_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Property
-										"property": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: TaskType
-							"task_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: TriggerConfig
-				"trigger_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: TriggerProperties
-						"trigger_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Scheduled
-								"scheduled": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: DataPullMode
-										"data_pull_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: FirstExecutionFrom
-										"first_execution_from": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: ScheduleEndTime
-										"schedule_end_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: ScheduleExpression
-										"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: ScheduleOffset
-										"schedule_offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: ScheduleStartTime
-										"schedule_start_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Timezone
-										"timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: TriggerType
-						"trigger_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"flow_definition": schemaAttributeafe827f56248567a152e8eff(),
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -718,10 +794,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The time of this integration got last updated at",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time of this integration got last updated at",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_at": schemaAttribute5f989cc6acdbe174b081ae26(),
 		// Property: ObjectTypeName
 		// CloudFormation resource type schema:
 		//
@@ -732,10 +805,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z_][a-zA-Z_0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"object_type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the ObjectType defined for the 3rd party data in Profile Service",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"object_type_name": schemaAttributeaf48ac64cdbc1a521b8e73f9(),
 		// Property: ObjectTypeNames
 		// CloudFormation resource type schema:
 		//
@@ -764,22 +834,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"object_type_names": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The mapping between 3rd party event types and ObjectType names",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"object_type_names": schemaAttribute3a6cc3f4e00abc0c1c9e6a99(),
 		// Property: Scope
 		// CloudFormation resource type schema:
 		//
@@ -794,10 +849,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z_][a-zA-Z_0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Scope of the integration, such as 'PROFILE' or 'DOMAIN'",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scope": schemaAttribute9df465fbeeeaee6c31834d30(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -828,22 +880,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags (keys and values) associated with the integration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute87687dd3990f4794572dd775(),
 		// Property: Uri
 		// CloudFormation resource type schema:
 		//
@@ -853,10 +890,7 @@ func integrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The URI of the S3 bucket or any other type of data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"uri": schemaAttribute75950612760074c026c44022(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

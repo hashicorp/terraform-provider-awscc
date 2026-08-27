@@ -15,6 +15,363 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1011caeac2480ed917cd4922() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GeneratedRulesType
+			"generated_rules_type": schemaAttributeb18b0f262f26403c3ca21cae(),
+			// Property: TargetTypes
+			"target_types": schemaAttributedb7725341ce149bf3e61f483(),
+			// Property: Targets
+			"targets": schemaAttributedb7725341ce149bf3e61f483(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a354944e1436aa6afb70535() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Definition
+				"definition": schemaAttributedb7725341ce149bf3e61f483(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1a9f926eb16dbccbc1ba495f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FromPort
+				"from_port": schemaAttributee9353b30067054ee96fd3da9(),
+				// Property: ToPort
+				"to_port": schemaAttributee9353b30067054ee96fd3da9(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute225f1ef2f6ecdffa15a69d01() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DestinationPorts
+			"destination_ports": schemaAttribute1a9f926eb16dbccbc1ba495f(),
+			// Property: Destinations
+			"destinations": schemaAttribute57a31f0d5a44524bd5c8737c(),
+			// Property: Protocols
+			"protocols": schemaAttribute46898a9cc55f469a4e557d05(),
+			// Property: SourcePorts
+			"source_ports": schemaAttribute1a9f926eb16dbccbc1ba495f(),
+			// Property: Sources
+			"sources": schemaAttribute57a31f0d5a44524bd5c8737c(),
+			// Property: TCPFlags
+			"tcp_flags": schemaAttributeda2fb3e6bd37cc5067a1c472(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23931e80bcc2e1dddac8a75c() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeb18b0f262f26403c3ca21cae(),
+				// Property: Value
+				"value": schemaAttributeb18b0f262f26403c3ca21cae(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e44d589e4f72451c01afb28() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Actions
+			"actions": schemaAttributedb7725341ce149bf3e61f483(),
+			// Property: MatchAttributes
+			"match_attributes": schemaAttribute225f1ef2f6ecdffa15a69d01(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f9ead9fb81fb0f1f0593af8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Value
+				"value": schemaAttributeb18b0f262f26403c3ca21cae(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute46898a9cc55f469a4e557d05() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.Int64Type,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57a31f0d5a44524bd5c8737c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AddressDefinition
+				"address_definition": schemaAttributeb18b0f262f26403c3ca21cae(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5fdb0b45fe94cf7686868383() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RuleOptions
+			"rule_options": schemaAttributedb7725341ce149bf3e61f483(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63427cf1823d2f678f19c459() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Action
+				"action": schemaAttributeb18b0f262f26403c3ca21cae(),
+				// Property: Header
+				"header": schemaAttribute996c6e824fa1e69544ac6ce2(),
+				// Property: RuleOptions
+				"rule_options": schemaAttributefa24c6d43bea8ca9b93bd7f3(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67af7d96b9ae42e054ff89b4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Priority
+				"priority": schemaAttributee9353b30067054ee96fd3da9(),
+				// Property: RuleDefinition
+				"rule_definition": schemaAttribute3e44d589e4f72451c01afb28(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute682218bf3492b009c99fe715() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Dimensions
+			"dimensions": schemaAttribute3f9ead9fb81fb0f1f0593af8(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d25c67539b67cfe8ead989b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IPSets
+			"ip_sets": schemaAttribute1a354944e1436aa6afb70535(),
+			// Property: PortSets
+			"port_sets": schemaAttribute1a354944e1436aa6afb70535(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute899a707586ade2d1e59d3cc4() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReferenceArn
+				"reference_arn": schemaAttributeb5c9e668c499c7bbd19dbbdd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f5d8c9469c73ab8128a7715() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IPSetReferences
+			"ip_set_references": schemaAttribute899a707586ade2d1e59d3cc4(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8fa1ce1ab467d2f851e13a2b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RuleOrder
+			"rule_order": schemaAttributeb18b0f262f26403c3ca21cae(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute996c6e824fa1e69544ac6ce2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Destination
+			"destination": schemaAttributeb18b0f262f26403c3ca21cae(),
+			// Property: DestinationPort
+			"destination_port": schemaAttributeb18b0f262f26403c3ca21cae(),
+			// Property: Direction
+			"direction": schemaAttributeb18b0f262f26403c3ca21cae(),
+			// Property: Protocol
+			"protocol": schemaAttributeb18b0f262f26403c3ca21cae(),
+			// Property: Source
+			"source": schemaAttributeb18b0f262f26403c3ca21cae(),
+			// Property: SourcePort
+			"source_port": schemaAttributeb18b0f262f26403c3ca21cae(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3c1799eb78d63d72f4fa22b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomActions
+			"custom_actions": schemaAttributed4f78d3356e1fa4bb52acd59(),
+			// Property: StatelessRules
+			"stateless_rules": schemaAttribute67af7d96b9ae42e054ff89b4(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb18b0f262f26403c3ca21cae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5c9e668c499c7bbd19dbbdd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A resource ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec02b1f192b8b44a3b9911ac0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PublishMetricAction
+			"publish_metric_action": schemaAttribute682218bf3492b009c99fe715(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4f78d3356e1fa4bb52acd59() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ActionDefinition
+				"action_definition": schemaAttributec02b1f192b8b44a3b9911ac0(),
+				// Property: ActionName
+				"action_name": schemaAttributeb18b0f262f26403c3ca21cae(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda2fb3e6bd37cc5067a1c472() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Flags
+				"flags": schemaAttributedb7725341ce149bf3e61f483(),
+				// Property: Masks
+				"masks": schemaAttributedb7725341ce149bf3e61f483(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb7725341ce149bf3e61f483() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4a1df704df98b8b20eb93fa() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RulesSourceList
+			"rules_source_list": schemaAttribute1011caeac2480ed917cd4922(),
+			// Property: RulesString
+			"rules_string": schemaAttributeb18b0f262f26403c3ca21cae(),
+			// Property: StatefulRules
+			"stateful_rules": schemaAttribute63427cf1823d2f678f19c459(),
+			// Property: StatelessRulesAndCustomActions
+			"stateless_rules_and_custom_actions": schemaAttributea3c1799eb78d63d72f4fa22b(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9353b30067054ee96fd3da9() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef277d376d743c132ae2e42cc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ReferenceSets
+			"reference_sets": schemaAttribute8f5d8c9469c73ab8128a7715(),
+			// Property: RuleVariables
+			"rule_variables": schemaAttribute6d25c67539b67cfe8ead989b(),
+			// Property: RulesSource
+			"rules_source": schemaAttributee4a1df704df98b8b20eb93fa(),
+			// Property: StatefulRuleOptions
+			"stateful_rule_options": schemaAttribute8fa1ce1ab467d2f851e13a2b(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa24c6d43bea8ca9b93bd7f3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Keyword
+				"keyword": schemaAttributeb18b0f262f26403c3ca21cae(),
+				// Property: Settings
+				"settings": schemaAttributedb7725341ce149bf3e61f483(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_networkfirewall_rule_group", ruleGroupDataSource)
 }
@@ -29,9 +386,7 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "integer"
 		//	}
-		"capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"capacity": schemaAttributee9353b30067054ee96fd3da9(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -41,9 +396,7 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^.*$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeb18b0f262f26403c3ca21cae(),
 		// Property: RuleGroup
 		// CloudFormation resource type schema:
 		//
@@ -579,314 +932,7 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"rule_group": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ReferenceSets
-				"reference_sets": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: IPSetReferences
-						"ip_set_references":       // Pattern: ""
-						schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: ReferenceArn
-									"reference_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A resource ARN.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: RuleVariables
-				"rule_variables": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: IPSets
-						"ip_sets":                 // Pattern: ""
-						schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Definition
-									"definition": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: PortSets
-						"port_sets":               // Pattern: ""
-						schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Definition
-									"definition": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: RulesSource
-				"rules_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: RulesSourceList
-						"rules_source_list": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: GeneratedRulesType
-								"generated_rules_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: TargetTypes
-								"target_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Targets
-								"targets": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: RulesString
-						"rules_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: StatefulRules
-						"stateful_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Action
-									"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Header
-									"header": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Destination
-											"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: DestinationPort
-											"destination_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: Direction
-											"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: Protocol
-											"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: Source
-											"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: SourcePort
-											"source_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: RuleOptions
-									"rule_options": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Keyword
-												"keyword": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Settings
-												"settings": schema.ListAttribute{ /*START ATTRIBUTE*/
-													ElementType: types.StringType,
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: StatelessRulesAndCustomActions
-						"stateless_rules_and_custom_actions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: CustomActions
-								"custom_actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: ActionDefinition
-											"action_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: PublishMetricAction
-													"publish_metric_action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Dimensions
-															"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																		// Property: Value
-																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			Computed: true,
-																		}, /*END ATTRIBUTE*/
-																	}, /*END SCHEMA*/
-																}, /*END NESTED OBJECT*/
-																Computed: true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: ActionName
-											"action_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: StatelessRules
-								"stateless_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Priority
-											"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: RuleDefinition
-											"rule_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Actions
-													"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
-														ElementType: types.StringType,
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: MatchAttributes
-													"match_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: DestinationPorts
-															"destination_ports": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																		// Property: FromPort
-																		"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																			Computed: true,
-																		}, /*END ATTRIBUTE*/
-																		// Property: ToPort
-																		"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																			Computed: true,
-																		}, /*END ATTRIBUTE*/
-																	}, /*END SCHEMA*/
-																}, /*END NESTED OBJECT*/
-																Computed: true,
-															}, /*END ATTRIBUTE*/
-															// Property: Destinations
-															"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																		// Property: AddressDefinition
-																		"address_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			Computed: true,
-																		}, /*END ATTRIBUTE*/
-																	}, /*END SCHEMA*/
-																}, /*END NESTED OBJECT*/
-																Computed: true,
-															}, /*END ATTRIBUTE*/
-															// Property: Protocols
-															"protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
-																ElementType: types.Int64Type,
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: SourcePorts
-															"source_ports": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																		// Property: FromPort
-																		"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																			Computed: true,
-																		}, /*END ATTRIBUTE*/
-																		// Property: ToPort
-																		"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																			Computed: true,
-																		}, /*END ATTRIBUTE*/
-																	}, /*END SCHEMA*/
-																}, /*END NESTED OBJECT*/
-																Computed: true,
-															}, /*END ATTRIBUTE*/
-															// Property: Sources
-															"sources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																		// Property: AddressDefinition
-																		"address_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
-																			Computed: true,
-																		}, /*END ATTRIBUTE*/
-																	}, /*END SCHEMA*/
-																}, /*END NESTED OBJECT*/
-																Computed: true,
-															}, /*END ATTRIBUTE*/
-															// Property: TCPFlags
-															"tcp_flags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																		// Property: Flags
-																		"flags": schema.ListAttribute{ /*START ATTRIBUTE*/
-																			ElementType: types.StringType,
-																			Computed:    true,
-																		}, /*END ATTRIBUTE*/
-																		// Property: Masks
-																		"masks": schema.ListAttribute{ /*START ATTRIBUTE*/
-																			ElementType: types.StringType,
-																			Computed:    true,
-																		}, /*END ATTRIBUTE*/
-																	}, /*END SCHEMA*/
-																}, /*END NESTED OBJECT*/
-																Computed: true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-									}, /*END NESTED OBJECT*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: StatefulRuleOptions
-				"stateful_rule_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: RuleOrder
-						"rule_order": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"rule_group": schemaAttributef277d376d743c132ae2e42cc(),
 		// Property: RuleGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -897,10 +943,7 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(arn:aws.*)$",
 		//	  "type": "string"
 		//	}
-		"rule_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A resource ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rule_group_arn": schemaAttributeb5c9e668c499c7bbd19dbbdd(),
 		// Property: RuleGroupId
 		// CloudFormation resource type schema:
 		//
@@ -910,9 +953,7 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$",
 		//	  "type": "string"
 		//	}
-		"rule_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"rule_group_id": schemaAttributeb18b0f262f26403c3ca21cae(),
 		// Property: RuleGroupName
 		// CloudFormation resource type schema:
 		//
@@ -922,9 +963,7 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"rule_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"rule_group_name": schemaAttributeb18b0f262f26403c3ca21cae(),
 		// Property: SummaryConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -947,16 +986,7 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"summary_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RuleOptions
-				"rule_options": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"summary_configuration": schemaAttribute5fdb0b45fe94cf7686868383(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -987,21 +1017,7 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute23931e80bcc2e1dddac8a75c(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -1012,9 +1028,7 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttributeb18b0f262f26403c3ca21cae(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

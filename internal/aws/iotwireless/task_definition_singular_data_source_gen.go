@@ -14,6 +14,126 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute21209780d13c059cb4934447() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute4b840254926e17f21effd003(),
+				// Property: Value
+				"value": schemaAttribute4b840254926e17f21effd003(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs that contain metadata for the destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute21a21d703aba67678a529aea() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2cc567f7da54f42c604080f6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "TaskDefinition arn. Returned after successful create.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49c57dbbf07ba65c5ef8bb7a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LoRaWAN
+			"lo_ra_wan": schemaAttribute9b866dd93f57c71fd61e42a0(),
+			// Property: UpdateDataRole
+			"update_data_role": schemaAttribute4b840254926e17f21effd003(),
+			// Property: UpdateDataSource
+			"update_data_source": schemaAttribute4b840254926e17f21effd003(),
+		}, /*END SCHEMA*/
+		Description: "Information about the gateways to update.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b840254926e17f21effd003() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5833f814a9edf00e1ed015ac() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Model
+			"model": schemaAttribute4b840254926e17f21effd003(),
+			// Property: PackageVersion
+			"package_version": schemaAttribute4b840254926e17f21effd003(),
+			// Property: Station
+			"station": schemaAttribute4b840254926e17f21effd003(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5db2ee7a8b194c83c8b0ac77() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CurrentVersion
+			"current_version": schemaAttribute5833f814a9edf00e1ed015ac(),
+			// Property: UpdateVersion
+			"update_version": schemaAttribute5833f814a9edf00e1ed015ac(),
+		}, /*END SCHEMA*/
+		Description: "The list of task definitions.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93b3546403a7423d4588904a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A filter to list only the wireless gateway task definitions that use this task definition type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9538c7ad5b5d4ffd71f76b20() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the new resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b866dd93f57c71fd61e42a0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CurrentVersion
+			"current_version": schemaAttribute5833f814a9edf00e1ed015ac(),
+			// Property: SigKeyCrc
+			"sig_key_crc": schemaAttribute21a21d703aba67678a529aea(),
+			// Property: UpdateSignature
+			"update_signature": schemaAttribute4b840254926e17f21effd003(),
+			// Property: UpdateVersion
+			"update_version": schemaAttribute5833f814a9edf00e1ed015ac(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6567b963bee34fca09b43aa() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to automatically create tasks using this task definition for all gateways with the specified current version. If false, the task must me created by calling CreateWirelessGatewayTask.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef22808c34e0c7b979a421fe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the new wireless gateway task definition",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iotwireless_task_definition", taskDefinitionDataSource)
 }
@@ -29,10 +149,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "TaskDefinition arn. Returned after successful create.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "TaskDefinition arn. Returned after successful create.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute2cc567f7da54f42c604080f6(),
 		// Property: AutoCreateTasks
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +157,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Whether to automatically create tasks using this task definition for all gateways with the specified current version. If false, the task must me created by calling CreateWirelessGatewayTask.",
 		//	  "type": "boolean"
 		//	}
-		"auto_create_tasks": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether to automatically create tasks using this task definition for all gateways with the specified current version. If false, the task must me created by calling CreateWirelessGatewayTask.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"auto_create_tasks": schemaAttributee6567b963bee34fca09b43aa(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +166,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"task_definition_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the new wireless gateway task definition",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"task_definition_id": schemaAttributeef22808c34e0c7b979a421fe(),
 		// Property: LoRaWANUpdateGatewayTaskEntry
 		// CloudFormation resource type schema:
 		//
@@ -108,48 +219,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"lo_ra_wan_update_gateway_task_entry": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CurrentVersion
-				"current_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Model
-						"model": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: PackageVersion
-						"package_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Station
-						"station": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UpdateVersion
-				"update_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Model
-						"model": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: PackageVersion
-						"package_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Station
-						"station": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The list of task definitions.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"lo_ra_wan_update_gateway_task_entry": schemaAttribute5db2ee7a8b194c83c8b0ac77(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -159,10 +229,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the new resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute9538c7ad5b5d4ffd71f76b20(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -189,22 +256,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs that contain metadata for the destination.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute21209780d13c059cb4934447(),
 		// Property: TaskDefinitionType
 		// CloudFormation resource type schema:
 		//
@@ -215,10 +267,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"task_definition_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A filter to list only the wireless gateway task definitions that use this task definition type",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"task_definition_type": schemaAttribute93b3546403a7423d4588904a(),
 		// Property: Update
 		// CloudFormation resource type schema:
 		//
@@ -296,70 +345,7 @@ func taskDefinitionDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  },
 		//	  "type": "object"
 		//	}
-		"update": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LoRaWAN
-				"lo_ra_wan": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CurrentVersion
-						"current_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Model
-								"model": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: PackageVersion
-								"package_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Station
-								"station": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SigKeyCrc
-						"sig_key_crc": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: UpdateSignature
-						"update_signature": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: UpdateVersion
-						"update_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Model
-								"model": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: PackageVersion
-								"package_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Station
-								"station": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UpdateDataRole
-				"update_data_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UpdateDataSource
-				"update_data_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Information about the gateways to update.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"update": schemaAttribute49c57dbbf07ba65c5ef8bb7a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -16,6 +16,555 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute08ba2adc78e6d534fbbe25cf() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Specifies the subnets associated with the task. These subnets must all be in the same VPC. You can specify as many as 16 subnets.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0eee66088aab4b7f107e1e49() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of parameter to start execution of a SageMaker Model Building Pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10919b3954c2176d94482db7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The short name of the capacity provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute16a61a3d30b98cef4757d7a5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttribute23b30dec90723fc5dc3d1146(),
+			// Property: DeadLetterConfig
+			"dead_letter_config": schemaAttributeea513e68108d25f4ad96c83d(),
+			// Property: EcsParameters
+			"ecs_parameters": schemaAttribute4e5ad75b9b5112f06585fb12(),
+			// Property: EventBridgeParameters
+			"event_bridge_parameters": schemaAttribute73078949cfaec9de0697fd27(),
+			// Property: Input
+			"input": schemaAttribute957f1216679ad7a6cf02754e(),
+			// Property: KinesisParameters
+			"kinesis_parameters": schemaAttribute3db1de65fbc2877863f0157f(),
+			// Property: RetryPolicy
+			"retry_policy": schemaAttributec69c9537668fb78d312a5da7(),
+			// Property: RoleArn
+			"role_arn": schemaAttribute70cc37dce3b9541035af8958(),
+			// Property: SageMakerPipelineParameters
+			"sage_maker_pipeline_parameters": schemaAttribute39b55bf0b5efd1332e35c055(),
+			// Property: SqsParameters
+			"sqs_parameters": schemaAttribute8fe66c07085db8af5d56ff54(),
+		}, /*END SCHEMA*/
+		Description: "The schedule target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute16daace7a583d966db381d13() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Determines whether the schedule is executed within a flexible time window.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1dc4bc41f9bf319cdc3f7167() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Specifies the security groups associated with the task. These security groups must all be in the same VPC. You can specify as many as five security groups. If you do not specify a security group, the default security group for the VPC is used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23b30dec90723fc5dc3d1146() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute39b55bf0b5efd1332e35c055() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PipelineParameterList
+			"pipeline_parameter_list": schemaAttributef7d40bb2211dbc4fad0fc726(),
+		}, /*END SCHEMA*/
+		Description: "These are custom parameters to use when the target is a SageMaker Model Building Pipeline that starts based on AWS EventBridge Scheduler schedules.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3bc775074aa07d54580b6eaa() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AwsvpcConfiguration
+			"awsvpc_configuration": schemaAttributede9e5bb0105c51203a4cb0c9(),
+		}, /*END SCHEMA*/
+		Description: "This structure specifies the network configuration for an ECS task.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3db1de65fbc2877863f0157f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PartitionKey
+			"partition_key": schemaAttribute765994383de654d7472009b5(),
+		}, /*END SCHEMA*/
+		Description: "The custom parameter you can use to control the shard to which EventBridge Scheduler sends the event.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute445c1df4c0eb318e4f7e2557() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Base
+				"base": schemaAttribute9980a56b888c5fb5031b6886(),
+				// Property: CapacityProvider
+				"capacity_provider": schemaAttribute10919b3954c2176d94482db7(),
+				// Property: Weight
+				"weight": schemaAttributeccf0f93c96c48a547a1cf450(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The capacity provider strategy to use for the task.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4e5ad75b9b5112f06585fb12() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CapacityProviderStrategy
+			"capacity_provider_strategy": schemaAttribute445c1df4c0eb318e4f7e2557(),
+			// Property: EnableECSManagedTags
+			"enable_ecs_managed_tags": schemaAttribute9828863b13409ae45a3e03dd(),
+			// Property: EnableExecuteCommand
+			"enable_execute_command": schemaAttributecef3492e2aedee51ef9f0e05(),
+			// Property: Group
+			"group": schemaAttribute86d7295ff8abbb5a856f30ef(),
+			// Property: LaunchType
+			"launch_type": schemaAttribute77b424ef7c0c19ac47ba48b2(),
+			// Property: NetworkConfiguration
+			"network_configuration": schemaAttribute3bc775074aa07d54580b6eaa(),
+			// Property: PlacementConstraints
+			"placement_constraints": schemaAttribute605a09c45b6f30c093975d40(),
+			// Property: PlacementStrategy
+			"placement_strategy": schemaAttribute921ca0175c3a186004f3e42a(),
+			// Property: PlatformVersion
+			"platform_version": schemaAttribute54b2ddaf93f5d460da8c34c4(),
+			// Property: PropagateTags
+			"propagate_tags": schemaAttributed6feeec3b2cc1dec9b1174b9(),
+			// Property: ReferenceId
+			"reference_id": schemaAttributef2020de95d40ac89de9fe8aa(),
+			// Property: Tags
+			"tags": schemaAttribute82b9d3f79b0fe07db51c52d0(),
+			// Property: TaskCount
+			"task_count": schemaAttributee666dd762ca1f520ff4cd16f(),
+			// Property: TaskDefinitionArn
+			"task_definition_arn": schemaAttribute5f3dcc8f26a19bd356723da6(),
+		}, /*END SCHEMA*/
+		Description: "The custom parameters to be used when the target is an Amazon ECS task.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute54b2ddaf93f5d460da8c34c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the platform version for the task. Specify only the numeric portion of the platform version, such as 1.1.0.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f3dcc8f26a19bd356723da6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the task definition to use if the event target is an Amazon ECS task.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5feb2fcd5253213fe94a2de2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the task's elastic network interface receives a public IP address. You can specify ENABLED only when LaunchType in EcsParameters is set to FARGATE.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute605a09c45b6f30c093975d40() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Expression
+				"expression": schemaAttribute6dc4d384b133b938e36c0228(),
+				// Property: Type
+				"type": schemaAttributee82c52e81449b350e2dff1dd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of placement constraint objects to use for the task. You can specify up to 10 constraints per task (including constraints in the task definition and those specified at runtime).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61b19af9e5ade6ac1eb68d77() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64b8b3042e33077ef522799d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The field to apply the placement strategy against. For the spread placement strategy, valid values are instanceId (or host, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as attribute:ecs.availability-zone. For the binpack placement strategy, valid values are cpu and memory. For the random placement strategy, this field is not used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65680fa1020b52b265abf11c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The scheduling expression.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute68168e7f4a3a8af9b3a8143b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the schedule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6dc4d384b133b938e36c0228() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is distinctInstance. To learn more, see Cluster Query Language in the Amazon Elastic Container Service Developer Guide.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70cc37dce3b9541035af8958() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the IAM role to be used for this target when the schedule is triggered.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73078949cfaec9de0697fd27() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DetailType
+			"detail_type": schemaAttribute61b19af9e5ade6ac1eb68d77(),
+			// Property: Source
+			"source": schemaAttribute804e2e03f793712a09fd3040(),
+		}, /*END SCHEMA*/
+		Description: "EventBridge PutEvent predefined target type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute765994383de654d7472009b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The custom parameter used as the Kinesis partition key. For more information, see Amazon Kinesis Streams Key Concepts in the Amazon Kinesis Streams Developer Guide.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77b424ef7c0c19ac47ba48b2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. The FARGATE value is supported only in the Regions where AWS Fargate with Amazon ECS is supported. For more information, see AWS Fargate on Amazon ECS in the Amazon Elastic Container Service Developer Guide.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7979c6582bfd2d8dee9ee33d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the schedule group to associate with this schedule. If you omit this, the default schedule group is used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d139c31c1ba9a3382dc1508() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timezone in which the scheduling expression is evaluated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute804e2e03f793712a09fd3040() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source of the event.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82b9d3f79b0fe07db51c52d0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.MapType{ElemType: types.StringType},
+		Description: "The metadata that you apply to the task to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. To learn more, see RunTask in the Amazon ECS API Reference.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute838662215d6d984c7d117f7c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The date, in UTC, after which the schedule can begin invoking its target. Depending on the schedule's recurrence expression, invocations might occur on, or after, the StartDate you specify.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute86d60b2ad34c6897da496b91() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The date, in UTC, before which the schedule can invoke its target. Depending on the schedule's recurrence expression, invocations might stop on, or before, the EndDate you specify.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute86d7295ff8abbb5a856f30ef() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies an ECS task group for the task. The maximum length is 255 characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8fe66c07085db8af5d56ff54() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MessageGroupId
+			"message_group_id": schemaAttributeed403f2bcab37b03312a13c4(),
+		}, /*END SCHEMA*/
+		Description: "Contains the message group ID to use when the target is a FIFO queue. If you specify an SQS FIFO queue as a target, the queue must have content-based deduplication enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute921ca0175c3a186004f3e42a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Field
+				"field": schemaAttribute64b8b3042e33077ef522799d(),
+				// Property: Type
+				"type": schemaAttributede01c318d5323ad6e2408934(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The placement strategy objects to use for the task. You can specify a maximum of five strategy rules per task.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute938a6fcb76464e4b120172c3() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum time window during which a schedule can be invoked.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute957f1216679ad7a6cf02754e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The text, or well-formed JSON, passed to the target. If you are configuring a templated Lambda, AWS Step Functions, or Amazon EventBridge target, the input must be a well-formed JSON. For all other target types, a JSON is not required. If you do not specify anything for this field, EventBridge Scheduler delivers a default notification to the target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9828863b13409ae45a3e03dd() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether to enable Amazon ECS managed tags for the task. For more information, see Tagging Your Amazon ECS Resources in the Amazon Elastic Container Service Developer Guide.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9980a56b888c5fb5031b6886() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. If no value is specified, the default value of 0 is used.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9985dc61bd5a78b17cff356c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN for a KMS Key that will be used to encrypt customer data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ae0bdd0c8086b2989a04438() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum amount of time, in seconds, to continue to make retry attempts.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea05f436bc47b358fa466c550() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the schedule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea41ad1db6f651ff5fed2a390() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the SQS queue specified as the target for the dead-letter queue.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea6d77a7fc235322707a30e84() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaximumWindowInMinutes
+			"maximum_window_in_minutes": schemaAttribute938a6fcb76464e4b120172c3(),
+			// Property: Mode
+			"mode": schemaAttribute16daace7a583d966db381d13(),
+		}, /*END SCHEMA*/
+		Description: "Flexible time window allows configuration of a window within which a schedule can be invoked",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec1d94c79ab443f8d57c83006() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec69c9537668fb78d312a5da7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaximumEventAgeInSeconds
+			"maximum_event_age_in_seconds": schemaAttribute9ae0bdd0c8086b2989a04438(),
+			// Property: MaximumRetryAttempts
+			"maximum_retry_attempts": schemaAttributedce45ecfe43230f2b3097816(),
+		}, /*END SCHEMA*/
+		Description: "A RetryPolicy object that includes information about the retry policy settings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeccf0f93c96c48a547a1cf450() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecef3492e2aedee51ef9f0e05() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether or not to enable the execute command functionality for the containers in this task. If true, this enables execute command functionality on all containers in the task.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6feeec3b2cc1dec9b1174b9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags are not propagated. Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use the TagResource API action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed859434068d780d9b9d8cd9d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the schedule is enabled or disabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedce45ecfe43230f2b3097816() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of retry attempts to make before the request fails. Retry attempts with exponential backoff continue until either the maximum number of attempts is made or until the duration of the MaximumEventAgeInSeconds is reached.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede01c318d5323ad6e2408934() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of placement strategy. The random placement strategy randomly places tasks on available candidates. The spread placement strategy spreads placement across available candidates evenly based on the field parameter. The binpack strategy places tasks on available candidates that have the least available amount of the resource that is specified with the field parameter. For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory (but still enough to run the task).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede9e5bb0105c51203a4cb0c9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AssignPublicIp
+			"assign_public_ip": schemaAttribute5feb2fcd5253213fe94a2de2(),
+			// Property: SecurityGroups
+			"security_groups": schemaAttribute1dc4bc41f9bf319cdc3f7167(),
+			// Property: Subnets
+			"subnets": schemaAttribute08ba2adc78e6d534fbbe25cf(),
+		}, /*END SCHEMA*/
+		Description: "This structure specifies the VPC subnets and security groups for the task, and whether a public IP address is to be used. This structure is relevant only for ECS tasks that use the awsvpc network mode.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee666dd762ca1f520ff4cd16f() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of tasks to create based on TaskDefinition. The default is 1.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee82c52e81449b350e2dff1dd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of constraint. Use distinctInstance to ensure that each task in a particular group is running on a different container instance. Use memberOf to restrict the selection to a group of valid candidates.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea513e68108d25f4ad96c83d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttributea41ad1db6f651ff5fed2a390(),
+		}, /*END SCHEMA*/
+		Description: "A DeadLetterConfig object that contains information about a dead-letter queue configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea570eb1e6bae46667821487() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Value of parameter to start execution of a SageMaker Model Building Pipeline.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed403f2bcab37b03312a13c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The FIFO message group ID to use as the target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2020de95d40ac89de9fe8aa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The reference ID to use for the task.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7d40bb2211dbc4fad0fc726() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute0eee66088aab4b7f107e1e49(),
+				// Property: Value
+				"value": schemaAttributeea570eb1e6bae46667821487(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of Parameter names and values for SageMaker Model Building Pipeline execution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_scheduler_schedule", scheduleDataSource)
 }
@@ -34,10 +583,7 @@ func scheduleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-z-]*:scheduler:[a-z0-9\\-]+:\\d{12}:schedule\\/[0-9a-zA-Z-_.]+\\/[0-9a-zA-Z-_.]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the schedule.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute68168e7f4a3a8af9b3a8143b(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +593,7 @@ func scheduleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the schedule.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributea05f436bc47b358fa466c550(),
 		// Property: EndDate
 		// CloudFormation resource type schema:
 		//
@@ -59,11 +602,7 @@ func scheduleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"end_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The date, in UTC, before which the schedule can invoke its target. Depending on the schedule's recurrence expression, invocations might stop on, or before, the EndDate you specify.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"end_date": schemaAttribute86d60b2ad34c6897da496b91(),
 		// Property: FlexibleTimeWindow
 		// CloudFormation resource type schema:
 		//
@@ -91,22 +630,7 @@ func scheduleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"flexible_time_window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaximumWindowInMinutes
-				"maximum_window_in_minutes": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum time window during which a schedule can be invoked.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Mode
-				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Determines whether the schedule is executed within a flexible time window.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Flexible time window allows configuration of a window within which a schedule can be invoked",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"flexible_time_window": schemaAttributea6d77a7fc235322707a30e84(),
 		// Property: GroupName
 		// CloudFormation resource type schema:
 		//
@@ -117,10 +641,7 @@ func scheduleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-zA-Z-_.]+$",
 		//	  "type": "string"
 		//	}
-		"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the schedule group to associate with this schedule. If you omit this, the default schedule group is used.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"group_name": schemaAttribute7979c6582bfd2d8dee9ee33d(),
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -131,10 +652,7 @@ func scheduleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws[a-z-]*:kms:[a-z0-9\\-]+:\\d{12}:(key|alias)\\/[0-9a-zA-Z-_]*$",
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN for a KMS Key that will be used to encrypt customer data.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttribute9985dc61bd5a78b17cff356c(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -144,9 +662,7 @@ func scheduleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-zA-Z-_.]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributec1d94c79ab443f8d57c83006(),
 		// Property: ScheduleExpression
 		// CloudFormation resource type schema:
 		//
@@ -156,10 +672,7 @@ func scheduleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The scheduling expression.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schedule_expression": schemaAttribute65680fa1020b52b265abf11c(),
 		// Property: ScheduleExpressionTimezone
 		// CloudFormation resource type schema:
 		//
@@ -169,10 +682,7 @@ func scheduleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"schedule_expression_timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timezone in which the scheduling expression is evaluated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schedule_expression_timezone": schemaAttribute7d139c31c1ba9a3382dc1508(),
 		// Property: StartDate
 		// CloudFormation resource type schema:
 		//
@@ -181,11 +691,7 @@ func scheduleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"start_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The date, in UTC, after which the schedule can begin invoking its target. Depending on the schedule's recurrence expression, invocations might occur on, or after, the StartDate you specify.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"start_date": schemaAttribute838662215d6d984c7d117f7c(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
@@ -197,10 +703,7 @@ func scheduleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether the schedule is enabled or disabled.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributed859434068d780d9b9d8cd9d(),
 		// Property: Target
 		// CloudFormation resource type schema:
 		//
@@ -578,274 +1081,7 @@ func scheduleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the target.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DeadLetterConfig
-				"dead_letter_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Arn
-						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the SQS queue specified as the target for the dead-letter queue.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A DeadLetterConfig object that contains information about a dead-letter queue configuration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EcsParameters
-				"ecs_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CapacityProviderStrategy
-						"capacity_provider_strategy": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Base
-									"base": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "The base value designates how many tasks, at a minimum, to run on the specified capacity provider. Only one capacity provider in a capacity provider strategy can have a base defined. If no value is specified, the default value of 0 is used.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: CapacityProvider
-									"capacity_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The short name of the capacity provider.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Weight
-									"weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "The weight value designates the relative percentage of the total number of tasks launched that should use the specified capacity provider. The weight value is taken into consideration after the base value, if defined, is satisfied.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "The capacity provider strategy to use for the task.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: EnableECSManagedTags
-						"enable_ecs_managed_tags": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies whether to enable Amazon ECS managed tags for the task. For more information, see Tagging Your Amazon ECS Resources in the Amazon Elastic Container Service Developer Guide.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: EnableExecuteCommand
-						"enable_execute_command": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Whether or not to enable the execute command functionality for the containers in this task. If true, this enables execute command functionality on all containers in the task.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Group
-						"group": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies an ECS task group for the task. The maximum length is 255 characters.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: LaunchType
-						"launch_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. The FARGATE value is supported only in the Regions where AWS Fargate with Amazon ECS is supported. For more information, see AWS Fargate on Amazon ECS in the Amazon Elastic Container Service Developer Guide.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: NetworkConfiguration
-						"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AwsvpcConfiguration
-								"awsvpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: AssignPublicIp
-										"assign_public_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Specifies whether the task's elastic network interface receives a public IP address. You can specify ENABLED only when LaunchType in EcsParameters is set to FARGATE.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: SecurityGroups
-										"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Description: "Specifies the security groups associated with the task. These security groups must all be in the same VPC. You can specify as many as five security groups. If you do not specify a security group, the default security group for the VPC is used.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Subnets
-										"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Description: "Specifies the subnets associated with the task. These subnets must all be in the same VPC. You can specify as many as 16 subnets.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "This structure specifies the VPC subnets and security groups for the task, and whether a public IP address is to be used. This structure is relevant only for ECS tasks that use the awsvpc network mode.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "This structure specifies the network configuration for an ECS task.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: PlacementConstraints
-						"placement_constraints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Expression
-									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is distinctInstance. To learn more, see Cluster Query Language in the Amazon Elastic Container Service Developer Guide.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Type
-									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The type of constraint. Use distinctInstance to ensure that each task in a particular group is running on a different container instance. Use memberOf to restrict the selection to a group of valid candidates.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "An array of placement constraint objects to use for the task. You can specify up to 10 constraints per task (including constraints in the task definition and those specified at runtime).",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: PlacementStrategy
-						"placement_strategy": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Field
-									"field": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The field to apply the placement strategy against. For the spread placement strategy, valid values are instanceId (or host, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as attribute:ecs.availability-zone. For the binpack placement strategy, valid values are cpu and memory. For the random placement strategy, this field is not used.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Type
-									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The type of placement strategy. The random placement strategy randomly places tasks on available candidates. The spread placement strategy spreads placement across available candidates evenly based on the field parameter. The binpack strategy places tasks on available candidates that have the least available amount of the resource that is specified with the field parameter. For example, if you binpack on memory, a task is placed on the instance with the least amount of remaining memory (but still enough to run the task).",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "The placement strategy objects to use for the task. You can specify a maximum of five strategy rules per task.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: PlatformVersion
-						"platform_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies the platform version for the task. Specify only the numeric portion of the platform version, such as 1.1.0.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: PropagateTags
-						"propagate_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags are not propagated. Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use the TagResource API action.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ReferenceId
-						"reference_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The reference ID to use for the task.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Tags
-						"tags": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.MapType{ElemType: types.StringType},
-							Description: "The metadata that you apply to the task to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. To learn more, see RunTask in the Amazon ECS API Reference.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TaskCount
-						"task_count": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "The number of tasks to create based on TaskDefinition. The default is 1.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TaskDefinitionArn
-						"task_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the task definition to use if the event target is an Amazon ECS task.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The custom parameters to be used when the target is an Amazon ECS task.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EventBridgeParameters
-				"event_bridge_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DetailType
-						"detail_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Free-form string, with a maximum of 128 characters, used to decide what fields to expect in the event detail.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Source
-						"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The source of the event.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "EventBridge PutEvent predefined target type.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Input
-				"input": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The text, or well-formed JSON, passed to the target. If you are configuring a templated Lambda, AWS Step Functions, or Amazon EventBridge target, the input must be a well-formed JSON. For all other target types, a JSON is not required. If you do not specify anything for this field, EventBridge Scheduler delivers a default notification to the target.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: KinesisParameters
-				"kinesis_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: PartitionKey
-						"partition_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The custom parameter used as the Kinesis partition key. For more information, see Amazon Kinesis Streams Key Concepts in the Amazon Kinesis Streams Developer Guide.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The custom parameter you can use to control the shard to which EventBridge Scheduler sends the event.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RetryPolicy
-				"retry_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: MaximumEventAgeInSeconds
-						"maximum_event_age_in_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "The maximum amount of time, in seconds, to continue to make retry attempts.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: MaximumRetryAttempts
-						"maximum_retry_attempts": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Description: "The maximum number of retry attempts to make before the request fails. Retry attempts with exponential backoff continue until either the maximum number of attempts is made or until the duration of the MaximumEventAgeInSeconds is reached.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A RetryPolicy object that includes information about the retry policy settings.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RoleArn
-				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the IAM role to be used for this target when the schedule is triggered.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SageMakerPipelineParameters
-				"sage_maker_pipeline_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: PipelineParameterList
-						"pipeline_parameter_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Name
-									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Name of parameter to start execution of a SageMaker Model Building Pipeline.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "Value of parameter to start execution of a SageMaker Model Building Pipeline.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Description: "List of Parameter names and values for SageMaker Model Building Pipeline execution.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "These are custom parameters to use when the target is a SageMaker Model Building Pipeline that starts based on AWS EventBridge Scheduler schedules.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SqsParameters
-				"sqs_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: MessageGroupId
-						"message_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The FIFO message group ID to use as the target.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Contains the message group ID to use when the target is a FIFO queue. If you specify an SQS FIFO queue as a target, the queue must have content-based deduplication enabled.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The schedule target.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target": schemaAttribute16a61a3d30b98cef4757d7a5(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,60 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0222d6a2b40e2c4f470973de() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0b647c46bce0c4266df2b8ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f3555ec76dbe0b8a159239f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ChangeableForDays
+			"changeable_for_days": schemaAttribute0222d6a2b40e2c4f470973de(),
+			// Property: MaxRetentionDays
+			"max_retention_days": schemaAttribute0222d6a2b40e2c4f470973de(),
+			// Property: MinRetentionDays
+			"min_retention_days": schemaAttribute0222d6a2b40e2c4f470973de(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d860dd2fdd05560a17e914d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec242f67340928470c053c851() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed0cd0a04e85a8d3c3874efb4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BackupVaultEvents
+			"backup_vault_events": schemaAttribute8d860dd2fdd05560a17e914d(),
+			// Property: SNSTopicArn
+			"sns_topic_arn": schemaAttribute0b647c46bce0c4266df2b8ae(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_backup_backup_vault", backupVaultDataSource)
 }
@@ -29,18 +83,14 @@ func backupVaultDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"access_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"access_policy": schemaAttribute0b647c46bce0c4266df2b8ae(),
 		// Property: BackupVaultArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"backup_vault_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"backup_vault_arn": schemaAttribute0b647c46bce0c4266df2b8ae(),
 		// Property: BackupVaultName
 		// CloudFormation resource type schema:
 		//
@@ -48,9 +98,7 @@ func backupVaultDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9\\-\\_]{2,50}$",
 		//	  "type": "string"
 		//	}
-		"backup_vault_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"backup_vault_name": schemaAttribute0b647c46bce0c4266df2b8ae(),
 		// Property: BackupVaultTags
 		// CloudFormation resource type schema:
 		//
@@ -63,20 +111,14 @@ func backupVaultDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"backup_vault_tags": // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"backup_vault_tags": schemaAttributec242f67340928470c053c851(),
 		// Property: EncryptionKeyArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"encryption_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"encryption_key_arn": schemaAttribute0b647c46bce0c4266df2b8ae(),
 		// Property: LockConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -98,23 +140,7 @@ func backupVaultDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"lock_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ChangeableForDays
-				"changeable_for_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaxRetentionDays
-				"max_retention_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MinRetentionDays
-				"min_retention_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"lock_configuration": schemaAttribute4f3555ec76dbe0b8a159239f(),
 		// Property: Notifications
 		// CloudFormation resource type schema:
 		//
@@ -139,20 +165,7 @@ func backupVaultDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"notifications": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BackupVaultEvents
-				"backup_vault_events": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SNSTopicArn
-				"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"notifications": schemaAttributed0cd0a04e85a8d3c3874efb4(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

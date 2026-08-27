@@ -15,6 +15,216 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute20734ad25c2c9d24cd439e35() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogGroupNamePattern
+			"log_group_name_pattern": schemaAttribute72b07d001d883125985363df(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e2d5cb55910648cd5a43af9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Account
+			"account": schemaAttribute72b07d001d883125985363df(),
+			// Property: DestinationLogsConfiguration
+			"destination_logs_configuration": schemaAttributebfd9324024857ccc04a399f9(),
+			// Property: DestinationMetricsConfiguration
+			"destination_metrics_configuration": schemaAttributee78f99dbe818ad352f903672(),
+			// Property: Region
+			"region": schemaAttribute72b07d001d883125985363df(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute554e2aff33d4626f39f0d2cd() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute62a2d626448d48fb85143c5b(),
+				// Property: Value
+				"value": schemaAttributec4db4426f6a0e6446493ce88(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute587a42a7df2b39df69677fec() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EncryptionConflictResolutionStrategy
+			"encryption_conflict_resolution_strategy": schemaAttribute72b07d001d883125985363df(),
+			// Property: EncryptionScope
+			"encryption_scope": schemaAttribute72b07d001d883125985363df(),
+			// Property: EncryptionStrategy
+			"encryption_strategy": schemaAttribute72b07d001d883125985363df(),
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttribute72b07d001d883125985363df(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute62a2d626448d48fb85143c5b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute674d8cbd32647f207a833c25() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the destination account IAM role used for tag propagation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ac501d5fe302aac6d32d80e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MetricsSelectionCriteria
+			"metrics_selection_criteria": schemaAttribute72b07d001d883125985363df(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute72b07d001d883125985363df() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute83bc324d6f9ca8842a2fadff() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute864c931556b9dbed3dffde78() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Destination
+			"destination": schemaAttribute3e2d5cb55910648cd5a43af9(),
+			// Property: Source
+			"source": schemaAttributed7f3274a1a65b78814b3086d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea671e2aa21ab9d64cf434fcd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Region
+			"region": schemaAttribute72b07d001d883125985363df(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba6ac9a627533c4ab49c5778() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DataSourceSelectionCriteria
+			"data_source_selection_criteria": schemaAttribute72b07d001d883125985363df(),
+			// Property: EncryptedLogGroupStrategy
+			"encrypted_log_group_strategy": schemaAttribute72b07d001d883125985363df(),
+			// Property: LogGroupSelectionCriteria
+			"log_group_selection_criteria": schemaAttribute72b07d001d883125985363df(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebfd9324024857ccc04a399f9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BackupConfiguration
+			"backup_configuration": schemaAttributeff2c803261c0429fd402382a(),
+			// Property: LogGroupNameConfiguration
+			"log_group_name_configuration": schemaAttribute20734ad25c2c9d24cd439e35(),
+			// Property: LogsEncryptionConfiguration
+			"logs_encryption_configuration": schemaAttribute587a42a7df2b39df69677fec(),
+			// Property: TagPropagationConfiguration
+			"tag_propagation_configuration": schemaAttributee4098f18cf654401c08c6620(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebfe244ae774c256348ebb67e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The strategy to resolve tag conflicts during propagation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4db4426f6a0e6446493ce88() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed7f3274a1a65b78814b3086d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Regions
+			"regions": schemaAttribute83bc324d6f9ca8842a2fadff(),
+			// Property: Scope
+			"scope": schemaAttribute72b07d001d883125985363df(),
+			// Property: SourceLogsConfiguration
+			"source_logs_configuration": schemaAttributeba6ac9a627533c4ab49c5778(),
+			// Property: SourceMetricsConfiguration
+			"source_metrics_configuration": schemaAttribute6ac501d5fe302aac6d32d80e(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4098f18cf654401c08c6620() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DestinationRoleArn
+			"destination_role_arn": schemaAttribute674d8cbd32647f207a833c25(),
+			// Property: TagConflictResolutionStrategy
+			"tag_conflict_resolution_strategy": schemaAttributebfe244ae774c256348ebb67e(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee78f99dbe818ad352f903672() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BackupConfiguration
+			"backup_configuration": schemaAttributea671e2aa21ab9d64cf434fcd(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff2c803261c0429fd402382a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttribute72b07d001d883125985363df(),
+			// Property: Region
+			"region": schemaAttribute72b07d001d883125985363df(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_observabilityadmin_organization_centralization_rule", organizationCentralizationRuleDataSource)
 }
@@ -85,6 +295,13 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		//	                  ],
 		//	                  "type": "string"
 		//	                },
+		//	                "EncryptionScope": {
+		//	                  "enum": [
+		//	                    "ENCRYPTED_SOURCE_ONLY",
+		//	                    "NEW_DESTINATION_LOG_GROUPS"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
 		//	                "EncryptionStrategy": {
 		//	                  "enum": [
 		//	                    "CUSTOMER_MANAGED",
@@ -101,6 +318,31 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		//	              },
 		//	              "required": [
 		//	                "EncryptionStrategy"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "TagPropagationConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "DestinationRoleArn": {
+		//	                  "description": "The ARN of the destination account IAM role used for tag propagation.",
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 20,
+		//	                  "pattern": "^arn:aws[a-zA-Z-]*:iam::\\d{12}:role/[\\w+=,.@/-]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "TagConflictResolutionStrategy": {
+		//	                  "description": "The strategy to resolve tag conflicts during propagation.",
+		//	                  "enum": [
+		//	                    "IN_SYNC",
+		//	                    "ADD_ONLY",
+		//	                    "UPDATE_SYNC"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "DestinationRoleArn"
 		//	              ],
 		//	              "type": "object"
 		//	            }
@@ -204,132 +446,7 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Destination
-				"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Account
-						"account": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: DestinationLogsConfiguration
-						"destination_logs_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BackupConfiguration
-								"backup_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: KmsKeyArn
-										"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: Region
-										"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: LogGroupNameConfiguration
-								"log_group_name_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: LogGroupNamePattern
-										"log_group_name_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: LogsEncryptionConfiguration
-								"logs_encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: EncryptionConflictResolutionStrategy
-										"encryption_conflict_resolution_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: EncryptionStrategy
-										"encryption_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: KmsKeyArn
-										"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: DestinationMetricsConfiguration
-						"destination_metrics_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: BackupConfiguration
-								"backup_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Region
-										"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Region
-						"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Source
-				"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Regions
-						"regions": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Scope
-						"scope": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SourceLogsConfiguration
-						"source_logs_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DataSourceSelectionCriteria
-								"data_source_selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: EncryptedLogGroupStrategy
-								"encrypted_log_group_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: LogGroupSelectionCriteria
-								"log_group_selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SourceMetricsConfiguration
-						"source_metrics_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: MetricsSelectionCriteria
-								"metrics_selection_criteria": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"rule": schemaAttribute864c931556b9dbed3dffde78(),
 		// Property: RuleArn
 		// CloudFormation resource type schema:
 		//
@@ -339,9 +456,7 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		//	  "pattern": "^arn:aws([a-z0-9\\-]+)?:([a-zA-Z0-9\\-]+):([a-z0-9\\-]+)?:([0-9]{12})?:(.+)$",
 		//	  "type": "string"
 		//	}
-		"rule_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"rule_arn": schemaAttribute72b07d001d883125985363df(),
 		// Property: RuleName
 		// CloudFormation resource type schema:
 		//
@@ -351,9 +466,7 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		//	  "pattern": "^[0-9A-Za-z-]+$",
 		//	  "type": "string"
 		//	}
-		"rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"rule_name": schemaAttribute72b07d001d883125985363df(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -386,24 +499,7 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute554e2aff33d4626f39f0d2cd(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -427,8 +523,10 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		"destination":                             "Destination",
 		"destination_logs_configuration":          "DestinationLogsConfiguration",
 		"destination_metrics_configuration":       "DestinationMetricsConfiguration",
+		"destination_role_arn":                    "DestinationRoleArn",
 		"encrypted_log_group_strategy":            "EncryptedLogGroupStrategy",
 		"encryption_conflict_resolution_strategy": "EncryptionConflictResolutionStrategy",
+		"encryption_scope":                        "EncryptionScope",
 		"encryption_strategy":                     "EncryptionStrategy",
 		"key":                                     "Key",
 		"kms_key_arn":                             "KmsKeyArn",
@@ -446,6 +544,8 @@ func organizationCentralizationRuleDataSource(ctx context.Context) (datasource.D
 		"source":                                  "Source",
 		"source_logs_configuration":               "SourceLogsConfiguration",
 		"source_metrics_configuration":            "SourceMetricsConfiguration",
+		"tag_conflict_resolution_strategy":        "TagConflictResolutionStrategy",
+		"tag_propagation_configuration":           "TagPropagationConfiguration",
 		"tags":                                    "Tags",
 		"value":                                   "Value",
 	})

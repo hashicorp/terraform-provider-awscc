@@ -14,6 +14,76 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2aaca64e3424b69ad64bb2a6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS-service, AWS-account, IAM user, or IAM role that invokes the function. If you specify a service, use ``SourceArn`` or ``SourceAccount`` to limit who can invoke the function through that service.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute461a6f483ed0ac77c5596c8a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier for your organization in AOlong. Use this to grant permissions to all the AWS-accounts under this organization.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89db4ce5870bc4e277dfbe6e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of authentication that your function URL uses. Set to ``AWS_IAM`` if you want to restrict access to authenticated users only. Set to ``NONE`` if you want to bypass IAM authentication to create a public endpoint. For more information, see [Control access to Lambda function URLs](https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute928c7c592fb6d13ecb7b1b90() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "For AWS-services, the ARN of the AWS resource that invokes the function. For example, an Amazon S3 bucket or Amazon SNS topic.\n Note that Lambda configures the comparison using the ``StringLike`` operator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute97a657655b6fd09a0ac73e02() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb013528d046a6c71f4564c9f() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the permission applies when the function is invoked through a function URL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb17ea6a6d112a101fbc273f8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "For Alexa Smart Home functions, a token that the invoker must supply.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb89593c599f8b3d050c91fd5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "For AWS-service, the ID of the AWS-account that owns the resource. Use this together with ``SourceArn`` to ensure that the specified account owns the resource. It is possible for an Amazon S3 bucket to be deleted by its owner and recreated by another account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee05056f882155e99f1c0b400() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name or ARN of the Lambda function, version, or alias.\n  **Name formats**\n +  *Function name* ? ``my-function`` (name-only), ``my-function:v1`` (with alias).\n  +  *Function ARN* ? ``arn:aws:lambda:us-west-2:123456789012:function:my-function``.\n  +  *Partial ARN* ? ``123456789012:function:my-function``.\n  \n You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee83dbd9668f37b22b203edd1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The action that the principal can use on the function. For example, ``lambda:InvokeFunction`` or ``lambda:GetFunction``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_lambda_permission", permissionDataSource)
 }
@@ -32,10 +102,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(lambda:[*]|lambda:[a-zA-Z]+|[*])$",
 		//	  "type": "string"
 		//	}
-		"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The action that the principal can use on the function. For example, ``lambda:InvokeFunction`` or ``lambda:GetFunction``.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"action": schemaAttributee83dbd9668f37b22b203edd1(),
 		// Property: EventSourceToken
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +113,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9._\\-]+$",
 		//	  "type": "string"
 		//	}
-		"event_source_token": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "For Alexa Smart Home functions, a token that the invoker must supply.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"event_source_token": schemaAttributeb17ea6a6d112a101fbc273f8(),
 		// Property: FunctionName
 		// CloudFormation resource type schema:
 		//
@@ -60,10 +124,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(arn:(aws[a-zA-Z-]*)?:lambda:)?((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1}:)?(\\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\\$LATEST(\\.PUBLISHED)?|[a-zA-Z0-9-_]+))?$",
 		//	  "type": "string"
 		//	}
-		"function_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name or ARN of the Lambda function, version, or alias.\n  **Name formats**\n +  *Function name* ? ``my-function`` (name-only), ``my-function:v1`` (with alias).\n  +  *Function ARN* ? ``arn:aws:lambda:us-west-2:123456789012:function:my-function``.\n  +  *Partial ARN* ? ``123456789012:function:my-function``.\n  \n You can append a version number or alias to any of the formats. The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"function_name": schemaAttributee05056f882155e99f1c0b400(),
 		// Property: FunctionUrlAuthType
 		// CloudFormation resource type schema:
 		//
@@ -75,10 +136,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"function_url_auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of authentication that your function URL uses. Set to ``AWS_IAM`` if you want to restrict access to authenticated users only. Set to ``NONE`` if you want to bypass IAM authentication to create a public endpoint. For more information, see [Control access to Lambda function URLs](https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"function_url_auth_type": schemaAttribute89db4ce5870bc4e277dfbe6e(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -89,10 +147,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^.*$",
 		//	  "type": "string"
 		//	}
-		"permission_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"permission_id": schemaAttribute97a657655b6fd09a0ac73e02(),
 		// Property: InvokedViaFunctionUrl
 		// CloudFormation resource type schema:
 		//
@@ -100,10 +155,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether the permission applies when the function is invoked through a function URL.",
 		//	  "type": "boolean"
 		//	}
-		"invoked_via_function_url": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the permission applies when the function is invoked through a function URL.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"invoked_via_function_url": schemaAttributeb013528d046a6c71f4564c9f(),
 		// Property: Principal
 		// CloudFormation resource type schema:
 		//
@@ -114,10 +166,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^.*$",
 		//	  "type": "string"
 		//	}
-		"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS-service, AWS-account, IAM user, or IAM role that invokes the function. If you specify a service, use ``SourceArn`` or ``SourceAccount`` to limit who can invoke the function through that service.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"principal": schemaAttribute2aaca64e3424b69ad64bb2a6(),
 		// Property: PrincipalOrgID
 		// CloudFormation resource type schema:
 		//
@@ -128,10 +177,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^o-[a-z0-9]{10,32}$",
 		//	  "type": "string"
 		//	}
-		"principal_org_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier for your organization in AOlong. Use this to grant permissions to all the AWS-accounts under this organization.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"principal_org_id": schemaAttribute461a6f483ed0ac77c5596c8a(),
 		// Property: SourceAccount
 		// CloudFormation resource type schema:
 		//
@@ -142,10 +188,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"source_account": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "For AWS-service, the ID of the AWS-account that owns the resource. Use this together with ``SourceArn`` to ensure that the specified account owns the resource. It is possible for an Amazon S3 bucket to be deleted by its owner and recreated by another account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_account": schemaAttributeb89593c599f8b3d050c91fd5(),
 		// Property: SourceArn
 		// CloudFormation resource type schema:
 		//
@@ -156,10 +199,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:((eusc-)?[a-z]{2}((-gov)|(-iso([a-z]?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
 		//	  "type": "string"
 		//	}
-		"source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "For AWS-services, the ARN of the AWS resource that invokes the function. For example, an Amazon S3 bucket or Amazon SNS topic.\n Note that Lambda configures the comparison using the ``StringLike`` operator.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_arn": schemaAttribute928c7c592fb6d13ecb7b1b90(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

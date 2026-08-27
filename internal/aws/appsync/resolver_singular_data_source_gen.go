@@ -15,6 +15,225 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0009cc2e49128d6ec3066f4a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The GraphQL field on a type that invokes the resolver.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute07037b492468b7c3856ff8cf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LambdaConflictHandlerArn
+			"lambda_conflict_handler_arn": schemaAttribute2fcaf2cbacbe0968108b091b(),
+		}, /*END SCHEMA*/
+		Description: "The ``LambdaConflictHandlerConfig`` when configuring ``LAMBDA`` as the Conflict Handler.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1cbd2b563709aa3ce22cc516() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The location of a response mapping template in an S3 bucket. Use this if you want to provision with a template file in S3 rather than embedding it in your CFNshort template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1cd8fb1f8a3ea0cc13add1a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The location of a request mapping template in an S3 bucket. Use this if you want to provision with a template file in S3 rather than embedding it in your CFNshort template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d83dbeda813f18ce1f0844a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Functions
+			"functions": schemaAttributeebeb0e751c3a60936daa79ed(),
+		}, /*END SCHEMA*/
+		Description: "Functions linked with the pipeline resolver.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2fcaf2cbacbe0968108b091b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) for the Lambda function to use as the Conflict Handler.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute371284068160d136c9bafc59() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The request mapping template.\n Request mapping templates are optional when using a Lambda data source. For all other data sources, a request mapping template is required.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute39dec1d8426fcb9896b4d57b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ``version`` of the runtime to use. Currently, the only allowed version is ``1.0.0``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute534806df5230ae1534a92b30() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon S3 endpoint.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57f20b49c78a9e439229d162() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6166f726874c52df67466f83() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The resolver type.\n  +  *UNIT*: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.\n  +  *PIPELINE*: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of ``Function`` objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute636121d64e01430546e50652() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ``resolver`` code that contains the request and response functions. When code is used, the ``runtime`` is required. The runtime value must be ``APPSYNC_JS``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64055bfed9674c6448f7e2b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The resolver data source name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64c10c5da762f209043939d3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of resolver request inputs that will be sent to a single LAMlong function in a ``BatchInvoke`` operation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6877ba98028628ae5e59ac56() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Conflict Resolution strategy to perform in the event of a conflict.\n  +  *OPTIMISTIC_CONCURRENCY*: Resolve conflicts by rejecting mutations when versions don't match the latest version at the server.\n  +  *AUTOMERGE*: Resolve conflicts with the Automerge conflict resolution strategy.\n  +  *LAMBDA*: Resolve conflicts with an LAMlong function supplied in the ``LambdaConflictHandlerConfig``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87db1fe3826be5d3f77a9cf2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Conflict Detection strategy to use.\n  +  *VERSION*: Detect conflicts based on object versions for this resolver.\n  +  *NONE*: Do not detect conflicts when invoking this resolver.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8dcfc535177215c3ad4a1098() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The response mapping template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93c766fe2508cc3241e37916() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttributee67c9893545e1045c67ce143(),
+			// Property: RuntimeVersion
+			"runtime_version": schemaAttribute39dec1d8426fcb9896b4d57b(),
+		}, /*END SCHEMA*/
+		Description: "Describes a runtime used by an APSYlong resolver or APSYlong function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7e81864ae97d192e76a87d9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables or disables enhanced resolver metrics for specified resolvers. Note that ``MetricsConfig`` won't be used unless the ``resolverLevelMetricsBehavior`` value is set to ``PER_RESOLVER_METRICS``. If the ``resolverLevelMetricsBehavior`` is set to ``FULL_REQUEST_RESOLVER_METRICS`` instead, ``MetricsConfig`` will be ignored. However, you can still set its value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8f98192ad0a891400d5413a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The caching keys for a resolver that has caching activated.\n Valid values are entries from the ``$context.arguments``, ``$context.source``, and ``$context.identity`` maps.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9360902df089f4c993b8e65() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CachingKeys
+			"caching_keys": schemaAttributeb8f98192ad0a891400d5413a(),
+			// Property: Ttl
+			"ttl": schemaAttributeffa60daff50091a224bd3e1a(),
+		}, /*END SCHEMA*/
+		Description: "The caching configuration for the resolver.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedfa4bbca5a15423edb2c8e40() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConflictDetection
+			"conflict_detection": schemaAttribute87db1fe3826be5d3f77a9cf2(),
+			// Property: ConflictHandler
+			"conflict_handler": schemaAttribute6877ba98028628ae5e59ac56(),
+			// Property: LambdaConflictHandlerConfig
+			"lambda_conflict_handler_config": schemaAttribute07037b492468b7c3856ff8cf(),
+		}, /*END SCHEMA*/
+		Description: "The ``SyncConfig`` for a resolver attached to a versioned data source.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee67c9893545e1045c67ce143() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ``name`` of the runtime to use. Currently, the only allowed value is ``APPSYNC_JS``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeebeb0e751c3a60936daa79ed() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of ``Function`` objects.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeedb5941d3a0ab2b328192012() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The APSYlong GraphQL API to which you want to attach this resolver.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff785d312ba2961087b3fc06() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The GraphQL type that invokes this resolver.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeffa60daff50091a224bd3e1a() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The TTL in seconds for a resolver that has caching activated.\n Valid values are 1?3,600 seconds.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_appsync_resolver", resolverDataSource)
 }
@@ -30,10 +249,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The APSYlong GraphQL API to which you want to attach this resolver.",
 		//	  "type": "string"
 		//	}
-		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The APSYlong GraphQL API to which you want to attach this resolver.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"api_id": schemaAttributeedb5941d3a0ab2b328192012(),
 		// Property: CachingConfig
 		// CloudFormation resource type schema:
 		//
@@ -60,23 +276,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"caching_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CachingKeys
-				"caching_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The caching keys for a resolver that has caching activated.\n Valid values are entries from the ``$context.arguments``, ``$context.source``, and ``$context.identity`` maps.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Ttl
-				"ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The TTL in seconds for a resolver that has caching activated.\n Valid values are 1?3,600 seconds.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The caching configuration for the resolver.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"caching_config": schemaAttributeb9360902df089f4c993b8e65(),
 		// Property: Code
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +284,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ``resolver`` code that contains the request and response functions. When code is used, the ``runtime`` is required. The runtime value must be ``APPSYNC_JS``.",
 		//	  "type": "string"
 		//	}
-		"code": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ``resolver`` code that contains the request and response functions. When code is used, the ``runtime`` is required. The runtime value must be ``APPSYNC_JS``.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"code": schemaAttribute636121d64e01430546e50652(),
 		// Property: CodeS3Location
 		// CloudFormation resource type schema:
 		//
@@ -95,10 +292,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon S3 endpoint.",
 		//	  "type": "string"
 		//	}
-		"code_s3_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon S3 endpoint.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"code_s3_location": schemaAttribute534806df5230ae1534a92b30(),
 		// Property: DataSourceName
 		// CloudFormation resource type schema:
 		//
@@ -106,10 +300,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The resolver data source name.",
 		//	  "type": "string"
 		//	}
-		"data_source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The resolver data source name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_source_name": schemaAttribute64055bfed9674c6448f7e2b5(),
 		// Property: FieldName
 		// CloudFormation resource type schema:
 		//
@@ -117,10 +308,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The GraphQL field on a type that invokes the resolver.",
 		//	  "type": "string"
 		//	}
-		"field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The GraphQL field on a type that invokes the resolver.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"field_name": schemaAttribute0009cc2e49128d6ec3066f4a(),
 		// Property: Kind
 		// CloudFormation resource type schema:
 		//
@@ -128,10 +316,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The resolver type.\n  +  *UNIT*: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.\n  +  *PIPELINE*: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of ``Function`` objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.",
 		//	  "type": "string"
 		//	}
-		"kind": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The resolver type.\n  +  *UNIT*: A UNIT resolver type. A UNIT resolver is the default resolver type. You can use a UNIT resolver to run a GraphQL query against a single data source.\n  +  *PIPELINE*: A PIPELINE resolver type. You can use a PIPELINE resolver to invoke a series of ``Function`` objects in a serial manner. You can use a pipeline resolver to run a GraphQL query against multiple data sources.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kind": schemaAttribute6166f726874c52df67466f83(),
 		// Property: MaxBatchSize
 		// CloudFormation resource type schema:
 		//
@@ -139,10 +324,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The maximum number of resolver request inputs that will be sent to a single LAMlong function in a ``BatchInvoke`` operation.",
 		//	  "type": "integer"
 		//	}
-		"max_batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The maximum number of resolver request inputs that will be sent to a single LAMlong function in a ``BatchInvoke`` operation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"max_batch_size": schemaAttribute64c10c5da762f209043939d3(),
 		// Property: MetricsConfig
 		// CloudFormation resource type schema:
 		//
@@ -154,10 +336,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"metrics_config": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Enables or disables enhanced resolver metrics for specified resolvers. Note that ``MetricsConfig`` won't be used unless the ``resolverLevelMetricsBehavior`` value is set to ``PER_RESOLVER_METRICS``. If the ``resolverLevelMetricsBehavior`` is set to ``FULL_REQUEST_RESOLVER_METRICS`` instead, ``MetricsConfig`` will be ignored. However, you can still set its value.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"metrics_config": schemaAttributea7e81864ae97d192e76a87d9(),
 		// Property: PipelineConfig
 		// CloudFormation resource type schema:
 		//
@@ -177,18 +356,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"pipeline_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Functions
-				"functions": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of ``Function`` objects.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Functions linked with the pipeline resolver.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"pipeline_config": schemaAttribute2d83dbeda813f18ce1f0844a(),
 		// Property: RequestMappingTemplate
 		// CloudFormation resource type schema:
 		//
@@ -196,10 +364,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The request mapping template.\n Request mapping templates are optional when using a Lambda data source. For all other data sources, a request mapping template is required.",
 		//	  "type": "string"
 		//	}
-		"request_mapping_template": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The request mapping template.\n Request mapping templates are optional when using a Lambda data source. For all other data sources, a request mapping template is required.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"request_mapping_template": schemaAttribute371284068160d136c9bafc59(),
 		// Property: RequestMappingTemplateS3Location
 		// CloudFormation resource type schema:
 		//
@@ -207,10 +372,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The location of a request mapping template in an S3 bucket. Use this if you want to provision with a template file in S3 rather than embedding it in your CFNshort template.",
 		//	  "type": "string"
 		//	}
-		"request_mapping_template_s3_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The location of a request mapping template in an S3 bucket. Use this if you want to provision with a template file in S3 rather than embedding it in your CFNshort template.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"request_mapping_template_s3_location": schemaAttribute1cd8fb1f8a3ea0cc13add1a5(),
 		// Property: ResolverArn
 		// CloudFormation resource type schema:
 		//
@@ -218,10 +380,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"resolver_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resolver_arn": schemaAttribute57f20b49c78a9e439229d162(),
 		// Property: ResponseMappingTemplate
 		// CloudFormation resource type schema:
 		//
@@ -229,10 +388,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The response mapping template.",
 		//	  "type": "string"
 		//	}
-		"response_mapping_template": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The response mapping template.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"response_mapping_template": schemaAttribute8dcfc535177215c3ad4a1098(),
 		// Property: ResponseMappingTemplateS3Location
 		// CloudFormation resource type schema:
 		//
@@ -240,10 +396,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The location of a response mapping template in an S3 bucket. Use this if you want to provision with a template file in S3 rather than embedding it in your CFNshort template.",
 		//	  "type": "string"
 		//	}
-		"response_mapping_template_s3_location": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The location of a response mapping template in an S3 bucket. Use this if you want to provision with a template file in S3 rather than embedding it in your CFNshort template.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"response_mapping_template_s3_location": schemaAttribute1cbd2b563709aa3ce22cc516(),
 		// Property: Runtime
 		// CloudFormation resource type schema:
 		//
@@ -266,22 +419,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"runtime": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ``name`` of the runtime to use. Currently, the only allowed value is ``APPSYNC_JS``.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RuntimeVersion
-				"runtime_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ``version`` of the runtime to use. Currently, the only allowed version is ``1.0.0``.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Describes a runtime used by an APSYlong resolver or APSYlong function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"runtime": schemaAttribute93c766fe2508cc3241e37916(),
 		// Property: SyncConfig
 		// CloudFormation resource type schema:
 		//
@@ -314,34 +452,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"sync_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConflictDetection
-				"conflict_detection": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Conflict Detection strategy to use.\n  +  *VERSION*: Detect conflicts based on object versions for this resolver.\n  +  *NONE*: Do not detect conflicts when invoking this resolver.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ConflictHandler
-				"conflict_handler": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Conflict Resolution strategy to perform in the event of a conflict.\n  +  *OPTIMISTIC_CONCURRENCY*: Resolve conflicts by rejecting mutations when versions don't match the latest version at the server.\n  +  *AUTOMERGE*: Resolve conflicts with the Automerge conflict resolution strategy.\n  +  *LAMBDA*: Resolve conflicts with an LAMlong function supplied in the ``LambdaConflictHandlerConfig``.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LambdaConflictHandlerConfig
-				"lambda_conflict_handler_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: LambdaConflictHandlerArn
-						"lambda_conflict_handler_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The Amazon Resource Name (ARN) for the Lambda function to use as the Conflict Handler.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The ``LambdaConflictHandlerConfig`` when configuring ``LAMBDA`` as the Conflict Handler.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The ``SyncConfig`` for a resolver attached to a versioned data source.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sync_config": schemaAttributedfa4bbca5a15423edb2c8e40(),
 		// Property: TypeName
 		// CloudFormation resource type schema:
 		//
@@ -349,10 +460,7 @@ func resolverDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The GraphQL type that invokes this resolver.",
 		//	  "type": "string"
 		//	}
-		"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The GraphQL type that invokes this resolver.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type_name": schemaAttributeff785d312ba2961087b3fc06(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

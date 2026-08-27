@@ -14,6 +14,135 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute086b0f4fb27355e841487834() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The namespace of the capability configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e473c036fc400f2c3355ffa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the gateway device.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28ac8a7535ab030e5747d901() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the CoreDevice in GreenGrass V2.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49d90f5e471cf539d8854bfc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ec06776e7e6fb16181bd504() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CapabilityConfiguration
+				"capability_configuration": schemaAttribute7264791a9d7db647384c2127(),
+				// Property: CapabilityNamespace
+				"capability_namespace": schemaAttribute086b0f4fb27355e841487834(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of gateway capability summaries that each contain a namespace and status.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute59e11133744029004554e6d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the IoT Core Thing.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7042ce926c15f0df9e4966aa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the gateway you want to create.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7264791a9d7db647384c2127() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The JSON document that defines the gateway capability's configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute846aae58385451a24f4dc29b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique, friendly name for the gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d552b37ef7d0aa21b50502d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IotCoreThingName
+			"iot_core_thing_name": schemaAttribute59e11133744029004554e6d8(),
+		}, /*END SCHEMA*/
+		Description: "A gateway that runs on Siemens Industrial Edge.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed40c17e4be36af953eb083f2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute49d90f5e471cf539d8854bfc(),
+				// Property: Value
+				"value": schemaAttribute49d90f5e471cf539d8854bfc(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of key-value pairs that contain metadata for the gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda1234decbe143c14d3488bb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GreengrassV2
+			"greengrass_v2": schemaAttributeee6570f1d82232848a590644(),
+			// Property: SiemensIE
+			"siemens_ie": schemaAttribute9d552b37ef7d0aa21b50502d(),
+		}, /*END SCHEMA*/
+		Description: "The gateway's platform. You can only specify one platform in a gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee06521c010155cf735696cc2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The operating system of the core device in AWS IoT Greengrass V2.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee6570f1d82232848a590644() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CoreDeviceOperatingSystem
+			"core_device_operating_system": schemaAttributee06521c010155cf735696cc2(),
+			// Property: CoreDeviceThingName
+			"core_device_thing_name": schemaAttribute28ac8a7535ab030e5747d901(),
+		}, /*END SCHEMA*/
+		Description: "A gateway that runs on AWS IoT Greengrass V2.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iotsitewise_gateway", gatewayDataSource)
 }
@@ -49,24 +178,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"gateway_capability_summaries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: CapabilityConfiguration
-					"capability_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The JSON document that defines the gateway capability's configuration.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: CapabilityNamespace
-					"capability_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The namespace of the capability configuration.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of gateway capability summaries that each contain a namespace and status.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"gateway_capability_summaries": schemaAttribute4ec06776e7e6fb16181bd504(),
 		// Property: GatewayId
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +186,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the gateway device.",
 		//	  "type": "string"
 		//	}
-		"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the gateway device.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"gateway_id": schemaAttribute1e473c036fc400f2c3355ffa(),
 		// Property: GatewayName
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +194,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A unique, friendly name for the gateway.",
 		//	  "type": "string"
 		//	}
-		"gateway_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique, friendly name for the gateway.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"gateway_name": schemaAttribute846aae58385451a24f4dc29b(),
 		// Property: GatewayPlatform
 		// CloudFormation resource type schema:
 		//
@@ -148,41 +254,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"gateway_platform": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: GreengrassV2
-				"greengrass_v2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CoreDeviceOperatingSystem
-						"core_device_operating_system": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The operating system of the core device in AWS IoT Greengrass V2.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: CoreDeviceThingName
-						"core_device_thing_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the CoreDevice in GreenGrass V2.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A gateway that runs on AWS IoT Greengrass V2.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SiemensIE
-				"siemens_ie": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: IotCoreThingName
-						"iot_core_thing_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the IoT Core Thing.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A gateway that runs on Siemens Industrial Edge.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The gateway's platform. You can only specify one platform in a gateway.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"gateway_platform": schemaAttributeda1234decbe143c14d3488bb(),
 		// Property: GatewayVersion
 		// CloudFormation resource type schema:
 		//
@@ -190,10 +262,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version of the gateway you want to create.",
 		//	  "type": "string"
 		//	}
-		"gateway_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of the gateway you want to create.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"gateway_version": schemaAttribute7042ce926c15f0df9e4966aa(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -220,22 +289,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of key-value pairs that contain metadata for the gateway.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributed40c17e4be36af953eb083f2(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

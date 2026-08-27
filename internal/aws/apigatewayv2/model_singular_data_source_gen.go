@@ -15,6 +15,49 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute00951fdc29dad1cb957838b0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the model.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0ab057b05208acf26f47a693() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The schema for the model. For application/json models, this should be JSON schema draft 4 model.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e377016a876d1302682d81e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the model.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute458cb5e2ed68d1bdefde9d82() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The API identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5133f51dac280a351eb919f2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeefd04f2d4e7da6751709492d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The content-type for the model, for example, \"application/json\".",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_apigatewayv2_model", modelDataSource)
 }
@@ -30,10 +73,7 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The API identifier.",
 		//	  "type": "string"
 		//	}
-		"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The API identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"api_id": schemaAttribute458cb5e2ed68d1bdefde9d82(),
 		// Property: ContentType
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +81,7 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The content-type for the model, for example, \"application/json\".",
 		//	  "type": "string"
 		//	}
-		"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The content-type for the model, for example, \"application/json\".",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"content_type": schemaAttributeefd04f2d4e7da6751709492d(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +89,7 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of the model.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the model.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute00951fdc29dad1cb957838b0(),
 		// Property: ModelId
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +97,7 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"model_id": schemaAttribute5133f51dac280a351eb919f2(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +105,7 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the model.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the model.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute2e377016a876d1302682d81e(),
 		// Property: Schema
 		// CloudFormation resource type schema:
 		//
@@ -85,11 +113,7 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The schema for the model. For application/json models, this should be JSON schema draft 4 model.",
 		//	  "type": "object"
 		//	}
-		"schema": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "The schema for the model. For application/json models, this should be JSON schema draft 4 model.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schema": schemaAttribute0ab057b05208acf26f47a693(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

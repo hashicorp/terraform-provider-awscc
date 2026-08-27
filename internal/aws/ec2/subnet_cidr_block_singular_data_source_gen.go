@@ -14,6 +14,55 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute414144ddeeadc946be839d54() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The netmask length of the IPv6 CIDR to allocate to the subnet from an IPAM pool",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute588f2e955e24cd7fa52e6502() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value denoting whether an IPv6 Subnet CIDR Block is public or private.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61cc4114a20d6e7c2c78db27() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Information about the IPv6 association.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c5f6a9f67ba7d064e0c95f9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of an IPv6 Amazon VPC IP Address Manager (IPAM) pool from which to allocate, to get the subnet's CIDR",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea05c601cf505bcc4221b54f0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IP Source of an IPv6 Subnet CIDR Block.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea1b0081621f932fe18e709bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb7c9abcd29f698177d9101f7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the subnet",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_subnet_cidr_block", subnetCidrBlockDataSource)
 }
@@ -29,10 +78,7 @@ func subnetCidrBlockDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Information about the IPv6 association.",
 		//	  "type": "string"
 		//	}
-		"subnet_cidr_block_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Information about the IPv6 association.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_cidr_block_id": schemaAttribute61cc4114a20d6e7c2c78db27(),
 		// Property: IpSource
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +86,7 @@ func subnetCidrBlockDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The IP Source of an IPv6 Subnet CIDR Block.",
 		//	  "type": "string"
 		//	}
-		"ip_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IP Source of an IPv6 Subnet CIDR Block.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ip_source": schemaAttributea05c601cf505bcc4221b54f0(),
 		// Property: Ipv6AddressAttribute
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +94,7 @@ func subnetCidrBlockDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The value denoting whether an IPv6 Subnet CIDR Block is public or private.",
 		//	  "type": "string"
 		//	}
-		"ipv_6_address_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The value denoting whether an IPv6 Subnet CIDR Block is public or private.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_6_address_attribute": schemaAttribute588f2e955e24cd7fa52e6502(),
 		// Property: Ipv6CidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +103,7 @@ func subnetCidrBlockDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "maxLength": 42,
 		//	  "type": "string"
 		//	}
-		"ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_6_cidr_block": schemaAttributea1b0081621f932fe18e709bb(),
 		// Property: Ipv6IpamPoolId
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +111,7 @@ func subnetCidrBlockDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The ID of an IPv6 Amazon VPC IP Address Manager (IPAM) pool from which to allocate, to get the subnet's CIDR",
 		//	  "type": "string"
 		//	}
-		"ipv_6_ipam_pool_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of an IPv6 Amazon VPC IP Address Manager (IPAM) pool from which to allocate, to get the subnet's CIDR",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_6_ipam_pool_id": schemaAttribute7c5f6a9f67ba7d064e0c95f9(),
 		// Property: Ipv6NetmaskLength
 		// CloudFormation resource type schema:
 		//
@@ -87,10 +121,7 @@ func subnetCidrBlockDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"ipv_6_netmask_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The netmask length of the IPv6 CIDR to allocate to the subnet from an IPAM pool",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ipv_6_netmask_length": schemaAttribute414144ddeeadc946be839d54(),
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -98,10 +129,7 @@ func subnetCidrBlockDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The ID of the subnet",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the subnet",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_id": schemaAttributeb7c9abcd29f698177d9101f7(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

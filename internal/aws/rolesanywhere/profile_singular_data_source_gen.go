@@ -15,6 +15,71 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0c303dfc48101c19f7163c1a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributea39a9d8a57e0f40804a3a03d(),
+				// Property: Value
+				"value": schemaAttributea39a9d8a57e0f40804a3a03d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a21ea80f92256fe0925df9c() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82b627f3634ba2e1b9828dea() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96ebe69d3d9a7c53964c0010() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Specifier
+				"specifier": schemaAttributea39a9d8a57e0f40804a3a03d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea39a9d8a57e0f40804a3a03d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedad9ea3f16e2b132c316a14d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CertificateField
+				"certificate_field": schemaAttributea39a9d8a57e0f40804a3a03d(),
+				// Property: MappingRules
+				"mapping_rules": schemaAttribute96ebe69d3d9a7c53964c0010(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef88650fe21aebd7d90f22b07() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_rolesanywhere_profile", profileDataSource)
 }
@@ -29,9 +94,7 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"accept_role_session_name": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"accept_role_session_name": schemaAttribute82b627f3634ba2e1b9828dea(),
 		// Property: AttributeMappings
 		// CloudFormation resource type schema:
 		//
@@ -71,29 +134,7 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"attribute_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: CertificateField
-					"certificate_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: MappingRules
-					"mapping_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Specifier
-								"specifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"attribute_mappings": schemaAttributedad9ea3f16e2b132c316a14d(),
 		// Property: DurationSeconds
 		// CloudFormation resource type schema:
 		//
@@ -102,18 +143,14 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 900,
 		//	  "type": "number"
 		//	}
-		"duration_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"duration_seconds": schemaAttribute5a21ea80f92256fe0925df9c(),
 		// Property: Enabled
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"enabled": schemaAttribute82b627f3634ba2e1b9828dea(),
 		// Property: ManagedPolicyArns
 		// CloudFormation resource type schema:
 		//
@@ -123,28 +160,21 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"managed_policy_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"managed_policy_arns": schemaAttributef88650fe21aebd7d90f22b07(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributea39a9d8a57e0f40804a3a03d(),
 		// Property: ProfileArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"profile_arn": schemaAttributea39a9d8a57e0f40804a3a03d(),
 		// Property: ProfileId
 		// CloudFormation resource type schema:
 		//
@@ -152,18 +182,14 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-f0-9]{8}-([a-z0-9]{4}-){3}[a-z0-9]{12}",
 		//	  "type": "string"
 		//	}
-		"profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"profile_id": schemaAttributea39a9d8a57e0f40804a3a03d(),
 		// Property: RequireInstanceProperties
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"require_instance_properties": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"require_instance_properties": schemaAttribute82b627f3634ba2e1b9828dea(),
 		// Property: RoleArns
 		// CloudFormation resource type schema:
 		//
@@ -175,19 +201,14 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"role_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arns": schemaAttributef88650fe21aebd7d90f22b07(),
 		// Property: SessionPolicy
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"session_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"session_policy": schemaAttributea39a9d8a57e0f40804a3a03d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -216,21 +237,7 @@ func profileDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute0c303dfc48101c19f7163c1a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

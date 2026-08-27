@@ -16,6 +16,457 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute06935425720da299f243401d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the operator on how to handle multiple groups within the same segment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute11b6b4385d8d8af8917e668a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of segment dimension to use for a date dimension.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute164511800bbb0b8740a90ae1() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConditionOverrides
+				"condition_overrides": schemaAttributee50db686a69b3700da468ed3(),
+				// Property: DimensionType
+				"dimension_type": schemaAttributefcd73567a378a6382a96e493(),
+				// Property: Values
+				"values": schemaAttributed4836846df5c385831f19328(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more calculated attributes to use as criteria for the segment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute168067011716cd23f6ef64ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unit to be applied to the range.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute22812ebf784ca3f03f95e784() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of segment dimension to use for a string dimension.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute376661d2ad7d7c4bb1dae502() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3910aa73aacaff9bba768747() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DimensionType
+			"dimension_type": schemaAttribute22812ebf784ca3f03f95e784(),
+			// Property: Values
+			"values": schemaAttributed4836846df5c385831f19328(),
+		}, /*END SCHEMA*/
+		Description: "Specifies criteria for a segment using extended-length string values.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute394dc9efb667a7b525fbea6b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique name of the domain.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a161b3587c813ab089ba783() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The display name of the segment definition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute43192f8e17957fd98b8be2ec() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Dimensions
+				"dimensions": schemaAttributec770406a9461de4416f188c4(),
+				// Property: SourceSegments
+				"source_segments": schemaAttributec5a0c89eb4751388843369b3(),
+				// Property: SourceType
+				"source_type": schemaAttribute06935425720da299f243401d(),
+				// Property: Type
+				"type": schemaAttribute06935425720da299f243401d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute506af84e3bde41a80685ea63() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AccountNumber
+			"account_number": schemaAttribute6250db25a975200e320226b2(),
+			// Property: AdditionalInformation
+			"additional_information": schemaAttribute3910aa73aacaff9bba768747(),
+			// Property: Address
+			"address": schemaAttribute97eafe98ec6ae4162a8ee9d6(),
+			// Property: Attributes
+			"attributes": schemaAttributea865bc6ae62eddbd3566960f(),
+			// Property: BillingAddress
+			"billing_address": schemaAttribute97eafe98ec6ae4162a8ee9d6(),
+			// Property: BirthDate
+			"birth_date": schemaAttributee354dc32486fb59db3551c89(),
+			// Property: BusinessEmailAddress
+			"business_email_address": schemaAttribute6250db25a975200e320226b2(),
+			// Property: BusinessName
+			"business_name": schemaAttribute6250db25a975200e320226b2(),
+			// Property: BusinessPhoneNumber
+			"business_phone_number": schemaAttribute6250db25a975200e320226b2(),
+			// Property: EmailAddress
+			"email_address": schemaAttribute6250db25a975200e320226b2(),
+			// Property: FirstName
+			"first_name": schemaAttribute6250db25a975200e320226b2(),
+			// Property: GenderString
+			"gender_string": schemaAttribute6250db25a975200e320226b2(),
+			// Property: HomePhoneNumber
+			"home_phone_number": schemaAttribute6250db25a975200e320226b2(),
+			// Property: LastName
+			"last_name": schemaAttribute6250db25a975200e320226b2(),
+			// Property: MailingAddress
+			"mailing_address": schemaAttribute97eafe98ec6ae4162a8ee9d6(),
+			// Property: MiddleName
+			"middle_name": schemaAttribute6250db25a975200e320226b2(),
+			// Property: MobilePhoneNumber
+			"mobile_phone_number": schemaAttribute6250db25a975200e320226b2(),
+			// Property: PartyTypeString
+			"party_type_string": schemaAttribute6250db25a975200e320226b2(),
+			// Property: PersonalEmailAddress
+			"personal_email_address": schemaAttribute6250db25a975200e320226b2(),
+			// Property: PhoneNumber
+			"phone_number": schemaAttribute6250db25a975200e320226b2(),
+			// Property: ProfileType
+			"profile_type": schemaAttributee6cffab344352ded830fe5b6(),
+			// Property: ShippingAddress
+			"shipping_address": schemaAttribute97eafe98ec6ae4162a8ee9d6(),
+		}, /*END SCHEMA*/
+		Description: "Specifies the dimension settings within profile attributes for a segment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute50a82d23e43ad4a8e670eacf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of attribute (e.g., profile, calculated).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51c1db985d61e2d5cf466bf3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The ending point for this overridden range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute545884fc995df2da60643749() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the segment definition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute586d4f4e34a308b87ac595c2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DataType
+				"data_type": schemaAttribute8a7b721f0fb9a4ba3cafcaa4(),
+				// Property: Name
+				"name": schemaAttributedecab0f13e41c3b06c5aee11(),
+				// Property: Order
+				"order": schemaAttributea7ca492927f49e82bccb845b(),
+				// Property: Type
+				"type": schemaAttribute50a82d23e43ad4a8e670eacf(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of attributes used to sort the segments and their ordering preferences.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5aaca4c8bf18f2f1b29da3ec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60b8615137fa094694d62467() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6250db25a975200e320226b2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DimensionType
+			"dimension_type": schemaAttribute22812ebf784ca3f03f95e784(),
+			// Property: Values
+			"values": schemaAttributed4836846df5c385831f19328(),
+		}, /*END SCHEMA*/
+		Description: "Specifies profile based criteria for a segment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77fb8da625ce7c933c6f6c29() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The time of this segment definition got created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a7b721f0fb9a4ba3cafcaa4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The data type of the sort attribute (e.g., string, number, date).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8cc251800028cf6cc20781e0() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute376661d2ad7d7c4bb1dae502(),
+				// Property: Value
+				"value": schemaAttribute60b8615137fa094694d62467(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags used to organize, track, or control access for this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute97eafe98ec6ae4162a8ee9d6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: City
+			"city": schemaAttribute6250db25a975200e320226b2(),
+			// Property: Country
+			"country": schemaAttribute6250db25a975200e320226b2(),
+			// Property: County
+			"county": schemaAttribute6250db25a975200e320226b2(),
+			// Property: PostalCode
+			"postal_code": schemaAttribute6250db25a975200e320226b2(),
+			// Property: Province
+			"province": schemaAttribute6250db25a975200e320226b2(),
+			// Property: State
+			"state": schemaAttribute6250db25a975200e320226b2(),
+		}, /*END SCHEMA*/
+		Description: "The address based criteria for the segment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b0c464a62fba14b13161db5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique name of the segment definition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d9698dc6cd451e7bd7dd83b() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The starting point for this overridden range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea142389e251c61e38f528751() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SQL query that defines the segment criteria.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7ca492927f49e82bccb845b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The sort order for the attribute (ascending or descending).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea865bc6ae62eddbd3566960f() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DimensionType
+				"dimension_type": schemaAttributefcd73567a378a6382a96e493(),
+				// Property: Values
+				"values": schemaAttributed4836846df5c385831f19328(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more custom attributes to use as criteria for the segment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8a819fc3437551f98e6a774() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Groups
+			"groups": schemaAttribute43192f8e17957fd98b8be2ec(),
+			// Property: Include
+			"include": schemaAttribute06935425720da299f243401d(),
+		}, /*END SCHEMA*/
+		Description: "An array that defines the set of segment criteria to evaluate when handling segment groups for the segment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5a0c89eb4751388843369b3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SegmentDefinitionName
+				"segment_definition_name": schemaAttribute5aaca4c8bf18f2f1b29da3ec(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec770406a9461de4416f188c4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CalculatedAttributes
+				"calculated_attributes": schemaAttribute164511800bbb0b8740a90ae1(),
+				// Property: ProfileAttributes
+				"profile_attributes": schemaAttribute506af84e3bde41a80685ea63(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec97c387c141529f8811368db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of segment dimension to use for a profile type dimension.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed381a10dad449c672af6105c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the segment definition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4836846df5c385831f19328() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedecab0f13e41c3b06c5aee11() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the attribute to sort by.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee354dc32486fb59db3551c89() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DimensionType
+			"dimension_type": schemaAttribute11b6b4385d8d8af8917e668a(),
+			// Property: Values
+			"values": schemaAttributed4836846df5c385831f19328(),
+		}, /*END SCHEMA*/
+		Description: "Specifies date based criteria for a segment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee50db686a69b3700da468ed3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Range
+			"range": schemaAttributef3298e1eba4eb4242cc88f2b(),
+		}, /*END SCHEMA*/
+		Description: "Overrides the condition block within the original calculated attribute definition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee656d82d294e05e3c16c4dc1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Attributes
+			"attributes": schemaAttribute586d4f4e34a308b87ac595c2(),
+		}, /*END SCHEMA*/
+		Description: "The segment sort configuration for ordering segment results.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee6cffab344352ded830fe5b6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DimensionType
+			"dimension_type": schemaAttributec97c387c141529f8811368db(),
+			// Property: Values
+			"values": schemaAttributed4836846df5c385831f19328(),
+		}, /*END SCHEMA*/
+		Description: "Specifies profile type based criteria for a segment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3298e1eba4eb4242cc88f2b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: End
+			"end": schemaAttribute51c1db985d61e2d5cf466bf3(),
+			// Property: Start
+			"start": schemaAttribute9d9698dc6cd451e7bd7dd83b(),
+			// Property: Unit
+			"unit": schemaAttribute168067011716cd23f6ef64ca(),
+		}, /*END SCHEMA*/
+		Description: "Defines the range to be applied to the calculated attribute definition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefcd73567a378a6382a96e493() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of segment dimension to use.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_customerprofiles_segment_definition", segmentDefinitionDataSource)
 }
@@ -32,11 +483,7 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time of this segment definition got created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute77fb8da625ce7c933c6f6c29(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +493,7 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the segment definition.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute545884fc995df2da60643749(),
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +503,7 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The display name of the segment definition.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"display_name": schemaAttribute3a161b3587c813ab089ba783(),
 		// Property: DomainName
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +514,7 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique name of the domain.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_name": schemaAttribute394dc9efb667a7b525fbea6b(),
 		// Property: SegmentDefinitionArn
 		// CloudFormation resource type schema:
 		//
@@ -86,10 +524,7 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"segment_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the segment definition.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"segment_definition_arn": schemaAttributed381a10dad449c672af6105c(),
 		// Property: SegmentDefinitionName
 		// CloudFormation resource type schema:
 		//
@@ -100,10 +535,7 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"segment_definition_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique name of the segment definition.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"segment_definition_name": schemaAttribute9b0c464a62fba14b13161db5(),
 		// Property: SegmentGroups
 		// CloudFormation resource type schema:
 		//
@@ -1699,856 +2131,7 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  },
 		//	  "type": "object"
 		//	}
-		"segment_groups": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Groups
-				"groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Dimensions
-							"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: CalculatedAttributes
-										"calculated_attributes":   // Pattern: ""
-										schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: ConditionOverrides
-													"condition_overrides": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: Range
-															"range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																	// Property: End
-																	"end": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																		Description: "The ending point for this overridden range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
-																		Computed:    true,
-																	}, /*END ATTRIBUTE*/
-																	// Property: Start
-																	"start": schema.Int64Attribute{ /*START ATTRIBUTE*/
-																		Description: "The starting point for this overridden range. Positive numbers indicate how many days in the past data should be included, and negative numbers indicate how many days in the future.",
-																		Computed:    true,
-																	}, /*END ATTRIBUTE*/
-																	// Property: Unit
-																	"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-																		Description: "The unit to be applied to the range.",
-																		Computed:    true,
-																	}, /*END ATTRIBUTE*/
-																}, /*END SCHEMA*/
-																Description: "Defines the range to be applied to the calculated attribute definition.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-														Description: "Overrides the condition block within the original calculated attribute definition.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: DimensionType
-													"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Description: "The type of segment dimension to use.",
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: Values
-													"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-														ElementType: types.StringType,
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-											}, /*END NESTED OBJECT*/
-											Description: "One or more calculated attributes to use as criteria for the segment.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ProfileAttributes
-										"profile_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: AccountNumber
-												"account_number": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: AdditionalInformation
-												"additional_information": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies criteria for a segment using extended-length string values.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Address
-												"address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: City
-														"city": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Country
-														"country": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: County
-														"county": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: PostalCode
-														"postal_code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Province
-														"province": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: State
-														"state": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "The address based criteria for the segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: Attributes
-												"attributes":              // Pattern: ""
-												schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-															// Property: DimensionType
-															"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																Description: "The type of segment dimension to use.",
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-															// Property: Values
-															"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																ElementType: types.StringType,
-																Computed:    true,
-															}, /*END ATTRIBUTE*/
-														}, /*END SCHEMA*/
-													}, /*END NESTED OBJECT*/
-													Description: "One or more custom attributes to use as criteria for the segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: BillingAddress
-												"billing_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: City
-														"city": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Country
-														"country": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: County
-														"county": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: PostalCode
-														"postal_code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Province
-														"province": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: State
-														"state": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "The address based criteria for the segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: BirthDate
-												"birth_date": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a date dimension.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies date based criteria for a segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: BusinessEmailAddress
-												"business_email_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: BusinessName
-												"business_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: BusinessPhoneNumber
-												"business_phone_number": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: EmailAddress
-												"email_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: FirstName
-												"first_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: GenderString
-												"gender_string": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: HomePhoneNumber
-												"home_phone_number": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: LastName
-												"last_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: MailingAddress
-												"mailing_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: City
-														"city": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Country
-														"country": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: County
-														"county": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: PostalCode
-														"postal_code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Province
-														"province": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: State
-														"state": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "The address based criteria for the segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: MiddleName
-												"middle_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: MobilePhoneNumber
-												"mobile_phone_number": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: PartyTypeString
-												"party_type_string": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: PersonalEmailAddress
-												"personal_email_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: PhoneNumber
-												"phone_number": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a string dimension.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile based criteria for a segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: ProfileType
-												"profile_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: DimensionType
-														"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Description: "The type of segment dimension to use for a profile type dimension.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Values
-														"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-															ElementType: types.StringType,
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "Specifies profile type based criteria for a segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-												// Property: ShippingAddress
-												"shipping_address": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: City
-														"city": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Country
-														"country": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: County
-														"county": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: PostalCode
-														"postal_code": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: Province
-														"province": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-														// Property: State
-														"state": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: DimensionType
-																"dimension_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Description: "The type of segment dimension to use for a string dimension.",
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-																// Property: Values
-																"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-																	ElementType: types.StringType,
-																	Computed:    true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Description: "Specifies profile based criteria for a segment.",
-															Computed:    true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Description: "The address based criteria for the segment.",
-													Computed:    true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-											Description: "Specifies the dimension settings within profile attributes for a segment.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: SourceSegments
-							"source_segments": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: SegmentDefinitionName
-										"segment_definition_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: SourceType
-							"source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Specifies the operator on how to handle multiple groups within the same segment.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Specifies the operator on how to handle multiple groups within the same segment.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Include
-				"include": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies the operator on how to handle multiple groups within the same segment.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An array that defines the set of segment criteria to evaluate when handling segment groups for the segment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"segment_groups": schemaAttributea8a819fc3437551f98e6a774(),
 		// Property: SegmentSort
 		// CloudFormation resource type schema:
 		//
@@ -2611,41 +2194,7 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"segment_sort": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Attributes
-				"attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DataType
-							"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The data type of the sort attribute (e.g., string, number, date).",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the attribute to sort by.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Order
-							"order": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The sort order for the attribute (ascending or descending).",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The type of attribute (e.g., profile, calculated).",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A list of attributes used to sort the segments and their ordering preferences.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The segment sort configuration for ordering segment results.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"segment_sort": schemaAttributee656d82d294e05e3c16c4dc1(),
 		// Property: SegmentSqlQuery
 		// CloudFormation resource type schema:
 		//
@@ -2655,10 +2204,7 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"segment_sql_query": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The SQL query that defines the segment criteria.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"segment_sql_query": schemaAttributea142389e251c61e38f528751(),
 		// Property: SegmentType
 		// CloudFormation resource type schema:
 		//
@@ -2670,10 +2216,7 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"segment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The SQL query that defines the segment criteria.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"segment_type": schemaAttributea142389e251c61e38f528751(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -2709,24 +2252,7 @@ func segmentDefinitionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags used to organize, track, or control access for this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute8cc251800028cf6cc20781e0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,41 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute114a54f1585dda198c401d2a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A policy document containing permissions to add to the specified table. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute46825773d5d73d4516be9df1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the specified table.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5570160c9d437536d89ec450() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the table.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec04488de2ad3779107259ca2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The namespace that the table belongs to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef65c18daffc591d24d773cb0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the specified table bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_s3tables_table_policy", tablePolicyDataSource)
 }
@@ -29,10 +64,7 @@ func tablePolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The namespace that the table belongs to.",
 		//	  "type": "string"
 		//	}
-		"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The namespace that the table belongs to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"namespace": schemaAttributec04488de2ad3779107259ca2(),
 		// Property: ResourcePolicy
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +72,7 @@ func tablePolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A policy document containing permissions to add to the specified table. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
 		//	  "type": "string"
 		//	}
-		"resource_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A policy document containing permissions to add to the specified table. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_policy": schemaAttribute114a54f1585dda198c401d2a(),
 		// Property: TableARN
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +83,7 @@ func tablePolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"table_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the specified table.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"table_arn": schemaAttribute46825773d5d73d4516be9df1(),
 		// Property: TableBucketARN
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +94,7 @@ func tablePolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"table_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the specified table bucket.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"table_bucket_arn": schemaAttributef65c18daffc591d24d773cb0(),
 		// Property: TableName
 		// CloudFormation resource type schema:
 		//
@@ -79,10 +102,7 @@ func tablePolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name for the table.",
 		//	  "type": "string"
 		//	}
-		"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the table.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"table_name": schemaAttribute5570160c9d437536d89ec450(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

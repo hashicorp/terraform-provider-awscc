@@ -15,6 +15,345 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute13a027b017e7c6bae9ccf50e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ColumnFormat
+			"column_format": schemaAttribute718436703f9b42c722dbec64(),
+			// Property: ColumnName
+			"column_name": schemaAttributed2b4ed7ee1de525a666b7fa4(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d136b63a7df0022cb3d42dc() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AppFlowConfig
+			"app_flow_config": schemaAttributed93a331116be1b79ff5a9877(),
+			// Property: CloudwatchConfig
+			"cloudwatch_config": schemaAttribute570a408b12c6359c1b475378(),
+			// Property: RDSSourceConfig
+			"rds_source_config": schemaAttributea8db52b5586dcaf87967d234(),
+			// Property: RedshiftSourceConfig
+			"redshift_source_config": schemaAttribute1ed286380add4eaf78a12ba9(),
+			// Property: S3SourceConfig
+			"s3_source_config": schemaAttributeb840b71acff7d3391bc5658f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1da645e6d21ec077031f51e3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the AnomalyDetector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ed286380add4eaf78a12ba9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClusterIdentifier
+			"cluster_identifier": schemaAttributeef50c21f1395408c64f663ca(),
+			// Property: DatabaseHost
+			"database_host": schemaAttributeef50c21f1395408c64f663ca(),
+			// Property: DatabaseName
+			"database_name": schemaAttributeef50c21f1395408c64f663ca(),
+			// Property: DatabasePort
+			"database_port": schemaAttribute57c234fd572611561d03886f(),
+			// Property: RoleArn
+			"role_arn": schemaAttributeef50c21f1395408c64f663ca(),
+			// Property: SecretManagerArn
+			"secret_manager_arn": schemaAttributeef50c21f1395408c64f663ca(),
+			// Property: TableName
+			"table_name": schemaAttributeef50c21f1395408c64f663ca(),
+			// Property: VpcConfiguration
+			"vpc_configuration": schemaAttribute3832bf772affd0b9f0bb8998(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20a42754f8d24e03a14bab59() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name for the Amazon Lookout for Metrics Anomaly Detector",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3832bf772affd0b9f0bb8998() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecurityGroupIdList
+			"security_group_id_list": schemaAttribute8c10832a25bcfe55ba8e50f9(),
+			// Property: SubnetIdList
+			"subnet_id_list": schemaAttribute8c10832a25bcfe55ba8e50f9(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48a6f3542d8ff628a8838c68() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Operator used to aggregate metric values",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute570a408b12c6359c1b475378() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RoleArn
+			"role_arn": schemaAttributeef50c21f1395408c64f663ca(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57c234fd572611561d03886f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5eafa86a516cde78324582da() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Frequency of anomaly detection",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute718436703f9b42c722dbec64() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A timestamp format for the timestamps in the dataset",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b8e8648add7c6110b3a3873() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the MetricSet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d42ecf8e689f07d4aad3b31() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AnomalyDetectorFrequency
+			"anomaly_detector_frequency": schemaAttribute5eafa86a516cde78324582da(),
+		}, /*END SCHEMA*/
+		Description: "Configuration options for the AnomalyDetector",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7db78486063953090884349b() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c10832a25bcfe55ba8e50f9() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8f862572464060cd58b5fbe1() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AggregationFunction
+				"aggregation_function": schemaAttribute48a6f3542d8ff628a8838c68(),
+				// Property: MetricName
+				"metric_name": schemaAttributed2b4ed7ee1de525a666b7fa4(),
+				// Property: Namespace
+				"namespace": schemaAttributeef50c21f1395408c64f663ca(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Metrics captured by this MetricSet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90594f90c445ee4d5dd99cc8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the MetricSet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea73c1f2ab2e3c60e1c633d9f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "KMS key used to encrypt the AnomalyDetector data",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8db52b5586dcaf87967d234() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DBInstanceIdentifier
+			"db_instance_identifier": schemaAttributeef50c21f1395408c64f663ca(),
+			// Property: DatabaseHost
+			"database_host": schemaAttributeef50c21f1395408c64f663ca(),
+			// Property: DatabaseName
+			"database_name": schemaAttributeef50c21f1395408c64f663ca(),
+			// Property: DatabasePort
+			"database_port": schemaAttribute57c234fd572611561d03886f(),
+			// Property: RoleArn
+			"role_arn": schemaAttributeef50c21f1395408c64f663ca(),
+			// Property: SecretManagerArn
+			"secret_manager_arn": schemaAttributeef50c21f1395408c64f663ca(),
+			// Property: TableName
+			"table_name": schemaAttributeef50c21f1395408c64f663ca(),
+			// Property: VpcConfiguration
+			"vpc_configuration": schemaAttribute3832bf772affd0b9f0bb8998(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb42472841f9915dec020f7f2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Charset
+			"charset": schemaAttributeef50c21f1395408c64f663ca(),
+			// Property: FileCompression
+			"file_compression": schemaAttributeef50c21f1395408c64f663ca(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb840b71acff7d3391bc5658f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FileFormatDescriptor
+			"file_format_descriptor": schemaAttributed3af047eaf3693f85a5c11f7(),
+			// Property: HistoricalDataPathList
+			"historical_data_path_list": schemaAttribute8c10832a25bcfe55ba8e50f9(),
+			// Property: RoleArn
+			"role_arn": schemaAttributeef50c21f1395408c64f663ca(),
+			// Property: TemplatedPathList
+			"templated_path_list": schemaAttribute8c10832a25bcfe55ba8e50f9(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2f3912406f97a1229e8b705() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DimensionList
+				"dimension_list": schemaAttributede534a45143d7070637f545d(),
+				// Property: MetricList
+				"metric_list": schemaAttribute8f862572464060cd58b5fbe1(),
+				// Property: MetricSetDescription
+				"metric_set_description": schemaAttribute7b8e8648add7c6110b3a3873(),
+				// Property: MetricSetFrequency
+				"metric_set_frequency": schemaAttributee695424496a6b166aa265848(),
+				// Property: MetricSetName
+				"metric_set_name": schemaAttribute90594f90c445ee4d5dd99cc8(),
+				// Property: MetricSource
+				"metric_source": schemaAttribute1d136b63a7df0022cb3d42dc(),
+				// Property: Offset
+				"offset": schemaAttributec5e3302b655da0e60daa9543(),
+				// Property: TimestampColumn
+				"timestamp_column": schemaAttribute13a027b017e7c6bae9ccf50e(),
+				// Property: Timezone
+				"timezone": schemaAttributeef50c21f1395408c64f663ca(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "List of metric sets for anomaly detection",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5e3302b655da0e60daa9543() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Offset, in seconds, between the frequency interval and the time at which the metrics are available.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed2b4ed7ee1de525a666b7fa4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of a column in the data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3af047eaf3693f85a5c11f7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CsvFormatDescriptor
+			"csv_format_descriptor": schemaAttributed6e0c329c50235024abe6cb0(),
+			// Property: JsonFormatDescriptor
+			"json_format_descriptor": schemaAttributeb42472841f9915dec020f7f2(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6e0c329c50235024abe6cb0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Charset
+			"charset": schemaAttributeef50c21f1395408c64f663ca(),
+			// Property: ContainsHeader
+			"contains_header": schemaAttribute7db78486063953090884349b(),
+			// Property: Delimiter
+			"delimiter": schemaAttributeef50c21f1395408c64f663ca(),
+			// Property: FileCompression
+			"file_compression": schemaAttributeef50c21f1395408c64f663ca(),
+			// Property: HeaderList
+			"header_list": schemaAttribute8c10832a25bcfe55ba8e50f9(),
+			// Property: QuoteSymbol
+			"quote_symbol": schemaAttributeef50c21f1395408c64f663ca(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed93a331116be1b79ff5a9877() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FlowName
+			"flow_name": schemaAttributeef50c21f1395408c64f663ca(),
+			// Property: RoleArn
+			"role_arn": schemaAttributeef50c21f1395408c64f663ca(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede534a45143d7070637f545d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Dimensions for this MetricSet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee695424496a6b166aa265848() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A frequency period to aggregate the data",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef50c21f1395408c64f663ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_lookoutmetrics_anomaly_detector", anomalyDetectorDataSource)
 }
@@ -46,17 +385,7 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"anomaly_detector_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AnomalyDetectorFrequency
-				"anomaly_detector_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Frequency of anomaly detection",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Configuration options for the AnomalyDetector",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"anomaly_detector_config": schemaAttribute7d42ecf8e689f07d4aad3b31(),
 		// Property: AnomalyDetectorDescription
 		// CloudFormation resource type schema:
 		//
@@ -66,10 +395,7 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"anomaly_detector_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description for the AnomalyDetector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"anomaly_detector_description": schemaAttribute1da645e6d21ec077031f51e3(),
 		// Property: AnomalyDetectorName
 		// CloudFormation resource type schema:
 		//
@@ -80,10 +406,7 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 		//	  "type": "string"
 		//	}
-		"anomaly_detector_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name for the Amazon Lookout for Metrics Anomaly Detector",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"anomaly_detector_name": schemaAttribute20a42754f8d24e03a14bab59(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -92,9 +415,7 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributeef50c21f1395408c64f663ca(),
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -105,10 +426,7 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/.*",
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "KMS key used to encrypt the AnomalyDetector data",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttributea73c1f2ab2e3c60e1c633d9f(),
 		// Property: MetricSetList
 		// CloudFormation resource type schema:
 		//
@@ -536,284 +854,7 @@ func anomalyDetectorDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"metric_set_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: DimensionList
-					"dimension_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Description: "Dimensions for this MetricSet.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: MetricList
-					"metric_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: AggregationFunction
-								"aggregation_function": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Operator used to aggregate metric values",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: MetricName
-								"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Name of a column in the data.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Namespace
-								"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "Metrics captured by this MetricSet.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: MetricSetDescription
-					"metric_set_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A description for the MetricSet.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: MetricSetFrequency
-					"metric_set_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A frequency period to aggregate the data",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: MetricSetName
-					"metric_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the MetricSet.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: MetricSource
-					"metric_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AppFlowConfig
-							"app_flow_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: FlowName
-									"flow_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: RoleArn
-									"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: CloudwatchConfig
-							"cloudwatch_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: RoleArn
-									"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: RDSSourceConfig
-							"rds_source_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DBInstanceIdentifier
-									"db_instance_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: DatabaseHost
-									"database_host": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: DatabaseName
-									"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: DatabasePort
-									"database_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: RoleArn
-									"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: SecretManagerArn
-									"secret_manager_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: TableName
-									"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: VpcConfiguration
-									"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: SecurityGroupIdList
-											"security_group_id_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: SubnetIdList
-											"subnet_id_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: RedshiftSourceConfig
-							"redshift_source_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: ClusterIdentifier
-									"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: DatabaseHost
-									"database_host": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: DatabaseName
-									"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: DatabasePort
-									"database_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: RoleArn
-									"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: SecretManagerArn
-									"secret_manager_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: TableName
-									"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: VpcConfiguration
-									"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: SecurityGroupIdList
-											"security_group_id_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-											// Property: SubnetIdList
-											"subnet_id_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-												ElementType: types.StringType,
-												Computed:    true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: S3SourceConfig
-							"s3_source_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: FileFormatDescriptor
-									"file_format_descriptor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: CsvFormatDescriptor
-											"csv_format_descriptor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Charset
-													"charset": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: ContainsHeader
-													"contains_header": schema.BoolAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: Delimiter
-													"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: FileCompression
-													"file_compression": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: HeaderList
-													"header_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-														ElementType: types.StringType,
-														Computed:    true,
-													}, /*END ATTRIBUTE*/
-													// Property: QuoteSymbol
-													"quote_symbol": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: JsonFormatDescriptor
-											"json_format_descriptor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Charset
-													"charset": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: FileCompression
-													"file_compression": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: HistoricalDataPathList
-									"historical_data_path_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: RoleArn
-									"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: TemplatedPathList
-									"templated_path_list": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Offset
-					"offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "Offset, in seconds, between the frequency interval and the time at which the metrics are available.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: TimestampColumn
-					"timestamp_column": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ColumnFormat
-							"column_format": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A timestamp format for the timestamps in the dataset",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ColumnName
-							"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Name of a column in the data.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Timezone
-					"timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "List of metric sets for anomaly detection",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"metric_set_list": schemaAttributec2f3912406f97a1229e8b705(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

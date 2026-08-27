@@ -15,6 +15,125 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute026c7bdf01a0cd4e0a70b3b5() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0b778bbfb8d4e54aa7690c7a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Defines the source of a key",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0eaf78fe4c9cd9990f7db26e() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schemaAttribute24749a542dc0bce32ad609cf(),
+				// Property: StatusMessage
+				"status_message": schemaAttribute7a23613eb7a3eaefaabbd6e7(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24749a542dc0bce32ad609cf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Defines the replication state of a key",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f7f88ba123f617d9ee7f94f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f2ccda55f3c930237ed846e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute7a23613eb7a3eaefaabbd6e7(),
+				// Property: Value
+				"value": schemaAttribute7a23613eb7a3eaefaabbd6e7(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute71048bf942666f52198df108() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KeyAlgorithm
+			"key_algorithm": schemaAttribute7a23613eb7a3eaefaabbd6e7(),
+			// Property: KeyClass
+			"key_class": schemaAttribute7a23613eb7a3eaefaabbd6e7(),
+			// Property: KeyModesOfUse
+			"key_modes_of_use": schemaAttributef467f017a3966f6fb85eae38(),
+			// Property: KeyUsage
+			"key_usage": schemaAttribute7a23613eb7a3eaefaabbd6e7(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a23613eb7a3eaefaabbd6e7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ec0bbebc5ecbb392331f8e6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Defines the state of a key",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea5b4b54a93ab2afb9c8aa119() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The resource-based policy attached to the key, in JSON format.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef467f017a3966f6fb85eae38() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Decrypt
+			"decrypt": schemaAttribute026c7bdf01a0cd4e0a70b3b5(),
+			// Property: DeriveKey
+			"derive_key": schemaAttribute026c7bdf01a0cd4e0a70b3b5(),
+			// Property: Encrypt
+			"encrypt": schemaAttribute026c7bdf01a0cd4e0a70b3b5(),
+			// Property: Generate
+			"generate": schemaAttribute026c7bdf01a0cd4e0a70b3b5(),
+			// Property: NoRestrictions
+			"no_restrictions": schemaAttribute026c7bdf01a0cd4e0a70b3b5(),
+			// Property: Sign
+			"sign": schemaAttribute026c7bdf01a0cd4e0a70b3b5(),
+			// Property: Unwrap
+			"unwrap": schemaAttribute026c7bdf01a0cd4e0a70b3b5(),
+			// Property: Verify
+			"verify": schemaAttribute026c7bdf01a0cd4e0a70b3b5(),
+			// Property: Wrap
+			"wrap": schemaAttribute026c7bdf01a0cd4e0a70b3b5(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_paymentcryptography_key", keyDataSource)
 }
@@ -50,27 +169,21 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"derive_key_usage": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"derive_key_usage": schemaAttribute7a23613eb7a3eaefaabbd6e7(),
 		// Property: Enabled
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"enabled": schemaAttribute026c7bdf01a0cd4e0a70b3b5(),
 		// Property: Exportable
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"exportable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"exportable": schemaAttribute026c7bdf01a0cd4e0a70b3b5(),
 		// Property: KeyAttributes
 		// CloudFormation resource type schema:
 		//
@@ -186,65 +299,7 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"key_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KeyAlgorithm
-				"key_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: KeyClass
-				"key_class": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: KeyModesOfUse
-				"key_modes_of_use": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Decrypt
-						"decrypt": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: DeriveKey
-						"derive_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Encrypt
-						"encrypt": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Generate
-						"generate": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: NoRestrictions
-						"no_restrictions": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Sign
-						"sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Unwrap
-						"unwrap": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Verify
-						"verify": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Wrap
-						"wrap": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: KeyUsage
-				"key_usage": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"key_attributes": schemaAttribute71048bf942666f52198df108(),
 		// Property: KeyCheckValueAlgorithm
 		// CloudFormation resource type schema:
 		//
@@ -257,9 +312,7 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"key_check_value_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"key_check_value_algorithm": schemaAttribute7a23613eb7a3eaefaabbd6e7(),
 		// Property: KeyIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -269,9 +322,7 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws:payment-cryptography:[a-z]{2}-[a-z]{1,16}-[0-9]+:[0-9]{12}:(key/[0-9a-zA-Z]{16,64}|alias/[a-zA-Z0-9/_-]+)$|^alias/[a-zA-Z0-9/_-]+$",
 		//	  "type": "string"
 		//	}
-		"key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"key_identifier": schemaAttribute7a23613eb7a3eaefaabbd6e7(),
 		// Property: KeyOrigin
 		// CloudFormation resource type schema:
 		//
@@ -283,10 +334,7 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"key_origin": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Defines the source of a key",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"key_origin": schemaAttribute0b778bbfb8d4e54aa7690c7a(),
 		// Property: KeyState
 		// CloudFormation resource type schema:
 		//
@@ -300,10 +348,7 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"key_state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Defines the state of a key",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"key_state": schemaAttribute9ec0bbebc5ecbb392331f8e6(),
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
@@ -314,10 +359,7 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The resource-based policy attached to the key, in JSON format.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy": schemaAttributea5b4b54a93ab2afb9c8aa119(),
 		// Property: ReplicationRegions
 		// CloudFormation resource type schema:
 		//
@@ -328,10 +370,7 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"replication_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"replication_regions": schemaAttribute4f7f88ba123f617d9ee7f94f(),
 		// Property: ReplicationStatus
 		// CloudFormation resource type schema:
 		//
@@ -363,23 +402,7 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"replication_status":      // Pattern: ""
-		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Status
-					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "Defines the replication state of a key",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: StatusMessage
-					"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"replication_status": schemaAttribute0eaf78fe4c9cd9990f7db26e(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -409,21 +432,7 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute6f2ccda55f3c930237ed846e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

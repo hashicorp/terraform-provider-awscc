@@ -14,6 +14,100 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0ccfabd0ebc643bbbd8de243() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DayOfMonth
+			"day_of_month": schemaAttributef756aa09a8b57b4325dec54b(),
+			// Property: DayOfWeek
+			"day_of_week": schemaAttribute6f4976258494cb2dca0a1993(),
+		}, /*END SCHEMA*/
+		Description: "<p>The day scheduled for refresh.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6241b463bcd4ee7d695451c1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The date time after which refresh is to be scheduled</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6f4976258494cb2dca0a1993() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute781c189da2f9135d31937da6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>An unique identifier for the refresh schedule.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bc51e2145b8bc0235a89115() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Interval
+			"interval": schemaAttribute6f4976258494cb2dca0a1993(),
+			// Property: RefreshOnDay
+			"refresh_on_day": schemaAttribute0ccfabd0ebc643bbbd8de243(),
+			// Property: TimeOfTheDay
+			"time_of_the_day": schemaAttributefb0100a1303bf432e26fb92b(),
+			// Property: TimeZone
+			"time_zone": schemaAttribute93ec415f96d57a234727b240(),
+		}, /*END SCHEMA*/
+		Description: "<p>Information about the schedule frequency.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bc8b1c45906de308017185d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The Amazon Resource Name (ARN) of the data source.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e0a1e81a929342817505e09() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: RefreshType
+			"refresh_type": schemaAttribute6f4976258494cb2dca0a1993(),
+			// Property: ScheduleFrequency
+			"schedule_frequency": schemaAttribute7bc51e2145b8bc0235a89115(),
+			// Property: ScheduleId
+			"schedule_id": schemaAttribute781c189da2f9135d31937da6(),
+			// Property: StartAfterDateTime
+			"start_after_date_time": schemaAttribute6241b463bcd4ee7d695451c1(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93ec415f96d57a234727b240() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The timezone for scheduled refresh.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef756aa09a8b57b4325dec54b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The Day Of Month for scheduled refresh.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb0100a1303bf432e26fb92b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The time of the day for scheduled refresh.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_quicksight_refresh_schedule", refreshScheduleDataSource)
 }
@@ -29,10 +123,7 @@ func refreshScheduleDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the data source.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The Amazon Resource Name (ARN) of the data source.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute7bc8b1c45906de308017185d(),
 		// Property: AwsAccountId
 		// CloudFormation resource type schema:
 		//
@@ -42,18 +133,14 @@ func refreshScheduleDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"aws_account_id": schemaAttribute6f4976258494cb2dca0a1993(),
 		// Property: DataSetId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"data_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"data_set_id": schemaAttribute6f4976258494cb2dca0a1993(),
 		// Property: Schedule
 		// CloudFormation resource type schema:
 		//
@@ -137,62 +224,7 @@ func refreshScheduleDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: RefreshType
-				"refresh_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ScheduleFrequency
-				"schedule_frequency": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Interval
-						"interval": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: RefreshOnDay
-						"refresh_on_day": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: DayOfMonth
-								"day_of_month": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "<p>The Day Of Month for scheduled refresh.</p>",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: DayOfWeek
-								"day_of_week": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "<p>The day scheduled for refresh.</p>",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TimeOfTheDay
-						"time_of_the_day": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The time of the day for scheduled refresh.</p>",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: TimeZone
-						"time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "<p>The timezone for scheduled refresh.</p>",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "<p>Information about the schedule frequency.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ScheduleId
-				"schedule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>An unique identifier for the refresh schedule.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StartAfterDateTime
-				"start_after_date_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>The date time after which refresh is to be scheduled</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"schedule": schemaAttribute8e0a1e81a929342817505e09(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

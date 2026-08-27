@@ -14,6 +14,12 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttributea2ed8564d96a08bac12b8e2e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_pcaconnectorad_service_principal_name", servicePrincipalNameDataSource)
 }
@@ -31,9 +37,7 @@ func servicePrincipalNameDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:connector(\\/[\\w-]+)$",
 		//	  "type": "string"
 		//	}
-		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"connector_arn": schemaAttributea2ed8564d96a08bac12b8e2e(),
 		// Property: DirectoryRegistrationArn
 		// CloudFormation resource type schema:
 		//
@@ -43,9 +47,7 @@ func servicePrincipalNameDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^arn:[\\w-]+:pca-connector-ad:[\\w-]+:[0-9]+:directory-registration(\\/[\\w-]+)$",
 		//	  "type": "string"
 		//	}
-		"directory_registration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"directory_registration_arn": schemaAttributea2ed8564d96a08bac12b8e2e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

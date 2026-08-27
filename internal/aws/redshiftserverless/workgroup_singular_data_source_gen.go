@@ -15,6 +15,282 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute07d9c633d019cac5c779bc63() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute296e2998e71366684cc2e962(),
+				// Property: Value
+				"value": schemaAttribute296e2998e71366684cc2e962(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The map of the key-value pairs used to tag the workgroup.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute296e2998e71366684cc2e962() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2ef02ecf537bc5f4b7833081() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of subnet IDs the workgroup is associated with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute305bcc9064c119ee364cbd5d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The namespace the workgroup is associated with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40a1ad47a3cebeee36c44068() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of security group IDs to associate with the workgroup.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b823f17ff139c87dab459a0() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4f2d963f35904d9e242aa45d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute503fb4e12b3ea3bba1d3dca9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Level
+			"level": schemaAttribute4f2d963f35904d9e242aa45d(),
+			// Property: Status
+			"status": schemaAttribute296e2998e71366684cc2e962(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6229e977a8c84498e41ca6fc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the snapshot to restore the namespace from. Because snapshot names are unique only within an account, also specify SnapshotOwnerAccount when restoring from a snapshot owned by a different account. Specify either SnapshotName or SnapshotArn, but not both. When this resource is first created, the namespace is restored from this snapshot. On subsequent updates, a restore occurs only when SnapshotName or SnapshotOwnerAccount changes from its previous value. If both values are unchanged or SnapshotName is removed, no restore takes place and existing data is preserved.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66dada51a262712cd711fd33() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The value that specifies whether to enable enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e9333229041345a778661b4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: NetworkInterfaces
+				"network_interfaces": schemaAttribute8fea1ea07c02fe6d6726e281(),
+				// Property: VpcEndpointId
+				"vpc_endpoint_id": schemaAttribute296e2998e71366684cc2e962(),
+				// Property: VpcId
+				"vpc_id": schemaAttribute296e2998e71366684cc2e962(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute86397da9f026f0e40f0994b9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the snapshot to restore the namespace from. Specify either SnapshotArn or SnapshotName, but not both. When this resource is first created, the namespace is restored from this snapshot. On subsequent updates, a restore occurs only when SnapshotArn changes from its previous value. If the value is unchanged or removed, no restore takes place and existing data is preserved.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8fea1ea07c02fe6d6726e281() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailabilityZone
+				"availability_zone": schemaAttribute296e2998e71366684cc2e962(),
+				// Property: NetworkInterfaceId
+				"network_interface_id": schemaAttribute296e2998e71366684cc2e962(),
+				// Property: PrivateIpAddress
+				"private_ip_address": schemaAttribute296e2998e71366684cc2e962(),
+				// Property: SubnetId
+				"subnet_id": schemaAttribute296e2998e71366684cc2e962(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90d20508988581ec9779ff8c() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A value that specifies whether the workgroup can be accessible from a public network.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9704d79154e2962e79ceb8a() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ParameterKey
+				"parameter_key": schemaAttribute296e2998e71366684cc2e962(),
+				// Property: ParameterValue
+				"parameter_value": schemaAttribute296e2998e71366684cc2e962(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of parameters to set for finer control over a database. Available options are datestyle, enable_user_activity_logging, query_group, search_path, max_query_execution_time, and require_ssl.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9edf28dc530bc55540b364d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BaseCapacity
+			"base_capacity": schemaAttribute4f2d963f35904d9e242aa45d(),
+			// Property: ConfigParameters
+			"config_parameters": schemaAttributed013fd73458dafc189c553a5(),
+			// Property: CreationDate
+			"creation_date": schemaAttribute296e2998e71366684cc2e962(),
+			// Property: Endpoint
+			"endpoint": schemaAttributeac1634778bd80da72412874f(),
+			// Property: EnhancedVpcRouting
+			"enhanced_vpc_routing": schemaAttributec48a314fc97ab5c9966adf5b(),
+			// Property: MaxCapacity
+			"max_capacity": schemaAttribute4f2d963f35904d9e242aa45d(),
+			// Property: NamespaceName
+			"namespace_name": schemaAttribute296e2998e71366684cc2e962(),
+			// Property: PricePerformanceTarget
+			"price_performance_target": schemaAttribute503fb4e12b3ea3bba1d3dca9(),
+			// Property: PubliclyAccessible
+			"publicly_accessible": schemaAttributec48a314fc97ab5c9966adf5b(),
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttributefbb6585fd0cec4c04d4c4bf0(),
+			// Property: Status
+			"status": schemaAttribute296e2998e71366684cc2e962(),
+			// Property: SubnetIds
+			"subnet_ids": schemaAttributefbb6585fd0cec4c04d4c4bf0(),
+			// Property: TrackName
+			"track_name": schemaAttribute296e2998e71366684cc2e962(),
+			// Property: WorkgroupArn
+			"workgroup_arn": schemaAttribute296e2998e71366684cc2e962(),
+			// Property: WorkgroupId
+			"workgroup_id": schemaAttribute296e2998e71366684cc2e962(),
+			// Property: WorkgroupName
+			"workgroup_name": schemaAttribute296e2998e71366684cc2e962(),
+		}, /*END SCHEMA*/
+		Description: "Definition for workgroup resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeac1634778bd80da72412874f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Address
+			"address": schemaAttribute296e2998e71366684cc2e962(),
+			// Property: Port
+			"port": schemaAttribute4f2d963f35904d9e242aa45d(),
+			// Property: VpcEndpoints
+			"vpc_endpoints": schemaAttribute6e9333229041345a778661b4(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb64d52e49a7e45a1e96f142a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS account ID that owns the snapshot. Required when restoring from a snapshot shared by another account. Used in combination with SnapshotName. On updates, changing this value while SnapshotName is set triggers a restore from the newly referenced snapshot. If the value is unchanged, no restore takes place and existing data is preserved.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec48a314fc97ab5c9966adf5b() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed013fd73458dafc189c553a5() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ParameterKey
+				"parameter_key": schemaAttribute296e2998e71366684cc2e962(),
+				// Property: ParameterValue
+				"parameter_value": schemaAttribute296e2998e71366684cc2e962(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed069b047e96b1152b9f33d8d() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The base compute capacity of the workgroup in Redshift Processing Units (RPUs).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf3635c7a6031f1d219269b4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the recovery point to restore the namespace from. When this resource is first created, the namespace is restored from this recovery point. On subsequent updates, a restore occurs only when RecoveryPointId changes from its previous value. If the value is unchanged or removed, no restore takes place and existing data is preserved.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1c27c12cfd5f669b69245f5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the workgroup.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef5ff1677ed44e017b8c80a52() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Level
+			"level": schemaAttribute4f2d963f35904d9e242aa45d(),
+			// Property: Status
+			"status": schemaAttribute296e2998e71366684cc2e962(),
+		}, /*END SCHEMA*/
+		Description: "A property that represents the price performance target settings for the workgroup.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef94a0c390f2172acb3170e4e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The max compute capacity of the workgroup in Redshift Processing Units (RPUs).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefbb6585fd0cec4c04d4c4bf0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_redshiftserverless_workgroup", workgroupDataSource)
 }
@@ -30,10 +306,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The base compute capacity of the workgroup in Redshift Processing Units (RPUs).",
 		//	  "type": "integer"
 		//	}
-		"base_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The base compute capacity of the workgroup in Redshift Processing Units (RPUs).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"base_capacity": schemaAttributed069b047e96b1152b9f33d8d(),
 		// Property: ConfigParameters
 		// CloudFormation resource type schema:
 		//
@@ -60,22 +333,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"config_parameters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ParameterKey
-					"parameter_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ParameterValue
-					"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A list of parameters to set for finer control over a database. Available options are datestyle, enable_user_activity_logging, query_group, search_path, max_query_execution_time, and require_ssl.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"config_parameters": schemaAttributea9704d79154e2962e79ceb8a(),
 		// Property: EnhancedVpcRouting
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +342,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The value that specifies whether to enable enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.",
 		//	  "type": "boolean"
 		//	}
-		"enhanced_vpc_routing": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "The value that specifies whether to enable enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enhanced_vpc_routing": schemaAttribute66dada51a262712cd711fd33(),
 		// Property: MaxCapacity
 		// CloudFormation resource type schema:
 		//
@@ -95,10 +350,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The max compute capacity of the workgroup in Redshift Processing Units (RPUs).",
 		//	  "type": "integer"
 		//	}
-		"max_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The max compute capacity of the workgroup in Redshift Processing Units (RPUs).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"max_capacity": schemaAttributef94a0c390f2172acb3170e4e(),
 		// Property: NamespaceName
 		// CloudFormation resource type schema:
 		//
@@ -109,10 +361,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The namespace the workgroup is associated with.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"namespace_name": schemaAttribute305bcc9064c119ee364cbd5d(),
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -120,10 +369,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.",
 		//	  "type": "integer"
 		//	}
-		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The custom port to use when connecting to a workgroup. Valid port ranges are 5431-5455 and 8191-8215. The default is 5439.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"port": schemaAttribute4b823f17ff139c87dab459a0(),
 		// Property: PricePerformanceTarget
 		// CloudFormation resource type schema:
 		//
@@ -146,20 +392,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"price_performance_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Level
-				"level": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Status
-				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A property that represents the price performance target settings for the workgroup.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"price_performance_target": schemaAttributef5ff1677ed44e017b8c80a52(),
 		// Property: PubliclyAccessible
 		// CloudFormation resource type schema:
 		//
@@ -168,10 +401,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A value that specifies whether the workgroup can be accessible from a public network.",
 		//	  "type": "boolean"
 		//	}
-		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A value that specifies whether the workgroup can be accessible from a public network.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"publicly_accessible": schemaAttribute90d20508988581ec9779ff8c(),
 		// Property: RecoveryPointId
 		// CloudFormation resource type schema:
 		//
@@ -179,10 +409,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The identifier of the recovery point to restore the namespace from. When this resource is first created, the namespace is restored from this recovery point. On subsequent updates, a restore occurs only when RecoveryPointId changes from its previous value. If the value is unchanged or removed, no restore takes place and existing data is preserved.",
 		//	  "type": "string"
 		//	}
-		"recovery_point_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the recovery point to restore the namespace from. When this resource is first created, the namespace is restored from this recovery point. On subsequent updates, a restore occurs only when RecoveryPointId changes from its previous value. If the value is unchanged or removed, no restore takes place and existing data is preserved.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"recovery_point_id": schemaAttributedf3635c7a6031f1d219269b4(),
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -199,11 +426,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of security group IDs to associate with the workgroup.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_ids": schemaAttribute40a1ad47a3cebeee36c44068(),
 		// Property: SnapshotArn
 		// CloudFormation resource type schema:
 		//
@@ -211,10 +434,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the snapshot to restore the namespace from. Specify either SnapshotArn or SnapshotName, but not both. When this resource is first created, the namespace is restored from this snapshot. On subsequent updates, a restore occurs only when SnapshotArn changes from its previous value. If the value is unchanged or removed, no restore takes place and existing data is preserved.",
 		//	  "type": "string"
 		//	}
-		"snapshot_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the snapshot to restore the namespace from. Specify either SnapshotArn or SnapshotName, but not both. When this resource is first created, the namespace is restored from this snapshot. On subsequent updates, a restore occurs only when SnapshotArn changes from its previous value. If the value is unchanged or removed, no restore takes place and existing data is preserved.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"snapshot_arn": schemaAttribute86397da9f026f0e40f0994b9(),
 		// Property: SnapshotName
 		// CloudFormation resource type schema:
 		//
@@ -222,10 +442,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the snapshot to restore the namespace from. Because snapshot names are unique only within an account, also specify SnapshotOwnerAccount when restoring from a snapshot owned by a different account. Specify either SnapshotName or SnapshotArn, but not both. When this resource is first created, the namespace is restored from this snapshot. On subsequent updates, a restore occurs only when SnapshotName or SnapshotOwnerAccount changes from its previous value. If both values are unchanged or SnapshotName is removed, no restore takes place and existing data is preserved.",
 		//	  "type": "string"
 		//	}
-		"snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the snapshot to restore the namespace from. Because snapshot names are unique only within an account, also specify SnapshotOwnerAccount when restoring from a snapshot owned by a different account. Specify either SnapshotName or SnapshotArn, but not both. When this resource is first created, the namespace is restored from this snapshot. On subsequent updates, a restore occurs only when SnapshotName or SnapshotOwnerAccount changes from its previous value. If both values are unchanged or SnapshotName is removed, no restore takes place and existing data is preserved.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"snapshot_name": schemaAttribute6229e977a8c84498e41ca6fc(),
 		// Property: SnapshotOwnerAccount
 		// CloudFormation resource type schema:
 		//
@@ -233,10 +450,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The AWS account ID that owns the snapshot. Required when restoring from a snapshot shared by another account. Used in combination with SnapshotName. On updates, changing this value while SnapshotName is set triggers a restore from the newly referenced snapshot. If the value is unchanged, no restore takes place and existing data is preserved.",
 		//	  "type": "string"
 		//	}
-		"snapshot_owner_account": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS account ID that owns the snapshot. Required when restoring from a snapshot shared by another account. Used in combination with SnapshotName. On updates, changing this value while SnapshotName is set triggers a restore from the newly referenced snapshot. If the value is unchanged, no restore takes place and existing data is preserved.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"snapshot_owner_account": schemaAttributeb64d52e49a7e45a1e96f142a(),
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
@@ -253,11 +467,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of subnet IDs the workgroup is associated with.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_ids": schemaAttribute2ef02ecf537bc5f4b7833081(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -288,22 +498,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The map of the key-value pairs used to tag the workgroup.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute07d9c633d019cac5c779bc63(),
 		// Property: TrackName
 		// CloudFormation resource type schema:
 		//
@@ -313,9 +508,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_]+$",
 		//	  "type": "string"
 		//	}
-		"track_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"track_name": schemaAttribute296e2998e71366684cc2e962(),
 		// Property: Workgroup
 		// CloudFormation resource type schema:
 		//
@@ -483,150 +676,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"workgroup": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BaseCapacity
-				"base_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ConfigParameters
-				"config_parameters": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ParameterKey
-							"parameter_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ParameterValue
-							"parameter_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreationDate
-				"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Endpoint
-				"endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Address
-						"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Port
-						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: VpcEndpoints
-						"vpc_endpoints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: NetworkInterfaces
-									"network_interfaces": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: AvailabilityZone
-												"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: NetworkInterfaceId
-												"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: PrivateIpAddress
-												"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: SubnetId
-												"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: VpcEndpointId
-									"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: VpcId
-									"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: EnhancedVpcRouting
-				"enhanced_vpc_routing": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaxCapacity
-				"max_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: NamespaceName
-				"namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PricePerformanceTarget
-				"price_performance_target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Level
-						"level": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Status
-						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PubliclyAccessible
-				"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecurityGroupIds
-				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Status
-				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SubnetIds
-				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: TrackName
-				"track_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: WorkgroupArn
-				"workgroup_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: WorkgroupId
-				"workgroup_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: WorkgroupName
-				"workgroup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Definition for workgroup resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"workgroup": schemaAttributea9edf28dc530bc55540b364d(),
 		// Property: WorkgroupName
 		// CloudFormation resource type schema:
 		//
@@ -637,10 +687,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"workgroup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the workgroup.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"workgroup_name": schemaAttributef1c27c12cfd5f669b69245f5(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

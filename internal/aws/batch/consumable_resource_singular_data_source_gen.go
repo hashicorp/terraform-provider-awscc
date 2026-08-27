@@ -15,6 +15,64 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute4cac7ff567215fd5f6feb48e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of ConsumableResource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5aa22105d2da9986ad76aa89() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Available Quantity of ConsumableResource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73462d40131cbf8ea4159a3a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute794896eff4ea911d877dbb56() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Type of Consumable Resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebaccb0ffa76e2ea859feb36f() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A key-value pair to associate with a resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9e825f80d04fc76e23cc8ad() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Total Quantity of ConsumableResource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributece75fafda374ee90d4ea2074() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "In-use Quantity of ConsumableResource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee14e18dcbe687f55af31f4c9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of the Consumable Resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_batch_consumable_resource", consumableResourceDataSource)
 }
@@ -31,10 +89,7 @@ func consumableResourceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
-		"available_quantity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Available Quantity of ConsumableResource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"available_quantity": schemaAttribute5aa22105d2da9986ad76aa89(),
 		// Property: ConsumableResourceArn
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +97,7 @@ func consumableResourceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "ARN of the Consumable Resource.",
 		//	  "type": "string"
 		//	}
-		"consumable_resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ARN of the Consumable Resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"consumable_resource_arn": schemaAttributee14e18dcbe687f55af31f4c9(),
 		// Property: ConsumableResourceName
 		// CloudFormation resource type schema:
 		//
@@ -54,10 +106,7 @@ func consumableResourceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"consumable_resource_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Name of ConsumableResource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"consumable_resource_name": schemaAttribute4cac7ff567215fd5f6feb48e(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -65,9 +114,7 @@ func consumableResourceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
-		"created_at": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute73462d40131cbf8ea4159a3a(),
 		// Property: InUseQuantity
 		// CloudFormation resource type schema:
 		//
@@ -76,10 +123,7 @@ func consumableResourceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
-		"in_use_quantity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "In-use Quantity of ConsumableResource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"in_use_quantity": schemaAttributece75fafda374ee90d4ea2074(),
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -91,10 +135,7 @@ func consumableResourceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Type of Consumable Resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_type": schemaAttribute794896eff4ea911d877dbb56(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -108,12 +149,7 @@ func consumableResourceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A key-value pair to associate with a resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributebaccb0ffa76e2ea859feb36f(),
 		// Property: TotalQuantity
 		// CloudFormation resource type schema:
 		//
@@ -122,10 +158,7 @@ func consumableResourceDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "format": "int64",
 		//	  "type": "integer"
 		//	}
-		"total_quantity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Total Quantity of ConsumableResource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"total_quantity": schemaAttributec9e825f80d04fc76e23cc8ad(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

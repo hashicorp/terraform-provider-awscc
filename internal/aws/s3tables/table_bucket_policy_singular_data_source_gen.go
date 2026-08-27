@@ -14,6 +14,20 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2a27eaa82c80d9e5a6faf6a0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the table bucket to which the policy applies.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63d62cef7c373883cbf6f372() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A policy document containing permissions to add to the specified table bucket. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_s3tables_table_bucket_policy", tableBucketPolicyDataSource)
 }
@@ -29,10 +43,7 @@ func tableBucketPolicyDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "A policy document containing permissions to add to the specified table bucket. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
 		//	  "type": "string"
 		//	}
-		"resource_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A policy document containing permissions to add to the specified table bucket. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_policy": schemaAttribute63d62cef7c373883cbf6f372(),
 		// Property: TableBucketARN
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +54,7 @@ func tableBucketPolicyDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"table_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the table bucket to which the policy applies.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"table_bucket_arn": schemaAttribute2a27eaa82c80d9e5a6faf6a0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

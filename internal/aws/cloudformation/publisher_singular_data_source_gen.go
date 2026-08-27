@@ -14,6 +14,48 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute5ebe5bfcbad29f00905133d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of account used as the identity provider when registering this publisher with CloudFormation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7bd824926c67ca26818f6356() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "If you are using a Bitbucket or GitHub account for identity verification, the Amazon Resource Name (ARN) for your connection to that account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d7a3877e54c54de9ecae87f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL to the publisher's profile with the identity provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute955a58a0e8135b234eefbc12() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The reserved publisher id for this type, or the publisher id assigned by CloudFormation for publishing in this region.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed801af5577ae4b70b72bbebb() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether you accept the terms and conditions for publishing extensions in the CloudFormation registry. You must accept the terms and conditions in order to publish public extensions to the CloudFormation registry. The terms and conditions can be found at https://cloudformation-registry-documents.s3.amazonaws.com/Terms_and_Conditions_for_AWS_CloudFormation_Registry_Publishers.pdf",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee54b9f343c33726924feef2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether the publisher is verified.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudformation_publisher", publisherDataSource)
 }
@@ -29,10 +71,7 @@ func publisherDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Whether you accept the terms and conditions for publishing extensions in the CloudFormation registry. You must accept the terms and conditions in order to publish public extensions to the CloudFormation registry. The terms and conditions can be found at https://cloudformation-registry-documents.s3.amazonaws.com/Terms_and_Conditions_for_AWS_CloudFormation_Registry_Publishers.pdf",
 		//	  "type": "boolean"
 		//	}
-		"accept_terms_and_conditions": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether you accept the terms and conditions for publishing extensions in the CloudFormation registry. You must accept the terms and conditions in order to publish public extensions to the CloudFormation registry. The terms and conditions can be found at https://cloudformation-registry-documents.s3.amazonaws.com/Terms_and_Conditions_for_AWS_CloudFormation_Registry_Publishers.pdf",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"accept_terms_and_conditions": schemaAttributed801af5577ae4b70b72bbebb(),
 		// Property: ConnectionArn
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +80,7 @@ func publisherDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws(-[w]+)*:.+:.+:[0-9]{12}:.+",
 		//	  "type": "string"
 		//	}
-		"connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "If you are using a Bitbucket or GitHub account for identity verification, the Amazon Resource Name (ARN) for your connection to that account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_arn": schemaAttribute7bd824926c67ca26818f6356(),
 		// Property: IdentityProvider
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +93,7 @@ func publisherDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"identity_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of account used as the identity provider when registering this publisher with CloudFormation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"identity_provider": schemaAttribute5ebe5bfcbad29f00905133d0(),
 		// Property: PublisherId
 		// CloudFormation resource type schema:
 		//
@@ -71,10 +104,7 @@ func publisherDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[0-9a-zA-Z-]{1,40}",
 		//	  "type": "string"
 		//	}
-		"publisher_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The reserved publisher id for this type, or the publisher id assigned by CloudFormation for publishing in this region.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"publisher_id": schemaAttribute955a58a0e8135b234eefbc12(),
 		// Property: PublisherProfile
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +114,7 @@ func publisherDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "(http:|https:)+[^s]+[w]",
 		//	  "type": "string"
 		//	}
-		"publisher_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The URL to the publisher's profile with the identity provider.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"publisher_profile": schemaAttribute7d7a3877e54c54de9ecae87f(),
 		// Property: PublisherStatus
 		// CloudFormation resource type schema:
 		//
@@ -99,10 +126,7 @@ func publisherDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"publisher_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether the publisher is verified.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"publisher_status": schemaAttributeee54b9f343c33726924feef2(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

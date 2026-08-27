@@ -15,6 +15,317 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute13a78db92f32dda912817bbf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1819185273d4fa8925c7b979() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the distribution forwards and caches based on query strings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute181bc95824816c396f8c4e99() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The path to a directory or file to cached, or not cache. Use an asterisk symbol to specify wildcard directories (path/to/assets/*), and file types (*.html, *jpg, *js). Directories and file paths are case-sensitive.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a9687f15b241cc9e26f8a6f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The IP address type for the distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f2ee5d30339e5b987e06dcd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b71a0fd5870b2ae8c261395() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The specific query strings that the distribution forwards to the origin.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f0f9496de106b4b530bed8a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The headers that you want your distribution to forward to your origin and base caching on.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3f6f5f417e71b79cc87c13c7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42a0a7cf0a0dec89fd6e2b30() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies which cookies to forward to the distribution's origin for a cache behavior: all, none, or allow-list to forward only the cookies specified in the cookiesAllowList parameter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45a7fda5cb64a4bafc66445f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The HTTP method responses that are cached by your distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute46b11235fb829cf215c2318c() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The specific cookies to forward to your distribution's origin.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute620c1e2636d9a1a28a5e773d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS Region name of the origin resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute67af7b47c186e48b1a6ae1d3() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute3f6f5f417e71b79cc87c13c7(),
+				// Property: Value
+				"value": schemaAttribute2f2ee5d30339e5b987e06dcd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute75819f2e3222d65ad8e58d29() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77cfcd9cdd3f3ce4b4965f51() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The specific headers to forward to your distribution's origin.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79cd91b7190fc1aeff9de159() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The certificate attached to the Distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e2585fffddda0da26b5f321() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89d26c4ee65f280a0e4fe456() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HeadersAllowList
+			"headers_allow_list": schemaAttribute77cfcd9cdd3f3ce4b4965f51(),
+			// Property: Option
+			"option": schemaAttribute3f0f9496de106b4b530bed8a(),
+		}, /*END SCHEMA*/
+		Description: "An object that describes the headers that are forwarded to the origin. Your content is cached based on the headers that are forwarded.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9714292675923832ed8ac0b1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The cache behavior for the specified path.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea6790428a932dc8eada9b5a0() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the bundle that is currently applied to your distribution, specified using the distributionName parameter, can be changed to another bundle.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaff9df2efd1d1ccfa2564016() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3af798d0ec8acbf16772acf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AllowedHTTPMethods
+			"allowed_http_methods": schemaAttributee1382fbe1586564983c0e0b8(),
+			// Property: CachedHTTPMethods
+			"cached_http_methods": schemaAttribute45a7fda5cb64a4bafc66445f(),
+			// Property: DefaultTTL
+			"default_ttl": schemaAttributef844b61d37d3df37b2d8e382(),
+			// Property: ForwardedCookies
+			"forwarded_cookies": schemaAttributee3d96c95fb76addf6c064f04(),
+			// Property: ForwardedHeaders
+			"forwarded_headers": schemaAttribute89d26c4ee65f280a0e4fe456(),
+			// Property: ForwardedQueryStrings
+			"forwarded_query_strings": schemaAttributedf40f241f7695327e4d78a25(),
+			// Property: MaximumTTL
+			"maximum_ttl": schemaAttributeaff9df2efd1d1ccfa2564016(),
+			// Property: MinimumTTL
+			"minimum_ttl": schemaAttributeef96c12441338664731eeb73(),
+		}, /*END SCHEMA*/
+		Description: "An object that describes the cache behavior settings for the distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec2bdcc1fad62a196d324c984() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The bundle ID to use for the distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecce31d2da3a9c3d4ded50bed() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttributecef6b199bc1bef639074b3a1(),
+			// Property: ProtocolPolicy
+			"protocol_policy": schemaAttributed9e0f9b6a38110df89aa3078(),
+			// Property: RegionName
+			"region_name": schemaAttribute620c1e2636d9a1a28a5e773d(),
+		}, /*END SCHEMA*/
+		Description: "An object that describes the origin resource for the distribution, such as a Lightsail instance or load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecef6b199bc1bef639074b3a1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the origin resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1ad13f0659586309ca905d9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The cache behavior of the distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3c5a7e37fea26dd5aa85797() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Behavior
+			"behavior": schemaAttributed1ad13f0659586309ca905d9(),
+		}, /*END SCHEMA*/
+		Description: "An object that describes the default cache behavior for the distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed9e0f9b6a38110df89aa3078() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede1b2227d80a882c8171b4b2() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the distribution is enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf40f241f7695327e4d78a25() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Option
+			"option": schemaAttribute1819185273d4fa8925c7b979(),
+			// Property: QueryStringsAllowList
+			"query_strings_allow_list": schemaAttribute3b71a0fd5870b2ae8c261395(),
+		}, /*END SCHEMA*/
+		Description: "An object that describes the query strings that are forwarded to the origin. Your content is cached based on the query strings that are forwarded.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1382fbe1586564983c0e0b8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The HTTP methods that are processed and forwarded to the distribution's origin.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3d96c95fb76addf6c064f04() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CookiesAllowList
+			"cookies_allow_list": schemaAttribute46b11235fb829cf215c2318c(),
+			// Property: Option
+			"option": schemaAttribute42a0a7cf0a0dec89fd6e2b30(),
+		}, /*END SCHEMA*/
+		Description: "An object that describes the cookies that are forwarded to the origin. Your content is cached based on the cookies that are forwarded.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef96c12441338664731eeb73() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef844b61d37d3df37b2d8e382() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The default amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the content has been updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd491ebe1e0535dfac2aaa16() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Behavior
+				"behavior": schemaAttribute9714292675923832ed8ac0b1(),
+				// Property: Path
+				"path": schemaAttribute181bc95824816c396f8c4e99(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of objects that describe the per-path cache behavior for the distribution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_lightsail_distribution", distributionDataSource)
 }
@@ -30,10 +341,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Indicates whether the bundle that is currently applied to your distribution, specified using the distributionName parameter, can be changed to another bundle.",
 		//	  "type": "boolean"
 		//	}
-		"able_to_update_bundle": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the bundle that is currently applied to your distribution, specified using the distributionName parameter, can be changed to another bundle.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"able_to_update_bundle": schemaAttributea6790428a932dc8eada9b5a0(),
 		// Property: BundleId
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +349,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The bundle ID to use for the distribution.",
 		//	  "type": "string"
 		//	}
-		"bundle_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The bundle ID to use for the distribution.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"bundle_id": schemaAttributec2bdcc1fad62a196d324c984(),
 		// Property: CacheBehaviorSettings
 		// CloudFormation resource type schema:
 		//
@@ -138,91 +443,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"cache_behavior_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllowedHTTPMethods
-				"allowed_http_methods": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The HTTP methods that are processed and forwarded to the distribution's origin.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CachedHTTPMethods
-				"cached_http_methods": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The HTTP method responses that are cached by your distribution.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DefaultTTL
-				"default_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The default amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the content has been updated.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ForwardedCookies
-				"forwarded_cookies": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CookiesAllowList
-						"cookies_allow_list": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The specific cookies to forward to your distribution's origin.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Option
-						"option": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies which cookies to forward to the distribution's origin for a cache behavior: all, none, or allow-list to forward only the cookies specified in the cookiesAllowList parameter.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "An object that describes the cookies that are forwarded to the origin. Your content is cached based on the cookies that are forwarded.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ForwardedHeaders
-				"forwarded_headers": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: HeadersAllowList
-						"headers_allow_list": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The specific headers to forward to your distribution's origin.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Option
-						"option": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The headers that you want your distribution to forward to your origin and base caching on.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "An object that describes the headers that are forwarded to the origin. Your content is cached based on the headers that are forwarded.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ForwardedQueryStrings
-				"forwarded_query_strings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Option
-						"option": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Indicates whether the distribution forwards and caches based on query strings.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: QueryStringsAllowList
-						"query_strings_allow_list": schema.SetAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The specific query strings that the distribution forwards to the origin.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "An object that describes the query strings that are forwarded to the origin. Your content is cached based on the query strings that are forwarded.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaximumTTL
-				"maximum_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MinimumTTL
-				"minimum_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The minimum amount of time that objects stay in the distribution's cache before the distribution forwards another request to the origin to determine whether the object has been updated.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object that describes the cache behavior settings for the distribution.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cache_behavior_settings": schemaAttributeb3af798d0ec8acbf16772acf(),
 		// Property: CacheBehaviors
 		// CloudFormation resource type schema:
 		//
@@ -247,24 +468,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"cache_behaviors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Behavior
-					"behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The cache behavior for the specified path.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Path
-					"path": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The path to a directory or file to cached, or not cache. Use an asterisk symbol to specify wildcard directories (path/to/assets/*), and file types (*.html, *jpg, *js). Directories and file paths are case-sensitive.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of objects that describe the per-path cache behavior for the distribution.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cache_behaviors": schemaAttributefd491ebe1e0535dfac2aaa16(),
 		// Property: CertificateName
 		// CloudFormation resource type schema:
 		//
@@ -272,10 +476,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The certificate attached to the Distribution.",
 		//	  "type": "string"
 		//	}
-		"certificate_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The certificate attached to the Distribution.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate_name": schemaAttribute79cd91b7190fc1aeff9de159(),
 		// Property: DefaultCacheBehavior
 		// CloudFormation resource type schema:
 		//
@@ -290,26 +491,14 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"default_cache_behavior": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Behavior
-				"behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The cache behavior of the distribution.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object that describes the default cache behavior for the distribution.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"default_cache_behavior": schemaAttributed3c5a7e37fea26dd5aa85797(),
 		// Property: DistributionArn
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"distribution_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"distribution_arn": schemaAttribute75819f2e3222d65ad8e58d29(),
 		// Property: DistributionName
 		// CloudFormation resource type schema:
 		//
@@ -318,10 +507,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "\\w[\\w\\-]*\\w",
 		//	  "type": "string"
 		//	}
-		"distribution_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the distribution.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"distribution_name": schemaAttribute7e2585fffddda0da26b5f321(),
 		// Property: IpAddressType
 		// CloudFormation resource type schema:
 		//
@@ -329,10 +515,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The IP address type for the distribution.",
 		//	  "type": "string"
 		//	}
-		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The IP address type for the distribution.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ip_address_type": schemaAttribute2a9687f15b241cc9e26f8a6f(),
 		// Property: IsEnabled
 		// CloudFormation resource type schema:
 		//
@@ -340,10 +523,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "Indicates whether the distribution is enabled.",
 		//	  "type": "boolean"
 		//	}
-		"is_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the distribution is enabled.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"is_enabled": schemaAttributede1b2227d80a882c8171b4b2(),
 		// Property: Origin
 		// CloudFormation resource type schema:
 		//
@@ -366,27 +546,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"origin": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the origin resource.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProtocolPolicy
-				"protocol_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The protocol that your Amazon Lightsail distribution uses when establishing a connection with your origin to pull content.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RegionName
-				"region_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The AWS Region name of the origin resource.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object that describes the origin resource for the distribution, such as a Lightsail instance or load balancer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"origin": schemaAttributecce31d2da3a9c3d4ded50bed(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -394,10 +554,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The status of the distribution.",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the distribution.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute13a78db92f32dda912817bbf(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -429,24 +586,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute67af7b47c186e48b1a6ae1d3(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

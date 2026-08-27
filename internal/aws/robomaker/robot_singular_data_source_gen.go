@@ -15,6 +15,50 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute4e8ff6c8d6b55ac69c6da28b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The target architecture of the robot.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9eeca4dbe2465398b77d098d() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A key-value pair to associate with a resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8a1f6454915f9f7454a4482() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the fleet.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed95abe12401afb002b205aeb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the robot.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea6f382cd7b1806dcdd350d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Greengrass group id.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd558b17badeb82886497583() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_robomaker_robot", robotDataSource)
 }
@@ -35,10 +79,7 @@ func robotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"architecture": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The target architecture of the robot.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"architecture": schemaAttribute4e8ff6c8d6b55ac69c6da28b(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -46,9 +87,7 @@ func robotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]*:[\\w+=,.@-]+(/[\\w+=,.@-]+)*",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributefd558b17badeb82886497583(),
 		// Property: Fleet
 		// CloudFormation resource type schema:
 		//
@@ -58,10 +97,7 @@ func robotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"fleet": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the fleet.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"fleet": schemaAttributed8a1f6454915f9f7454a4482(),
 		// Property: GreengrassGroupId
 		// CloudFormation resource type schema:
 		//
@@ -71,10 +107,7 @@ func robotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"greengrass_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Greengrass group id.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"greengrass_group_id": schemaAttributeea6f382cd7b1806dcdd350d0(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +117,7 @@ func robotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the robot.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributed95abe12401afb002b205aeb(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -104,12 +134,7 @@ func robotDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A key-value pair to associate with a resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute9eeca4dbe2465398b77d098d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

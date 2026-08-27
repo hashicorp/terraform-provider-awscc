@@ -15,6 +15,19 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute8c7028c0c707f7eeb4743f45() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeead944bb911578fe50f45634() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_vpc_endpoint_service_permissions", vPCEndpointServicePermissionsDataSource)
 }
@@ -27,25 +40,21 @@ func vPCEndpointServicePermissionsDataSource(ctx context.Context) (datasource.Da
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"allowed_principals": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"allowed_principals": schemaAttributeead944bb911578fe50f45634(),
 		// Property: ServiceId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"service_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"service_id": schemaAttribute8c7028c0c707f7eeb4743f45(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

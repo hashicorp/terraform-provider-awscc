@@ -14,6 +14,18 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute987bd08bf277878cb394debe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc8cb0eb51b17cceb27fec31() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_wisdom_ai_guardrail_version", aIGuardrailVersionDataSource)
 }
@@ -29,9 +41,7 @@ func aIGuardrailVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}){0,2}(:[A-Z0-9_$]+){0,1}$",
 		//	  "type": "string"
 		//	}
-		"ai_guardrail_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"ai_guardrail_arn": schemaAttribute987bd08bf277878cb394debe(),
 		// Property: AIGuardrailId
 		// CloudFormation resource type schema:
 		//
@@ -39,9 +49,7 @@ func aIGuardrailVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"ai_guardrail_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"ai_guardrail_id": schemaAttribute987bd08bf277878cb394debe(),
 		// Property: AIGuardrailVersionId
 		// CloudFormation resource type schema:
 		//
@@ -49,9 +57,7 @@ func aIGuardrailVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(:[A-Z0-9_$]+){0,1}$",
 		//	  "type": "string"
 		//	}
-		"ai_guardrail_version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"ai_guardrail_version_id": schemaAttribute987bd08bf277878cb394debe(),
 		// Property: AssistantArn
 		// CloudFormation resource type schema:
 		//
@@ -59,9 +65,7 @@ func aIGuardrailVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:[a-z-]*?:wisdom:[a-z0-9-]*?:[0-9]{12}:[a-z-]*?/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}(?:/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})?$",
 		//	  "type": "string"
 		//	}
-		"assistant_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"assistant_arn": schemaAttribute987bd08bf277878cb394debe(),
 		// Property: AssistantId
 		// CloudFormation resource type schema:
 		//
@@ -69,27 +73,21 @@ func aIGuardrailVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"assistant_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"assistant_id": schemaAttribute987bd08bf277878cb394debe(),
 		// Property: ModifiedTimeSeconds
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "number"
 		//	}
-		"modified_time_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"modified_time_seconds": schemaAttributefc8cb0eb51b17cceb27fec31(),
 		// Property: VersionNumber
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "number"
 		//	}
-		"version_number": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"version_number": schemaAttributefc8cb0eb51b17cceb27fec31(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

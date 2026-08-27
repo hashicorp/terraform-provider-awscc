@@ -14,6 +14,27 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0334da3b6d408b5312f309a8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Mappings for the collection index",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute03f61bdf2ffb2fe6908ee2db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the collection",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b2e7ee5e74f8eb05b0241e7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the collection index",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_opensearchserverless_collection_index", collectionIndexDataSource)
 }
@@ -32,10 +53,7 @@ func collectionIndexDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[a-z0-9]{3,40}$",
 		//	  "type": "string"
 		//	}
-		"collection_index_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the collection",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"collection_index_id": schemaAttribute03f61bdf2ffb2fe6908ee2db(),
 		// Property: IndexName
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +64,7 @@ func collectionIndexDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the collection index",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"index_name": schemaAttribute6b2e7ee5e74f8eb05b0241e7(),
 		// Property: IndexSchema
 		// CloudFormation resource type schema:
 		//
@@ -60,10 +75,7 @@ func collectionIndexDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"index_schema": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Mappings for the collection index",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"index_schema": schemaAttribute0334da3b6d408b5312f309a8(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

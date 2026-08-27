@@ -15,6 +15,151 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0840f9b730d094f5021f76d0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute299679c495759c28affdd6db(),
+				// Property: Value
+				"value": schemaAttribute94478eedfbcd5fb8258ab531(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Metadata that you can assign to help organize the report plans that you create. Each tag is a key-value pair.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute089c15a171d16a961c850cf3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Accounts
+			"accounts": schemaAttributec0882994452363109ad3fd03(),
+			// Property: FrameworkArns
+			"framework_arns": schemaAttribute6b31840613df2cea800bf0c6(),
+			// Property: OrganizationUnits
+			"organization_units": schemaAttributee87e2bbdd4efd586066140f1(),
+			// Property: Regions
+			"regions": schemaAttribute3de00c562f10c7116563e364(),
+			// Property: ReportTemplate
+			"report_template": schemaAttributec0ce1e749204ab9602b6b84c(),
+		}, /*END SCHEMA*/
+		Description: "Identifies the report template for the report. Reports are built using a report template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a690a40ff0e6640d1a3ebc6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique name of the report plan. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute299679c495759c28affdd6db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3de00c562f10c7116563e364() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of AWS regions that a report covers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6af5aca01fee9e4be8b87aa3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Formats
+			"formats": schemaAttribute8640cfc36a7461d47dc933ad(),
+			// Property: S3BucketName
+			"s3_bucket_name": schemaAttributef94d7630c6c17d87e0f6fa83(),
+			// Property: S3KeyPrefix
+			"s3_key_prefix": schemaAttributec31ee76c1756a97fa5c3950a(),
+		}, /*END SCHEMA*/
+		Description: "A structure that contains information about where and how to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b31840613df2cea800bf0c6() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The Amazon Resource Names (ARNs) of the frameworks a report covers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute750f18c44a05082203c101a8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An optional description of the report plan with a maximum of 1,024 characters.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8640cfc36a7461d47dc933ad() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of the format of your reports: CSV, JSON, or both. If not specified, the default format is CSV.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94478eedfbcd5fb8258ab531() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec0882994452363109ad3fd03() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of AWS accounts that a report covers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec0ce1e749204ab9602b6b84c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Identifies the report template for the report. Reports are built using a report template. The report templates are: `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec31ee76c1756a97fa5c3950a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The prefix for where AWS Backup Audit Manager delivers your reports to Amazon S3. The prefix is this part of the following path: s3://your-bucket-name/prefix/Backup/us-west-2/year/month/day/report-name. If not specified, there is no prefix.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8ab05066b228b55d5b4cf66() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee87e2bbdd4efd586066140f1() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of AWS organization units that a report covers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef94d7630c6c17d87e0f6fa83() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique name of the S3 bucket that receives your reports.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_backup_report_plan", reportPlanDataSource)
 }
@@ -53,28 +198,7 @@ func reportPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"report_delivery_channel": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Formats
-				"formats": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of the format of your reports: CSV, JSON, or both. If not specified, the default format is CSV.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: S3BucketName
-				"s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The unique name of the S3 bucket that receives your reports.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: S3KeyPrefix
-				"s3_key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The prefix for where AWS Backup Audit Manager delivers your reports to Amazon S3. The prefix is this part of the following path: s3://your-bucket-name/prefix/Backup/us-west-2/year/month/day/report-name. If not specified, there is no prefix.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A structure that contains information about where and how to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"report_delivery_channel": schemaAttribute6af5aca01fee9e4be8b87aa3(),
 		// Property: ReportPlanArn
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +206,7 @@ func reportPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.",
 		//	  "type": "string"
 		//	}
-		"report_plan_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"report_plan_arn": schemaAttributec8ab05066b228b55d5b4cf66(),
 		// Property: ReportPlanDescription
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +217,7 @@ func reportPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*\\S.*",
 		//	  "type": "string"
 		//	}
-		"report_plan_description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An optional description of the report plan with a maximum of 1,024 characters.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"report_plan_description": schemaAttribute750f18c44a05082203c101a8(),
 		// Property: ReportPlanName
 		// CloudFormation resource type schema:
 		//
@@ -110,10 +228,7 @@ func reportPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z][_a-zA-Z0-9]*",
 		//	  "type": "string"
 		//	}
-		"report_plan_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique name of the report plan. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"report_plan_name": schemaAttribute0a690a40ff0e6640d1a3ebc6(),
 		// Property: ReportPlanTags
 		// CloudFormation resource type schema:
 		//
@@ -141,24 +256,7 @@ func reportPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"report_plan_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Metadata that you can assign to help organize the report plans that you create. Each tag is a key-value pair.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"report_plan_tags": schemaAttribute0840f9b730d094f5021f76d0(),
 		// Property: ReportSetting
 		// CloudFormation resource type schema:
 		//
@@ -212,41 +310,7 @@ func reportPlanDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"report_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Accounts
-				"accounts": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The list of AWS accounts that a report covers.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FrameworkArns
-				"framework_arns": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The Amazon Resource Names (ARNs) of the frameworks a report covers.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: OrganizationUnits
-				"organization_units": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The list of AWS organization units that a report covers.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Regions
-				"regions": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The list of AWS regions that a report covers.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ReportTemplate
-				"report_template": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Identifies the report template for the report. Reports are built using a report template. The report templates are: `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Identifies the report template for the report. Reports are built using a report template.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"report_setting": schemaAttribute089c15a171d16a961c850cf3(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

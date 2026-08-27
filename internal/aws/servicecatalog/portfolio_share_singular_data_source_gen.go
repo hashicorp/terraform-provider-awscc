@@ -14,6 +14,34 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute20547e7254085d847eeb306a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The portfolio identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute29ab659ee969a52e0c9acbc4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The language code.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82f2bc8fa1518aa23a724d45() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS account ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef66a90dc6e2883a5e7f7b1cb() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables or disables TagOptions sharing when creating the portfolio share.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_servicecatalog_portfolio_share", portfolioShareDataSource)
 }
@@ -29,10 +57,7 @@ func portfolioShareDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The language code.",
 		//	  "type": "string"
 		//	}
-		"accept_language": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The language code.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"accept_language": schemaAttribute29ab659ee969a52e0c9acbc4(),
 		// Property: AccountId
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +66,7 @@ func portfolioShareDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "pattern": "^[0-9]{12}$",
 		//	  "type": "string"
 		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS account ID.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"account_id": schemaAttribute82f2bc8fa1518aa23a724d45(),
 		// Property: PortfolioId
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +74,7 @@ func portfolioShareDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "The portfolio identifier.",
 		//	  "type": "string"
 		//	}
-		"portfolio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The portfolio identifier.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"portfolio_id": schemaAttribute20547e7254085d847eeb306a(),
 		// Property: ShareTagOptions
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +82,7 @@ func portfolioShareDataSource(ctx context.Context) (datasource.DataSource, error
 		//	  "description": "Enables or disables TagOptions sharing when creating the portfolio share.",
 		//	  "type": "boolean"
 		//	}
-		"share_tag_options": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Enables or disables TagOptions sharing when creating the portfolio share.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"share_tag_options": schemaAttributef66a90dc6e2883a5e7f7b1cb(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

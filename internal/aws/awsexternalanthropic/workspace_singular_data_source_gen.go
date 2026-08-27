@@ -16,6 +16,101 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute024e8ee7b5e3a7294aee44bd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23fcee61c473dd6d68f91508() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unique identifier of the workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a3c1bb58e72850a71f33539() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Geographic region for workspace data storage. Immutable after creation. Defaults to 'us' if omitted.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d051cbb93243ffa26a4da65() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8181f350c1c5e3f668632fb9() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Permitted inference geo values. Omit to allow all geos (the service default of 'unrestricted'); otherwise list specific geos.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea5fb0b596824c9f52f7ced85() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6d47324289a6f85895c1c56() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AllowedInferenceGeos
+			"allowed_inference_geos": schemaAttribute8181f350c1c5e3f668632fb9(),
+			// Property: DefaultInferenceGeo
+			"default_inference_geo": schemaAttributed613d61b97c5ad11d89c3b87(),
+			// Property: WorkspaceGeo
+			"workspace_geo": schemaAttribute3a3c1bb58e72850a71f33539(),
+		}, /*END SCHEMA*/
+		Description: "Data residency configuration for the workspace. WorkspaceGeo is immutable after creation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed26ced1a62faddc4e5005801() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the workspace was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed369430334a5dfd0a8700b64() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed613d61b97c5ad11d89c3b87() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Default inference geo applied when requests omit the parameter. Defaults to 'global' if omitted. Must be a member of AllowedInferenceGeos unless AllowedInferenceGeos is omitted.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedb382ce41a12901775ecd5b2() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributed369430334a5dfd0a8700b64(),
+				// Property: Value
+				"value": schemaAttribute5d051cbb93243ffa26a4da65(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_awsexternalanthropic_workspace", workspaceDataSource)
 }
@@ -34,10 +129,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[a-zA-Z0-9_\\-]+:aws-external-anthropic:[a-zA-Z0-9_\\-]+:[0-9]+:workspace/wrkspc_[A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the workspace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute024e8ee7b5e3a7294aee44bd(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -46,11 +138,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the workspace was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributed26ced1a62faddc4e5005801(),
 		// Property: DataResidency
 		// CloudFormation resource type schema:
 		//
@@ -78,28 +166,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"data_residency": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllowedInferenceGeos
-				"allowed_inference_geos": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Permitted inference geo values. Omit to allow all geos (the service default of 'unrestricted'); otherwise list specific geos.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DefaultInferenceGeo
-				"default_inference_geo": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Default inference geo applied when requests omit the parameter. Defaults to 'global' if omitted. Must be a member of AllowedInferenceGeos unless AllowedInferenceGeos is omitted.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: WorkspaceGeo
-				"workspace_geo": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Geographic region for workspace data storage. Immutable after creation. Defaults to 'us' if omitted.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Data residency configuration for the workspace. WorkspaceGeo is immutable after creation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_residency": schemaAttributeb6d47324289a6f85895c1c56(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -110,10 +177,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^wrkspc_[A-Za-z0-9]+$",
 		//	  "type": "string"
 		//	}
-		"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unique identifier of the workspace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"workspace_id": schemaAttribute23fcee61c473dd6d68f91508(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -123,10 +187,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the workspace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributea5fb0b596824c9f52f7ced85(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -161,24 +222,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributedb382ce41a12901775ecd5b2(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

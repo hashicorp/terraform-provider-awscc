@@ -15,6 +15,100 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute09313697a15a66d187daa2d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the NFS server. This value is the IP address or DNS name of the NFS server.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1b60885022a7695237edc2d5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key for an AWS resource tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute21f0657e9c9a775071472412() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The specific NFS version that you want DataSync to use to mount your NFS share.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d323f219d0d466e4754b5c6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AgentArns
+			"agent_arns": schemaAttribute9b3c11258a6585d6fda6275d(),
+		}, /*END SCHEMA*/
+		Description: "Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect an NFS server.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute686c9cef87bcf296db067e1a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for an AWS resource tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute75f54f45d0dcb2244a4a2a6c() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute1b60885022a7695237edc2d5(),
+				// Property: Value
+				"value": schemaAttribute686c9cef87bcf296db067e1a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute94fab81820c56ed731e60f05() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL of the NFS location that was described.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b3c11258a6585d6fda6275d() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "ARN(s) of the agent(s) to use for an NFS location.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6563602f7027de95a02fe43() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Version
+			"version": schemaAttribute21f0657e9c9a775071472412(),
+		}, /*END SCHEMA*/
+		Description: "The NFS mount options that DataSync can use to mount your NFS share.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedfdf269819d6f671b7d68799() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the NFS location.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdfa64b2f02c131337fc1d72() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_datasync_location_nfs", locationNFSDataSource)
 }
@@ -32,10 +126,7 @@ func locationNFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-eusc|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
 		//	  "type": "string"
 		//	}
-		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the NFS location.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"location_arn": schemaAttributedfdf269819d6f671b7d68799(),
 		// Property: LocationUri
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +136,7 @@ func locationNFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9./\\-]+$",
 		//	  "type": "string"
 		//	}
-		"location_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The URL of the NFS location that was described.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"location_uri": schemaAttribute94fab81820c56ed731e60f05(),
 		// Property: MountOptions
 		// CloudFormation resource type schema:
 		//
@@ -72,17 +160,7 @@ func locationNFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"mount_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Version
-				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The specific NFS version that you want DataSync to use to mount your NFS share.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The NFS mount options that DataSync can use to mount your NFS share.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"mount_options": schemaAttributeb6563602f7027de95a02fe43(),
 		// Property: OnPremConfig
 		// CloudFormation resource type schema:
 		//
@@ -108,18 +186,7 @@ func locationNFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"on_prem_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AgentArns
-				"agent_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "ARN(s) of the agent(s) to use for an NFS location.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect an NFS server.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"on_prem_config": schemaAttribute2d323f219d0d466e4754b5c6(),
 		// Property: ServerHostname
 		// CloudFormation resource type schema:
 		//
@@ -129,10 +196,7 @@ func locationNFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$",
 		//	  "type": "string"
 		//	}
-		"server_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the NFS server. This value is the IP address or DNS name of the NFS server.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"server_hostname": schemaAttribute09313697a15a66d187daa2d0(),
 		// Property: Subdirectory
 		// CloudFormation resource type schema:
 		//
@@ -142,10 +206,7 @@ func locationNFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$",
 		//	  "type": "string"
 		//	}
-		"subdirectory": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subdirectory": schemaAttributefdfa64b2f02c131337fc1d72(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -181,24 +242,7 @@ func locationNFSDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key for an AWS resource tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for an AWS resource tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute75f54f45d0dcb2244a4a2a6c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

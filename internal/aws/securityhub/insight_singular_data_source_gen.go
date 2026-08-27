@@ -14,6 +14,1935 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute02ab99a014715d5764b971c6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AwsAccountId
+			"aws_account_id": schemaAttribute50e52996ae2ee3ac54c253e8(),
+			// Property: AwsAccountName
+			"aws_account_name": schemaAttributeefb366cb14b9832d9dabaa6f(),
+			// Property: CompanyName
+			"company_name": schemaAttribute2478b820afa0c47471565450(),
+			// Property: ComplianceAssociatedStandardsId
+			"compliance_associated_standards_id": schemaAttribute4a0fb68422496db5680c2f34(),
+			// Property: ComplianceSecurityControlId
+			"compliance_security_control_id": schemaAttributeee07167d982c0e01d71cdf27(),
+			// Property: ComplianceSecurityControlParametersName
+			"compliance_security_control_parameters_name": schemaAttributee4bd10aac6b757634eaf5929(),
+			// Property: ComplianceSecurityControlParametersValue
+			"compliance_security_control_parameters_value": schemaAttribute2c17e6b55579f68399af58d2(),
+			// Property: ComplianceStatus
+			"compliance_status": schemaAttribute18480dcd8c78488ac1bdc58d(),
+			// Property: Confidence
+			"confidence": schemaAttribute0da423ed9a7aff120b3139fe(),
+			// Property: CreatedAt
+			"created_at": schemaAttributeeaee1d24c899b986c5c8a3c8(),
+			// Property: Criticality
+			"criticality": schemaAttribute1bab4278a9a8b7c4beaa4ce8(),
+			// Property: Description
+			"description": schemaAttributee688dd79f9fda567b22e8070(),
+			// Property: FindingProviderFieldsConfidence
+			"finding_provider_fields_confidence": schemaAttributebc535e5052511304840d44a6(),
+			// Property: FindingProviderFieldsCriticality
+			"finding_provider_fields_criticality": schemaAttributec9dab0e80aa9f961256500ef(),
+			// Property: FindingProviderFieldsRelatedFindingsId
+			"finding_provider_fields_related_findings_id": schemaAttribute03140a31f3d7d358549456fb(),
+			// Property: FindingProviderFieldsRelatedFindingsProductArn
+			"finding_provider_fields_related_findings_product_arn": schemaAttribute36b10f9211856df3f1e26d9f(),
+			// Property: FindingProviderFieldsSeverityLabel
+			"finding_provider_fields_severity_label": schemaAttribute5cb6f8bb02067efc3ce1bdf5(),
+			// Property: FindingProviderFieldsSeverityOriginal
+			"finding_provider_fields_severity_original": schemaAttributec05f7a46ea7deaf074f36f9d(),
+			// Property: FindingProviderFieldsTypes
+			"finding_provider_fields_types": schemaAttribute48f486574408c1626c820f48(),
+			// Property: FirstObservedAt
+			"first_observed_at": schemaAttribute2af160504fc3e85923a2f69a(),
+			// Property: GeneratorId
+			"generator_id": schemaAttribute6bafecd6d6a02eb6d0175599(),
+			// Property: Id
+			"id": schemaAttributede7fea757e3a2ea72c9ff0f2(),
+			// Property: Keyword
+			"keyword": schemaAttributeee3eaf162eebd390557da604(),
+			// Property: LastObservedAt
+			"last_observed_at": schemaAttribute4fe6825e7ad1a0313096fc2f(),
+			// Property: MalwareName
+			"malware_name": schemaAttributec23eff441129785c77273fa2(),
+			// Property: MalwarePath
+			"malware_path": schemaAttributea33959f9f75fd3e334f34669(),
+			// Property: MalwareState
+			"malware_state": schemaAttributefa0f45a0ede070dbc13f23b5(),
+			// Property: MalwareType
+			"malware_type": schemaAttributeb5e28b17cf549dc3af56519b(),
+			// Property: NetworkDestinationDomain
+			"network_destination_domain": schemaAttribute48807b512cb79ffdfdd7238a(),
+			// Property: NetworkDestinationIpV4
+			"network_destination_ip_v4": schemaAttributeb65ea04cdee0e4503da7d159(),
+			// Property: NetworkDestinationIpV6
+			"network_destination_ip_v6": schemaAttribute1e13997d7a1fd37d63b774ef(),
+			// Property: NetworkDestinationPort
+			"network_destination_port": schemaAttribute8d6258bbe56e123709dad26e(),
+			// Property: NetworkDirection
+			"network_direction": schemaAttributec37765e4e591aaabf4139217(),
+			// Property: NetworkProtocol
+			"network_protocol": schemaAttribute167410ecc6abcdf407ccd478(),
+			// Property: NetworkSourceDomain
+			"network_source_domain": schemaAttributee08cd77404d4607664f71531(),
+			// Property: NetworkSourceIpV4
+			"network_source_ip_v4": schemaAttribute9a1795624a0bf294e0a73f7c(),
+			// Property: NetworkSourceIpV6
+			"network_source_ip_v6": schemaAttribute68308dee5e62c5d096c98b1a(),
+			// Property: NetworkSourceMac
+			"network_source_mac": schemaAttributeb31ce0afdfabad8f7c093e49(),
+			// Property: NetworkSourcePort
+			"network_source_port": schemaAttribute49458f272775a8afdbca2973(),
+			// Property: NoteText
+			"note_text": schemaAttributeafcadbc3f7efe1c391163909(),
+			// Property: NoteUpdatedAt
+			"note_updated_at": schemaAttribute8397f45cf881b5313f821b89(),
+			// Property: NoteUpdatedBy
+			"note_updated_by": schemaAttribute864f4de00051befa0969fc9d(),
+			// Property: ProcessLaunchedAt
+			"process_launched_at": schemaAttributec7bab11c6f2fea8e4c2307bb(),
+			// Property: ProcessName
+			"process_name": schemaAttribute57f1db953bae754d1ce80dbd(),
+			// Property: ProcessParentPid
+			"process_parent_pid": schemaAttribute7c858ece182300fca09151c1(),
+			// Property: ProcessPath
+			"process_path": schemaAttributea0c97e594ada1f89f0828024(),
+			// Property: ProcessPid
+			"process_pid": schemaAttribute4b1250b6c5da864270cf102b(),
+			// Property: ProcessTerminatedAt
+			"process_terminated_at": schemaAttribute397b05d55df5d36a25603a70(),
+			// Property: ProductArn
+			"product_arn": schemaAttribute6b2c3bb0b51e168827fcbc70(),
+			// Property: ProductFields
+			"product_fields": schemaAttribute1bdf17c25c1dac6241d66232(),
+			// Property: ProductName
+			"product_name": schemaAttribute2c1c31e354d4171d96416178(),
+			// Property: RecommendationText
+			"recommendation_text": schemaAttributedfb08cc596873d4208659e4a(),
+			// Property: RecordState
+			"record_state": schemaAttributec15e40b745c3356c32a39281(),
+			// Property: Region
+			"region": schemaAttributeef7191fa0ec5840c8e05d8cd(),
+			// Property: RelatedFindingsId
+			"related_findings_id": schemaAttribute8a7d60c1bc3401bef2457ce4(),
+			// Property: RelatedFindingsProductArn
+			"related_findings_product_arn": schemaAttributee426f5ec96086f506eb37f7c(),
+			// Property: ResourceApplicationArn
+			"resource_application_arn": schemaAttributef2ff934dd2a7031c7377c2a2(),
+			// Property: ResourceApplicationName
+			"resource_application_name": schemaAttribute63e0367a332e085116e66c40(),
+			// Property: ResourceAwsEc2InstanceIamInstanceProfileArn
+			"resource_aws_ec_2_instance_iam_instance_profile_arn": schemaAttribute6043411b1c3fe545a6f3fdef(),
+			// Property: ResourceAwsEc2InstanceImageId
+			"resource_aws_ec_2_instance_image_id": schemaAttribute9154bfe1c2f222ed17f72d46(),
+			// Property: ResourceAwsEc2InstanceIpV4Addresses
+			"resource_aws_ec_2_instance_ip_v4_addresses": schemaAttribute2f04813b5bd09042544002dd(),
+			// Property: ResourceAwsEc2InstanceIpV6Addresses
+			"resource_aws_ec_2_instance_ip_v6_addresses": schemaAttributecfcd6c22f9b9fe5d429f2eeb(),
+			// Property: ResourceAwsEc2InstanceKeyName
+			"resource_aws_ec_2_instance_key_name": schemaAttribute80029fbeb7d69be8aeb75f29(),
+			// Property: ResourceAwsEc2InstanceLaunchedAt
+			"resource_aws_ec_2_instance_launched_at": schemaAttributee78a6cc05b6fa8fdb11e0e0e(),
+			// Property: ResourceAwsEc2InstanceSubnetId
+			"resource_aws_ec_2_instance_subnet_id": schemaAttribute87744722c7fe467a4895b044(),
+			// Property: ResourceAwsEc2InstanceType
+			"resource_aws_ec_2_instance_type": schemaAttribute105da2e59452aa645f103e89(),
+			// Property: ResourceAwsEc2InstanceVpcId
+			"resource_aws_ec_2_instance_vpc_id": schemaAttributec5fa54bee5da5dde4a5a81c5(),
+			// Property: ResourceAwsIamAccessKeyCreatedAt
+			"resource_aws_iam_access_key_created_at": schemaAttribute0bcc9cc6fca12731d9dd6eab(),
+			// Property: ResourceAwsIamAccessKeyPrincipalName
+			"resource_aws_iam_access_key_principal_name": schemaAttribute8a1dc867fd378e2faa15632f(),
+			// Property: ResourceAwsIamAccessKeyStatus
+			"resource_aws_iam_access_key_status": schemaAttributec06ef6cc151bee27f74d646f(),
+			// Property: ResourceAwsIamAccessKeyUserName
+			"resource_aws_iam_access_key_user_name": schemaAttribute0ea8a1668d9c89aead2d4335(),
+			// Property: ResourceAwsIamUserUserName
+			"resource_aws_iam_user_user_name": schemaAttributecbfe60cd08f5997dc4aa380b(),
+			// Property: ResourceAwsS3BucketOwnerId
+			"resource_aws_s3_bucket_owner_id": schemaAttributea6c355dac77cd54ebed64cbd(),
+			// Property: ResourceAwsS3BucketOwnerName
+			"resource_aws_s3_bucket_owner_name": schemaAttribute2868a7005da2dfaafe7ecdd1(),
+			// Property: ResourceContainerImageId
+			"resource_container_image_id": schemaAttributed54992fb3157ae565758e6f0(),
+			// Property: ResourceContainerImageName
+			"resource_container_image_name": schemaAttributecc9f9b514969d5da34aaa071(),
+			// Property: ResourceContainerLaunchedAt
+			"resource_container_launched_at": schemaAttribute7382555ac82b8939df1a21ba(),
+			// Property: ResourceContainerName
+			"resource_container_name": schemaAttributeba4313c9f06e1631543dc324(),
+			// Property: ResourceDetailsOther
+			"resource_details_other": schemaAttribute6b60e21387adff47e6a239ca(),
+			// Property: ResourceId
+			"resource_id": schemaAttributec66e31cc24e6e2c4e71af95d(),
+			// Property: ResourcePartition
+			"resource_partition": schemaAttribute5bb5ba2179de5cae2d0c0163(),
+			// Property: ResourceRegion
+			"resource_region": schemaAttribute645ee950e667b4fa3d7be9fe(),
+			// Property: ResourceTags
+			"resource_tags": schemaAttribute9c2c1cb8b6bf6c4814795e5f(),
+			// Property: ResourceType
+			"resource_type": schemaAttribute46a9a2fe244ae0ea4bd6de05(),
+			// Property: Sample
+			"sample": schemaAttribute48739d76fcbb9df26389c8c5(),
+			// Property: SeverityLabel
+			"severity_label": schemaAttributede107e2d561fac5459f1759c(),
+			// Property: SeverityNormalized
+			"severity_normalized": schemaAttributec9c0c67b1bfe9b2dbc2535c1(),
+			// Property: SeverityProduct
+			"severity_product": schemaAttribute60c918f45d258b7f15030844(),
+			// Property: SourceUrl
+			"source_url": schemaAttribute39a8fb88bfea6e80f7d1fef1(),
+			// Property: ThreatIntelIndicatorCategory
+			"threat_intel_indicator_category": schemaAttributecb25cf8ad93ad5d2d3ca05ff(),
+			// Property: ThreatIntelIndicatorLastObservedAt
+			"threat_intel_indicator_last_observed_at": schemaAttribute91b0b4ff85ae2671ccb04f73(),
+			// Property: ThreatIntelIndicatorSource
+			"threat_intel_indicator_source": schemaAttribute781099e03a26f66c3d68aaef(),
+			// Property: ThreatIntelIndicatorSourceUrl
+			"threat_intel_indicator_source_url": schemaAttributea0fe69501f722561d898e2fd(),
+			// Property: ThreatIntelIndicatorType
+			"threat_intel_indicator_type": schemaAttribute66e12990584b6babf719d372(),
+			// Property: ThreatIntelIndicatorValue
+			"threat_intel_indicator_value": schemaAttributee04659a1731752bea786dbf8(),
+			// Property: Title
+			"title": schemaAttributed2003864d44adad9f8caeade(),
+			// Property: Type
+			"type": schemaAttributea23337f29e34c14885136ec4(),
+			// Property: UpdatedAt
+			"updated_at": schemaAttributefa6779f7b9a25ba8f2d2b218(),
+			// Property: UserDefinedFields
+			"user_defined_fields": schemaAttribute6b72d1c8ae83b4f6dce35e24(),
+			// Property: VerificationState
+			"verification_state": schemaAttribute87c00e66777db15bb62e8350(),
+			// Property: VulnerabilitiesExploitAvailable
+			"vulnerabilities_exploit_available": schemaAttribute141cdac27c783eaf4d83d20f(),
+			// Property: VulnerabilitiesFixAvailable
+			"vulnerabilities_fix_available": schemaAttributed83682c8acd776c658b7639f(),
+			// Property: WorkflowState
+			"workflow_state": schemaAttribute52142ec34609136ee681efbc(),
+			// Property: WorkflowStatus
+			"workflow_status": schemaAttribute682ad43659cb10ce750cd7f6(),
+		}, /*END SCHEMA*/
+		Description: "One or more attributes used to filter the findings included in the insight",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute03140a31f3d7d358549456fb() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The finding identifier of a related finding that is identified by the finding provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0bcc9cc6fca12731d9dd6eab() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DateRange
+				"date_range": schemaAttributeb49e2454c6297bdfef01c424(),
+				// Property: End
+				"end": schemaAttributef42519045e4034980a626a3a(),
+				// Property: Start
+				"start": schemaAttributef42519045e4034980a626a3a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The creation date/time of the IAM access key related to a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0da423ed9a7aff120b3139fe() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Eq
+				"eq": schemaAttribute9c988e97f6cc0f9329d717e1(),
+				// Property: Gte
+				"gte": schemaAttributef415775c10c101c7c003d541(),
+				// Property: Lte
+				"lte": schemaAttributed49fe5f1ea9e6502483c2a43(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A finding's confidence.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0ea8a1668d9c89aead2d4335() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The user associated with the IAM access key related to a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute105da2e59452aa645f103e89() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The instance type of the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute141cdac27c783eaf4d83d20f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Indicates whether a software vulnerability in your environment has a known exploit.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute167410ecc6abcdf407ccd478() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The protocol of network-related information about a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18480dcd8c78488ac1bdc58d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19c2ff13d59c448efc97d29b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Non-empty string definition.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1bab4278a9a8b7c4beaa4ce8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Eq
+				"eq": schemaAttribute9c988e97f6cc0f9329d717e1(),
+				// Property: Gte
+				"gte": schemaAttributef415775c10c101c7c003d541(),
+				// Property: Lte
+				"lte": schemaAttributed49fe5f1ea9e6502483c2a43(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The level of importance assigned to the resources associated with the finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1bdf17c25c1dac6241d66232() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute95cb4de6906bfe2692ab12b2(),
+				// Property: Key
+				"key": schemaAttribute19c2ff13d59c448efc97d29b(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A data type where security findings providers can include additional solution-specific details that aren't part of the defined AwsSecurityFinding format.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e13997d7a1fd37d63b774ef() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Cidr
+				"cidr": schemaAttribute75152ced37b6ee1aeb8bb15a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The destination IPv6 address of network-related information about a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2478b820afa0c47471565450() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The name of the findings provider (company) that owns the solution (product) that generates findings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2868a7005da2dfaafe7ecdd1() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The display name of the owner of the S3 bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2af160504fc3e85923a2f69a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DateRange
+				"date_range": schemaAttributeb49e2454c6297bdfef01c424(),
+				// Property: End
+				"end": schemaAttributef42519045e4034980a626a3a(),
+				// Property: Start
+				"start": schemaAttributef42519045e4034980a626a3a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An ISO8601-formatted timestamp that indicates when the security findings provider first observed the potential security issue that a finding captured.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c17e6b55579f68399af58d2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The current value of a security control parameter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c1c31e354d4171d96416178() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The name of the solution (product) that generates findings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f04813b5bd09042544002dd() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Cidr
+				"cidr": schemaAttribute75152ced37b6ee1aeb8bb15a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The IPv4 addresses associated with the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute360e89537c6dccca6655d2f4() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "A date range value for the date filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute36b10f9211856df3f1e26d9f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The ARN of the solution that generated a related finding that is identified by the finding provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute397b05d55df5d36a25603a70() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DateRange
+				"date_range": schemaAttributeb49e2454c6297bdfef01c424(),
+				// Property: End
+				"end": schemaAttributef42519045e4034980a626a3a(),
+				// Property: Start
+				"start": schemaAttributef42519045e4034980a626a3a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A timestamp that identifies when the process was terminated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute39a8fb88bfea6e80f7d1fef1() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A URL that links to a page about the current finding in the security findings provider's solution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute46a9a2fe244ae0ea4bd6de05() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Specifies the type of the resource that details are provided for.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48739d76fcbb9df26389c8c5() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Value
+				"value": schemaAttributedf0f53df2d2fea796b2218ac(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Indicates whether or not sample findings are included in the filter results.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48807b512cb79ffdfdd7238a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The destination domain of network-related information about a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48f486574408c1626c820f48() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "One or more finding types that the finding provider assigned to the finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49458f272775a8afdbca2973() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Eq
+				"eq": schemaAttribute9c988e97f6cc0f9329d717e1(),
+				// Property: Gte
+				"gte": schemaAttributef415775c10c101c7c003d541(),
+				// Property: Lte
+				"lte": schemaAttributed49fe5f1ea9e6502483c2a43(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The source port of network-related information about a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a0fb68422496db5680c2f34() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The unique identifier of a standard in which a control is enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b1250b6c5da864270cf102b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Eq
+				"eq": schemaAttribute9c988e97f6cc0f9329d717e1(),
+				// Property: Gte
+				"gte": schemaAttributef415775c10c101c7c003d541(),
+				// Property: Lte
+				"lte": schemaAttributed49fe5f1ea9e6502483c2a43(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The process ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4fe6825e7ad1a0313096fc2f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DateRange
+				"date_range": schemaAttributeb49e2454c6297bdfef01c424(),
+				// Property: End
+				"end": schemaAttributef42519045e4034980a626a3a(),
+				// Property: Start
+				"start": schemaAttributef42519045e4034980a626a3a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An ISO8601-formatted timestamp that indicates when the security findings provider most recently observed the potential security issue that a finding captured.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute50e52996ae2ee3ac54c253e8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The AWS account ID in which a finding is generated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52142ec34609136ee681efbc() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The workflow state of a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5230eabf2b2c8e065cf7af06() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The condition to apply to a string value when filtering Security Hub findings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute55704b772a567aacb57e4883() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of a Security Hub insight",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute57f1db953bae754d1ce80dbd() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The name of the process.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5bb5ba2179de5cae2d0c0163() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The canonical AWS partition name that the Region is assigned to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5cb6f8bb02067efc3ce1bdf5() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The finding provider value for the severity label.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5f5e8a20dc64974e64f59b88() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A date range unit for the date filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6043411b1c3fe545a6f3fdef() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The IAM profile ARN of the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60c918f45d258b7f15030844() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Eq
+				"eq": schemaAttribute9c988e97f6cc0f9329d717e1(),
+				// Property: Gte
+				"gte": schemaAttributef415775c10c101c7c003d541(),
+				// Property: Lte
+				"lte": schemaAttributed49fe5f1ea9e6502483c2a43(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The native severity as defined by the security findings provider's solution that generated the finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63e0367a332e085116e66c40() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The name of the application that is related to a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute645ee950e667b4fa3d7be9fe() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The canonical AWS external Region name where this resource is located.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66e12990584b6babf719d372() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The type of a threat intelligence indicator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute682ad43659cb10ce750cd7f6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The status of the investigation into a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute68308dee5e62c5d096c98b1a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Cidr
+				"cidr": schemaAttribute75152ced37b6ee1aeb8bb15a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The source IPv6 address of network-related information about a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b2c3bb0b51e168827fcbc70() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The ARN generated by Security Hub that uniquely identifies a third-party company (security findings provider) after this provider's product (solution that generates findings) is registered with Security Hub.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b60e21387adff47e6a239ca() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute95cb4de6906bfe2692ab12b2(),
+				// Property: Key
+				"key": schemaAttribute19c2ff13d59c448efc97d29b(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The details of a resource that doesn't have a specific subfield for the resource type defined.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6b72d1c8ae83b4f6dce35e24() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute95cb4de6906bfe2692ab12b2(),
+				// Property: Key
+				"key": schemaAttribute19c2ff13d59c448efc97d29b(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of name/value string pairs associated with the finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6bafecd6d6a02eb6d0175599() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The identifier for the solution-specific component (a discrete unit of logic) that generated a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7382555ac82b8939df1a21ba() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DateRange
+				"date_range": schemaAttributeb49e2454c6297bdfef01c424(),
+				// Property: End
+				"end": schemaAttributef42519045e4034980a626a3a(),
+				// Property: Start
+				"start": schemaAttributef42519045e4034980a626a3a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A timestamp that identifies when the container was started.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute75152ced37b6ee1aeb8bb15a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A finding's CIDR value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute781099e03a26f66c3d68aaef() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The source of the threat intelligence.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c858ece182300fca09151c1() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Eq
+				"eq": schemaAttribute9c988e97f6cc0f9329d717e1(),
+				// Property: Gte
+				"gte": schemaAttributef415775c10c101c7c003d541(),
+				// Property: Lte
+				"lte": schemaAttributed49fe5f1ea9e6502483c2a43(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The parent process ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80029fbeb7d69be8aeb75f29() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The key name associated with the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8397f45cf881b5313f821b89() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DateRange
+				"date_range": schemaAttributeb49e2454c6297bdfef01c424(),
+				// Property: End
+				"end": schemaAttributef42519045e4034980a626a3a(),
+				// Property: Start
+				"start": schemaAttributef42519045e4034980a626a3a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The timestamp of when the note was updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute864f4de00051befa0969fc9d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The principal that created a note.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87744722c7fe467a4895b044() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The identifier of the subnet that the instance was launched in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute87c00e66777db15bb62e8350() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The veracity of a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a1dc867fd378e2faa15632f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The name of the principal that is associated with an IAM access key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a7d60c1bc3401bef2457ce4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The solution-generated identifier for a related finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d6258bbe56e123709dad26e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Eq
+				"eq": schemaAttribute9c988e97f6cc0f9329d717e1(),
+				// Property: Gte
+				"gte": schemaAttributef415775c10c101c7c003d541(),
+				// Property: Lte
+				"lte": schemaAttributed49fe5f1ea9e6502483c2a43(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The destination port of network-related information about a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9154bfe1c2f222ed17f72d46() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The Amazon Machine Image (AMI) ID of the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute91b0b4ff85ae2671ccb04f73() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DateRange
+				"date_range": schemaAttributeb49e2454c6297bdfef01c424(),
+				// Property: End
+				"end": schemaAttributef42519045e4034980a626a3a(),
+				// Property: Start
+				"start": schemaAttributef42519045e4034980a626a3a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A timestamp that identifies the last observation of a threat intelligence indicator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95cb4de6906bfe2692ab12b2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The condition to apply to the key value when filtering Security Hub findings with a map filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a1795624a0bf294e0a73f7c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Cidr
+				"cidr": schemaAttribute75152ced37b6ee1aeb8bb15a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The source IPv4 address of network-related information about a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c2c1cb8b6bf6c4814795e5f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute95cb4de6906bfe2692ab12b2(),
+				// Property: Key
+				"key": schemaAttribute19c2ff13d59c448efc97d29b(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A list of AWS tags associated with a resource at the time the finding was processed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c988e97f6cc0f9329d717e1() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The equal-to condition to be applied to a single field when querying for findings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0c97e594ada1f89f0828024() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The path to the process executable.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0fe69501f722561d898e2fd() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The URL for more details from the source of the threat intelligence.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea23337f29e34c14885136ec4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A finding type in the format of namespace/category/classifier that classifies a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea33959f9f75fd3e334f34669() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The filesystem path of the malware that was observed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea6c355dac77cd54ebed64cbd() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The canonical user ID of the owner of the S3 bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeafcadbc3f7efe1c391163909() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The text of a note.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb31ce0afdfabad8f7c093e49() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The source media access control (MAC) address of network-related information about a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb49e2454c6297bdfef01c424() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Unit
+			"unit": schemaAttribute5f5e8a20dc64974e64f59b88(),
+			// Property: Value
+			"value": schemaAttribute360e89537c6dccca6655d2f4(),
+		}, /*END SCHEMA*/
+		Description: "A date range for the date filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5e28b17cf549dc3af56519b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The type of the malware that was observed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb65ea04cdee0e4503da7d159() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Cidr
+				"cidr": schemaAttribute75152ced37b6ee1aeb8bb15a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The destination IPv4 address of network-related information about a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9182097ed0e424e98d6570b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A value for the keyword.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeba4313c9f06e1631543dc324() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The name of the container related to a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebc535e5052511304840d44a6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Eq
+				"eq": schemaAttribute9c988e97f6cc0f9329d717e1(),
+				// Property: Gte
+				"gte": schemaAttributef415775c10c101c7c003d541(),
+				// Property: Lte
+				"lte": schemaAttributed49fe5f1ea9e6502483c2a43(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The finding provider value for the finding confidence.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec05f7a46ea7deaf074f36f9d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The finding provider's original value for the severity.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec06ef6cc151bee27f74d646f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The status of the IAM access key related to a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec15e40b745c3356c32a39281() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The updated record state for the finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec23eff441129785c77273fa2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The name of the malware that was observed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec37765e4e591aaabf4139217() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Indicates the direction of network traffic associated with a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5fa54bee5da5dde4a5a81c5() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The identifier of the VPC that the instance was launched in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6602eeb1c9b028440d6d2bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The grouping attribute for the insight's findings",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec66e31cc24e6e2c4e71af95d() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The canonical identifier for the given resource type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7bab11c6f2fea8e4c2307bb() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DateRange
+				"date_range": schemaAttributeb49e2454c6297bdfef01c424(),
+				// Property: End
+				"end": schemaAttributef42519045e4034980a626a3a(),
+				// Property: Start
+				"start": schemaAttributef42519045e4034980a626a3a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A timestamp that identifies when the process was launched.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9c0c67b1bfe9b2dbc2535c1() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Eq
+				"eq": schemaAttribute9c988e97f6cc0f9329d717e1(),
+				// Property: Gte
+				"gte": schemaAttributef415775c10c101c7c003d541(),
+				// Property: Lte
+				"lte": schemaAttributed49fe5f1ea9e6502483c2a43(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The normalized severity of a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9dab0e80aa9f961256500ef() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Eq
+				"eq": schemaAttribute9c988e97f6cc0f9329d717e1(),
+				// Property: Gte
+				"gte": schemaAttributef415775c10c101c7c003d541(),
+				// Property: Lte
+				"lte": schemaAttributed49fe5f1ea9e6502483c2a43(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The finding provider value for the level of importance assigned to the resources associated with the findings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecb25cf8ad93ad5d2d3ca05ff() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The category of a threat intelligence indicator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecbfe60cd08f5997dc4aa380b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The name of an IAM user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc9f9b514969d5da34aaa071() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The name of the image related to a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecfcd6c22f9b9fe5d429f2eeb() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Cidr
+				"cidr": schemaAttribute75152ced37b6ee1aeb8bb15a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The IPv6 addresses associated with the instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed2003864d44adad9f8caeade() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A finding's title.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed49fe5f1ea9e6502483c2a43() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The less-than-equal condition to be applied to a single field when querying for findings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed54992fb3157ae565758e6f0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The identifier of the image related to a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed83682c8acd776c658b7639f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Indicates whether a vulnerability is fixed in a newer version of the affected software packages.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede107e2d561fac5459f1759c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The label of a finding's severity.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributede7fea757e3a2ea72c9ff0f2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The security findings provider-specific identifier for a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf0f53df2d2fea796b2218ac() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the boolean.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedfb08cc596873d4208659e4a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The recommendation of what to do about the issue described in a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee04659a1731752bea786dbf8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The value of a threat intelligence indicator.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0597c23feddbf5f91216436() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of a Security Hub insight",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee08cd77404d4607664f71531() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The source domain of network-related information about a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee426f5ec96086f506eb37f7c() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The ARN of the solution that generated a related finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4bd10aac6b757634eaf5929() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The name of a security control parameter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee688dd79f9fda567b22e8070() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A finding's description.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee78a6cc05b6fa8fdb11e0e0e() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DateRange
+				"date_range": schemaAttributeb49e2454c6297bdfef01c424(),
+				// Property: End
+				"end": schemaAttributef42519045e4034980a626a3a(),
+				// Property: Start
+				"start": schemaAttributef42519045e4034980a626a3a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The date and time the instance was launched.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeaee1d24c899b986c5c8a3c8() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DateRange
+				"date_range": schemaAttributeb49e2454c6297bdfef01c424(),
+				// Property: End
+				"end": schemaAttributef42519045e4034980a626a3a(),
+				// Property: Start
+				"start": schemaAttributef42519045e4034980a626a3a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An ISO8601-formatted timestamp that indicates when the security findings provider captured the potential security issue that a finding captured.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee07167d982c0e01d71cdf27() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The unique identifier of a control across standards.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee3eaf162eebd390557da604() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Value
+				"value": schemaAttributeb9182097ed0e424e98d6570b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A keyword for a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef7191fa0ec5840c8e05d8cd() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The Region from which the finding was generated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeefb366cb14b9832d9dabaa6f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The name of the AWS account in which a finding is generated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2ff934dd2a7031c7377c2a2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The ARN of the application that is related to a finding.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef415775c10c101c7c003d541() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The greater-than-equal condition to be applied to a single field when querying for findings.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef42519045e4034980a626a3a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date and time, in UTC and ISO 8601 format.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa0f45a0ede070dbc13f23b5() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comparison
+				"comparison": schemaAttribute5230eabf2b2c8e065cf7af06(),
+				// Property: Value
+				"value": schemaAttribute19c2ff13d59c448efc97d29b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The state of the malware that was observed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefa6779f7b9a25ba8f2d2b218() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DateRange
+				"date_range": schemaAttributeb49e2454c6297bdfef01c424(),
+				// Property: End
+				"end": schemaAttributef42519045e4034980a626a3a(),
+				// Property: Start
+				"start": schemaAttributef42519045e4034980a626a3a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An ISO8601-formatted timestamp that indicates when the security findings provider last updated the finding record.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_securityhub_insight", insightDataSource)
 }
@@ -3464,2205 +5393,7 @@ func insightDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"filters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AwsAccountId
-				"aws_account_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The AWS account ID in which a finding is generated.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: AwsAccountName
-				"aws_account_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The name of the AWS account in which a finding is generated.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CompanyName
-				"company_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The name of the findings provider (company) that owns the solution (product) that generates findings.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ComplianceAssociatedStandardsId
-				"compliance_associated_standards_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The unique identifier of a standard in which a control is enabled.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ComplianceSecurityControlId
-				"compliance_security_control_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The unique identifier of a control across standards.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ComplianceSecurityControlParametersName
-				"compliance_security_control_parameters_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The name of a security control parameter.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ComplianceSecurityControlParametersValue
-				"compliance_security_control_parameters_value": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The current value of a security control parameter.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ComplianceStatus
-				"compliance_status": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Confidence
-				"confidence": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Eq
-							"eq": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The equal-to condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Gte
-							"gte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The greater-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Lte
-							"lte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The less-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A finding's confidence.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: CreatedAt
-				"created_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DateRange
-							"date_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Unit
-									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A date range unit for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "A date range value for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "A date range for the date filter.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: End
-							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Start
-							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "An ISO8601-formatted timestamp that indicates when the security findings provider captured the potential security issue that a finding captured.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Criticality
-				"criticality": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Eq
-							"eq": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The equal-to condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Gte
-							"gte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The greater-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Lte
-							"lte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The less-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The level of importance assigned to the resources associated with the finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Description
-				"description": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A finding's description.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FindingProviderFieldsConfidence
-				"finding_provider_fields_confidence": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Eq
-							"eq": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The equal-to condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Gte
-							"gte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The greater-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Lte
-							"lte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The less-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The finding provider value for the finding confidence.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FindingProviderFieldsCriticality
-				"finding_provider_fields_criticality": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Eq
-							"eq": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The equal-to condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Gte
-							"gte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The greater-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Lte
-							"lte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The less-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The finding provider value for the level of importance assigned to the resources associated with the findings.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FindingProviderFieldsRelatedFindingsId
-				"finding_provider_fields_related_findings_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The finding identifier of a related finding that is identified by the finding provider.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FindingProviderFieldsRelatedFindingsProductArn
-				"finding_provider_fields_related_findings_product_arn": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The ARN of the solution that generated a related finding that is identified by the finding provider.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FindingProviderFieldsSeverityLabel
-				"finding_provider_fields_severity_label": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The finding provider value for the severity label.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FindingProviderFieldsSeverityOriginal
-				"finding_provider_fields_severity_original": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The finding provider's original value for the severity.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FindingProviderFieldsTypes
-				"finding_provider_fields_types": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "One or more finding types that the finding provider assigned to the finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FirstObservedAt
-				"first_observed_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DateRange
-							"date_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Unit
-									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A date range unit for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "A date range value for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "A date range for the date filter.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: End
-							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Start
-							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "An ISO8601-formatted timestamp that indicates when the security findings provider first observed the potential security issue that a finding captured.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: GeneratorId
-				"generator_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The identifier for the solution-specific component (a discrete unit of logic) that generated a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Id
-				"id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The security findings provider-specific identifier for a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Keyword
-				"keyword": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A value for the keyword.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A keyword for a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LastObservedAt
-				"last_observed_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DateRange
-							"date_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Unit
-									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A date range unit for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "A date range value for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "A date range for the date filter.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: End
-							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Start
-							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "An ISO8601-formatted timestamp that indicates when the security findings provider most recently observed the potential security issue that a finding captured.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MalwareName
-				"malware_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The name of the malware that was observed.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MalwarePath
-				"malware_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The filesystem path of the malware that was observed.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MalwareState
-				"malware_state": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The state of the malware that was observed.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MalwareType
-				"malware_type": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The type of the malware that was observed.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NetworkDestinationDomain
-				"network_destination_domain": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The destination domain of network-related information about a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NetworkDestinationIpV4
-				"network_destination_ip_v4": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Cidr
-							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A finding's CIDR value.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The destination IPv4 address of network-related information about a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NetworkDestinationIpV6
-				"network_destination_ip_v6": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Cidr
-							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A finding's CIDR value.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The destination IPv6 address of network-related information about a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NetworkDestinationPort
-				"network_destination_port": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Eq
-							"eq": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The equal-to condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Gte
-							"gte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The greater-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Lte
-							"lte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The less-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The destination port of network-related information about a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NetworkDirection
-				"network_direction": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Indicates the direction of network traffic associated with a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NetworkProtocol
-				"network_protocol": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The protocol of network-related information about a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NetworkSourceDomain
-				"network_source_domain": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The source domain of network-related information about a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NetworkSourceIpV4
-				"network_source_ip_v4": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Cidr
-							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A finding's CIDR value.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The source IPv4 address of network-related information about a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NetworkSourceIpV6
-				"network_source_ip_v6": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Cidr
-							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A finding's CIDR value.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The source IPv6 address of network-related information about a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NetworkSourceMac
-				"network_source_mac": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The source media access control (MAC) address of network-related information about a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NetworkSourcePort
-				"network_source_port": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Eq
-							"eq": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The equal-to condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Gte
-							"gte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The greater-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Lte
-							"lte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The less-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The source port of network-related information about a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NoteText
-				"note_text": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The text of a note.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NoteUpdatedAt
-				"note_updated_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DateRange
-							"date_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Unit
-									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A date range unit for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "A date range value for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "A date range for the date filter.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: End
-							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Start
-							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The timestamp of when the note was updated.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NoteUpdatedBy
-				"note_updated_by": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The principal that created a note.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProcessLaunchedAt
-				"process_launched_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DateRange
-							"date_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Unit
-									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A date range unit for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "A date range value for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "A date range for the date filter.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: End
-							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Start
-							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A timestamp that identifies when the process was launched.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProcessName
-				"process_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The name of the process.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProcessParentPid
-				"process_parent_pid": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Eq
-							"eq": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The equal-to condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Gte
-							"gte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The greater-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Lte
-							"lte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The less-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The parent process ID.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProcessPath
-				"process_path": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The path to the process executable.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProcessPid
-				"process_pid": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Eq
-							"eq": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The equal-to condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Gte
-							"gte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The greater-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Lte
-							"lte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The less-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The process ID.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProcessTerminatedAt
-				"process_terminated_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DateRange
-							"date_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Unit
-									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A date range unit for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "A date range value for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "A date range for the date filter.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: End
-							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Start
-							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A timestamp that identifies when the process was terminated.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProductArn
-				"product_arn": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The ARN generated by Security Hub that uniquely identifies a third-party company (security findings provider) after this provider's product (solution that generates findings) is registered with Security Hub.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProductFields
-				"product_fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to the key value when filtering Security Hub findings with a map filter.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Key
-							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A data type where security findings providers can include additional solution-specific details that aren't part of the defined AwsSecurityFinding format.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ProductName
-				"product_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The name of the solution (product) that generates findings.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RecommendationText
-				"recommendation_text": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The recommendation of what to do about the issue described in a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RecordState
-				"record_state": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The updated record state for the finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Region
-				"region": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The Region from which the finding was generated.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RelatedFindingsId
-				"related_findings_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The solution-generated identifier for a related finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RelatedFindingsProductArn
-				"related_findings_product_arn": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The ARN of the solution that generated a related finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceApplicationArn
-				"resource_application_arn": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The ARN of the application that is related to a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceApplicationName
-				"resource_application_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The name of the application that is related to a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceAwsEc2InstanceIamInstanceProfileArn
-				"resource_aws_ec_2_instance_iam_instance_profile_arn": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The IAM profile ARN of the instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceAwsEc2InstanceImageId
-				"resource_aws_ec_2_instance_image_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The Amazon Machine Image (AMI) ID of the instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceAwsEc2InstanceIpV4Addresses
-				"resource_aws_ec_2_instance_ip_v4_addresses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Cidr
-							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A finding's CIDR value.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The IPv4 addresses associated with the instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceAwsEc2InstanceIpV6Addresses
-				"resource_aws_ec_2_instance_ip_v6_addresses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Cidr
-							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A finding's CIDR value.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The IPv6 addresses associated with the instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceAwsEc2InstanceKeyName
-				"resource_aws_ec_2_instance_key_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The key name associated with the instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceAwsEc2InstanceLaunchedAt
-				"resource_aws_ec_2_instance_launched_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DateRange
-							"date_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Unit
-									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A date range unit for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "A date range value for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "A date range for the date filter.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: End
-							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Start
-							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The date and time the instance was launched.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceAwsEc2InstanceSubnetId
-				"resource_aws_ec_2_instance_subnet_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The identifier of the subnet that the instance was launched in.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceAwsEc2InstanceType
-				"resource_aws_ec_2_instance_type": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The instance type of the instance.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceAwsEc2InstanceVpcId
-				"resource_aws_ec_2_instance_vpc_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The identifier of the VPC that the instance was launched in.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceAwsIamAccessKeyCreatedAt
-				"resource_aws_iam_access_key_created_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DateRange
-							"date_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Unit
-									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A date range unit for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "A date range value for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "A date range for the date filter.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: End
-							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Start
-							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The creation date/time of the IAM access key related to a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceAwsIamAccessKeyPrincipalName
-				"resource_aws_iam_access_key_principal_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The name of the principal that is associated with an IAM access key.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceAwsIamAccessKeyStatus
-				"resource_aws_iam_access_key_status": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The status of the IAM access key related to a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceAwsIamAccessKeyUserName
-				"resource_aws_iam_access_key_user_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The user associated with the IAM access key related to a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceAwsIamUserUserName
-				"resource_aws_iam_user_user_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The name of an IAM user.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceAwsS3BucketOwnerId
-				"resource_aws_s3_bucket_owner_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The canonical user ID of the owner of the S3 bucket.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceAwsS3BucketOwnerName
-				"resource_aws_s3_bucket_owner_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The display name of the owner of the S3 bucket.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceContainerImageId
-				"resource_container_image_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The identifier of the image related to a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceContainerImageName
-				"resource_container_image_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The name of the image related to a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceContainerLaunchedAt
-				"resource_container_launched_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DateRange
-							"date_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Unit
-									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A date range unit for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "A date range value for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "A date range for the date filter.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: End
-							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Start
-							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A timestamp that identifies when the container was started.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceContainerName
-				"resource_container_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The name of the container related to a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceDetailsOther
-				"resource_details_other": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to the key value when filtering Security Hub findings with a map filter.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Key
-							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The details of a resource that doesn't have a specific subfield for the resource type defined.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceId
-				"resource_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The canonical identifier for the given resource type.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourcePartition
-				"resource_partition": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The canonical AWS partition name that the Region is assigned to.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceRegion
-				"resource_region": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The canonical AWS external Region name where this resource is located.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceTags
-				"resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to the key value when filtering Security Hub findings with a map filter.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Key
-							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A list of AWS tags associated with a resource at the time the finding was processed.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceType
-				"resource_type": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Specifies the type of the resource that details are provided for.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Sample
-				"sample": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Value
-							"value": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "The value of the boolean.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Indicates whether or not sample findings are included in the filter results.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SeverityLabel
-				"severity_label": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The label of a finding's severity.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SeverityNormalized
-				"severity_normalized": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Eq
-							"eq": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The equal-to condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Gte
-							"gte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The greater-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Lte
-							"lte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The less-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The normalized severity of a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SeverityProduct
-				"severity_product": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Eq
-							"eq": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The equal-to condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Gte
-							"gte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The greater-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Lte
-							"lte": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Description: "The less-than-equal condition to be applied to a single field when querying for findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The native severity as defined by the security findings provider's solution that generated the finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourceUrl
-				"source_url": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A URL that links to a page about the current finding in the security findings provider's solution.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ThreatIntelIndicatorCategory
-				"threat_intel_indicator_category": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The category of a threat intelligence indicator.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ThreatIntelIndicatorLastObservedAt
-				"threat_intel_indicator_last_observed_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DateRange
-							"date_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Unit
-									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A date range unit for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "A date range value for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "A date range for the date filter.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: End
-							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Start
-							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A timestamp that identifies the last observation of a threat intelligence indicator.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ThreatIntelIndicatorSource
-				"threat_intel_indicator_source": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The source of the threat intelligence.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ThreatIntelIndicatorSourceUrl
-				"threat_intel_indicator_source_url": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The URL for more details from the source of the threat intelligence.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ThreatIntelIndicatorType
-				"threat_intel_indicator_type": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The type of a threat intelligence indicator.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ThreatIntelIndicatorValue
-				"threat_intel_indicator_value": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The value of a threat intelligence indicator.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Title
-				"title": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A finding's title.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Type
-				"type": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A finding type in the format of namespace/category/classifier that classifies a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: UpdatedAt
-				"updated_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DateRange
-							"date_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Unit
-									"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "A date range unit for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-										Description: "A date range value for the date filter.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Description: "A date range for the date filter.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: End
-							"end": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Start
-							"start": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The date and time, in UTC and ISO 8601 format.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "An ISO8601-formatted timestamp that indicates when the security findings provider last updated the finding record.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: UserDefinedFields
-				"user_defined_fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to the key value when filtering Security Hub findings with a map filter.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Key
-							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "A list of name/value string pairs associated with the finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VerificationState
-				"verification_state": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The veracity of a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VulnerabilitiesExploitAvailable
-				"vulnerabilities_exploit_available": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Indicates whether a software vulnerability in your environment has a known exploit.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VulnerabilitiesFixAvailable
-				"vulnerabilities_fix_available": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "Indicates whether a vulnerability is fixed in a newer version of the affected software packages.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: WorkflowState
-				"workflow_state": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The workflow state of a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: WorkflowStatus
-				"workflow_status": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Comparison
-							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The condition to apply to a string value when filtering Security Hub findings.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Value
-							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "Non-empty string definition.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The status of the investigation into a finding.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "One or more attributes used to filter the findings included in the insight",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"filters": schemaAttribute02ab99a014715d5764b971c6(),
 		// Property: GroupByAttribute
 		// CloudFormation resource type schema:
 		//
@@ -5671,10 +5402,7 @@ func insightDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"group_by_attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The grouping attribute for the insight's findings",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"group_by_attribute": schemaAttributec6602eeb1c9b028440d6d2bb(),
 		// Property: InsightArn
 		// CloudFormation resource type schema:
 		//
@@ -5683,10 +5411,7 @@ func insightDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "arn:aws\\S*:securityhub:\\S*",
 		//	  "type": "string"
 		//	}
-		"insight_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of a Security Hub insight",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"insight_arn": schemaAttribute55704b772a567aacb57e4883(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -5696,10 +5421,7 @@ func insightDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of a Security Hub insight",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributee0597c23feddbf5f91216436(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

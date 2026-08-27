@@ -15,6 +15,242 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute00f020f18519d38963f2591b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The URL for the identity provider login (only for environments that use AppStream 2.0).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0984e3392130f499eb9d7b21() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the AWS Key Management Service key used to encrypt the environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d7fe8172895e855fcf21286() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute29b56b78f70736a060d6345f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of VDI.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3276ce744ab1e82509e8f463() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The environment ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e1b3b9229050f1e164301a8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApplyTimeOf
+			"apply_time_of": schemaAttribute9dbaea517ef750698a803561(),
+			// Property: DaysOfTheWeek
+			"days_of_the_week": schemaAttributebad292ac10d14d2c6b032798(),
+			// Property: EndTimeHour
+			"end_time_hour": schemaAttributed85764dea509ba877fd52c6e(),
+			// Property: EndTimeMinute
+			"end_time_minute": schemaAttributef50408c6554f38802e0d8bac(),
+			// Property: StartTimeHour
+			"start_time_hour": schemaAttributef58b2ad9a5bd53129fdeac64(),
+			// Property: StartTimeMinute
+			"start_time_minute": schemaAttribute90cb0c353de8f7489cce7020(),
+			// Property: Type
+			"type": schemaAttribute481fc93c6e690d3aedd123cd(),
+		}, /*END SCHEMA*/
+		Description: "A specification for a time window to apply software updates.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute481fc93c6e690d3aedd123cd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of maintenance window.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5a3f8e94eb02e3637f3d0439() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Describes if the software currently installed on all devices in the environment is a supported version.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79090192f7a8d47a2a883d33() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute0d7fe8172895e855fcf21286(),
+				// Property: Value
+				"value": schemaAttributed773b2a05bcca62c89274a18(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to the newly created devices for this environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8de25bce68028e17689042db() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the software set that is pending to be installed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8fff0625d863da0cad1d5cd4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the software set to apply.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute90cb0c353de8f7489cce7020() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minute start time of maintenance window.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9dbaea517ef750698a803561() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The desired time zone maintenance window.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9eba434ff2a276c6bb3432fc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique identifier of the environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f63baed87fc224faf2ffcec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea00e0b24850801d48aae53aa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Activation code for devices associated with environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea219699e6ef0db1d37552864() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp in unix epoch format when environment was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2edded048d11e874c50b9ff() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Number of devices registered to the environment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb97e6a01327bcc62dba8bb4e() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute0d7fe8172895e855fcf21286(),
+				// Property: Value
+				"value": schemaAttributed773b2a05bcca62c89274a18(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebad292ac10d14d2c6b032798() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The date of maintenance window.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec02a9188c3c4536c4bbb803a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An option to define which software updates to apply.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec1f941a9dec8e045b814b45d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The timestamp in unix epoch format when environment was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd398d38e729239666d70993() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An option to define if software updates should be applied within a maintenance window.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed773b2a05bcca62c89274a18() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed85764dea509ba877fd52c6e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The hour end time of maintenance window.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4cd518d4bcf9d7306bce55f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of the software set that is pending to be installed.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef50408c6554f38802e0d8bac() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minute end time of maintenance window.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef58b2ad9a5bd53129fdeac64() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The hour start time of maintenance window.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeffdcc28a9e471fb930353f2f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces, WorkSpaces Web, or AppStream 2.0.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_workspacesthinclient_environment", environmentDataSource)
 }
@@ -31,10 +267,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z]{2}[a-z0-9]{6}$",
 		//	  "type": "string"
 		//	}
-		"activation_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Activation code for devices associated with environment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"activation_code": schemaAttributea00e0b24850801d48aae53aa(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +278,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[0-9]{0,12}:[a-zA-Z0-9\\-\\/\\._]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The environment ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute3276ce744ab1e82509e8f463(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +286,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp in unix epoch format when environment was created.",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp in unix epoch format when environment was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttributea219699e6ef0db1d37552864(),
 		// Property: DesiredSoftwareSetId
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +295,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]{1,9}$",
 		//	  "type": "string"
 		//	}
-		"desired_software_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the software set to apply.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"desired_software_set_id": schemaAttribute8fff0625d863da0cad1d5cd4(),
 		// Property: DesktopArn
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +306,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[0-9]{0,12}:[a-zA-Z0-9\\-\\/\\._]+$",
 		//	  "type": "string"
 		//	}
-		"desktop_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the desktop to stream from Amazon WorkSpaces, WorkSpaces Web, or AppStream 2.0.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"desktop_arn": schemaAttributeffdcc28a9e471fb930353f2f(),
 		// Property: DesktopEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +317,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(https:\\/\\/)[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,32}(:[0-9]{1,5})?(\\/.*)?$",
 		//	  "type": "string"
 		//	}
-		"desktop_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The URL for the identity provider login (only for environments that use AppStream 2.0).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"desktop_endpoint": schemaAttribute00f020f18519d38963f2591b(),
 		// Property: DesktopType
 		// CloudFormation resource type schema:
 		//
@@ -112,10 +330,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"desktop_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of VDI.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"desktop_type": schemaAttribute29b56b78f70736a060d6345f(),
 		// Property: DeviceCreationTags
 		// CloudFormation resource type schema:
 		//
@@ -149,24 +364,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"device_creation_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to the newly created devices for this environment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"device_creation_tags": schemaAttribute79090192f7a8d47a2a883d33(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -175,10 +373,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-z0-9]{9}$",
 		//	  "type": "string"
 		//	}
-		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique identifier of the environment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"environment_id": schemaAttribute9eba434ff2a276c6bb3432fc(),
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -189,10 +384,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:kms:[a-zA-Z0-9\\-]*:[0-9]{0,12}:key\\/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the AWS Key Management Service key used to encrypt the environment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttribute0984e3392130f499eb9d7b21(),
 		// Property: MaintenanceWindow
 		// CloudFormation resource type schema:
 		//
@@ -266,48 +458,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"maintenance_window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ApplyTimeOf
-				"apply_time_of": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The desired time zone maintenance window.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DaysOfTheWeek
-				"days_of_the_week": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The date of maintenance window.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EndTimeHour
-				"end_time_hour": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The hour end time of maintenance window.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EndTimeMinute
-				"end_time_minute": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The minute end time of maintenance window.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StartTimeHour
-				"start_time_hour": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The hour start time of maintenance window.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: StartTimeMinute
-				"start_time_minute": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The minute start time of maintenance window.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Type
-				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of maintenance window.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A specification for a time window to apply software updates.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"maintenance_window": schemaAttribute3e1b3b9229050f1e164301a8(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -318,10 +469,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^.+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the environment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute9f63baed87fc224faf2ffcec(),
 		// Property: PendingSoftwareSetId
 		// CloudFormation resource type schema:
 		//
@@ -330,10 +478,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]{1,9}$",
 		//	  "type": "string"
 		//	}
-		"pending_software_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the software set that is pending to be installed.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"pending_software_set_id": schemaAttribute8de25bce68028e17689042db(),
 		// Property: PendingSoftwareSetVersion
 		// CloudFormation resource type schema:
 		//
@@ -341,10 +486,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version of the software set that is pending to be installed.",
 		//	  "type": "string"
 		//	}
-		"pending_software_set_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of the software set that is pending to be installed.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"pending_software_set_version": schemaAttributee4cd518d4bcf9d7306bce55f(),
 		// Property: RegisteredDevicesCount
 		// CloudFormation resource type schema:
 		//
@@ -353,10 +495,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"registered_devices_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "Number of devices registered to the environment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"registered_devices_count": schemaAttributeb2edded048d11e874c50b9ff(),
 		// Property: SoftwareSetComplianceStatus
 		// CloudFormation resource type schema:
 		//
@@ -369,10 +508,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"software_set_compliance_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Describes if the software currently installed on all devices in the environment is a supported version.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"software_set_compliance_status": schemaAttribute5a3f8e94eb02e3637f3d0439(),
 		// Property: SoftwareSetUpdateMode
 		// CloudFormation resource type schema:
 		//
@@ -384,10 +520,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"software_set_update_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An option to define which software updates to apply.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"software_set_update_mode": schemaAttributec02a9188c3c4536c4bbb803a(),
 		// Property: SoftwareSetUpdateSchedule
 		// CloudFormation resource type schema:
 		//
@@ -399,10 +532,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"software_set_update_schedule": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An option to define if software updates should be applied within a maintenance window.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"software_set_update_schedule": schemaAttributecd398d38e729239666d70993(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -436,24 +566,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 1 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeb97e6a01327bcc62dba8bb4e(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -461,10 +574,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The timestamp in unix epoch format when environment was last updated.",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The timestamp in unix epoch format when environment was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttributec1f941a9dec8e045b814b45d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

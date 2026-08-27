@@ -15,6 +15,116 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute12528115e6d570ddaa5a4dc8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ErrorLog
+			"error_log": schemaAttributecc4de09fbe52ab9b118700fb(),
+			// Property: FilterLog
+			"filter_log": schemaAttributecc4de09fbe52ab9b118700fb(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1481d6711cca7b6e3162ea6f() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LinkApplicationLogSampling
+			"link_application_log_sampling": schemaAttribute12528115e6d570ddaa5a4dc8(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2914c7c13ce237c3c1ca39bd() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributef2f68188f62e93ee8631a8c4(),
+				// Property: Value
+				"value": schemaAttribute315ac325dbf070d8c49d6cdc(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to assign to the Link.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c5433783b25adcfaed4df6b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomerProvidedId
+			"customer_provided_id": schemaAttribute95a44722798ad96aa784707d(),
+			// Property: ResponderErrorMasking
+			"responder_error_masking": schemaAttribute49c4a0f31cd5123d8efb0f22(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute315ac325dbf070d8c49d6cdc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49c4a0f31cd5123d8efb0f22() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Action
+				"action": schemaAttribute95a44722798ad96aa784707d(),
+				// Property: HttpCode
+				"http_code": schemaAttribute95a44722798ad96aa784707d(),
+				// Property: LoggingTypes
+				"logging_types": schemaAttribute51c31a90e1573fc007506727(),
+				// Property: ResponseLoggingPercentage
+				"response_logging_percentage": schemaAttributecc4de09fbe52ab9b118700fb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51c31a90e1573fc007506727() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute916ba052ce79e35efc6b6fd0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApplicationLogs
+			"application_logs": schemaAttribute1481d6711cca7b6e3162ea6f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95a44722798ad96aa784707d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc4de09fbe52ab9b118700fb() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2f68188f62e93ee8631a8c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_rtbfabric_outbound_external_link", outboundExternalLinkDataSource)
 }
@@ -32,18 +142,14 @@ func outboundExternalLinkDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^arn:aws:rtbfabric:[a-zA-Z0-9_-]+:[0-9]{12}:gateway/[a-zA-Z0-9-]+/link/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute95a44722798ad96aa784707d(),
 		// Property: CreatedTimestamp
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"created_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"created_timestamp": schemaAttribute95a44722798ad96aa784707d(),
 		// Property: GatewayId
 		// CloudFormation resource type schema:
 		//
@@ -51,9 +157,7 @@ func outboundExternalLinkDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^rtb-gw-[a-z0-9-]{1,25}$",
 		//	  "type": "string"
 		//	}
-		"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"gateway_id": schemaAttribute95a44722798ad96aa784707d(),
 		// Property: LinkAttributes
 		// CloudFormation resource type schema:
 		//
@@ -117,40 +221,7 @@ func outboundExternalLinkDataSource(ctx context.Context) (datasource.DataSource,
 		//	  },
 		//	  "type": "object"
 		//	}
-		"link_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomerProvidedId
-				"customer_provided_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResponderErrorMasking
-				"responder_error_masking": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Action
-							"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: HttpCode
-							"http_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: LoggingTypes
-							"logging_types": schema.SetAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ResponseLoggingPercentage
-							"response_logging_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"link_attributes": schemaAttribute2c5433783b25adcfaed4df6b(),
 		// Property: LinkId
 		// CloudFormation resource type schema:
 		//
@@ -158,9 +229,7 @@ func outboundExternalLinkDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^link-[a-z0-9-]{1,25}$",
 		//	  "type": "string"
 		//	}
-		"link_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"link_id": schemaAttribute95a44722798ad96aa784707d(),
 		// Property: LinkLogSettings
 		// CloudFormation resource type schema:
 		//
@@ -202,31 +271,7 @@ func outboundExternalLinkDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"link_log_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ApplicationLogs
-				"application_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: LinkApplicationLogSampling
-						"link_application_log_sampling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ErrorLog
-								"error_log": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: FilterLog
-								"filter_log": schema.Float64Attribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"link_log_settings": schemaAttribute916ba052ce79e35efc6b6fd0(),
 		// Property: LinkStatus
 		// CloudFormation resource type schema:
 		//
@@ -249,9 +294,7 @@ func outboundExternalLinkDataSource(ctx context.Context) (datasource.DataSource,
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"link_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"link_status": schemaAttribute95a44722798ad96aa784707d(),
 		// Property: PublicEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -261,9 +304,7 @@ func outboundExternalLinkDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "pattern": "^(https|http)://.+$",
 		//	  "type": "string"
 		//	}
-		"public_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"public_endpoint": schemaAttribute95a44722798ad96aa784707d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -298,33 +339,14 @@ func outboundExternalLinkDataSource(ctx context.Context) (datasource.DataSource,
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to assign to the Link.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute2914c7c13ce237c3c1ca39bd(),
 		// Property: UpdatedTimestamp
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"updated_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"updated_timestamp": schemaAttribute95a44722798ad96aa784707d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

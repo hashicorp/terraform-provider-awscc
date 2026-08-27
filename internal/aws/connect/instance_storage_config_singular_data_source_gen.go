@@ -14,6 +14,136 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute04e9eea3103cf6ab2095b0eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An associationID is automatically generated when a storage config is associated with an instance",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a8a989263e0b65d0534cffe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Connect Instance ID with which the storage config will be associated",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0d2de191b43da2436252c52a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the encryption key id",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15515fe94460b5a271ce7597() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the type of storage resource available for the instance",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute193c3adec85c2820f55100be() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EncryptionType
+			"encryption_type": schemaAttributeeb82ff4601e83e98ec0a2f39(),
+			// Property: KeyId
+			"key_id": schemaAttribute0d2de191b43da2436252c52a(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute312f5cb2e05966fd3285dd6c() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "Number of hours",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38d3a4ab2b9631d47250b4d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the storage type to be associated with the instance",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51b4bb1b2fb0140da932da1b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FirehoseArn
+			"firehose_arn": schemaAttributee212adb2f068b03ecf78cd1f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute55a80c73b7778c426261375c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EncryptionConfig
+			"encryption_config": schemaAttribute193c3adec85c2820f55100be(),
+			// Property: Prefix
+			"prefix": schemaAttributeb8ed7a18488a9cdfa2d704b2(),
+			// Property: RetentionPeriodHours
+			"retention_period_hours": schemaAttribute312f5cb2e05966fd3285dd6c(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95fbbc9c561a29215b417059() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A name for the S3 Bucket",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ed53b37e4f4a48e37d79802() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketName
+			"bucket_name": schemaAttribute95fbbc9c561a29215b417059(),
+			// Property: BucketPrefix
+			"bucket_prefix": schemaAttributeb8ed7a18488a9cdfa2d704b2(),
+			// Property: EncryptionConfig
+			"encryption_config": schemaAttribute193c3adec85c2820f55100be(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8ed7a18488a9cdfa2d704b2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Prefixes are used to infer logical hierarchy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedffb1d00b5c1215680648d8d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: StreamArn
+			"stream_arn": schemaAttributee212adb2f068b03ecf78cd1f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee212adb2f068b03ecf78cd1f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An ARN is a unique AWS resource identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb82ff4601e83e98ec0a2f39() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies default encryption using AWS KMS-Managed Keys",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_instance_storage_config", instanceStorageConfigDataSource)
 }
@@ -32,10 +162,7 @@ func instanceStorageConfigDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^[-a-z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An associationID is automatically generated when a storage config is associated with an instance",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"association_id": schemaAttribute04e9eea3103cf6ab2095b0eb(),
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +171,7 @@ func instanceStorageConfigDataSource(ctx context.Context) (datasource.DataSource
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Connect Instance ID with which the storage config will be associated",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_arn": schemaAttribute0a8a989263e0b65d0534cffe(),
 		// Property: KinesisFirehoseConfig
 		// CloudFormation resource type schema:
 		//
@@ -65,16 +189,7 @@ func instanceStorageConfigDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"kinesis_firehose_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FirehoseArn
-				"firehose_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "An ARN is a unique AWS resource identifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"kinesis_firehose_config": schemaAttribute51b4bb1b2fb0140da932da1b(),
 		// Property: KinesisStreamConfig
 		// CloudFormation resource type schema:
 		//
@@ -92,16 +207,7 @@ func instanceStorageConfigDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"kinesis_stream_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: StreamArn
-				"stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "An ARN is a unique AWS resource identifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"kinesis_stream_config": schemaAttributedffb1d00b5c1215680648d8d(),
 		// Property: KinesisVideoStreamConfig
 		// CloudFormation resource type schema:
 		//
@@ -149,37 +255,7 @@ func instanceStorageConfigDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"kinesis_video_stream_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EncryptionConfig
-				"encryption_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: EncryptionType
-						"encryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies default encryption using AWS KMS-Managed Keys",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: KeyId
-						"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies the encryption key id",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Prefix
-				"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Prefixes are used to infer logical hierarchy",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RetentionPeriodHours
-				"retention_period_hours": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "Number of hours",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"kinesis_video_stream_config": schemaAttribute55a80c73b7778c426261375c(),
 		// Property: ResourceType
 		// CloudFormation resource type schema:
 		//
@@ -202,10 +278,7 @@ func instanceStorageConfigDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the type of storage resource available for the instance",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_type": schemaAttribute15515fe94460b5a271ce7597(),
 		// Property: S3Config
 		// CloudFormation resource type schema:
 		//
@@ -254,37 +327,7 @@ func instanceStorageConfigDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"s3_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: BucketName
-				"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A name for the S3 Bucket",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: BucketPrefix
-				"bucket_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Prefixes are used to infer logical hierarchy",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: EncryptionConfig
-				"encryption_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: EncryptionType
-						"encryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies default encryption using AWS KMS-Managed Keys",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: KeyId
-						"key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Specifies the encryption key id",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"s3_config": schemaAttribute9ed53b37e4f4a48e37d79802(),
 		// Property: StorageType
 		// CloudFormation resource type schema:
 		//
@@ -298,10 +341,7 @@ func instanceStorageConfigDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the storage type to be associated with the instance",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"storage_type": schemaAttribute38d3a4ab2b9631d47250b4d8(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

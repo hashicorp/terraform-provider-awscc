@@ -15,6 +15,267 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0d5548e8d776b321a7a51b75() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the AWS Verified Access instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1007a4a31baead4b5fce6b36() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of trust provider (user- or device-based).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute10e51825f8ba20683eefe51d() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether FIPS is enabled",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25a05f5d6251ae014b146296() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of user-based trust provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2f61a733a2b5b773672b0240() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The bucket prefix.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute320ab9466e727140a91506c3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatchLogs
+			"cloudwatch_logs": schemaAttribute97a9b5aecf1cc22fbfcb60c5(),
+			// Property: IncludeTrustContext
+			"include_trust_context": schemaAttribute77e3cbf07125b8b504282b0f(),
+			// Property: KinesisDataFirehose
+			"kinesis_data_firehose": schemaAttributea077883916fed80beedbc92a(),
+			// Property: LogVersion
+			"log_version": schemaAttributecbd3e3c85e2e8f50ec5ad640(),
+			// Property: S3
+			"s3": schemaAttributef1c0a99baabadab849feefcd(),
+		}, /*END SCHEMA*/
+		Description: "The configuration options for AWS Verified Access instances.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3537c23e5741c92eec0fc4b6() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeff030bd0cf5fefeacaacf207(),
+				// Property: Value
+				"value": schemaAttributefb1afa6007613498f5798b35(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37ed52154f21881f7c80db28() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of trust provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4253b6f0c04b6aa3b36f36dd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the delivery stream.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute615bf3c58f7ef00a83e5bd2b() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Description
+				"description": schemaAttribute37ed52154f21881f7c80db28(),
+				// Property: DeviceTrustProviderType
+				"device_trust_provider_type": schemaAttribute750f19c25caf8c1c23cbd1ca(),
+				// Property: TrustProviderType
+				"trust_provider_type": schemaAttribute1007a4a31baead4b5fce6b36(),
+				// Property: UserTrustProviderType
+				"user_trust_provider_type": schemaAttribute25a05f5d6251ae014b146296(),
+				// Property: VerifiedAccessTrustProviderId
+				"verified_access_trust_provider_id": schemaAttributec7b4e0ba157aec0ddefe31d0(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "AWS Verified Access trust providers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute750f19c25caf8c1c23cbd1ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of device-based trust provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute77e3cbf07125b8b504282b0f() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Include claims from trust providers in Verified Access logs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d46a908c3e4de7cb1d4d401() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Time this Verified Access Instance was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute80f36ede10f46d34db0d9a71() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether logging is enabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85a8f258d63ce9c9ba0e6b68() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The IDs of the AWS Verified Access trust providers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b037bc7310ef93a3b69b51e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The bucket name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute97a9b5aecf1cc22fbfcb60c5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Enabled
+			"enabled": schemaAttribute80f36ede10f46d34db0d9a71(),
+			// Property: LogGroup
+			"log_group": schemaAttributeb32a7a52cebb032d3fc3fbb3(),
+		}, /*END SCHEMA*/
+		Description: "Sends Verified Access logs to CloudWatch Logs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea077883916fed80beedbc92a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DeliveryStream
+			"delivery_stream": schemaAttribute4253b6f0c04b6aa3b36f36dd(),
+			// Property: Enabled
+			"enabled": schemaAttribute80f36ede10f46d34db0d9a71(),
+		}, /*END SCHEMA*/
+		Description: "Sends Verified Access logs to Kinesis.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9bf4ca6f369815ad5482a66() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Property to represent the name servers assoicated with the domain that AVA manages (say, ['ns1.amazonaws.com', 'ns2.amazonaws.com', 'ns3.amazonaws.com', 'ns4.amazonaws.com']).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9c925011b1f33f6224ac880() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the AWS account that owns the Amazon S3 bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb32a7a52cebb032d3fc3fbb3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the CloudWatch Logs log group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4a5c19a6f4bb5629104926d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Time this Verified Access Instance was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe71c6ac3d9c02589673e828() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Introduce CidrEndpointsCustomSubDomain property to represent the domain (say, ava.my-company.com)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7b4e0ba157aec0ddefe31d0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the trust provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecbd3e3c85e2e8f50ec5ad640() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Select log version for Verified Access logs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef10e599c25cbe4b7947014cb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description for the AWS Verified Access instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef1c0a99baabadab849feefcd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: BucketName
+			"bucket_name": schemaAttribute8b037bc7310ef93a3b69b51e(),
+			// Property: BucketOwner
+			"bucket_owner": schemaAttributea9c925011b1f33f6224ac880(),
+			// Property: Enabled
+			"enabled": schemaAttribute80f36ede10f46d34db0d9a71(),
+			// Property: Prefix
+			"prefix": schemaAttribute2f61a733a2b5b773672b0240(),
+		}, /*END SCHEMA*/
+		Description: "Sends Verified Access logs to Amazon S3.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb1afa6007613498f5798b35() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff030bd0cf5fefeacaacf207() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_verified_access_instance", verifiedAccessInstanceDataSource)
 }
@@ -30,10 +291,7 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "Introduce CidrEndpointsCustomSubDomain property to represent the domain (say, ava.my-company.com)",
 		//	  "type": "string"
 		//	}
-		"cidr_endpoints_custom_sub_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Introduce CidrEndpointsCustomSubDomain property to represent the domain (say, ava.my-company.com)",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cidr_endpoints_custom_sub_domain": schemaAttributebe71c6ac3d9c02589673e828(),
 		// Property: CidrEndpointsCustomSubDomainNameServers
 		// CloudFormation resource type schema:
 		//
@@ -46,11 +304,7 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "array"
 		//	}
-		"cidr_endpoints_custom_sub_domain_name_servers": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "Property to represent the name servers assoicated with the domain that AVA manages (say, ['ns1.amazonaws.com', 'ns2.amazonaws.com', 'ns3.amazonaws.com', 'ns4.amazonaws.com']).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cidr_endpoints_custom_sub_domain_name_servers": schemaAttributea9bf4ca6f369815ad5482a66(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -58,10 +312,7 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "Time this Verified Access Instance was created.",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Time this Verified Access Instance was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute7d46a908c3e4de7cb1d4d401(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -69,10 +320,7 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "A description for the AWS Verified Access instance.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description for the AWS Verified Access instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributef10e599c25cbe4b7947014cb(),
 		// Property: FipsEnabled
 		// CloudFormation resource type schema:
 		//
@@ -80,10 +328,7 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "Indicates whether FIPS is enabled",
 		//	  "type": "boolean"
 		//	}
-		"fips_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether FIPS is enabled",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"fips_enabled": schemaAttribute10e51825f8ba20683eefe51d(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -91,10 +336,7 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "Time this Verified Access Instance was last updated.",
 		//	  "type": "string"
 		//	}
-		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Time this Verified Access Instance was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttributeb4a5c19a6f4bb5629104926d(),
 		// Property: LoggingConfigurations
 		// CloudFormation resource type schema:
 		//
@@ -166,83 +408,7 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  },
 		//	  "type": "object"
 		//	}
-		"logging_configurations": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CloudWatchLogs
-				"cloudwatch_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Enabled
-						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Indicates whether logging is enabled.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: LogGroup
-						"log_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ID of the CloudWatch Logs log group.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Sends Verified Access logs to CloudWatch Logs.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IncludeTrustContext
-				"include_trust_context": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Include claims from trust providers in Verified Access logs.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: KinesisDataFirehose
-				"kinesis_data_firehose": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DeliveryStream
-						"delivery_stream": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ID of the delivery stream.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Enabled
-						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Indicates whether logging is enabled.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Sends Verified Access logs to Kinesis.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LogVersion
-				"log_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Select log version for Verified Access logs.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: S3
-				"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: BucketName
-						"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The bucket name.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: BucketOwner
-						"bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ID of the AWS account that owns the Amazon S3 bucket.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Enabled
-						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Indicates whether logging is enabled.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Prefix
-						"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The bucket prefix.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Sends Verified Access logs to Amazon S3.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration options for AWS Verified Access instances.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"logging_configurations": schemaAttribute320ab9466e727140a91506c3(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -275,24 +441,7 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute3537c23e5741c92eec0fc4b6(),
 		// Property: VerifiedAccessInstanceId
 		// CloudFormation resource type schema:
 		//
@@ -300,10 +449,7 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "The ID of the AWS Verified Access instance.",
 		//	  "type": "string"
 		//	}
-		"verified_access_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the AWS Verified Access instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"verified_access_instance_id": schemaAttribute0d5548e8d776b321a7a51b75(),
 		// Property: VerifiedAccessTrustProviderIds
 		// CloudFormation resource type schema:
 		//
@@ -317,11 +463,7 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"verified_access_trust_provider_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The IDs of the AWS Verified Access trust providers.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"verified_access_trust_provider_ids": schemaAttribute85a8f258d63ce9c9ba0e6b68(),
 		// Property: VerifiedAccessTrustProviders
 		// CloudFormation resource type schema:
 		//
@@ -358,39 +500,7 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"verified_access_trust_providers": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Description
-					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The description of trust provider.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: DeviceTrustProviderType
-					"device_trust_provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of device-based trust provider.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: TrustProviderType
-					"trust_provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of trust provider (user- or device-based).",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: UserTrustProviderType
-					"user_trust_provider_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of user-based trust provider.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: VerifiedAccessTrustProviderId
-					"verified_access_trust_provider_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of the trust provider.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "AWS Verified Access trust providers.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"verified_access_trust_providers": schemaAttribute615bf3c58f7ef00a83e5bd2b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

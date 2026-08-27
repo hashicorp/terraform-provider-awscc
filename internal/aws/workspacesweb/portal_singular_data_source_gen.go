@@ -16,6 +16,48 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0d8a39eef4385aabaa450061() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31a5dad10302844e75ca6fea() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute448027bc574c1d3830f165eb(),
+				// Property: Value
+				"value": schemaAttribute448027bc574c1d3830f165eb(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute448027bc574c1d3830f165eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute608198ced222a890e3ddc135() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec455c739fd09c5d842a0d181() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_workspacesweb_portal", portalDataSource)
 }
@@ -39,11 +81,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"additional_encryption_context": // Pattern: ""
-		schema.MapAttribute{             /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"additional_encryption_context": schemaAttribute608198ced222a890e3ddc135(),
 		// Property: AuthenticationType
 		// CloudFormation resource type schema:
 		//
@@ -54,9 +92,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"authentication_type": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: BrowserSettingsArn
 		// CloudFormation resource type schema:
 		//
@@ -66,9 +102,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36})+$",
 		//	  "type": "string"
 		//	}
-		"browser_settings_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"browser_settings_arn": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: BrowserType
 		// CloudFormation resource type schema:
 		//
@@ -78,9 +112,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"browser_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"browser_type": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: CreationDate
 		// CloudFormation resource type schema:
 		//
@@ -88,10 +120,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"creation_date": schemaAttributec455c739fd09c5d842a0d181(),
 		// Property: CustomerManagedKey
 		// CloudFormation resource type schema:
 		//
@@ -101,9 +130,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:kms:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:key\\/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"customer_managed_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"customer_managed_key": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: DataProtectionSettingsArn
 		// CloudFormation resource type schema:
 		//
@@ -113,9 +140,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36})+$",
 		//	  "type": "string"
 		//	}
-		"data_protection_settings_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"data_protection_settings_arn": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: DisplayName
 		// CloudFormation resource type schema:
 		//
@@ -125,9 +150,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^.+$",
 		//	  "type": "string"
 		//	}
-		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"display_name": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: InstanceType
 		// CloudFormation resource type schema:
 		//
@@ -139,9 +162,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"instance_type": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: IpAccessSettingsArn
 		// CloudFormation resource type schema:
 		//
@@ -151,9 +172,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36})+$",
 		//	  "type": "string"
 		//	}
-		"ip_access_settings_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"ip_access_settings_arn": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: MaxConcurrentSessions
 		// CloudFormation resource type schema:
 		//
@@ -162,9 +181,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 1,
 		//	  "type": "number"
 		//	}
-		"max_concurrent_sessions": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"max_concurrent_sessions": schemaAttribute0d8a39eef4385aabaa450061(),
 		// Property: NetworkSettingsArn
 		// CloudFormation resource type schema:
 		//
@@ -174,9 +191,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36})+$",
 		//	  "type": "string"
 		//	}
-		"network_settings_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"network_settings_arn": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: PortalArn
 		// CloudFormation resource type schema:
 		//
@@ -186,9 +201,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36})+$",
 		//	  "type": "string"
 		//	}
-		"portal_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"portal_arn": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: PortalCustomDomain
 		// CloudFormation resource type schema:
 		//
@@ -198,9 +211,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"portal_custom_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"portal_custom_domain": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: PortalEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -210,9 +221,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"portal_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"portal_endpoint": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: PortalStatus
 		// CloudFormation resource type schema:
 		//
@@ -224,9 +233,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"portal_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"portal_status": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: RendererType
 		// CloudFormation resource type schema:
 		//
@@ -236,9 +243,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"renderer_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"renderer_type": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: ServiceProviderSamlMetadata
 		// CloudFormation resource type schema:
 		//
@@ -248,9 +253,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^.*$",
 		//	  "type": "string"
 		//	}
-		"service_provider_saml_metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"service_provider_saml_metadata": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: SessionLoggerArn
 		// CloudFormation resource type schema:
 		//
@@ -260,9 +263,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36})+$",
 		//	  "type": "string"
 		//	}
-		"session_logger_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"session_logger_arn": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: StatusReason
 		// CloudFormation resource type schema:
 		//
@@ -272,9 +273,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": ".*",
 		//	  "type": "string"
 		//	}
-		"status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status_reason": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -306,21 +305,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute31a5dad10302844e75ca6fea(),
 		// Property: TrustStoreArn
 		// CloudFormation resource type schema:
 		//
@@ -330,9 +315,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36})+$",
 		//	  "type": "string"
 		//	}
-		"trust_store_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"trust_store_arn": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: UserAccessLoggingSettingsArn
 		// CloudFormation resource type schema:
 		//
@@ -342,9 +325,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36})+$",
 		//	  "type": "string"
 		//	}
-		"user_access_logging_settings_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"user_access_logging_settings_arn": schemaAttribute448027bc574c1d3830f165eb(),
 		// Property: UserSettingsArn
 		// CloudFormation resource type schema:
 		//
@@ -354,9 +335,7 @@ func portalDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:[\\w+=\\/,.@-]+:[a-zA-Z0-9\\-]+:[a-zA-Z0-9\\-]*:[a-zA-Z0-9]{1,12}:[a-zA-Z]+(\\/[a-fA-F0-9\\-]{36})+$",
 		//	  "type": "string"
 		//	}
-		"user_settings_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"user_settings_arn": schemaAttribute448027bc574c1d3830f165eb(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

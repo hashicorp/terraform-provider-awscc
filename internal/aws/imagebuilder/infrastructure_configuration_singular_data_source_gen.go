@@ -15,6 +15,208 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1081be520e5d563df4314987() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The EC2 key pair of the infrastructure configuration..",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1871b776ef9ca8774e25a516() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The instance profile of the infrastructure configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e2e68fcf08bba2044c09bc8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HttpPutResponseHopLimit
+			"http_put_response_hop_limit": schemaAttribute89e7dcd492434de1fe6ea028(),
+			// Property: HttpTokens
+			"http_tokens": schemaAttribute25c5f48b61eae4c17926f49b(),
+		}, /*END SCHEMA*/
+		Description: "The instance metadata option settings for the infrastructure configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20bb1c982c203f53f3b72628() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3BucketName
+			"s3_bucket_name": schemaAttribute260802364fc1a2eeae8d5889(),
+			// Property: S3KeyPrefix
+			"s3_key_prefix": schemaAttribute42015a6837fbc3172a184833(),
+		}, /*END SCHEMA*/
+		Description: "The S3 path in which to store the logs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute25c5f48b61eae4c17926f49b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether a signed token header is required for instance metadata retrieval requests. The values affect the response as follows: ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute260802364fc1a2eeae8d5889() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "S3BucketName",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34b4dd58e946b2f1b27b831d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: S3Logs
+			"s3_logs": schemaAttribute20bb1c982c203f53f3b72628(),
+		}, /*END SCHEMA*/
+		Description: "The logging configuration of the infrastructure configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3bbb52340f5fe3f964b69b33() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "HostResourceGroupArn",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute42015a6837fbc3172a184833() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "S3KeyPrefix",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute49404182d4cc2c37f0b6d80b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the infrastructure configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ba4fdda3faab253236e9f0c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "HostId",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e47fb1fb7659a43b5f72557() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the infrastructure configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute71852c8d6cd5773c6d183176() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The security group IDs of the infrastructure configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a163fc0a94cdc72b0638728() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The instance types of the infrastructure configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7c868a84694be0f116d03b39() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "AvailabilityZone",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute89e7dcd492434de1fe6ea028() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Limit the number of hops that an instance metadata request can traverse to reach its destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8e0d1ffe642632e99d54168d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the infrastructure configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ed7baabaee1f2ecc79a2682() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SNS Topic Amazon Resource Name (ARN) of the infrastructure configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9238c15576e2df349b20a8c() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The tags attached to the resource created by Image Builder.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd05f3bb6366ea06d6eac0cf() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The terminate instance on failure configuration of the infrastructure configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed0b9141b636728acf94d4a8c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Tenancy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed0d5d1e0f6ca28e291b9cb61() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The subnet ID of the infrastructure configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed24aaedf083dec6b06f85a70() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The tags associated with the component.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff186d52ff48203d52e16b59() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AvailabilityZone
+			"availability_zone": schemaAttribute7c868a84694be0f116d03b39(),
+			// Property: HostId
+			"host_id": schemaAttribute4ba4fdda3faab253236e9f0c(),
+			// Property: HostResourceGroupArn
+			"host_resource_group_arn": schemaAttribute3bbb52340f5fe3f964b69b33(),
+			// Property: Tenancy
+			"tenancy": schemaAttributed0b9141b636728acf94d4a8c(),
+		}, /*END SCHEMA*/
+		Description: "The placement option settings for the infrastructure configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_imagebuilder_infrastructure_configuration", infrastructureConfigurationDataSource)
 }
@@ -31,10 +233,7 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  "pattern": "^arn:[^:]+:imagebuilder:[^:]+:[^:]+:infrastructure-configuration/.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the infrastructure configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute49404182d4cc2c37f0b6d80b(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +241,7 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The description of the infrastructure configuration.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the infrastructure configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute5e47fb1fb7659a43b5f72557(),
 		// Property: InstanceMetadataOptions
 		// CloudFormation resource type schema:
 		//
@@ -68,22 +264,7 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  },
 		//	  "type": "object"
 		//	}
-		"instance_metadata_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: HttpPutResponseHopLimit
-				"http_put_response_hop_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Limit the number of hops that an instance metadata request can traverse to reach its destination.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: HttpTokens
-				"http_tokens": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Indicates whether a signed token header is required for instance metadata retrieval requests. The values affect the response as follows: ",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The instance metadata option settings for the infrastructure configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_metadata_options": schemaAttribute1e2e68fcf08bba2044c09bc8(),
 		// Property: InstanceProfileName
 		// CloudFormation resource type schema:
 		//
@@ -91,10 +272,7 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The instance profile of the infrastructure configuration.",
 		//	  "type": "string"
 		//	}
-		"instance_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The instance profile of the infrastructure configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_profile_name": schemaAttribute1871b776ef9ca8774e25a516(),
 		// Property: InstanceTypes
 		// CloudFormation resource type schema:
 		//
@@ -106,11 +284,7 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  },
 		//	  "type": "array"
 		//	}
-		"instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The instance types of the infrastructure configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_types": schemaAttribute7a163fc0a94cdc72b0638728(),
 		// Property: KeyPair
 		// CloudFormation resource type schema:
 		//
@@ -118,10 +292,7 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The EC2 key pair of the infrastructure configuration..",
 		//	  "type": "string"
 		//	}
-		"key_pair": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The EC2 key pair of the infrastructure configuration..",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"key_pair": schemaAttribute1081be520e5d563df4314987(),
 		// Property: Logging
 		// CloudFormation resource type schema:
 		//
@@ -147,29 +318,7 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  },
 		//	  "type": "object"
 		//	}
-		"logging": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: S3Logs
-				"s3_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: S3BucketName
-						"s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "S3BucketName",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: S3KeyPrefix
-						"s3_key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "S3KeyPrefix",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The S3 path in which to store the logs.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The logging configuration of the infrastructure configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"logging": schemaAttribute34b4dd58e946b2f1b27b831d(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -177,10 +326,7 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The name of the infrastructure configuration.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the infrastructure configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute8e0d1ffe642632e99d54168d(),
 		// Property: Placement
 		// CloudFormation resource type schema:
 		//
@@ -212,32 +358,7 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  },
 		//	  "type": "object"
 		//	}
-		"placement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AvailabilityZone
-				"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "AvailabilityZone",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: HostId
-				"host_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "HostId",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: HostResourceGroupArn
-				"host_resource_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "HostResourceGroupArn",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Tenancy
-				"tenancy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Tenancy",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The placement option settings for the infrastructure configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"placement": schemaAttributeff186d52ff48203d52e16b59(),
 		// Property: ResourceTags
 		// CloudFormation resource type schema:
 		//
@@ -251,12 +372,7 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  },
 		//	  "type": "object"
 		//	}
-		"resource_tags":     // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The tags attached to the resource created by Image Builder.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_tags": schemaAttributeb9238c15576e2df349b20a8c(),
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
@@ -268,11 +384,7 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  },
 		//	  "type": "array"
 		//	}
-		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The security group IDs of the infrastructure configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"security_group_ids": schemaAttribute71852c8d6cd5773c6d183176(),
 		// Property: SnsTopicArn
 		// CloudFormation resource type schema:
 		//
@@ -280,10 +392,7 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The SNS Topic Amazon Resource Name (ARN) of the infrastructure configuration.",
 		//	  "type": "string"
 		//	}
-		"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The SNS Topic Amazon Resource Name (ARN) of the infrastructure configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sns_topic_arn": schemaAttribute9ed7baabaee1f2ecc79a2682(),
 		// Property: SubnetId
 		// CloudFormation resource type schema:
 		//
@@ -291,10 +400,7 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The subnet ID of the infrastructure configuration.",
 		//	  "type": "string"
 		//	}
-		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The subnet ID of the infrastructure configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subnet_id": schemaAttributed0d5d1e0f6ca28e291b9cb61(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -308,12 +414,7 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The tags associated with the component.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributed24aaedf083dec6b06f85a70(),
 		// Property: TerminateInstanceOnFailure
 		// CloudFormation resource type schema:
 		//
@@ -321,10 +422,7 @@ func infrastructureConfigurationDataSource(ctx context.Context) (datasource.Data
 		//	  "description": "The terminate instance on failure configuration of the infrastructure configuration.",
 		//	  "type": "boolean"
 		//	}
-		"terminate_instance_on_failure": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "The terminate instance on failure configuration of the infrastructure configuration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"terminate_instance_on_failure": schemaAttributebd05f3bb6366ea06d6eac0cf(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

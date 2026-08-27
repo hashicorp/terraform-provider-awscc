@@ -15,6 +15,50 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute5d7b3e1e90410e64531635dd() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of event categories for a SourceType that you want to subscribe to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79b3284aacbcd833638df25a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of source that is generating the events.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79f8bf5f55f0f193936ac73c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the subscription.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecd454f6b81e2aef3ee5dfc34() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of identifiers of the event sources for which events are returned",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed7daf6bc115fcdc63d8b1ec7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the SNS topic created for event notification. Amazon SNS creates the ARN when you create a topic and subscribe to it.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2205f744569f0ee283c590e() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "A Boolean value; set to true to activate the subscription, set to false to create the subscription but not active it.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_docdb_event_subscription", eventSubscriptionDataSource)
 }
@@ -30,10 +74,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "A Boolean value; set to true to activate the subscription, set to false to create the subscription but not active it.",
 		//	  "type": "boolean"
 		//	}
-		"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "A Boolean value; set to true to activate the subscription, set to false to create the subscription but not active it.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enabled": schemaAttributef2205f744569f0ee283c590e(),
 		// Property: EventCategories
 		// CloudFormation resource type schema:
 		//
@@ -45,11 +86,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"event_categories": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of event categories for a SourceType that you want to subscribe to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"event_categories": schemaAttribute5d7b3e1e90410e64531635dd(),
 		// Property: SnsTopicArn
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +94,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The Amazon Resource Name (ARN) of the SNS topic created for event notification. Amazon SNS creates the ARN when you create a topic and subscribe to it.",
 		//	  "type": "string"
 		//	}
-		"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the SNS topic created for event notification. Amazon SNS creates the ARN when you create a topic and subscribe to it.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sns_topic_arn": schemaAttributed7daf6bc115fcdc63d8b1ec7(),
 		// Property: SourceIds
 		// CloudFormation resource type schema:
 		//
@@ -72,11 +106,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  },
 		//	  "type": "array"
 		//	}
-		"source_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The list of identifiers of the event sources for which events are returned",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_ids": schemaAttributecd454f6b81e2aef3ee5dfc34(),
 		// Property: SourceType
 		// CloudFormation resource type schema:
 		//
@@ -91,10 +121,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of source that is generating the events.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_type": schemaAttribute79b3284aacbcd833638df25a(),
 		// Property: SubscriptionName
 		// CloudFormation resource type schema:
 		//
@@ -103,10 +130,7 @@ func eventSubscriptionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "maxLength": 255,
 		//	  "type": "string"
 		//	}
-		"subscription_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the subscription.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"subscription_name": schemaAttribute79f8bf5f55f0f193936ac73c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

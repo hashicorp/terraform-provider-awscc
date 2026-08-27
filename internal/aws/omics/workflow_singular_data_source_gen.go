@@ -16,6 +16,57 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute544e49540ec4a9937197a5e4() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Description
+				"description": schemaAttributef9fa4b395a79fc182f82daba(),
+				// Property: Optional
+				"optional": schemaAttribute8a2de9aa7abe41ab11670124(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute56fca9332e3eca37cb2f19ba() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A map of resource tags",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute752616dec6dd651d3b70f38e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a2de9aa7abe41ab11670124() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef662db00af6617a6de27fd4d() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef9fa4b395a79fc182f82daba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_omics_workflow", workflowDataSource)
 }
@@ -35,9 +86,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"accelerators": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"accelerators": schemaAttributef9fa4b395a79fc182f82daba(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -47,9 +96,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributef9fa4b395a79fc182f82daba(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +104,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute752616dec6dd651d3b70f38e(),
 		// Property: DefinitionUri
 		// CloudFormation resource type schema:
 		//
@@ -70,9 +114,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$",
 		//	  "type": "string"
 		//	}
-		"definition_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"definition_uri": schemaAttributef9fa4b395a79fc182f82daba(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -82,9 +124,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributef9fa4b395a79fc182f82daba(),
 		// Property: Engine
 		// CloudFormation resource type schema:
 		//
@@ -98,9 +138,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"engine": schemaAttributef9fa4b395a79fc182f82daba(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -110,9 +148,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9]+$",
 		//	  "type": "string"
 		//	}
-		"workflow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"workflow_id": schemaAttributef9fa4b395a79fc182f82daba(),
 		// Property: Main
 		// CloudFormation resource type schema:
 		//
@@ -122,9 +158,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$",
 		//	  "type": "string"
 		//	}
-		"main": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"main": schemaAttributef9fa4b395a79fc182f82daba(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -134,9 +168,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributef9fa4b395a79fc182f82daba(),
 		// Property: ParameterTemplate
 		// CloudFormation resource type schema:
 		//
@@ -161,22 +193,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"parameter_template":      // Pattern: ""
-		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Description
-					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Optional
-					"optional": schema.BoolAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"parameter_template": schemaAttribute544e49540ec4a9937197a5e4(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -192,9 +209,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributef9fa4b395a79fc182f82daba(),
 		// Property: StorageCapacity
 		// CloudFormation resource type schema:
 		//
@@ -203,9 +218,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "number"
 		//	}
-		"storage_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"storage_capacity": schemaAttributef662db00af6617a6de27fd4d(),
 		// Property: StorageType
 		// CloudFormation resource type schema:
 		//
@@ -218,9 +231,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"storage_type": schemaAttributef9fa4b395a79fc182f82daba(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -237,12 +248,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A map of resource tags",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute56fca9332e3eca37cb2f19ba(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
@@ -254,9 +260,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttributef9fa4b395a79fc182f82daba(),
 		// Property: Uuid
 		// CloudFormation resource type schema:
 		//
@@ -264,9 +268,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
 		//	  "type": "string"
 		//	}
-		"uuid": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"uuid": schemaAttributef9fa4b395a79fc182f82daba(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

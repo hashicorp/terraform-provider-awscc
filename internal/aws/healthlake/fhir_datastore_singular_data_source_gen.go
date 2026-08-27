@@ -14,6 +14,204 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0177762aae38dce40bd6c515() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Seconds since epoch.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0a3e4b1c31950a0aa4997739() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The JSON metadata elements for identity provider configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute179658744f09fa2ee2d36f05() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Nanos
+			"nanos": schemaAttributee417f5b63a5df463147b66d6(),
+			// Property: Seconds
+			"seconds": schemaAttribute0177762aae38dce40bd6c515(),
+		}, /*END SCHEMA*/
+		Description: "The time that a Data Store was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18ea5e94de7ce08b684e3f37() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Lambda function that will be used to decode the access token created by the authorization server.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute212060717e2a68ad342cb73a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The KMS encryption key id/alias used to encrypt the Data Store contents at rest.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute475497754c3dc5b00efce5fe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS endpoint for the Data Store. Each Data Store will have it's own endpoint with Data Store ID in the endpoint URL.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63ff79bda715975a91ca9879() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of preloaded data. Only Synthea preloaded data is supported.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute704533cc3276117641eadd5a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CmkType
+			"cmk_type": schemaAttributec68291c5c17b71f165dada99(),
+			// Property: KmsKeyId
+			"kms_key_id": schemaAttribute212060717e2a68ad342cb73a(),
+		}, /*END SCHEMA*/
+		Description: "The customer-managed-key (CMK) used when creating a Data Store. If a customer owned key is not specified, an AWS owned key will be used for encryption.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ebd4683f5d39b4571c2c825() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributedd33646c8da1bd2a13ce0198(),
+				// Property: Value
+				"value": schemaAttributeae5ad60b4a37cf2630db9f93(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute915e9aba089f6a8b31a8da1d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute95428d329f4ebb95c5079370() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS-generated ID number for the Data Store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c664fbfa23f399241dab9a4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthorizationStrategy
+			"authorization_strategy": schemaAttributeb4ffb4d8fa1d75704ad523d8(),
+			// Property: FineGrainedAuthorizationEnabled
+			"fine_grained_authorization_enabled": schemaAttributeb9a3d9d3f4f76c33d95ae7b3(),
+			// Property: IdpLambdaArn
+			"idp_lambda_arn": schemaAttribute18ea5e94de7ce08b684e3f37(),
+			// Property: Metadata
+			"metadata": schemaAttribute0a3e4b1c31950a0aa4997739(),
+		}, /*END SCHEMA*/
+		Description: "The identity provider configuration for the datastore",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeae5ad60b4a37cf2630db9f93() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaf3e2ceb318f2186e4932065() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KmsEncryptionConfig
+			"kms_encryption_config": schemaAttribute704533cc3276117641eadd5a(),
+		}, /*END SCHEMA*/
+		Description: "The server-side encryption key configuration for a customer provided encryption key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4ffb4d8fa1d75704ad523d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Type of Authorization Strategy. The two types of supported Authorization strategies are SMART_ON_FHIR_V1 and AWS_AUTH.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9a3d9d3f4f76c33d95ae7b3() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Flag to indicate if fine-grained authorization will be enabled for the datastore",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec68291c5c17b71f165dada99() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of customer-managed-key (CMK) used for encryption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec74a05ded1c668ab811b133a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name used in the creation of the Data Store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedd33646c8da1bd2a13ce0198() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee1a287293dbccccf576f5e30() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PreloadDataType
+			"preload_data_type": schemaAttribute63ff79bda715975a91ca9879(),
+		}, /*END SCHEMA*/
+		Description: "The preloaded data configuration for the Data Store. Only data preloaded from Synthea is supported.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee417f5b63a5df463147b66d6() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Nanoseconds.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5d208145bf9405d77e451f6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user-generated name for the Data Store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7b118f2e63ad480f0f824a6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The FHIR version. Only R4 version data is supported.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_healthlake_fhir_datastore", fHIRDatastoreDataSource)
 }
@@ -44,22 +242,7 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"created_at": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Nanos
-				"nanos": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Nanoseconds.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Seconds
-				"seconds": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Seconds since epoch.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The time that a Data Store was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute179658744f09fa2ee2d36f05(),
 		// Property: DatastoreArn
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +251,7 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "pattern": "^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-zA-Z0-9-]+:[0-9]{12}:datastore/.+?",
 		//	  "type": "string"
 		//	}
-		"datastore_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name used in the creation of the Data Store.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"datastore_arn": schemaAttributec74a05ded1c668ab811b133a(),
 		// Property: DatastoreEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -80,10 +260,7 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "maxLength": 10000,
 		//	  "type": "string"
 		//	}
-		"datastore_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS endpoint for the Data Store. Each Data Store will have it's own endpoint with Data Store ID in the endpoint URL.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"datastore_endpoint": schemaAttribute475497754c3dc5b00efce5fe(),
 		// Property: DatastoreId
 		// CloudFormation resource type schema:
 		//
@@ -93,10 +270,7 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"datastore_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS-generated ID number for the Data Store.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"datastore_id": schemaAttribute95428d329f4ebb95c5079370(),
 		// Property: DatastoreName
 		// CloudFormation resource type schema:
 		//
@@ -106,10 +280,7 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"datastore_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The user-generated name for the Data Store.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"datastore_name": schemaAttributee5d208145bf9405d77e451f6(),
 		// Property: DatastoreStatus
 		// CloudFormation resource type schema:
 		//
@@ -123,10 +294,7 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"datastore_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"datastore_status": schemaAttribute915e9aba089f6a8b31a8da1d(),
 		// Property: DatastoreTypeVersion
 		// CloudFormation resource type schema:
 		//
@@ -137,10 +305,7 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"datastore_type_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The FHIR version. Only R4 version data is supported.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"datastore_type_version": schemaAttributef7b118f2e63ad480f0f824a6(),
 		// Property: IdentityProviderConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -182,32 +347,7 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"identity_provider_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AuthorizationStrategy
-				"authorization_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Type of Authorization Strategy. The two types of supported Authorization strategies are SMART_ON_FHIR_V1 and AWS_AUTH.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FineGrainedAuthorizationEnabled
-				"fine_grained_authorization_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Flag to indicate if fine-grained authorization will be enabled for the datastore",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IdpLambdaArn
-				"idp_lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the Lambda function that will be used to decode the access token created by the authorization server.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Metadata
-				"metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The JSON metadata elements for identity provider configuration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The identity provider configuration for the datastore",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"identity_provider_configuration": schemaAttribute9c664fbfa23f399241dab9a4(),
 		// Property: PreloadDataConfig
 		// CloudFormation resource type schema:
 		//
@@ -228,17 +368,7 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"preload_data_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PreloadDataType
-				"preload_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The type of preloaded data. Only Synthea preloaded data is supported.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The preloaded data configuration for the Data Store. Only data preloaded from Synthea is supported.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"preload_data_config": schemaAttributee1a287293dbccccf576f5e30(),
 		// Property: SseConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -282,29 +412,7 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"sse_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KmsEncryptionConfig
-				"kms_encryption_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CmkType
-						"cmk_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The type of customer-managed-key (CMK) used for encryption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: KmsKeyId
-						"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The KMS encryption key id/alias used to encrypt the Data Store contents at rest.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The customer-managed-key (CMK) used when creating a Data Store. If a customer owned key is not specified, an AWS owned key will be used for encryption.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The server-side encryption key configuration for a customer provided encryption key.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sse_configuration": schemaAttributeaf3e2ceb318f2186e4932065(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -335,23 +443,7 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute7ebd4683f5d39b4571c2c825(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

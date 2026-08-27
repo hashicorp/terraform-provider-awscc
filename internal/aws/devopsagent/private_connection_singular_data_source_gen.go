@@ -16,6 +16,186 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0573f76d3941643d290e8cab() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SelfManaged
+			"self_managed": schemaAttribute3b41fc111a1d9db72679a482(),
+			// Property: ServiceManaged
+			"service_managed": schemaAttribute79b81b76e72c6db2a833db10(),
+		}, /*END SCHEMA*/
+		Description: "The connection configuration for the Private Connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute111a403ec1c964a3171492bc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "VPC to create the service-managed Resource Gateway in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1bba822a1c7050b6500713ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "IP address type of the service-managed Resource Gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute294dbf8e7e2fa5d307af4e62() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b41fc111a1d9db72679a482() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ResourceConfigurationId
+			"resource_configuration_id": schemaAttributeb2611068515c49acd3a8dd14(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for a self-managed Private Connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b76b5b42ec00d1d3b24b4fb() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Number of IPv4 addresses in each ENI for the service-managed Resource Gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52b56e7f00708ff677d35889() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "TCP port ranges that a consumer can use to access the resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5eab28a0dccffc6dc5b8101f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Certificate for the Private Connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65a5bd8d6173df15623d5280() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "IP address or DNS name of the target resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6e3afac641ab8163652c37e0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute79b81b76e72c6db2a833db10() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DnsResolution
+			"dns_resolution": schemaAttributeea3484a8ad0ff55600d1a58a(),
+			// Property: HostAddress
+			"host_address": schemaAttribute65a5bd8d6173df15623d5280(),
+			// Property: IpAddressType
+			"ip_address_type": schemaAttribute1bba822a1c7050b6500713ca(),
+			// Property: Ipv4AddressesPerEni
+			"ipv_4_addresses_per_eni": schemaAttribute4b76b5b42ec00d1d3b24b4fb(),
+			// Property: PortRanges
+			"port_ranges": schemaAttribute52b56e7f00708ff677d35889(),
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttributedfe65b11e0b528eab0637239(),
+			// Property: SubnetIds
+			"subnet_ids": schemaAttributeb8111ff9638f1083dd195f04(),
+			// Property: VpcId
+			"vpc_id": schemaAttribute111a403ec1c964a3171492bc(),
+		}, /*END SCHEMA*/
+		Description: "Configuration for a service-managed Private Connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute942b99168afdac3e5e026767() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the Private Connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2611068515c49acd3a8dd14() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Resource Configuration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8111ff9638f1083dd195f04() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Subnets that the service-managed Resource Gateway will span.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec808a2af0cb246e0cdbd2944() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique name for this Private Connection within the account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeccd66f660653c8a50c0f7c38() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The expiry time of the certificate associated with the Private Connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5ce923c15074c8c444d66f4() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute6e3afac641ab8163652c37e0(),
+				// Property: Value
+				"value": schemaAttribute294dbf8e7e2fa5d307af4e62(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedf9457b36ec9b981985063ee() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the Private Connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedfe65b11e0b528eab0637239() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Security groups to attach to the service-managed Resource Gateway.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea3484a8ad0ff55600d1a58a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "DNS resolution mode for the resource gateway. Defaults to PUBLIC when not set.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_devopsagent_private_connection", privateConnectionDataSource)
 }
@@ -31,10 +211,7 @@ func privateConnectionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The Amazon Resource Name (ARN) of the Private Connection.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the Private Connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributedf9457b36ec9b981985063ee(),
 		// Property: Certificate
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +221,7 @@ func privateConnectionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Certificate for the Private Connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate": schemaAttribute5eab28a0dccffc6dc5b8101f(),
 		// Property: CertificateExpiryTime
 		// CloudFormation resource type schema:
 		//
@@ -56,11 +230,7 @@ func privateConnectionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"certificate_expiry_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The expiry time of the certificate associated with the Private Connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"certificate_expiry_time": schemaAttributeccd66f660653c8a50c0f7c38(),
 		// Property: ConnectionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -169,74 +339,7 @@ func privateConnectionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  },
 		//	  "type": "object"
 		//	}
-		"connection_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SelfManaged
-				"self_managed": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ResourceConfigurationId
-						"resource_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the Resource Configuration.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration for a self-managed Private Connection.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ServiceManaged
-				"service_managed": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DnsResolution
-						"dns_resolution": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "DNS resolution mode for the resource gateway. Defaults to PUBLIC when not set.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: HostAddress
-						"host_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "IP address or DNS name of the target resource.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: IpAddressType
-						"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "IP address type of the service-managed Resource Gateway.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Ipv4AddressesPerEni
-						"ipv_4_addresses_per_eni": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Description: "Number of IPv4 addresses in each ENI for the service-managed Resource Gateway.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: PortRanges
-						"port_ranges": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "TCP port ranges that a consumer can use to access the resource.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SecurityGroupIds
-						"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "Security groups to attach to the service-managed Resource Gateway.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: SubnetIds
-						"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "Subnets that the service-managed Resource Gateway will span.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: VpcId
-						"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "VPC to create the service-managed Resource Gateway in.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Configuration for a service-managed Private Connection.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The connection configuration for the Private Connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connection_configuration": schemaAttribute0573f76d3941643d290e8cab(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -247,10 +350,7 @@ func privateConnectionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique name for this Private Connection within the account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributec808a2af0cb246e0cdbd2944(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -265,10 +365,7 @@ func privateConnectionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the Private Connection.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute942b99168afdac3e5e026767(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -301,24 +398,7 @@ func privateConnectionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributed5ce923c15074c8c444d66f4(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

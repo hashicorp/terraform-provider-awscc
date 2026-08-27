@@ -14,6 +14,81 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1ccd2648d5961468b8fc312d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute221fd5d6f7bda40991b402e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Dataset name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31ec3f1573461e46b4e68eda() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Size
+			"size": schemaAttribute6ab7aa96a4e579f3e640ff17(),
+			// Property: Type
+			"type": schemaAttributea1fc8b4c56cd69aea0586bba(),
+		}, /*END SCHEMA*/
+		Description: "Sample",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5be04ed367a97d34ab084752() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Recipe name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6ab7aa96a4e579f3e640ff17() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Sample size",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a9207a9bf67598a3006a337() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute1ccd2648d5961468b8fc312d(),
+				// Property: Value
+				"value": schemaAttribute1ccd2648d5961468b8fc312d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea1fc8b4c56cd69aea0586bba() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Sample type",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4ce31d0ab024d35ed60dadd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Project name",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0d04bc89121f3839069d149() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Role arn",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_databrew_project", projectDataSource)
 }
@@ -31,10 +106,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"dataset_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Dataset name",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dataset_name": schemaAttribute221fd5d6f7bda40991b402e1(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +116,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Project name",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributee4ce31d0ab024d35ed60dadd(),
 		// Property: RecipeName
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +126,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"recipe_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Recipe name",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"recipe_name": schemaAttribute5be04ed367a97d34ab084752(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -68,10 +134,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Role arn",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Role arn",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttributef0d04bc89121f3839069d149(),
 		// Property: Sample
 		// CloudFormation resource type schema:
 		//
@@ -99,22 +162,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"sample": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Size
-				"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Sample size",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Type
-				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Sample type",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Sample",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sample": schemaAttribute31ec3f1573461e46b4e68eda(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -144,21 +192,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute9a9207a9bf67598a3006a337(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

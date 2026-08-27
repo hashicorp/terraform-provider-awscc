@@ -15,6 +15,88 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute065307ca0c556cb968f8d16d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "One or more SQL statements for the proxy to run when opening each new database connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute377bd64a6d168cf62388fecf() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of seconds for a proxy to wait for a connection to become available in the connection pool.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4e50ac73f3e03d6855c01699() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "Controls how actively the proxy closes idle database connections in the connection pool.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53a30adbd89c7db1b461ea8f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9b79cec6caa6316babc7c6b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier for the DBProxyTargetGroup",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec112a1ffc46cd93ad29dfcb3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum size of the connection pool for each target in a target group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed41569f52ee9707a60cb4b90() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConnectionBorrowTimeout
+			"connection_borrow_timeout": schemaAttribute377bd64a6d168cf62388fecf(),
+			// Property: InitQuery
+			"init_query": schemaAttribute065307ca0c556cb968f8d16d(),
+			// Property: MaxConnectionsPercent
+			"max_connections_percent": schemaAttributec112a1ffc46cd93ad29dfcb3(),
+			// Property: MaxIdleConnectionsPercent
+			"max_idle_connections_percent": schemaAttribute4e50ac73f3e03d6855c01699(),
+			// Property: SessionPinningFilters
+			"session_pinning_filters": schemaAttribute53a30adbd89c7db1b461ea8f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0904c63c279de056f2afa78() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef2df754b78967c509af6606() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier for the proxy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef00d9b8c816d5caa5c94d3d8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) representing the target group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_rds_db_proxy_target_group", dBProxyTargetGroupDataSource)
 }
@@ -60,37 +142,7 @@ func dBProxyTargetGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"connection_pool_configuration_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConnectionBorrowTimeout
-				"connection_borrow_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The number of seconds for a proxy to wait for a connection to become available in the connection pool.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: InitQuery
-				"init_query": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "One or more SQL statements for the proxy to run when opening each new database connection.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaxConnectionsPercent
-				"max_connections_percent": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum size of the connection pool for each target in a target group.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaxIdleConnectionsPercent
-				"max_idle_connections_percent": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Controls how actively the proxy closes idle database connections in the connection pool.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SessionPinningFilters
-				"session_pinning_filters": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"connection_pool_configuration_info": schemaAttributed41569f52ee9707a60cb4b90(),
 		// Property: DBClusterIdentifiers
 		// CloudFormation resource type schema:
 		//
@@ -101,10 +153,7 @@ func dBProxyTargetGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "array"
 		//	}
-		"db_cluster_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"db_cluster_identifiers": schemaAttributee0904c63c279de056f2afa78(),
 		// Property: DBInstanceIdentifiers
 		// CloudFormation resource type schema:
 		//
@@ -115,10 +164,7 @@ func dBProxyTargetGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "array"
 		//	}
-		"db_instance_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"db_instance_identifiers": schemaAttributee0904c63c279de056f2afa78(),
 		// Property: DBProxyName
 		// CloudFormation resource type schema:
 		//
@@ -128,10 +174,7 @@ func dBProxyTargetGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "[A-z][0-z]*",
 		//	  "type": "string"
 		//	}
-		"db_proxy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier for the proxy.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"db_proxy_name": schemaAttributeef2df754b78967c509af6606(),
 		// Property: TargetGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -139,10 +182,7 @@ func dBProxyTargetGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "The Amazon Resource Name (ARN) representing the target group.",
 		//	  "type": "string"
 		//	}
-		"target_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) representing the target group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_group_arn": schemaAttributef00d9b8c816d5caa5c94d3d8(),
 		// Property: TargetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -153,10 +193,7 @@ func dBProxyTargetGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"target_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier for the DBProxyTargetGroup",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_group_name": schemaAttributeb9b79cec6caa6316babc7c6b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

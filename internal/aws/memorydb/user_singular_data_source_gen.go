@@ -15,6 +15,90 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1913ec9988d6b98ad9793baa() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributecc954fb11c1eed8b14b8f31c(),
+				// Property: Value
+				"value": schemaAttributeeb9603f3996291c632e4a3aa(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d170ce49e3658ff8df9d1ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Type of authentication strategy for this user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d58362d0049969017bdf2ed() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Passwords
+			"passwords": schemaAttribute81aa14b13cfbe2cba6924e7f(),
+			// Property: Type
+			"type": schemaAttribute1d170ce49e3658ff8df9d1ae(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d1121827040be60cb0ba6e4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the user account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ea3f11ac9dab1f3fd8fb218() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates the user status. Can be \"active\", \"modifying\" or \"deleting\".",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute81aa14b13cfbe2cba6924e7f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Passwords used for this user account. You can create up to two passwords for each user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5735733441caa4485de4d2d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the user.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc954fb11c1eed8b14b8f31c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with 'aws:'. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb9603f3996291c632e4a3aa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefdc0af5287dc66a0bc4d1c72() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Access permissions string used for this user account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_memorydb_user", userDataSource)
 }
@@ -30,10 +114,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Access permissions string used for this user account.",
 		//	  "type": "string"
 		//	}
-		"access_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Access permissions string used for this user account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"access_string": schemaAttributefdc0af5287dc66a0bc4d1c72(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +122,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the user account.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the user account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute2d1121827040be60cb0ba6e4(),
 		// Property: AuthenticationMode
 		// CloudFormation resource type schema:
 		//
@@ -74,22 +152,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"authentication_mode": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Passwords
-				"passwords": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Passwords used for this user account. You can create up to two passwords for each user.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Type
-				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Type of authentication strategy for this user.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"authentication_mode": schemaAttribute1d58362d0049969017bdf2ed(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -97,10 +160,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates the user status. Can be \"active\", \"modifying\" or \"deleting\".",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates the user status. Can be \"active\", \"modifying\" or \"deleting\".",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute3ea3f11ac9dab1f3fd8fb218(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -135,24 +195,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with 'aws:'. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this user.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute1913ec9988d6b98ad9793baa(),
 		// Property: UserName
 		// CloudFormation resource type schema:
 		//
@@ -161,10 +204,7 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-z][a-z0-9\\\\-]*",
 		//	  "type": "string"
 		//	}
-		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the user.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"user_name": schemaAttributeb5735733441caa4485de4d2d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

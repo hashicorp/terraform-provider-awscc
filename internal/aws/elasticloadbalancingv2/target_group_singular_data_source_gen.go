@@ -15,6 +15,272 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute12c5f289014828ac2e55145f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of consecutive health check failures required before considering a target unhealthy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute13ed9f1cd23b0775325a9b2c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "You can specify values between 0 and 99. You can specify multiple values, or a range of values. The default value is 12.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute14f9b51eccb913e602be1863() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the attribute.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute168ad3a8cf6e92ff913f5a6e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The port on which the targets receive traffic. This port is used unless you specify a port override when registering the target. If the target is a Lambda function, this parameter does not apply. If the protocol is GENEVE, the supported port is 6081.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18079381cd17ac5013934724() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the Target Group",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18fa7c317b276c6b40bebd07() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The protocol the load balancer uses when performing health checks on targets. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1b0f96153f1497f33c96b9c7() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether health checks are enabled. If the target type is lambda, health checks are disabled by default but can be enabled. If the target type is instance, ip, or alb, health checks are always enabled and cannot be disabled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b8923ca7394e48a507992f8() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailabilityZone
+				"availability_zone": schemaAttribute5d09e0880c7c8cd4bf86661d(),
+				// Property: Id
+				"id": schemaAttributeb9c0b798ca83a1c6b41486ea(),
+				// Property: Port
+				"port": schemaAttribute38675416fe18d69f5db5eb5f(),
+				// Property: QuicServerId
+				"quic_server_id": schemaAttribute98f07e7765349cc3afd3bdaa(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The targets.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute333739d33f15d7b6905a3c1e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "[HTTP/HTTPS protocol] The protocol version. The possible values are GRPC, HTTP1, and HTTP2.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38675416fe18d69f5db5eb5f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The port on which the target is listening. If the target group protocol is GENEVE, the supported port is 6081. If the target type is alb, the targeted Application Load Balancer must have at least one listener whose port matches the target group port. Not used if the target is a Lambda function.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4282c67c88c311d4f7b153c6() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributed8bc804e85edf5fddd23bb1b(),
+				// Property: Value
+				"value": schemaAttribute14f9b51eccb913e602be1863(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The attributes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45d049890cb8c195e55312eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of target that you must specify when registering targets with this target group. You can't specify targets for a target group using more than one target type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute47ee187f6b5e9026275c46c9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The protocol to use for routing traffic to the targets.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute533f450180dc20032fc66626() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: GrpcCode
+			"grpc_code": schemaAttribute13ed9f1cd23b0775325a9b2c(),
+			// Property: HttpCode
+			"http_code": schemaAttributec1185411bbb5144d4a5d1c48(),
+		}, /*END SCHEMA*/
+		Description: "[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5d09e0880c7c8cd4bf86661d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An Availability Zone or all. This determines whether the target receives traffic from the load balancer nodes in the specified Availability Zone or from all enabled Availability Zones for the load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute631d3372de08c1f4f6f4aa80() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount of time, in seconds, during which no response from a target means a failed health check.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute98f07e7765349cc3afd3bdaa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Server ID used by targets when using QUIC or TCP_QUIC protocols.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9b0e99dd00f301057d93fe66() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "[HTTP/HTTPS health checks] The destination for health checks on the targets. [HTTP1 or HTTP2 protocol version] The ping path. The default is /. [GRPC protocol version] The path of a custom health check method with the format /package.service/method. The default is /AWS.ALB/healthcheck.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f5e15b47237346e91498815() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The port the load balancer uses when performing health checks on targets. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fd2907dfe6263468a84ec70() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea4501107f04a8907f24103b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The full name of the target group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea604dec036b51a290e25eba6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the target group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3ad7423a9ae78fdb80e54e7() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The approximate amount of time, in seconds, between health checks of an individual target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8c4c5f8c589b9cca47a05b8() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of consecutive health checks successes required before considering an unhealthy target healthy. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9c0b798ca83a1c6b41486ea() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the target. If the target type of the target group is instance, specify an instance ID. If the target type is ip, specify an IP address. If the target type is lambda, specify the ARN of the Lambda function. If the target type is alb, specify the ARN of the Application Load Balancer target. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec1185411bbb5144d4a5d1c48() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values or a range of values. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec97a60c0211b77c191a0fb85() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The Amazon Resource Names (ARNs) of the load balancers that route traffic to this target group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8bc804e85edf5fddd23bb1b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value of the attribute.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed8bd7b52a0d3e54885ce2a69() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute9fd2907dfe6263468a84ec70(),
+				// Property: Value
+				"value": schemaAttributee3959b2c680e2b01d43e296b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee3959b2c680e2b01d43e296b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeebf2bf316f52c41bad8e394e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The port that the target control agent uses to communicate the available capacity of targets to the load balancer.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef33b05af5509fee805f86113() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the virtual private cloud (VPC). If the target is a Lambda function, this parameter does not apply.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef5fa5ae27ee577912af7d4af() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of IP address used for this target group. The possible values are ipv4 and ipv6. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_elasticloadbalancingv2_target_group", targetGroupDataSource)
 }
@@ -30,10 +296,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Indicates whether health checks are enabled. If the target type is lambda, health checks are disabled by default but can be enabled. If the target type is instance, ip, or alb, health checks are always enabled and cannot be disabled.",
 		//	  "type": "boolean"
 		//	}
-		"health_check_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether health checks are enabled. If the target type is lambda, health checks are disabled by default but can be enabled. If the target type is instance, ip, or alb, health checks are always enabled and cannot be disabled.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"health_check_enabled": schemaAttribute1b0f96153f1497f33c96b9c7(),
 		// Property: HealthCheckIntervalSeconds
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +304,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The approximate amount of time, in seconds, between health checks of an individual target.",
 		//	  "type": "integer"
 		//	}
-		"health_check_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The approximate amount of time, in seconds, between health checks of an individual target.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"health_check_interval_seconds": schemaAttributeb3ad7423a9ae78fdb80e54e7(),
 		// Property: HealthCheckPath
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +312,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "[HTTP/HTTPS health checks] The destination for health checks on the targets. [HTTP1 or HTTP2 protocol version] The ping path. The default is /. [GRPC protocol version] The path of a custom health check method with the format /package.service/method. The default is /AWS.ALB/healthcheck.",
 		//	  "type": "string"
 		//	}
-		"health_check_path": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "[HTTP/HTTPS health checks] The destination for health checks on the targets. [HTTP1 or HTTP2 protocol version] The ping path. The default is /. [GRPC protocol version] The path of a custom health check method with the format /package.service/method. The default is /AWS.ALB/healthcheck.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"health_check_path": schemaAttribute9b0e99dd00f301057d93fe66(),
 		// Property: HealthCheckPort
 		// CloudFormation resource type schema:
 		//
@@ -63,10 +320,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The port the load balancer uses when performing health checks on targets. ",
 		//	  "type": "string"
 		//	}
-		"health_check_port": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The port the load balancer uses when performing health checks on targets. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"health_check_port": schemaAttribute9f5e15b47237346e91498815(),
 		// Property: HealthCheckProtocol
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +328,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The protocol the load balancer uses when performing health checks on targets. ",
 		//	  "type": "string"
 		//	}
-		"health_check_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The protocol the load balancer uses when performing health checks on targets. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"health_check_protocol": schemaAttribute18fa7c317b276c6b40bebd07(),
 		// Property: HealthCheckTimeoutSeconds
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +336,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The amount of time, in seconds, during which no response from a target means a failed health check.",
 		//	  "type": "integer"
 		//	}
-		"health_check_timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The amount of time, in seconds, during which no response from a target means a failed health check.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"health_check_timeout_seconds": schemaAttribute631d3372de08c1f4f6f4aa80(),
 		// Property: HealthyThresholdCount
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +344,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of consecutive health checks successes required before considering an unhealthy target healthy. ",
 		//	  "type": "integer"
 		//	}
-		"healthy_threshold_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of consecutive health checks successes required before considering an unhealthy target healthy. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"healthy_threshold_count": schemaAttributeb8c4c5f8c589b9cca47a05b8(),
 		// Property: IpAddressType
 		// CloudFormation resource type schema:
 		//
@@ -107,10 +352,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of IP address used for this target group. The possible values are ipv4 and ipv6. ",
 		//	  "type": "string"
 		//	}
-		"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of IP address used for this target group. The possible values are ipv4 and ipv6. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ip_address_type": schemaAttributef5fa5ae27ee577912af7d4af(),
 		// Property: LoadBalancerArns
 		// CloudFormation resource type schema:
 		//
@@ -123,11 +365,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"load_balancer_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The Amazon Resource Names (ARNs) of the load balancers that route traffic to this target group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"load_balancer_arns": schemaAttributec97a60c0211b77c191a0fb85(),
 		// Property: Matcher
 		// CloudFormation resource type schema:
 		//
@@ -146,22 +384,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"matcher": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: GrpcCode
-				"grpc_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "You can specify values between 0 and 99. You can specify multiple values, or a range of values. The default value is 12.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: HttpCode
-				"http_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values or a range of values. ",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"matcher": schemaAttribute533f450180dc20032fc66626(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -169,10 +392,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the target group.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the target group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributea604dec036b51a290e25eba6(),
 		// Property: Port
 		// CloudFormation resource type schema:
 		//
@@ -180,10 +400,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The port on which the targets receive traffic. This port is used unless you specify a port override when registering the target. If the target is a Lambda function, this parameter does not apply. If the protocol is GENEVE, the supported port is 6081.",
 		//	  "type": "integer"
 		//	}
-		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The port on which the targets receive traffic. This port is used unless you specify a port override when registering the target. If the target is a Lambda function, this parameter does not apply. If the protocol is GENEVE, the supported port is 6081.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"port": schemaAttribute168ad3a8cf6e92ff913f5a6e(),
 		// Property: Protocol
 		// CloudFormation resource type schema:
 		//
@@ -191,10 +408,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The protocol to use for routing traffic to the targets.",
 		//	  "type": "string"
 		//	}
-		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The protocol to use for routing traffic to the targets.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"protocol": schemaAttribute47ee187f6b5e9026275c46c9(),
 		// Property: ProtocolVersion
 		// CloudFormation resource type schema:
 		//
@@ -202,10 +416,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "[HTTP/HTTPS protocol] The protocol version. The possible values are GRPC, HTTP1, and HTTP2.",
 		//	  "type": "string"
 		//	}
-		"protocol_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "[HTTP/HTTPS protocol] The protocol version. The possible values are GRPC, HTTP1, and HTTP2.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"protocol_version": schemaAttribute333739d33f15d7b6905a3c1e(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -233,24 +444,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributed8bd7b52a0d3e54885ce2a69(),
 		// Property: TargetControlPort
 		// CloudFormation resource type schema:
 		//
@@ -258,10 +452,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The port that the target control agent uses to communicate the available capacity of targets to the load balancer.",
 		//	  "type": "integer"
 		//	}
-		"target_control_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The port that the target control agent uses to communicate the available capacity of targets to the load balancer.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_control_port": schemaAttributeebf2bf316f52c41bad8e394e(),
 		// Property: TargetGroupArn
 		// CloudFormation resource type schema:
 		//
@@ -269,10 +460,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the Target Group",
 		//	  "type": "string"
 		//	}
-		"target_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the Target Group",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_group_arn": schemaAttribute18079381cd17ac5013934724(),
 		// Property: TargetGroupAttributes
 		// CloudFormation resource type schema:
 		//
@@ -297,24 +485,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"target_group_attributes": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value of the attribute.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the attribute.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The attributes.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_group_attributes": schemaAttribute4282c67c88c311d4f7b153c6(),
 		// Property: TargetGroupFullName
 		// CloudFormation resource type schema:
 		//
@@ -322,10 +493,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The full name of the target group.",
 		//	  "type": "string"
 		//	}
-		"target_group_full_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The full name of the target group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_group_full_name": schemaAttributea4501107f04a8907f24103b5(),
 		// Property: TargetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -333,10 +501,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the target group.",
 		//	  "type": "string"
 		//	}
-		"target_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the target group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_group_name": schemaAttributea604dec036b51a290e25eba6(),
 		// Property: TargetType
 		// CloudFormation resource type schema:
 		//
@@ -344,10 +509,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The type of target that you must specify when registering targets with this target group. You can't specify targets for a target group using more than one target type.",
 		//	  "type": "string"
 		//	}
-		"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of target that you must specify when registering targets with this target group. You can't specify targets for a target group using more than one target type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_type": schemaAttribute45d049890cb8c195e55312eb(),
 		// Property: Targets
 		// CloudFormation resource type schema:
 		//
@@ -382,34 +544,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"targets": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: AvailabilityZone
-					"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "An Availability Zone or all. This determines whether the target receives traffic from the load balancer nodes in the specified Availability Zone or from all enabled Availability Zones for the load balancer.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Id
-					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of the target. If the target type of the target group is instance, specify an instance ID. If the target type is ip, specify an IP address. If the target type is lambda, specify the ARN of the Lambda function. If the target type is alb, specify the ARN of the Application Load Balancer target. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Port
-					"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Description: "The port on which the target is listening. If the target group protocol is GENEVE, the supported port is 6081. If the target type is alb, the targeted Application Load Balancer must have at least one listener whose port matches the target group port. Not used if the target is a Lambda function.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: QuicServerId
-					"quic_server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Server ID used by targets when using QUIC or TCP_QUIC protocols.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The targets.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"targets": schemaAttribute2b8923ca7394e48a507992f8(),
 		// Property: UnhealthyThresholdCount
 		// CloudFormation resource type schema:
 		//
@@ -417,10 +552,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The number of consecutive health check failures required before considering a target unhealthy.",
 		//	  "type": "integer"
 		//	}
-		"unhealthy_threshold_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of consecutive health check failures required before considering a target unhealthy.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"unhealthy_threshold_count": schemaAttribute12c5f289014828ac2e55145f(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -428,10 +560,7 @@ func targetGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The identifier of the virtual private cloud (VPC). If the target is a Lambda function, this parameter does not apply.",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the virtual private cloud (VPC). If the target is a Lambda function, this parameter does not apply.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttributef33b05af5509fee805f86113(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

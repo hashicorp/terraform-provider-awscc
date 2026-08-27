@@ -15,6 +15,147 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute03e5f0dc109a98f231af3eb0() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MetricType
+				"metric_type": schemaAttributefb614616692fcb927107c351(),
+				// Property: TargetValue
+				"target_value": schemaAttribute7df0ea1dc112642ad3020878(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1bbae783a2e8ff56d96a3fb0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2a60a6fc8b117b69f14f9ef6() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Effect
+				"effect": schemaAttributefb614616692fcb927107c351(),
+				// Property: Entities
+				"entities": schemaAttribute1bbae783a2e8ff56d96a3fb0(),
+				// Property: Type
+				"type": schemaAttributefb614616692fcb927107c351(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70535208078454e4debf76a1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DefaultBehavior
+			"default_behavior": schemaAttributefb614616692fcb927107c351(),
+			// Property: OrderedProxyRules
+			"ordered_proxy_rules": schemaAttribute2a60a6fc8b117b69f14f9ef6(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7df0ea1dc112642ad3020878() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9981a2801cc683375cfa3f96() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxCapacity
+			"max_capacity": schemaAttributeeae59d7a644ee39d6cae7037(),
+			// Property: ScalingType
+			"scaling_type": schemaAttributefb614616692fcb927107c351(),
+			// Property: TargetTrackingScalingConfigs
+			"target_tracking_scaling_configs": schemaAttribute03e5f0dc109a98f231af3eb0(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9f94f2234b78d8264f5f3e0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: disk
+			"disk": schemaAttributeeae59d7a644ee39d6cae7037(),
+			// Property: instanceType
+			"instance_type": schemaAttributefb614616692fcb927107c351(),
+			// Property: machineType
+			"machine_type": schemaAttributefb614616692fcb927107c351(),
+			// Property: memory
+			"memory": schemaAttributeeae59d7a644ee39d6cae7037(),
+			// Property: vCpu
+			"v_cpu": schemaAttributeeae59d7a644ee39d6cae7037(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb57dfd07fa728bd59a765959() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttribute1bbae783a2e8ff56d96a3fb0(),
+			// Property: Subnets
+			"subnets": schemaAttribute1bbae783a2e8ff56d96a3fb0(),
+			// Property: VpcId
+			"vpc_id": schemaAttributefb614616692fcb927107c351(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed9a1d736b102315ef79cbc1e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee65a72c99f5e915739846299() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeae59d7a644ee39d6cae7037() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefb614616692fcb927107c351() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefbd9226d431d38a59ab46236() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee65a72c99f5e915739846299(),
+				// Property: Value
+				"value": schemaAttributed9a1d736b102315ef79cbc1e(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_codebuild_fleet", fleetDataSource)
 }
@@ -30,9 +171,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributefb614616692fcb927107c351(),
 		// Property: BaseCapacity
 		// CloudFormation resource type schema:
 		//
@@ -40,9 +179,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minimum": 0,
 		//	  "type": "integer"
 		//	}
-		"base_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"base_capacity": schemaAttributeeae59d7a644ee39d6cae7037(),
 		// Property: ComputeConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -71,31 +208,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"compute_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: disk
-				"disk": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: instanceType
-				"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: machineType
-				"machine_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: memory
-				"memory": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: vCpu
-				"v_cpu": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"compute_configuration": schemaAttributea9f94f2234b78d8264f5f3e0(),
 		// Property: ComputeType
 		// CloudFormation resource type schema:
 		//
@@ -111,9 +224,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"compute_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"compute_type": schemaAttributefb614616692fcb927107c351(),
 		// Property: EnvironmentType
 		// CloudFormation resource type schema:
 		//
@@ -131,9 +242,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"environment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"environment_type": schemaAttributefb614616692fcb927107c351(),
 		// Property: FleetProxyConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -181,36 +290,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"fleet_proxy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DefaultBehavior
-				"default_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: OrderedProxyRules
-				"ordered_proxy_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Effect
-							"effect": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Entities
-							"entities": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Type
-							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"fleet_proxy_configuration": schemaAttribute70535208078454e4debf76a1(),
 		// Property: FleetServiceRole
 		// CloudFormation resource type schema:
 		//
@@ -218,9 +298,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(?:arn:)[a-zA-Z+-=,._:/@]+$",
 		//	  "type": "string"
 		//	}
-		"fleet_service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"fleet_service_role": schemaAttributefb614616692fcb927107c351(),
 		// Property: FleetVpcConfig
 		// CloudFormation resource type schema:
 		//
@@ -247,25 +325,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"fleet_vpc_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SecurityGroupIds
-				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Subnets
-				"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VpcId
-				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"fleet_vpc_config": schemaAttributeb57dfd07fa728bd59a765959(),
 		// Property: ImageId
 		// CloudFormation resource type schema:
 		//
@@ -273,9 +333,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"image_id": schemaAttributefb614616692fcb927107c351(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -284,9 +342,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 2,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributefb614616692fcb927107c351(),
 		// Property: OverflowBehavior
 		// CloudFormation resource type schema:
 		//
@@ -297,9 +353,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"overflow_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"overflow_behavior": schemaAttributefb614616692fcb927107c351(),
 		// Property: ScalingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -337,35 +391,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"scaling_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaxCapacity
-				"max_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ScalingType
-				"scaling_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: TargetTrackingScalingConfigs
-				"target_tracking_scaling_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: MetricType
-							"metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: TargetValue
-							"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"scaling_configuration": schemaAttribute9981a2801cc683375cfa3f96(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -397,23 +423,7 @@ func fleetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 255 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributefbd9226d431d38a59ab46236(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

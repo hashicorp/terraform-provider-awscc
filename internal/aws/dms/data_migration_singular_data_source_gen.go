@@ -14,6 +14,160 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute173f226ca75b86a8d5fb8d4b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The property describes a name to identify the data migration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2fdb434830c04fb194e747ba() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The property specifies whether to enable the CloudWatch log.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute35511c37fe76833cc7e37f4e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The property specifies the rules of selecting objects for data migration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3554bf39a490786f52d81c74() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The property describes an ARN of the data migration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute448fbed3deb7260811e117ef() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The property describes the create time of the data migration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b24b689d0140171f6f89436() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The property describes an identifier for the migration project. It is used for describing/deleting/modifying can be name/arn",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5349c396711f1f3fd3f41df8() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of parallel jobs that trigger parallel threads to unload the tables from the source, and then load them to the target.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7b24fb4b30fa96115fd7f97e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudwatchLogsEnabled
+			"cloudwatch_logs_enabled": schemaAttribute2fdb434830c04fb194e747ba(),
+			// Property: NumberOfJobs
+			"number_of_jobs": schemaAttribute5349c396711f1f3fd3f41df8(),
+			// Property: SelectionRules
+			"selection_rules": schemaAttribute35511c37fe76833cc7e37f4e(),
+		}, /*END SCHEMA*/
+		Description: "The property describes the settings for the data migration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7f64955bc762455e4300dd1a() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CDCStartPosition
+				"cdc_start_position": schemaAttributeb1d03e3b8900d12578d14fd2(),
+				// Property: CDCStartTime
+				"cdc_start_time": schemaAttribute9c5938cd0c0b98307f7beb08(),
+				// Property: CDCStopTime
+				"cdc_stop_time": schemaAttributead08e9b157a764b8b5d3c3ab(),
+				// Property: SlotName
+				"slot_name": schemaAttribute7fd7562638c48ff37e550659(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The property describes the settings for the data migration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7fd7562638c48ff37e550659() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The property sets the name of a previously created logical replication slot for a change data capture (CDC) load of the source instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c5938cd0c0b98307f7beb08() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The property indicates the start time for a change data capture (CDC) operation. The value is server time in UTC format.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributead08e9b157a764b8b5d3c3ab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The property indicates the stop time for a change data capture (CDC) operation. The value is server time in UTC format.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeafd47e7c0d41c0afaf11e1da() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeb1bcb4907b20df3067e835da(),
+				// Property: Value
+				"value": schemaAttributedbe063c6994cfd1e4aedd19c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb1bcb4907b20df3067e835da() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb1d03e3b8900d12578d14fd2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The property is a point in the database engine's log that defines a time where you can begin CDC.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeca854d8d685f3539743749ca() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The property describes the type of migration.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedbe063c6994cfd1e4aedd19c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeaf32dc974238c62c3d25260() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The property describes Amazon Resource Name (ARN) of the service access role.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_dms_data_migration", dataMigrationDataSource)
 }
@@ -31,10 +185,7 @@ func dataMigrationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"data_migration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The property describes an ARN of the data migration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_migration_arn": schemaAttribute3554bf39a490786f52d81c74(),
 		// Property: DataMigrationCreateTime
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +195,7 @@ func dataMigrationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"data_migration_create_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The property describes the create time of the data migration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_migration_create_time": schemaAttribute448fbed3deb7260811e117ef(),
 		// Property: DataMigrationIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +205,7 @@ func dataMigrationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"data_migration_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The property describes an ARN of the data migration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_migration_identifier": schemaAttribute3554bf39a490786f52d81c74(),
 		// Property: DataMigrationName
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +215,7 @@ func dataMigrationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"data_migration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The property describes a name to identify the data migration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_migration_name": schemaAttribute173f226ca75b86a8d5fb8d4b(),
 		// Property: DataMigrationSettings
 		// CloudFormation resource type schema:
 		//
@@ -98,27 +240,7 @@ func dataMigrationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "object"
 		//	}
-		"data_migration_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CloudwatchLogsEnabled
-				"cloudwatch_logs_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "The property specifies whether to enable the CloudWatch log.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: NumberOfJobs
-				"number_of_jobs": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The number of parallel jobs that trigger parallel threads to unload the tables from the source, and then load them to the target.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SelectionRules
-				"selection_rules": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The property specifies the rules of selecting objects for data migration.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The property describes the settings for the data migration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_migration_settings": schemaAttribute7b24fb4b30fa96115fd7f97e(),
 		// Property: DataMigrationType
 		// CloudFormation resource type schema:
 		//
@@ -131,10 +253,7 @@ func dataMigrationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"data_migration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The property describes the type of migration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_migration_type": schemaAttributeca854d8d685f3539743749ca(),
 		// Property: MigrationProjectIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -144,10 +263,7 @@ func dataMigrationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"migration_project_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The property describes an identifier for the migration project. It is used for describing/deleting/modifying can be name/arn",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"migration_project_identifier": schemaAttribute4b24b689d0140171f6f89436(),
 		// Property: ServiceAccessRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -157,10 +273,7 @@ func dataMigrationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"service_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The property describes Amazon Resource Name (ARN) of the service access role.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"service_access_role_arn": schemaAttributeeaf32dc974238c62c3d25260(),
 		// Property: SourceDataSettings
 		// CloudFormation resource type schema:
 		//
@@ -196,34 +309,7 @@ func dataMigrationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"source_data_settings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: CDCStartPosition
-					"cdc_start_position": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The property is a point in the database engine's log that defines a time where you can begin CDC.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: CDCStartTime
-					"cdc_start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The property indicates the start time for a change data capture (CDC) operation. The value is server time in UTC format.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: CDCStopTime
-					"cdc_stop_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The property indicates the stop time for a change data capture (CDC) operation. The value is server time in UTC format.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: SlotName
-					"slot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The property sets the name of a previously created logical replication slot for a change data capture (CDC) load of the source instance.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The property describes the settings for the data migration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_data_settings": schemaAttribute7f64955bc762455e4300dd1a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -256,24 +342,7 @@ func dataMigrationDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeafd47e7c0d41c0afaf11e1da(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

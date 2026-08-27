@@ -14,6 +14,28 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0abc290cbf2db4e5c1aff8ab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute964ec6823461bc7dd317f321() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DaysBeforeExpiry
+			"days_before_expiry": schemaAttributec8385c665d7fecdc3e10fd8a(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec8385c665d7fecdc3e10fd8a() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_certificatemanager_account", accountDataSource)
 }
@@ -28,9 +50,7 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "string"
 		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"account_id": schemaAttribute0abc290cbf2db4e5c1aff8ab(),
 		// Property: ExpiryEventsConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -45,15 +65,7 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"expiry_events_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DaysBeforeExpiry
-				"days_before_expiry": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"expiry_events_configuration": schemaAttribute964ec6823461bc7dd317f321(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,12 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute898713188e3f96c900d1d871() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_signer_profile_permission", profilePermissionDataSource)
 }
@@ -28,18 +34,14 @@ func profilePermissionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	{
 		//	  "type": "string"
 		//	}
-		"action": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"action": schemaAttribute898713188e3f96c900d1d871(),
 		// Property: Principal
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"principal": schemaAttribute898713188e3f96c900d1d871(),
 		// Property: ProfileName
 		// CloudFormation resource type schema:
 		//
@@ -47,9 +49,7 @@ func profilePermissionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^[0-9a-zA-Z_]{2,64}$",
 		//	  "type": "string"
 		//	}
-		"profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"profile_name": schemaAttribute898713188e3f96c900d1d871(),
 		// Property: ProfileVersion
 		// CloudFormation resource type schema:
 		//
@@ -57,18 +57,14 @@ func profilePermissionDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^[0-9a-zA-Z]{10}$",
 		//	  "type": "string"
 		//	}
-		"profile_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"profile_version": schemaAttribute898713188e3f96c900d1d871(),
 		// Property: StatementId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"statement_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"statement_id": schemaAttribute898713188e3f96c900d1d871(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

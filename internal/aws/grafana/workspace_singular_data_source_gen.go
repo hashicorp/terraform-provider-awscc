@@ -16,6 +16,391 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute033d375b7957691d37892192() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PrefixListIds
+			"prefix_list_ids": schemaAttribute96ef5046bf0ddeeaa361b127(),
+			// Property: VpceIds
+			"vpce_ids": schemaAttribute96910db125e3d2efb0b48be6(),
+		}, /*END SCHEMA*/
+		Description: "The configuration settings for Network Access Control.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute088cbdeac264dc23f1112b08() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "URL that vends the IdPs metadata.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1030dd06125f3b5fad2223c5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the attribute within the SAML assert to use as the users organizations in Grafana.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute134ae7cd87c9a1454e582768() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15c60384b73df430ad0b96aa() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of an IAM role that already exists to use with AWS Organizations to access AWS data sources and notification channels in other accounts in an organization.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute18d32ba858642ab8497e8fdc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "Timestamp when the workspace was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1c2df632652e03396288517c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Url
+			"url": schemaAttribute088cbdeac264dc23f1112b08(),
+			// Property: Xml
+			"xml": schemaAttribute71c7101076742408f27e8c1e(),
+		}, /*END SCHEMA*/
+		Description: "IdP Metadata used to configure SAML authentication in Grafana.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1d325af22e458c66de2e8bb9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Endpoint for the Grafana workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31007d5c73130cb850c597ea() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AllowedOrganizations
+			"allowed_organizations": schemaAttribute5832c953c2841fffa4187769(),
+			// Property: AssertionAttributes
+			"assertion_attributes": schemaAttributef2cce6a7fd01db962fac0f68(),
+			// Property: IdpMetadata
+			"idp_metadata": schemaAttribute1c2df632652e03396288517c(),
+			// Property: LoginValidityDuration
+			"login_validity_duration": schemaAttribute9cc3ba72f3576e363db1c99e(),
+			// Property: RoleValues
+			"role_values": schemaAttribute4b227049b8dc74eb849c8f3b(),
+		}, /*END SCHEMA*/
+		Description: "SAML configuration data associated with an AMG workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3a043eca2902bdce3830300a() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of SAML roles which will be mapped into the Grafana Admin role.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3e661db55578944250c57c15() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3fb576756486843a4b9f2773() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of Organizational Units containing AWS accounts the Grafana workspace can pull data from.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute40829fb49b4eb6e3bc469e34() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4975a910ada5c2b96386bcb9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The id that uniquely identifies a Grafana workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b227049b8dc74eb849c8f3b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Admin
+			"admin": schemaAttribute3a043eca2902bdce3830300a(),
+			// Property: Editor
+			"editor": schemaAttributef46300faa31536019d712088(),
+		}, /*END SCHEMA*/
+		Description: "Maps SAML roles to the Grafana Editor and Admin roles.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4d245dd4130bb20ea616e063() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the attribute within the SAML assert to use as the users groups in Grafana.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4e686afa5424ef873b76aa89() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "These enums represent the status of a workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute515b0e92d9cf92551314e474() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of notification destinations on the customers service managed IAM role that the Grafana workspace can query.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute52d8ecbcf9ec57cf4830d085() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The client ID of the AWS SSO Managed Application.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5832c953c2841fffa4187769() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of SAML organizations allowed to access Grafana.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute601492ab8b84b9eb005ffaf0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "These enums represent valid permission types to use when creating or configuring a Grafana workspace. The SERVICE_MANAGED permission type means the Managed Grafana service will create a workspace IAM role on your behalf. The CUSTOMER_MANAGED permission type means that the customer is expected to provide an IAM role that the Grafana workspace can use to query data sources.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute697f40116518bc8ffcb6ec58() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of authentication providers to enable.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute71c7101076742408f27e8c1e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "XML blob of the IdPs metadata.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute767bc5ea3e3d8f137ed9953f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "IAM Role that will be used to grant the Grafana workspace access to a customers AWS resources.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a1b6294ba0c31bef4fb51a8() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the attribute within the SAML assert to use as the users email in Grafana.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92a035712eb2d60aab0d4c1f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute3e661db55578944250c57c15(),
+				// Property: Value
+				"value": schemaAttribute3e661db55578944250c57c15(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The list of tags associated with the workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute934c4ffc2ad17315be44d169() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The user friendly name of a workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96910db125e3d2efb0b48be6() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of Amazon VPC endpoint IDs for the workspace. If a NetworkAccessConfiguration is specified then only VPC endpoints specified here will be allowed to access the workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96ef5046bf0ddeeaa361b127() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses. The IP addresses specified are allowed to access your workspace. If the list is not included in the configuration then no IP addresses will be allowed to access the workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9cc3ba72f3576e363db1c99e() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The maximum lifetime an authenticated user can be logged in (in minutes) before being required to re-authenticate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9d603e2d12f231d0350a6fbe() schema.Attribute {
+	return (schema.SetAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9fc9287b946387358e7a25d7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Description of a workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb991b1bd6d00fe496cae859e() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of data sources on the service managed IAM role.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebcd4e8b3af47cc5f1d9780d9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "These enums represent valid account access types. Specifically these enums determine whether the workspace can access AWS resources in the AWS account only, or whether it can also access resources in other accounts in the same organization. If the value CURRENT_ACCOUNT is used, a workspace role ARN must be provided. If the value is ORGANIZATION, a list of organizational units must be provided.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe4db52656fb902ae3cfb302() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Valid SAML configuration statuses.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec734ca16464e53cba5a6a964() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of Grafana to support in your workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed7b5b64882383b27d32e9b64() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "Timestamp when the workspace was last modified",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedaa4ecc03652f091ea2da9b9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the attribute within the SAML assert to use as the users roles in Grafana.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeca605dfd715e12bfd80fe4d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttribute40829fb49b4eb6e3bc469e34(),
+			// Property: SubnetIds
+			"subnet_ids": schemaAttribute9d603e2d12f231d0350a6fbe(),
+		}, /*END SCHEMA*/
+		Description: "The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeecd27f6da39fe757f9cb29be() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the attribute within the SAML assert to use as the users login handle in Grafana.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee2bb6186e0a24b19add8bbe() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Name of the attribute within the SAML assert to use as the users name in Grafana.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2cce6a7fd01db962fac0f68() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Email
+			"email": schemaAttribute8a1b6294ba0c31bef4fb51a8(),
+			// Property: Groups
+			"groups": schemaAttribute4d245dd4130bb20ea616e063(),
+			// Property: Login
+			"login": schemaAttributeecd27f6da39fe757f9cb29be(),
+			// Property: Name
+			"name": schemaAttributeee2bb6186e0a24b19add8bbe(),
+			// Property: Org
+			"org": schemaAttribute1030dd06125f3b5fad2223c5(),
+			// Property: Role
+			"role": schemaAttributedaa4ecc03652f091ea2da9b9(),
+		}, /*END SCHEMA*/
+		Description: "Maps Grafana friendly names to the IdPs SAML attributes.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef46300faa31536019d712088() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of SAML roles which will be mapped into the Grafana Editor role.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefac361f4e2930d4a4c4426bb() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Allow workspace admins to install plugins",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefe82359722ced45d69f378c7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the AWS CloudFormation stack set to use to generate IAM roles to be used for this workspace.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_grafana_workspace", workspaceDataSource)
 }
@@ -35,10 +420,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"account_access_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "These enums represent valid account access types. Specifically these enums determine whether the workspace can access AWS resources in the AWS account only, or whether it can also access resources in other accounts in the same organization. If the value CURRENT_ACCOUNT is used, a workspace role ARN must be provided. If the value is ORGANIZATION, a list of organizational units must be provided.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"account_access_type": schemaAttributebcd4e8b3af47cc5f1d9780d9(),
 		// Property: AuthenticationProviders
 		// CloudFormation resource type schema:
 		//
@@ -57,11 +439,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"authentication_providers": schema.SetAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "List of authentication providers to enable.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"authentication_providers": schemaAttribute697f40116518bc8ffcb6ec58(),
 		// Property: ClientToken
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +448,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[!-~]{1,64}$",
 		//	  "type": "string"
 		//	}
-		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"client_token": schemaAttribute134ae7cd87c9a1454e582768(),
 		// Property: CreationTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -82,11 +457,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "Timestamp when the workspace was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_timestamp": schemaAttribute18d32ba858642ab8497e8fdc(),
 		// Property: DataSources
 		// CloudFormation resource type schema:
 		//
@@ -109,11 +480,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"data_sources": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "List of data sources on the service managed IAM role.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_sources": schemaAttributeb991b1bd6d00fe496cae859e(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -123,10 +490,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Description of a workspace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute9fc9287b946387358e7a25d7(),
 		// Property: Endpoint
 		// CloudFormation resource type schema:
 		//
@@ -136,10 +500,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Endpoint for the Grafana workspace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"endpoint": schemaAttribute1d325af22e458c66de2e8bb9(),
 		// Property: GrafanaVersion
 		// CloudFormation resource type schema:
 		//
@@ -149,10 +510,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"grafana_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of Grafana to support in your workspace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"grafana_version": schemaAttributec734ca16464e53cba5a6a964(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -161,10 +519,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^g-[0-9a-f]{10}$",
 		//	  "type": "string"
 		//	}
-		"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The id that uniquely identifies a Grafana workspace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"workspace_id": schemaAttribute4975a910ada5c2b96386bcb9(),
 		// Property: ModificationTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -173,11 +528,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"modification_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "Timestamp when the workspace was last modified",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"modification_timestamp": schemaAttributed7b5b64882383b27d32e9b64(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -186,10 +537,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-._~]{1,255}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The user friendly name of a workspace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute934c4ffc2ad17315be44d169(),
 		// Property: NetworkAccessControl
 		// CloudFormation resource type schema:
 		//
@@ -226,24 +574,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"network_access_control": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PrefixListIds
-				"prefix_list_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The list of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses. The IP addresses specified are allowed to access your workspace. If the list is not included in the configuration then no IP addresses will be allowed to access the workspace.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VpceIds
-				"vpce_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The list of Amazon VPC endpoint IDs for the workspace. If a NetworkAccessConfiguration is specified then only VPC endpoints specified here will be allowed to access the workspace.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration settings for Network Access Control.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"network_access_control": schemaAttribute033d375b7957691d37892192(),
 		// Property: NotificationDestinations
 		// CloudFormation resource type schema:
 		//
@@ -259,11 +590,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"notification_destinations": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "List of notification destinations on the customers service managed IAM role that the Grafana workspace can query.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"notification_destinations": schemaAttribute515b0e92d9cf92551314e474(),
 		// Property: OrganizationRoleName
 		// CloudFormation resource type schema:
 		//
@@ -273,10 +600,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"organization_role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of an IAM role that already exists to use with AWS Organizations to access AWS data sources and notification channels in other accounts in an organization.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"organization_role_name": schemaAttribute15c60384b73df430ad0b96aa(),
 		// Property: OrganizationalUnits
 		// CloudFormation resource type schema:
 		//
@@ -289,11 +613,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"organizational_units": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "List of Organizational Units containing AWS accounts the Grafana workspace can pull data from.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"organizational_units": schemaAttribute3fb576756486843a4b9f2773(),
 		// Property: PermissionType
 		// CloudFormation resource type schema:
 		//
@@ -305,10 +625,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"permission_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "These enums represent valid permission types to use when creating or configuring a Grafana workspace. The SERVICE_MANAGED permission type means the Managed Grafana service will create a workspace IAM role on your behalf. The CUSTOMER_MANAGED permission type means that the customer is expected to provide an IAM role that the Grafana workspace can use to query data sources.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"permission_type": schemaAttribute601492ab8b84b9eb005ffaf0(),
 		// Property: PluginAdminEnabled
 		// CloudFormation resource type schema:
 		//
@@ -316,10 +633,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Allow workspace admins to install plugins",
 		//	  "type": "boolean"
 		//	}
-		"plugin_admin_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Allow workspace admins to install plugins",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"plugin_admin_enabled": schemaAttributefac361f4e2930d4a4c4426bb(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -329,10 +643,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "IAM Role that will be used to grant the Grafana workspace access to a customers AWS resources.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute767bc5ea3e3d8f137ed9953f(),
 		// Property: SamlConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -450,96 +761,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"saml_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllowedOrganizations
-				"allowed_organizations": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "List of SAML organizations allowed to access Grafana.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: AssertionAttributes
-				"assertion_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Email
-						"email": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Name of the attribute within the SAML assert to use as the users email in Grafana.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Groups
-						"groups": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Name of the attribute within the SAML assert to use as the users groups in Grafana.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Login
-						"login": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Name of the attribute within the SAML assert to use as the users login handle in Grafana.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Name
-						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Name of the attribute within the SAML assert to use as the users name in Grafana.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Org
-						"org": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Name of the attribute within the SAML assert to use as the users organizations in Grafana.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Role
-						"role": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Name of the attribute within the SAML assert to use as the users roles in Grafana.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Maps Grafana friendly names to the IdPs SAML attributes.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IdpMetadata
-				"idp_metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Url
-						"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "URL that vends the IdPs metadata.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Xml
-						"xml": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "XML blob of the IdPs metadata.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "IdP Metadata used to configure SAML authentication in Grafana.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LoginValidityDuration
-				"login_validity_duration": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The maximum lifetime an authenticated user can be logged in (in minutes) before being required to re-authenticate.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RoleValues
-				"role_values": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Admin
-						"admin": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "List of SAML roles which will be mapped into the Grafana Admin role.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Editor
-						"editor": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "List of SAML roles which will be mapped into the Grafana Editor role.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "Maps SAML roles to the Grafana Editor and Admin roles.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "SAML configuration data associated with an AMG workspace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"saml_configuration": schemaAttribute31007d5c73130cb850c597ea(),
 		// Property: SamlConfigurationStatus
 		// CloudFormation resource type schema:
 		//
@@ -551,10 +773,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"saml_configuration_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Valid SAML configuration statuses.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"saml_configuration_status": schemaAttributebe4db52656fb902ae3cfb302(),
 		// Property: SsoClientId
 		// CloudFormation resource type schema:
 		//
@@ -562,10 +781,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The client ID of the AWS SSO Managed Application.",
 		//	  "type": "string"
 		//	}
-		"sso_client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The client ID of the AWS SSO Managed Application.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sso_client_id": schemaAttribute52d8ecbcf9ec57cf4830d085(),
 		// Property: StackSetName
 		// CloudFormation resource type schema:
 		//
@@ -573,10 +789,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the AWS CloudFormation stack set to use to generate IAM roles to be used for this workspace.",
 		//	  "type": "string"
 		//	}
-		"stack_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the AWS CloudFormation stack set to use to generate IAM roles to be used for this workspace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"stack_set_name": schemaAttributefe82359722ced45d69f378c7(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -599,10 +812,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "These enums represent the status of a workspace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute4e686afa5424ef873b76aa89(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -632,22 +842,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The list of tags associated with the workspace.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute92a035712eb2d60aab0d4c1f(),
 		// Property: VpcConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -690,24 +885,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SecurityGroupIds
-				"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SubnetIds
-				"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vpc_configuration": schemaAttributeeca605dfd715e12bfd80fe4d(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,114 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute14c6d40cb7f761d827f1e667() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of the CloudWatch Logs data source",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4fdaae68d39067e10542e44e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute58a8e9327f52302dd7fbda94() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the CloudWatch Logs data source",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute65d2ea306a159dbf90645409() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute4fdaae68d39067e10542e44e(),
+				// Property: Value
+				"value": schemaAttribute7cb4dab410807dfc4cb1334c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d7b9d802d1378b83f5ed000() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the role used to access the S3 Table Integration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute789552964fdfd338d4e547a5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the KMS key used to encrypt the S3 Table Integration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7cb4dab410807dfc4cb1334c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa8763aebc639b193b3c6be5() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Identifier
+				"identifier": schemaAttributeb20bcd0eee734baabf263f36(),
+				// Property: Name
+				"name": schemaAttribute58a8e9327f52302dd7fbda94(),
+				// Property: Type
+				"type": schemaAttribute14c6d40cb7f761d827f1e667(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The CloudWatch Logs data sources to associate with the S3 Table Integration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb20bcd0eee734baabf263f36() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the CloudWatch Logs data source association",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5f0ea04958ebdda69e07f0b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The server-side encryption algorithm used to encrypt the S3 Table(s) data",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee0c01d38019ffe076e317996() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the S3 Table Integration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee72fc471de5b537004ed6efe() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttribute789552964fdfd338d4e547a5(),
+			// Property: SseAlgorithm
+			"sse_algorithm": schemaAttributec5f0ea04958ebdda69e07f0b(),
+		}, /*END SCHEMA*/
+		Description: "Encryption configuration for the S3 Table Integration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_observabilityadmin_s3_table_integration", s3TableIntegrationDataSource)
 }
@@ -32,10 +140,7 @@ func s3TableIntegrationDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:aws([a-z0-9\\-]+)?:([a-zA-Z0-9\\-]+):([a-z0-9\\-]+)?:([0-9]{12})?:(.+)$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the S3 Table Integration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributee0c01d38019ffe076e317996(),
 		// Property: Encryption
 		// CloudFormation resource type schema:
 		//
@@ -64,22 +169,7 @@ func s3TableIntegrationDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: KmsKeyArn
-				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the KMS key used to encrypt the S3 Table Integration",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SseAlgorithm
-				"sse_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The server-side encryption algorithm used to encrypt the S3 Table(s) data",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Encryption configuration for the S3 Table Integration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"encryption": schemaAttributee72fc471de5b537004ed6efe(),
 		// Property: LogSources
 		// CloudFormation resource type schema:
 		//
@@ -118,29 +208,7 @@ func s3TableIntegrationDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"log_sources": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Identifier
-					"identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The ID of the CloudWatch Logs data source association",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the CloudWatch Logs data source",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Type
-					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The type of the CloudWatch Logs data source",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The CloudWatch Logs data sources to associate with the S3 Table Integration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"log_sources": schemaAttributeaa8763aebc639b193b3c6be5(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -151,10 +219,7 @@ func s3TableIntegrationDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:aws([a-z0-9\\-]+)?:([a-zA-Z0-9\\-]+):([a-z0-9\\-]+)?:([0-9]{12})?:(.+)$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the role used to access the S3 Table Integration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute6d7b9d802d1378b83f5ed000(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -187,24 +252,7 @@ func s3TableIntegrationDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute65d2ea306a159dbf90645409(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

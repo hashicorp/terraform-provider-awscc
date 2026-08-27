@@ -15,6 +15,21 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute819c942e4f0306eac3ccb456() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "A policy document containing permissions to add to the specified ObjectLambdaAccessPoint. For more information, see Access Policy Language Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-policy-language-overview.html) in the Amazon Simple Storage Service Developer Guide. ",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9ad593eab568537d37fa3880() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Amazon S3 ObjectLambdaAccessPoint to which the policy applies.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_s3objectlambda_access_point_policy", accessPointPolicyDataSource)
 }
@@ -33,10 +48,7 @@ func accessPointPolicyDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$",
 		//	  "type": "string"
 		//	}
-		"object_lambda_access_point": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Amazon S3 ObjectLambdaAccessPoint to which the policy applies.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"object_lambda_access_point": schemaAttribute9ad593eab568537d37fa3880(),
 		// Property: PolicyDocument
 		// CloudFormation resource type schema:
 		//
@@ -44,11 +56,7 @@ func accessPointPolicyDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "A policy document containing permissions to add to the specified ObjectLambdaAccessPoint. For more information, see Access Policy Language Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-policy-language-overview.html) in the Amazon Simple Storage Service Developer Guide. ",
 		//	  "type": "object"
 		//	}
-		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "A policy document containing permissions to add to the specified ObjectLambdaAccessPoint. For more information, see Access Policy Language Overview (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-policy-language-overview.html) in the Amazon Simple Storage Service Developer Guide. ",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_document": schemaAttribute819c942e4f0306eac3ccb456(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

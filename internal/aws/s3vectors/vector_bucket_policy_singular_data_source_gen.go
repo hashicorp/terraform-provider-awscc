@@ -14,6 +14,27 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute90b3eb7efa567b00281c0af0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A policy document containing permissions to add to the specified vector bucket. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb630c37a8a86128c8145aac2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the vector bucket",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed21040bd220b5b4734eb06d1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the vector bucket.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_s3vectors_vector_bucket_policy", vectorBucketPolicyDataSource)
 }
@@ -29,10 +50,7 @@ func vectorBucketPolicyDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "A policy document containing permissions to add to the specified vector bucket. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
 		//	  "type": "string"
 		//	}
-		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A policy document containing permissions to add to the specified vector bucket. In IAM, you must provide policy documents in JSON format. However, in CloudFormation you can provide the policy in JSON or YAML format because CloudFormation converts YAML to JSON before submitting it to IAM.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy": schemaAttribute90b3eb7efa567b00281c0af0(),
 		// Property: VectorBucketArn
 		// CloudFormation resource type schema:
 		//
@@ -43,10 +61,7 @@ func vectorBucketPolicyDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"vector_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the vector bucket.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vector_bucket_arn": schemaAttributed21040bd220b5b4734eb06d1(),
 		// Property: VectorBucketName
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +71,7 @@ func vectorBucketPolicyDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 3,
 		//	  "type": "string"
 		//	}
-		"vector_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the vector bucket",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"vector_bucket_name": schemaAttributeb630c37a8a86128c8145aac2(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

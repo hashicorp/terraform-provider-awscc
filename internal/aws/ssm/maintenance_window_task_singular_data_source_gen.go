@@ -16,6 +16,272 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute04d3d0b107fce6417d489eb9() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+				// Property: Values
+				"values": schemaAttribute11114b22928f0d8c2557517b(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The targets (either instances or window target ids).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute089ef07900674c92cd11ada1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the CloudWatch log group where you want to send command output.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute08c55e69d3d80735cdf06550() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "The parameters to pass to the task when it runs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute11114b22928f0d8c2557517b() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1343c89e995097ca28dbef01() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: jsontypes.NormalizedType{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute13983dae89321b8488f39c96() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The priority of the task in the maintenance window. The lower the number, the higher the priority. Tasks that have the same priority are scheduled in parallel.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19f73ff37e8be389467a7643() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the maintenance window where the task is registered.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute21082c425aa6cf0ef2073d31() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Enables Systems Manager to send command output to CloudWatch Logs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute23f9e9ab541cf061620792c8() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ClientContext
+			"client_context": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+			// Property: Payload
+			"payload": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+			// Property: Qualifier
+			"qualifier": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28f12f1fba42d4110c6e2df6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the IAM service role for AWS Systems Manager to assume when running a maintenance window task.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3488c36319da53086137d234() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DocumentVersion
+			"document_version": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+			// Property: Parameters
+			"parameters": schemaAttribute1343c89e995097ca28dbef01(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute358c0d550a1b2fee6a6a24f3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of task.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute375ea00931aa610f8d6f2f20() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4a0d64bcc4622cee2d6eb15f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The task name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute552cadf1b30645692d9b00ef() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Unique identifier of the maintenance window task.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute580a79d3ff2ca7f864ba0a43() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaintenanceWindowAutomationParameters
+			"maintenance_window_automation_parameters": schemaAttribute3488c36319da53086137d234(),
+			// Property: MaintenanceWindowLambdaParameters
+			"maintenance_window_lambda_parameters": schemaAttribute23f9e9ab541cf061620792c8(),
+			// Property: MaintenanceWindowRunCommandParameters
+			"maintenance_window_run_command_parameters": schemaAttribute5cfd8a51f9c1cbf6d3b35fc2(),
+			// Property: MaintenanceWindowStepFunctionsParameters
+			"maintenance_window_step_functions_parameters": schemaAttributea9fae166b919ad3fa1316f11(),
+		}, /*END SCHEMA*/
+		Description: "The parameters to pass to the task when it runs. Populate only the fields that match the task type. All other fields should be empty.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5cfd8a51f9c1cbf6d3b35fc2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatchOutputConfig
+			"cloudwatch_output_config": schemaAttributeaea5d1c63388e1d3cdfa7ce7(),
+			// Property: Comment
+			"comment": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+			// Property: DocumentHash
+			"document_hash": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+			// Property: DocumentHashType
+			"document_hash_type": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+			// Property: DocumentVersion
+			"document_version": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+			// Property: NotificationConfig
+			"notification_config": schemaAttributebcd4cf1d8f500405c9a9d5b2(),
+			// Property: OutputS3BucketName
+			"output_s3_bucket_name": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+			// Property: OutputS3KeyPrefix
+			"output_s3_key_prefix": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+			// Property: Parameters
+			"parameters": schemaAttribute1343c89e995097ca28dbef01(),
+			// Property: ServiceRoleArn
+			"service_role_arn": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+			// Property: TimeoutSeconds
+			"timeout_seconds": schemaAttribute375ea00931aa610f8d6f2f20(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute704b065b56683a1591d857ed() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The specification for whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d9f5ece2cacf6d8421ecd04() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f837e9cb6fbbf649d58a6d7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Region
+			"region": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+			// Property: S3Bucket
+			"s3_bucket": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+			// Property: S3Prefix
+			"s3_prefix": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+		}, /*END SCHEMA*/
+		Description: "Information about an Amazon S3 bucket to write Run Command task-level logs to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9fae166b919ad3fa1316f11() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Input
+			"input": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+			// Property: Name
+			"name": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaea5d1c63388e1d3cdfa7ce7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CloudWatchLogGroupName
+			"cloudwatch_log_group_name": schemaAttribute089ef07900674c92cd11ada1(),
+			// Property: CloudWatchOutputEnabled
+			"cloudwatch_output_enabled": schemaAttribute21082c425aa6cf0ef2073d31(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebcd4cf1d8f500405c9a9d5b2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: NotificationArn
+			"notification_arn": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+			// Property: NotificationEvents
+			"notification_events": schemaAttribute11114b22928f0d8c2557517b(),
+			// Property: NotificationType
+			"notification_type": schemaAttribute7d9f5ece2cacf6d8421ecd04(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7831f284b247810229c6580() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of targets this task can be run for, in parallel.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec79bf8cf80bf2103212b0731() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The maximum number of errors allowed before this task stops being scheduled.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed42a721c79c1cc2815f39a85() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The resource that the task uses during execution.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedca2d40422e61a62f6701c24() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A description of the task.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ssm_maintenance_window_task", maintenanceWindowTaskDataSource)
 }
@@ -31,10 +297,7 @@ func maintenanceWindowTaskDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The specification for whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached.",
 		//	  "type": "string"
 		//	}
-		"cutoff_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The specification for whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cutoff_behavior": schemaAttribute704b065b56683a1591d857ed(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +305,7 @@ func maintenanceWindowTaskDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "A description of the task.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A description of the task.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributedca2d40422e61a62f6701c24(),
 		// Property: LoggingInfo
 		// CloudFormation resource type schema:
 		//
@@ -69,24 +329,7 @@ func maintenanceWindowTaskDataSource(ctx context.Context) (datasource.DataSource
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"logging_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Region
-				"region": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: S3Bucket
-				"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: S3Prefix
-				"s3_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Information about an Amazon S3 bucket to write Run Command task-level logs to.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"logging_info": schemaAttribute9f837e9cb6fbbf649d58a6d7(),
 		// Property: MaxConcurrency
 		// CloudFormation resource type schema:
 		//
@@ -94,10 +337,7 @@ func maintenanceWindowTaskDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The maximum number of targets this task can be run for, in parallel.",
 		//	  "type": "string"
 		//	}
-		"max_concurrency": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The maximum number of targets this task can be run for, in parallel.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"max_concurrency": schemaAttributec7831f284b247810229c6580(),
 		// Property: MaxErrors
 		// CloudFormation resource type schema:
 		//
@@ -105,10 +345,7 @@ func maintenanceWindowTaskDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The maximum number of errors allowed before this task stops being scheduled.",
 		//	  "type": "string"
 		//	}
-		"max_errors": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The maximum number of errors allowed before this task stops being scheduled.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"max_errors": schemaAttributec79bf8cf80bf2103212b0731(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -116,10 +353,7 @@ func maintenanceWindowTaskDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The task name.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The task name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute4a0d64bcc4622cee2d6eb15f(),
 		// Property: Priority
 		// CloudFormation resource type schema:
 		//
@@ -127,10 +361,7 @@ func maintenanceWindowTaskDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The priority of the task in the maintenance window. The lower the number, the higher the priority. Tasks that have the same priority are scheduled in parallel.",
 		//	  "type": "integer"
 		//	}
-		"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The priority of the task in the maintenance window. The lower the number, the higher the priority. Tasks that have the same priority are scheduled in parallel.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"priority": schemaAttribute13983dae89321b8488f39c96(),
 		// Property: ServiceRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -138,10 +369,7 @@ func maintenanceWindowTaskDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The Amazon Resource Name (ARN) of the IAM service role for AWS Systems Manager to assume when running a maintenance window task.",
 		//	  "type": "string"
 		//	}
-		"service_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the IAM service role for AWS Systems Manager to assume when running a maintenance window task.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"service_role_arn": schemaAttribute28f12f1fba42d4110c6e2df6(),
 		// Property: Targets
 		// CloudFormation resource type schema:
 		//
@@ -170,23 +398,7 @@ func maintenanceWindowTaskDataSource(ctx context.Context) (datasource.DataSource
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Values
-					"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The targets (either instances or window target ids).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"targets": schemaAttribute04d3d0b107fce6417d489eb9(),
 		// Property: TaskArn
 		// CloudFormation resource type schema:
 		//
@@ -194,10 +406,7 @@ func maintenanceWindowTaskDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The resource that the task uses during execution.",
 		//	  "type": "string"
 		//	}
-		"task_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The resource that the task uses during execution.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"task_arn": schemaAttributed42a721c79c1cc2815f39a85(),
 		// Property: TaskInvocationParameters
 		// CloudFormation resource type schema:
 		//
@@ -316,137 +525,7 @@ func maintenanceWindowTaskDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"task_invocation_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaintenanceWindowAutomationParameters
-				"maintenance_window_automation_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DocumentVersion
-						"document_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Parameters
-						"parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType: jsontypes.NormalizedType{},
-							Computed:   true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaintenanceWindowLambdaParameters
-				"maintenance_window_lambda_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: ClientContext
-						"client_context": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Payload
-						"payload": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Qualifier
-						"qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaintenanceWindowRunCommandParameters
-				"maintenance_window_run_command_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CloudWatchOutputConfig
-						"cloudwatch_output_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: CloudWatchLogGroupName
-								"cloudwatch_log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The name of the CloudWatch log group where you want to send command output.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: CloudWatchOutputEnabled
-								"cloudwatch_output_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Description: "Enables Systems Manager to send command output to CloudWatch Logs.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Comment
-						"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: DocumentHash
-						"document_hash": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: DocumentHashType
-						"document_hash_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: DocumentVersion
-						"document_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: NotificationConfig
-						"notification_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: NotificationArn
-								"notification_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: NotificationEvents
-								"notification_events": schema.ListAttribute{ /*START ATTRIBUTE*/
-									ElementType: types.StringType,
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: NotificationType
-								"notification_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: OutputS3BucketName
-						"output_s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: OutputS3KeyPrefix
-						"output_s3_key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Parameters
-						"parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType: jsontypes.NormalizedType{},
-							Computed:   true,
-						}, /*END ATTRIBUTE*/
-						// Property: ServiceRoleArn
-						"service_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: TimeoutSeconds
-						"timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaintenanceWindowStepFunctionsParameters
-				"maintenance_window_step_functions_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Input
-						"input": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Name
-						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The parameters to pass to the task when it runs. Populate only the fields that match the task type. All other fields should be empty.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"task_invocation_parameters": schemaAttribute580a79d3ff2ca7f864ba0a43(),
 		// Property: TaskParameters
 		// CloudFormation resource type schema:
 		//
@@ -454,11 +533,7 @@ func maintenanceWindowTaskDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The parameters to pass to the task when it runs.",
 		//	  "type": "object"
 		//	}
-		"task_parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  jsontypes.NormalizedType{},
-			Description: "The parameters to pass to the task when it runs.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"task_parameters": schemaAttribute08c55e69d3d80735cdf06550(),
 		// Property: TaskType
 		// CloudFormation resource type schema:
 		//
@@ -466,10 +541,7 @@ func maintenanceWindowTaskDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The type of task.",
 		//	  "type": "string"
 		//	}
-		"task_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of task.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"task_type": schemaAttribute358c0d550a1b2fee6a6a24f3(),
 		// Property: WindowId
 		// CloudFormation resource type schema:
 		//
@@ -477,10 +549,7 @@ func maintenanceWindowTaskDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The ID of the maintenance window where the task is registered.",
 		//	  "type": "string"
 		//	}
-		"window_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the maintenance window where the task is registered.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"window_id": schemaAttribute19f73ff37e8be389467a7643(),
 		// Property: WindowTaskId
 		// CloudFormation resource type schema:
 		//
@@ -488,10 +557,7 @@ func maintenanceWindowTaskDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "Unique identifier of the maintenance window task.",
 		//	  "type": "string"
 		//	}
-		"window_task_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Unique identifier of the maintenance window task.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"window_task_id": schemaAttribute552cadf1b30645692d9b00ef(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

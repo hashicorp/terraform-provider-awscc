@@ -14,6 +14,314 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute08b3d2645e87d1b3857b3b92() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1e46a0ae954b4997155d3f0d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MaxCapacityBreachBehavior
+			"max_capacity_breach_behavior": schemaAttribute82e985b40a55a697bec94b8f(),
+			// Property: MaxCapacityBuffer
+			"max_capacity_buffer": schemaAttribute5b8e94c451c1329ff8f55b70(),
+			// Property: MetricSpecifications
+			"metric_specifications": schemaAttribute350fe4fa605836b7845c8e55(),
+			// Property: Mode
+			"mode": schemaAttribute82e985b40a55a697bec94b8f(),
+			// Property: SchedulingBufferTime
+			"scheduling_buffer_time": schemaAttribute5b8e94c451c1329ff8f55b70(),
+		}, /*END SCHEMA*/
+		Description: "A predictive scaling policy. Includes support for predefined metrics only.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1f41acb30107f3ab691b32b5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies how the scaling adjustment is interpreted. The valid values are ChangeInCapacity, ExactCapacity, and PercentChangeInCapacity.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute28492b5ef1d4660aae285ac9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The duration of the policy's cooldown period, in seconds. When a cooldown period is specified here, it overrides the default cooldown period defined for the Auto Scaling group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2b5f71255f5c426f5bfb70ad() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Dimensions
+			"dimensions": schemaAttribute894e974b2254c2c7a04e5170(),
+			// Property: MetricName
+			"metric_name": schemaAttribute82e985b40a55a697bec94b8f(),
+			// Property: Namespace
+			"namespace": schemaAttribute82e985b40a55a697bec94b8f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31f8b203d8159e350772ed31() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Dimensions
+			"dimensions": schemaAttribute894e974b2254c2c7a04e5170(),
+			// Property: MetricName
+			"metric_name": schemaAttribute82e985b40a55a697bec94b8f(),
+			// Property: Metrics
+			"metrics": schemaAttributed044623d8c93a4e6e7f5d85a(),
+			// Property: Namespace
+			"namespace": schemaAttribute82e985b40a55a697bec94b8f(),
+			// Property: Period
+			"period": schemaAttribute5b8e94c451c1329ff8f55b70(),
+			// Property: Statistic
+			"statistic": schemaAttribute82e985b40a55a697bec94b8f(),
+			// Property: Unit
+			"unit": schemaAttribute82e985b40a55a697bec94b8f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute34733e87afa9c3d8fedc0678() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The aggregation type for the CloudWatch metrics. The valid values are Minimum, Maximum, and Average. If the aggregation type is null, the value is treated as Average. Valid only if the policy type is StepScaling.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute350fe4fa605836b7845c8e55() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomizedCapacityMetricSpecification
+				"customized_capacity_metric_specification": schemaAttributee9639abac65a64dc5bd4d70d(),
+				// Property: CustomizedLoadMetricSpecification
+				"customized_load_metric_specification": schemaAttributee9639abac65a64dc5bd4d70d(),
+				// Property: CustomizedScalingMetricSpecification
+				"customized_scaling_metric_specification": schemaAttributee9639abac65a64dc5bd4d70d(),
+				// Property: PredefinedLoadMetricSpecification
+				"predefined_load_metric_specification": schemaAttribute35653dd0714f8dab47b0e068(),
+				// Property: PredefinedMetricPairSpecification
+				"predefined_metric_pair_specification": schemaAttribute35653dd0714f8dab47b0e068(),
+				// Property: PredefinedScalingMetricSpecification
+				"predefined_scaling_metric_specification": schemaAttribute35653dd0714f8dab47b0e068(),
+				// Property: TargetValue
+				"target_value": schemaAttribute08b3d2645e87d1b3857b3b92(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute35653dd0714f8dab47b0e068() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PredefinedMetricType
+			"predefined_metric_type": schemaAttribute82e985b40a55a697bec94b8f(),
+			// Property: ResourceLabel
+			"resource_label": schemaAttribute82e985b40a55a697bec94b8f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53da7c808f1830b31b2cf92a() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5b8e94c451c1329ff8f55b70() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6116ba584086370b73f53dd9() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Metric
+			"metric": schemaAttribute2b5f71255f5c426f5bfb70ad(),
+			// Property: Period
+			"period": schemaAttribute5b8e94c451c1329ff8f55b70(),
+			// Property: Stat
+			"stat": schemaAttribute82e985b40a55a697bec94b8f(),
+			// Property: Unit
+			"unit": schemaAttribute82e985b40a55a697bec94b8f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute70afbbe901dd2509776fa929() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Expression
+				"expression": schemaAttribute82e985b40a55a697bec94b8f(),
+				// Property: Id
+				"id": schemaAttribute82e985b40a55a697bec94b8f(),
+				// Property: Label
+				"label": schemaAttribute82e985b40a55a697bec94b8f(),
+				// Property: MetricStat
+				"metric_stat": schemaAttribute732a1d2352f383ecd52d7af3(),
+				// Property: ReturnData
+				"return_data": schemaAttribute53da7c808f1830b31b2cf92a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute732a1d2352f383ecd52d7af3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Metric
+			"metric": schemaAttribute2b5f71255f5c426f5bfb70ad(),
+			// Property: Stat
+			"stat": schemaAttribute82e985b40a55a697bec94b8f(),
+			// Property: Unit
+			"unit": schemaAttribute82e985b40a55a697bec94b8f(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7ddf48da896208467c2220af() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The minimum value to scale by when the adjustment type is PercentChangeInCapacity. For example, suppose that you create a step scaling policy to scale out an Auto Scaling group by 25 percent and you specify a MinAdjustmentMagnitude of 2. If the group has 4 instances and the scaling policy is performed, 25 percent of 4 is 1. However, because you specified a MinAdjustmentMagnitude of 2, Amazon EC2 Auto Scaling scales out the group by 2 instances.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82e985b40a55a697bec94b8f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute85cd358a3eb773c95a9d8cb3() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics. If not provided, the default is to use the value from the default cooldown period for the Auto Scaling group. Valid only if the policy type is TargetTrackingScaling or StepScaling.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute894e974b2254c2c7a04e5170() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schemaAttribute82e985b40a55a697bec94b8f(),
+				// Property: Value
+				"value": schemaAttribute82e985b40a55a697bec94b8f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9681ce89a3e00ba1659a02b4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Auto Scaling group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed044623d8c93a4e6e7f5d85a() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Expression
+				"expression": schemaAttribute82e985b40a55a697bec94b8f(),
+				// Property: Id
+				"id": schemaAttribute82e985b40a55a697bec94b8f(),
+				// Property: Label
+				"label": schemaAttribute82e985b40a55a697bec94b8f(),
+				// Property: MetricStat
+				"metric_stat": schemaAttribute6116ba584086370b73f53dd9(),
+				// Property: Period
+				"period": schemaAttribute5b8e94c451c1329ff8f55b70(),
+				// Property: ReturnData
+				"return_data": schemaAttribute53da7c808f1830b31b2cf92a(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed1442bf6d2983faeeb7731ad() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CustomizedMetricSpecification
+			"customized_metric_specification": schemaAttribute31f8b203d8159e350772ed31(),
+			// Property: DisableScaleIn
+			"disable_scale_in": schemaAttribute53da7c808f1830b31b2cf92a(),
+			// Property: PredefinedMetricSpecification
+			"predefined_metric_specification": schemaAttribute35653dd0714f8dab47b0e068(),
+			// Property: TargetValue
+			"target_value": schemaAttribute08b3d2645e87d1b3857b3b92(),
+		}, /*END SCHEMA*/
+		Description: "A target tracking scaling policy. Includes support for predefined or customized metrics.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4e849db6b13ead35756f9db() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MetricIntervalLowerBound
+				"metric_interval_lower_bound": schemaAttribute08b3d2645e87d1b3857b3b92(),
+				// Property: MetricIntervalUpperBound
+				"metric_interval_upper_bound": schemaAttribute08b3d2645e87d1b3857b3b92(),
+				// Property: ScalingAdjustment
+				"scaling_adjustment": schemaAttribute5b8e94c451c1329ff8f55b70(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A set of adjustments that enable you to scale based on the size of the alarm breach. Required if the policy type is StepScaling. (Not used with any other policy type.)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5876971bc557bd7dd5b08e4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "One of the following policy types: TargetTrackingScaling, StepScaling, SimpleScaling (default), PredictiveScaling",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed7a1058df54df239242e0c88() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity. For exact capacity, you must specify a positive value. Required if the policy type is SimpleScaling. (Not used with any other policy type.)",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9639abac65a64dc5bd4d70d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MetricDataQueries
+			"metric_data_queries": schemaAttribute70afbbe901dd2509776fa929(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef0c7b048d2e6f64bbad8a6f5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the AutoScaling scaling policy",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_autoscaling_scaling_policy", scalingPolicyDataSource)
 }
@@ -29,10 +337,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "Specifies how the scaling adjustment is interpreted. The valid values are ChangeInCapacity, ExactCapacity, and PercentChangeInCapacity.",
 		//	  "type": "string"
 		//	}
-		"adjustment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies how the scaling adjustment is interpreted. The valid values are ChangeInCapacity, ExactCapacity, and PercentChangeInCapacity.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"adjustment_type": schemaAttribute1f41acb30107f3ab691b32b5(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +345,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The ARN of the AutoScaling scaling policy",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the AutoScaling scaling policy",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributef0c7b048d2e6f64bbad8a6f5(),
 		// Property: AutoScalingGroupName
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +353,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The name of the Auto Scaling group.",
 		//	  "type": "string"
 		//	}
-		"auto_scaling_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Auto Scaling group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"auto_scaling_group_name": schemaAttribute9681ce89a3e00ba1659a02b4(),
 		// Property: Cooldown
 		// CloudFormation resource type schema:
 		//
@@ -62,10 +361,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The duration of the policy's cooldown period, in seconds. When a cooldown period is specified here, it overrides the default cooldown period defined for the Auto Scaling group.",
 		//	  "type": "string"
 		//	}
-		"cooldown": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The duration of the policy's cooldown period, in seconds. When a cooldown period is specified here, it overrides the default cooldown period defined for the Auto Scaling group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cooldown": schemaAttribute28492b5ef1d4660aae285ac9(),
 		// Property: EstimatedInstanceWarmup
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +369,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics. If not provided, the default is to use the value from the default cooldown period for the Auto Scaling group. Valid only if the policy type is TargetTrackingScaling or StepScaling.",
 		//	  "type": "integer"
 		//	}
-		"estimated_instance_warmup": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics. If not provided, the default is to use the value from the default cooldown period for the Auto Scaling group. Valid only if the policy type is TargetTrackingScaling or StepScaling.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"estimated_instance_warmup": schemaAttribute85cd358a3eb773c95a9d8cb3(),
 		// Property: MetricAggregationType
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +377,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The aggregation type for the CloudWatch metrics. The valid values are Minimum, Maximum, and Average. If the aggregation type is null, the value is treated as Average. Valid only if the policy type is StepScaling.",
 		//	  "type": "string"
 		//	}
-		"metric_aggregation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The aggregation type for the CloudWatch metrics. The valid values are Minimum, Maximum, and Average. If the aggregation type is null, the value is treated as Average. Valid only if the policy type is StepScaling.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"metric_aggregation_type": schemaAttribute34733e87afa9c3d8fedc0678(),
 		// Property: MinAdjustmentMagnitude
 		// CloudFormation resource type schema:
 		//
@@ -95,19 +385,14 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The minimum value to scale by when the adjustment type is PercentChangeInCapacity. For example, suppose that you create a step scaling policy to scale out an Auto Scaling group by 25 percent and you specify a MinAdjustmentMagnitude of 2. If the group has 4 instances and the scaling policy is performed, 25 percent of 4 is 1. However, because you specified a MinAdjustmentMagnitude of 2, Amazon EC2 Auto Scaling scales out the group by 2 instances.",
 		//	  "type": "integer"
 		//	}
-		"min_adjustment_magnitude": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The minimum value to scale by when the adjustment type is PercentChangeInCapacity. For example, suppose that you create a step scaling policy to scale out an Auto Scaling group by 25 percent and you specify a MinAdjustmentMagnitude of 2. If the group has 4 instances and the scaling policy is performed, 25 percent of 4 is 1. However, because you specified a MinAdjustmentMagnitude of 2, Amazon EC2 Auto Scaling scales out the group by 2 instances.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"min_adjustment_magnitude": schemaAttribute7ddf48da896208467c2220af(),
 		// Property: PolicyName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"policy_name": schemaAttribute82e985b40a55a697bec94b8f(),
 		// Property: PolicyType
 		// CloudFormation resource type schema:
 		//
@@ -115,10 +400,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "One of the following policy types: TargetTrackingScaling, StepScaling, SimpleScaling (default), PredictiveScaling",
 		//	  "type": "string"
 		//	}
-		"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "One of the following policy types: TargetTrackingScaling, StepScaling, SimpleScaling (default), PredictiveScaling",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"policy_type": schemaAttributed5876971bc557bd7dd5b08e4(),
 		// Property: PredictiveScalingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -470,304 +752,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"predictive_scaling_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MaxCapacityBreachBehavior
-				"max_capacity_breach_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaxCapacityBuffer
-				"max_capacity_buffer": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MetricSpecifications
-				"metric_specifications": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: CustomizedCapacityMetricSpecification
-							"customized_capacity_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: MetricDataQueries
-									"metric_data_queries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Expression
-												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Id
-												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Label
-												"label": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: MetricStat
-												"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Metric
-														"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: Dimensions
-																"dimensions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-																	NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: Name
-																			"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Computed: true,
-																			}, /*END ATTRIBUTE*/
-																			// Property: Value
-																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Computed: true,
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																	}, /*END NESTED OBJECT*/
-																	Computed: true,
-																}, /*END ATTRIBUTE*/
-																// Property: MetricName
-																"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Computed: true,
-																}, /*END ATTRIBUTE*/
-																// Property: Namespace
-																"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Computed: true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Computed: true,
-														}, /*END ATTRIBUTE*/
-														// Property: Stat
-														"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Computed: true,
-														}, /*END ATTRIBUTE*/
-														// Property: Unit
-														"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Computed: true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: ReturnData
-												"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: CustomizedLoadMetricSpecification
-							"customized_load_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: MetricDataQueries
-									"metric_data_queries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Expression
-												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Id
-												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Label
-												"label": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: MetricStat
-												"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Metric
-														"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: Dimensions
-																"dimensions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-																	NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: Name
-																			"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Computed: true,
-																			}, /*END ATTRIBUTE*/
-																			// Property: Value
-																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Computed: true,
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																	}, /*END NESTED OBJECT*/
-																	Computed: true,
-																}, /*END ATTRIBUTE*/
-																// Property: MetricName
-																"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Computed: true,
-																}, /*END ATTRIBUTE*/
-																// Property: Namespace
-																"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Computed: true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Computed: true,
-														}, /*END ATTRIBUTE*/
-														// Property: Stat
-														"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Computed: true,
-														}, /*END ATTRIBUTE*/
-														// Property: Unit
-														"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Computed: true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: ReturnData
-												"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: CustomizedScalingMetricSpecification
-							"customized_scaling_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: MetricDataQueries
-									"metric_data_queries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-												// Property: Expression
-												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Id
-												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: Label
-												"label": schema.StringAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: MetricStat
-												"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-														// Property: Metric
-														"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: Dimensions
-																"dimensions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-																	NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																			// Property: Name
-																			"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Computed: true,
-																			}, /*END ATTRIBUTE*/
-																			// Property: Value
-																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																				Computed: true,
-																			}, /*END ATTRIBUTE*/
-																		}, /*END SCHEMA*/
-																	}, /*END NESTED OBJECT*/
-																	Computed: true,
-																}, /*END ATTRIBUTE*/
-																// Property: MetricName
-																"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Computed: true,
-																}, /*END ATTRIBUTE*/
-																// Property: Namespace
-																"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Computed: true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-															Computed: true,
-														}, /*END ATTRIBUTE*/
-														// Property: Stat
-														"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Computed: true,
-														}, /*END ATTRIBUTE*/
-														// Property: Unit
-														"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-															Computed: true,
-														}, /*END ATTRIBUTE*/
-													}, /*END SCHEMA*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-												// Property: ReturnData
-												"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
-													Computed: true,
-												}, /*END ATTRIBUTE*/
-											}, /*END SCHEMA*/
-										}, /*END NESTED OBJECT*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: PredefinedLoadMetricSpecification
-							"predefined_load_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: PredefinedMetricType
-									"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: ResourceLabel
-									"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: PredefinedMetricPairSpecification
-							"predefined_metric_pair_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: PredefinedMetricType
-									"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: ResourceLabel
-									"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: PredefinedScalingMetricSpecification
-							"predefined_scaling_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: PredefinedMetricType
-									"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: ResourceLabel
-									"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: TargetValue
-							"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Mode
-				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SchedulingBufferTime
-				"scheduling_buffer_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A predictive scaling policy. Includes support for predefined metrics only.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"predictive_scaling_configuration": schemaAttribute1e46a0ae954b4997155d3f0d(),
 		// Property: ScalingAdjustment
 		// CloudFormation resource type schema:
 		//
@@ -775,10 +760,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity. For exact capacity, you must specify a positive value. Required if the policy type is SimpleScaling. (Not used with any other policy type.)",
 		//	  "type": "integer"
 		//	}
-		"scaling_adjustment": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity. For exact capacity, you must specify a positive value. Required if the policy type is SimpleScaling. (Not used with any other policy type.)",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"scaling_adjustment": schemaAttributed7a1058df54df239242e0c88(),
 		// Property: StepAdjustments
 		// CloudFormation resource type schema:
 		//
@@ -807,26 +789,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"step_adjustments": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: MetricIntervalLowerBound
-					"metric_interval_lower_bound": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: MetricIntervalUpperBound
-					"metric_interval_upper_bound": schema.Float64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ScalingAdjustment
-					"scaling_adjustment": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A set of adjustments that enable you to scale based on the size of the alarm breach. Required if the policy type is StepScaling. (Not used with any other policy type.)",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"step_adjustments": schemaAttributed4e849db6b13ead35756f9db(),
 		// Property: TargetTrackingConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -988,152 +951,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"target_tracking_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: CustomizedMetricSpecification
-				"customized_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Dimensions
-						"dimensions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Name
-									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Value
-									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: MetricName
-						"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Metrics
-						"metrics": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: Expression
-									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Id
-									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Label
-									"label": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: MetricStat
-									"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-											// Property: Metric
-											"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-													// Property: Dimensions
-													"dimensions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-																// Property: Name
-																"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Computed: true,
-																}, /*END ATTRIBUTE*/
-																// Property: Value
-																"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-																	Computed: true,
-																}, /*END ATTRIBUTE*/
-															}, /*END SCHEMA*/
-														}, /*END NESTED OBJECT*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: MetricName
-													"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-													// Property: Namespace
-													"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-														Computed: true,
-													}, /*END ATTRIBUTE*/
-												}, /*END SCHEMA*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: Period
-											"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: Stat
-											"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-											// Property: Unit
-											"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Computed: true,
-											}, /*END ATTRIBUTE*/
-										}, /*END SCHEMA*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Period
-									"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: ReturnData
-									"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Namespace
-						"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Period
-						"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Statistic
-						"statistic": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Unit
-						"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: DisableScaleIn
-				"disable_scale_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PredefinedMetricSpecification
-				"predefined_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: PredefinedMetricType
-						"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ResourceLabel
-						"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: TargetValue
-				"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A target tracking scaling policy. Includes support for predefined or customized metrics.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_tracking_configuration": schemaAttributed1442bf6d2983faeeb7731ad(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

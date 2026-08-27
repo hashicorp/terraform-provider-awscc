@@ -14,6 +14,59 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute032ea0f5ed35181e11bcc093() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A single IP address or a range of IP addresses to block or allow, specified in CIDR notation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1fb50efcb833323fbd741a04() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute82e9ce9e6725e93c31528447() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Cidr
+			"cidr": schemaAttribute032ea0f5ed35181e11bcc093(),
+			// Property: Policy
+			"policy": schemaAttributea3eca0845954083ca97c1cbb(),
+		}, /*END SCHEMA*/
+		Description: "A structure that provides the IP addresses to block or allow, and whether to block or allow incoming mail from them.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea3eca0845954083ca97c1cbb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether to block or allow incoming mail from the specified IP addresses.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebb4be89309973e5cec0dab80() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: IpFilter
+			"ip_filter": schemaAttribute82e9ce9e6725e93c31528447(),
+			// Property: Name
+			"name": schemaAttributecbd3fd67fb94a2b1e5d1cd85(),
+		}, /*END SCHEMA*/
+		Description: "A structure that describes the IP address filter to create, which consists of a name, an IP address range, and whether to allow or block mail from it.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecbd3fd67fb94a2b1e5d1cd85() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the IP address filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ses_receipt_filter", receiptFilterDataSource)
 }
@@ -58,43 +111,14 @@ func receiptFilterDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IpFilter
-				"ip_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Cidr
-						"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "A single IP address or a range of IP addresses to block or allow, specified in CIDR notation.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Policy
-						"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "Indicates whether to block or allow incoming mail from the specified IP addresses.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A structure that provides the IP addresses to block or allow, and whether to block or allow incoming mail from them.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the IP address filter.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "A structure that describes the IP address filter to create, which consists of a name, an IP address range, and whether to allow or block mail from it.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"filter": schemaAttributebb4be89309973e5cec0dab80(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"receipt_filter_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"receipt_filter_id": schemaAttribute1fb50efcb833323fbd741a04(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

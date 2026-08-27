@@ -14,6 +14,63 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute15548ccced2f14d56476628b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Identifier of the association with Connect Instance",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute31f75688888c2c0462a7355f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute5c19c14c77321cce966db1d3(),
+				// Property: Value
+				"value": schemaAttributeb2ea7d8bdd315d82e4f0753f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags used to organize, track, or control access for this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute32b91217328bb2e012e7fe4c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Amazon Connect instance identifier",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5c19c14c77321cce966db1d3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2ea7d8bdd315d82e4f0753f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecbf27eb2f0fa1e32e045d48b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies the integration type to be associated with the instance",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee4d1f19d2d2d8d39c70aba66() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "ARN of Integration being associated with the instance",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_integration_association", integrationAssociationDataSource)
 }
@@ -32,10 +89,7 @@ func integrationAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Amazon Connect instance identifier",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_id": schemaAttribute32b91217328bb2e012e7fe4c(),
 		// Property: IntegrationArn
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +99,7 @@ func integrationAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"integration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "ARN of Integration being associated with the instance",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"integration_arn": schemaAttributee4d1f19d2d2d8d39c70aba66(),
 		// Property: IntegrationAssociationId
 		// CloudFormation resource type schema:
 		//
@@ -56,10 +107,7 @@ func integrationAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "Identifier of the association with Connect Instance",
 		//	  "type": "string"
 		//	}
-		"integration_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Identifier of the association with Connect Instance",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"integration_association_id": schemaAttribute15548ccced2f14d56476628b(),
 		// Property: IntegrationType
 		// CloudFormation resource type schema:
 		//
@@ -80,10 +128,7 @@ func integrationAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"integration_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the integration type to be associated with the instance",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"integration_type": schemaAttributecbf27eb2f0fa1e32e045d48b(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -117,24 +162,7 @@ func integrationAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags used to organize, track, or control access for this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute31f75688888c2c0462a7355f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,87 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute01d0ab0d1fb2cc32be969fc3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the resource to publish to.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4759035231a700b60fb02f06() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the KMS key to use for encryption.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4791ef6c7740619feba0e2a6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the publishing destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4baa3da6ca107b12b446a76b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the publishing destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5eb6969b5dd5b7175667d41b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the GuardDuty detector associated with the publishing destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60c9b612d90c15f06fe6b6bb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The type of resource for the publishing destination. Currently only Amazon S3 buckets are supported.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7e6023b6bc6f0404119d3453() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The time, in epoch millisecond format, at which GuardDuty was first unable to publish findings to the destination.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeabf0102720fcf3571a5cef66() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9ec0bd566573d6ad454e18b() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeabf0102720fcf3571a5cef66(),
+				// Property: Value
+				"value": schemaAttributeabf0102720fcf3571a5cef66(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec526114948bacd20d08b9df6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DestinationArn
+			"destination_arn": schemaAttribute01d0ab0d1fb2cc32be969fc3(),
+			// Property: KmsKeyArn
+			"kms_key_arn": schemaAttribute4759035231a700b60fb02f06(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_guardduty_publishing_destination", publishingDestinationDataSource)
 }
@@ -39,21 +120,7 @@ func publishingDestinationDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "object"
 		//	}
-		"destination_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DestinationArn
-				"destination_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the resource to publish to.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: KmsKeyArn
-				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the KMS key to use for encryption.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"destination_properties": schemaAttributec526114948bacd20d08b9df6(),
 		// Property: DestinationType
 		// CloudFormation resource type schema:
 		//
@@ -61,10 +128,7 @@ func publishingDestinationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The type of resource for the publishing destination. Currently only Amazon S3 buckets are supported.",
 		//	  "type": "string"
 		//	}
-		"destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The type of resource for the publishing destination. Currently only Amazon S3 buckets are supported.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"destination_type": schemaAttribute60c9b612d90c15f06fe6b6bb(),
 		// Property: DetectorId
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +138,7 @@ func publishingDestinationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"detector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the GuardDuty detector associated with the publishing destination.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"detector_id": schemaAttribute5eb6969b5dd5b7175667d41b(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +146,7 @@ func publishingDestinationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The ID of the publishing destination.",
 		//	  "type": "string"
 		//	}
-		"publishing_destination_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the publishing destination.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"publishing_destination_id": schemaAttribute4791ef6c7740619feba0e2a6(),
 		// Property: PublishingFailureStartTimestamp
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +154,7 @@ func publishingDestinationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The time, in epoch millisecond format, at which GuardDuty was first unable to publish findings to the destination.",
 		//	  "type": "string"
 		//	}
-		"publishing_failure_start_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The time, in epoch millisecond format, at which GuardDuty was first unable to publish findings to the destination.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"publishing_failure_start_timestamp": schemaAttribute7e6023b6bc6f0404119d3453(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -107,10 +162,7 @@ func publishingDestinationDataSource(ctx context.Context) (datasource.DataSource
 		//	  "description": "The status of the publishing destination.",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the publishing destination.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute4baa3da6ca107b12b446a76b(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -138,21 +190,7 @@ func publishingDestinationDataSource(ctx context.Context) (datasource.DataSource
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeb9ec0bd566573d6ad454e18b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

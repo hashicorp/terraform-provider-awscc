@@ -15,6 +15,19 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute544f7148c2394a834867de08() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: jsontypes.NormalizedType{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64ec874a5608b4dfd1d04b77() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_eventschemas_registry_policy", registryPolicyDataSource)
 }
@@ -29,37 +42,28 @@ func registryPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "type": "string"
 		//	}
-		"registry_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"registry_policy_id": schemaAttribute64ec874a5608b4dfd1d04b77(),
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "object"
 		//	}
-		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: jsontypes.NormalizedType{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"policy": schemaAttribute544f7148c2394a834867de08(),
 		// Property: RegistryName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"registry_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"registry_name": schemaAttribute64ec874a5608b4dfd1d04b77(),
 		// Property: RevisionId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"revision_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"revision_id": schemaAttribute64ec874a5608b4dfd1d04b77(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

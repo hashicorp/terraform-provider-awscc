@@ -16,6 +16,137 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute06283fd00aac68a5283759b5() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>When true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is false. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute178f866704346016a64538c1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The system-generated unique identifier for the IngestEndpoint.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2130fb5665b0b2e7ee7e880f() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "<p>For CMAF inputs, indicates which input MediaPackage should prefer when both inputs have equal MQCS scores. Select <code>1</code> to prefer the first ingest endpoint, or <code>2</code> to prefer the second ingest endpoint. If you don't specify a preferred input, MediaPackage uses its default switching behavior when MQCS scores are equal.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute271d1d3e20139225b6289634() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "<p>The date and time the channel was modified.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5492ca1797470f83c418f35f() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeb4cfdf2a0aee94345a9fb17c(),
+				// Property: Value
+				"value": schemaAttributeb4cfdf2a0aee94345a9fb17c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute596699ab512867927f919995() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The ingest domain URL where the source stream should be sent.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6a1fcb6e4c68ed85bc9f81c3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: PublishMQCS
+			"publish_mqcs": schemaAttributeb62ba9e6612ef36df9184052(),
+		}, /*END SCHEMA*/
+		Description: "<p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute857b7f6eb7bf741d76bccee3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Id
+				"id": schemaAttribute178f866704346016a64538c1(),
+				// Property: Url
+				"url": schemaAttribute596699ab512867927f919995(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "<p>The list of ingest endpoints.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8c44614ae3be7f667d178d5b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "<p>The date and time the channel was created.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute92e53b85df34a76435aecee5() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MQCSInputSwitching
+			"mqcs_input_switching": schemaAttribute06283fd00aac68a5283759b5(),
+			// Property: PreferredInput
+			"preferred_input": schemaAttribute2130fb5665b0b2e7ee7e880f(),
+		}, /*END SCHEMA*/
+		Description: "<p>The configuration for input switching based on the media quality confidence score (MQCS) as provided from AWS Elemental MediaLive.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea922b53a879a3bad28ac5da6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>Enter any descriptive text that helps you to identify the channel.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4cfdf2a0aee94345a9fb17c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb62ba9e6612ef36df9184052() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>When true, AWS Elemental MediaPackage includes the MQCS in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebabe5a25e79a431c37fc6f87() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "<p>The Amazon Resource Name (ARN) associated with the resource.</p>",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda18525a5e36c58f22886996() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_mediapackagev2_channel", channelDataSource)
 }
@@ -31,10 +162,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) associated with the resource.\u003c/p\u003e",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>The Amazon Resource Name (ARN) associated with the resource.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributebabe5a25e79a431c37fc6f87(),
 		// Property: ChannelGroupName
 		// CloudFormation resource type schema:
 		//
@@ -44,9 +172,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"channel_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"channel_group_name": schemaAttributeb4cfdf2a0aee94345a9fb17c(),
 		// Property: ChannelName
 		// CloudFormation resource type schema:
 		//
@@ -56,9 +182,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"channel_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"channel_name": schemaAttributeb4cfdf2a0aee94345a9fb17c(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -67,11 +191,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "<p>The date and time the channel was created.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute8c44614ae3be7f667d178d5b(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -81,10 +201,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "<p>Enter any descriptive text that helps you to identify the channel.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributea922b53a879a3bad28ac5da6(),
 		// Property: IngestEndpointUrls
 		// CloudFormation resource type schema:
 		//
@@ -94,10 +211,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"ingest_endpoint_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ingest_endpoint_urls": schemaAttributeda18525a5e36c58f22886996(),
 		// Property: IngestEndpoints
 		// CloudFormation resource type schema:
 		//
@@ -120,24 +234,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"ingest_endpoints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Id
-					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>The system-generated unique identifier for the IngestEndpoint.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Url
-					"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "<p>The ingest domain URL where the source stream should be sent.</p>",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "<p>The list of ingest endpoints.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"ingest_endpoints": schemaAttribute857b7f6eb7bf741d76bccee3(),
 		// Property: InputSwitchConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -158,22 +255,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"input_switch_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: MQCSInputSwitching
-				"mqcs_input_switching": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>When true, AWS Elemental MediaPackage performs input switching based on the MQCS. Default is false. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PreferredInput
-				"preferred_input": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "<p>For CMAF inputs, indicates which input MediaPackage should prefer when both inputs have equal MQCS scores. Select <code>1</code> to prefer the first ingest endpoint, or <code>2</code> to prefer the second ingest endpoint. If you don't specify a preferred input, MediaPackage uses its default switching behavior when MQCS scores are equal.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "<p>The configuration for input switching based on the media quality confidence score (MQCS) as provided from AWS Elemental MediaLive.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"input_switch_configuration": schemaAttribute92e53b85df34a76435aecee5(),
 		// Property: InputType
 		// CloudFormation resource type schema:
 		//
@@ -184,9 +266,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"input_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"input_type": schemaAttributeb4cfdf2a0aee94345a9fb17c(),
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
 		//
@@ -195,11 +275,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"modified_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "<p>The date and time the channel was modified.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"modified_at": schemaAttribute271d1d3e20139225b6289634(),
 		// Property: OutputHeaderConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -214,17 +290,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"output_header_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: PublishMQCS
-				"publish_mqcs": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "<p>When true, AWS Elemental MediaPackage includes the MQCS in responses to the CDN. This setting is valid only when <code>InputType</code> is <code>CMAF</code>.</p>",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "<p>The settings for what common media server data (CMSD) headers AWS Elemental MediaPackage includes in responses to the CDN.</p>",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"output_header_configuration": schemaAttribute6a1fcb6e4c68ed85bc9f81c3(),
 		// Property: OutputLockingMode
 		// CloudFormation resource type schema:
 		//
@@ -235,9 +301,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"output_locking_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"output_locking_mode": schemaAttributeb4cfdf2a0aee94345a9fb17c(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -257,21 +321,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute5492ca1797470f83c418f35f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

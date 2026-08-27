@@ -14,6 +14,63 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute4c8bd917c73a3741ec01650c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5bddce83c4cca58ce545dcd2() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Arn
+			"arn": schemaAttribute4c8bd917c73a3741ec01650c(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute63607119dec9268b06ccdc7e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string used to identify this tag",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d3f80523b2fd3052dd2f3e3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: HealthUrl
+			"health_url": schemaAttribute4c8bd917c73a3741ec01650c(),
+			// Property: Url
+			"url": schemaAttribute4c8bd917c73a3741ec01650c(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed302e198c413f22aa15623c3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute63607119dec9268b06ccdc7e(),
+				// Property: Value
+				"value": schemaAttributef8397ffecf3ca6dbfd7be7c3(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef8397ffecf3ca6dbfd7be7c3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string containing the value for the tag",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_refactorspaces_service", serviceDataSource)
 }
@@ -31,9 +88,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^app-([0-9A-Za-z]{10}$)",
 		//	  "type": "string"
 		//	}
-		"application_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"application_identifier": schemaAttribute4c8bd917c73a3741ec01650c(),
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -43,9 +98,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*)?:refactor-spaces:[a-zA-Z0-9\\-]+:\\w{12}:[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute4c8bd917c73a3741ec01650c(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -55,9 +108,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-_\\s\\.\\!\\*\\#\\@\\']+$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute4c8bd917c73a3741ec01650c(),
 		// Property: EndpointType
 		// CloudFormation resource type schema:
 		//
@@ -68,9 +119,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"endpoint_type": schemaAttribute4c8bd917c73a3741ec01650c(),
 		// Property: EnvironmentIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -80,9 +129,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^env-([0-9A-Za-z]{10}$)",
 		//	  "type": "string"
 		//	}
-		"environment_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"environment_identifier": schemaAttribute4c8bd917c73a3741ec01650c(),
 		// Property: LambdaEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -101,15 +148,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"lambda_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Arn
-				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"lambda_endpoint": schemaAttribute5bddce83c4cca58ce545dcd2(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -119,9 +158,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute4c8bd917c73a3741ec01650c(),
 		// Property: ServiceIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -131,9 +168,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^svc-([0-9A-Za-z]{10}$)",
 		//	  "type": "string"
 		//	}
-		"service_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"service_identifier": schemaAttribute4c8bd917c73a3741ec01650c(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -166,24 +201,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string used to identify this tag",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string containing the value for the tag",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributed302e198c413f22aa15623c3(),
 		// Property: UrlEndpoint
 		// CloudFormation resource type schema:
 		//
@@ -208,19 +226,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"url_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: HealthUrl
-				"health_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Url
-				"url": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"url_endpoint": schemaAttribute6d3f80523b2fd3052dd2f3e3(),
 		// Property: VpcId
 		// CloudFormation resource type schema:
 		//
@@ -230,9 +236,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^vpc-[-a-f0-9]{8}([-a-f0-9]{9})?$",
 		//	  "type": "string"
 		//	}
-		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"vpc_id": schemaAttribute4c8bd917c73a3741ec01650c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

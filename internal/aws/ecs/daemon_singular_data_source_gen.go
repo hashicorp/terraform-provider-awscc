@@ -16,6 +16,156 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0606ab588fe1a13445fe790a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute06eaee542362d1ef9cd23cdd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute0e5baa213d9b2b8096a6b8e9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the daemon task definition used by this revision.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20f08f96357b85d6f51def2a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute06eaee542362d1ef9cd23cdd(),
+				// Property: Value
+				"value": schemaAttribute3ac1f67ea23b29813fe8aa39(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute389a33365c39663a38a5bfb1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Alarms
+			"alarms": schemaAttribute457a8fff2bbf9d5236501e1c(),
+			// Property: BakeTimeInMinutes
+			"bake_time_in_minutes": schemaAttribute926a19a64ea019fbcdc96fef(),
+			// Property: DrainPercent
+			"drain_percent": schemaAttributed9353ee6886b29ef983b4f66(),
+		}, /*END SCHEMA*/
+		Description: "The deployment configuration used for this daemon deployment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3ac1f67ea23b29813fe8aa39() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The optional part of a key-value pair that make up a tag. A ``value`` acts as a descriptor within a tag category (key).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d5f208630e52746b2d9200e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether tags are propagated from the daemon to the daemon tasks.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute457a8fff2bbf9d5236501e1c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AlarmNames
+			"alarm_names": schemaAttributef3e1c4c87b2b8287c37c43c1(),
+			// Property: Enable
+			"enable": schemaAttributeeedac291d52582017331a404(),
+		}, /*END SCHEMA*/
+		Description: "The CloudWatch alarm configuration for the daemon deployment. When alarms are triggered during a deployment, the deployment can be automatically rolled back.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute73b7a991fed078ab5d45b687() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute926a19a64ea019fbcdc96fef() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The amount of time (in minutes) to wait after a successful deployment step before proceeding. This allows time to monitor for issues before continuing. The default value is 0.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9c5bc36fca0d244be521ef3b() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether the execute command functionality is turned on for the daemon tasks.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9f49b76af7abd3c7f6d9c2cb() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The Amazon Resource Names (ARNs) of the capacity providers associated with the daemon.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea393f6d9e1cb831e291f47f0() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Specifies whether Amazon ECS managed tags are turned on for the daemon tasks.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeacf90d8e411194b2c7451662() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed9353ee6886b29ef983b4f66() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The percentage of container instances to drain simultaneously during a daemon deployment. Valid values are between 0.0 and 100.0.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee931b8ca3dd2ebbab1597027() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the cluster that the daemon is running in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeedac291d52582017331a404() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Determines whether to use the CloudWatch alarm option in the daemon deployment process. The default value is ``false``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef3e1c4c87b2b8287c37c43c1() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The CloudWatch alarm names to monitor during a daemon deployment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ecs_daemon", daemonDataSource)
 }
@@ -35,11 +185,7 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"capacity_provider_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "The Amazon Resource Names (ARNs) of the capacity providers associated with the daemon.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"capacity_provider_arns": schemaAttribute9f49b76af7abd3c7f6d9c2cb(),
 		// Property: ClusterArn
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +193,7 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the cluster that the daemon is running in.",
 		//	  "type": "string"
 		//	}
-		"cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the cluster that the daemon is running in.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"cluster_arn": schemaAttributee931b8ca3dd2ebbab1597027(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -59,11 +202,7 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute0606ab588fe1a13445fe790a(),
 		// Property: DaemonArn
 		// CloudFormation resource type schema:
 		//
@@ -71,10 +210,7 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"daemon_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"daemon_arn": schemaAttributeacf90d8e411194b2c7451662(),
 		// Property: DaemonName
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +218,7 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"daemon_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"daemon_name": schemaAttributeacf90d8e411194b2c7451662(),
 		// Property: DaemonStatus
 		// CloudFormation resource type schema:
 		//
@@ -96,9 +229,7 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"daemon_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"daemon_status": schemaAttribute73b7a991fed078ab5d45b687(),
 		// Property: DaemonTaskDefinitionArn
 		// CloudFormation resource type schema:
 		//
@@ -106,10 +237,7 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the daemon task definition used by this revision.",
 		//	  "type": "string"
 		//	}
-		"daemon_task_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the daemon task definition used by this revision.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"daemon_task_definition_arn": schemaAttribute0e5baa213d9b2b8096a6b8e9(),
 		// Property: DeploymentArn
 		// CloudFormation resource type schema:
 		//
@@ -117,10 +245,7 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"deployment_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"deployment_arn": schemaAttributeacf90d8e411194b2c7451662(),
 		// Property: DeploymentConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -161,40 +286,7 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"deployment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Alarms
-				"alarms": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AlarmNames
-						"alarm_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "The CloudWatch alarm names to monitor during a daemon deployment.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Enable
-						"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Determines whether to use the CloudWatch alarm option in the daemon deployment process. The default value is ``false``.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "The CloudWatch alarm configuration for the daemon deployment. When alarms are triggered during a deployment, the deployment can be automatically rolled back.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: BakeTimeInMinutes
-				"bake_time_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The amount of time (in minutes) to wait after a successful deployment step before proceeding. This allows time to monitor for issues before continuing. The default value is 0.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DrainPercent
-				"drain_percent": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "The percentage of container instances to drain simultaneously during a daemon deployment. Valid values are between 0.0 and 100.0.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The deployment configuration used for this daemon deployment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"deployment_configuration": schemaAttribute389a33365c39663a38a5bfb1(),
 		// Property: EnableECSManagedTags
 		// CloudFormation resource type schema:
 		//
@@ -202,10 +294,7 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether Amazon ECS managed tags are turned on for the daemon tasks.",
 		//	  "type": "boolean"
 		//	}
-		"enable_ecs_managed_tags": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether Amazon ECS managed tags are turned on for the daemon tasks.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enable_ecs_managed_tags": schemaAttributea393f6d9e1cb831e291f47f0(),
 		// Property: EnableExecuteCommand
 		// CloudFormation resource type schema:
 		//
@@ -213,10 +302,7 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Specifies whether the execute command functionality is turned on for the daemon tasks.",
 		//	  "type": "boolean"
 		//	}
-		"enable_execute_command": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether the execute command functionality is turned on for the daemon tasks.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enable_execute_command": schemaAttribute9c5bc36fca0d244be521ef3b(),
 		// Property: PropagateTags
 		// CloudFormation resource type schema:
 		//
@@ -228,10 +314,7 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"propagate_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies whether tags are propagated from the daemon to the daemon tasks.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"propagate_tags": schemaAttribute3d5f208630e52746b2d9200e(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -258,24 +341,7 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "One part of a key-value pair that make up a tag. A ``key`` is a general label that acts like a category for more specific tag values.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The optional part of a key-value pair that make up a tag. A ``value`` acts as a descriptor within a tag category (key).",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute20f08f96357b85d6f51def2a(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -284,11 +350,7 @@ func daemonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute0606ab588fe1a13445fe790a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

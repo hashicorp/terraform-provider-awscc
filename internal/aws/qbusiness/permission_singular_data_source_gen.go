@@ -15,6 +15,35 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2888829d3273ec443949a928() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5aa26e9b39ae3f69700be663() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConditionKey
+				"condition_key": schemaAttributef51b932b110930575a2a772f(),
+				// Property: ConditionOperator
+				"condition_operator": schemaAttributef51b932b110930575a2a772f(),
+				// Property: ConditionValues
+				"condition_values": schemaAttribute2888829d3273ec443949a928(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef51b932b110930575a2a772f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_qbusiness_permission", permissionDataSource)
 }
@@ -35,10 +64,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"actions": schemaAttribute2888829d3273ec443949a928(),
 		// Property: ApplicationId
 		// CloudFormation resource type schema:
 		//
@@ -48,9 +74,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{35}$",
 		//	  "type": "string"
 		//	}
-		"application_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"application_id": schemaAttributef51b932b110930575a2a772f(),
 		// Property: Conditions
 		// CloudFormation resource type schema:
 		//
@@ -89,26 +113,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minItems": 1,
 		//	  "type": "array"
 		//	}
-		"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ConditionKey
-					"condition_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ConditionOperator
-					"condition_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: ConditionValues
-					"condition_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"conditions": schemaAttribute5aa26e9b39ae3f69700be663(),
 		// Property: Principal
 		// CloudFormation resource type schema:
 		//
@@ -118,9 +123,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws:iam::[0-9]{12}:role/[a-zA-Z0-9_/+=,.@-]+$",
 		//	  "type": "string"
 		//	}
-		"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"principal": schemaAttributef51b932b110930575a2a772f(),
 		// Property: StatementId
 		// CloudFormation resource type schema:
 		//
@@ -130,9 +133,7 @@ func permissionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9_-]+$",
 		//	  "type": "string"
 		//	}
-		"statement_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"statement_id": schemaAttributef51b932b110930575a2a772f(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

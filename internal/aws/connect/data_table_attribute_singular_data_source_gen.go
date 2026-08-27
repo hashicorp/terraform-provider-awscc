@@ -15,6 +15,97 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1323fa2e164f011c616bc68d() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ea7b890ec75f7442861e476() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Attribute
+			"attribute": schemaAttributeb6acd08649fe2607e44187b0(),
+			// Property: DataTable
+			"data_table": schemaAttributeb6acd08649fe2607e44187b0(),
+		}, /*END SCHEMA*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute37452cffc41748cfd4881e21() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6accb7c1690bfd8b96614c68() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea0b3578bffce45b8b71ad7ed() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea7a5d21a9bb688bd38d3ff8a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Strict
+			"strict": schemaAttribute1323fa2e164f011c616bc68d(),
+			// Property: Values
+			"values": schemaAttribute6accb7c1690bfd8b96614c68(),
+		}, /*END SCHEMA*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb6acd08649fe2607e44187b0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed5346eb631d8d17e19f5785c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Enum
+			"enum": schemaAttributea7a5d21a9bb688bd38d3ff8a(),
+			// Property: ExclusiveMaximum
+			"exclusive_maximum": schemaAttributea0b3578bffce45b8b71ad7ed(),
+			// Property: ExclusiveMinimum
+			"exclusive_minimum": schemaAttributea0b3578bffce45b8b71ad7ed(),
+			// Property: MaxLength
+			"max_length": schemaAttribute37452cffc41748cfd4881e21(),
+			// Property: MaxValues
+			"max_values": schemaAttribute37452cffc41748cfd4881e21(),
+			// Property: Maximum
+			"maximum": schemaAttributea0b3578bffce45b8b71ad7ed(),
+			// Property: MinLength
+			"min_length": schemaAttribute37452cffc41748cfd4881e21(),
+			// Property: MinValues
+			"min_values": schemaAttribute37452cffc41748cfd4881e21(),
+			// Property: Minimum
+			"minimum": schemaAttributea0b3578bffce45b8b71ad7ed(),
+			// Property: MultipleOf
+			"multiple_of": schemaAttributea0b3578bffce45b8b71ad7ed(),
+		}, /*END SCHEMA*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_connect_data_table_attribute", dataTableAttributeDataSource)
 }
@@ -32,10 +123,7 @@ func dataTableAttributeDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"attribute_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"attribute_id": schemaAttributeb6acd08649fe2607e44187b0(),
 		// Property: DataTableArn
 		// CloudFormation resource type schema:
 		//
@@ -45,10 +133,7 @@ func dataTableAttributeDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"data_table_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_table_arn": schemaAttributeb6acd08649fe2607e44187b0(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +144,7 @@ func dataTableAttributeDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[\\P{C}\r\n\t]+$",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeb6acd08649fe2607e44187b0(),
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +155,7 @@ func dataTableAttributeDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_arn": schemaAttributeb6acd08649fe2607e44187b0(),
 		// Property: LastModifiedRegion
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +164,7 @@ func dataTableAttributeDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "[a-z]{2}(-[a-z]+){1,2}(-[0-9])?",
 		//	  "type": "string"
 		//	}
-		"last_modified_region": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_region": schemaAttributeb6acd08649fe2607e44187b0(),
 		// Property: LastModifiedTime
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +172,7 @@ func dataTableAttributeDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "",
 		//	  "type": "number"
 		//	}
-		"last_modified_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_time": schemaAttributea0b3578bffce45b8b71ad7ed(),
 		// Property: LockVersion
 		// CloudFormation resource type schema:
 		//
@@ -118,22 +191,7 @@ func dataTableAttributeDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"lock_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Attribute
-				"attribute": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DataTable
-				"data_table": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"lock_version": schemaAttribute1ea7b890ec75f7442861e476(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -144,10 +202,7 @@ func dataTableAttributeDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "pattern": "^[\\p{L}\\p{Z}\\p{N}\\-_.:=@'|]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributeb6acd08649fe2607e44187b0(),
 		// Property: Primary
 		// CloudFormation resource type schema:
 		//
@@ -155,10 +210,7 @@ func dataTableAttributeDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "description": "",
 		//	  "type": "boolean"
 		//	}
-		"primary": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"primary": schemaAttribute1323fa2e164f011c616bc68d(),
 		// Property: Validation
 		// CloudFormation resource type schema:
 		//
@@ -229,75 +281,7 @@ func dataTableAttributeDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"validation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Enum
-				"enum": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: Strict
-						"strict": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: Values
-						"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ExclusiveMaximum
-				"exclusive_maximum": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ExclusiveMinimum
-				"exclusive_minimum": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaxLength
-				"max_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaxValues
-				"max_values": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Maximum
-				"maximum": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MinLength
-				"min_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MinValues
-				"min_values": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Minimum
-				"minimum": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MultipleOf
-				"multiple_of": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"validation": schemaAttributed5346eb631d8d17e19f5785c(),
 		// Property: ValueType
 		// CloudFormation resource type schema:
 		//
@@ -312,10 +296,7 @@ func dataTableAttributeDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"value_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"value_type": schemaAttributeb6acd08649fe2607e44187b0(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

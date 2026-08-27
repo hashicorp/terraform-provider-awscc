@@ -15,6 +15,150 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute13d94c2854cfa0ef78a80cef() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The order in which API Gateway evaluates a rule. Priority is evaluated from the lowest value to the highest value. Rules can't have the same priority. Priority values 1-1,000,000 are supported.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1dcb3b4fc20337e14f0d1a01() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ApiId
+			"api_id": schemaAttributec62d2aab9fb2f73d99660c05(),
+			// Property: Stage
+			"stage": schemaAttributeb2bd2e3a91abfb80bf9fea78(),
+			// Property: StripBasePath
+			"strip_base_path": schemaAttributeb9b6af42df5ab64911b6ec00(),
+		}, /*END SCHEMA*/
+		Description: "Represents an InvokeApi action.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute20a5efc1c3cb04d838b22ba5() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Header
+				"header": schemaAttribute84cfe94e530a1a014d6eeccb(),
+				// Property: ValueGlob
+				"value_glob": schemaAttribute81d852703e08181c07921337(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The header name and header value glob to be matched. The matchHeaders condition is matched if any of the header name and header value globs are matched.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c7930ae35f7b889bacc5ed0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the domain name.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3345e984c3dbd15a5ae36a8d() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AnyOf
+			"any_of": schemaAttributec6b54b3b6af5adf11f37a6a0(),
+		}, /*END SCHEMA*/
+		Description: "The base path to be matched.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4c1fe6d35eb60e143855d7d3() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AnyOf
+			"any_of": schemaAttribute20a5efc1c3cb04d838b22ba5(),
+		}, /*END SCHEMA*/
+		Description: "The headers to be matched.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute75b42606d1a946c497657c0a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MatchBasePaths
+				"match_base_paths": schemaAttribute3345e984c3dbd15a5ae36a8d(),
+				// Property: MatchHeaders
+				"match_headers": schemaAttribute4c1fe6d35eb60e143855d7d3(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The conditions of the routing rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute81d852703e08181c07921337() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The case sensitive header glob value to be matched against entire header value. The header glob value must be less than 128 characters and the only allowed characters are ``a-z``, ``A-Z``, ``0-9``, and the following special characters: ``*?-!#$%&'.^_`|~``. Wildcard matching is supported for header glob values but must be for ``*prefix-match``, ``suffix-match*``, or ``*infix*-match``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute84cfe94e530a1a014d6eeccb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The case insensitive header name to be matched. The header name must be less than 40 characters and the only allowed characters are ``a-z``, ``A-Z``, ``0-9``, and the following special characters: ``*?-!#$%&'.^_`|~.``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8d5984b46ed638b98f3d72fd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb2bd2e3a91abfb80bf9fea78() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the target stage.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb9b6af42df5ab64911b6ec00() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The strip base path setting. When true, API Gateway strips the incoming matched base path when forwarding the request to the target API.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec62d2aab9fb2f73d99660c05() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The API identifier of the target API.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec6b54b3b6af5adf11f37a6a0() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The string of the case sensitive base path to be matched.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef2c3f656807636483878c74a() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InvokeApi
+				"invoke_api": schemaAttribute1dcb3b4fc20337e14f0d1a01(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The resulting action based on matching a routing rules condition. Only InvokeApi is supported.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_apigatewayv2_routing_rule", routingRuleDataSource)
 }
@@ -61,36 +205,7 @@ func routingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: InvokeApi
-					"invoke_api": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ApiId
-							"api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The API identifier of the target API.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Stage
-							"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the target stage.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: StripBasePath
-							"strip_base_path": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Description: "The strip base path setting. When true, API Gateway strips the incoming matched base path when forwarding the request to the target API.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "Represents an InvokeApi action.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The resulting action based on matching a routing rules condition. Only InvokeApi is supported.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"actions": schemaAttributef2c3f656807636483878c74a(),
 		// Property: Conditions
 		// CloudFormation resource type schema:
 		//
@@ -151,53 +266,7 @@ func routingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: MatchBasePaths
-					"match_base_paths": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AnyOf
-							"any_of": schema.ListAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Description: "The string of the case sensitive base path to be matched.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The base path to be matched.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: MatchHeaders
-					"match_headers": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: AnyOf
-							"any_of": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: Header
-										"header": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The case insensitive header name to be matched. The header name must be less than 40 characters and the only allowed characters are ``a-z``, ``A-Z``, ``0-9``, and the following special characters: ``*?-!#$%&'.^_`|~.``.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: ValueGlob
-										"value_glob": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "The case sensitive header glob value to be matched against entire header value. The header glob value must be less than 128 characters and the only allowed characters are ``a-z``, ``A-Z``, ``0-9``, and the following special characters: ``*?-!#$%&'.^_`|~``. Wildcard matching is supported for header glob values but must be for ``*prefix-match``, ``suffix-match*``, or ``*infix*-match``.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-								}, /*END NESTED OBJECT*/
-								Description: "The header name and header value glob to be matched. The matchHeaders condition is matched if any of the header name and header value globs are matched.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-						Description: "The headers to be matched.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The conditions of the routing rule.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"conditions": schemaAttribute75b42606d1a946c497657c0a(),
 		// Property: DomainNameArn
 		// CloudFormation resource type schema:
 		//
@@ -205,10 +274,7 @@ func routingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ARN of the domain name.",
 		//	  "type": "string"
 		//	}
-		"domain_name_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the domain name.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain_name_arn": schemaAttribute2c7930ae35f7b889bacc5ed0(),
 		// Property: Priority
 		// CloudFormation resource type schema:
 		//
@@ -216,10 +282,7 @@ func routingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The order in which API Gateway evaluates a rule. Priority is evaluated from the lowest value to the highest value. Rules can't have the same priority. Priority values 1-1,000,000 are supported.",
 		//	  "type": "integer"
 		//	}
-		"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The order in which API Gateway evaluates a rule. Priority is evaluated from the lowest value to the highest value. Rules can't have the same priority. Priority values 1-1,000,000 are supported.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"priority": schemaAttribute13d94c2854cfa0ef78a80cef(),
 		// Property: RoutingRuleArn
 		// CloudFormation resource type schema:
 		//
@@ -227,10 +290,7 @@ func routingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"routing_rule_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"routing_rule_arn": schemaAttribute8d5984b46ed638b98f3d72fd(),
 		// Property: RoutingRuleId
 		// CloudFormation resource type schema:
 		//
@@ -238,10 +298,7 @@ func routingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"routing_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"routing_rule_id": schemaAttribute8d5984b46ed638b98f3d72fd(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

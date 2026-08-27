@@ -16,6 +16,138 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute05173ae369d073f995f9089e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the legal hold.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3b3255c9f026f53944e7f683() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The resources included in the resource selection.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3d379dfe3ffceb89e7872694() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the legal hold.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute53eadcc0e11904dd0d7bdbaf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute55f8feea389452642a19f519() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "The names of the vaults in which the selected recovery points are contained.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute60d85ec1819441b6bb4759f7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The beginning date, inclusive. ISO 8601 date-time.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6196a338e97391758e9a4a9d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute707d2a7ff8394b11ca2fcf20() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FromDate
+			"from_date": schemaAttribute60d85ec1819441b6bb4759f7(),
+			// Property: ToDate
+			"to_date": schemaAttributed6b4cb58918485ca55b22200(),
+		}, /*END SCHEMA*/
+		Description: "A date range for filtering recovery points.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute815b75fe1c510f0e25454878() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the legal hold.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute834535dfa6811f56bd2a9aa7() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute6196a338e97391758e9a4a9d(),
+				// Property: Value
+				"value": schemaAttribute53eadcc0e11904dd0d7bdbaf(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Optional tags to include.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute861d7a0b824118be36736c16() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DateRange
+			"date_range": schemaAttribute707d2a7ff8394b11ca2fcf20(),
+			// Property: ResourceIdentifiers
+			"resource_identifiers": schemaAttribute3b3255c9f026f53944e7f683(),
+			// Property: VaultNames
+			"vault_names": schemaAttribute55f8feea389452642a19f519(),
+		}, /*END SCHEMA*/
+		Description: "The criteria to assign a set of resources, such as resource types or backup vaults.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed6b4cb58918485ca55b22200() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The end date, inclusive. ISO 8601 date-time.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeea6c5e7aff64b10f723b523e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the legal hold.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef2c5404fa6d6d7a632510c4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The title of the legal hold.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeffd76155213be2efbef3505e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The time when the legal hold was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_backup_legal_hold", legalHoldDataSource)
 }
@@ -31,10 +163,7 @@ func legalHoldDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Name (ARN) of the legal hold.",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the legal hold.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute05173ae369d073f995f9089e(),
 		// Property: CreationDate
 		// CloudFormation resource type schema:
 		//
@@ -43,11 +172,7 @@ func legalHoldDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The time when the legal hold was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_date": schemaAttributeffd76155213be2efbef3505e(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -55,10 +180,7 @@ func legalHoldDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of the legal hold.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the legal hold.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeea6c5e7aff64b10f723b523e(),
 		// Property: LegalHoldId
 		// CloudFormation resource type schema:
 		//
@@ -66,10 +188,7 @@ func legalHoldDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The ID of the legal hold.",
 		//	  "type": "string"
 		//	}
-		"legal_hold_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the legal hold.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"legal_hold_id": schemaAttribute3d379dfe3ffceb89e7872694(),
 		// Property: RecoveryPointSelection
 		// CloudFormation resource type schema:
 		//
@@ -117,43 +236,7 @@ func legalHoldDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"recovery_point_selection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DateRange
-				"date_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: FromDate
-						"from_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType:  timetypes.RFC3339Type{},
-							Description: "The beginning date, inclusive. ISO 8601 date-time.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ToDate
-						"to_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-							CustomType:  timetypes.RFC3339Type{},
-							Description: "The end date, inclusive. ISO 8601 date-time.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "A date range for filtering recovery points.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ResourceIdentifiers
-				"resource_identifiers": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The resources included in the resource selection.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: VaultNames
-				"vault_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The names of the vaults in which the selected recovery points are contained.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The criteria to assign a set of resources, such as resource types or backup vaults.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"recovery_point_selection": schemaAttribute861d7a0b824118be36736c16(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -167,10 +250,7 @@ func legalHoldDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the legal hold.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute815b75fe1c510f0e25454878(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -197,24 +277,7 @@ func legalHoldDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Optional tags to include.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute834535dfa6811f56bd2a9aa7(),
 		// Property: Title
 		// CloudFormation resource type schema:
 		//
@@ -222,10 +285,7 @@ func legalHoldDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The title of the legal hold.",
 		//	  "type": "string"
 		//	}
-		"title": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The title of the legal hold.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"title": schemaAttributeef2c5404fa6d6d7a632510c4(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

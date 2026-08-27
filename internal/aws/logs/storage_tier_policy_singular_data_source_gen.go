@@ -14,6 +14,27 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute178c1808d7d89e60ef0ae56b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The storage tier to apply. Only INTELLIGENT_TIERING is accepted for creation.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute29b5786d15288b37804c43c2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS account ID that owns this storage tier policy.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedede7ca5cc36c741dcbfca19() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "Timestamp (milliseconds after Jan 1, 1970 00:00:00 UTC) when the storage tier policy was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_logs_storage_tier_policy", storageTierPolicyDataSource)
 }
@@ -30,10 +51,7 @@ func storageTierPolicyDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^\\d{12}$",
 		//	  "type": "string"
 		//	}
-		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS account ID that owns this storage tier policy.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"account_id": schemaAttribute29b5786d15288b37804c43c2(),
 		// Property: LastUpdatedTime
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +59,7 @@ func storageTierPolicyDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "Timestamp (milliseconds after Jan 1, 1970 00:00:00 UTC) when the storage tier policy was last updated.",
 		//	  "type": "number"
 		//	}
-		"last_updated_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "Timestamp (milliseconds after Jan 1, 1970 00:00:00 UTC) when the storage tier policy was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_time": schemaAttributedede7ca5cc36c741dcbfca19(),
 		// Property: StorageTier
 		// CloudFormation resource type schema:
 		//
@@ -55,10 +70,7 @@ func storageTierPolicyDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"storage_tier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The storage tier to apply. Only INTELLIGENT_TIERING is accepted for creation.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"storage_tier": schemaAttribute178c1808d7d89e60ef0ae56b(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

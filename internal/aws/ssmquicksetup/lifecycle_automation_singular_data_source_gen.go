@@ -15,6 +15,46 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute05f473cc86b25abef1665b87() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute14222baed66b74014aa28aec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Automation document to execute",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1ef9f355f140317cf3afdfb3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The id from the association that is returned when creating the association",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute704dec835c0cc2e350e54b16() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier used for generating a unique logical ID for the custom resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9362c7d56f8eca14d0192da0() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.ListType{ElemType: types.StringType},
+		Description: "Parameters to be passed to the Automation Document",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ssmquicksetup_lifecycle_automation", lifecycleAutomationDataSource)
 }
@@ -33,10 +73,7 @@ func lifecycleAutomationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The id from the association that is returned when creating the association",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"association_id": schemaAttribute1ef9f355f140317cf3afdfb3(),
 		// Property: AutomationDocument
 		// CloudFormation resource type schema:
 		//
@@ -47,10 +84,7 @@ func lifecycleAutomationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^\\S+$",
 		//	  "type": "string"
 		//	}
-		"automation_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Automation document to execute",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"automation_document": schemaAttribute14222baed66b74014aa28aec(),
 		// Property: AutomationParameters
 		// CloudFormation resource type schema:
 		//
@@ -67,12 +101,7 @@ func lifecycleAutomationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"automation_parameters": // Pattern: ""
-		schema.MapAttribute{     /*START ATTRIBUTE*/
-			ElementType: types.ListType{ElemType: types.StringType},
-			Description: "Parameters to be passed to the Automation Document",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"automation_parameters": schemaAttribute9362c7d56f8eca14d0192da0(),
 		// Property: ResourceKey
 		// CloudFormation resource type schema:
 		//
@@ -83,10 +112,7 @@ func lifecycleAutomationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "pattern": "^[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"resource_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier used for generating a unique logical ID for the custom resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"resource_key": schemaAttribute704dec835c0cc2e350e54b16(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -102,11 +128,7 @@ func lifecycleAutomationDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute05f473cc86b25abef1665b87(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -14,6 +14,62 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0c20171deb42dd7b8f1120ed() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The universally unique identifier (UUID) of the configuration policy or a value of SELF_MANAGED_SECURITY_HUB for a self-managed configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute326d384b627ce40bf15856ab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "An explanation for a FAILED value for AssociationStatus",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5ac6214be4efaa858cfa459f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The current status of the association between the specified target and the configuration",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76df5d79c5925070c97eba2c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the target is an AWS account, organizational unit, or the organization root",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3070ceba10de1db6d6a3365() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A unique identifier to indicates if the target has an association",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebd3922aa26a20edbb902b570() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The date and time, in UTC and ISO 8601 format, that the configuration policy association was last updated",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed3f68d14bea1fe425f73cc9a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The identifier of the target account, organizational unit, or the root",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed4cbb17e016264219afd4bb5() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates whether the association between the specified target and the configuration was directly applied by the Security Hub delegated administrator or inherited from a parent",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_securityhub_policy_association", policyAssociationDataSource)
 }
@@ -29,10 +85,7 @@ func policyAssociationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "A unique identifier to indicates if the target has an association",
 		//	  "type": "string"
 		//	}
-		"association_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A unique identifier to indicates if the target has an association",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"association_identifier": schemaAttributeb3070ceba10de1db6d6a3365(),
 		// Property: AssociationStatus
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +99,7 @@ func policyAssociationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"association_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The current status of the association between the specified target and the configuration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"association_status": schemaAttribute5ac6214be4efaa858cfa459f(),
 		// Property: AssociationStatusMessage
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +107,7 @@ func policyAssociationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "An explanation for a FAILED value for AssociationStatus",
 		//	  "type": "string"
 		//	}
-		"association_status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "An explanation for a FAILED value for AssociationStatus",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"association_status_message": schemaAttribute326d384b627ce40bf15856ab(),
 		// Property: AssociationType
 		// CloudFormation resource type schema:
 		//
@@ -72,10 +119,7 @@ func policyAssociationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"association_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the association between the specified target and the configuration was directly applied by the Security Hub delegated administrator or inherited from a parent",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"association_type": schemaAttributed4cbb17e016264219afd4bb5(),
 		// Property: ConfigurationPolicyId
 		// CloudFormation resource type schema:
 		//
@@ -84,10 +128,7 @@ func policyAssociationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$|^SELF_MANAGED_SECURITY_HUB$",
 		//	  "type": "string"
 		//	}
-		"configuration_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The universally unique identifier (UUID) of the configuration policy or a value of SELF_MANAGED_SECURITY_HUB for a self-managed configuration",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"configuration_policy_id": schemaAttribute0c20171deb42dd7b8f1120ed(),
 		// Property: TargetId
 		// CloudFormation resource type schema:
 		//
@@ -95,10 +136,7 @@ func policyAssociationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The identifier of the target account, organizational unit, or the root",
 		//	  "type": "string"
 		//	}
-		"target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The identifier of the target account, organizational unit, or the root",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_id": schemaAttributed3f68d14bea1fe425f73cc9a(),
 		// Property: TargetType
 		// CloudFormation resource type schema:
 		//
@@ -111,10 +149,7 @@ func policyAssociationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates whether the target is an AWS account, organizational unit, or the organization root",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"target_type": schemaAttribute76df5d79c5925070c97eba2c(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -122,10 +157,7 @@ func policyAssociationDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The date and time, in UTC and ISO 8601 format, that the configuration policy association was last updated",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The date and time, in UTC and ISO 8601 format, that the configuration policy association was last updated",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttributebd3922aa26a20edbb902b570(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

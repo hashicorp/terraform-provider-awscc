@@ -14,6 +14,20 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute59f3b37ffe97c3bdfee5e890() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of transit gateway attachment.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute711adcc3e177dd2e84a7c289() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of transit gateway route table.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_transit_gateway_route_table_association", transitGatewayRouteTableAssociationDataSource)
 }
@@ -29,10 +43,7 @@ func transitGatewayRouteTableAssociationDataSource(ctx context.Context) (datasou
 		//	  "description": "The ID of transit gateway attachment.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of transit gateway attachment.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_attachment_id": schemaAttribute59f3b37ffe97c3bdfee5e890(),
 		// Property: TransitGatewayRouteTableId
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +51,7 @@ func transitGatewayRouteTableAssociationDataSource(ctx context.Context) (datasou
 		//	  "description": "The ID of transit gateway route table.",
 		//	  "type": "string"
 		//	}
-		"transit_gateway_route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of transit gateway route table.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"transit_gateway_route_table_id": schemaAttribute711adcc3e177dd2e84a7c289(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

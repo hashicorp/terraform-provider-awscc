@@ -15,6 +15,87 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute18635eb685ef39e90f41dad7() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ExpirationDataRules
+			"expiration_data_rules": schemaAttribute702a3c3c78f3c29b3c483cc3(),
+			// Property: ImportDataRules
+			"import_data_rules": schemaAttributecf255925032af16fac293ee3(),
+			// Property: LatestVersionNumber
+			"latest_version_number": schemaAttribute2850736856fcaf6b14d599ee(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2850736856fcaf6b14d599ee() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c48f319bdcc7fdcfd408b5c() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributecf670f6f20977d122c41c78f(),
+				// Property: Value
+				"value": schemaAttributecf670f6f20977d122c41c78f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute702a3c3c78f3c29b3c483cc3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DaysAfterLastAccess
+				"days_after_last_access": schemaAttribute2850736856fcaf6b14d599ee(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e7e04d9a66df08bcdc80421() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb26d8576d2cce3dbd9c61827() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf255925032af16fac293ee3() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Prefix
+				"prefix": schemaAttributecf670f6f20977d122c41c78f(),
+				// Property: SizeLessThan
+				"size_less_than": schemaAttribute2850736856fcaf6b14d599ee(),
+				// Property: Trigger
+				"trigger": schemaAttributecf670f6f20977d122c41c78f(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecf670f6f20977d122c41c78f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_s3files_file_system", fileSystemDataSource)
 }
@@ -29,9 +110,7 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "boolean"
 		//	}
-		"accept_bucket_warning": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"accept_bucket_warning": schemaAttributeb26d8576d2cce3dbd9c61827(),
 		// Property: Bucket
 		// CloudFormation resource type schema:
 		//
@@ -39,9 +118,7 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(arn:aws[a-zA-Z0-9-]*:s3:::.+)$",
 		//	  "type": "string"
 		//	}
-		"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"bucket": schemaAttributecf670f6f20977d122c41c78f(),
 		// Property: ClientToken
 		// CloudFormation resource type schema:
 		//
@@ -51,9 +128,7 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(.+)$",
 		//	  "type": "string"
 		//	}
-		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"client_token": schemaAttributecf670f6f20977d122c41c78f(),
 		// Property: CreationTime
 		// CloudFormation resource type schema:
 		//
@@ -61,10 +136,7 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType: timetypes.RFC3339Type{},
-			Computed:   true,
-		}, /*END ATTRIBUTE*/
+		"creation_time": schemaAttribute9e7e04d9a66df08bcdc80421(),
 		// Property: FileSystemArn
 		// CloudFormation resource type schema:
 		//
@@ -72,9 +144,7 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(arn:aws[-a-z]*:s3files:[0-9a-z-:]+:file-system/fs-[0-9a-f]{17,40})$",
 		//	  "type": "string"
 		//	}
-		"file_system_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"file_system_arn": schemaAttributecf670f6f20977d122c41c78f(),
 		// Property: FileSystemId
 		// CloudFormation resource type schema:
 		//
@@ -83,9 +153,7 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(arn:aws[-a-z]*:s3files:[0-9a-z-:]+:file-system/fs-[0-9a-f]{17,40}|fs-[0-9a-f]{17,40})$",
 		//	  "type": "string"
 		//	}
-		"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"file_system_id": schemaAttributecf670f6f20977d122c41c78f(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -94,18 +162,14 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|mrk-[0-9a-f]{32}|alias/[a-zA-Z0-9/_-]+|(arn:aws[-a-z]*:kms:[a-z0-9-]+:\\d{12}:((key/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})|(key/mrk-[0-9a-f]{32})|(alias/[a-zA-Z0-9/_-]+))))$",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttributecf670f6f20977d122c41c78f(),
 		// Property: OwnerId
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"owner_id": schemaAttributecf670f6f20977d122c41c78f(),
 		// Property: Prefix
 		// CloudFormation resource type schema:
 		//
@@ -114,9 +178,7 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^(|.*/)$",
 		//	  "type": "string"
 		//	}
-		"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"prefix": schemaAttributecf670f6f20977d122c41c78f(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -125,9 +187,7 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttributecf670f6f20977d122c41c78f(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -142,18 +202,14 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttributecf670f6f20977d122c41c78f(),
 		// Property: StatusMessage
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"status_message": schemaAttributecf670f6f20977d122c41c78f(),
 		// Property: SynchronizationConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -224,47 +280,7 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"synchronization_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ExpirationDataRules
-				"expiration_data_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: DaysAfterLastAccess
-							"days_after_last_access": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ImportDataRules
-				"import_data_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: Prefix
-							"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: SizeLessThan
-							"size_less_than": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: Trigger
-							"trigger": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: LatestVersionNumber
-				"latest_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"synchronization_configuration": schemaAttribute18635eb685ef39e90f41dad7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -295,21 +311,7 @@ func fileSystemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute2c48f319bdcc7fdcfd408b5c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

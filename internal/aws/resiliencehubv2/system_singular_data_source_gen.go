@@ -15,6 +15,93 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0c2402bca23948017a498521() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute8dfff0b9ee6ff44a5a4510bd(),
+				// Property: Value
+				"value": schemaAttribute86451cfdf797038b81b07d4c(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags assigned to the system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1f14330a93b59deb4c6f343b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute201db3061aaf4e8bfb5635c7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2eab402ad7850bf03655b29a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the system was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute86451cfdf797038b81b07d4c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag value.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b4d58b404a1491f36b4ef48() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The KMS key ID for encrypting system data.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ca74c4b81029ae33d68910a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "The timestamp when the system was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8dfff0b9ee6ff44a5a4510bd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute93568cee453d8a8912b4f69a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The system ID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9a9220ea83acbca12f1984fb() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether the system is enabled to be shared with other members of the Organization. Only applicable if the system owner is a management account or delegated admin.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributecc047f438e3ce4869fdac804() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the system.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_resiliencehubv2_system", systemDataSource)
 }
@@ -31,11 +118,7 @@ func systemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the system was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute2eab402ad7850bf03655b29a(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +127,7 @@ func systemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 500,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the system.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute201db3061aaf4e8bfb5635c7(),
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -58,10 +138,7 @@ func systemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^((arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:((key/[a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+)))|([a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+))$",
 		//	  "type": "string"
 		//	}
-		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The KMS key ID for encrypting system data.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_id": schemaAttribute8b4d58b404a1491f36b4ef48(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +147,7 @@ func systemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the system.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributecc047f438e3ce4869fdac804(),
 		// Property: SharingEnabled
 		// CloudFormation resource type schema:
 		//
@@ -82,10 +156,7 @@ func systemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Whether the system is enabled to be shared with other members of the Organization. Only applicable if the system owner is a management account or delegated admin.",
 		//	  "type": "boolean"
 		//	}
-		"sharing_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Whether the system is enabled to be shared with other members of the Organization. Only applicable if the system owner is a management account or delegated admin.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"sharing_enabled": schemaAttribute9a9220ea83acbca12f1984fb(),
 		// Property: SystemArn
 		// CloudFormation resource type schema:
 		//
@@ -94,10 +165,7 @@ func systemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
-		"system_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the system.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"system_arn": schemaAttribute1f14330a93b59deb4c6f343b(),
 		// Property: SystemId
 		// CloudFormation resource type schema:
 		//
@@ -106,10 +174,7 @@ func systemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\S{1,255}$",
 		//	  "type": "string"
 		//	}
-		"system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The system ID.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"system_id": schemaAttribute93568cee453d8a8912b4f69a(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -141,24 +206,7 @@ func systemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxItems": 50,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag key.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag value.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags assigned to the system.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute0c2402bca23948017a498521(),
 		// Property: UpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -167,11 +215,7 @@ func systemDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "The timestamp when the system was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"updated_at": schemaAttribute8ca74c4b81029ae33d68910a(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

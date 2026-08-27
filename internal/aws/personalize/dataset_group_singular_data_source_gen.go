@@ -14,6 +14,62 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute073f36724ab354fe4b74198a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name(ARN) of a AWS Key Management Service (KMS) key used to encrypt the datasets.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute74ed9e094cfcdf0317056130() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a503aa41ea19aa7e95ce4b7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the AWS Identity and Access Management (IAM) role that has permissions to access the AWS Key Management Service (KMS) key. Supplying an IAM role is only valid when also specifying a KMS key.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7d89bc06b6627d6f64ef18a4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name for the new dataset group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec35c91eeb01c03db012a1c3a() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The domain of a Domain dataset group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed7ca93b54542d3d332a9e678() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute74ed9e094cfcdf0317056130(),
+				// Property: Value
+				"value": schemaAttribute74ed9e094cfcdf0317056130(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "The tags used to organize, track, or control access for this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc944bc2ebdff17d733376d3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the dataset group.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_personalize_dataset_group", datasetGroupDataSource)
 }
@@ -31,10 +87,7 @@ func datasetGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
 		//	  "type": "string"
 		//	}
-		"dataset_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the dataset group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"dataset_group_arn": schemaAttributefc944bc2ebdff17d733376d3(),
 		// Property: Domain
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +99,7 @@ func datasetGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The domain of a Domain dataset group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"domain": schemaAttributec35c91eeb01c03db012a1c3a(),
 		// Property: KmsKeyArn
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +109,7 @@ func datasetGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/.*",
 		//	  "type": "string"
 		//	}
-		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name(ARN) of a AWS Key Management Service (KMS) key used to encrypt the datasets.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"kms_key_arn": schemaAttribute073f36724ab354fe4b74198a(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -73,10 +120,7 @@ func datasetGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name for the new dataset group.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute7d89bc06b6627d6f64ef18a4(),
 		// Property: RoleArn
 		// CloudFormation resource type schema:
 		//
@@ -87,10 +131,7 @@ func datasetGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "pattern": "arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+",
 		//	  "type": "string"
 		//	}
-		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ARN of the AWS Identity and Access Management (IAM) role that has permissions to access the AWS Key Management Service (KMS) key. Supplying an IAM role is only valid when also specifying a KMS key.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"role_arn": schemaAttribute7a503aa41ea19aa7e95ce4b7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -121,22 +162,7 @@ func datasetGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minItems": 0,
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The tags used to organize, track, or control access for this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributed7ca93b54542d3d332a9e678(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

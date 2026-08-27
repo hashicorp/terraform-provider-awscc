@@ -16,6 +16,203 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute1c4673f50938725f0b5aa92c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Azure
+			"azure": schemaAttribute449b7d1e3021140acf53c398(),
+		}, /*END SCHEMA*/
+		Description: "Provider-specific configuration including regions and scope.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute209d5e94b22a127768f5528b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Reason for the current enablement status, if applicable.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute337373574fdf89ab0bfca40e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Display name for the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute33d84efe6569290c7731c660() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType: timetypes.RFC3339Type{},
+		Computed:   true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute38345de53cf5508b676a893a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ScopeType
+			"scope_type": schemaAttributea036df463839e01d17266232(),
+			// Property: ScopeValues
+			"scope_values": schemaAttribute795307613d435f39e547ebec(),
+			// Property: State
+			"state": schemaAttributea036df463839e01d17266232(),
+			// Property: StateReason
+			"state_reason": schemaAttributec43737a3f7d88249447d2301(),
+		}, /*END SCHEMA*/
+		Description: "Defines the scope of Azure resources to monitor for a specific resource type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute449b7d1e3021140acf53c398() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AutoInstallVMScanner
+			"auto_install_vm_scanner": schemaAttributeb53d412b1495fa21172b2d35(),
+			// Property: AwsConfigConnectorArn
+			"aws_config_connector_arn": schemaAttributec3d186088119439cafecdfee(),
+			// Property: AzureRegions
+			"azure_regions": schemaAttributeff13aa6a4542d0db569b6b3f(),
+			// Property: ScopeConfiguration
+			"scope_configuration": schemaAttributef340d927c8475a8235bc7111(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute64672a8ce58faae65c4c5a8f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "Timestamp when the connector was created.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute795307613d435f39e547ebec() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of subscription IDs. Empty for TENANT scope.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute899c0a6bc1b6858407d9a5cf() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The enablement status of the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute96a597c1bcf14249a5bd1d3e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Optional description of the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea036df463839e01d17266232() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb07276a87fe3ce29048f13e1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  timetypes.RFC3339Type{},
+		Description: "Timestamp when the connector was last updated.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb53d412b1495fa21172b2d35() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Whether to automatically install the VM scanner. Defaults to true.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf3a97446645dfb60246a998() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ConnectorStatus
+			"connector_status": schemaAttributea036df463839e01d17266232(),
+			// Property: LastCheckedAt
+			"last_checked_at": schemaAttribute33d84efe6569290c7731c660(),
+			// Property: Message
+			"message": schemaAttributea036df463839e01d17266232(),
+		}, /*END SCHEMA*/
+		Description: "Health status of the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec3d186088119439cafecdfee() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the AWS Config connector used for Azure resource discovery.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec43737a3f7d88249447d2301() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Reason for the current scope state.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec873b867ee3a79ece8522625() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The cloud provider for this connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedeabf494f8af04c3b121d68e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee95df9fa47ab242ee75d1ad4() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributea036df463839e01d17266232(),
+				// Property: Value
+				"value": schemaAttributea036df463839e01d17266232(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Tags to apply to the connector.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef340d927c8475a8235bc7111() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContainerImageScanning
+			"container_image_scanning": schemaAttribute38345de53cf5508b676a893a(),
+			// Property: ServerlessScanning
+			"serverless_scanning": schemaAttribute38345de53cf5508b676a893a(),
+			// Property: VmScanning
+			"vm_scanning": schemaAttribute38345de53cf5508b676a893a(),
+		}, /*END SCHEMA*/
+		Description: "Defines which resource types to scan and at what scope level.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeff13aa6a4542d0db569b6b3f() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "List of Azure regions to scan.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_inspectorv2_connector", connectorDataSource)
 }
@@ -33,10 +230,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[a-z]+)?:inspector2:[a-z0-9-]+:[0-9]{12}:connector/[a-f0-9-]+$",
 		//	  "type": "string"
 		//	}
-		"connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"connector_arn": schemaAttributedeabf494f8af04c3b121d68e(),
 		// Property: CreatedAt
 		// CloudFormation resource type schema:
 		//
@@ -45,11 +239,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "Timestamp when the connector was created.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"created_at": schemaAttribute64672a8ce58faae65c4c5a8f(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -59,10 +249,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "minLength": 0,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Optional description of the connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute96a597c1bcf14249a5bd1d3e(),
 		// Property: EnablementStatus
 		// CloudFormation resource type schema:
 		//
@@ -80,10 +267,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"enablement_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The enablement status of the connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enablement_status": schemaAttribute899c0a6bc1b6858407d9a5cf(),
 		// Property: EnablementStatusReason
 		// CloudFormation resource type schema:
 		//
@@ -91,10 +275,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Reason for the current enablement status, if applicable.",
 		//	  "type": "string"
 		//	}
-		"enablement_status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Reason for the current enablement status, if applicable.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"enablement_status_reason": schemaAttribute209d5e94b22a127768f5528b(),
 		// Property: Health
 		// CloudFormation resource type schema:
 		//
@@ -123,25 +304,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"health": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ConnectorStatus
-				"connector_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: LastCheckedAt
-				"last_checked_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType: timetypes.RFC3339Type{},
-					Computed:   true,
-				}, /*END ATTRIBUTE*/
-				// Property: Message
-				"message": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Health status of the connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"health": schemaAttributebf3a97446645dfb60246a998(),
 		// Property: LastUpdatedAt
 		// CloudFormation resource type schema:
 		//
@@ -150,11 +313,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
-		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  timetypes.RFC3339Type{},
-			Description: "Timestamp when the connector was last updated.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_updated_at": schemaAttributeb07276a87fe3ce29048f13e1(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -165,10 +324,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\p{L}\\p{N}_-]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Display name for the connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute337373574fdf89ab0bfca40e(),
 		// Property: Provider
 		// CloudFormation resource type schema:
 		//
@@ -179,10 +335,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The cloud provider for this connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"provider_name": schemaAttributec873b867ee3a79ece8522625(),
 		// Property: ProviderConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -352,119 +505,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"provider_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Azure
-				"azure": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AutoInstallVMScanner
-						"auto_install_vm_scanner": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Description: "Whether to automatically install the VM scanner. Defaults to true.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AwsConfigConnectorArn
-						"aws_config_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The ARN of the AWS Config connector used for Azure resource discovery.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: AzureRegions
-						"azure_regions": schema.ListAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
-							Description: "List of Azure regions to scan.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-						// Property: ScopeConfiguration
-						"scope_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ContainerImageScanning
-								"container_image_scanning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ScopeType
-										"scope_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: ScopeValues
-										"scope_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Description: "List of subscription IDs. Empty for TENANT scope.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: State
-										"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: StateReason
-										"state_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Reason for the current scope state.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Defines the scope of Azure resources to monitor for a specific resource type.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: ServerlessScanning
-								"serverless_scanning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ScopeType
-										"scope_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: ScopeValues
-										"scope_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Description: "List of subscription IDs. Empty for TENANT scope.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: State
-										"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: StateReason
-										"state_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Reason for the current scope state.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Defines the scope of Azure resources to monitor for a specific resource type.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: VmScanning
-								"vm_scanning": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ScopeType
-										"scope_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: ScopeValues
-										"scope_values": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Description: "List of subscription IDs. Empty for TENANT scope.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: State
-										"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: StateReason
-										"state_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Description: "Reason for the current scope state.",
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Description: "Defines the scope of Azure resources to monitor for a specific resource type.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Description: "Defines which resource types to scan and at what scope level.",
-							Computed:    true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Provider-specific configuration including regions and scope.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"provider_configuration": schemaAttribute1c4673f50938725f0b5aa92c(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -497,22 +538,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Tags to apply to the connector.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributee95df9fa47ab242ee75d1ad4(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

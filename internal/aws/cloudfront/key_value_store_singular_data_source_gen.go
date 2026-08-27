@@ -14,6 +14,83 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute2f84eedcf4ea01652e940cd7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute417d84362d31ce3cf0b84e7b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the import source for the key value store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4278cc7d0dd0351da0db7963() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the key value store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8ece9734c7815045c1f764fd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9972c13a65facbf523f0ba6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebf73369e4c45efde5fc64fec() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source type of the import source for the key value store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec4646f58f2a122de366ba5a6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SourceArn
+			"source_arn": schemaAttribute417d84362d31ce3cf0b84e7b(),
+			// Property: SourceType
+			"source_type": schemaAttributebf73369e4c45efde5fc64fec(),
+		}, /*END SCHEMA*/
+		Description: "The import source for the key value store.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef3b7d02ce9c27ba97f3a1c2() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributea9972c13a65facbf523f0ba6(),
+				// Property: Value
+				"value": schemaAttribute8ece9734c7815045c1f764fd(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "A complex type that contains zero or more ``Tag`` elements.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefd05011dc77eff65e662018e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A comment to describe the Key Value Store. Omitting ``Comment`` from the template during updates will clear the existing comment (set to empty string). To preserve an existing comment, you must explicitly include it in the template.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudfront_key_value_store", keyValueStoreDataSource)
 }
@@ -29,10 +106,7 @@ func keyValueStoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttribute2f84eedcf4ea01652e940cd7(),
 		// Property: Comment
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +114,7 @@ func keyValueStoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "A comment to describe the Key Value Store. Omitting ``Comment`` from the template during updates will clear the existing comment (set to empty string). To preserve an existing comment, you must explicitly include it in the template.",
 		//	  "type": "string"
 		//	}
-		"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A comment to describe the Key Value Store. Omitting ``Comment`` from the template during updates will clear the existing comment (set to empty string). To preserve an existing comment, you must explicitly include it in the template.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"comment": schemaAttributefd05011dc77eff65e662018e(),
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -51,10 +122,7 @@ func keyValueStoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"key_value_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"key_value_store_id": schemaAttribute2f84eedcf4ea01652e940cd7(),
 		// Property: ImportSource
 		// CloudFormation resource type schema:
 		//
@@ -77,22 +145,7 @@ func keyValueStoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"import_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: SourceArn
-				"source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the import source for the key value store.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SourceType
-				"source_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The source type of the import source for the key value store.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The import source for the key value store.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"import_source": schemaAttributec4646f58f2a122de366ba5a6(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -100,10 +153,7 @@ func keyValueStoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "The name of the key value store.",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the key value store.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttribute4278cc7d0dd0351da0db7963(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -111,10 +161,7 @@ func keyValueStoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "",
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute2f84eedcf4ea01652e940cd7(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -148,24 +195,7 @@ func keyValueStoreDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  },
 		//	  "type": "array"
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string that contains ``Tag`` key.\n The string length should be between 1 and 128 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "A string that contains an optional ``Tag`` value.\n The string length should be between 0 and 256 characters. Valid characters include ``a-z``, ``A-Z``, ``0-9``, space, and the special characters ``_ - . : / = + @``.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "A complex type that contains zero or more ``Tag`` elements.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributeef3b7d02ce9c27ba97f3a1c2(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

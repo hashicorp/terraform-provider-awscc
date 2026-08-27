@@ -14,6 +14,352 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0ef3fcc8b17a441bed57ecbd() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CertificateArn
+			"certificate_arn": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: DatabaseName
+			"database_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: Port
+			"port": schemaAttributeb5b3b4cc8909cca599f676be(),
+			// Property: ServerName
+			"server_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: SslMode
+			"ssl_mode": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+		}, /*END SCHEMA*/
+		Description: "IbmDb2LuwSettings property identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15e66e6f85dba5927e7d1494() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2e25999aca137df39ec65108() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CertificateArn
+			"certificate_arn": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: DatabaseName
+			"database_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: Port
+			"port": schemaAttributeb5b3b4cc8909cca599f676be(),
+			// Property: ServerName
+			"server_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: SslMode
+			"ssl_mode": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+		}, /*END SCHEMA*/
+		Description: "PostgreSqlSettings property identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3777a3ec871a3c02d5e6ab9c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CertificateArn
+			"certificate_arn": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: DatabaseName
+			"database_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: Port
+			"port": schemaAttributeb5b3b4cc8909cca599f676be(),
+			// Property: ServerName
+			"server_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: SslMode
+			"ssl_mode": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+		}, /*END SCHEMA*/
+		Description: "MicrosoftSqlServerSettings property identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute386ebc48d3ae2584531ab411() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CertificateArn
+			"certificate_arn": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: DatabaseName
+			"database_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: EncryptPassword
+			"encrypt_password": schemaAttributeffea578d568cdd1a5c696497(),
+			// Property: Port
+			"port": schemaAttributeb5b3b4cc8909cca599f676be(),
+			// Property: ServerName
+			"server_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: SslMode
+			"ssl_mode": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+		}, /*END SCHEMA*/
+		Description: "SybaseAseSettings property identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute395625a45d369799a39f6f66() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AsmServer
+			"asm_server": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: CertificateArn
+			"certificate_arn": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: DatabaseName
+			"database_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: Port
+			"port": schemaAttributeb5b3b4cc8909cca599f676be(),
+			// Property: SecretsManagerOracleAsmAccessRoleArn
+			"secrets_manager_oracle_asm_access_role_arn": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: SecretsManagerOracleAsmSecretId
+			"secrets_manager_oracle_asm_secret_id": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: SecretsManagerSecurityDbEncryptionAccessRoleArn
+			"secrets_manager_security_db_encryption_access_role_arn": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: SecretsManagerSecurityDbEncryptionSecretId
+			"secrets_manager_security_db_encryption_secret_id": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: ServerName
+			"server_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: SslMode
+			"ssl_mode": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+		}, /*END SCHEMA*/
+		Description: "OracleSettings property identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute45dcaa4d9384acbefdc2414c() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CertificateArn
+			"certificate_arn": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: DatabaseName
+			"database_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: Port
+			"port": schemaAttributeb5b3b4cc8909cca599f676be(),
+			// Property: ServerName
+			"server_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: SslMode
+			"ssl_mode": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+		}, /*END SCHEMA*/
+		Description: "IbmDb2zOsSettings property identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute461e5a46876b7d07d694e3bf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CertificateArn
+			"certificate_arn": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: Port
+			"port": schemaAttributeb5b3b4cc8909cca599f676be(),
+			// Property: ServerName
+			"server_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: SslMode
+			"ssl_mode": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+		}, /*END SCHEMA*/
+		Description: "MySqlSettings property identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute48a93b14a7fee56753712dac() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CertificateArn
+			"certificate_arn": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: DatabaseName
+			"database_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: Port
+			"port": schemaAttributeb5b3b4cc8909cca599f676be(),
+			// Property: ServerName
+			"server_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: SslMode
+			"ssl_mode": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+		}, /*END SCHEMA*/
+		Description: "DocDbSettings property identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute51f81f8b324c1ad47cf8d3d7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6d59716a069a92d3ad1a0836() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The property describes a data engine for the data provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6de840353946bad7ab80aada() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AuthMechanism
+			"auth_mechanism": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: AuthSource
+			"auth_source": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: AuthType
+			"auth_type": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: CertificateArn
+			"certificate_arn": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: DatabaseName
+			"database_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: Port
+			"port": schemaAttributeb5b3b4cc8909cca599f676be(),
+			// Property: ServerName
+			"server_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: SslMode
+			"ssl_mode": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+		}, /*END SCHEMA*/
+		Description: "MongoDbSettings property identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute893243e69a6ae2d4072e5e3e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DocDbSettings
+			"doc_db_settings": schemaAttribute48a93b14a7fee56753712dac(),
+			// Property: IbmDb2LuwSettings
+			"ibm_db_2_luw_settings": schemaAttribute0ef3fcc8b17a441bed57ecbd(),
+			// Property: IbmDb2zOsSettings
+			"ibm_db_2_z_os_settings": schemaAttribute45dcaa4d9384acbefdc2414c(),
+			// Property: MariaDbSettings
+			"maria_db_settings": schemaAttributedbef65e4af0a77c0567e724b(),
+			// Property: MicrosoftSqlServerSettings
+			"microsoft_sql_server_settings": schemaAttribute3777a3ec871a3c02d5e6ab9c(),
+			// Property: MongoDbSettings
+			"mongo_db_settings": schemaAttribute6de840353946bad7ab80aada(),
+			// Property: MySqlSettings
+			"my_sql_settings": schemaAttribute461e5a46876b7d07d694e3bf(),
+			// Property: OracleSettings
+			"oracle_settings": schemaAttribute395625a45d369799a39f6f66(),
+			// Property: PostgreSqlSettings
+			"postgre_sql_settings": schemaAttribute2e25999aca137df39ec65108(),
+			// Property: RedshiftSettings
+			"redshift_settings": schemaAttributea8e6bcd25299442d10c3f98a(),
+			// Property: SybaseAseSettings
+			"sybase_ase_settings": schemaAttribute386ebc48d3ae2584531ab411(),
+		}, /*END SCHEMA*/
+		Description: "The property identifies the exact type of settings for the data provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9049bd8fffc4e5860a4665f0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The data provider creation time.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea5e04ae2ec35c76984cbe129() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea8e6bcd25299442d10c3f98a() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: DatabaseName
+			"database_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: Port
+			"port": schemaAttributeb5b3b4cc8909cca599f676be(),
+			// Property: ServerName
+			"server_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+		}, /*END SCHEMA*/
+		Description: "RedshiftSettings property identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaa6527849253b4d11b57f8d7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The optional description of the data provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb3e39a20e26e293cff6afd0d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The property describes a name to identify the data provider.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb4b57a1f3449d34cc3c66867() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The data provider ARN.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb5b3b4cc8909cca599f676be() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec1d40cf665b3dad8942ec614() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The property describes an identifier for the data provider. It is used for describing/deleting/modifying can be name/arn",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7fef71e81987d62ecb79ada() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "The property describes the exact settings which can be modified",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedbef65e4af0a77c0567e724b() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CertificateArn
+			"certificate_arn": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: Port
+			"port": schemaAttributeb5b3b4cc8909cca599f676be(),
+			// Property: ServerName
+			"server_name": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+			// Property: SslMode
+			"ssl_mode": schemaAttribute51f81f8b324c1ad47cf8d3d7(),
+		}, /*END SCHEMA*/
+		Description: "MariaDbSettings property identifier.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee385455103c9722c949c7b1e() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute15e66e6f85dba5927e7d1494(),
+				// Property: Value
+				"value": schemaAttributea5e04ae2ec35c76984cbe129(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeffea578d568cdd1a5c696497() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_dms_data_provider", dataProviderDataSource)
 }
@@ -31,10 +377,7 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"data_provider_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The data provider ARN.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_provider_arn": schemaAttributeb4b57a1f3449d34cc3c66867(),
 		// Property: DataProviderCreationTime
 		// CloudFormation resource type schema:
 		//
@@ -44,10 +387,7 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"data_provider_creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The data provider creation time.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_provider_creation_time": schemaAttribute9049bd8fffc4e5860a4665f0(),
 		// Property: DataProviderIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -57,10 +397,7 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"data_provider_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The property describes an identifier for the data provider. It is used for describing/deleting/modifying can be name/arn",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_provider_identifier": schemaAttributec1d40cf665b3dad8942ec614(),
 		// Property: DataProviderName
 		// CloudFormation resource type schema:
 		//
@@ -70,10 +407,7 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"data_provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The property describes a name to identify the data provider.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"data_provider_name": schemaAttributeb3e39a20e26e293cff6afd0d(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -83,10 +417,7 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The optional description of the data provider.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributeaa6527849253b4d11b57f8d7(),
 		// Property: Engine
 		// CloudFormation resource type schema:
 		//
@@ -109,10 +440,7 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The property describes a data engine for the data provider.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"engine": schemaAttribute6d59716a069a92d3ad1a0836(),
 		// Property: ExactSettings
 		// CloudFormation resource type schema:
 		//
@@ -121,10 +449,7 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The property describes the exact settings which can be modified",
 		//	  "type": "boolean"
 		//	}
-		"exact_settings": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "The property describes the exact settings which can be modified",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"exact_settings": schemaAttributec7fef71e81987d62ecb79ada(),
 		// Property: Settings
 		// CloudFormation resource type schema:
 		//
@@ -570,329 +895,7 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  },
 		//	  "type": "object"
 		//	}
-		"settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DocDbSettings
-				"doc_db_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CertificateArn
-						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: DatabaseName
-						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Port
-						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ServerName
-						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SslMode
-						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "DocDbSettings property identifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IbmDb2LuwSettings
-				"ibm_db_2_luw_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CertificateArn
-						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: DatabaseName
-						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Port
-						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ServerName
-						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SslMode
-						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "IbmDb2LuwSettings property identifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: IbmDb2zOsSettings
-				"ibm_db_2_z_os_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CertificateArn
-						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: DatabaseName
-						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Port
-						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ServerName
-						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SslMode
-						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "IbmDb2zOsSettings property identifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MariaDbSettings
-				"maria_db_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CertificateArn
-						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Port
-						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ServerName
-						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SslMode
-						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "MariaDbSettings property identifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MicrosoftSqlServerSettings
-				"microsoft_sql_server_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CertificateArn
-						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: DatabaseName
-						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Port
-						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ServerName
-						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SslMode
-						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "MicrosoftSqlServerSettings property identifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MongoDbSettings
-				"mongo_db_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AuthMechanism
-						"auth_mechanism": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: AuthSource
-						"auth_source": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: AuthType
-						"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: CertificateArn
-						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: DatabaseName
-						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Port
-						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ServerName
-						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SslMode
-						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "MongoDbSettings property identifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: MySqlSettings
-				"my_sql_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CertificateArn
-						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Port
-						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ServerName
-						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SslMode
-						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "MySqlSettings property identifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: OracleSettings
-				"oracle_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: AsmServer
-						"asm_server": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: CertificateArn
-						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: DatabaseName
-						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Port
-						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SecretsManagerOracleAsmAccessRoleArn
-						"secrets_manager_oracle_asm_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SecretsManagerOracleAsmSecretId
-						"secrets_manager_oracle_asm_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SecretsManagerSecurityDbEncryptionAccessRoleArn
-						"secrets_manager_security_db_encryption_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SecretsManagerSecurityDbEncryptionSecretId
-						"secrets_manager_security_db_encryption_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ServerName
-						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SslMode
-						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "OracleSettings property identifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: PostgreSqlSettings
-				"postgre_sql_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CertificateArn
-						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: DatabaseName
-						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Port
-						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ServerName
-						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SslMode
-						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "PostgreSqlSettings property identifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: RedshiftSettings
-				"redshift_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: DatabaseName
-						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Port
-						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ServerName
-						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "RedshiftSettings property identifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SybaseAseSettings
-				"sybase_ase_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: CertificateArn
-						"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: DatabaseName
-						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: EncryptPassword
-						"encrypt_password": schema.BoolAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Port
-						"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: ServerName
-						"server_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: SslMode
-						"ssl_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Description: "SybaseAseSettings property identifier.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The property identifies the exact type of settings for the data provider.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"settings": schemaAttribute893243e69a6ae2d4072e5e3e(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -925,24 +928,7 @@ func dataProviderDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributee385455103c9722c949c7b1e(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

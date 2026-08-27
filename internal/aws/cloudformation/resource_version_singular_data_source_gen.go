@@ -14,6 +14,96 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute164cfdcc71e41ae31426f726() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1bc03ad9ca607fa168a15c7a() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Description: "Indicates if this type version is the current default version",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1f4dbccbf8ee33c2ff6d3d86() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LogGroupName
+			"log_group_name": schemaAttribute4037518a4f3aa6e420fd3fa4(),
+			// Property: LogRoleArn
+			"log_role_arn": schemaAttribute69934de5fb831d0b3f6075c7(),
+		}, /*END SCHEMA*/
+		Description: "Specifies logging configuration information for a type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4037518a4f3aa6e420fd3fa4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute535628fb90fbebb5597469b6() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute69934de5fb831d0b3f6075c7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute76117a2ae76b45eabe62677c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A url to the S3 bucket containing the schema handler package that contains the schema, event handlers, and associated files for the type you want to register.\n\nFor information on generating a schema handler package for the type you want to register, see submit in the CloudFormation CLI User Guide.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute867b5c46a5113a2749bba593() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the type without the versionID.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a17949a3fd90235b422be89() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the version of the type represented by this resource instance.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8bf5f80bdb51d1f09335a3fd() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the IAM execution role to use to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an IAM execution role that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed0ad0abfa1a71c721b46c8ae() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The scope at which the type is visible and usable in CloudFormation operations.\n\nValid values include:\n\nPRIVATE: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you register as PRIVATE.\n\nPUBLIC: The type is publically visible and usable within any Amazon account.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee88e7d41e54a54e2240357a3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Name (ARN) of the type, here the ResourceVersion. This is used to uniquely identify a ResourceVersion resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_cloudformation_resource_version", resourceVersionDataSource)
 }
@@ -30,10 +120,7 @@ func resourceVersionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/resource/.+$",
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the type, here the ResourceVersion. This is used to uniquely identify a ResourceVersion resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributee88e7d41e54a54e2240357a3(),
 		// Property: ExecutionRoleArn
 		// CloudFormation resource type schema:
 		//
@@ -41,10 +128,7 @@ func resourceVersionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "The Amazon Resource Name (ARN) of the IAM execution role to use to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an IAM execution role that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.",
 		//	  "type": "string"
 		//	}
-		"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the IAM execution role to use to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an IAM execution role that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your resource type with the appropriate credentials.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"execution_role_arn": schemaAttribute8bf5f80bdb51d1f09335a3fd(),
 		// Property: IsDefaultVersion
 		// CloudFormation resource type schema:
 		//
@@ -52,10 +136,7 @@ func resourceVersionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "Indicates if this type version is the current default version",
 		//	  "type": "boolean"
 		//	}
-		"is_default_version": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Description: "Indicates if this type version is the current default version",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"is_default_version": schemaAttribute1bc03ad9ca607fa168a15c7a(),
 		// Property: LoggingConfig
 		// CloudFormation resource type schema:
 		//
@@ -79,22 +160,7 @@ func resourceVersionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"logging_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: LogGroupName
-				"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LogRoleArn
-				"log_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The ARN of the role that CloudFormation should assume when sending log entries to CloudWatch logs.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Specifies logging configuration information for a type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"logging_config": schemaAttribute1f4dbccbf8ee33c2ff6d3d86(),
 		// Property: ProvisioningType
 		// CloudFormation resource type schema:
 		//
@@ -107,10 +173,7 @@ func resourceVersionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"provisioning_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"provisioning_type": schemaAttribute164cfdcc71e41ae31426f726(),
 		// Property: SchemaHandlerPackage
 		// CloudFormation resource type schema:
 		//
@@ -118,10 +181,7 @@ func resourceVersionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "A url to the S3 bucket containing the schema handler package that contains the schema, event handlers, and associated files for the type you want to register.\n\nFor information on generating a schema handler package for the type you want to register, see submit in the CloudFormation CLI User Guide.",
 		//	  "type": "string"
 		//	}
-		"schema_handler_package": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "A url to the S3 bucket containing the schema handler package that contains the schema, event handlers, and associated files for the type you want to register.\n\nFor information on generating a schema handler package for the type you want to register, see submit in the CloudFormation CLI User Guide.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"schema_handler_package": schemaAttribute76117a2ae76b45eabe62677c(),
 		// Property: TypeArn
 		// CloudFormation resource type schema:
 		//
@@ -130,10 +190,7 @@ func resourceVersionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/resource/.+$",
 		//	  "type": "string"
 		//	}
-		"type_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Name (ARN) of the type without the versionID.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type_arn": schemaAttribute867b5c46a5113a2749bba593(),
 		// Property: TypeName
 		// CloudFormation resource type schema:
 		//
@@ -142,10 +199,7 @@ func resourceVersionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$",
 		//	  "type": "string"
 		//	}
-		"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"type_name": schemaAttribute535628fb90fbebb5597469b6(),
 		// Property: VersionId
 		// CloudFormation resource type schema:
 		//
@@ -154,10 +208,7 @@ func resourceVersionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "pattern": "^[A-Za-z0-9-]{1,128}$",
 		//	  "type": "string"
 		//	}
-		"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the version of the type represented by this resource instance.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version_id": schemaAttribute8a17949a3fd90235b422be89(),
 		// Property: Visibility
 		// CloudFormation resource type schema:
 		//
@@ -169,10 +220,7 @@ func resourceVersionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"visibility": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The scope at which the type is visible and usable in CloudFormation operations.\n\nValid values include:\n\nPRIVATE: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you register as PRIVATE.\n\nPUBLIC: The type is publically visible and usable within any Amazon account.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"visibility": schemaAttributed0ad0abfa1a71c721b46c8ae(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

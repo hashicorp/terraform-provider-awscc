@@ -14,6 +14,130 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute19da2a3d42933ba77591bed1() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The first port in the Traffic Mirror port range.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute218117ae165b3cb57ed40b98() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The last port in the Traffic Mirror port range.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute47ff8e2874f6e2d27d309c24() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute7a039c88889595a7296ca1b4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The destination CIDR block to assign to the Traffic Mirror rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9952406265134d51236cd52e() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of protocol, for example 17 (UDP), to assign to the Traffic Mirror rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea656b0a378e8b6b6a29f20b9() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The number of the Traffic Mirror rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea76dcb1c9bfd3167f4a844dc() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The direction of traffic (ingress/egress).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributea9973a28ac5c9932c59e8265() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttribute47ff8e2874f6e2d27d309c24(),
+				// Property: Value
+				"value": schemaAttribute47ff8e2874f6e2d27d309c24(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "Any tags assigned to the Traffic Mirror Filter rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb60a7900b11a427108397e4f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The action to take on the filtered traffic (accept/reject).",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebe1317073a1394bacc13f4ac() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FromPort
+			"from_port": schemaAttribute19da2a3d42933ba77591bed1(),
+			// Property: ToPort
+			"to_port": schemaAttribute218117ae165b3cb57ed40b98(),
+		}, /*END SCHEMA*/
+		Description: "The source port range.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec7acd0c471108362b7414854() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: FromPort
+			"from_port": schemaAttribute19da2a3d42933ba77591bed1(),
+			// Property: ToPort
+			"to_port": schemaAttribute218117ae165b3cb57ed40b98(),
+		}, /*END SCHEMA*/
+		Description: "The destination port range.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed787d12287e5b19c22123fd0() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the filter that this rule is associated with.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributed793e163d42816571f0023b7() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the Traffic Mirror Filter rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee762e1be008e194f5f78554b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of the Traffic Mirror Filter rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7c1fff3e5ab89792f2b269e() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The source CIDR block to assign to the Traffic Mirror Filter rule.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_ec2_traffic_mirror_filter_rule", trafficMirrorFilterRuleDataSource)
 }
@@ -29,10 +153,7 @@ func trafficMirrorFilterRuleDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The description of the Traffic Mirror Filter rule.",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of the Traffic Mirror Filter rule.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttributee762e1be008e194f5f78554b(),
 		// Property: DestinationCidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -40,10 +161,7 @@ func trafficMirrorFilterRuleDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The destination CIDR block to assign to the Traffic Mirror rule.",
 		//	  "type": "string"
 		//	}
-		"destination_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The destination CIDR block to assign to the Traffic Mirror rule.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"destination_cidr_block": schemaAttribute7a039c88889595a7296ca1b4(),
 		// Property: DestinationPortRange
 		// CloudFormation resource type schema:
 		//
@@ -66,22 +184,7 @@ func trafficMirrorFilterRuleDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"destination_port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FromPort
-				"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The first port in the Traffic Mirror port range.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ToPort
-				"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The last port in the Traffic Mirror port range.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The destination port range.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"destination_port_range": schemaAttributec7acd0c471108362b7414854(),
 		// Property: Protocol
 		// CloudFormation resource type schema:
 		//
@@ -89,10 +192,7 @@ func trafficMirrorFilterRuleDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The number of protocol, for example 17 (UDP), to assign to the Traffic Mirror rule.",
 		//	  "type": "integer"
 		//	}
-		"protocol": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of protocol, for example 17 (UDP), to assign to the Traffic Mirror rule.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"protocol": schemaAttribute9952406265134d51236cd52e(),
 		// Property: RuleAction
 		// CloudFormation resource type schema:
 		//
@@ -100,10 +200,7 @@ func trafficMirrorFilterRuleDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The action to take on the filtered traffic (accept/reject).",
 		//	  "type": "string"
 		//	}
-		"rule_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The action to take on the filtered traffic (accept/reject).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rule_action": schemaAttributeb60a7900b11a427108397e4f(),
 		// Property: RuleNumber
 		// CloudFormation resource type schema:
 		//
@@ -111,10 +208,7 @@ func trafficMirrorFilterRuleDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The number of the Traffic Mirror rule.",
 		//	  "type": "integer"
 		//	}
-		"rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The number of the Traffic Mirror rule.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"rule_number": schemaAttributea656b0a378e8b6b6a29f20b9(),
 		// Property: SourceCidrBlock
 		// CloudFormation resource type schema:
 		//
@@ -122,10 +216,7 @@ func trafficMirrorFilterRuleDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The source CIDR block to assign to the Traffic Mirror Filter rule.",
 		//	  "type": "string"
 		//	}
-		"source_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The source CIDR block to assign to the Traffic Mirror Filter rule.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_cidr_block": schemaAttributef7c1fff3e5ab89792f2b269e(),
 		// Property: SourcePortRange
 		// CloudFormation resource type schema:
 		//
@@ -148,22 +239,7 @@ func trafficMirrorFilterRuleDataSource(ctx context.Context) (datasource.DataSour
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"source_port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FromPort
-				"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The first port in the Traffic Mirror port range.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: ToPort
-				"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "The last port in the Traffic Mirror port range.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "The source port range.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"source_port_range": schemaAttributebe1317073a1394bacc13f4ac(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -189,22 +265,7 @@ func trafficMirrorFilterRuleDataSource(ctx context.Context) (datasource.DataSour
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Any tags assigned to the Traffic Mirror Filter rule.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttributea9973a28ac5c9932c59e8265(),
 		// Property: TrafficDirection
 		// CloudFormation resource type schema:
 		//
@@ -212,10 +273,7 @@ func trafficMirrorFilterRuleDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The direction of traffic (ingress/egress).",
 		//	  "type": "string"
 		//	}
-		"traffic_direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The direction of traffic (ingress/egress).",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"traffic_direction": schemaAttributea76dcb1c9bfd3167f4a844dc(),
 		// Property: TrafficMirrorFilterId
 		// CloudFormation resource type schema:
 		//
@@ -223,10 +281,7 @@ func trafficMirrorFilterRuleDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The ID of the filter that this rule is associated with.",
 		//	  "type": "string"
 		//	}
-		"traffic_mirror_filter_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the filter that this rule is associated with.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"traffic_mirror_filter_id": schemaAttributed787d12287e5b19c22123fd0(),
 		// Property: TrafficMirrorFilterRuleId
 		// CloudFormation resource type schema:
 		//
@@ -234,10 +289,7 @@ func trafficMirrorFilterRuleDataSource(ctx context.Context) (datasource.DataSour
 		//	  "description": "The ID of the Traffic Mirror Filter rule.",
 		//	  "type": "string"
 		//	}
-		"traffic_mirror_filter_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the Traffic Mirror Filter rule.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"traffic_mirror_filter_rule_id": schemaAttributed793e163d42816571f0023b7(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

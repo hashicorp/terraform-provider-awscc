@@ -16,6 +16,89 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute23d183b266728ae572db7fd0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ExcludedColumnNames
+			"excluded_column_names": schemaAttributeeb7c6790f74b0303b273a434(),
+		}, /*END SCHEMA*/
+		Description: "An object representing the Data Cells Filter's Columns. Either Column Names or a Wildcard is required",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute61041e47fcb45c764e39ca8b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		CustomType:  jsontypes.NormalizedType{},
+		Description: "An empty object representing a row wildcard.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute674ec76ae7ca1f6392af699b() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "A PartiQL predicate.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8b14122f2ac8db135ea4e840() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Catalog Id of the Table on which to create a Data Cells Filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute937b5ac1e6fa9eda6f8edc54() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of columns to be included in this Data Cells Filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute9e7acb4430900a98272402df() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AllRowsWildcard
+			"all_rows_wildcard": schemaAttribute61041e47fcb45c764e39ca8b(),
+			// Property: FilterExpression
+			"filter_expression": schemaAttribute674ec76ae7ca1f6392af699b(),
+		}, /*END SCHEMA*/
+		Description: "An object representing the Data Cells Filter's Row Filter. Either a Filter Expression or a Wildcard is required",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedeb1dd42c875ca5b934130e2() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Database that the Table resides in.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb7c6790f74b0303b273a434() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A list of column names to be excluded from the Data Cells Filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef783fc9feec64cf67d3a83ed() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Table to create a Data Cells Filter for.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributefc1338709248b48d9736ba2f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The desired name of the Data Cells Filter.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_lakeformation_data_cells_filter", dataCellsFilterDataSource)
 }
@@ -38,11 +121,7 @@ func dataCellsFilterDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "array"
 		//	}
-		"column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A list of columns to be included in this Data Cells Filter.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"column_names": schemaAttribute937b5ac1e6fa9eda6f8edc54(),
 		// Property: ColumnWildcard
 		// CloudFormation resource type schema:
 		//
@@ -64,18 +143,7 @@ func dataCellsFilterDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"column_wildcard": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ExcludedColumnNames
-				"excluded_column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of column names to be excluded from the Data Cells Filter.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object representing the Data Cells Filter's Columns. Either Column Names or a Wildcard is required",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"column_wildcard": schemaAttribute23d183b266728ae572db7fd0(),
 		// Property: DatabaseName
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +153,7 @@ func dataCellsFilterDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Database that the Table resides in.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"database_name": schemaAttributedeb1dd42c875ca5b934130e2(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -98,10 +163,7 @@ func dataCellsFilterDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The desired name of the Data Cells Filter.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributefc1338709248b48d9736ba2f(),
 		// Property: RowFilter
 		// CloudFormation resource type schema:
 		//
@@ -121,23 +183,7 @@ func dataCellsFilterDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  },
 		//	  "type": "object"
 		//	}
-		"row_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllRowsWildcard
-				"all_rows_wildcard": schema.StringAttribute{ /*START ATTRIBUTE*/
-					CustomType:  jsontypes.NormalizedType{},
-					Description: "An empty object representing a row wildcard.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: FilterExpression
-				"filter_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A PartiQL predicate.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "An object representing the Data Cells Filter's Row Filter. Either a Filter Expression or a Wildcard is required",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"row_filter": schemaAttribute9e7acb4430900a98272402df(),
 		// Property: TableCatalogId
 		// CloudFormation resource type schema:
 		//
@@ -147,10 +193,7 @@ func dataCellsFilterDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 12,
 		//	  "type": "string"
 		//	}
-		"table_catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Catalog Id of the Table on which to create a Data Cells Filter.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"table_catalog_id": schemaAttribute8b14122f2ac8db135ea4e840(),
 		// Property: TableName
 		// CloudFormation resource type schema:
 		//
@@ -160,10 +203,7 @@ func dataCellsFilterDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
-		"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Table to create a Data Cells Filter for.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"table_name": schemaAttributef783fc9feec64cf67d3a83ed(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

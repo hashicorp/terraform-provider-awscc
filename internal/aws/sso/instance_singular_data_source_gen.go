@@ -14,6 +14,61 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute0d6dc39aa2dd01a864ce9001() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The status of the Identity Center (SSO) Instance, create_in_progress/delete_in_progress/active",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute13bfa6c6751c609b059a67ab() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The AWS accountId of the owner of the Identity Center (SSO) Instance",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8a16c803d425ff327b623af1() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributee9c4c938be038a205c31da63(),
+				// Property: Value
+				"value": schemaAttributee9c4c938be038a205c31da63(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb52cf744c1b450456e8951a9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name you want to assign to this Identity Center (SSO) Instance",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedbf53cad6b700ec2bf17097d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The ID of the identity store associated with the created Identity Center (SSO) Instance",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9c4c938be038a205c31da63() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7c16b56c1e943b2807880c1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The SSO Instance ARN that is returned upon creation of the Identity Center (SSO) Instance",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_sso_instance", instanceDataSource)
 }
@@ -32,10 +87,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[a-zA-Z0-9-]*$",
 		//	  "type": "string"
 		//	}
-		"identity_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The ID of the identity store associated with the created Identity Center (SSO) Instance",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"identity_store_id": schemaAttributedbf53cad6b700ec2bf17097d(),
 		// Property: InstanceArn
 		// CloudFormation resource type schema:
 		//
@@ -46,10 +98,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$",
 		//	  "type": "string"
 		//	}
-		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The SSO Instance ARN that is returned upon creation of the Identity Center (SSO) Instance",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"instance_arn": schemaAttributef7c16b56c1e943b2807880c1(),
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -60,10 +109,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^[\\w+=,.@-]+$",
 		//	  "type": "string"
 		//	}
-		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name you want to assign to this Identity Center (SSO) Instance",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"name": schemaAttributeb52cf744c1b450456e8951a9(),
 		// Property: OwnerAccountId
 		// CloudFormation resource type schema:
 		//
@@ -74,10 +120,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^\\d{12}?$",
 		//	  "type": "string"
 		//	}
-		"owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The AWS accountId of the owner of the Identity Center (SSO) Instance",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"owner_account_id": schemaAttribute13bfa6c6751c609b059a67ab(),
 		// Property: Status
 		// CloudFormation resource type schema:
 		//
@@ -90,10 +133,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "string"
 		//	}
-		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of the Identity Center (SSO) Instance, create_in_progress/delete_in_progress/active",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"status": schemaAttribute0d6dc39aa2dd01a864ce9001(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -126,21 +166,7 @@ func instanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute8a16c803d425ff327b623af1(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

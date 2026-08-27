@@ -15,6 +15,147 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute12a62f936fa562688f6824eb() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The version of a Fleet Indexing query used by a fleet metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute19b077a6c53fbe1a3e5d50f8() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Description: "The period of metric emission in seconds",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2c68bea51e1c15106c927b6c() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The description of a fleet metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2d27aacd657e635c23eba8e9() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The creation date of a fleet metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute306c65442c72cd061f4c615c() schema.Attribute {
+	return (schema.Float64Attribute{ /*START ATTRIBUTE*/
+		Description: "The version of a fleet metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute35b2979e151183f074b21a76() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the fleet metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute394fc3b560dfdb383aa3debe() schema.Attribute {
+	return (schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Key
+				"key": schemaAttributeed0bdfc526fff224494fed5d(),
+				// Property: Value
+				"value": schemaAttribute66c449b9e71e46fce0530334(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Description: "An array of key-value pairs to apply to this resource",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute5e915a9ad832a54b14004d02() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The index name of a fleet metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute66c449b9e71e46fce0530334() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag's value",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6fe4119878750f9af2c99c51() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The unit of data points emitted by a fleet metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute8344614975a450d0f84c1be4() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The last modified date of a fleet metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute98022ff2b0ad176b6bc38ea3() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Fleet Indexing query used by a fleet metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb52a4b2090db601992db852f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The aggregation field to perform aggregation and metric emission",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeb8e1478120ac2e4d61b49630() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: Name
+			"name": schemaAttributee5a98da858a7904cce7e3729(),
+			// Property: Values
+			"values": schemaAttributeee052b92a604aa6018cec097(),
+		}, /*END SCHEMA*/
+		Description: "Aggregation types supported by Fleet Indexing",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributebeb5540a17f4417eef4487f1() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The Amazon Resource Number (ARN) of a fleet metric metric",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee5a98da858a7904cce7e3729() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "Fleet Indexing aggregation type names such as Statistics, Percentiles and Cardinality",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeed0bdfc526fff224494fed5d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The tag's key",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeee052b92a604aa6018cec097() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Fleet Indexing aggregation type values",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_iot_fleet_metric", fleetMetricDataSource)
 }
@@ -30,10 +171,7 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The aggregation field to perform aggregation and metric emission",
 		//	  "type": "string"
 		//	}
-		"aggregation_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The aggregation field to perform aggregation and metric emission",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"aggregation_field": schemaAttributeb52a4b2090db601992db852f(),
 		// Property: AggregationType
 		// CloudFormation resource type schema:
 		//
@@ -60,23 +198,7 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"aggregation_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Fleet Indexing aggregation type names such as Statistics, Percentiles and Cardinality",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Values
-				"values": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Fleet Indexing aggregation type values",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Aggregation types supported by Fleet Indexing",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"aggregation_type": schemaAttributeb8e1478120ac2e4d61b49630(),
 		// Property: CreationDate
 		// CloudFormation resource type schema:
 		//
@@ -85,10 +207,7 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 		//	  "type": "string"
 		//	}
-		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The creation date of a fleet metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"creation_date": schemaAttribute2d27aacd657e635c23eba8e9(),
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -96,10 +215,7 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The description of a fleet metric",
 		//	  "type": "string"
 		//	}
-		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The description of a fleet metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"description": schemaAttribute2c68bea51e1c15106c927b6c(),
 		// Property: IndexName
 		// CloudFormation resource type schema:
 		//
@@ -107,10 +223,7 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The index name of a fleet metric",
 		//	  "type": "string"
 		//	}
-		"index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The index name of a fleet metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"index_name": schemaAttribute5e915a9ad832a54b14004d02(),
 		// Property: LastModifiedDate
 		// CloudFormation resource type schema:
 		//
@@ -119,10 +232,7 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
 		//	  "type": "string"
 		//	}
-		"last_modified_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The last modified date of a fleet metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"last_modified_date": schemaAttribute8344614975a450d0f84c1be4(),
 		// Property: MetricArn
 		// CloudFormation resource type schema:
 		//
@@ -130,10 +240,7 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Amazon Resource Number (ARN) of a fleet metric metric",
 		//	  "type": "string"
 		//	}
-		"metric_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Amazon Resource Number (ARN) of a fleet metric metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"metric_arn": schemaAttributebeb5540a17f4417eef4487f1(),
 		// Property: MetricName
 		// CloudFormation resource type schema:
 		//
@@ -141,10 +248,7 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The name of the fleet metric",
 		//	  "type": "string"
 		//	}
-		"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the fleet metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"metric_name": schemaAttribute35b2979e151183f074b21a76(),
 		// Property: Period
 		// CloudFormation resource type schema:
 		//
@@ -152,10 +256,7 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The period of metric emission in seconds",
 		//	  "type": "integer"
 		//	}
-		"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Description: "The period of metric emission in seconds",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"period": schemaAttribute19b077a6c53fbe1a3e5d50f8(),
 		// Property: QueryString
 		// CloudFormation resource type schema:
 		//
@@ -163,10 +264,7 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The Fleet Indexing query used by a fleet metric",
 		//	  "type": "string"
 		//	}
-		"query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Fleet Indexing query used by a fleet metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"query_string": schemaAttribute98022ff2b0ad176b6bc38ea3(),
 		// Property: QueryVersion
 		// CloudFormation resource type schema:
 		//
@@ -174,10 +272,7 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version of a Fleet Indexing query used by a fleet metric",
 		//	  "type": "string"
 		//	}
-		"query_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The version of a Fleet Indexing query used by a fleet metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"query_version": schemaAttribute12a62f936fa562688f6824eb(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -211,24 +306,7 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Key
-					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag's key",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: Value
-					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The tag's value",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "An array of key-value pairs to apply to this resource",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute394fc3b560dfdb383aa3debe(),
 		// Property: Unit
 		// CloudFormation resource type schema:
 		//
@@ -236,10 +314,7 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The unit of data points emitted by a fleet metric",
 		//	  "type": "string"
 		//	}
-		"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The unit of data points emitted by a fleet metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"unit": schemaAttribute6fe4119878750f9af2c99c51(),
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -247,10 +322,7 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The version of a fleet metric",
 		//	  "type": "number"
 		//	}
-		"version": schema.Float64Attribute{ /*START ATTRIBUTE*/
-			Description: "The version of a fleet metric",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"version": schemaAttribute306c65442c72cd061f4c615c(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{

@@ -15,6 +15,309 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute11c7a014ed0c75b443d5a207() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AllowedInstanceTypes
+			"allowed_instance_types": schemaAttributef7fc8f5c9132adce2cb5a1b4(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute1406279d8e67c6b08bf6a9f1() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ScaleInAfter
+			"scale_in_after": schemaAttribute15720f71e8c0d473d8a2f438(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute15720f71e8c0d473d8a2f438() schema.Attribute {
+	return (schema.Int64Attribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute22e8c5f7d6143c3c8c6e1bfe() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: JobExecutionTimeoutMinutes
+			"job_execution_timeout_minutes": schemaAttribute15720f71e8c0d473d8a2f438(),
+			// Property: TerminateJobsOnUpdate
+			"terminate_jobs_on_update": schemaAttributeeb0fd3133423e91e47a15abb(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute24d9d2d7de1147e95165dc6e() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "A key-value pair to associate with a resource.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute2717e7d6a7c5703417ac2fb0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: UseLocalStorage
+			"use_local_storage": schemaAttributeeb0fd3133423e91e47a15abb(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute3463b370f7d20c6b5adc9fdb() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: CapacityOptionType
+			"capacity_option_type": schemaAttributeeea2fb2b3994663ba2a8432d(),
+			// Property: CapacityReservations
+			"capacity_reservations": schemaAttributee9b0b703f2d7cd175784f4ac(),
+			// Property: Ec2InstanceProfileArn
+			"ec_2_instance_profile_arn": schemaAttributeeea2fb2b3994663ba2a8432d(),
+			// Property: FipsEnabled
+			"fips_enabled": schemaAttributeeb0fd3133423e91e47a15abb(),
+			// Property: InstanceMetadataTagsPropagation
+			"instance_metadata_tags_propagation": schemaAttributeeb0fd3133423e91e47a15abb(),
+			// Property: InstanceRequirements
+			"instance_requirements": schemaAttribute11c7a014ed0c75b443d5a207(),
+			// Property: LocalStorageConfiguration
+			"local_storage_configuration": schemaAttribute2717e7d6a7c5703417ac2fb0(),
+			// Property: Monitoring
+			"monitoring": schemaAttributeeea2fb2b3994663ba2a8432d(),
+			// Property: NetworkConfiguration
+			"network_configuration": schemaAttribute6976beb9a3033b03e85ad051(),
+			// Property: StorageConfiguration
+			"storage_configuration": schemaAttributeef5a3c3643dbb072799167b4(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4b6cb568437256ebade8ef44() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: LaunchTemplateId
+			"launch_template_id": schemaAttributeeea2fb2b3994663ba2a8432d(),
+			// Property: LaunchTemplateName
+			"launch_template_name": schemaAttributeeea2fb2b3994663ba2a8432d(),
+			// Property: Overrides
+			"overrides": schemaAttributeaed8cc46db1624fb19ed78b4(),
+			// Property: UserdataType
+			"userdata_type": schemaAttributeeea2fb2b3994663ba2a8432d(),
+			// Property: Version
+			"version": schemaAttributeeea2fb2b3994663ba2a8432d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute4ca7c06f2023f5bfb42c418e() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: MinScaleDownDelayMinutes
+			"min_scale_down_delay_minutes": schemaAttribute15720f71e8c0d473d8a2f438(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute529c396c8a5b09a51acfffb6() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: AllocationStrategy
+			"allocation_strategy": schemaAttributeeea2fb2b3994663ba2a8432d(),
+			// Property: BidPercentage
+			"bid_percentage": schemaAttribute15720f71e8c0d473d8a2f438(),
+			// Property: CapacityTags
+			"capacity_tags": schemaAttributeec65fdf655309106f58e49d4(),
+			// Property: DesiredvCpus
+			"desiredv_cpus": schemaAttribute15720f71e8c0d473d8a2f438(),
+			// Property: Ec2Configuration
+			"ec_2_configuration": schemaAttributec785dfa5572888e8813f9102(),
+			// Property: Ec2KeyPair
+			"ec_2_key_pair": schemaAttributeeea2fb2b3994663ba2a8432d(),
+			// Property: ImageId
+			"image_id": schemaAttributeeea2fb2b3994663ba2a8432d(),
+			// Property: InstanceRole
+			"instance_role": schemaAttributeeea2fb2b3994663ba2a8432d(),
+			// Property: InstanceTypes
+			"instance_types": schemaAttributef7fc8f5c9132adce2cb5a1b4(),
+			// Property: LaunchTemplate
+			"launch_template": schemaAttribute4b6cb568437256ebade8ef44(),
+			// Property: ManagedInstancesProvider
+			"managed_instances_provider": schemaAttributeda9c99d04f21a2569034ceb0(),
+			// Property: MaxvCpus
+			"maxv_cpus": schemaAttribute15720f71e8c0d473d8a2f438(),
+			// Property: MinvCpus
+			"minv_cpus": schemaAttribute15720f71e8c0d473d8a2f438(),
+			// Property: PlacementGroup
+			"placement_group": schemaAttributeeea2fb2b3994663ba2a8432d(),
+			// Property: ScalingPolicy
+			"scaling_policy": schemaAttribute4ca7c06f2023f5bfb42c418e(),
+			// Property: SecurityGroupIds
+			"security_group_ids": schemaAttributef7fc8f5c9132adce2cb5a1b4(),
+			// Property: SpotIamFleetRole
+			"spot_iam_fleet_role": schemaAttributeeea2fb2b3994663ba2a8432d(),
+			// Property: Subnets
+			"subnets": schemaAttributef7fc8f5c9132adce2cb5a1b4(),
+			// Property: Tags
+			"tags": schemaAttribute24d9d2d7de1147e95165dc6e(),
+			// Property: Type
+			"type": schemaAttributeeea2fb2b3994663ba2a8432d(),
+			// Property: UpdateToLatestImageVersion
+			"update_to_latest_image_version": schemaAttributeeb0fd3133423e91e47a15abb(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttribute6976beb9a3033b03e85ad051() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: SecurityGroups
+			"security_groups": schemaAttributef7fc8f5c9132adce2cb5a1b4(),
+			// Property: Subnets
+			"subnets": schemaAttributef7fc8f5c9132adce2cb5a1b4(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeaed8cc46db1624fb19ed78b4() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LaunchTemplateId
+				"launch_template_id": schemaAttributeeea2fb2b3994663ba2a8432d(),
+				// Property: LaunchTemplateName
+				"launch_template_name": schemaAttributeeea2fb2b3994663ba2a8432d(),
+				// Property: TargetInstanceTypes
+				"target_instance_types": schemaAttributef7fc8f5c9132adce2cb5a1b4(),
+				// Property: UserdataType
+				"userdata_type": schemaAttributeeea2fb2b3994663ba2a8432d(),
+				// Property: Version
+				"version": schemaAttributeeea2fb2b3994663ba2a8432d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec785dfa5572888e8813f9102() schema.Attribute {
+	return (schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BatchImageStatus
+				"batch_image_status": schemaAttributeeea2fb2b3994663ba2a8432d(),
+				// Property: ImageIdOverride
+				"image_id_override": schemaAttributeeea2fb2b3994663ba2a8432d(),
+				// Property: ImageKubernetesVersion
+				"image_kubernetes_version": schemaAttributeeea2fb2b3994663ba2a8432d(),
+				// Property: ImageType
+				"image_type": schemaAttributeeea2fb2b3994663ba2a8432d(),
+			}, /*END SCHEMA*/
+		}, /*END NESTED OBJECT*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec9e41b358ea06b076e3d0616() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: EksClusterArn
+			"eks_cluster_arn": schemaAttributeeea2fb2b3994663ba2a8432d(),
+			// Property: KubernetesNamespace
+			"kubernetes_namespace": schemaAttributeeea2fb2b3994663ba2a8432d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeda9c99d04f21a2569034ceb0() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: InfrastructureOptimization
+			"infrastructure_optimization": schemaAttribute1406279d8e67c6b08bf6a9f1(),
+			// Property: InfrastructureRoleArn
+			"infrastructure_role_arn": schemaAttributeeea2fb2b3994663ba2a8432d(),
+			// Property: InstanceLaunchTemplate
+			"instance_launch_template": schemaAttribute3463b370f7d20c6b5adc9fdb(),
+			// Property: PropagateTags
+			"propagate_tags": schemaAttributeeea2fb2b3994663ba2a8432d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributedfacddad47bdae901deffbdf() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ContainerInsights
+			"container_insights": schemaAttributeeea2fb2b3994663ba2a8432d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributee9b0b703f2d7cd175784f4ac() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: ReservationGroupArn
+			"reservation_group_arn": schemaAttributeeea2fb2b3994663ba2a8432d(),
+			// Property: ReservationPreference
+			"reservation_preference": schemaAttributeeea2fb2b3994663ba2a8432d(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeb0fd3133423e91e47a15abb() schema.Attribute {
+	return (schema.BoolAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeec65fdf655309106f58e49d4() schema.Attribute {
+	return (
+	// Pattern: ""
+	schema.MapAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Description: "Capacity-level tags for compute environments.",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeeea2fb2b3994663ba2a8432d() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributeef5a3c3643dbb072799167b4() schema.Attribute {
+	return (schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+			// Property: StorageSizeGiB
+			"storage_size_gi_b": schemaAttribute15720f71e8c0d473d8a2f438(),
+		}, /*END SCHEMA*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributef7fc8f5c9132adce2cb5a1b4() schema.Attribute {
+	return (schema.ListAttribute{ /*START ATTRIBUTE*/
+		ElementType: types.StringType,
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_batch_compute_environment", computeEnvironmentDataSource)
 }
@@ -29,18 +332,14 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	{
 		//	  "type": "string"
 		//	}
-		"compute_environment_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"compute_environment_arn": schemaAttributeeea2fb2b3994663ba2a8432d(),
 		// Property: ComputeEnvironmentName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"compute_environment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"compute_environment_name": schemaAttributeeea2fb2b3994663ba2a8432d(),
 		// Property: ComputeResources
 		// CloudFormation resource type schema:
 		//
@@ -356,293 +655,32 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"compute_resources": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: AllocationStrategy
-				"allocation_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: BidPercentage
-				"bid_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: CapacityTags
-				"capacity_tags":     // Pattern: ""
-				schema.MapAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "Capacity-level tags for compute environments.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: DesiredvCpus
-				"desiredv_cpus": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Ec2Configuration
-				"ec_2_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: BatchImageStatus
-							"batch_image_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ImageIdOverride
-							"image_id_override": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ImageKubernetesVersion
-							"image_kubernetes_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: ImageType
-							"image_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Ec2KeyPair
-				"ec_2_key_pair": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ImageId
-				"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: InstanceRole
-				"instance_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: InstanceTypes
-				"instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: LaunchTemplate
-				"launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: LaunchTemplateId
-						"launch_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: LaunchTemplateName
-						"launch_template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Overrides
-						"overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: LaunchTemplateId
-									"launch_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: LaunchTemplateName
-									"launch_template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: TargetInstanceTypes
-									"target_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-									// Property: UserdataType
-									"userdata_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-									// Property: Version
-									"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Computed: true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-							}, /*END NESTED OBJECT*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: UserdataType
-						"userdata_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: Version
-						"version": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ManagedInstancesProvider
-				"managed_instances_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: InfrastructureOptimization
-						"infrastructure_optimization": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: ScaleInAfter
-								"scale_in_after": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: InfrastructureRoleArn
-						"infrastructure_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: InstanceLaunchTemplate
-						"instance_launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: CapacityOptionType
-								"capacity_option_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: CapacityReservations
-								"capacity_reservations": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: ReservationGroupArn
-										"reservation_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-										// Property: ReservationPreference
-										"reservation_preference": schema.StringAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Ec2InstanceProfileArn
-								"ec_2_instance_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: FipsEnabled
-								"fips_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: InstanceMetadataTagsPropagation
-								"instance_metadata_tags_propagation": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: InstanceRequirements
-								"instance_requirements": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: AllowedInstanceTypes
-										"allowed_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: LocalStorageConfiguration
-								"local_storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: UseLocalStorage
-										"use_local_storage": schema.BoolAttribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: Monitoring
-								"monitoring": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: NetworkConfiguration
-								"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: SecurityGroups
-										"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-										// Property: Subnets
-										"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-											ElementType: types.StringType,
-											Computed:    true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-								// Property: StorageConfiguration
-								"storage_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-										// Property: StorageSizeGiB
-										"storage_size_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Computed: true,
-										}, /*END ATTRIBUTE*/
-									}, /*END SCHEMA*/
-									Computed: true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-						// Property: PropagateTags
-						"propagate_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MaxvCpus
-				"maxv_cpus": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: MinvCpus
-				"minv_cpus": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: PlacementGroup
-				"placement_group": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: ScalingPolicy
-				"scaling_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-						// Property: MinScaleDownDelayMinutes
-						"min_scale_down_delay_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-							Computed: true,
-						}, /*END ATTRIBUTE*/
-					}, /*END SCHEMA*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: SecurityGroupIds
-				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SpotIamFleetRole
-				"spot_iam_fleet_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: Subnets
-				"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Tags
-				"tags":              // Pattern: ""
-				schema.MapAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A key-value pair to associate with a resource.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Type
-				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: UpdateToLatestImageVersion
-				"update_to_latest_image_version": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"compute_resources": schemaAttribute529c396c8a5b09a51acfffb6(),
 		// Property: Context
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"context": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"context": schemaAttributeeea2fb2b3994663ba2a8432d(),
+		// Property: EcsSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ContainerInsights": {
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "ENHANCED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"ecs_settings": schemaAttributedfacddad47bdae901deffbdf(),
 		// Property: EksConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -664,19 +702,7 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  ],
 		//	  "type": "object"
 		//	}
-		"eks_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: EksClusterArn
-				"eks_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: KubernetesNamespace
-				"kubernetes_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"eks_configuration": schemaAttributec9e41b358ea06b076e3d0616(),
 		// Property: ReplaceComputeEnvironment
 		// CloudFormation resource type schema:
 		//
@@ -684,27 +710,21 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  "default": true,
 		//	  "type": "boolean"
 		//	}
-		"replace_compute_environment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"replace_compute_environment": schemaAttributeeb0fd3133423e91e47a15abb(),
 		// Property: ServiceRole
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"service_role": schemaAttributeeea2fb2b3994663ba2a8432d(),
 		// Property: State
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"state": schemaAttributeeea2fb2b3994663ba2a8432d(),
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -718,30 +738,21 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"tags":              // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Description: "A key-value pair to associate with a resource.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"tags": schemaAttribute24d9d2d7de1147e95165dc6e(),
 		// Property: Type
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "string"
 		//	}
-		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"type": schemaAttributeeea2fb2b3994663ba2a8432d(),
 		// Property: UnmanagedvCpus
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "type": "integer"
 		//	}
-		"unmanagedv_cpus": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"unmanagedv_cpus": schemaAttribute15720f71e8c0d473d8a2f438(),
 		// Property: UpdatePolicy
 		// CloudFormation resource type schema:
 		//
@@ -759,19 +770,7 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		//	  },
 		//	  "type": "object"
 		//	}
-		"update_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: JobExecutionTimeoutMinutes
-				"job_execution_timeout_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-				// Property: TerminateJobsOnUpdate
-				"terminate_jobs_on_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"update_policy": schemaAttribute22e8c5f7d6143c3c8c6e1bfe(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -799,11 +798,13 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		"compute_environment_arn":            "ComputeEnvironmentArn",
 		"compute_environment_name":           "ComputeEnvironmentName",
 		"compute_resources":                  "ComputeResources",
+		"container_insights":                 "ContainerInsights",
 		"context":                            "Context",
 		"desiredv_cpus":                      "DesiredvCpus",
 		"ec_2_configuration":                 "Ec2Configuration",
 		"ec_2_instance_profile_arn":          "Ec2InstanceProfileArn",
 		"ec_2_key_pair":                      "Ec2KeyPair",
+		"ecs_settings":                       "EcsSettings",
 		"eks_cluster_arn":                    "EksClusterArn",
 		"eks_configuration":                  "EksConfiguration",
 		"fips_enabled":                       "FipsEnabled",

@@ -14,6 +14,19 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
+func schemaAttribute407e2051d43af2c05c3ae522() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Description: "The name of the Amazon Lookout for Vision project",
+		Computed:    true,
+	} /*END ATTRIBUTE*/)
+}
+
+func schemaAttributec5e9183542d1142ed2a9532f() schema.Attribute {
+	return (schema.StringAttribute{ /*START ATTRIBUTE*/
+		Computed: true,
+	} /*END ATTRIBUTE*/)
+}
+
 func init() {
 	registry.AddDataSourceFactory("awscc_lookoutvision_project", projectDataSource)
 }
@@ -29,9 +42,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
-		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
+		"arn": schemaAttributec5e9183542d1142ed2a9532f(),
 		// Property: ProjectName
 		// CloudFormation resource type schema:
 		//
@@ -42,10 +53,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "pattern": "[a-zA-Z0-9][a-zA-Z0-9_\\-]*",
 		//	  "type": "string"
 		//	}
-		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The name of the Amazon Lookout for Vision project",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
+		"project_name": schemaAttribute407e2051d43af2c05c3ae522(),
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
