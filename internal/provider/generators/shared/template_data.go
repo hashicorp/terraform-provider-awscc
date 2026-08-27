@@ -288,7 +288,7 @@ func schemaIsDeRecursed(cfTypeSchemaFile string) (bool, error) {
 // unrepresentableProperties returns the property names recorded under the
 // "x-derecursed" key of a depth-limited (de-recursed) local schema — properties
 // pruned at the depth boundary that the generated Terraform schema therefore cannot
-// represent. tools/derecurse-schema.py writes the key; pristine schemas lack it.
+// represent. internal/provider/generators/derecurse-schema writes the key; pristine schemas lack it.
 func unrepresentableProperties(cfTypeSchemaFile string) ([]string, error) {
 	data, err := os.ReadFile(cfTypeSchemaFile)
 	if err != nil {

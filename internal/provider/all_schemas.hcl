@@ -6924,7 +6924,7 @@ resource_schema "aws_wafv2_rule_group" {
 
   # Latest schema updates are suppressed.
   # Local schema is de-recursed via
-  # python3 tools/derecurse-schema.py --depth 4 internal/service/cloudformation/schemas/AWS_WAFv2_RuleGroup.json
+  # go run internal/provider/generators/derecurse-schema/main.go --depth 4 internal/service/cloudformation/schemas/AWS_WAFv2_RuleGroup.json
   # to 4 levels of Statement nesting = 3 chained logical statements (And/Or/Not) above a
   # match statement - parity with terraform-provider-aws's hand-written WAFv2 schemas.
   # Statements deeper than the schema are omitted from state on import/read (a warning
@@ -6939,7 +6939,7 @@ resource_schema "aws_wafv2_web_acl" {
 
   # Latest schema updates are suppressed.
   # Local schema is de-recursed via
-  # python3 tools/derecurse-schema.py --depth 4 internal/service/cloudformation/schemas/AWS_WAFv2_WebACL.json
+  # go run internal/provider/generators/derecurse-schema/main.go --depth 4 internal/service/cloudformation/schemas/AWS_WAFv2_WebACL.json
   # to 4 levels of Statement nesting = 3 chained logical statements (And/Or/Not) above a
   # match statement - parity with terraform-provider-aws's hand-written WAFv2 schemas.
   # Statements deeper than the schema are omitted from state on import/read (a warning
